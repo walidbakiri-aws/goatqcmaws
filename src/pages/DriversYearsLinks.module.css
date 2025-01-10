@@ -1,0 +1,85 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+}
+.contanerspace {
+  position: absolute;
+  display: inline-block;
+  margin-left: 300px;
+  margin-top: 20px;
+}
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+.biologiediv {
+  display: flex;
+}
+.cardyear {
+  margin: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardyearbodyfirst {
+  border-radius: 5px;
+  height: 230px;
+  width: 400px;
+  background: linear-gradient(45deg, #4099ff, #73b4ff);
+}
+.cardyearbodyseconde {
+  border-radius: 5px;
+  height: 230px;
+  width: 400px;
+  background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+}
+
+.cartitle {
+  margin-top: 60px;
+  margin-left: 30px;
+  font-size: 30px;
+}
+
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+
+  margin-top: 20px;
+}
+.cardyear_phone {
+  margin: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardyearbodyfirst_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #4099ff, #73b4ff);
+}
+.cardyearbodyseconde_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+}

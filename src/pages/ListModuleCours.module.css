@@ -1,0 +1,51 @@
+.modulecoursdiv {
+  border: 1px solid rgb(206, 195, 195);
+  margin-top: 0px;
+  margin-left: 20%;
+  width: 700px;
+  height: 200px;
+  display: "flex";
+}
+.childmodulecoursdiv {
+  border: 1px solid rgb(218, 215, 215);
+  width: 50%;
+  height: 250px;
+  display: inline-block;
+  vertical-align: middle;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.affichage {
+  width: 500px;
+  margin: auto;
+}
+
+.testdiv {
+  width: 700px;
+  height: 400px;
+}
+.moduleitem {
+  margin-left: 10px;
+}
+.moduleitem input {
+  border: 1px solid rgb(194, 191, 191);
+  margin-right: 3px;
+}
+
+.moduleitem label {
+  font-style: unset;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+}
+
+.btnCommencer {
+  position: absolute;
+  right: 0px;
+  margin-top: 150px;
+}

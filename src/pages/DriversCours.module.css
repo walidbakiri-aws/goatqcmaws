@@ -1,0 +1,167 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+}
+.contanerspace {
+  position: absolute;
+  display: inline-block;
+  margin-left: 300px;
+  margin-top: 20px;
+}
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+.biologiediv {
+  display: flex;
+}
+.cardyear {
+  margin: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardyearbodyfirst {
+  border-radius: 5px;
+  height: 230px;
+  width: 400px;
+  background: linear-gradient(45deg, #4099ff, #73b4ff);
+}
+.cardyearbodyseconde {
+  border-radius: 5px;
+  height: 230px;
+  width: 400px;
+  background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+}
+.cardyearbodythird {
+  border-radius: 5px;
+  height: 230px;
+  width: 400px;
+  background: linear-gradient(45deg, #f12711, #f5af19);
+}
+.cartitle {
+  margin-top: 60px;
+  margin-left: 30px;
+  font-size: 30px;
+}
+.cliniquediv {
+  display: flex;
+}
+.cardyearbodyfourth {
+  height: 230px;
+  width: 400px;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #7f00ff, #e100ff);
+}
+.cardyearbodyfifth {
+  border-radius: 5px;
+  height: 230px;
+  width: 400px;
+  background: linear-gradient(45deg, #f1948a, #943126);
+}
+.cardyearbodysix {
+  border-radius: 5px;
+  height: 230px;
+  width: 400px;
+  background: linear-gradient(45deg, #d2b4de, #5b2c6f);
+}
+.cardyearbodysamedi {
+  border-radius: 5px;
+  height: 230px;
+
+  background: linear-gradient(45deg, #bdc3c7, #1b2631);
+}
+/***********phone************************************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+
+  margin-top: 20px;
+}
+
+.biologiediv_phone {
+  width: 300px;
+  margin-left: 20px;
+}
+.cardyear_phone {
+  margin: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  box-shadow: 0 1px 2.94px 0.06px rgba(4, 26, 55, 0.16);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.cardyearbodyfirst_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #4099ff, #73b4ff);
+}
+.cardyearbodyseconde_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #2ed8b6, #59e0c5);
+}
+.cardyearbodythird_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #f12711, #f5af19);
+}
+.cartitle_phone {
+  margin-top: 40px;
+  margin-left: 30px;
+  font-size: 25px;
+}
+.cliniquediv_phone {
+  width: 300px;
+  margin-left: 20px;
+}
+.cardyearbodyfourth_phone {
+  height: 150px;
+  width: 300px;
+  border-radius: 5px;
+  background: linear-gradient(45deg, #7f00ff, #e100ff);
+}
+.cardyearbodyfifth_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #f1948a, #943126);
+}
+.cardyearbodysix_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #d2b4de, #5b2c6f);
+}
+.cardyearsamedi_phone {
+  height: 150px;
+  width: 300px;
+  margin-left: 30px;
+  margin-bottom: 10px;
+}
+.cardyearbodysamedi_phone {
+  border-radius: 5px;
+  height: 150px;
+  width: 300px;
+  background: linear-gradient(45deg, #bdc3c7, #1b2631);
+}

@@ -1,0 +1,6 @@
+.floating-toolbar {
+  background-color: #17a9ec;
+  z-index: 16;
+  position: relative;
+  margin-top: -200px;
+}

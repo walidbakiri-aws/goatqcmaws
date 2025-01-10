@@ -1,0 +1,47 @@
+.modal {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 30rem;
+  z-index: 10;
+  position: fixed;
+  height: 250px;
+  width: 400px;
+  top: 20vh;
+  left: calc(50% - 15rem);
+  background-color: rgb(226, 231, 236);
+}
+
+.connectdiv {
+  margin-top: 20px;
+}
+.cancelbtn {
+  margin-right: 10px;
+}
+
+/**phone*********************************************************/
+.modal_phone {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 30rem;
+  z-index: 10;
+  position: fixed;
+  height: 250px;
+  margin-left: 150px;
+  width: 200px;
+  top: 20vh;
+  left: calc(50% - 15rem);
+  background-color: rgb(226, 231, 236);
+}
+
+.connectdiv_phone {
+  margin-top: 20px;
+}
+.cancelbtn_phone {
+  margin-right: 10px;
+}

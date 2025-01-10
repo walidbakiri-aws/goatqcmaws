@@ -1,0 +1,354 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.typesujetsourcesexamn {
+  display: inline-block;
+}
+.typesujetsourcesexamn_full {
+  background-color: var(--background-color);
+  margin-left: 30px;
+}
+.childtypesujetsourcesexamn {
+  display: inline-block;
+  margin-right: 50px;
+  padding: 1rem 1rem;
+  vertical-align: middle;
+  width: 330px;
+  color: var(--primary-text-color);
+}
+
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+}
+.contanerspace {
+  background-color: var(--background-color-full);
+  width: 100%;
+  position: absolute;
+  display: inline-block;
+  height: auto;
+  margin-top: 20px;
+}
+.allcards {
+  width: 900px;
+  margin-left: 350px;
+}
+.qcmmodele {
+  height: 130px;
+  width: 90%;
+  margin-top: 20px;
+  background-color: var(--background-color);
+  z-index: 1;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  border: 0.2px solid rgb(109, 95, 81);
+}
+.cadrheader {
+  border-radius: 8px;
+  padding: 5px;
+  color: var(--primary-text-color);
+}
+.vl {
+  border-left: 4px solid rgb(159, 161, 159);
+  height: 80px;
+  padding-top: 50px;
+  margin-top: -82px;
+  margin-left: 350px;
+  left: 46%;
+}
+.modulecours_full {
+  background-color: var(--background-color);
+}
+.modulecoursdiv {
+  background-color: var(--background-color);
+  z-index: 1;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+
+  height: 150px;
+  width: 90%;
+}
+.vlmodule {
+  border-left: 4px solid rgb(159, 161, 159);
+  height: 170px;
+  margin-top: -170px;
+  margin-left: 380px;
+  left: 46%;
+}
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.affichage {
+  width: 500px;
+  margin: auto;
+}
+
+.testdiv {
+  height: 400px;
+}
+
+.listecontent {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+}
+
+.typesujet {
+  display: flex;
+}
+.typesujet input {
+  display: inline-block;
+}
+
+.typesujeth6 {
+  margin-left: 3px;
+  color: var(--primary-text-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  font-size: 18px;
+}
+.modulecoursdiv {
+  border: 1px solid rgb(206, 195, 195);
+  margin-top: 0px;
+
+  width: 700px;
+  height: 230px;
+  display: "flex";
+}
+
+.childmodulecoursdiv {
+  padding-left: 10px;
+  width: 45%;
+  margin-right: 30px;
+  margin-left: 10px;
+  height: 180px;
+  display: inline-block;
+  vertical-align: middle;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.qcmtype {
+  height: 80px;
+  width: 90%;
+  margin-top: 20px;
+  background-color: var(--background-color);
+  z-index: 1;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  border: 0.2px solid rgb(109, 95, 81);
+}
+.qcmtype i {
+  position: absolute;
+  right: 0;
+}
+
+.qcmtypecontent div {
+  display: inline-block;
+  vertical-align: left;
+}
+
+.typeqcm input {
+  border: 1px solid rgb(194, 191, 191);
+  margin-right: 3px;
+}
+.typeqcm {
+  width: 210px;
+  height: 3px;
+  margin: 0px;
+}
+.qcmtypecontent {
+  display: "flex";
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.typeqcmlabel {
+  color: var(--primary-text-color);
+  font-size: 15px;
+  margin-left: 20px;
+  margin-top: -22px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.affichage {
+  width: 500px;
+  margin: auto;
+}
+
+.testdiv {
+  width: 700px;
+  height: 400px;
+}
+
+.moduleitem input {
+  border: 1px solid rgb(194, 191, 191);
+  margin-right: 3px;
+}
+
+.moduleitem label {
+  font-style: unset;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+}
+
+.yearSelectCard {
+  width: 90%;
+
+  margin-top: 20px;
+  background-color: var(--background-color);
+  z-index: 1;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  border: 0.2px solid rgb(109, 95, 81);
+  height: 100px;
+}
+.yearSelectBody select {
+  display: inline-block;
+  vertical-align: left;
+
+  margin: 5px;
+}
+
+.btnCommencer {
+  margin-right: 10px;
+  height: 80px;
+  width: 95%;
+  background-color: var(--background-color-full);
+}
+
+.contanerspacephone {
+  width: 100%;
+}
+
+.allcardsphone {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.qcmmodelephone {
+  width: 95%;
+  position: fixed;
+  margin-left: 5px;
+}
+.modulecoursdivphone {
+  border: 1px solid rgb(182, 169, 169);
+  background-color: white;
+  height: 150px;
+  width: 95%;
+  margin-left: 5px;
+}
+.nextprevbtn {
+  border: 1px solid rgb(182, 169, 169);
+  width: 100%;
+  height: 30px;
+}
+.nextprevbtn h6 {
+  color: rgb(120, 120, 233);
+
+  margin-left: 90px;
+}
+.nextbtn {
+  width: 20px;
+  height: 100%;
+  float: right;
+  background-color: rgb(220, 224, 224);
+}
+.prevbtn {
+  width: 20px;
+  height: 100%;
+  float: left;
+  background-color: rgb(220, 224, 224);
+}
+.childmodulecoursdivphone {
+  border: 1px solid rgb(218, 215, 215);
+  width: 100%;
+  height: 200px;
+  display: inline-block;
+  vertical-align: middle;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.moduleitem_phone {
+  margin-left: 5px;
+}
+.moduleitem_phone input {
+  border: 1px solid rgb(177, 174, 174);
+  margin-right: 2px;
+}
+
+.moduleitem_phone label {
+  font-style: unset;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+}
+.typesujetsourcesexamnphone {
+  display: inline-block;
+  width: 95%;
+}
+.childtypesujetsourcesexamnphone {
+  display: inline-block;
+  border: 1px solid rgb(211, 206, 206);
+  padding: 1rem 1rem;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.qcmtype_phone {
+  background-color: black;
+  border: 3px solid rgb(167, 55, 55);
+  position: fixed;
+  width: 95%;
+  margin-left: 5px;
+}
+.qcmtype_phone i {
+  position: absolute;
+  right: 0;
+}
+
+.qcmtypecontent_phone div {
+  display: inline-block;
+  vertical-align: left;
+}
+.typeqcm_phone input {
+  border: 1px solid rgb(194, 191, 191);
+  margin-right: 3px;
+}
+.typeqcm_phone {
+  width: 210px;
+  height: 3px;
+  margin: 0px;
+}
+.qcmtypecontent_phone {
+  display: "flex";
+}
+.qcmtypecontent_phone label {
+  display: "flex";
+}
+
+.yearSelectCardphone {
+  width: 95%;
+  position: fixed;
+  margin-left: 5px;
+}
+.yearSelectBodyphone select {
+  display: inline-block;
+  vertical-align: left;
+  margin: 5px;
+}

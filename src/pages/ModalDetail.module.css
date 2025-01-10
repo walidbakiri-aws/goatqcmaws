@@ -1,0 +1,85 @@
+.modal {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 30rem;
+  z-index: 10;
+  position: absolute;
+  height: 400px;
+  width: 900px;
+  top: 20vh;
+  left: calc(40% - 15rem);
+}
+
+.cancelbtn {
+  margin-top: -40px;
+  margin-right: 10px;
+}
+.infocontent {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.infonames {
+  height: 100%;
+  width: 50%;
+}
+
+.infovalue {
+  height: 100%;
+  width: 50%;
+}
+.year {
+  display: flex;
+}
+.listecours {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 200px;
+}
+
+/****phone*******************************************/
+.modal_phone {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 30rem;
+  z-index: 10;
+  position: absolute;
+  height: 250px;
+  width: 90%;
+  margin-top: 100px;
+  margin-left: 20px;
+  font-size: 13px;
+}
+
+.cancelbtn_phone {
+  margin-top: -40px;
+  margin-right: 10px;
+}
+.infocontent_phone {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.infonames_phone {
+  height: 100%;
+  width: 50%;
+}
+
+.infovalue_phone {
+  height: 100%;
+  width: 50%;
+}
+.year_phone {
+  display: flex;
+}
+.listecours_phone {
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 70px;
+}

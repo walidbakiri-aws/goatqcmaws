@@ -1,0 +1,36 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+}
+.contanerspace {
+  position: absolute;
+  display: inline-block;
+  margin-left: 300px;
+  margin-top: 0;
+}
+
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+.quizcontainer {
+  margin-top: 30px;
+  width: 900px;
+  height: 500px;
+  background-color: #dcdcde;
+}
+
+.affichage {
+  width: 500px;
+  margin: auto;
+}

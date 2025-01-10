@@ -1,0 +1,45 @@
+.addingdiv {
+  width: 100%;
+  margin: auto;
+  height: 750px;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(220, 220, 220);
+  position: relative;
+  display: "flex";
+  padding-top: 20;
+}
+
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.affichage {
+  width: 500px;
+  margin: auto;
+}
+.child {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.imagediv {
+  width: 45%;
+  border: 1px solid rgb(126, 197, 245);
+}
+.imagediv img {
+  border: 1px solid rgb(189, 185, 185);
+  height: 250px;
+  width: 100%;
+  padding: 2px;
+  background-color: aliceblue;
+}
+
+.updtimage {
+  float: left;
+}
+
+.deeletefulldesc {
+  margin-left: 250px;
+}

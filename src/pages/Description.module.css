@@ -1,0 +1,68 @@
+.fulldesccontainer {
+  width: 100%;
+  height: auto;
+  background-color: var(--background-color-full);
+}
+
+.desccontainer {
+  width: 1000px;
+  height: auto;
+  border: 1px solid rgb(194, 192, 192);
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  margin-left: 280px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.imagedesc {
+  width: 100%;
+  height: auto;
+}
+.imagedesc img {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+.carddesc {
+  height: auto;
+  margin-top: 5px;
+  white-space: pre-line;
+  height: auto;
+  padding: 10px;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+}
+/************phone **************************/
+.desccontainer_phone {
+  width: 100%;
+  height: auto;
+  border: 1px solid rgb(194, 192, 192);
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.imagedesc_phone {
+  width: 100%;
+  height: auto;
+}
+.imagedesc_phone img {
+  width: 90%;
+  margin-left: 5px;
+  height: 100%;
+  padding: 20px;
+}
+.carddesc_phone {
+  border-radius: 3px;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  height: auto;
+  margin-top: 5px;
+  white-space: pre-line;
+  height: auto;
+  padding: 10px;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+}

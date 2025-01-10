@@ -1,0 +1,83 @@
+.desktoptoggle {
+  margin-left: 5px;
+  margin-top: 600px;
+  position: absolute;
+}
+
+.toggle {
+  visibility: hidden;
+}
+.toggle + label {
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+  cursor: pointer;
+  color: black;
+}
+.toggle + label::before {
+  content: "";
+  height: 1em;
+  width: 2em;
+  border-radius: 2em;
+  background-color: rgb(212, 218, 218);
+  margin-right: 0.5em;
+  transition: background-color 250ms ease-in-out, tranform 250ms ease-in-out;
+  color: black;
+}
+
+.toggle + label::after {
+  content: "";
+  height: 0.8em;
+  width: 0.8em;
+  border-radius: 1em;
+  background-color: var(--toggle-fg);
+  position: absolute;
+  left: 0.2em;
+  color: black;
+}
+.toggle:checked + label::after {
+  transform: translateX(100%);
+}
+
+/****phone********************************/
+.phonetoggle {
+  margin-left: 90px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  position: absolute;
+}
+
+.togglephone {
+  visibility: hidden;
+}
+.togglephone + label {
+  display: flex;
+  align-items: center;
+  font-size: 0.5em;
+  cursor: pointer;
+  color: black;
+}
+.togglephone + label::before {
+  content: "";
+  height: 1em;
+  width: 2em;
+  border-radius: 2em;
+  background-color: rgb(212, 218, 218);
+  margin-right: 0.5em;
+  transition: background-color 250ms ease-in-out, tranform 250ms ease-in-out;
+  color: black;
+}
+
+.togglephone + label::after {
+  content: "";
+  height: 0.8em;
+  width: 0.8em;
+  border-radius: 1em;
+  background-color: var(--toggle-fg);
+  position: absolute;
+  left: 0.2em;
+  color: black;
+}
+.togglephone:checked + label::after {
+  transform: translateX(100%);
+}

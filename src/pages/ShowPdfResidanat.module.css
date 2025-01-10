@@ -1,0 +1,67 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+
+  display: flex;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+}
+.contanerspace {
+  background-color: var(--background-color-full);
+  width: 100%;
+  height: 600px;
+  position: absolute;
+  display: inline-block;
+  height: fit-content;
+  margin-left: 20px;
+  margin-top: 20px;
+  transition: background-color 250ms ease-in-out;
+}
+.fulldivpdfcontainer {
+  margin-left: 50px;
+  width: 80%;
+
+  border: 1px solid cornflowerblue;
+}
+.documentdiv {
+  height: 1200px;
+  pointer-events: none;
+}
+.hidesecondepdf {
+  position: absolute;
+  width: 80%;
+  height: 800px;
+  background-color: aqua;
+  margin-left: 200px;
+  z-index: 3;
+  margin-top: -2300px;
+}
+/***********phone************************************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+  margin-top: 20px;
+  width: fit-content;
+}
+
+.fulldiv_phone {
+  position: relative;
+}
+
+.hidesavepdf_phone {
+  width: 80px;
+  height: 30px;
+  background-color: rgb(52, 54, 54);
+  position: relative;
+  z-index: 2;
+  margin-left: 290px;
+  margin-top: -20px;
+}
+.pdfsection_phone {
+  margin-top: -30px;
+}

@@ -1,0 +1,372 @@
+.addingdiv {
+  width: 100%;
+
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.contanerspace {
+  margin-top: 20px;
+  position: absolute;
+  display: inline-block;
+  background-color: var(--background-color-full);
+  height: auto;
+  width: 100%;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+}
+.quizzContainer {
+  margin-left: 200px;
+  width: 1200px;
+  height: 850px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-top: 20px;
+  border-radius: 10px;
+
+  box-shadow: 5px 10px;
+  background-color: var(--background-color);
+}
+.fullquizzdiv {
+  margin-top: 5px;
+  width: 1100px;
+  height: fit-content;
+  margin-bottom: 20px;
+  margin-left: 50px;
+  padding: 5px;
+  border-radius: 8px;
+
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.fullquizzdiv_header {
+  width: 100%;
+  height: 30px;
+  background-color: var(--background-color);
+  border-radius: 5px;
+  border: 1px solid rgb(80, 80, 76);
+  color: var(--primary-text-color);
+  padding-left: 550px;
+}
+.fullquizzdiv_content {
+  display: inline-block;
+  height: 100%;
+  background-color: var(--background-color-full);
+  overflow-x: auto; /* Allow horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical scrollbar if needed */
+  white-space: nowrap;
+  width: 100%;
+}
+.quizzdiv {
+  display: inline-block;
+  margin-right: 10px;
+  width: 250px;
+  height: 190px;
+  border: 1px solid rgb(80, 80, 76);
+  border-radius: 5px;
+}
+
+.quizzdivheader {
+  padding-left: 10px;
+  background-color: var(--background-color);
+  border: 1px solid rgb(80, 80, 76);
+  width: 100%;
+  height: 40px;
+  color: var(--primary-text-color);
+  border-radius: 5px;
+  display: flex;
+}
+.float_child_element {
+  float: left;
+}
+.quizzname {
+  height: 100px;
+  width: 180px;
+}
+.threedotsbtn {
+  height: 100px;
+  width: 55px;
+}
+.quizzdiv_container {
+  position: relative;
+}
+.detail {
+  width: 120px;
+  height: 70px;
+  margin-left: 110px;
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 1;
+  margin-top: -180px;
+  color: var(--primary-text-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.detail button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+.hr_desk {
+  margin-left: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(159, 157, 202) 0%,
+    rgb(159, 157, 202) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+/*cas clinique*********************************/
+.quizzdiv_container_clinique {
+  position: relative;
+}
+.detail_clinique {
+  width: 120px;
+  height: 70px;
+  margin-left: 110px;
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 2;
+  margin-top: -180px;
+  color: var(--primary-text-color);
+  position: absolute;
+}
+.detail_clinique button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail_clinique button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+
+/**********************************************/
+
+.popup {
+  z-index: 5;
+  width: 200px;
+  height: 200px;
+}
+.quizzcontent {
+  width: 100%;
+  height: 140px;
+}
+
+.quizzcontent img {
+  width: 100%;
+  height: 100%;
+}
+.quizzdivfooter {
+  width: 100%;
+  height: 30px;
+  background-color: var(--background-color);
+  border: 1px solid rgb(80, 80, 76);
+  border-radius: 5px;
+}
+
+/*****phone****************************************************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color-full);
+}
+.fullquizzdiv_phone {
+  width: 100%;
+  margin: 5px;
+  margin-top: 20px;
+  height: 240px;
+  background-color: var(--background-color-full);
+  border-radius: 7px;
+  margin-bottom: 40px;
+}
+.fullquizzdiv_header_phone {
+  width: 100%;
+  height: 30px;
+  background-color: var(--background-color);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.title_type_quizz {
+  margin-left: 3px;
+  color: var(--primary-text-color);
+  float: left;
+  font-size: 12px;
+  padding-top: 3px;
+}
+.drowdown_btn {
+  margin-right: 10px;
+  float: right;
+  color: aqua;
+}
+.fullquizzdiv_content_phone {
+  margin-top: 5px;
+  display: inline-block;
+  background-color: var(--background-color);
+  overflow-x: auto; /* Allow horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical scrollbar if needed */
+  white-space: nowrap;
+  width: 100%;
+}
+.quizzdiv_phone {
+  display: inline-block;
+  margin-right: 10px;
+  width: 120px;
+  height: fit-content;
+  border: 1px solid rgb(80, 80, 76);
+  border-radius: 5px;
+}
+.quizzdivheader_phone {
+  padding-left: 10px;
+  background-color: var(--background-color);
+  border: 1px solid rgb(80, 80, 76);
+  width: 100%;
+  height: 25px;
+  color: var(--primary-text-color);
+  border-radius: 5px;
+  font-size: 10px;
+}
+
+.float_child_element_phone {
+  float: left;
+}
+.quizzname_phone {
+  height: 10px;
+  width: 70px;
+}
+.threedotsbtn_phone {
+  height: 20px;
+  width: 25px;
+}
+.quizzdiv_container_phone {
+  position: relative;
+}
+.detail_phone {
+  width: 70px;
+  height: 70px;
+  margin-left: 40px;
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 2;
+  margin-top: -160px;
+  color: var(--primary-text-color);
+  position: absolute;
+}
+.detail_phone button {
+  padding-left: 5px;
+  width: 100%;
+  height: 7px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail_phone button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+.hr_desk_phone {
+  margin-left: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(159, 157, 202) 0%,
+    rgb(159, 157, 202) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.quizzcontent_phone {
+  width: 100%;
+  height: 140px;
+}
+.quizzcontent_phone img {
+  width: 100%;
+  height: 100%;
+}
+.quizzdivfooter_phone {
+  width: 100%;
+  height: 20px;
+  background-color: var(--background-color);
+  border: 1px solid rgb(80, 80, 76);
+  border-radius: 5px;
+}
+.quizzdiv_container_clinique_phone {
+  position: relative;
+}
+.detail_clinique_phone {
+  width: 70px;
+  height: 70px;
+  margin-left: 40px;
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 2;
+  margin-top: -160px;
+  color: var(--primary-text-color);
+  position: absolute;
+}
+.detail_clinique_phone button {
+  padding-left: 5px;
+  width: 100%;
+  height: 7px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail_clinique_phone button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+
+.fullquizzdiv_casclinique_phone {
+  margin-left: 5px;
+
+  width: 100%;
+  height: 30px;
+  background-color: var(--background-color);
+  border-radius: 3px;
+  overflow: hidden;
+}

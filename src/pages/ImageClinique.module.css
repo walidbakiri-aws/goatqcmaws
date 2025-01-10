@@ -1,0 +1,19 @@
+.imagedesc {
+  width: 100%;
+  height: 120px;
+  text-align: center;
+}
+.imagedesc img {
+  width: 40%;
+  height: 100%;
+}
+
+.imagedesc_phone {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
+.imagedesc_phone img {
+  width: 40%;
+  height: 100%;
+}

@@ -1,0 +1,59 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+}
+.contanerspace {
+  position: absolute;
+  display: inline-block;
+  margin-left: 300px;
+  margin-top: 20px;
+}
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+.abncard {
+  margin-top: 20px;
+  width: 1000px;
+  height: 800px;
+}
+.cardabnprincipale {
+  width: 85%;
+  height: 100%;
+  padding: 10px;
+  border: 1px solid rgb(90, 85, 85);
+}
+.valideabncontainer {
+  margin-left: 100px;
+  margin-top: 30px;
+  width: 600px;
+}
+.paymentdiv {
+  left: 0;
+  margin-left: 0px;
+}
+.affichage {
+  width: 500px;
+  margin: auto;
+}
+
+.testdiv {
+  width: 700px;
+  height: 400px;
+}
+
+.listecontent {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  background-color: aqua;
+}

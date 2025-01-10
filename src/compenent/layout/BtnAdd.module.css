@@ -1,0 +1,5 @@
+.btncontainer {
+  display: flex;
+  margin: auto;
+  width: 35%;
+}

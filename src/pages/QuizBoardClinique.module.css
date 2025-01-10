@@ -1,0 +1,880 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  z-index: 3;
+}
+.contanerspace {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  margin-top: 0;
+  background-color: var(--background-color);
+}
+.container_save_casclinique_timer {
+  margin-left: 720px;
+
+  display: flex;
+  width: 700px;
+  height: 40px;
+}
+.full_save_casclinique {
+  margin-top: 5px;
+  width: 350px;
+  height: 40px;
+}
+.full_save_casclinique button {
+  margin-right: 5px;
+}
+.save_quizz {
+  width: 550px;
+  height: 150px;
+  padding: 10px;
+  margin-bottom: 7px;
+  margin-left: 550px;
+  margin-top: 100px;
+  border-radius: 8px;
+  z-index: 3;
+  position: fixed;
+  background-color: rgb(238, 234, 234);
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  white-space: pre-line;
+}
+
+.save_quizz_conetent button {
+  margin-top: 20px;
+  margin-left: 160px;
+  width: 200px;
+  font-size: 16px;
+}
+.fullchronotime {
+  margin-top: 5px;
+  border-radius: 8px;
+  display: flex;
+  border: 1px solid #61e03a;
+  width: 190px;
+  height: 40px;
+  margin-bottom: -48px;
+
+  background-color: var(--background-color);
+  overflow: hidden;
+}
+.timediv {
+  width: 115px;
+  color: var(--primary-text-color);
+  height: auto;
+  font-size: 13px;
+  float: left;
+  display: flex;
+  margin-left: 10px;
+  margin-right: 5px;
+}
+.timediv span {
+  padding-top: 3px;
+  font-size: 18px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.timetbns {
+  display: flex;
+  float: right;
+}
+.timetbns a {
+  margin-left: 5px;
+}
+
+.parsujetscontainer {
+  background-color: rgb(198, 202, 201);
+}
+
+.parsujetscontainer select {
+  display: inline-block;
+  vertical-align: left;
+  margin: 5px;
+}
+.addingdiv label {
+  color: black;
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.affichage {
+  width: 500px;
+  margin: auto;
+}
+.quizcontainer {
+  margin-top: 5px;
+  width: 1000px;
+  height: 700px;
+  margin-left: 280px;
+  background: linear-gradient(to right, lch(50% 250 250), lch(50% 250 250));
+}
+.cliniqueqcmcontainer {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--background-color-full);
+}
+
+.cascliniquecontent {
+  z-index: 1;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  white-space: pre-line;
+  margin-bottom: 5px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  border-radius: 8px;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+}
+.btnqcmclinique {
+  width: 100%;
+}
+
+.btnqcmclinique button {
+  margin: 2px;
+  width: 25px;
+}
+.cascliniquefeild p {
+  border: 1px solid rgb(218, 215, 215);
+  background-color: rgb(255, 255, 255);
+}
+.cascliniquefeild ul {
+  border: 1px solid rgb(218, 215, 215);
+  background-color: rgb(255, 255, 255);
+  left: 0;
+  position: relative;
+}
+.cascliniquefeild ul button {
+  border: 1px solid rgb(156, 153, 153);
+  margin-right: 3px;
+  background-color: rgb(236, 229, 229);
+  left: 0;
+  position: relative;
+}
+.qcmcascliniquefeild {
+  width: 100%;
+  height: auto;
+  white-space: pre-line;
+  margin-bottom: 7px;
+  background-color: rgb(255, 255, 255);
+  border-color: aqua;
+}
+.qcmpropocontainer {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgb(240, 240, 240);
+}
+
+.qcmfeild {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  margin-bottom: 7px;
+  z-index: 1;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  border-radius: 8px;
+  color: var(--primary-text-color);
+  background-color: var(--background-color);
+  white-space: pre-line;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+}
+.propofeild {
+  width: 100%;
+  height: 100%;
+}
+.qcmInfoHeader {
+  display: flex;
+}
+.ulcatogorycourname {
+  display: flex;
+  color: var(--primary-text-color-info);
+}
+.ulcatogorycourname li {
+  margin-right: 10px;
+}
+.ulcatogorycourname li {
+  margin-right: 10px;
+}
+.ulcatogorycourname img {
+  margin-right: 3px;
+}
+.goatlogo {
+  position: absolute;
+  right: 0;
+  margin-right: 20px;
+}
+.ulpropo {
+  padding-bottom: 10px;
+  border: 1px solid rgb(192, 186, 186);
+}
+.ulpropo li {
+  height: auto;
+  border: 1px solid rgb(192, 186, 186);
+  padding: 3px;
+  background-color: var(--background-color);
+  color: var(--primary-text-color-propo);
+  overflow: hidden;
+  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+}
+.percentage {
+  width: 50px;
+  font-size: 15px;
+  height: 25px;
+  padding-left: 5px;
+  padding-bottom: 3px;
+  float: right;
+  margin-top: 5px;
+  color: #5284cf;
+  background-color: #e8ecf1;
+  font-weight: bolder;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  border-radius: 8px;
+  border: 1px solid rgb(192, 186, 186);
+}
+.ulpropo img {
+  height: 40px;
+  width: 40px;
+  margin-right: 5px;
+}
+.btnfooter {
+  background-color: rgb(207, 209, 209);
+}
+.btnfooter button {
+  margin-top: 5px;
+}
+.BntVerifierrpnse {
+  position: relative;
+  margin-left: 40%;
+}
+.btnsuivant {
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
+}
+.btnPrecdent {
+  position: absolute;
+  left: 0;
+  margin-left: 15px;
+}
+
+.qcmpropofeild {
+  width: 100%;
+  height: 50%;
+  background-color: rgb(173, 76, 76);
+}
+
+.p_qcmhow {
+  color: blue;
+}
+.p_qcmhow2 {
+  color: rgb(199, 80, 100);
+}
+
+.imgdescdiv {
+  border: 1px solid rgb(233, 167, 167);
+  height: 330px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+.fulldescription {
+  display: flex;
+  border: 1px solid rgb(189, 185, 185);
+}
+.imagediv {
+  width: 45%;
+  border: 1px solid rgb(126, 197, 245);
+}
+.imagediv img {
+  border: 1px solid rgb(189, 185, 185);
+  height: 250px;
+  width: 100%;
+  padding: 2px;
+  background-color: aliceblue;
+}
+.descarea {
+  width: 100%;
+  margin-left: 2px;
+  border: 1px solid rgb(126, 197, 245);
+}
+.descarea textarea {
+  height: 100%;
+}
+
+.updtimage {
+  float: left;
+}
+
+.updtdesc {
+  float: right;
+}
+.deeletefulldesc {
+  margin-left: 250px;
+}
+.card_done_quiz {
+  width: 550px;
+  height: 200px;
+  padding: 10px;
+  margin-bottom: 7px;
+  margin-left: 550px;
+  margin-top: 70px;
+  z-index: 4;
+  position: fixed;
+  background-color: rgb(238, 234, 234);
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  white-space: pre-line;
+  border-radius: 8px;
+}
+.card_done_quiz h6 {
+  margin-top: 20px;
+}
+.card_done_quiz_btns {
+  display: grid;
+}
+.card_done_quiz_btns button {
+  color: rgb(7, 4, 0);
+  margin-left: 70px;
+  width: 400px;
+  margin-top: 10px;
+}
+
+/***liste qcms******************************************************/
+.qcmsliste {
+  width: 200px;
+  height: 600px;
+  margin-top: 5px;
+  margin-left: -270px;
+  border-radius: 10px;
+  background-color: var(--background-color);
+  position: absolute;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  overflow-y: auto;
+}
+.qcmsliste_header {
+  border-radius: 10px;
+  width: 100%;
+  height: 40px;
+  background-color: #5389db;
+}
+.qcmsliste_header h6 {
+  margin-left: 10px;
+  padding-top: 10px;
+  color: var(--primary-text-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+}
+.ul_clinique_clinique {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #4b91f7;
+  margin-left: -25px;
+  margin-top: 10px;
+  display: flex;
+}
+.title_casclinique {
+  margin-right: 20px;
+  font-size: 18px;
+}
+.ul_qcms_clinique {
+  margin-left: -50;
+  display: grid;
+}
+.div_qcm {
+  display: flex;
+}
+.div_qcm a {
+  margin-left: 5px;
+  margin-left: -20px;
+  padding-top: 5px;
+  font-size: 18px;
+}
+.div_qcm a:hover {
+  background-color: rgb(228, 219, 219);
+  color: black;
+  border: 2px solid #e7e7e7;
+  width: 130px;
+}
+
+.vl_select {
+  border-left: 4px solid rgb(121, 141, 231);
+  height: 15px;
+  margin-top: 11px;
+  margin-left: 10px;
+}
+.vl_answer {
+  border-left: 4px solid rgb(65, 185, 81);
+  height: 15px;
+  margin-top: 11px;
+  margin-left: 5px;
+}
+/***end list qcms******************************************************/
+/*****phone*********************************************/
+
+/***********add new designe phone header******************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+}
+.headerquizz_phone {
+  width: 100%;
+  height: 35px;
+  background-color: var(--background-color);
+  display: flex;
+}
+
+.fullchronotime_phone {
+  margin-top: 3px;
+  width: 160px;
+  border-radius: 8px;
+  display: flex;
+  border: 1px solid #61e03a;
+  height: 30px;
+  background-color: var(--background-color);
+  overflow: hidden;
+  margin-left: 3px;
+}
+.timediv_phone {
+  width: 60%;
+  background-color: var(--background-color);
+
+  height: auto;
+  font-size: 13px;
+  float: left;
+  display: flex;
+  margin-left: 3px;
+}
+.timediv_phone span {
+  color: var(--primary-text-color);
+  background-color: var(--background-color);
+  padding-top: 3px;
+  font-size: 15px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+.timetbns_phone {
+  color: #4b91f7;
+  width: 45%;
+  background-color: var(--background-color);
+  display: flex;
+  float: right;
+}
+.timetbns_phone a {
+  margin-left: 5px;
+}
+.full_save_close_quizz {
+  color: #4b91f7;
+  display: flex;
+  margin-top: 3px;
+  float: right;
+  width: 70px;
+  margin-left: 130px;
+}
+.closequizz_phone {
+  margin-left: 10px;
+}
+
+/************************************************************************/
+
+.modal {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  margin-top: -60px;
+  margin-left: -18px;
+  padding: 1rem;
+  z-index: 5;
+
+  height: auto;
+  width: 100%;
+}
+.quizcontainer_phone {
+  display: flex;
+  height: 100px;
+  width: 100%;
+  background: var(--background-color);
+}
+.cliniqueqcmcontainer_phone {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--background-color-full);
+}
+.modulediv_phone {
+  width: 100%;
+
+  margin-top: -15px;
+  font-size: 13px;
+}
+.child_phone {
+  float: left;
+  color: var(--primary-text-color-info);
+}
+.modulename {
+  font-style: initial;
+}
+.homebtn {
+  margin-left: 210px;
+}
+.qcmInfoHeader_phone {
+  display: flex;
+  width: 100%;
+  font-size: 13px;
+}
+
+.hr_phone {
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(13, 8, 96, 1) 0%,
+    rgba(9, 9, 121, 1) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.nmbrqcm {
+  font-size: 12px;
+}
+.qcmfeild_phone {
+  white-space: pre-line;
+  width: 100%;
+  height: auto;
+  padding: 5px;
+  margin-bottom: 7px;
+  z-index: 1;
+
+  border-radius: 5px;
+  color: var(--primary-text-color);
+  background-color: var(--background-color);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.qcmInfocatgrp_phone {
+  float: left;
+  display: flex;
+  color: var(--primary-text-color-info);
+}
+.courname_phone {
+  font-size: 13px;
+}
+.qcmcourimgname_phone {
+  display: flex;
+  color: var(--primary-text-color-info);
+}
+.propofeild_phone {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--background-color-full);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.ulpropo_phone {
+  padding-bottom: 10px;
+  border: 1px solid var(--background-color-full);
+}
+.propofeild_ul_phone ul {
+  border-radius: 5px;
+}
+.ulpropo_phone li {
+  height: auto;
+  border: 1px solid rgb(192, 186, 186);
+  padding: 3px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  overflow: hidden;
+}
+/****percentage*******************************************/
+.percentage_phone {
+  width: 40px;
+  font-size: 12px;
+  height: 20px;
+  padding-left: 5px;
+  padding-bottom: 3px;
+  margin-left: 2px;
+  margin-bottom: 7px;
+  float: right;
+  color: #5284cf;
+  background-color: #e8ecf1;
+  font-weight: bolder;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  border-radius: 8px;
+  border: 1px solid rgb(192, 186, 186);
+}
+/****************************************************************/
+.ulpropo_phone img {
+  height: 28px;
+  width: 28px;
+}
+/********************************************/
+
+.cascliniquecontent_phone {
+  width: 100%;
+  height: auto;
+  padding: 3px;
+  margin-bottom: 7px;
+  z-index: 1;
+
+  border-radius: 5px;
+  color: var(--primary-text-color);
+  background-color: var(--background-color);
+  white-space: pre-line;
+  border: 1px solid var(--background-color-full);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.cascliniquecontent_phone p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+.qcmfeild_phone p {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+.btnqcmclinique_phone {
+  height: auto;
+  width: auto;
+  display: block;
+  margin-left: -15px;
+}
+.btnqcmclinique_phone button {
+  width: auto;
+  padding-left: 5px;
+  padding-right: 5px;
+
+  margin-right: 3px;
+}
+
+/***********footer phone divs******************/
+.btnfooter_phone {
+  background-color: rgb(207, 209, 209);
+  display: flex;
+  padding-top: 7px;
+  height: 30px;
+}
+
+.btnPrecdent_phone {
+  position: absolute;
+  left: 0;
+  margin-left: 15px;
+}
+.btnsuivant_phone {
+  position: absolute;
+  right: 0;
+  margin-right: 15px;
+}
+.BntVerifierrpnse_phone {
+  position: relative;
+  margin-left: 45%;
+}
+
+.button_10 {
+  position: relative;
+  margin-left: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-radius: 6px;
+  border: none;
+  font-size: 15px;
+  color: #fcfbfb;
+  background: linear-gradient(180deg, #4b91f7 0%, #367af6 100%);
+  background-origin: border-box;
+  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+    inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-10:focus {
+  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+    0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+    0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
+  outline: 0;
+}
+/*************done quiz popup****************************************************/
+.card_done_quiz_phone {
+  width: 250px;
+  height: 180px;
+  padding: 10px;
+  margin-bottom: 7px;
+  margin-left: 40px;
+  margin-top: 150px;
+  z-index: 5;
+  position: fixed;
+  background-color: rgb(238, 234, 234);
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  white-space: pre-line;
+  border-radius: 8px;
+}
+.card_done_quiz_phone h6 {
+  margin-top: 20px;
+  font-size: 12px;
+}
+.card_done_quiz_btns_phone {
+  display: grid;
+}
+.card_done_quiz_btns_phone button {
+  color: rgb(7, 4, 0);
+  font-size: 12px;
+  width: 100%;
+  margin-top: 10px;
+}
+/*****liste qcm phone****************************************/
+.full_listeqcm_phone {
+  margin-top: 30px;
+
+  height: 500px;
+  position: absolute;
+  display: flex;
+  border-radius: 10px;
+  background-color: transparent;
+  z-index: 2;
+}
+.qcmsliste_phone {
+  width: 90%;
+  height: 100%;
+
+  border-radius: 10px;
+  background-color: var(--background-color);
+
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  overflow-y: auto;
+}
+.iconlistqcm_phone {
+  margin-top: 40px;
+
+  width: 40px;
+  height: 40px;
+}
+.iconlistqcm img {
+  margin-left: -7px;
+}
+
+.qcmsliste_header_phone {
+  border-radius: 10px;
+  width: 100%;
+  height: 30px;
+  background-color: #5389db;
+}
+.qcmsliste_header_phone h6 {
+  margin-left: 10px;
+  padding-top: 5px;
+  color: var(--primary-text-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+}
+
+.ul_clinique_clinique_phone {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #4b91f7;
+  margin-left: -25px;
+  margin-top: 10px;
+  display: flex;
+}
+.title_casclinique_phone {
+  margin-right: 20px;
+  font-size: 16px;
+}
+
+.ul_qcms_clinique_phone {
+  margin-left: -50;
+  display: grid;
+}
+
+.div_qcm_phone {
+  display: flex;
+}
+.div_qcm_phone a {
+  margin-left: 5px;
+  margin-left: -25px;
+  margin-top: 3px;
+  font-size: 16px;
+  padding-left: 2px;
+  padding-bottom: 5px;
+}
+.div_qcm_phone a:hover {
+  background-color: rgb(199, 194, 194);
+  color: var(--primary-text-color);
+
+  height: 30px;
+  width: 120px;
+}
+.vl_select_phone {
+  border-left: 4px solid rgb(121, 141, 231);
+  height: 12px;
+  margin-top: 7px;
+  margin-left: 10px;
+}
+.vl_answer_phone {
+  border-left: 4px solid rgb(65, 185, 81);
+  height: 12px;
+  margin-top: 7px;
+  margin-left: 5px;
+}
+/***end list qcms******************************************************/
+/****************************************************************/
+.save_quizz_phone {
+  width: 240px;
+  height: 200px;
+  padding: 10px;
+  margin-bottom: 7px;
+  margin-left: 30px;
+  margin-top: 100px;
+  border-radius: 8px;
+  z-index: 6;
+  position: fixed;
+  background-color: rgb(238, 234, 234);
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  white-space: pre-line;
+}
+.save_quizz_conetent_phone button {
+  margin-top: 20px;
+  margin-left: 55px;
+  width: 120px;
+  font-size: 13px;
+}
+.full_save_casclinique_phone {
+  background-color: #e6dddd;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+
+  padding: 1rem;
+  text-align: center;
+  width: 30rem;
+  z-index: 10;
+  position: fixed;
+  height: 200px;
+  width: 280px;
+  top: 20vh;
+  margin-top: 50px;
+  margin-left: 30px;
+}

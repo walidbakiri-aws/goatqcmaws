@@ -1,0 +1,329 @@
+.addingdiv {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+
+  display: flex;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+}
+.contanerspace {
+  background-color: var(--background-color);
+  position: absolute;
+  display: inline-block;
+  margin-left: 300px;
+  margin-top: 20px;
+  transition: background-color 250ms ease-in-out;
+}
+
+.bienvenulogo {
+  width: 700px;
+  margin-left: 110px;
+  height: 160px;
+  margin-bottom: 0px;
+}
+.bienvuenwlcm {
+  height: 70px;
+
+  text-align: center;
+  font-size: 40px;
+}
+.logogoat {
+  text-align: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+  margin-left: 20px;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  min-height: 100vh;
+}
+
+.card {
+  margin-top: -160px;
+  background: #287bff;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  width: 250px;
+  height: 450px;
+  margin-right: 60px;
+  border-radius: 20px;
+  border-bottom-left-radius: 160px;
+  border-bottom-right-radius: 160px;
+  box-shadow: 0 15px 0 #fff, inset 0 -15px 0 rgba(255, 255, 255, 0.24),
+    0 45px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+
+  left: -40%;
+  padding: 0;
+  width: 100%;
+  height: 120%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+  transform: rotate(35deg);
+  pointer-events: none;
+  filter: blur(5px);
+}
+
+.card:nth-child(1) {
+  background: linear-gradient(to bottom, #ff2ae0, #645bf6);
+}
+
+.card:nth-child(2) {
+  background: linear-gradient(to bottom, #ffec61, #f321d7);
+}
+
+.card:nth-child(3) {
+  background: linear-gradient(to bottom, #24ff72, #9a4eff);
+}
+
+.icon {
+  position: relative;
+  width: 140px;
+  height: 120px;
+  background: #3c2846;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  box-shadow: 0 15px 0 rgba(0, 0, 0, 0.1), inset 0 -8px 0 #fff;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.icon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-top-right-radius: 50px;
+  box-shadow: 15px -15px 0 15px #3c2846;
+}
+
+.icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-top-left-radius: 50px;
+  box-shadow: -15px -15px 0 15px #3c2846;
+}
+
+.icon ion-icon {
+  color: #fff;
+  position: relative;
+  font-size: 6em;
+  z-index: 1000;
+  --ionicon-stroke-width: 24px;
+}
+
+.content {
+  position: absolute;
+  width: 100%;
+  padding: 30px;
+  padding-top: 150px;
+  text-align: center;
+}
+
+.content h2 {
+  font-size: 1.8em;
+  color: #fff;
+  margin-bottom: 15px;
+}
+.content p {
+  color: #fff;
+  line-height: 1.5em;
+}
+/***********phone************************************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+
+  margin-top: 20px;
+}
+
+.bienvenulogo_phone {
+  width: 100%;
+  height: 70px;
+  margin-bottom: 30px;
+}
+.bienvuenwlcm_phone {
+  height: 50px;
+  text-align: center;
+  font-size: 15px;
+}
+.logogoat_phone {
+  margin-top: -20px;
+  text-align: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container_phone {
+  margin-left: 20px;
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  min-height: 70vh;
+}
+
+.card_phone {
+  background: #287bff;
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+  width: 200px;
+  height: 270px;
+  margin-bottom: 20px;
+  border-radius: 20px;
+  font-size: 10px;
+  box-shadow: 0 15px 0 #fff, inset 0 -15px 0 rgba(255, 255, 255, 0.24),
+    0 45px 0 rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.card_phone::before {
+  content: "";
+  position: absolute;
+
+  left: -40%;
+  padding: 0;
+  width: 100%;
+  height: 20%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2));
+  transform: rotate(35deg);
+  pointer-events: none;
+  filter: blur(5px);
+}
+
+.card_phone:nth-child(1) {
+  background: linear-gradient(to bottom, #ff2ae0, #645bf6);
+}
+
+.card_phone:nth-child(2) {
+  background: linear-gradient(to bottom, #ffec61, #f321d7);
+}
+
+.card_phone:nth-child(3) {
+  background: linear-gradient(to bottom, #24ff72, #9a4eff);
+}
+
+.icon_phone {
+  position: relative;
+  width: 120px;
+  height: 100px;
+  background: #3c2846;
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+  box-shadow: 0 15px 0 rgba(0, 0, 0, 0.1), inset 0 -8px 0 #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.icon_phone::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-top-right-radius: 50px;
+  box-shadow: 15px -15px 0 15px #3c2846;
+}
+
+.icon_phone::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -50px;
+  width: 50px;
+  height: 50px;
+  background: transparent;
+  border-top-left-radius: 50px;
+  box-shadow: -15px -15px 0 15px #3c2846;
+}
+
+.icon_phone ion-icon {
+  color: #fff;
+  position: relative;
+  font-size: 6em;
+  z-index: 1000;
+  --ionicon-stroke-width: 24px;
+}
+
+.content_phone {
+  position: absolute;
+  width: 100%;
+  padding: 30px;
+  padding-top: 150px;
+  text-align: center;
+}
+
+.content_phone h2 {
+  font-size: 1.8em;
+  color: #fff;
+  margin-bottom: 15px;
+}
+.content_phone p {
+  color: #fff;
+  line-height: 1.5em;
+}
+
+.adresseIp {
+  margin-top: 20px;
+}
+
+:root {
+  --background-color: #f6f6f6;
+  --foreground-color: #3c8eec;
+  --primary-text-color: #e0d8d8;
+  --secondary-text-color: #f6f6f6;
+  --toggle-bg: #f6f6f6;
+  --toggle-fg: #eefa4c;
+}
+[data-theme="dark"] {
+  --background-color: #2c2b2b;
+  --foreground-color: #3c8eec;
+  --primary-text-color: #e0d8d8;
+  --secondary-text-color: #0a0a0a;
+  --toggle-bg: #070707;
+  --toggle-fg: #17a9ec;
+}

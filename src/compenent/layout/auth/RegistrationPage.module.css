@@ -1,0 +1,152 @@
+.loginform {
+  background-color: #ebf5fb;
+
+  background-position: center;
+  padding: 5px 5px 5px 5px;
+  float: right;
+  width: 100%;
+  height: 600px;
+}
+.fullloginpage {
+  background-color: #ebf5fb;
+
+  align-items: center;
+  padding-top: 10px;
+  width: 100%;
+  height: 500px;
+  display: flex;
+}
+.child_phone {
+  float: left;
+
+  margin-top: 10px;
+  height: 100%;
+  margin-right: 0px;
+}
+.logoimage img {
+  margin-left: 5px;
+  width: 800px;
+  height: 400px;
+}
+.wrapper {
+  margin-left: 50px;
+  align-items: center;
+  color: #b32929;
+  background-color: #b7e0ee;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  width: 400px;
+  height: 500px;
+  border-radius: 10px;
+  padding: 20px;
+}
+.wrapperinput input {
+  margin-top: 20px;
+}
+.wrapper h1 {
+  font-size: 36px;
+  text-align: center;
+  color: #161a1a;
+}
+
+.inputbox input::placeholder {
+  color: #fff;
+}
+
+.inputboxicon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+.inputboxiconrememberforgot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: -15px 0 15px;
+}
+
+.inputboxiconrememberforgot label input {
+  accent-color: #fff;
+  margin-right: 4px;
+}
+
+.inputboxiconrememberforgot a {
+  color: #fff;
+  text-decoration: none;
+}
+.inputboxiconrememberforgot a:hover {
+  text-decoration: underline;
+}
+
+.wrapper button {
+  width: 100%;
+  height: 45px;
+
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+  cursor: pointer;
+  font-size: 16px;
+
+  font-weight: 700;
+}
+.wrapperregisterlink {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btnform {
+  margin-top: 10px;
+}
+
+.btninscret {
+  font-size: medium;
+  background-color: #4cbb17;
+}
+.btncancel {
+  margin-top: 10px;
+}
+
+.wrapperphone {
+  align-items: center;
+  color: #b32929;
+  background-color: #b7e0ee;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(30px);
+  height: 100%;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.wrapperphone h1 {
+  font-size: 36px;
+  text-align: center;
+  color: #161a1a;
+}
+
+.wrapperphone button {
+  width: 100%;
+  height: 45px;
+
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+  cursor: pointer;
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+.wrapperinputphone input {
+  margin-top: 10px;
+}
+.inputusername {
+  text-transform: lowercase;
+}
