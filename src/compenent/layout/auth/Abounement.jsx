@@ -20,7 +20,7 @@ function Abounement() {
               <h2>Résidanat 2025</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>3500</span>DA
+                <span>4500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
