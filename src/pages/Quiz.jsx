@@ -35,6 +35,7 @@ function Quiz() {
     "2022",
     "2023",
     "2024",
+    "2025",
   ];
   const [selectAllCours, setSelectAllCours] = useState("");
   const QcmTypeSelected = useSignal("");
