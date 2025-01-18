@@ -410,7 +410,7 @@ function QuizBoard(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post("http://localhost:8080/image/uploadimage", formData, {
+      .post("https://goatqcm-instance.com/image/uploadimage", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
