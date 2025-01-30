@@ -29,7 +29,17 @@ function AbounementPhone() {
           <h2>Résidanat 2025</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>4500</span>DA
+            <ul className="list-group">
+              <li className="list-group-item">
+                <span>4500</span>DA
+              </li>
+              <li className="list-group-item">
+                <span>2 x 4000</span>DA
+              </li>
+              <li className="list-group-item">
+                <span>3 x 3500</span>DA
+              </li>
+            </ul>
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
