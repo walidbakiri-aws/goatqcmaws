@@ -20,14 +20,14 @@ function Abounement() {
               <h2>Résidanat 2025</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <ul className="list-group">
-                  <li className="list-group-item">
+                <ul>
+                  <li>
                     <span>4500</span>DA
                   </li>
-                  <li className="list-group-item">
+                  <li>
                     <span>2 x 4000</span>DA
                   </li>
-                  <li className="list-group-item">
+                  <li>
                     <span>3 x 3500</span>DA
                   </li>
                 </ul>
