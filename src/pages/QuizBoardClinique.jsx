@@ -3810,6 +3810,7 @@ function QuizBoardClinique(props) {
               className="btn btn-primary"
               onClick={() => {
                 setModalSaveQuizzIsOpen(true);
+                 setShowModelActionsPhone(false);
               }}
             >
               Sauvegarder Quizz
