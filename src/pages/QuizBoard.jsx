@@ -1247,6 +1247,8 @@ function QuizBoard(props) {
   };
   //********************************************************************************** */
   const SelectGroupePermHndlerChange = async (e) => {
+    getGroupePerm.value = document.getElementById("groupepermutation").value;
+    console.log(getGroupePerm.value);
     setVisibleParSujet(true);
     /******intializer **************************************************************** */
     setShowQcm([]);
@@ -1262,8 +1264,6 @@ function QuizBoard(props) {
     //******************************************************************************* */
     loadQcms();
     setVisibleQmcContainer(true);
-    getGroupePerm.value = document.getElementById("groupepermutation").value;
-    console.log(getGroupePerm.value);
   };
   //********************************************************************************** */
   //****description******************************************************************* */
