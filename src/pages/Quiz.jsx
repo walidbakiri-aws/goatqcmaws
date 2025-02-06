@@ -640,10 +640,10 @@ function Quiz() {
 
         minMaxYear = MinMaxMultipleFinalClinique;
         console.log(minMaxYear);
-        if (minMaxYear[0].length > 0) {
+        if (maxYearMultipleCoursClinique.length > 0) {
           console.log(minYearMultipleCoursClinique.length);
           setExisteCasClinique(true);
-        } else if (minMaxYear[0].length === 0) {
+        } else if (maxYearMultipleCoursClinique.length === 0) {
           console.log(minYearMultipleCoursClinique.length);
           setExisteCasClinique(false);
         }
