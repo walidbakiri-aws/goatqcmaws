@@ -1,4 +1,5 @@
 import classes from "./Abounement.module.css";
+import ramadan from "../img/Ramadan.png";
 
 function Abounement() {
   const abdounement = [
