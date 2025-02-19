@@ -26,20 +26,10 @@ function AbounementPhone() {
     <>
       <div className={classes.cardfinal_phone}>
         <div className={`${classes.card_title_phone}`}>
-          <h2>Résidanat 2025</h2>
+          <h2>Résidanat 2024</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <ul>
-              <li>
-                <span>4500</span>DA
-              </li>
-              <li>
-                <span>2 x 4000</span>DA
-              </li>
-              <li>
-                <span>3 x 3500</span>DA
-              </li>
-            </ul>
+            <span>1000</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -55,6 +45,22 @@ function AbounementPhone() {
               <i className="fa fa-check-circle"></i>Avec Explication
             </li>
           </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
+        </div>
+      </div>
+      <div className={classes.cardfinal_phone}>
+        <div className={`${classes.card_title_phone}`}>
+          <h2>Résidanat 2025</h2>
+          <p>
+            <i className="fa fa-rupee"></i>
+            <span>3000 </span>DA<br></br>
+            <span>2 X 2700</span>DA
+          </p>
+        </div>
+        <div className={`${classes.card_content_phone}`}>
+          <img src={ramadan} height="130px" width="100%" />
         </div>
       </div>
       <div className={classes.cardfinal_phone}>
@@ -62,7 +68,7 @@ function AbounementPhone() {
           <h2>1ér Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>1100</span>DA
+            <span>1000</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -78,6 +84,9 @@ function AbounementPhone() {
               <i className="fa fa-check-circle"></i>Avec Explication
             </li>
           </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
         </div>
       </div>
       <div className={classes.cardfinal_phone}>
@@ -101,6 +110,9 @@ function AbounementPhone() {
               <i className="fa fa-check-circle"></i>Avec Explication
             </li>
           </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
         </div>
       </div>
       <div className={classes.cardfinal_phone}>
@@ -124,6 +136,9 @@ function AbounementPhone() {
               <i className="fa fa-check-circle"></i>Avec Explication
             </li>
           </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
         </div>
       </div>
       <div className={classes.cardfinal_phone}>
@@ -147,6 +162,9 @@ function AbounementPhone() {
               <i className="fa fa-check-circle"></i>Avec Explication
             </li>
           </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
         </div>
       </div>
       <div className={classes.cardfinal_phone}>
@@ -170,6 +188,9 @@ function AbounementPhone() {
               <i className="fa fa-check-circle"></i>Avec Explication
             </li>
           </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
         </div>
       </div>
       <div className={classes.cardfinal_phone}>
@@ -193,6 +214,9 @@ function AbounementPhone() {
               <i className="fa fa-check-circle"></i>Avec Explication
             </li>
           </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
         </div>
       </div>
     </>
