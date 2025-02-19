@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import classes from "./AbounementPhone.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import ramadan from "../compenent/layout/img/Ramadan.png";
 
 import "react-toastify/dist/ReactToastify.css";
 
