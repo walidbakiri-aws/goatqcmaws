@@ -22,10 +22,7 @@ function RegistrationPage() {
 
   const navigate = useNavigate();
   const [confirmePasswrord, setConfirmePasswrord] = useState("");
-  useEffect(() => {
-    UserService.logout();
-  }, []);
-  UserService.logout();
+
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -49,6 +46,7 @@ function RegistrationPage() {
     console.log(formData.username);
     console.log(confirmePasswrord);
     console.log(checkExisteUser.value);
+    UserService.logout();
     try {
       console.log(confirmePasswrord.length);
       if (formData.password === confirmePasswrord) {
