@@ -64,6 +64,7 @@ function LoginPage() {
   );
   //***registre******************************************************** */
   const handleResiterBtn = (e) => {
+    UserService.logout();
     navigate("/register");
   };
   //***************************************************************** */
