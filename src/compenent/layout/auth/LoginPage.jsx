@@ -36,7 +36,6 @@ function LoginPage() {
   let getAbnIfExist = useSignal([]);
   const [showPassword, setShowPassword] = useState(false);
   const refreshPage = useSignal(0);
-
   //***************************************************************** */
   const UpdtAbn = {
     stateActiveLogin: true,
@@ -64,7 +63,6 @@ function LoginPage() {
   );
   //***registre******************************************************** */
   const handleResiterBtn = (e) => {
-    UserService.logout();
     navigate("/register");
   };
   //***************************************************************** */
@@ -299,6 +297,7 @@ function LoginPage() {
         {isDesktopOrLaptop && (
           <div className={classes.fullloginpage}>
             <div className={classes.child_phone}>
+              <button onClick={testbtn}>test</button>
               <div className={classes.logoimage}>
                 <img src={logologingoat}></img>
               </div>

@@ -6,7 +6,6 @@ import successreg from "../img/successreg.png";
 import { useMediaQuery } from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
 function ModalReg(props) {
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",
