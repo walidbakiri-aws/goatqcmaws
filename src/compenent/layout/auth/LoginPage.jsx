@@ -85,7 +85,7 @@ function LoginPage() {
     localStorage.setItem("tokengoat", userData.token);
     localStorage.setItem("role", userData.role);
     localStorage.setItem("username", username);
-    if (userData !== null) {
+    if (userData.token !== null) {
       try {
         console.log(userData);
         const FullUser = await UserService.getUserByuserName(
