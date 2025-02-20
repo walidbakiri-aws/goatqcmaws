@@ -81,25 +81,26 @@ function LoginPage() {
   const handlerSubmit = async (e) => {
     UserService.logout();
     e.preventDefault();
-
-    try {
-      const userData = await UserService.login(username, password);
-      localStorage.setItem("tokengoat", userData.token);
-      localStorage.setItem("role", userData.role);
-      localStorage.setItem("username", username);
-      console.log(userData);
-      const FullUser = await UserService.getUserByuserName(
-        username,
-        localStorage.getItem("tokengoat")
-      );
-      localStorage.setItem("userId", FullUser.id);
-      getUser(username, userData.token, userData.role);
-    } catch (error) {
-      console.log(error);
-      toast.error("votre mote de pass est incorrect!");
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+    const userData = await UserService.login(username, password);
+    localStorage.setItem("tokengoat", userData.token);
+    localStorage.setItem("role", userData.role);
+    localStorage.setItem("username", username);
+    if (userData !== null) {
+      try {
+        console.log(userData);
+        const FullUser = await UserService.getUserByuserName(
+          username,
+          localStorage.getItem("tokengoat")
+        );
+        localStorage.setItem("userId", FullUser.id);
+        getUser(username, userData.token, userData.role);
+      } catch (error) {
+        console.log(error);
+        toast.error("votre mote de pass est incorrect!");
+        setTimeout(() => {
+          setError("");
+        }, 5000);
+      }
     }
   };
   //*********************************************************************************** */
