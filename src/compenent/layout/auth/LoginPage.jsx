@@ -81,6 +81,9 @@ function LoginPage() {
   const handlerSubmit = async (e) => {
     UserService.logout();
     e.preventDefault();
+    localStorage.removeItem("tokengoat");
+    localStorage.removeItem("role");
+    localStorage.removeItem("username");
     const userData = await UserService.login(username, password);
     localStorage.setItem("tokengoat", userData.token);
     localStorage.setItem("role", userData.role);
