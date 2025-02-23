@@ -24,7 +24,11 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            Authorization: `Bearer ${token}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
         }
       );
       return response.data;
