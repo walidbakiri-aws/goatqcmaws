@@ -59,10 +59,7 @@ function RegistrationPage() {
       } else {
         toast.error("Les mots de passe ne correspondent pas!");
       }
-      /* }else {
-        toast.error("Email déja existe!");
-      }*/
-      //clear the form fields after secceccful registration
+
       setFormData({
         name: "",
         lastname: "",
