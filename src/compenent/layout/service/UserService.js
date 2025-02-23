@@ -19,15 +19,13 @@ class UserService {
     }
   }
   static async register(userData) {
-    console.log(userData);
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
           headers: {
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Headers": "*",
+            "Content-Type": "application/json",
           },
         }
       );
