@@ -73,7 +73,7 @@ function RegistrationPage() {
       // alert.error("error registration user: ", error);
     } catch (error) {
       //console.error("Error registration user: ", error);
-      alert("An Error occures chile registration user");
+      alert(error);
     }
   };
 
