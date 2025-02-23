@@ -48,16 +48,13 @@ function RegistrationPage() {
     console.log(checkExisteUser.value);
     UserService.logout();
     try {
-      console.log(confirmePasswrord.length);
       if (formData.password === confirmePasswrord) {
-        if (confirmePasswrord.length >= 7) {
+        if (formData.password.length >= 4) {
           await UserService.register(formData).then((res) => {
             toast.success("Success registration");
             setMoladIsOpen(true);
             //navigate("/");
           });
-        } else {
-          toast.error("court mote mote passs,inserer autre!");
         }
       } else {
         toast.error("Les mots de passe ne correspondent pas!");
