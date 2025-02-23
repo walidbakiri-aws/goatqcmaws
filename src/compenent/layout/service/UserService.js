@@ -23,10 +23,13 @@ class UserService {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData
-        /* {
-          headers: { Authorization: `Bearer ${token}` },
-        }*/
+        userData,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Headers": "*",
+          },
+        }
       );
       return response.data;
     } catch (err) {
