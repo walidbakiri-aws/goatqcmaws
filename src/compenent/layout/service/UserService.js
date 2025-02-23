@@ -24,7 +24,7 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
-          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` },
         }
       );
       return response.data;
