@@ -174,6 +174,18 @@ function Sidebar() {
         SavePercentageAmount: JSON.parse(
           fullSessionsListe[index].savePercentageAmount
         ),
+
+        //***statique Qcms************************************************************* */
+        SaveCorrectAnswer: JSON.parse(
+          fullSessionsListe[index].saveCorrectAnswer
+        ),
+        SaveIsClickedCounter: JSON.parse(
+          fullSessionsListe[index].saveIsClickedCounter
+        ),
+        savePieStatique: JSON.parse(fullSessionsListe[index].savePieStatique),
+        SaveEachLineStatique: JSON.parse(
+          fullSessionsListe[index].saveEachLineStatique
+        ),
         commingFrom: "savesession",
         ExisteCasClinique: false,
       },
@@ -212,6 +224,19 @@ function Sidebar() {
         ),
         savePercentageCliniqueAmount: JSON.parse(
           fullSessionsListe[index].savePercentageCliniqueAmount
+        ),
+        //**statque Clinique************************************************************************ */
+        SaveCorrectAnswerClinique: JSON.parse(
+          fullSessionsListe[index].saveCorrectAnswerClinique
+        ),
+        SaveIsClickedCounterClinique: JSON.parse(
+          fullSessionsListe[index].saveIsClickedCounterClinique
+        ),
+        savePieStatiqueClinique: JSON.parse(
+          fullSessionsListe[index].savePieStatiqueClinique
+        ),
+        SaveEachLineStatiqueClinique: JSON.parse(
+          fullSessionsListe[index].saveEachLineStatiqueClinique
         ),
         commingFrom: "savesession",
       },
@@ -264,6 +289,31 @@ function Sidebar() {
           fullSessionsListe[index].savePercentageCliniqueAmount
         ),
         //**end cas clinique********************************************************** */
+        //***statique Qcms************************************************************* */
+        SaveCorrectAnswer: JSON.parse(
+          fullSessionsListe[index].saveCorrectAnswer
+        ),
+        SaveIsClickedCounter: JSON.parse(
+          fullSessionsListe[index].saveIsClickedCounter
+        ),
+        savePieStatique: JSON.parse(fullSessionsListe[index].savePieStatique),
+        SaveEachLineStatique: JSON.parse(
+          fullSessionsListe[index].saveEachLineStatique
+        ),
+        //**statque Clinique************************************************************************ */
+        SaveCorrectAnswerClinique: JSON.parse(
+          fullSessionsListe[index].saveCorrectAnswerClinique
+        ),
+        SaveIsClickedCounterClinique: JSON.parse(
+          fullSessionsListe[index].saveIsClickedCounterClinique
+        ),
+        savePieStatiqueClinique: JSON.parse(
+          fullSessionsListe[index].savePieStatiqueClinique
+        ),
+        SaveEachLineStatiqueClinique: JSON.parse(
+          fullSessionsListe[index].saveEachLineStatiqueClinique
+        ),
+        //********************************************************************************************* */
         commingFrom: "savesession",
         ExisteCasClinique: fullSessionsListe[index].existeCasClinique,
         DoneGetAllClinique: fullSessionsListe[index].doneGetAllClinique,
@@ -340,7 +390,7 @@ function Sidebar() {
                 <span className="fs-6 p-2">Crée un Quiz </span>
               </Link>
             </li>
-
+            <button onClick={handleShowSession}>test</button>
             <li className="nav-item p-1">
               <Link
                 to={"/quizz"}
@@ -495,7 +545,7 @@ function Sidebar() {
             >
               <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
               <span className="fs-7 " style={{ marginLeft: 8 }}>
-                Mes Sessions
+                Mes Session
               </span>
               <IoMdArrowDropdown color="#c5c5c5" style={{ marginLeft: 15 }} />
             </li>

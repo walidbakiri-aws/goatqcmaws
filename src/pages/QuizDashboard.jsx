@@ -30,6 +30,11 @@ function QuizDashboard(props) {
     SaveVerfieReponses,
     SaveQcmIsAnswer,
     SavePercentageAmount,
+    //Statique***************************************************************
+    SaveCorrectAnswer,
+    SaveIsClickedCounter,
+    savePieStatique,
+    SaveEachLineStatique,
     //*************************************************************** */
     //historique states Cas Clinique********************************************
     savePropositionsClinique,
@@ -37,10 +42,17 @@ function QuizDashboard(props) {
     saveVerfieReponsesClinique,
     saveQcmIsAnswerClinique,
     savePercentageCliniqueAmount,
+    //Statique***************************************************************
+    SaveCorrectAnswerClinique,
+    SaveIsClickedCounterClinique,
+    savePieStatiqueClinique,
+    SaveEachLineStatiqueClinique,
     //*************************************************************** */
     //****tous qcm casClinique*************************************** */
     DoneGetAllClinique,
     //*************************************************************** */
+
+    /**************************************************************** */
   } = state;
   const [QuizQcmIndex, setQuizQcmIndex] = useState("");
   useEffect(() => {
@@ -75,6 +87,11 @@ function QuizDashboard(props) {
           SaveVerfieReponses={SaveVerfieReponses}
           SaveQcmIsAnswer={SaveQcmIsAnswer}
           SavePercentageAmount={SavePercentageAmount}
+          //*statique*************************************************************
+          SaveCorrectAnswer={SaveCorrectAnswer}
+          SaveIsClickedCounter={SaveIsClickedCounter}
+          savePieStatique={savePieStatique}
+          SaveEachLineStatique={SaveEachLineStatique}
           commingFrom={commingFrom}
         />
       );
@@ -100,6 +117,11 @@ function QuizDashboard(props) {
           SaveVerfieReponsesClinique={saveVerfieReponsesClinique}
           SaveQcmIsAnswerClinique={saveQcmIsAnswerClinique}
           SavePercentageCliniqueAmount={savePercentageCliniqueAmount}
+          //*statique*************************************************************
+          SaveCorrectAnswerClinique={SaveCorrectAnswerClinique}
+          SaveIsClickedCounterClinique={SaveIsClickedCounterClinique}
+          savePieStatiqueClinique={savePieStatiqueClinique}
+          SaveEachLineStatiqueClinique={SaveEachLineStatiqueClinique}
           commingFrom={commingFrom}
         />
       );
@@ -140,6 +162,15 @@ function QuizDashboard(props) {
           SaveVerfieReponsesClinique={saveVerfieReponsesClinique}
           SaveQcmIsAnswerClinique={saveQcmIsAnswerClinique}
           SavePercentageCliniqueAmount={savePercentageCliniqueAmount}
+          //*statique*************************************************************
+          SaveCorrectAnswer={SaveCorrectAnswer}
+          SaveIsClickedCounter={SaveIsClickedCounter}
+          savePieStatique={savePieStatique}
+          SaveEachLineStatique={SaveEachLineStatique}
+          SaveCorrectAnswerClinique={SaveCorrectAnswerClinique}
+          SaveIsClickedCounterClinique={SaveIsClickedCounterClinique}
+          savePieStatiqueClinique={savePieStatiqueClinique}
+          SaveEachLineStatiqueClinique={SaveEachLineStatiqueClinique}
           //********done upload all cas clinique*********************************** */
           doneGetAllClinique={DoneGetAllClinique}
         />
