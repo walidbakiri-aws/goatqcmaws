@@ -15,9 +15,7 @@ import A from "../compenent/layout/img/A.png";
 import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
-import blueclr from "../compenent/layout/img/blueclr.png";
-import jaunclr from "../compenent/layout/img/jaunclr.png";
-import redclr from "../compenent/layout/img/redclr.png";
+
 import E from "../compenent/layout/img/E.png";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
 import externatlogo from "../compenent/layout/externatlogo.svg";
