@@ -1009,6 +1009,8 @@ function QuizBoard(props) {
               finalgetCasCliniqueLength.value = getCasCliniqueLength;
               setgetlengthCasCliniqueParSjr(getresultCasClinqiue.data.length);
               console.log(finalgetCasCliniqueLength.value);
+              console.log("walidd");
+              onsole.log("walidd");
               try {
                 const result = await axios.get(
                   `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`
