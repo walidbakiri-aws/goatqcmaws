@@ -112,6 +112,11 @@ function SaveQuizz() {
         SaveVerfieReponses: JSON.parse(qcmsQuizz[index].saveVerfieReponses),
         SaveQcmIsAnswer: JSON.parse(qcmsQuizz[index].saveQcmIsAnswer),
         SavePercentageAmount: JSON.parse(qcmsQuizz[index].savePercentageAmount),
+        //******statique***************************************************************** */
+        SaveCorrectAnswer: JSON.parse(qcmsQuizz[index].saveCorrectAnswer),
+        SaveIsClickedCounter: JSON.parse(qcmsQuizz[index].saveIsClickedCounter),
+        savePieStatique: JSON.parse(qcmsQuizz[index].savePieStatique),
+        SaveEachLineStatique: JSON.parse(qcmsQuizz[index].saveEachLineStatique),
         commingFrom: "savequizz",
         ExisteCasClinique: false,
       },
@@ -149,6 +154,19 @@ function SaveQuizz() {
         ),
         savePercentageCliniqueAmount: JSON.parse(
           casCliniqueQuizz[index].savePercentageCliniqueAmount
+        ),
+        //**statique******************************************************* */
+        SaveCorrectAnswerClinique: JSON.parse(
+          casCliniqueQuizz[index].saveCorrectAnswerClinique
+        ),
+        SaveIsClickedCounterClinique: JSON.parse(
+          casCliniqueQuizz[index].saveIsClickedCounterClinique
+        ),
+        savePieStatiqueClinique: JSON.parse(
+          casCliniqueQuizz[index].savePieStatiqueClinique
+        ),
+        SaveEachLineStatiqueClinique: JSON.parse(
+          casCliniqueQuizz[index].saveEachLineStatiqueClinique
         ),
         commingFrom: "savequizz",
       },
@@ -200,6 +218,29 @@ function SaveQuizz() {
         ),
         savePercentageCliniqueAmount: JSON.parse(
           QcmCasCliniqueQuizz[index].savePercentageCliniqueAmount
+        ),
+        //***statique****************************************************************** */
+        SaveCorrectAnswer: JSON.parse(
+          QcmCasCliniqueQuizz[index].saveCorrectAnswer
+        ),
+        SaveIsClickedCounter: JSON.parse(
+          QcmCasCliniqueQuizz[index].saveIsClickedCounter
+        ),
+        savePieStatique: JSON.parse(QcmCasCliniqueQuizz[index].savePieStatique),
+        SaveEachLineStatique: JSON.parse(
+          QcmCasCliniqueQuizz[index].saveEachLineStatique
+        ),
+        SaveCorrectAnswerClinique: JSON.parse(
+          QcmCasCliniqueQuizz[index].saveCorrectAnswerClinique
+        ),
+        SaveIsClickedCounterClinique: JSON.parse(
+          QcmCasCliniqueQuizz[index].saveIsClickedCounterClinique
+        ),
+        savePieStatiqueClinique: JSON.parse(
+          QcmCasCliniqueQuizz[index].savePieStatiqueClinique
+        ),
+        SaveEachLineStatiqueClinique: JSON.parse(
+          QcmCasCliniqueQuizz[index].saveEachLineStatiqueClinique
         ),
         //**end cas clinique********************************************************** */
         commingFrom: "savequizz",

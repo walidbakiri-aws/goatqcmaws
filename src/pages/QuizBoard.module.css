@@ -467,7 +467,108 @@
   margin-top: 5px;
   margin-left: 5px;
 }
+/**statique*****************************************************************/
+.fullstatique {
+  width: 1300px;
+  height: 700px;
+  background-color: rgb(239, 240, 241);
+  z-index: 4;
+  position: fixed;
+  margin-left: 250px;
+  margin-top: -10px;
+  border-radius: 13px;
+}
+.bothfullstatique {
+  width: 1300px;
+  height: 700px;
 
+  display: flex;
+}
+.fullpiebarestatique {
+  width: 600px;
+  height: 650px;
+
+  margin-top: 10px;
+}
+.piestatique {
+  width: 550px;
+  height: 300px;
+  padding: 10px;
+  margin-bottom: 7px;
+  margin-left: 20px;
+  margin-top: 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  white-space: pre-line;
+}
+.barstatique {
+  width: 550px;
+  height: 300px;
+  padding: 10px;
+  margin-bottom: 7px;
+  margin-left: 20px;
+  margin-top: 50px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  white-space: pre-line;
+}
+.fulleachcours {
+  margin-top: 10px;
+  width: 600px;
+  height: 650px;
+
+  margin-left: 20px;
+}
+.headerbounate {
+  margin-top: 5px;
+  width: 550px;
+  height: 120px;
+  padding-left: 10px;
+
+  display: flex;
+}
+
+.cardbodynumber {
+  border-radius: 10px;
+  height: 110px;
+  width: 240px;
+  background: #e4f9f2;
+  margin-right: 10px;
+}
+.cardbodycard_timer {
+  border-radius: 10px;
+  height: 110px;
+  width: 240px;
+  background: #f5e1fd;
+}
+.titlenumber_time {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 25px;
+  color: rgb(83, 81, 81);
+}
+.eachbounatecour {
+  display: flex;
+  width: 550px;
+  height: 100px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: 1px solid rgb(192, 186, 186);
+}
+.namecourdounate {
+  width: 50%;
+  height: 100px;
+  font-size: 17px;
+  padding-top: 20px;
+  padding-left: 20px;
+}
+.donatecour {
+  padding-left: 50px;
+  width: 50%;
+  height: 100px;
+}
 /***end list qcms******************************************************/
 /***********phone designe***************************************************/
 .headerquizz_phone {
