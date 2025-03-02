@@ -2241,6 +2241,7 @@ function QuizBoard(props) {
   //********************************************************************************* */
 
   const closeModalSaveQcmQuizHandler = () => {
+    console.log("walidd");
     setModalSaveQuizzIsOpen(false);
     setShowModelActionsPhone(false);
   };
