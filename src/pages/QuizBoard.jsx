@@ -17,9 +17,6 @@ import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
 import E from "../compenent/layout/img/E.png";
-import blueclr from "../compenent/layout/img/blueclr.png";
-import jaunclr from "../compenent/layout/img/jaunclr.png";
-import redclr from "../compenent/layout/img/redclr.png";
 import DateObject from "react-date-object";
 
 import smileimoji from "../compenent/layout/img/smileimoji.png";
@@ -43,7 +40,7 @@ import { IoCheckmarkDoneSharp } from "react-icons/io5";
 import { jwtDecode } from "jwt-decode";
 import { FaRegWindowClose } from "react-icons/fa";
 import { FaRegCommentDots } from "react-icons/fa";
-import { LegendToggleOutlined, Margin, Style } from "@mui/icons-material";
+import { Margin, Style } from "@mui/icons-material";
 import Picker from "emoji-picker-react";
 import useLocalStorage from "use-local-storage";
 import BackdropDoneQuiz from "./BackdropDoneQuiz";
@@ -57,29 +54,6 @@ import Backdrop from "./Backdrop";
 import BackdropSaveQuizPhone from "./BackdropSaveQuizPhone.jsx";
 import { TfiClose } from "react-icons/tfi";
 import { BsSave } from "react-icons/bs";
-import { Pie } from "react-chartjs-2";
-import { Bar } from "react-chartjs-2";
-import { Doughnut } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-} from "chart.js";
-ChartJS.register(
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  LinearScale,
-  BarElement
-);
-
 function QuizBoard(props) {
   const Date = new DateObject();
   const sourceBtnSaveQuizz = "saveQuizz";
@@ -212,8 +186,6 @@ function QuizBoard(props) {
   const [SaveVerfieReponses, setSaveVerfieReponses] = useState([]);
   const [SaveQcmIsAnswer, setSaveQcmIsAnswer] = useState([]);
   const [SaveClickSelectVerfieAll, setSaveClickSelectVerfieAll] = useState([]);
-  let [SaveCorrectAnswer, setSaveCorrectAnswer] = useState([]);
-  const [SaveIsClickedCounter, setSaveIsClickedCounter] = useState([]);
   const doneFirstUplaod = useSignal(false);
   //**********fin propo selected************************************* */
   //**timer*********************************************************** */
@@ -303,10 +275,6 @@ function QuizBoard(props) {
     saveQcmIsAnswer: "",
     savePercentageAmount: "",
     dateSaveQuizzSession: "",
-    saveCorrectAnswer: "",
-    saveIsClickedCounter: "",
-    savePieStatique: "",
-    saveEachLineStatique: "",
     ourUsers: {},
   });
   const [SaveQcmSession, setSaveQcmSession] = useState({
@@ -325,10 +293,6 @@ function QuizBoard(props) {
     saveQcmIsAnswer: "",
     savePercentageAmount: "",
     dateSaveQuizzSession: "",
-    saveCorrectAnswer: "",
-    saveIsClickedCounter: "",
-    savePieStatique: "",
-    saveEachLineStatique: "",
     ourUsers: {},
   });
   let [ShowCancelQuizzPhone, setShowCancelQuizzPhone] = useState(false);
@@ -348,10 +312,6 @@ function QuizBoard(props) {
     saveVerfieReponses: "",
     saveQcmIsAnswer: "",
     savePercentageAmount: "",
-    saveCorrectAnswer: "",
-    saveIsClickedCounter: "",
-    savePieStatique: "",
-    saveEachLineStatique: "",
   });
   //********************************************************** */
   const isDesktopOrLaptop = useMediaQuery({
@@ -385,17 +345,7 @@ function QuizBoard(props) {
   //****select liste qcms ***************************** */
   const [SelectQcmIndex, setSelectQcmIndex] = useState("");
 
-  //******Statique**************************************** */
-  const [ShowModalStatiqueParCour, setShowModalStatiqueParCour] =
-    useState(false);
-  const [ShowModalStatiqueParSujet, setShowModalStatiqueParSujet] =
-    useState(false);
-  const [ShowModalStatique, setShowModalStatique] = useState(false);
-  const [savePieStatique, setSavePieStatique] = useState([0, 0, 0]);
-  const [SaveQcmsNbrStatique, setSaveQcmsNbrStatique] = useState([]);
-  const [SaveQcmsCourNameStatique, setSaveQcmsCourNameStatique] = useState([]);
-  const [SaveEachLineStatique, setSaveEachLineStatique] = useState([]);
-  const newStateEachLineStatique = [];
+  //***************************************************** */
 
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
@@ -518,7 +468,6 @@ function QuizBoard(props) {
     if (props.moduleName === "Biochimie_3eme") {
       setShoCopyParModule(false);
     }
-
     console.log(props.sessionsLength);
     console.log(props.selectMultipleCours[0]);
     //***suizzDashboard********************************************** */
@@ -531,6 +480,11 @@ function QuizBoard(props) {
     console.log(props.maxYearQcm); //minMax-parCours)
     //************************************************************** */
 
+    console.log(props.SaveQcmIsAnswer);
+    console.log(props.SaveVerfieReponses);
+    console.log(props.SaveClickSelectVerfieAll);
+    console.log(props.SaveVerfieReponsesClinique);
+    console.log(props.savePropositions);
     /* console.log(props.checkParSjtBiologieClinique);
      console.log(props.TrueFullInsertClr); 
      console.log(props.savePropositionsClinique);
@@ -571,18 +525,6 @@ function QuizBoard(props) {
       setVisibleQmcContainer(true);
       loadQcms();
     }
-    //Qcms State*****************************************************
-    console.log("Qcms State**");
-    console.log(props.SaveCorrectAnswer);
-    console.log(props.SaveIsClickedCounter);
-    console.log(props.savePieStatique);
-    console.log(props.SaveEachLineStatique);
-    //clinique State*****************************************************
-    console.log("clinique State**");
-    console.log(props.SaveCorrectAnswerClinique);
-    console.log(props.SaveIsClickedCounterClinique);
-    console.log(props.SaveEachLineStatiqueClinique);
-    console.log(props.savePieStatiqueClinique);
   }, []);
 
   //***get years props*************************** *****************************/
@@ -608,17 +550,12 @@ function QuizBoard(props) {
       if (props.TrueFullInsertClr === true) {
         setSaveQcmIsAnswer(props.SaveClickSelectVerfieAll);
       }
-      setSaveCorrectAnswer(props.SaveCorrectAnswer);
-      setSaveIsClickedCounter(props.SaveIsClickedCounter);
-      setSavePieStatique(props.savePieStatique);
-      setSaveEachLineStatique(props.SaveEachLineStatique);
 
       console.log(props.SaveClickSelectVerfieAll);
       console.log(props.TrueFullInsertClr);
     }
     //***************************************************************** */
     //**load Save propo************************************************ */
-
     if (
       props.commingFrom === "savequizz" &&
       doneFirstUplaodSaveQcm.value === false
@@ -630,14 +567,6 @@ function QuizBoard(props) {
       setSaveClickSelectVerfieAll(props.SaveClickSelectVerfieAll);
       setSaveQcmIsAnswer(props.SaveQcmIsAnswer);
       setSavePercentageAmount(props.SavePercentageAmount);
-      setSaveQcmIsAnswer(props.SaveQcmIsAnswer);
-      //****statique************************************************* */
-      if (props.savePieStatique !== null) {
-        setSaveCorrectAnswer(props.SaveCorrectAnswer);
-        setSaveIsClickedCounter(props.SaveIsClickedCounter);
-        setSavePieStatique(props.savePieStatique);
-        setSaveEachLineStatique(props.SaveEachLineStatique);
-      }
     } else if (
       props.commingFrom === "savesession" &&
       doneFirstUplaodSaveQcm.value === false
@@ -649,13 +578,6 @@ function QuizBoard(props) {
       setSaveClickSelectVerfieAll(props.SaveClickSelectVerfieAll);
       setSaveQcmIsAnswer(props.SaveQcmIsAnswer);
       setSavePercentageAmount(props.SavePercentageAmount);
-      //****statique************************************************* */
-      if (props.savePieStatique !== null) {
-        setSaveCorrectAnswer(props.SaveCorrectAnswer);
-        setSaveIsClickedCounter(props.SaveIsClickedCounter);
-        setSavePieStatique(props.savePieStatique);
-        setSaveEachLineStatique(props.SaveEachLineStatique);
-      }
     }
     //***************************************************************** */
 
@@ -667,7 +589,7 @@ function QuizBoard(props) {
         console.log(incCours.value);
         console.log(doneUplaodQcm.value);
         console.log(props.selectMultipleCours.length);
-        let incIndexSaveLine = 0;
+
         while (
           doneUplaodQcm.value === true &&
           incCours.value < props.selectMultipleCours.length
@@ -680,41 +602,8 @@ function QuizBoard(props) {
                 headers: { Authorization: `Bearer ${token}` },
               }
             );
-
             getQcms.value = result.data;
             saveAllQcms.value = result.data;
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
-              ...QcmsCourNameStatique,
-              result.data[0].coursMed.coursName,
-            ]);
-            //***************************************************************************** */
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-              ...QcmsNbrStatique,
-              result.data.length,
-            ]);
-            //***************************************************************************** */
-
-            if (
-              props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
-              props.commingFrom !== "savesession" &&
-              props.commingFrom !== "savequizz"
-            ) {
-              newStateEachLineStatique.push([0, 0, result.data.length]);
-              setSaveEachLineStatique(newStateEachLineStatique);
-            }
-            //****************************************************************************** */
-            //***exception add statiqe session et savequizz********************************* */
-            if (
-              props.savePieStatique === null &&
-              (props.commingFrom === "savesession" ||
-                props.commingFrom === "savequizz")
-            ) {
-              newStateEachLineStatique.push([0, 0, result.data.length]);
-              setSaveEachLineStatique(newStateEachLineStatique);
-            }
-            //******************************************************************************* */
           } catch {
             console.log("qmc not find");
           }
@@ -753,13 +642,6 @@ function QuizBoard(props) {
           const result = await axios.get(
             `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
           );
-
-          //save nombre qcms ////////***************************************************** */
-          setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-            ...QcmsNbrStatique,
-            result.data.length,
-          ]);
-          //***************************************************************************** */
           currentIndex.value = 0;
           setVisibiliteQcmIndex(0);
           setShowQcm([]);
@@ -813,38 +695,6 @@ function QuizBoard(props) {
               );
               getQcms.value = result.data;
               saveAllQcms.value = result.data;
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
-                ...QcmsCourNameStatique,
-                result.data[0].coursMed.coursName,
-              ]);
-              //***************************************************************************** */
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                ...QcmsNbrStatique,
-                result.data.length,
-              ]);
-              //***************************************************************************** */
-
-              if (
-                props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
-                props.commingFrom !== "savesession" &&
-                props.commingFrom !== "savequizz"
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
-              }
-              //****************************************************************************** */
-              //***exception add statiqe session et savequizz********************************* */
-              if (
-                props.savePieStatique === null &&
-                (props.commingFrom === "savesession" ||
-                  props.commingFrom === "savequizz")
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
-              }
-              //******************************************************************************* */
             } catch {
               console.log("qmc not find");
             }
@@ -912,39 +762,6 @@ function QuizBoard(props) {
                   headers: { Authorization: `Bearer ${token}` },
                 }
               );
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
-                ...QcmsCourNameStatique,
-                result.data[0].coursMed.coursName,
-              ]);
-              //***************************************************************************** */
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                ...QcmsNbrStatique,
-                result.data.length,
-              ]);
-              //***************************************************************************** */
-              //***************************************************************************** */
-
-              if (
-                props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
-                (props.commingFrom !== "savesession" ||
-                  props.commingFrom !== "savequizz")
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
-              }
-              //****************************************************************************** */
-              //***exception add statiqe session et savequizz********************************* */
-              if (
-                props.savePieStatique === null &&
-                (props.commingFrom === "savesession" ||
-                  props.commingFrom === "savequizz")
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
-              }
-              //******************************************************************************* */
               getQcms.value = result.data;
               saveAllQcms.value = result.data;
             } catch {
@@ -1009,19 +826,10 @@ function QuizBoard(props) {
               finalgetCasCliniqueLength.value = getCasCliniqueLength;
               setgetlengthCasCliniqueParSjr(getresultCasClinqiue.data.length);
               console.log(finalgetCasCliniqueLength.value);
-              console.log("walidd");
-              onsole.log("walidd");
               try {
                 const result = await axios.get(
                   `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`
                 );
-
-                //save nombre qcms ////////***************************************************** */
-                setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                  ...QcmsNbrStatique,
-                  result.data.length,
-                ]);
-                //***************************************************************************** */
                 currentIndex.value = 0;
                 setVisibiliteQcmIndex(0);
                 setShowQcm([]);
@@ -1065,12 +873,6 @@ function QuizBoard(props) {
                 const result = await axios.get(
                   `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getGroupePerm.value}/${props.SelectedSourceExmn}`
                 );
-                //save nombre qcms ////////***************************************************** */
-                setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                  ...QcmsNbrStatique,
-                  result.data.length,
-                ]);
-                //***************************************************************************** */
                 currentIndex.value = 0;
                 setVisibiliteQcmIndex(0);
                 setShowQcm([]);
@@ -1118,12 +920,6 @@ function QuizBoard(props) {
               const result = await axios.get(
                 `${BASE_URL}/qcms/getqcqms/biologie/${props.moduleId}/${getCurrentYear}/Biologie`
               );
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                ...QcmsNbrStatique,
-                result.data.length,
-              ]);
-              //***************************************************************************** */
               currentIndex.value = 0;
               setVisibiliteQcmIndex(0);
               setShowQcm([]);
@@ -1172,12 +968,6 @@ function QuizBoard(props) {
             const result = await axios.get(
               `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
             );
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-              ...QcmsNbrStatique,
-              result.data.length,
-            ]);
-            //***************************************************************************** */
             currentIndex.value = 0;
             setVisibiliteQcmIndex(0);
             setShowQcm([]);
@@ -1219,12 +1009,6 @@ function QuizBoard(props) {
             const result = await axios.get(
               `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`
             );
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-              ...QcmsNbrStatique,
-              result.data.length,
-            ]);
-            //***************************************************************************** */
             currentIndex.value = 0;
             setVisibiliteQcmIndex(0);
             setShowQcm([]);
@@ -1265,19 +1049,7 @@ function QuizBoard(props) {
             setSaveQcmIsAnswer((QcmIsAnswer) => [...QcmIsAnswer, ""]);
             setSaveClickSelectVerfieAll((clickSelect) => [...clickSelect, ""]);
             setSavePercentageAmount((percentage) => [...percentage, ""]);
-            setSaveCorrectAnswer((CorrectAnswer) => [...CorrectAnswer, ""]);
-            setSaveIsClickedCounter((ClickedCounter) => [...ClickedCounter, 0]);
           }
-          //***exception add statiqe session et savequizz********************************* */
-          if (
-            props.savePieStatique === null &&
-            (props.commingFrom === "savesession" ||
-              props.commingFrom === "savequizz")
-          ) {
-            setSaveCorrectAnswer((CorrectAnswer) => [...CorrectAnswer, ""]);
-            setSaveIsClickedCounter((ClickedCounter) => [...ClickedCounter, 0]);
-          }
-          //******************************************************************************* */
         }
         const result = await axios.get(
           `${BASE_URL}/qcms/${getQcms.value[increment].id}/reponses`
@@ -1332,8 +1104,6 @@ function QuizBoard(props) {
           setSaveQcmIsAnswer((QcmIsAnswer) => [...QcmIsAnswer, ""]);
           setSaveClickSelectVerfieAll((clickSelect) => [...clickSelect, ""]);
           setSavePercentageAmount((percentage) => [...percentage, ""]);
-          setSaveCorrectAnswer((CorrectAnswer) => [...CorrectAnswer, ""]);
-          setSaveIsClickedCounter((ClickedCounter) => [...ClickedCounter, 0]);
         }
         const result = await axios.get(
           `${BASE_URL}/qcms/${getQcms.value[i].id}/reponses`
@@ -1411,30 +1181,6 @@ function QuizBoard(props) {
           VisibleNextBtn.value = true;
         }
       } else if (currentIndex.value === ShowQcm.length) {
-        //*******all statique*****************************************************************************************
-
-        if (props.QcmSujetTypeSelected === "Par Cour") {
-          //update statique pie***************************************************************
-          savePieStatique[2] =
-            ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
-          console.log(savePieStatique);
-          //********************************************************************************* */
-          //update statique dounate***************************************************************
-          for (
-            let index = 0;
-            index < SaveQcmsCourNameStatique.length;
-            index++
-          ) {
-            SaveEachLineStatique[index][2] =
-              SaveQcmsNbrStatique[index] -
-              (SaveEachLineStatique[index][0] + SaveEachLineStatique[index][1]);
-          }
-          console.log(SaveEachLineStatique);
-          //********************************************************************************* */
-          setShowModalStatique(true);
-          setShowModalStatiqueParCour(true);
-        }
-        //*******end all statique*****************************************************************************************
         setOpenBoardClinique(true);
       }
     } else if (props.QcmSujetTypeSelected === "Par Sujet") {
@@ -1448,18 +1194,6 @@ function QuizBoard(props) {
           VisibleNextBtn.value = true;
         }
       } else if (currentIndex.value === ShowQcm.length) {
-        //*******all statique*****************************************************************************************
-
-        if (props.QcmSujetTypeSelected === "Par Sujet") {
-          //update statique pie***************************************************************
-          savePieStatique[2] =
-            ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
-          console.log(savePieStatique);
-          setShowModalStatique(true);
-          setShowModalStatiqueParSujet(true);
-          //********************************************************************************* */
-        }
-        //*******end all statique*****************************************************************************************
         setOpenBoardClinique(true);
       }
     }
@@ -1623,147 +1357,27 @@ function QuizBoard(props) {
     console.log(SaveVerfieReponses); //save qcmIndex that has verifier button Clicked.
     console.log(SaveQcmIsAnswer); //save index qcmIndex that has verifier all reponses button clicked.
     console.log(SavePercentageAmount); //save somme of all propo
-    console.log(SaveCorrectAnswer); //save somme of all propo
-    console.log(SaveIsClickedCounter);
-    console.log(SaveEachLineStatique);
+  };
 
-    //*******all statique*****************************************************************************************
-
-    if (props.QcmSujetTypeSelected === "Par Cour") {
-      //update statique pie***************************************************************
-      savePieStatique[2] =
-        ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
-      console.log(savePieStatique);
-      //********************************************************************************* */
-      //update statique dounate***************************************************************
-      for (let index = 0; index < SaveQcmsCourNameStatique.length; index++) {
-        SaveEachLineStatique[index][2] =
-          SaveQcmsNbrStatique[index] -
-          (SaveEachLineStatique[index][0] + SaveEachLineStatique[index][1]);
-      }
-      console.log(SaveEachLineStatique);
-      //********************************************************************************* */
-      setShowModalStatique(true);
-      setShowModalStatiqueParCour(true);
-    } else if (props.QcmSujetTypeSelected === "Par Sujet") {
-      //update statique pie***************************************************************
-      savePieStatique[2] =
-        ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
-      console.log(savePieStatique);
-      setShowModalStatique(true);
-      setShowModalStatiqueParSujet(true);
-      //********************************************************************************* */
-    }
-    //*******end all statique*****************************************************************************************
-  };
-  const pieChartData = {
-    labels: ["vrai", "faut", "pas répondu"],
-    datasets: [
-      {
-        label: "Quizz Statique",
-        data: [savePieStatique[0], savePieStatique[1], savePieStatique[2]],
-        backgroundColor: [
-          "rgb(37, 176, 233,0.9)",
-          "rgb(193,159,203,0.9)",
-          "rgb(244, 180, 234,0.9)",
-        ],
-        hoverOffset: 4,
-      },
-    ],
-  };
-  const options = {};
-  const barChartData = {
-    labels: ["vrai", "faut", "pas répondu"],
-    datasets: [
-      {
-        label: "Quizz Statique",
-        data: [savePieStatique[0], savePieStatique[1], savePieStatique[2]],
-        backgroundColor: ["#8f85fb", "#c19fcb", "#f5e1fd"],
-        borderColor: ["#8f85fb", "#c19fcb", "#f5e1fd"],
-        borderWidth: 1,
-      },
-    ],
-  };
-  const optionsBar = {};
-
-  const dounateData = SaveEachLineStatique.map((row, index) => ({
-    labels: ["vrai", "faut", "pas répondu"],
-    datasets: [
-      {
-        label: "Cours Statique",
-        data: [
-          SaveEachLineStatique[index][0],
-          SaveEachLineStatique[index][1],
-          SaveQcmsNbrStatique[index] -
-            (SaveEachLineStatique[index][0] + SaveEachLineStatique[index][1]),
-        ],
-        backgroundColor: [
-          "rgb(37, 176, 233,0.9)",
-          "rgb(193,159,203,0.9)",
-          "rgb(244, 180, 234,0.9)",
-        ],
-        borderColor: [
-          "rgb(337, 176, 233,0.9)",
-          "rgb(193,159,203,0.9)",
-          "rgb(244, 180, 234,0.9)",
-        ],
-        borderWidth: 1,
-      },
-    ],
-  }));
-  const optionsDounate = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "right",
-      },
-    },
-  };
   //***handle propo click**************************************************** */
-  const handlePropoClick = async (
-    e,
-    propoId,
-    QcmIndex,
-    indexPropo,
-    qcmId,
-    courName
-  ) => {
-    console.log(courName);
+  const handlePropoClick = async (e, propoId, QcmIndex, indexPropo, qcmId) => {
     //initialiser TrueFullInsertClr************************
     setTrueFullInsertClr(false);
-    //save proposition selected &&ClickedCounter*********************************************************
-    const updatedArraySavePropositions = savePropositions.map((innerArray) => [
-      ...innerArray,
-    ]);
-    const updatedSaveIsClickedCounter = [...SaveIsClickedCounter];
-    if (updatedArraySavePropositions[QcmIndex][indexPropo] !== propoId) {
-      //****update propoId************************************************* */
-      updatedArraySavePropositions[QcmIndex][indexPropo] = propoId;
-      //****update counter click**************************************** */
-      updatedSaveIsClickedCounter[QcmIndex] =
-        updatedSaveIsClickedCounter[QcmIndex] + 1;
-      console.log("+1");
-    } else {
-      //****update propoId************************************************* */
-      updatedArraySavePropositions[QcmIndex][indexPropo] = "";
-      //****update counter click**************************************** */
-      updatedSaveIsClickedCounter[QcmIndex] =
-        updatedSaveIsClickedCounter[QcmIndex] - 1;
-      console.log("-1");
-    }
-    setSavePropositions(updatedArraySavePropositions);
-    setSaveIsClickedCounter(updatedSaveIsClickedCounter);
-    //************************************************************************************************* */
+    //save proposition selected **********************************************
+    // Clone the current state
+    const updatedArray = savePropositions.map((innerArray) => [...innerArray]);
 
-    //*******function one propo at least is clicked in this qcm ****************************************** */
-    const updatedClickedVerefieAll = [...SaveClickSelectVerfieAll];
-    if (updatedSaveIsClickedCounter[QcmIndex] === 0) {
-      updatedClickedVerefieAll[QcmIndex] = "";
+    if (updatedArray[QcmIndex][indexPropo] !== propoId) {
+      updatedArray[QcmIndex][indexPropo] = propoId;
     } else {
-      updatedClickedVerefieAll[QcmIndex] = QcmIndex;
+      updatedArray[QcmIndex][indexPropo] = "";
     }
+    setSavePropositions(updatedArray);
+    //************************************************************************** */
+    const updatedClickedVerefieAll = [...SaveClickSelectVerfieAll];
+    updatedClickedVerefieAll[QcmIndex] = QcmIndex;
     setSaveClickSelectVerfieAll(updatedClickedVerefieAll);
-    //******************************************************************************************************/
+    //*************************************************************************** */
 
     //****augmenter slect count******************************************** */
     await axios
@@ -1796,154 +1410,6 @@ function QuizBoard(props) {
     console.log(updatedCalcAmountCountSelect);
 
     //********************************************************************** */
-    /****statique function***************************************************** */
-    console.log(updatedArraySavePropositions[QcmIndex][indexPropo]);
-
-    //get cour index**********************************************************
-    if (props.QcmSujetTypeSelected === "Par Cour") {
-      let indexParcourCourName = 0;
-      let SaveCourIndex = 0;
-      let isFound = false;
-
-      while (isFound !== true) {
-        console.log(SaveQcmsCourNameStatique[indexParcourCourName]);
-        if (courName === SaveQcmsCourNameStatique[indexParcourCourName]) {
-          SaveCourIndex = indexParcourCourName;
-          isFound = true;
-          console.log(SaveCourIndex);
-        }
-        indexParcourCourName++;
-      }
-      /*************************************************************************** */
-      if (
-        updatedArraySavePropositions[QcmIndex][indexPropo] === propoId &&
-        result.data[indexPropo].reponseBool === true &&
-        SaveCorrectAnswer[QcmIndex] !== false
-      ) {
-        SaveCorrectAnswer[QcmIndex] = true;
-        console.log("true");
-        //update full pie***********************************************
-        setSavePieStatique((prevState) => {
-          const newState = [...prevState]; // Copy the existing array
-          newState[0] = newState[0] + 1; // Modify the first index
-          return newState; // Return the updated array
-        });
-        //***************************************************************
-        //update EachLineStatique***********************************************
-        setSaveEachLineStatique((prevState) => {
-          const newState = [...prevState]; // Copy the existing array
-          newState[SaveCourIndex][0] = newState[SaveCourIndex][0] + 1; // Modify the first index
-          return newState; // Return the updated array
-        });
-        //*************************************************************** */
-      } else if (
-        updatedArraySavePropositions[QcmIndex][indexPropo] === propoId &&
-        result.data[indexPropo].reponseBool === false
-      ) {
-        SaveCorrectAnswer[QcmIndex] = false;
-        //update full pie***********************************************
-        setSavePieStatique((prevState) => {
-          const newState = [...prevState]; // Copy the existing array
-          newState[1] = newState[1] + 1; // Modify the first index
-          return newState; // Return the updated array
-        });
-        //*************************************************************** */
-        //update EachLineStatique***********************************************
-        setSaveEachLineStatique((prevState) => {
-          const newState = [...prevState]; // Copy the existing array
-          newState[SaveCourIndex][1] = newState[SaveCourIndex][1] + 1; // Modify the first index
-          return newState; // Return the updated array
-        });
-        //*************************************************************** */
-        console.log("false");
-      } else if (
-        updatedArraySavePropositions[QcmIndex][indexPropo] !== propoId &&
-        updatedClickedVerefieAll[QcmIndex] === ""
-      ) {
-        SaveCorrectAnswer[QcmIndex] = "";
-        if (savePieStatique[0] !== 0) {
-          setSavePieStatique((prevState) => {
-            const newState = [...prevState]; // Copy the existing array
-            newState[0] = newState[0] - 1; // Modify the first index
-            return newState; // Return the updated array
-          });
-          //update EachLineStatique***********************************************
-          setSaveEachLineStatique((prevState) => {
-            const newState = [...prevState]; // Copy the existing array
-            newState[SaveCourIndex][0] = newState[SaveCourIndex][0] - 1; // Modify the first index
-            return newState; // Return the updated array
-          });
-          //*************************************************************** */
-        } else if (savePieStatique[1] !== 0) {
-          setSavePieStatique((prevState) => {
-            const newState = [...prevState]; // Copy the existing array
-            newState[1] = newState[1] - 1; // Modify the first index
-            return newState; // Return the updated array
-          });
-          //update EachLineStatique***********************************************
-          setSaveEachLineStatique((prevState) => {
-            const newState = [...prevState]; // Copy the existing array
-            newState[SaveCourIndex][1] = newState[SaveCourIndex][1] - 1; // Modify the first index
-            return newState; // Return the updated array
-          });
-          //*************************************************************** */
-        }
-
-        console.log("nothing");
-      }
-    } else if (props.QcmSujetTypeSelected === "Par Sujet") {
-      /*************************************************************************** */
-      if (
-        updatedArraySavePropositions[QcmIndex][indexPropo] === propoId &&
-        result.data[indexPropo].reponseBool === true &&
-        SaveCorrectAnswer[QcmIndex] !== false
-      ) {
-        SaveCorrectAnswer[QcmIndex] = true;
-        console.log("true");
-        //update full pie***********************************************
-        setSavePieStatique((prevState) => {
-          const newState = [...prevState]; // Copy the existing array
-          newState[0] = newState[0] + 1; // Modify the first index
-          return newState; // Return the updated array
-        });
-        //***************************************************************
-      } else if (
-        updatedArraySavePropositions[QcmIndex][indexPropo] === propoId &&
-        result.data[indexPropo].reponseBool === false
-      ) {
-        SaveCorrectAnswer[QcmIndex] = false;
-        //update full pie***********************************************
-        setSavePieStatique((prevState) => {
-          const newState = [...prevState]; // Copy the existing array
-          newState[1] = newState[1] + 1; // Modify the first index
-          return newState; // Return the updated array
-        });
-        //*************************************************************** */
-
-        console.log("false");
-      } else if (
-        updatedArraySavePropositions[QcmIndex][indexPropo] !== propoId &&
-        updatedClickedVerefieAll[QcmIndex] === ""
-      ) {
-        SaveCorrectAnswer[QcmIndex] = "";
-        if (savePieStatique[0] !== 0) {
-          setSavePieStatique((prevState) => {
-            const newState = [...prevState]; // Copy the existing array
-            newState[0] = newState[0] - 1; // Modify the first index
-            return newState; // Return the updated array
-          });
-        } else if (savePieStatique[1] !== 0) {
-          setSavePieStatique((prevState) => {
-            const newState = [...prevState]; // Copy the existing array
-            newState[1] = newState[1] - 1; // Modify the first index
-            return newState; // Return the updated array
-          });
-        }
-
-        console.log("nothing");
-      }
-    }
-    //************************************************************************* */
   };
 
   //********************************************************************** */
@@ -1989,38 +1455,9 @@ function QuizBoard(props) {
   /*****done Quiz******************************************** */
   function closeModalDoneQuizHandler() {
     setModalDoneQuizIsOpen(false);
-    setShowModalStatique(false);
   }
   //**************************************************** */
   function handlerConfirmShowAllReponse() {
-    //*******all statique*****************************************************************************************
-
-    if (props.QcmSujetTypeSelected === "Par Cour") {
-      //update statique pie***************************************************************
-      savePieStatique[2] =
-        ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
-      console.log(savePieStatique);
-      //********************************************************************************* */
-      //update statique dounate***************************************************************
-      for (let index = 0; index < SaveQcmsCourNameStatique.length; index++) {
-        SaveEachLineStatique[index][2] =
-          SaveQcmsNbrStatique[index] -
-          (SaveEachLineStatique[index][0] + SaveEachLineStatique[index][1]);
-      }
-      console.log(SaveEachLineStatique);
-      //********************************************************************************* */
-      setShowModalStatique(true);
-      setShowModalStatiqueParCour(true);
-    } else if (props.QcmSujetTypeSelected === "Par Sujet") {
-      //update statique pie***************************************************************
-      savePieStatique[2] =
-        ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
-      console.log(savePieStatique);
-      setShowModalStatique(true);
-      setShowModalStatiqueParSujet(true);
-      //********************************************************************************* */
-    }
-    //*******end all statique*****************************************************************************************
     //***this qcm is has been answer************************* */
 
     setSaveQcmIsAnswer(SaveClickSelectVerfieAll);
@@ -2149,14 +1586,6 @@ function QuizBoard(props) {
     );
     saveQcmQuizzSession.saveVerfieReponses = JSON.stringify(SaveVerfieReponses);
     saveQcmQuizzSession.saveQcmIsAnswer = JSON.stringify(SaveQcmIsAnswer);
-    //**statique ***************************************************************** */
-    saveQcmQuizzSession.saveCorrectAnswer = JSON.stringify(SaveCorrectAnswer);
-    saveQcmQuizzSession.saveIsClickedCounter =
-      JSON.stringify(SaveIsClickedCounter);
-    saveQcmQuizzSession.savePieStatique = JSON.stringify(savePieStatique);
-    saveQcmQuizzSession.saveEachLineStatique =
-      JSON.stringify(SaveEachLineStatique);
-    //****************************************************************************** */
     saveQcmQuizzSession.savePercentageAmount =
       JSON.stringify(SavePercentageAmount);
     saveQcmQuizzSession.dateSaveQuizzSession = Date.format(
@@ -2212,15 +1641,8 @@ function QuizBoard(props) {
     updateQcmQuizz.saveVerfieReponses = JSON.stringify(SaveVerfieReponses);
     updateQcmQuizz.saveQcmIsAnswer = JSON.stringify(SaveQcmIsAnswer);
     updateQcmQuizz.savePercentageAmount = JSON.stringify(SavePercentageAmount);
-    //**statique ***************************************************************** */
-    updateQcmQuizz.saveCorrectAnswer = JSON.stringify(SaveCorrectAnswer);
-    updateQcmQuizz.saveIsClickedCounter = JSON.stringify(SaveIsClickedCounter);
-    updateQcmQuizz.savePieStatique = JSON.stringify(savePieStatique);
-    updateQcmQuizz.saveEachLineStatique = JSON.stringify(SaveEachLineStatique);
-    //****************************************************************************** */
-    console.log(updateQcmQuizz);
-    console.log("walidd");
-    onsole.log("walidd");
+
+    console.log(updateQcmQuizz.savePercentageAmount);
     await axios
       .put(
         `https://goatqcm-instance.com/${sourceCommingFrom}/${qcmQuizzId}`,
@@ -2728,8 +2150,7 @@ function QuizBoard(props) {
                                           propo.id,
                                           VisibiliteQcmIndex,
                                           indexPropo,
-                                          propo.qcmStandard.id,
-                                          propo.qcmStandard.coursMed.coursName
+                                          propo.qcmStandard.id
                                         );
                                       }}
                                     >
@@ -3390,9 +2811,7 @@ function QuizBoard(props) {
                                               propo.id,
                                               VisibiliteQcmIndex,
                                               indexPropo,
-                                              propo.qcmStandard.id,
-                                              propo.qcmStandard.coursMed
-                                                .coursName
+                                              propo.qcmStandard.id
                                             );
                                           }}
                                         >
@@ -3789,94 +3208,6 @@ function QuizBoard(props) {
             (ModalSaveQuizzIsOpen || ShowModelActionsPhone) && (
               <BackdropSaveQuizPhone onCancel={closeModalSaveQcmQuizHandler} />
             )}
-          {isDesktopOrLaptop &&
-            ShowModalStatique &&
-            ShowModalStatiqueParCour && (
-              <>
-                <div className={classes.fullstatique}>
-                  <div className={classes.bothfullstatique}>
-                    <div className={classes.fullpiebarestatique}>
-                      <div className={classes.piestatique}>
-                        <Doughnut options={options} data={pieChartData} />
-                      </div>
-                      <div className={classes.piestatique}>
-                        <Bar options={optionsBar} data={barChartData} />
-                      </div>
-                    </div>
-                    <div className={classes.fulleachcours}>
-                      <div className={classes.headerbounate}>
-                        <div
-                          className={`${classes.cardbodynumber} card-body    `}
-                        >
-                          <h5 className={classes.titlenumber_time}>
-                            {ShowQcm.length} Questions
-                          </h5>
-                        </div>
-
-                        <div
-                          className={`${classes.cardbodycard_timer} card-body    `}
-                        >
-                          <h5 className={classes.titlenumber_time}>
-                            <span>
-                              {props.qcmAndCliniqueTimer === true
-                                ? props.watchValues[0].hours
-                                : hours}
-                              :
-                            </span>
-                            <span>
-                              {props.qcmAndCliniqueTimer === true
-                                ? props.watchValues[1].minutes
-                                : minutes}
-                              :
-                            </span>
-                            <span>
-                              {props.qcmAndCliniqueTimer === true
-                                ? props.watchValues[2].seconds
-                                : seconds}
-                            </span>
-                          </h5>
-                        </div>
-                      </div>
-
-                      {SaveQcmsCourNameStatique.map((nomCour, index) => (
-                        <div key={index} className={classes.eachbounatecour}>
-                          <div className={classes.namecourdounate}>
-                            <div>{nomCour}</div>
-                          </div>
-                          <div className={classes.donatecour}>
-                            <Doughnut
-                              options={optionsDounate}
-                              data={dounateData[index]}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-          {isDesktopOrLaptop &&
-            ShowModalStatique &&
-            ShowModalStatiqueParSujet && (
-              <>
-                <div className={classes.fullstatique}>
-                  <div className={classes.bothfullstatique}>
-                    <div className={classes.fullpiebarestatique}>
-                      <div className={classes.piestatique}>
-                        <Pie options={options} data={pieChartData} />
-                      </div>
-                      <div className={classes.piestatique}>
-                        <Bar options={optionsBar} data={barChartData} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
-          {isDesktopOrLaptop && ShowModalStatique && (
-            <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
-          )}
         </>
       )}
       {OpenBoardClinique && (
@@ -3933,20 +3264,6 @@ function QuizBoard(props) {
             },
           ]}
           commingFrom={props.commingFrom}
-          //Qcms State*****************************************************
-          SaveCorrectAnswer={SaveCorrectAnswer}
-          SaveIsClickedCounter={SaveIsClickedCounter}
-          savePieStatique={savePieStatique}
-          SaveQcmsCourNameStatique={SaveQcmsCourNameStatique}
-          SaveEachLineStatique={SaveEachLineStatique}
-          nbrAllQclStatique={ShowQcm.length}
-          dounateDataQcms={dounateData}
-          //**********************************************************************
-          //clinique State********************************************************
-          SaveCorrectAnswerClinique={props.SaveCorrectAnswerClinique}
-          SaveIsClickedCounterClinique={props.SaveIsClickedCounterClinique}
-          savePieStatiqueClinique={props.savePieStatiqueClinique}
-          SaveEachLineStatiqueClinique={props.SaveEachLineStatiqueClinique}
         />
       )}
       {ShowModelActionsPhone && isTabletOrMobile && (
