@@ -2217,7 +2217,8 @@ function QuizBoard(props) {
     updateQcmQuizz.saveEachLineStatique = JSON.stringify(SaveEachLineStatique);
     //****************************************************************************** */
     console.log(updateQcmQuizz);
-
+    console.log("walidd");
+    onsole.log("walidd");
     await axios
       .put(
         `https://goatqcm-instance.com/${sourceCommingFrom}/${qcmQuizzId}`,
@@ -2241,7 +2242,6 @@ function QuizBoard(props) {
   //********************************************************************************* */
 
   const closeModalSaveQcmQuizHandler = () => {
-    console.log("walidd");
     setModalSaveQuizzIsOpen(false);
     setShowModelActionsPhone(false);
   };
