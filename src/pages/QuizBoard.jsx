@@ -1479,7 +1479,7 @@ function QuizBoard(props) {
     setVisibilitePorpoIndex(currentIndex.value);
     VisibleNextBtn.value = true;
     VisiblePrevBtn.value = true;
-
+    console.log("walidjj");
     //*****check if kayn cas clinique*********************** */
     if (props.QcmSujetTypeSelected === "Par Cour") {
       if (currentIndex.value === ShowQcm.length - 1) {
