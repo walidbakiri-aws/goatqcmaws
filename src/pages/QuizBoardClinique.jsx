@@ -2766,13 +2766,7 @@ function QuizBoardClinique(props) {
                 className={classes.contanerspace}
                 data-theme={isDark ? "dark" : "light"}
               >
-                <button
-                  onClick={() => {
-                    handlePorpoClick();
-                  }}
-                >
-                  test
-                </button>
+               
                 <div className={classes.container_save_casclinique_timer}>
                   <div className={classes.full_save_casclinique}>
                     {showSaveCasCliniqueBtn && (
