@@ -2273,13 +2273,7 @@ function QuizBoard(props) {
             <div className={classes.sidebare}>
               {ShowSideBare && <Sidebar />}
             </div>
-            <button
-              onClick={() => {
-                handlePorpoClick();
-              }}
-            >
-              test
-            </button>
+
             {VisibleQmcContainer && isDesktopOrLaptop && (
               <div
                 className={classes.contanerspace}
