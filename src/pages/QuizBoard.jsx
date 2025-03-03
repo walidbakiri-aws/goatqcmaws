@@ -82,7 +82,7 @@ function QuizBoard(props) {
   const Date = new DateObject();
   const sourceBtnSaveQuizz = "saveQuizz";
   const sourceBtnSaveSession = "saveSession";
-  const BASE_URL = "http://localhost:8080";
+  const BASE_URL = "https://goatqcm-instance.com";
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   const token = localStorage.getItem("tokengoat");
   let navigateLogin = useNavigate();
