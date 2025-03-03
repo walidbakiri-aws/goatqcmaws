@@ -3872,6 +3872,100 @@ function QuizBoard(props) {
           {isDesktopOrLaptop && ShowModalStatique && (
             <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
           )}
+          {isTabletOrMobile &&
+            ShowModalStatique &&
+            ShowModalStatiqueParCour && (
+              <>
+                <div
+                  style={{ overflowY: "scroll", overflowX: "scroll" }}
+                  className={classes.fullstatique_phone}
+                >
+                  <div className={classes.bothfullstatique_phone}>
+                    <div className={classes.fullpiebarestatique_phone}>
+                      <div className={classes.piestatique_phone}>
+                        <Doughnut options={options} data={pieChartData} />
+                      </div>
+                      <div className={classes.piestatique_phone}>
+                        <Bar options={optionsBar} data={barChartData} />
+                      </div>
+                    </div>
+                    <div className={classes.fulleachcours_phone}>
+                      <div className={classes.headerbounate_phone}>
+                        <div
+                          className={`${classes.cardbodynumber_phone} card-body    `}
+                        >
+                          <h5 className={classes.titlenumber_time_phone}>
+                            {ShowQcm.length} Questions
+                          </h5>
+                        </div>
+
+                        <div
+                          className={`${classes.cardbodycard_timer_phone} card-body    `}
+                        >
+                          <h5 className={classes.titlenumber_time_phone}>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[0].hours
+                                : hours}
+                              :
+                            </span>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[1].minutes
+                                : minutes}
+                              :
+                            </span>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[2].seconds
+                                : seconds}
+                            </span>
+                          </h5>
+                        </div>
+                      </div>
+
+                      {SaveQcmsCourNameStatique.map((nomCour, index) => (
+                        <div
+                          key={index}
+                          className={classes.eachbounatecour_phone}
+                        >
+                          <div className={classes.namecourdounate_phone}>
+                            <div>{nomCour}</div>
+                          </div>
+                          <div className={classes.donatecour_phone}>
+                            <Doughnut
+                              options={optionsDounate}
+                              data={dounateData[index]}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          {isTabletOrMobile &&
+            ShowModalStatique &&
+            ShowModalStatiqueParSujet && (
+              <>
+                <div className={classes.fullstatique_phone}>
+                  <div className={classes.bothfullstatique_phone}>
+                    <div className={classes.fullpiebarestatique_phone}>
+                      <div className={classes.piestatique_phone}>
+                        <Pie options={options} data={pieChartData} />
+                      </div>
+                      <div className={classes.piestatique_phone}>
+                        <Bar options={optionsBar} data={barChartData} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          {isTabletOrMobile && ShowModalStatique && (
+            <BackdropSaveQuizPhone onCancel={closeModalDoneQuizHandler} />
+          )}
         </>
       )}
       {OpenBoardClinique && (

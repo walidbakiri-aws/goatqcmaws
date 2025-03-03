@@ -15,7 +15,7 @@ import A from "../compenent/layout/img/A.png";
 import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
-
+ 
 import E from "../compenent/layout/img/E.png";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
 import externatlogo from "../compenent/layout/externatlogo.svg";
@@ -540,10 +540,7 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(
-        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
-        formData
-      )
+      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -563,15 +560,11 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post(
-        "https://goatqcm-instance.com/image/clinique/uploadimage",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -1830,12 +1823,9 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(
-        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2336,13 +2326,9 @@ function QuizBoardClinique(props) {
     //******************************************************************************** */
     saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2487,13 +2473,9 @@ function QuizBoardClinique(props) {
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3554,6 +3536,7 @@ function QuizBoardClinique(props) {
                   <div
                     className={`${classes.quizcontainer_phone} card text-white  py-1`}
                   >
+                    
                     <div
                       className={classes.headerquizz_phone}
                       data-theme={isDark ? "dark" : "light"}
@@ -4663,6 +4646,220 @@ function QuizBoardClinique(props) {
                 </div>
               </>
             )}
+
+          {isTabletOrMobile &&
+            ShowModalStatique &&
+            ShowModalStatiqueParCour &&
+            props.qcmType === "Tous (Qcm,Cas Clinique)" && (
+              <>
+                <div className={classes.fullstatique_phone}>
+                  <div className={classes.bothfullstatique_phone}>
+                    <div className={classes.fullpiebarestatique_phone}>
+                      <div className={classes.piestatique_phone}>
+                        <Doughnut options={options} data={pieChartData} />
+                      </div>
+                      <div className={classes.piestatique_phone}>
+                        <Bar options={optionsBar} data={barChartData} />
+                      </div>
+                    </div>
+
+                    <div className={classes.fullrightstatiquediv_phone}>
+                      <div className={classes.headerbounate_phone}>
+                        <div
+                          className={`${classes.cardbodynumber_phone} card-body    `}
+                        >
+                          <h5 className={classes.titlenumber_time_phone}>
+                            {props.nbrAllQclStatique} Questions
+                          </h5>
+                          <h5 className={classes.titlenumber_time_phone}>
+                            {saveAllNumberCasClinique.value} Cas Cliniques
+                          </h5>
+                        </div>
+                        <div
+                          className={`${classes.cardbodycard_timer_phone} card-body    `}
+                        >
+                          <h5 className={classes.titlenumber_time_phone}>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[0].hours
+                                : hours}
+                              :
+                            </span>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[1].minutes
+                                : minutes}
+                              :
+                            </span>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[2].seconds
+                                : seconds}
+                            </span>
+                          </h5>
+                        </div>
+                      </div>
+                      <div className={classes.fulleachcours_qcmclinique_phone}>
+                        <div
+                          className={
+                            classes.fulleachcours_eachqcmClinique_phone
+                          }
+                        >
+                          <div
+                            className={
+                              classes.Qcm_CasClinique_Title_qcmclinique_phone
+                            }
+                          >
+                            {" "}
+                            Qcms
+                          </div>
+                          {props.SaveQcmsCourNameStatique.map(
+                            (nomCourQcm, index) => (
+                              <div
+                                key={index}
+                                className={
+                                  classes.eachbounatecour_qcmclinique_phone
+                                }
+                              >
+                                <div className={classes.namecourdounate_phone}>
+                                  <div>{nomCourQcm}</div>
+                                </div>
+                                <div className={classes.donatecour_phone}>
+                                  <Doughnut
+                                    options={optionsDounate}
+                                    data={props.dounateDataQcms[index]}
+                                  />
+                                </div>
+                              </div>
+                            )
+                          )}
+                        </div>
+                        <div
+                          className={
+                            classes.fulleachcours_eachqcmClinique_phone
+                          }
+                        >
+                          <div
+                            className={
+                              classes.Qcm_CasClinique_Title_qcmclinique_phone
+                            }
+                          >
+                            {" "}
+                            Cas Clinique
+                          </div>
+                          {SaveQcmsCourNameStatiqueClinique.map(
+                            (nomCourClinique, index) => (
+                              <div
+                                key={index}
+                                className={
+                                  classes.eachbounatecour_qcmclinique_phone
+                                }
+                              >
+                                <div className={classes.namecourdounate_phone}>
+                                  <div>{nomCourClinique}</div>
+                                </div>
+                                <div className={classes.donatecour_phone}>
+                                  <Doughnut
+                                    options={optionsDounate}
+                                    data={dounateData[index]}
+                                  />
+                                </div>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+          {isTabletOrMobile &&
+            ShowModalStatique &&
+            ShowModalStatiqueParCour &&
+            props.qcmType === "Cas Clinique" && (
+              <>
+                <div className={classes.fullstatique_phone}>
+                  <div className={classes.bothfullstatique_phone}>
+                    <div className={classes.fullpiebarestatique_phone}>
+                      <div className={classes.piestatique_phone}>
+                        <Doughnut options={options} data={pieChartData} />
+                      </div>
+                      <div className={classes.piestatique_phone}>
+                        <Bar options={optionsBar} data={barChartData} />
+                      </div>
+                    </div>
+                    <div className={classes.fullrightstatiquediv_phone}>
+                      <div className={classes.headerbounate_phone}>
+                        <div
+                          className={`${classes.cardbodynumber_phone} card-body    `}
+                        >
+                          <h5 className={classes.titlenumber_time_phone}>
+                            {saveAllNumberCasClinique.value} Cas Clinique
+                          </h5>
+                        </div>
+
+                        <div
+                          className={`${classes.cardbodycard_timer_phone} card-body    `}
+                        >
+                          <h5 className={classes.titlenumber_time_phone}>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[0].hours
+                                : hours}
+                              :
+                            </span>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[1].minutes
+                                : minutes}
+                              :
+                            </span>
+                            <span>
+                              {props.qcmAndCliniqueTimer === true
+                                ? props.watchValues[2].seconds
+                                : seconds}
+                            </span>
+                          </h5>
+                        </div>
+                      </div>
+                      <div className={classes.fulleachcours_clinique_phone}>
+                        <div
+                          className={
+                            classes.Qcm_CasClinique_Title_clinique_phone
+                          }
+                        >
+                          {" "}
+                          Cas Clinique
+                        </div>
+                        {SaveQcmsCourNameStatiqueClinique.map(
+                          (nomCour, index) => (
+                            <div
+                              key={index}
+                              className={classes.eachbounatecour_clinique_phone}
+                            >
+                              <div className={classes.namecourdounate_phone}>
+                                <div>{nomCour}</div>
+                              </div>
+                              <div className={classes.donatecour_phone}>
+                                <Doughnut
+                                  options={optionsDounate}
+                                  data={dounateData[index]}
+                                />
+                              </div>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          {isTabletOrMobile && ShowModalStatique && (
+            <BackdropSaveQuizPhone onCancel={closeModalDoneQuizHandler} />
+          )}
           {isDesktopOrLaptop &&
             ShowModalStatique &&
             ShowModalStatiqueParSujet && (
@@ -4674,6 +4871,29 @@ function QuizBoardClinique(props) {
                         <Pie options={options} data={pieChartData} />
                       </div>
                       <div className={classes.piestatique}>
+                        <Bar options={optionsBar} data={barChartData} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+
+          {isDesktopOrLaptop && ShowModalStatique && (
+            <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
+          )}
+
+          {isTabletOrMobile &&
+            ShowModalStatique &&
+            ShowModalStatiqueParSujet && (
+              <>
+                <div className={classes.fullstatique_phone}>
+                  <div className={classes.bothfullstatique_phone}>
+                    <div className={classes.fullpiebarestatique_phone}>
+                      <div className={classes.piestatique_phone}>
+                        <Pie options={options} data={pieChartData} />
+                      </div>
+                      <div className={classes.piestatique_phone}>
                         <Bar options={optionsBar} data={barChartData} />
                       </div>
                     </div>
