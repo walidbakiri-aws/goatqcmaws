@@ -26,6 +26,7 @@ class UserService {
         {
           headers: {
             "Content-Type": "application/json",
+            timeout: 7000, // 10 seconds
           },
         }
       );
