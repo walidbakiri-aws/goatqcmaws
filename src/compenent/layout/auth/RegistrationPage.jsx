@@ -47,19 +47,25 @@ function RegistrationPage() {
     console.log(confirmePasswrord);
     console.log(checkExisteUser.value);
     UserService.logout();
+
     try {
-      if (formData.password === confirmePasswrord) {
-        if (formData.password.length >= 4) {
-          await UserService.register(formData).then((res) => {
-            toast.success("Success registration");
-            setMoladIsOpen(true);
-            //navigate("/");
-          });
-        }
-      } else {
+      // Check password match
+      if (formData.password !== confirmePasswrord) {
+        // Fixed typo in variable name
         toast.error("Les mots de passe ne correspondent pas!");
+        return;
       }
 
+      // Check password length
+      if (formData.password.length < 4) {
+        toast.error("Le mot de passe doit contenir au moins 4 caractères!");
+        return;
+      }
+
+      // Registration API call
+      const res = await UserService.register(formData);
+
+      // Only reset form if registration was successful
       setFormData({
         name: "",
         lastname: "",
@@ -67,10 +73,15 @@ function RegistrationPage() {
         password: "",
       });
       document.getElementById("confirmepassword").value = "";
-      // alert.error("error registration user: ", error);
+
+      // Show success and navigate after delay
+      toast.success("Inscription réussie !");
+      setTimeout(() => {
+        navigate("/");
+      }, 7000);
     } catch (error) {
-      //console.error("Error registration user: ", error);
-      alert(error);
+      console.error("Erreur d'inscription:", error);
+      toast.error(`Échec de l'inscription: ${error.message}`);
     }
   };
 
