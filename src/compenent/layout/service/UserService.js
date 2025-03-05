@@ -20,9 +20,12 @@ class UserService {
   }
   static async register(userData) {
     try {
+      const agent = new (require("https").Agent)({ rejectUnauthorized: false });
+
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
         userData,
+        { httpsAgent: agent },
         {
           headers: {
             "Content-Type": "multipart/form-data",
