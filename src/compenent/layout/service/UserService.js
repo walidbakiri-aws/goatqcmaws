@@ -1,6 +1,6 @@
 import axios from "axios";
 class UserService {
-  static BASE_URL = "https://goatqcm-instance.com";
+  static BASE_URL = "https://goatqcm.com";
 
   static async login(username, password) {
     //console.log(username);
