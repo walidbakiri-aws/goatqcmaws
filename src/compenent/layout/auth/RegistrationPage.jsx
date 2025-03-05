@@ -22,6 +22,7 @@ function RegistrationPage() {
 
   const navigate = useNavigate();
   const [confirmePasswrord, setConfirmePasswrord] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -45,25 +46,26 @@ function RegistrationPage() {
     console.log(formData.username);
     console.log(confirmePasswrord);
     console.log(checkExisteUser.value);
+    UserService.logout();
+
     try {
-      console.log(confirmePasswrord.length);
-      if (formData.password === confirmePasswrord) {
-        if (confirmePasswrord.length >= 5) {
-          await UserService.register(formData).then((res) => {
-            toast.success("Success registration");
-            setMoladIsOpen(true);
-            //navigate("/");
-          });
-        } else {
-          toast.error("court mote mote passs,inserer autre!");
-        }
-      } else {
+      // Check password match
+      if (formData.password !== confirmePasswrord) {
+        // Fixed typo in variable name
         toast.error("Les mots de passe ne correspondent pas!");
+        return;
       }
-      /* }else {
-        toast.error("Email déja existe!");
-      }*/
-      //clear the form fields after secceccful registration
+
+      // Check password length
+      if (formData.password.length < 4) {
+        toast.error("Le mot de passe doit contenir au moins 4 caractères!");
+        return;
+      }
+
+      // Registration API call
+      const res = await UserService.register(formData);
+
+      // Only reset form if registration was successful
       setFormData({
         name: "",
         lastname: "",
@@ -71,10 +73,15 @@ function RegistrationPage() {
         password: "",
       });
       document.getElementById("confirmepassword").value = "";
-      // alert.error("error registration user: ", error);
+
+      // Show success and navigate after delay
+      toast.success("Inscription réussie !");
+      setTimeout(() => {
+        navigate("/");
+      }, 7000);
     } catch (error) {
-      //console.error("Error registration user: ", error);
-      alert("An Error occures chwile registration user");
+      console.error("Erreur d'inscription:", error);
+      toast.error(`Échec de l'inscription: ${error.message}`);
     }
   };
 
