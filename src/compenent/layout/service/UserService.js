@@ -25,8 +25,7 @@ class UserService {
         userData,
         {
           headers: {
-            "Content-Type": "application/json",
-            timeout: 7000, // 10 seconds
+            "Content-Type": "multipart/form-data",
           },
         }
       );
