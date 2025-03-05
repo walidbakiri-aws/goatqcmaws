@@ -19,18 +19,14 @@ class UserService {
     }
   }
   static async register(userData) {
+    console.log(userData);
     try {
-      const agent = new (require("https").Agent)({ rejectUnauthorized: false });
-
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData,
-        { httpsAgent: agent },
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+        userData
+        /* {
+          headers: { Authorization: `Bearer ${token}` },
+        }*/
       );
       return response.data;
     } catch (err) {
