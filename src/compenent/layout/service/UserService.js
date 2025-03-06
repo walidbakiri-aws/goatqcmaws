@@ -19,14 +19,21 @@ class UserService {
     }
   }
   static async register(userData) {
-    console.log(userData);
     try {
-      fetch("https://goatqcm-instance.com/auth/register", userData, {
+      const response = await fetch(`${UserService.baseURL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}`, // Uncomment if you need authentication
         },
-      }).then((response) => response.data);
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      return await response.json();
     } catch (err) {
       throw err;
     }
