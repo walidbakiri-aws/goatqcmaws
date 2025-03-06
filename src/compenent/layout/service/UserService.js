@@ -21,7 +21,7 @@ class UserService {
   static async register(userData) {
     console.log(userData);
     try {
-      fetch("${UserService.BASE_URL}/auth/register", userData, {
+      fetch("https://goatqcm-instance.com/auth/register", userData, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
