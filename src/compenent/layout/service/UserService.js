@@ -1,12 +1,12 @@
 import axios from "axios";
 class UserService {
-  static BASE_URL = "https://goatqcm-instance.com";
+  static baseURL = "https://goatqcm-instance.com";
 
   static async login(username, password) {
     //console.log(username);
 
     try {
-      const response = await axios.post(`${UserService.BASE_URL}/auth/login`, {
+      const response = await axios.post(`${UserService.baseURL}/auth/login`, {
         username,
         password,
       });
@@ -22,7 +22,7 @@ class UserService {
     console.log(userData);
     try {
       const response = await axios.post(
-        `${UserService.BASE_URL}/auth/register`,
+        `${UserService.baseURL}/auth/register`,
         userData
         /* {
           headers: { Authorization: `Bearer ${token}` },
@@ -37,7 +37,7 @@ class UserService {
   static async getAllUsers(token) {
     try {
       const response = await axios.get(
-        `${UserService.BASE_URL}/admin/get-all-users`,
+        `${UserService.baseURL}/admin/get-all-users`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -51,7 +51,7 @@ class UserService {
   static async getUserByuserName(username, token) {
     try {
       const response = await axios.get(
-        `${UserService.BASE_URL}/adminuserpartc/getuserbyname/${username}`,
+        `${UserService.baseURL}/adminuserpartc/getuserbyname/${username}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -67,7 +67,7 @@ class UserService {
   static async getYourProfil(token) {
     try {
       const response = await axios.get(
-        `${UserService.BASE_URL}/adminuser/get-profile`,
+        `${UserService.baseURL}/adminuser/get-profile`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -81,7 +81,7 @@ class UserService {
   static async getUserById(userId, token) {
     try {
       const response = await axios.get(
-        `${UserService.BASE_URL}/admin/get-users/${userId}`,
+        `${UserService.baseURL}/admin/get-users/${userId}`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -97,7 +97,7 @@ class UserService {
   static async deleteUser(userId, token) {
     try {
       const response = await axios.delete(
-        `${UserService.BASE_URL}/admin/delete/${userId}`,
+        `${UserService.baseURL}/admin/delete/${userId}`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -113,7 +113,7 @@ class UserService {
     try {
       console.log(userData);
       const response = await axios.put(
-        `${UserService.BASE_URL}/admin/update/${userId}`,
+        `${UserService.baseURL}/admin/update/${userId}`,
         userData,
         {
           headers: { Authorization: `Bearer ${token}` },
