@@ -26,8 +26,7 @@ class UserService {
         headers: {
           "Content-Type": "application/json",
         },
-      });
-      return response.data;
+      }).then((response) => response.json());
     } catch (err) {
       throw err;
     }
