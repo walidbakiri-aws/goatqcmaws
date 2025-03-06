@@ -21,13 +21,12 @@ class UserService {
   static async register(userData) {
     console.log(userData);
     try {
-      const response = await axios.post(
-        `${UserService.baseURL}/auth/register`,
-        userData
-        /* {
-          headers: { Authorization: `Bearer ${token}` },
-        }*/
-      );
+      fetch("${UserService.BASE_URL}/auth/register", userData, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       return response.data;
     } catch (err) {
       throw err;
