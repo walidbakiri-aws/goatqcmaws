@@ -1,12 +1,12 @@
 import axios from "axios";
 class UserService {
-  static baseURL = "https://goatqcm-instance.com";
+  static BASE_URL = "https://goatqcm-instance.com";
 
   static async login(username, password) {
     //console.log(username);
 
     try {
-      const response = await axios.post(`${UserService.baseURL}/auth/login`, {
+      const response = await axios.post(`${UserService.BASE_URL}/auth/login`, {
         username,
         password,
       });
@@ -20,20 +20,11 @@ class UserService {
   }
   static async register(userData) {
     try {
-      const response = await fetch(`${UserService.baseURL}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Authorization: `Bearer ${token}`, // Uncomment if you need authentication
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      return await response.json();
+      const response = await axios.post(
+        `${UserService.BASE_URL}/auth/register`,
+        userData
+      );
+      return response.data;
     } catch (err) {
       throw err;
     }
@@ -42,7 +33,7 @@ class UserService {
   static async getAllUsers(token) {
     try {
       const response = await axios.get(
-        `${UserService.baseURL}/admin/get-all-users`,
+        `${UserService.BASE_URL}/admin/get-all-users`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -56,7 +47,7 @@ class UserService {
   static async getUserByuserName(username, token) {
     try {
       const response = await axios.get(
-        `${UserService.baseURL}/adminuserpartc/getuserbyname/${username}`,
+        `${UserService.BASE_URL}/adminuserpartc/getuserbyname/${username}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -72,7 +63,7 @@ class UserService {
   static async getYourProfil(token) {
     try {
       const response = await axios.get(
-        `${UserService.baseURL}/adminuser/get-profile`,
+        `${UserService.BASE_URL}/adminuser/get-profile`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -86,7 +77,7 @@ class UserService {
   static async getUserById(userId, token) {
     try {
       const response = await axios.get(
-        `${UserService.baseURL}/admin/get-users/${userId}`,
+        `${UserService.BASE_URL}/admin/get-users/${userId}`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -102,7 +93,7 @@ class UserService {
   static async deleteUser(userId, token) {
     try {
       const response = await axios.delete(
-        `${UserService.baseURL}/admin/delete/${userId}`,
+        `${UserService.BASE_URL}/admin/delete/${userId}`,
 
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -118,7 +109,7 @@ class UserService {
     try {
       console.log(userData);
       const response = await axios.put(
-        `${UserService.baseURL}/admin/update/${userId}`,
+        `${UserService.BASE_URL}/admin/update/${userId}`,
         userData,
         {
           headers: { Authorization: `Bearer ${token}` },

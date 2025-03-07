@@ -50,11 +50,9 @@ function RegistrationPage() {
     try {
       if (formData.password === confirmePasswrord) {
         if (formData.password.length >= 4) {
-          await UserService.register(formData).then((res) => {
-            toast.success("Success registration");
-            setMoladIsOpen(true);
-            //navigate("/");
-          });
+          await UserService.register(formData);
+          toast.success("Success registration");
+          setMoladIsOpen(true);
         }
       } else {
         toast.error("Les mots de passe ne correspondent pas!");
