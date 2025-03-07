@@ -66,7 +66,7 @@ function LoginPage() {
     navigate("/register");
   };
   //***************************************************************** */
-  useEffect(() => {
+  /* useEffect(() => {
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
@@ -76,7 +76,8 @@ function LoginPage() {
       }
     }
     console.log(username);
-  }, [refreshPage.value]);
+  }, [refreshPage.value]);*/
+  useEffect(() => {}, []);
   //****submit login button************************************ */
   const handlerSubmit = async (e) => {
     UserService.logout();
