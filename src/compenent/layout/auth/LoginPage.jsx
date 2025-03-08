@@ -77,7 +77,16 @@ function LoginPage() {
     }
     console.log(username);
   }, [refreshPage.value]);*/
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (window.localStorage) {
+      if (!localStorage.getItem("reload")) {
+        localStorage["reload"] = true;
+        window.location.reload();
+      } else {
+        localStorage.removeItem("reload");
+      }
+    }
+  }, [[refreshPage.value]]);
   //****submit login button************************************ */
   const handlerSubmit = async (e) => {
     UserService.logout();
