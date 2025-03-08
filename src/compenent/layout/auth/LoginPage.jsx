@@ -86,7 +86,7 @@ function LoginPage() {
         localStorage.removeItem("reload");
       }
     }
-  }, [[refreshPage.value]]);
+  }, [refreshPage.value]);
   //****submit login button************************************ */
   const handlerSubmit = async (e) => {
     UserService.logout();
