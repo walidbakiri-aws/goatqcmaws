@@ -149,7 +149,7 @@ function LoginPage() {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
 
-        // window.location.reload();
+        //window.location.reload();
       } else if (getAbnIfExist.value.statusAbn === false) {
         console.log("we in home not confirm yet");
         navigate("/home", {
