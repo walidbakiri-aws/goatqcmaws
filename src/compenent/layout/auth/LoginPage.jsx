@@ -56,7 +56,9 @@ function LoginPage() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-
+  const getIsAlreadyUserValidate = localStorage.getItem(
+    "isAlreadyUserValidate"
+  );
   //************************************************************************ */
   const [userIdTkn, setUserIdTkn] = useState(
     +localStorage.getItem("userId") || 0
@@ -78,9 +80,6 @@ function LoginPage() {
     console.log(username);
   }, [refreshPage.value]);*/
   useEffect(() => {
-    const getIsAlreadyUserValidate = localStorage.getItem(
-      "isAlreadyUserValidate"
-    );
     console.log(getIsAlreadyUserValidate);
     if (getIsAlreadyUserValidate) {
       console.log("is already ok to pass");
@@ -149,7 +148,7 @@ function LoginPage() {
     }
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
-        //fetchIp(getresultUserFinalId);
+        fetchIp(getresultUserFinalId);
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
