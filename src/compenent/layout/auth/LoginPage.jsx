@@ -81,6 +81,7 @@ function LoginPage() {
     const getIsAlreadyUserValidate = localStorage.getItem(
       "isAlreadyUserValidate"
     );
+    console.log(getIsAlreadyUserValidate);
     if (getIsAlreadyUserValidate) {
       console.log("is already ok to pass");
       navigate("/goatqcm", {
