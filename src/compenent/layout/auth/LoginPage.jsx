@@ -149,6 +149,7 @@ function LoginPage() {
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
         fetchIp(getresultUserFinalId);
+        localStorage.setItem("isAlreadyUserValidate", "isAlreadyUserValidate");
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
