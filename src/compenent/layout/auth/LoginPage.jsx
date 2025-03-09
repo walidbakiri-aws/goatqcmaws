@@ -86,6 +86,19 @@ function LoginPage() {
         localStorage.removeItem("reload");
       }
     }
+
+    const getIsAlreadyUserValidate = localStorage.getItem(
+      "isAlreadyUserValidate"
+    );
+    if (getIsAlreadyUserValidate) {
+      console.log("is already ok to pass");
+      navigate("/goatqcm", {
+        state: {
+          getUserName: localStorage.getItem("username"),
+          userId: localStorage.getItem("userId"),
+        },
+      });
+    }
   }, [refreshPage.value]);
   //****submit login button************************************ */
   const handlerSubmit = async (e) => {
@@ -148,8 +161,6 @@ function LoginPage() {
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
-
-        [refreshPage.value];
       } else if (getAbnIfExist.value.statusAbn === false) {
         console.log("we in home not confirm yet");
         navigate("/home", {
