@@ -80,9 +80,7 @@ function LoginPage() {
     console.log(username);
   }, [refreshPage.value]);*/
   useEffect(() => {
-    console.log(getIsAlreadyUserValidate);
     if (getIsAlreadyUserValidate) {
-      console.log("is already ok to pass");
       navigate("/goatqcm", {
         state: {
           getUserName: localStorage.getItem("username"),
