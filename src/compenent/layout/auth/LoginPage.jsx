@@ -78,15 +78,6 @@ function LoginPage() {
     console.log(username);
   }, [refreshPage.value]);*/
   useEffect(() => {
-    if (window.localStorage) {
-      if (!localStorage.getItem("reload")) {
-        localStorage["reload"] = true;
-        window.location.reload();
-      } else {
-        localStorage.removeItem("reload");
-      }
-    }
-
     const getIsAlreadyUserValidate = localStorage.getItem(
       "isAlreadyUserValidate"
     );
@@ -99,7 +90,7 @@ function LoginPage() {
         },
       });
     }
-  }, [refreshPage.value]);
+  }, []);
   //****submit login button************************************ */
   const handlerSubmit = async (e) => {
     UserService.logout();
@@ -324,7 +315,6 @@ function LoginPage() {
         {isDesktopOrLaptop && (
           <div className={classes.fullloginpage}>
             <div className={classes.child_phone}>
-              <button onClick={testbtn}>test</button>
               <div className={classes.logoimage}>
                 <img src={logologingoat}></img>
               </div>
