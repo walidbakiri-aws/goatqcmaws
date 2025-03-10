@@ -68,27 +68,25 @@ function LoginPage() {
     navigate("/register");
   };
   //***************************************************************** */
-  /* useEffect(() => {
+  useEffect(() => {
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
         window.location.reload();
       } else {
         localStorage.removeItem("reload");
+        console.log(getIsAlreadyUserValidate);
+        if (getIsAlreadyUserValidate) {
+          navigate("/goatqcm", {
+            state: {
+              getUserName: localStorage.getItem("username"),
+              userId: localStorage.getItem("userId"),
+            },
+          });
+        }
       }
     }
-    console.log(username);
-  }, [refreshPage.value]);*/
-  useEffect(() => {
-    if (getIsAlreadyUserValidate) {
-      navigate("/goatqcm", {
-        state: {
-          getUserName: localStorage.getItem("username"),
-          userId: localStorage.getItem("userId"),
-        },
-      });
-    }
-  }, []);
+  }, [refreshPage.value]);
   //****submit login button************************************ */
   const handlerSubmit = async (e) => {
     UserService.logout();
@@ -146,8 +144,9 @@ function LoginPage() {
     }
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
-        fetchIp(getresultUserFinalId);
         localStorage.setItem("isAlreadyUserValidate", "isAlreadyUserValidate");
+        fetchIp(getresultUserFinalId);
+
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
