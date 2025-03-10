@@ -69,25 +69,30 @@ function LoginPage() {
   };
   //***************************************************************** */
   useEffect(() => {
-    if (window.localStorage) {
-      if (!localStorage.getItem("reload")) {
-        localStorage["reload"] = true;
-        window.location.reload();
-      } else {
-        localStorage.removeItem("reload");
-        console.log(getIsAlreadyUserValidate);
-        handlerGetTokenAlreadyUser();
-        if (getIsAlreadyUserValidate) {
-          navigate("/goatqcm", {
-            state: {
-              getUserName: localStorage.getItem("username"),
-              userId: localStorage.getItem("userId"),
-            },
-          });
+    const checkUser = async () => {
+      if (window.localStorage) {
+        if (!localStorage.getItem("reload")) {
+          localStorage["reload"] = true;
+          window.location.reload();
+        } else {
+          localStorage.removeItem("reload");
+          console.log(getIsAlreadyUserValidate);
+          await handlerGetTokenAlreadyUser();
+          if (getIsAlreadyUserValidate) {
+            navigate("/goatqcm", {
+              state: {
+                getUserName: localStorage.getItem("username"),
+                userId: localStorage.getItem("userId"),
+              },
+            });
+          }
         }
       }
-    }
+    };
+    checkUser();
   }, [refreshPage.value]);
+  //*****************************************************************
+  //******handlerGetTokenAlreadyUser****************************************************
   const handlerGetTokenAlreadyUser = async (e) => {
     try {
       const userData = await UserService.login(
@@ -158,7 +163,7 @@ function LoginPage() {
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
         localStorage.setItem("isAlreadyUserValidate", "isAlreadyUserValidate");
-        fetchIp(getresultUserFinalId);
+        await fetchIp(getresultUserFinalId);
 
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
