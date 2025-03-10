@@ -112,7 +112,7 @@ function LoginPage() {
     localStorage.removeItem("role");
     localStorage.removeItem("username");
     const userData = await UserService.login(username, password);
-    localStorage.setItem(password, password);
+    localStorage.setItem("password", password);
     localStorage.setItem("tokengoat", userData.token);
     localStorage.setItem("role", userData.role);
     localStorage.setItem("username", username);
