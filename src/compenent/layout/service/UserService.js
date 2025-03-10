@@ -127,6 +127,7 @@ class UserService {
     localStorage.removeItem("role");
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
+    localStorage.removeItem("password");
     localStorage.removeItem("isAlreadyUserValidate");
   }
 

@@ -76,6 +76,7 @@ function LoginPage() {
       } else {
         localStorage.removeItem("reload");
         console.log(getIsAlreadyUserValidate);
+        handlerGetTokenAlreadyUser();
         if (getIsAlreadyUserValidate) {
           navigate("/goatqcm", {
             state: {
@@ -87,6 +88,17 @@ function LoginPage() {
       }
     }
   }, [refreshPage.value]);
+  const handlerGetTokenAlreadyUser = async (e) => {
+    try {
+      const userData = await UserService.login(
+        localStorage.getItem("username"),
+        localStorage.getItem("password")
+      );
+      localStorage.setItem("tokengoat", userData.token);
+    } catch (error) {
+      console.log("user not ok to pass");
+    }
+  };
   //****submit login button************************************ */
   const handlerSubmit = async (e) => {
     UserService.logout();
@@ -95,6 +107,7 @@ function LoginPage() {
     localStorage.removeItem("role");
     localStorage.removeItem("username");
     const userData = await UserService.login(username, password);
+    localStorage.setItem(password, password);
     localStorage.setItem("tokengoat", userData.token);
     localStorage.setItem("role", userData.role);
     localStorage.setItem("username", username);

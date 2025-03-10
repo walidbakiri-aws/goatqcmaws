@@ -25,7 +25,9 @@ function GoatQcm() {
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
   /******************************************************************* */
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(localStorage.getItem("tokengoat"));
+  }, []);
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />
