@@ -574,7 +574,7 @@
 .headerquizz_phone {
   width: 100%;
   height: 35px;
-  background-color: var(--background-color);
+  background-color: var(--background-color_headerquizz);
   display: flex;
 }
 .full_save_qcm_phone {
@@ -636,6 +636,11 @@
   display: flex;
   margin-top: 3px;
 }
+.closequizz_phone {
+  position: fixed;
+  right: 0;
+  margin-right: 10px;
+}
 .full_parsujets_timer_container_phone {
   display: flex;
   width: 100%;
@@ -680,6 +685,9 @@
 }
 .child_phone {
   float: left;
+  background-color: rgb(37, 176, 233, 0.9);
+  padding: 3px;
+  border-radius: 4px;
 }
 
 .modulename {
@@ -720,18 +728,13 @@
   padding: 5px;
   margin-bottom: 7px;
   z-index: 1;
-  border-radius: 8px;
-  border: 1px solid var(--background-color-full);
+
   white-space: pre-line;
   background-color: var(--background-color);
-  border: 1px solid rgb(42, 42, 43);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .qcmfeild_phone p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -740,21 +743,17 @@
 }
 .ulpropo_phone {
   padding-bottom: 10px;
-  border: 1px solid rgb(42, 42, 43);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .ulpropo_phone li {
   height: auto;
 
   padding: 3px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
-  border: 1px solid rgb(83, 83, 85);
+  border: 0.3px solid rgb(112, 112, 114);
 }
 .ulpropo_phone img {
   height: 25px;
@@ -795,25 +794,50 @@
 /***********footer phone divs******************/
 
 .btnfooter_phone {
-  background-color: rgb(207, 209, 209);
+  height: 70px;
+  width: 100%;
+  background-color: rgb(224, 226, 226);
   display: flex;
-  padding-top: 7px;
+
   height: 25px;
+  position: fixed;
+  bottom: 5px; /* Distance from the bottom */
+  right: 5px; /* Distance from the right */
+  left: 5px; /* Distance from the right */
 }
 
 .btnPrecdent_phone {
+  width: 50px;
+  height: 22px;
+  background: linear-gradient(0deg, #1b1b1b, #0e0c0c56);
+  color: #fefbef;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid #6f7174;
   position: absolute;
+  border-radius: 6px;
+
   left: 0;
-  margin-left: 15px;
+  margin-left: 5px;
 }
 .btnsuivant_phone {
+  width: 50px;
+  height: 22px;
+  background: linear-gradient(0deg, #1b1b1b, #0e0c0c56);
+  color: #fefbef;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid #6f7174;
   position: absolute;
+  border-radius: 6px;
   right: 0;
-  margin-right: 15px;
+  margin-right: 5px;
 }
 .BntVerifierrpnse_phone {
   position: relative;
-  margin-left: 45%;
+  margin-left: 47%;
 }
 
 .button_10 {
