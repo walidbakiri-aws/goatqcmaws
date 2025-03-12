@@ -321,6 +321,7 @@
 :root {
   --background-color: #fffbfb;
   --background-color-full: #ffffff;
+  --background-color_headerquizz: #f5e1fd;
   --foreground-color: #3c8eec;
   --primary-text-color-info: #252424;
   --primary-text-color: #252424;
@@ -332,6 +333,7 @@
 [data-theme="dark"] {
   --background-color-full: #191c22;
   --background-color: #272b33;
+  --background-color_headerquizz: #272b33;
   --foreground-color: #3c8eec;
   --primary-text-color-info: #e99653;
   --primary-text-color: #cccccc;
