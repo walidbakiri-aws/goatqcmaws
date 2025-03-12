@@ -2160,13 +2160,9 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2646,9 +2642,7 @@ function QuizBoard(props) {
                                 </div>
                               )}
                               {shoCopyParModule === false && (
-                                <div
-                                  className={`${classes.qcmfeild}  table-hover shadow`}
-                                >
+                                <div className={`${classes.qcmfeild}  `}>
                                   <p>{qcm.qcmContent}</p>
                                 </div>
                               )}
@@ -2658,9 +2652,7 @@ function QuizBoard(props) {
                         }
                       })}
 
-                      <div
-                        className={`${classes.propofeild} card table-hover shadow`}
-                      >
+                      <div className={`${classes.propofeild} card `}>
                         {ShowPropositions.map((Proposition, QcmPropoIndex) => {
                           if (QcmPropoIndex === VisibiliteQcmIndex) {
                             return (
@@ -3299,7 +3291,7 @@ function QuizBoard(props) {
                                   </div>
                                 )}
                                 <div
-                                  className={`${classes.qcmfeild_phone} table-hover shadow`}
+                                  className={`${classes.qcmfeild_phone}`}
                                   data-theme={isDark ? "dark" : "light"}
                                   onCopy={disableCopyPaste}
                                   onCut={disableCopyPaste}
@@ -3315,9 +3307,7 @@ function QuizBoard(props) {
                             );
                           }
                         })}
-                        <div
-                          className={`${classes.propofeild_phone} card table-hover shadow`}
-                        >
+                        <div className={`${classes.propofeild_phone} card `}>
                           {ShowPropositions.map(
                             (Proposition, QcmPropoIndex) => {
                               if (QcmPropoIndex === VisibiliteQcmIndex) {
