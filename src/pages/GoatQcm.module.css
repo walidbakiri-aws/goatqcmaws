@@ -320,7 +320,9 @@
 
 :root {
   --background-color: #fffbfb;
-  --background-color-full: #f3efef;
+  --background-color-full: #ffffff;
+  --background-color_headerquizz: #f5e1fd;
+  --background-modulename-color: rgb(37, 176, 233, 0.9);
   --foreground-color: #3c8eec;
   --primary-text-color-info: #252424;
   --primary-text-color: #252424;
@@ -332,6 +334,8 @@
 [data-theme="dark"] {
   --background-color-full: #191c22;
   --background-color: #272b33;
+  --background-color_headerquizz: #272b33;
+  --background-modulename-color: #272b33;
   --foreground-color: #3c8eec;
   --primary-text-color-info: #e99653;
   --primary-text-color: #cccccc;

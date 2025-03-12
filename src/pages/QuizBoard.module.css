@@ -685,6 +685,7 @@
 }
 .child_phone {
   float: left;
+  background-color: var(--background-modulename-color);
   background-color: rgb(37, 176, 233, 0.9);
   padding: 3px;
   border-radius: 4px;
