@@ -112,6 +112,7 @@ function LoginPage() {
   const handlerSubmit = async (e) => {
     UserService.logout();
     e.preventDefault();
+    localStorage.removeItem("getIsAlreadyUserValidate");
     localStorage.removeItem("tokengoat");
     localStorage.removeItem("role");
     localStorage.removeItem("username");
