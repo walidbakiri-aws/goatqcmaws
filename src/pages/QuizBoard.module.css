@@ -726,7 +726,7 @@
 }
 .qcmfeild_phone p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -741,7 +741,7 @@
 
   padding: 3px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
