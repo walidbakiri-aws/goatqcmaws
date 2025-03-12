@@ -250,6 +250,7 @@ function Quiz() {
         console.log("no year of this qcm");
       }
       try {
+        console.log("qcm");
         setSelectMultipleCoursClinique([...selectMultipleCoursClinique, value]);
 
         //**************get min max multiople cours */
