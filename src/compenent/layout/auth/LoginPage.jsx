@@ -78,7 +78,11 @@ function LoginPage() {
           localStorage.removeItem("reload");
           console.log(getIsAlreadyUserValidate);
           await handlerGetTokenAlreadyUser();
-          if (getIsAlreadyUserValidate) {
+          if (
+            getIsAlreadyUserValidate &&
+            localStorage.getItem("username") &&
+            localStorage.getItem("password")
+          ) {
             navigate("/goatqcm", {
               state: {
                 getUserName: localStorage.getItem("username"),
