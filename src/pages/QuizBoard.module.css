@@ -636,7 +636,11 @@
   display: flex;
   margin-top: 3px;
 }
-
+.closequizz_phone {
+  position: fixed;
+  right: 0;
+  margin-right: 15px;
+}
 .full_parsujets_timer_container_phone {
   display: flex;
   width: 100%;
