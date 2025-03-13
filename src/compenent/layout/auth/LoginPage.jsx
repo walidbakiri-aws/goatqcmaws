@@ -112,10 +112,7 @@ function LoginPage() {
   const handlerSubmit = async (e) => {
     UserService.logout();
     e.preventDefault();
-    console.log("token aff" + localStorage.getItem("token"));
-    console.log("password aff" + localStorage.getItem("password"));
-    console.log("username aff" + localStorage.getItem("username"));
-    console.log("role aff" + localStorage.getItem("role"));
+
     const userData = await UserService.login(username, password);
     localStorage.setItem("password", password);
     localStorage.setItem("tokengoat", userData.token);
@@ -168,11 +165,19 @@ function LoginPage() {
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
         localStorage.setItem("isAlreadyUserValidate", "isAlreadyUserValidate");
+        console.log("*******************************************************");
+        console.log("token aff" + localStorage.getItem("token"));
+        console.log("password aff" + localStorage.getItem("password"));
+        console.log("username aff" + localStorage.getItem("username"));
+        console.log("role aff" + localStorage.getItem("role"));
+        console.log("*******************************************************");
         await fetchIp(getresultUserFinalId);
 
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
+
+        console.log("didn't navigate");
       } else if (getAbnIfExist.value.statusAbn === false) {
         console.log("we in home not confirm yet");
         navigate("/home", {
