@@ -113,29 +113,29 @@ function LoginPage() {
     UserService.logout();
     e.preventDefault();
 
-    if (userData.token !== null) {
-      try {
-        const userData = await UserService.login(username, password);
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password);
-        localStorage.setItem("tokengoat", userData.token);
-        localStorage.setItem("role", userData.role);
+    // if (userData.token !== null) {
+    try {
+      const userData = await UserService.login(username, password);
+      localStorage.setItem("username", username);
+      localStorage.setItem("password", password);
+      localStorage.setItem("tokengoat", userData.token);
+      localStorage.setItem("role", userData.role);
 
-        console.log(userData);
-        const FullUser = await UserService.getUserByuserName(
-          username,
-          localStorage.getItem("tokengoat")
-        );
-        localStorage.setItem("userId", FullUser.id);
-        getUser(username, userData.token, userData.role);
-      } catch (error) {
-        console.log(error);
-        toast.error("votre mote de pass est incorrect!");
-        setTimeout(() => {
-          setError("");
-        }, 5000);
-      }
+      console.log(userData);
+      const FullUser = await UserService.getUserByuserName(
+        username,
+        localStorage.getItem("tokengoat")
+      );
+      localStorage.setItem("userId", FullUser.id);
+      getUser(username, userData.token, userData.role);
+    } catch (error) {
+      console.log(error);
+      toast.error("votre mote de pass est incorrect!");
+      setTimeout(() => {
+        setError("");
+      }, 5000);
     }
+    //}
   };
   //*********************************************************************************** */
   //*****get user********************************************************** */
@@ -166,12 +166,7 @@ function LoginPage() {
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
         localStorage.setItem("isAlreadyUserValidate", "isAlreadyUserValidate");
-        console.log("*******************************************************");
-        console.log("token aff" + localStorage.getItem("token"));
-        console.log("password aff" + localStorage.getItem("password"));
-        console.log("username aff" + localStorage.getItem("username"));
-        console.log("role aff" + localStorage.getItem("role"));
-        console.log("*******************************************************");
+
         await fetchIp(getresultUserFinalId);
 
         navigate("/goatqcm", {
