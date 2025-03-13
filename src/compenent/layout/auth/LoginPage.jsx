@@ -113,13 +113,14 @@ function LoginPage() {
     UserService.logout();
     e.preventDefault();
 
-    const userData = await UserService.login(username, password);
-    localStorage.setItem("password", password);
-    localStorage.setItem("tokengoat", userData.token);
-    localStorage.setItem("role", userData.role);
-    localStorage.setItem("username", username);
     if (userData.token !== null) {
       try {
+        const userData = await UserService.login(username, password);
+        localStorage.setItem("username", username);
+        localStorage.setItem("password", password);
+        localStorage.setItem("tokengoat", userData.token);
+        localStorage.setItem("role", userData.role);
+
         console.log(userData);
         const FullUser = await UserService.getUserByuserName(
           username,
