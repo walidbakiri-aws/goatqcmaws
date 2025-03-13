@@ -112,10 +112,10 @@ function LoginPage() {
   const handlerSubmit = async (e) => {
     UserService.logout();
     e.preventDefault();
-    localStorage.removeItem("getIsAlreadyUserValidate");
-    localStorage.removeItem("tokengoat");
-    localStorage.removeItem("role");
-    localStorage.removeItem("username");
+    console.log("token aff" + localStorage.getItem("token"));
+    console.log("password aff" + localStorage.getItem("password"));
+    console.log("username aff" + localStorage.getItem("username"));
+    console.log("role aff" + localStorage.getItem("role"));
     const userData = await UserService.login(username, password);
     localStorage.setItem("password", password);
     localStorage.setItem("tokengoat", userData.token);
