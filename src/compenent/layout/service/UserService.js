@@ -20,11 +20,21 @@ class UserService {
   }
   static async register(userData) {
     try {
-      const response = await axios.post(
-        `${UserService.BASE_URL}/auth/register`,
-        userData
-      );
-      return response.data;
+      const response = await fetch(`${UserService.BASE_URL}/auth/register`, {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
     } catch (err) {
       throw err;
     }
