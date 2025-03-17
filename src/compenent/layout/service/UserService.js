@@ -25,7 +25,6 @@ class UserService {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userData),
       });
 
       if (!response.ok) {
