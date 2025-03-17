@@ -25,9 +25,9 @@ class UserService {
         userData,
         {
           adapter: "fetch",
-          headers: {
+          /* headers: {
             "Content-Type": "multipart/form-data",
-          },
+          },*/
         }
       );
       return response.data;
