@@ -19,10 +19,9 @@ function RegistrationPage() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-
+  const token = localStorage.getItem("token");
   const navigate = useNavigate();
   const [confirmePasswrord, setConfirmePasswrord] = useState("");
-
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -42,39 +41,36 @@ function RegistrationPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formData.username = formData.username.toLowerCase();
-    console.log(formData.username);
-    console.log(confirmePasswrord);
-    console.log(checkExisteUser.value);
-    UserService.logout();
+    formData.username = formData.username.toLowerCase().trim(); // Added trim()
+
     try {
-      if (formData.password === confirmePasswrord) {
-        if (formData.password.length >= 4) {
-          await UserService.register(formData);
-          toast.success("Success registration");
-          setMoladIsOpen(true);
-        }
-      } else {
+      if (formData.password !== confirmePasswrord) {
         toast.error("Les mots de passe ne correspondent pas!");
+        return;
       }
-      /* }else {
-        toast.error("Email déja existe!");
-      }*/
-      //clear the form fields after secceccful registration
+
+      if (formData.password.length < 4) {
+        toast.error("Le mot de passe doit contenir au moins 4 caractères!");
+        return;
+      }
+
+      await UserService.register(formData);
+      toast.success("Inscription réussie!");
+      setMoladIsOpen(true);
+
+      // Reset form only on success
       setFormData({
         name: "",
         lastname: "",
         username: "",
         password: "",
       });
-
-      // alert.error("error registration user: ", error);
+      setConfirmePasswrord("");
     } catch (error) {
-      //console.error("Error registration user: ", error);
-      alert(error);
+      console.error("Registration error:", error);
+      toast.error(error.message || "Erreur lors de l'inscription");
     }
   };
-
   const handleCancel = async (e) => {
     navigate("/");
   };
@@ -86,10 +82,16 @@ function RegistrationPage() {
   const shoModal = () => {
     setMoladIsOpen(true);
   };
+
+  const testbtn = () => {
+    console.log(formData.username);
+    console.log(formData.password);
+  };
   return (
     <div className={classes.loginform}>
       {isTabletOrMobile && (
         <>
+          <button onClick={shoModal}>test</button>
           <div className={classes.wrapperphone}>
             <h1>S’inscrire</h1>
             <form onSubmit={handleSubmit}>
@@ -114,7 +116,7 @@ function RegistrationPage() {
 
                 <input
                   className={`${classes.inputusername} form-control`}
-                  type={"text"}
+                  type="email"
                   placeholder="Email"
                   name="username"
                   value={formData.username}
@@ -145,7 +147,6 @@ function RegistrationPage() {
               <div className={classes.btnform}>
                 <button
                   type="submit"
-                  onClick={handleSubmit}
                   className={`${classes.btninscret} btn btn-success`}
                 >
                   S'inscrire
@@ -167,6 +168,7 @@ function RegistrationPage() {
         <>
           <div className={classes.fullloginpage}>
             <div className={classes.child_phone}>
+              <button onClick={testbtn}>test</button>
               <div className={classes.logoimage}>
                 <img src={logologingoat}></img>
               </div>
@@ -195,7 +197,7 @@ function RegistrationPage() {
                     />
 
                     <input
-                      type={"text"}
+                      type="email"
                       placeholder="Email"
                       className={`${classes.inputusername} form-control`}
                       name="username"
