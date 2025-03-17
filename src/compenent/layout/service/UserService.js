@@ -20,20 +20,11 @@ class UserService {
   }
   static async register(userData) {
     try {
-      const response = await fetch(`${UserService.BASE_URL}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || "Registration failed");
-      }
-
-      return await response.json();
+      const response = await axios.post(
+        `${UserService.BASE_URL}/auth/register`,
+        userData
+      );
+      return response.data;
     } catch (err) {
       throw err;
     }
@@ -68,6 +59,7 @@ class UserService {
       throw err;
     }
   }
+
   static async getYourProfil(token) {
     try {
       const response = await axios.get(
@@ -131,16 +123,16 @@ class UserService {
 
   /*Authentification checker*/
   static logout() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("tokengoat");
     localStorage.removeItem("role");
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
-    localStorage.removeItem("useridgoatpage");
+    localStorage.removeItem("password");
     localStorage.removeItem("isAlreadyUserValidate");
   }
 
   static isAuthenticated() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("tokengoat");
     return !!token;
   }
   static isAdmin() {
