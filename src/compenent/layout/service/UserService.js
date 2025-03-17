@@ -20,18 +20,11 @@ class UserService {
   }
   static async register(userData) {
     try {
-      const response = await fetch(`${UserService.BASE_URL}/auth/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      return await response.json();
+      const response = await axios.post(
+        `${UserService.BASE_URL}/auth/register`,
+        userData
+      );
+      return response.data;
     } catch (err) {
       throw err;
     }
