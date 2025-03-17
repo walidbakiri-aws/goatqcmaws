@@ -22,7 +22,12 @@ class UserService {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData
+        userData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
       return response.data;
     } catch (err) {
