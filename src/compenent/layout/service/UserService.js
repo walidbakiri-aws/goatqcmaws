@@ -24,6 +24,7 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
+          adapter: "fetch",
           headers: {
             "Content-Type": "multipart/form-data",
           },
