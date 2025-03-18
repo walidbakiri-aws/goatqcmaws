@@ -20,12 +20,29 @@ class UserService {
     }
   }
   static async register(userData) {
+    console.log(userData);
+    try {
+      const response = await axios.post(
+        `${UserService.BASE_URL}/auth/register`,
+        userData,
+        {
+          headers: { "Access-Control-Allow-Origin": "*" },
+          withCredentials: true, // Helps with cookies & authentication issues
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+  /*
+  static async register(userData) {
     try {
       const response = await fetch(`${UserService.BASE_URL}/auth/register`, {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
-        credentials: "include", // Changed from 'same-origin'
+        credentials: "include", 
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -42,7 +59,7 @@ class UserService {
     } catch (err) {
       throw err;
     }
-  }
+  }*/
 
   static async getAllUsers(token) {
     try {
