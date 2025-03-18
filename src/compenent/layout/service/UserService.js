@@ -23,11 +23,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData,
-        {
-          //headers: { "Access-Control-Allow-Origin": "*" },
-          withCredentials: true, // Helps with cookies & authentication issues
-        }
+        userData
       );
       return response.data;
     } catch (err) {
