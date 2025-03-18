@@ -25,8 +25,8 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
-          headers: { "Access-Control-Allow-Origin": "*" },
-          //withCredentials: true, // Helps with cookies & authentication issues
+          //headers: { "Access-Control-Allow-Origin": "*" },
+          withCredentials: true, // Helps with cookies & authentication issues
         }
       );
       return response.data;
