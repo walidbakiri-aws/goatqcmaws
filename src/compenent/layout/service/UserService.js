@@ -25,10 +25,7 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
-          withCredentials: true, // Include cookies/auth headers
-          headers: {
-            "Content-Type": "application/json",
-          },
+          withCredentials: true,
         }
       );
       return response.data;
