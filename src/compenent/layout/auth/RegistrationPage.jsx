@@ -56,7 +56,7 @@ function RegistrationPage() {
 
       await UserService.register(formData);
       toast.success("Inscription réussie!");
-      setMoladIsOpen(true);
+      //setMoladIsOpen(true);
 
       // Reset form only on success
       setFormData({
