@@ -1,5 +1,4 @@
 import axios from "axios";
-axios.defaults.withCredentials = true;
 class UserService {
   static BASE_URL = "https://goatqcm-instance.com";
 
@@ -27,7 +26,7 @@ class UserService {
         userData,
         {
           headers: { "Access-Control-Allow-Origin": "*" },
-          withCredentials: true, // Helps with cookies & authentication issues
+          //withCredentials: true, // Helps with cookies & authentication issues
         }
       );
       return response.data;
