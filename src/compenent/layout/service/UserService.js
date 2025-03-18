@@ -1,4 +1,5 @@
 import axios from "axios";
+axios.defaults.withCredentials = true;
 class UserService {
   static BASE_URL = "https://goatqcm-instance.com";
 
@@ -24,7 +25,7 @@ class UserService {
         method: "POST",
         mode: "cors",
         cache: "no-cache",
-        credentials: "same-origin",
+        credentials: "include", // Changed from 'same-origin'
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
