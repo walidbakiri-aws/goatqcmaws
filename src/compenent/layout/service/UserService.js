@@ -23,7 +23,13 @@ class UserService {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData
+        userData,
+        {
+          withCredentials: true, // Include cookies/auth headers
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
       return response.data;
     } catch (err) {
