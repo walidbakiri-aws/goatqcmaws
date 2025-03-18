@@ -91,7 +91,6 @@ function RegistrationPage() {
     <div className={classes.loginform}>
       {isTabletOrMobile && (
         <>
-          <button onClick={shoModal}>test</button>
           <div className={classes.wrapperphone}>
             <h1>S’inscrire</h1>
             <form onSubmit={handleSubmit}>
