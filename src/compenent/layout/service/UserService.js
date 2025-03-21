@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.withCredentials = true;
+
 class UserService {
   static BASE_URL = "https://goatqcm-instance.com";
 
@@ -24,10 +24,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData,
-        {
-          withCredentials: true,
-        }
+        userData
       );
       return response.data;
     } catch (err) {
