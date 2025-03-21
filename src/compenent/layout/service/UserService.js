@@ -25,7 +25,9 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
-          withCredentials: true,
+          headers: {
+            Accept: "application/json, text/plain",
+          },
         }
       );
       return response.data;
