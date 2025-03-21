@@ -1,3 +1,5 @@
+import axios from "axios";
+axios.defaults.withCredentials = true;
 class UserService {
   static BASE_URL = "https://goatqcm-instance.com";
 
