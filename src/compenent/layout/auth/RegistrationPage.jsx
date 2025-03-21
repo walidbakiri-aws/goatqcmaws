@@ -19,9 +19,10 @@ function RegistrationPage() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-  const token = localStorage.getItem("token");
+
   const navigate = useNavigate();
   const [confirmePasswrord, setConfirmePasswrord] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     lastname: "",
@@ -41,36 +42,38 @@ function RegistrationPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formData.username = formData.username.toLowerCase().trim(); // Added trim()
-
+    formData.username = formData.username.toLowerCase();
+    console.log(formData.username);
+    console.log(confirmePasswrord);
+    console.log(checkExisteUser.value);
+    UserService.logout();
     try {
-      if (formData.password !== confirmePasswrord) {
+      if (formData.password === confirmePasswrord) {
+        if (formData.password.length >= 4) {
+          await UserService.register(formData).then((res) => {
+            toast.success("Success registration");
+            setMoladIsOpen(true);
+            //navigate("/");
+          });
+        }
+      } else {
         toast.error("Les mots de passe ne correspondent pas!");
-        return;
       }
 
-      if (formData.password.length < 4) {
-        toast.error("Le mot de passe doit contenir au moins 4 caractères!");
-        return;
-      }
-
-      await UserService.register(formData);
-      toast.success("Inscription réussie!");
-      navigate("/");
-
-      // Reset form only on success
       setFormData({
         name: "",
         lastname: "",
         username: "",
         password: "",
       });
-      setConfirmePasswrord("");
+      document.getElementById("confirmepassword").value = "";
+      // alert.error("error registration user: ", error);
     } catch (error) {
-      console.error("Registration error:", error);
-      toast.error(error.message || "Erreur lors de l'inscription");
+      //console.error("Error registration user: ", error);
+      alert(error);
     }
   };
+
   const handleCancel = async (e) => {
     navigate("/");
   };
@@ -81,11 +84,6 @@ function RegistrationPage() {
   //-----------------------------------------------------
   const shoModal = () => {
     setMoladIsOpen(true);
-  };
-
-  const testbtn = () => {
-    console.log(formData.username);
-    console.log(formData.password);
   };
   return (
     <div className={classes.loginform}>
@@ -115,7 +113,7 @@ function RegistrationPage() {
 
                 <input
                   className={`${classes.inputusername} form-control`}
-                  type="email"
+                  type={"text"}
                   placeholder="Email"
                   name="username"
                   value={formData.username}
@@ -146,6 +144,7 @@ function RegistrationPage() {
               <div className={classes.btnform}>
                 <button
                   type="submit"
+                  onClick={handleSubmit}
                   className={`${classes.btninscret} btn btn-success`}
                 >
                   S'inscrire
@@ -167,7 +166,6 @@ function RegistrationPage() {
         <>
           <div className={classes.fullloginpage}>
             <div className={classes.child_phone}>
-              <button onClick={testbtn}>test</button>
               <div className={classes.logoimage}>
                 <img src={logologingoat}></img>
               </div>
@@ -196,7 +194,7 @@ function RegistrationPage() {
                     />
 
                     <input
-                      type="email"
+                      type={"text"}
                       placeholder="Email"
                       className={`${classes.inputusername} form-control`}
                       name="username"

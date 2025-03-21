@@ -1,4 +1,3 @@
-import axios from "axios";
 class UserService {
   static BASE_URL = "https://goatqcm-instance.com";
 
