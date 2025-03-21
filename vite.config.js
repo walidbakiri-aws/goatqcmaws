@@ -11,8 +11,6 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: "https://goatqcm-instance.com",
-        changeOrigin: true,
-        secure: false,
       },
     },
   },
