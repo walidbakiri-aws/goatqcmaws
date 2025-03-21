@@ -23,12 +23,7 @@ class UserService {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData,
-        {
-          headers: {
-            Accept: "application/json, text/plain",
-          },
-        }
+        userData
       );
       return response.data;
     } catch (err) {
