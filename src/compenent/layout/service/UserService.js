@@ -19,20 +19,20 @@ class UserService {
     }
   }
   static async register(userData) {
-    console.log(userData);
+    console.log(JSON.stringify(userData));
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        userData,
+        JSON.stringify(userData),
         {
           headers: {
-            Accept: "application/json ",
-            "content-Type": "multipart/form-data",
+            "Content-Type": "application/json",
           },
           withCredentials: true,
         }
       );
-      return JSON.stringify(response.data);
+      console.log(response.data);
+      return response.data;
     } catch (err) {
       throw err;
     }
