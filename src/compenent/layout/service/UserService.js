@@ -27,9 +27,9 @@ class UserService {
         {
           headers: {
             //Accept: "application/json ",
-            "Content-Type": "multipart/form-data",
+            "content-Type": "multipart/form-data",
           },
-          //withCredentials: true,
+          withCredentials: true,
         }
       );
       return response.data;
