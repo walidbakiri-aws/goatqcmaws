@@ -23,12 +23,12 @@ class UserService {
     try {
       const response = await axios.post(
         `${UserService.BASE_URL}/auth/register`,
-        JSON.stringify(userData),
+        userData,
         {
           headers: {
+            Accept: "application/json",
             "Content-Type": "application/json",
           },
-          withCredentials: true,
         }
       );
       console.log(response.data);
