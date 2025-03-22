@@ -25,10 +25,10 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
-          headers: {
-            //Accept: "application/json ",
+          /* headers: {
+            Accept: "application/json ",
             "content-Type": "multipart/form-data",
-          },
+          },*/
           withCredentials: true,
         }
       );
