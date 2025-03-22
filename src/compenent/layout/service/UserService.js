@@ -1,5 +1,4 @@
 import axios from "axios";
-
 class UserService {
   static BASE_URL = "https://goatqcm-instance.com";
 
@@ -26,7 +25,10 @@ class UserService {
         `${UserService.BASE_URL}/auth/register`,
         userData,
         {
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            Accept: "application/json, text/plain, /",
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
       return response.data;
