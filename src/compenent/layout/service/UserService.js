@@ -21,19 +21,26 @@ class UserService {
   static async register(userData) {
     console.log(JSON.stringify(userData));
     try {
-      const response = await axios.post(
-        `${UserService.BASE_URL}/auth/register`,
-        userData,
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response.data);
-      return response.data;
+      const response = await fetch(`${UserService.BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      // Check if the response is OK (status code 2xx)
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      // Parse the JSON response
+      const data = await response.json();
+      console.log(data);
+      return data;
     } catch (err) {
+      console.error("Error:", err);
       throw err;
     }
   }
