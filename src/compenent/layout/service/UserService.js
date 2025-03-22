@@ -32,7 +32,7 @@ class UserService {
           withCredentials: true,
         }
       );
-      return response.data;
+      return JSON.stringify(response.data);
     } catch (err) {
       throw err;
     }
