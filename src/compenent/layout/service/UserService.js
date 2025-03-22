@@ -29,7 +29,7 @@ class UserService {
             Accept: "application/json, text/plain",
             "Content-Type": "multipart/form-data",
           },
-          //withCredentials: true,
+          withCredentials: true,
         }
       );
       return response.data;
