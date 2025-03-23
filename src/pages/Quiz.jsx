@@ -702,7 +702,7 @@ function Quiz() {
               headers: { Authorization: `Bearer ${token}` },
             }
           );
-
+          minQcmYear = result.data;
           console.log(result.data.length);
           ExisteQcmInTous.value = true;
 
