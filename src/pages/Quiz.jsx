@@ -624,14 +624,14 @@ function Quiz() {
         console.log("we here");
         //****check if qcm existe************************************* */
         console.log(minYearMultipleCours);
-
-        if (minYearMultipleCours && minYearMultipleCours.length > 0) {
-          ExisteQcmInTous.value = true;
-        } else {
-          QcmTypeSelected.value = "Cas Clinique";
-          ExisteQcmInTous.value = false;
+        if (QcmSujetTypeSelected.value === "Par Cour") {
+          if (minYearMultipleCours && minYearMultipleCours.length > 0) {
+            ExisteQcmInTous.value = true;
+          } else {
+            QcmTypeSelected.value = "Cas Clinique";
+            ExisteQcmInTous.value = false;
+          }
         }
-
         //*********************************************************** */
         let minYear = [];
         let maxYear = [];
@@ -704,12 +704,15 @@ function Quiz() {
           );
           minQcmYear = result.data;
           console.log(result.data.length);
-          ExisteQcmInTous.value = true;
-
+          if (QcmSujetTypeSelected.value === "Par Cour") {
+            ExisteQcmInTous.value = true;
+          }
           console.log(minMaxYear);
         } catch {
-          QcmTypeSelected.value = "Cas Clinique";
-          ExisteQcmInTous.value = false;
+          if (QcmSujetTypeSelected.value === "Par Cour") {
+            QcmTypeSelected.value = "Cas Clinique";
+            ExisteQcmInTous.value = false;
+          }
           console.log("Cours not selected");
         }
         try {
