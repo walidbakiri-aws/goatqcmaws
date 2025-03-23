@@ -94,6 +94,7 @@ function Quiz() {
   let findMaxYear = useSignal(false);
   let findMinYearClinique = useSignal(false);
   const [ExisteCasClinique, setExisteCasClinique] = useState(false);
+  let ExisteQcmInTous = useSignal(false);
   //********get All Modules ************************************************* */
   const [AllModules, setAllModules] = useState([]);
   //**************************liste cour data */***************
@@ -177,6 +178,7 @@ function Quiz() {
   //******************************************************************* */
   //*******handle Change Module**********************************************
   const handleChangeModule = (e) => {
+    setSelectMultipleCours([]); //initialiszer for check each time change module
     setMinMaxYearFinal([]);
     setMaxYearValue("");
     SelectedModule.value = e.target.value;
@@ -250,7 +252,6 @@ function Quiz() {
         console.log("no year of this qcm");
       }
       try {
-        console.log("qcm");
         setSelectMultipleCoursClinique([...selectMultipleCoursClinique, value]);
 
         //**************get min max multiople cours */
@@ -621,7 +622,17 @@ function Quiz() {
         }
       } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
         console.log("we here");
+        //****check if qcm existe************************************* */
+        console.log(minYearMultipleCours);
 
+        if (minYearMultipleCours && minYearMultipleCours.length > 0) {
+          ExisteQcmInTous.value = true;
+        } else {
+          QcmTypeSelected.value = "Cas Clinique";
+          ExisteQcmInTous.value = false;
+        }
+
+        //*********************************************************** */
         let minYear = [];
         let maxYear = [];
 
@@ -652,6 +663,7 @@ function Quiz() {
         setMaxYearValue(minMaxYear[1]);
       }
     } else if (isMultipleCours.value === false) {
+      console.log("we jst select one cour");
       if (QcmTypeSelected.value === "Qcm") {
         try {
           const result = await axios.get(
@@ -691,10 +703,13 @@ function Quiz() {
             }
           );
 
-          minQcmYear = result.data;
+          console.log(result.data.length);
+          ExisteQcmInTous.value = true;
 
           console.log(minMaxYear);
         } catch {
+          QcmTypeSelected.value = "Cas Clinique";
+          ExisteQcmInTous.value = false;
           console.log("Cours not selected");
         }
         try {
@@ -818,9 +833,11 @@ function Quiz() {
   }
 
   const handleShowCours = () => {
+    console.log(ExisteQcmInTous.value);
     console.log(ExisteCasClinique);
     console.log(SelectedCours);
   };
+
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />
@@ -831,6 +848,7 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
+            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div

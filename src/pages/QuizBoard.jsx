@@ -811,38 +811,40 @@ function QuizBoard(props) {
               );
               getQcms.value = result.data;
               saveAllQcms.value = result.data;
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
-                ...QcmsCourNameStatique,
-                result.data[0].coursMed.coursName,
-              ]);
-              //***************************************************************************** */
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                ...QcmsNbrStatique,
-                result.data.length,
-              ]);
-              //***************************************************************************** */
+              if (result.data.length > 0) {
+                //save nombre qcms ////////***************************************************** */
+                setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
+                  ...QcmsCourNameStatique,
+                  result.data[0].coursMed.coursName,
+                ]);
+                //***************************************************************************** */
+                //save nombre qcms ////////***************************************************** */
+                setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+                  ...QcmsNbrStatique,
+                  result.data.length,
+                ]);
+                //***************************************************************************** */
 
-              if (
-                props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
-                props.commingFrom !== "savesession" &&
-                props.commingFrom !== "savequizz"
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
+                if (
+                  props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
+                  props.commingFrom !== "savesession" &&
+                  props.commingFrom !== "savequizz"
+                ) {
+                  newStateEachLineStatique.push([0, 0, result.data.length]);
+                  setSaveEachLineStatique(newStateEachLineStatique);
+                }
+                //****************************************************************************** */
+                //***exception add statiqe session et savequizz********************************* */
+                if (
+                  props.savePieStatique === null &&
+                  (props.commingFrom === "savesession" ||
+                    props.commingFrom === "savequizz")
+                ) {
+                  newStateEachLineStatique.push([0, 0, result.data.length]);
+                  setSaveEachLineStatique(newStateEachLineStatique);
+                }
+                //******************************************************************************* */
               }
-              //****************************************************************************** */
-              //***exception add statiqe session et savequizz********************************* */
-              if (
-                props.savePieStatique === null &&
-                (props.commingFrom === "savesession" ||
-                  props.commingFrom === "savequizz")
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
-              }
-              //******************************************************************************* */
             } catch {
               console.log("qmc not find");
             }
@@ -910,39 +912,41 @@ function QuizBoard(props) {
                   headers: { Authorization: `Bearer ${token}` },
                 }
               );
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
-                ...QcmsCourNameStatique,
-                result.data[0].coursMed.coursName,
-              ]);
-              //***************************************************************************** */
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                ...QcmsNbrStatique,
-                result.data.length,
-              ]);
-              //***************************************************************************** */
-              //***************************************************************************** */
+              if (result.data.length > 0) {
+                //save nombre qcms ////////***************************************************** */
+                setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
+                  ...QcmsCourNameStatique,
+                  result.data[0].coursMed.coursName,
+                ]);
+                //***************************************************************************** */
+                //save nombre qcms ////////***************************************************** */
+                setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+                  ...QcmsNbrStatique,
+                  result.data.length,
+                ]);
+                //***************************************************************************** */
+                //***************************************************************************** */
 
-              if (
-                props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
-                (props.commingFrom !== "savesession" ||
-                  props.commingFrom !== "savequizz")
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
+                if (
+                  props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
+                  (props.commingFrom !== "savesession" ||
+                    props.commingFrom !== "savequizz")
+                ) {
+                  newStateEachLineStatique.push([0, 0, result.data.length]);
+                  setSaveEachLineStatique(newStateEachLineStatique);
+                }
+                //****************************************************************************** */
+                //***exception add statiqe session et savequizz********************************* */
+                if (
+                  props.savePieStatique === null &&
+                  (props.commingFrom === "savesession" ||
+                    props.commingFrom === "savequizz")
+                ) {
+                  newStateEachLineStatique.push([0, 0, result.data.length]);
+                  setSaveEachLineStatique(newStateEachLineStatique);
+                }
+                //******************************************************************************* */
               }
-              //****************************************************************************** */
-              //***exception add statiqe session et savequizz********************************* */
-              if (
-                props.savePieStatique === null &&
-                (props.commingFrom === "savesession" ||
-                  props.commingFrom === "savequizz")
-              ) {
-                newStateEachLineStatique.push([0, 0, result.data.length]);
-                setSaveEachLineStatique(newStateEachLineStatique);
-              }
-              //******************************************************************************* */
               getQcms.value = result.data;
               saveAllQcms.value = result.data;
             } catch {
@@ -2160,9 +2164,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
