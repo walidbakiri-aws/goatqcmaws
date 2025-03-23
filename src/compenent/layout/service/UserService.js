@@ -21,17 +21,14 @@ class UserService {
   static async register(userData) {
     console.log(JSON.stringify(userData));
     try {
-      const response = await fetch(
-        `https://ec2-54-183-247-154.us-west-1.compute.amazonaws.com/auth/register`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(userData),
-        }
-      );
+      const response = await fetch(`${UserService.BASE_URL}/auth/register`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
 
       // Check if the response is OK (status code 2xx)
       if (!response.ok) {
