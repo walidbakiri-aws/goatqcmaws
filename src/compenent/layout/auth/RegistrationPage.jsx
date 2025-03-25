@@ -49,7 +49,7 @@ function RegistrationPage() {
     UserService.logout();
     try {
       if (formData.password === confirmePasswrord) {
-        if (formData.password.length >= 4) {
+        if (formData.password.length >= 5) {
           await UserService.register(formData).then((res) => {
             toast.success("Success registration");
             setMoladIsOpen(true);

@@ -18,6 +18,28 @@ class UserService {
       throw err;
     }
   }
+
+  static async register(userData) {
+    console.log(userData);
+    try {
+      const response = await axios.post(
+        `${UserService.BASE_URL}/auth/register`,
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          timeout: 5000, // 5-second timeout
+        }
+      );
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  /*
   static async register(userData) {
     console.log(JSON.stringify(userData));
     try {
@@ -44,32 +66,7 @@ class UserService {
       throw err;
     }
   }
-  /*
-  static async register(userData) {
-    try {
-      const response = await fetch(`${UserService.BASE_URL}/auth/register`, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "include", 
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (err) {
-      throw err;
-    }
-  }*/
-
+  */
   static async getAllUsers(token) {
     try {
       const response = await axios.get(
