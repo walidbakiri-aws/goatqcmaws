@@ -43,34 +43,35 @@ function RegistrationPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     formData.username = formData.username.toLowerCase();
-    console.log(formData.username);
-    console.log(confirmePasswrord);
-    console.log(checkExisteUser.value);
-    UserService.logout();
-    try {
-      if (formData.password === confirmePasswrord) {
-        if (formData.password.length >= 5) {
-          await UserService.register(formData).then((res) => {
-            toast.success("Success registration");
-            setMoladIsOpen(true);
-            //navigate("/");
-          });
-        }
-      } else {
-        toast.error("Les mots de passe ne correspondent pas!");
-      }
 
-      setFormData({
-        name: "",
-        lastname: "",
-        username: "",
-        password: "",
-      });
-      document.getElementById("confirmepassword").value = "";
-      // alert.error("error registration user: ", error);
+    // Validate password match
+    if (formData.password !== confirmePasswrord) {
+      toast.error("Les mots de passe ne correspondent pas!");
+      return;
+    }
+
+    try {
+      const succesInsert = await UserService.register(formData);
+
+      if (succesInsert !== null) {
+        toast.success("Inscription réussie !");
+        setMoladIsOpen(true); // Ensure correct function name (typo fix)
+
+        // Reset form only on success
+        setFormData({
+          name: "",
+          lastname: "",
+          username: "",
+          password: "",
+        });
+        document.getElementById("confirmepassword").value = "";
+      }
+      // navigate("/"); // Uncomment if needed
     } catch (error) {
-      //console.error("Error registration user: ", error);
-      alert(error);
+      // Handle API errors (e.g., network issues, server errors)
+      const errorMessage =
+        error.response?.data?.message || "Erreur lors de l'inscription";
+      toast.error(errorMessage);
     }
   };
 
