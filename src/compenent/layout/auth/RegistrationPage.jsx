@@ -53,9 +53,10 @@ function RegistrationPage() {
     try {
       const succesInsert = await UserService.register(formData);
 
-      if (succesInsert !== null) {
+      if (successInsert) {
         toast.success("Inscription réussie !");
-        setMoladIsOpen(true); // Ensure correct function name (typo fix)
+        navigate("/");
+        //setMoladIsOpen(true); // Ensure correct function name (typo fix)
 
         // Reset form only on success
         setFormData({

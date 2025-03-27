@@ -30,7 +30,6 @@ class UserService {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          timeout: 3000, // 5-second timeout
         }
       );
       return response.data;
