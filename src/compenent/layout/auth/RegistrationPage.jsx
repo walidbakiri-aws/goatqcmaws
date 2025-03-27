@@ -53,20 +53,18 @@ function RegistrationPage() {
     try {
       const succesInsert = await UserService.register(formData);
 
-      if (successInsert) {
-        toast.success("Inscription réussie !");
-        navigate("/");
-        //setMoladIsOpen(true); // Ensure correct function name (typo fix)
+      toast.success("Inscription réussie !");
+      setMoladIsOpen(true); // Ensure correct function name (typo fix)
 
-        // Reset form only on success
-        setFormData({
-          name: "",
-          lastname: "",
-          username: "",
-          password: "",
-        });
-        document.getElementById("confirmepassword").value = "";
-      }
+      // Reset form only on success
+      setFormData({
+        name: "",
+        lastname: "",
+        username: "",
+        password: "",
+      });
+      document.getElementById("confirmepassword").value = "";
+
       // navigate("/"); // Uncomment if needed
     } catch (error) {
       // Handle API errors (e.g., network issues, server errors)
