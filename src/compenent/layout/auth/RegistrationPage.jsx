@@ -44,18 +44,20 @@ function RegistrationPage() {
     e.preventDefault();
     formData.username = formData.username.toLowerCase();
 
-    // Validate password match
-    if (formData.password !== confirmePasswrord) {
-      toast.error("Les mots de passe ne correspondent pas!");
-      return;
-    }
-
     try {
-      const succesInsert = await UserService.register(formData);
+      if (formData.password !== confirmePasswrord) {
+        toast.error("Les mots de passe ne correspondent pas!");
+        return;
+      }
 
-      toast.success("Inscription réussie !");
-      setMoladIsOpen(true); // Ensure correct function name (typo fix)
+      if (formData.password.length < 4) {
+        toast.error("Le mot de passe doit contenir au moins 4 caractères!");
+        return;
+      }
 
+      await UserService.register(formData);
+      toast.success("Inscription réussie!");
+      navigate("/");
       // Reset form only on success
       setFormData({
         name: "",
@@ -63,14 +65,10 @@ function RegistrationPage() {
         username: "",
         password: "",
       });
-      document.getElementById("confirmepassword").value = "";
-
-      // navigate("/"); // Uncomment if needed
+      setConfirmePasswrord("");
     } catch (error) {
-      // Handle API errors (e.g., network issues, server errors)
-      const errorMessage =
-        error.response?.data?.message || "Erreur lors de l'inscription";
-      toast.error(errorMessage);
+      console.error("Registration error:", error);
+      toast.error(error.message || "Erreur lors de l'inscription");
     }
   };
 
