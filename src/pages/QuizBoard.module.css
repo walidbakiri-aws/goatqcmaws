@@ -136,14 +136,23 @@
   display: flex;
   height: 30px;
 }
-.commentary {
+.full_note_commentary {
   margin-left: 610px;
+  width: 100px;
+  height: 100%;
+
+  display: flex;
+}
+.commentary {
+  margin-left: 10px;
+  width: 25px;
+  height: 100%;
 }
 .nbrComent {
   position: absolute;
   z-index: 3;
-  top: 48px;
-  left: 758px;
+  top: 53px;
+  left: 823px;
   color: #5389db;
   font-size: 20px;
   font-weight: bold;
@@ -327,7 +336,7 @@
 .p_qcmhow2 {
   color: rgb(199, 80, 100);
 }
-
+/****************************************************************/
 .imgdescdiv {
   border: 1px solid rgb(233, 167, 167);
   height: 330px;
@@ -368,7 +377,7 @@
 .deeletefulldesc {
   margin-left: 250px;
 }
-
+/**************************************************/
 .contanerspace_phone {
   position: absolute;
   display: inline-block;
@@ -960,13 +969,23 @@
   margin-top: 5px;
   display: flex;
   height: 27px;
+  background-color: #c1eeac;
 }
 .nmbrqcm_phone {
   width: 160px;
   background-color: transparent;
+  float: left;
+  left: 0;
+}
+.full_note_commentary_phone {
+  display: flex;
+  width: 60px;
+  height: 30px;
+  float: right;
+  right: 0;
 }
 .commentary_phone {
-  margin-left: 80px;
+  margin-left: 5px;
   height: 100%;
 }
 
