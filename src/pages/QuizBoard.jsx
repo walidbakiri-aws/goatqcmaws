@@ -22,6 +22,7 @@ import DateObject from "react-date-object";
 
 import smileimoji from "../compenent/layout/img/smileimoji.png";
 import sendcomentary from "../compenent/layout/img/sendcomentary.png";
+import noteimage from "../compenent/layout/img/note.png";
 import comment from "../compenent/layout/img/comment.png";
 import dropright from "../compenent/layout/img/dropright.png";
 import jadore from "../compenent/layout/img/jadore.png";
@@ -68,6 +69,7 @@ import {
   LinearScale,
   BarElement,
 } from "chart.js";
+import NoteQcm from "./NoteQcm.jsx";
 ChartJS.register(
   ArcElement,
   Title,
@@ -149,7 +151,7 @@ function QuizBoard(props) {
   const isAdmin = UserService.isAdmin();
   const isParticipateAdmin = UserService.isParticipateAdmin();
   const username = localStorage.getItem("username");
-  const userId = localStorage.getItem("userId");
+  let userId = localStorage.getItem("userId");
 
   //******SideBare Change************************************* */
   //***************show descr***************************************** */
@@ -171,6 +173,8 @@ function QuizBoard(props) {
   const getFullDesc = useSignal();
   const [VisisbleDescUpdate, setVisisbleDescUpdate] = useState(false);
   const [visisbleDescInsert, setvisisbleDescInsert] = useState(false);
+  const [visibleNoteQcm, setVisibleNoteQcm] = useState(false);
+
   const [FullDescEdite, setFullDescEdite] = useState({
     imageName: "",
     imageType: "",
@@ -418,6 +422,10 @@ function QuizBoard(props) {
     //getFullDesc.value = fullDescResult.data;
   };
   //******************************************* */
+  const handleNoteQcmBtn = async () => {
+    setVisibleNoteQcm(true);
+  };
+
   ///*****update image************************************** */
   const UpdateImage = async (qcmId) => {
     console.log("update item");
@@ -811,19 +819,20 @@ function QuizBoard(props) {
               );
               getQcms.value = result.data;
               saveAllQcms.value = result.data;
+              console.log(result.data);
               if (result.data.length > 0) {
-                //save nombre qcms ////////***************************************************** */
+                //save nombre qcms ////////*****************************************************
                 setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
                   ...QcmsCourNameStatique,
                   result.data[0].coursMed.coursName,
                 ]);
-                //***************************************************************************** */
-                //save nombre qcms ////////***************************************************** */
+                //*****************************************************************************
+                //save nombre qcms ////////*****************************************************
                 setSaveQcmsNbrStatique((QcmsNbrStatique) => [
                   ...QcmsNbrStatique,
                   result.data.length,
                 ]);
-                //***************************************************************************** */
+                //*****************************************************************************
 
                 if (
                   props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
@@ -833,8 +842,8 @@ function QuizBoard(props) {
                   newStateEachLineStatique.push([0, 0, result.data.length]);
                   setSaveEachLineStatique(newStateEachLineStatique);
                 }
-                //****************************************************************************** */
-                //***exception add statiqe session et savequizz********************************* */
+                //******************************************************************************
+                //***exception add statiqe session et savequizz*********************************
                 if (
                   props.savePieStatique === null &&
                   (props.commingFrom === "savesession" ||
@@ -843,7 +852,7 @@ function QuizBoard(props) {
                   newStateEachLineStatique.push([0, 0, result.data.length]);
                   setSaveEachLineStatique(newStateEachLineStatique);
                 }
-                //******************************************************************************* */
+                //*******************************************************************************
               }
             } catch {
               console.log("qmc not find");
@@ -946,9 +955,9 @@ function QuizBoard(props) {
                   setSaveEachLineStatique(newStateEachLineStatique);
                 }
                 //******************************************************************************* */
+                getQcms.value = result.data;
+                saveAllQcms.value = result.data;
               }
-              getQcms.value = result.data;
-              saveAllQcms.value = result.data;
             } catch {
               console.log("qmc not find");
             }
@@ -1360,6 +1369,7 @@ function QuizBoard(props) {
   //********************************************************************** */
   //********handel qcm change**********************************************
   const handlePrevClick = () => {
+    setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
 
     currentIndex.value = currentIndex.value - 1;
@@ -1392,6 +1402,7 @@ function QuizBoard(props) {
   };
 
   const handleNextClick = () => {
+    setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
     currentIndex.value = currentIndex.value + 1;
     setSelectQcmIndex(currentIndex.value);
@@ -1572,6 +1583,7 @@ function QuizBoard(props) {
     setVisibleCommentaryStudent(true);
   };
   //************************************************************ */
+
   //**get all commentary of qcms******************************************
   const getCommentaryQcm = async (qcmId) => {
     const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`);
@@ -2035,6 +2047,7 @@ function QuizBoard(props) {
   //*********************************************************** */
   const handleItemClick = (qcmId, qcmIndex) => {
     currentIndex.value = qcmIndex;
+    setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
 
     setSelectQcmIndex(currentIndex.value);
@@ -2501,18 +2514,32 @@ function QuizBoard(props) {
                                     Question {index + 1} sur {ShowQcm.length}
                                   </li>
                                 </div>
-                                <div className={`${classes.commentary} `}>
-                                  <span className={`${classes.nbrComent} `}>
-                                    {numbreCommentaryFinal.value[index]}
-                                  </span>
-                                  <img
-                                    src={comment}
-                                    height="50%"
-                                    width="20"
-                                    onClick={(e) => {
-                                      handleCommentaryBtn(qcm.id);
-                                    }}
-                                  />
+                                <div
+                                  className={`${classes.full_note_commentary} `}
+                                >
+                                  <div className={`${classes.note} `}>
+                                    <img
+                                      src={noteimage}
+                                      height="100%"
+                                      width="30"
+                                      onClick={(e) => {
+                                        handleNoteQcmBtn();
+                                      }}
+                                    />
+                                  </div>
+                                  <div className={`${classes.commentary} `}>
+                                    <span className={`${classes.nbrComent} `}>
+                                      {numbreCommentaryFinal.value[index]}
+                                    </span>
+                                    <img
+                                      src={comment}
+                                      height="50%"
+                                      width="20"
+                                      onClick={(e) => {
+                                        handleCommentaryBtn(qcm.id);
+                                      }}
+                                    />
+                                  </div>
                                 </div>
                               </div>
                               {isParticipateAdmin && (
@@ -2549,6 +2576,7 @@ function QuizBoard(props) {
                                   </button>
                                 </div>
                               )}
+                              {visibleNoteQcm && <NoteQcm qcmId={qcm.id} />}
                               {visisbleDescInsert && (
                                 <div className={classes.imgdescdiv}>
                                   <div className={classes.fulldescription}>
@@ -3158,21 +3186,35 @@ function QuizBoard(props) {
                                       </li>
                                     </div>
                                     <div
-                                      className={`${classes.commentary_phone} `}
+                                      className={`${classes.full_note_commentary_phone} `}
                                     >
-                                      <span
-                                        className={`${classes.nbrComent_phone} `}
+                                      <div className={`${classes.note_phone} `}>
+                                        <img
+                                          src={noteimage}
+                                          height="100%"
+                                          width="30"
+                                          onClick={(e) => {
+                                            handleNoteQcmBtn();
+                                          }}
+                                        />
+                                      </div>
+                                      <div
+                                        className={`${classes.commentary_phone} `}
                                       >
-                                        {numbreCommentaryFinal.value[index]}
-                                      </span>
-                                      <img
-                                        src={comment}
-                                        height="10%"
-                                        width="20"
-                                        onClick={(e) => {
-                                          handleCommentaryBtn(qcm.id);
-                                        }}
-                                      />
+                                        <span
+                                          className={`${classes.nbrComent_phone} `}
+                                        >
+                                          {numbreCommentaryFinal.value[index]}
+                                        </span>
+                                        <img
+                                          src={comment}
+                                          height="10%"
+                                          width="20"
+                                          onClick={(e) => {
+                                            handleCommentaryBtn(qcm.id);
+                                          }}
+                                        />
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -3211,6 +3253,7 @@ function QuizBoard(props) {
                                     </button>
                                   </div>
                                 )}
+                                {visibleNoteQcm && <NoteQcm qcmId={qcm.id} />}
                                 {visisbleDescInsert && (
                                   <div className={classes.imgdescdiv}>
                                     <div className={classes.fulldescription}>
