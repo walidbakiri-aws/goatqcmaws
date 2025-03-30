@@ -2490,7 +2490,7 @@ function QuizBoardClinique(props) {
 
         if (fullSessionsListeLength >= 5) {
           handleDeleteSession();
-          console.log("succes deleting");
+          console.log("succes deleting d");
         }
         navigateHome("/goatqcm", {
           state: {
