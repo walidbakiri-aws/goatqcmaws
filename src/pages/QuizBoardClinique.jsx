@@ -15,9 +15,7 @@ import A from "../compenent/layout/img/A.png";
 import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
-import blueclr from "../compenent/layout/img/blueclr.png";
-import jaunclr from "../compenent/layout/img/jaunclr.png";
-import redclr from "../compenent/layout/img/redclr.png";
+
 import E from "../compenent/layout/img/E.png";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
 import externatlogo from "../compenent/layout/externatlogo.svg";
@@ -545,7 +543,10 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
+      .put(
+        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
+        formData
+      )
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -565,11 +566,15 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://goatqcm-instance.com/image/clinique/uploadimage",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -1830,9 +1835,12 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .put(
+        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2333,9 +2341,13 @@ function QuizBoardClinique(props) {
     //******************************************************************************** */
     saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2480,9 +2492,13 @@ function QuizBoardClinique(props) {
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
