@@ -678,6 +678,10 @@
   overflow-y: auto;
   background-color: var(--background-color-full);
 }
+.full_note_commentary_clinique_phone {
+  float: right;
+  right: 0;
+}
 .modulediv_phone {
   width: 100%;
   background-color: #6f7174;
@@ -1218,8 +1222,5 @@
   font-size: 15px;
   color: rgb(83, 81, 81);
 }
-.full_note_commentary_clinique_phone {
-  float: right;
-  right: 0;
-}
+
 /***end list qcms******************************************************/

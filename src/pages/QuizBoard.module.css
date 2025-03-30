@@ -702,6 +702,7 @@
   margin-top: -15px;
   font-size: 13px;
 }
+
 .child_phone {
   float: left;
   background-color: var(--background-modulename-color);
@@ -979,7 +980,6 @@
   margin-top: 5px;
   display: flex;
   height: 27px;
-  background-color: #c1eeac;
 }
 .nmbrqcm_phone {
   width: 160px;
