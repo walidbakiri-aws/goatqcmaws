@@ -10,12 +10,14 @@ import QuizBoard from "./QuizBoard";
 import { FaRegWindowClose } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import DateObject from "react-date-object";
-
+import noteimage from "../compenent/layout/img/note.png";
 import A from "../compenent/layout/img/A.png";
 import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
- 
+import blueclr from "../compenent/layout/img/blueclr.png";
+import jaunclr from "../compenent/layout/img/jaunclr.png";
+import redclr from "../compenent/layout/img/redclr.png";
 import E from "../compenent/layout/img/E.png";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
 import externatlogo from "../compenent/layout/externatlogo.svg";
@@ -61,6 +63,7 @@ import {
   LinearScale,
   BarElement,
 } from "chart.js";
+import NoteQcmClinique from "./NoteQcmClinique";
 ChartJS.register(
   ArcElement,
   Title,
@@ -480,6 +483,8 @@ function QuizBoardClinique(props) {
   let dounateDataQcms = [];
   let saveAllNumberCasClinique = useSignal(0);
   //******************************************************************* */
+  const [visibleNoteQcm, setVisibleNoteQcm] = useState(false);
+  const [QcmIdNote, setQcmIdNote] = useState("");
   //***get image from local distination and display it****** */
   const getFile = (e) => {
     setFile(e.target.files[0]);
@@ -1470,6 +1475,7 @@ function QuizBoardClinique(props) {
   };
   //********************************************************************** */
   const handlePrevClick = () => {
+    setVisibleNoteQcm(false);
     currentIndex.value = currentIndex.value - 1;
     setSelectcasCliniqueIndex(currentIndex.value);
     setVisibiliteCasCliniqueIndex(currentIndex.value);
@@ -1551,6 +1557,7 @@ function QuizBoardClinique(props) {
 
   //************************************************************************* */
   const handleNextClick = () => {
+    setVisibleNoteQcm(false);
     //saveIncrValueOfeachClinique.value[VisibiliteCasCliniqueIndex] = 0;
 
     /*if (
@@ -2691,7 +2698,11 @@ function QuizBoardClinique(props) {
     );
   };
   //************************************************************* */
-
+  //******************************************* */
+  const handleNoteQcmBtn = async () => {
+    setVisibleNoteQcm(!visibleNoteQcm);
+  };
+  /***************************************************************** */
   return (
     <>
       {!OpenBoardQcm && (
@@ -2994,33 +3005,48 @@ function QuizBoardClinique(props) {
                           </div>
                         );
                     })}
-
-                    {ShowQcm.map((qcm, index) => {
-                      if (index === VisibiliteCasCliniqueIndex) {
-                        return (
-                          <div className={classes.btnqcmclinique}>
-                            <ul>
-                              {qcm.map((qcmCln, indexqcmClnq) => (
-                                <button
-                                  style={{
-                                    backgroundColor: backGroundBtn,
-                                  }}
-                                  onClick={(e) => {
-                                    setQcmIndex(indexqcmClnq);
-                                    console.log(indexqcmClnq);
-                                    setShowDescQcm(false);
-                                  }}
-                                  value={indexqcmClnq}
-                                >
-                                  {indexqcmClnq + 1}
-                                </button>
-                              ))}
-                            </ul>
-                          </div>
-                        );
-                      }
-                    })}
-
+                    <div className={`${classes.qcmnbr_commentary_div} `}>
+                      <div>
+                        {ShowQcm.map((qcm, index) => {
+                          if (index === VisibiliteCasCliniqueIndex) {
+                            return (
+                              <div className={classes.btnqcmclinique}>
+                                <ul>
+                                  {qcm.map((qcmCln, indexqcmClnq) => (
+                                    <button
+                                      style={{
+                                        backgroundColor: backGroundBtn,
+                                      }}
+                                      onClick={(e) => {
+                                        setQcmIndex(indexqcmClnq);
+                                        console.log(indexqcmClnq);
+                                        setShowDescQcm(false);
+                                        setVisibleNoteQcm(false);
+                                      }}
+                                      value={indexqcmClnq}
+                                    >
+                                      {indexqcmClnq + 1}
+                                    </button>
+                                  ))}
+                                </ul>
+                              </div>
+                            );
+                          }
+                        })}
+                      </div>
+                      <div className={`${classes.full_note_commentary} `}>
+                        <div className={`${classes.note} `}>
+                          <img
+                            src={noteimage}
+                            height="100%"
+                            width="30"
+                            onClick={(e) => {
+                              handleNoteQcmBtn();
+                            }}
+                          />
+                        </div>
+                      </div>
+                    </div>
                     {ShowQcm.map((qcmClinique, indexClinique) => {
                       if (indexClinique === VisibiliteCasCliniqueIndex) {
                         return (
@@ -3076,6 +3102,9 @@ function QuizBoardClinique(props) {
                                           </button>
                                         )}
                                       </div>
+                                    )}
+                                    {visibleNoteQcm && (
+                                      <NoteQcmClinique qcmId={qcm.id} />
                                     )}
                                     {visisbleDescInsert && (
                                       <div className={classes.imgdescdiv}>
@@ -3536,7 +3565,6 @@ function QuizBoardClinique(props) {
                   <div
                     className={`${classes.quizcontainer_phone} card text-white  py-1`}
                   >
-                    
                     <div
                       className={classes.headerquizz_phone}
                       data-theme={isDark ? "dark" : "light"}
@@ -3637,6 +3665,20 @@ function QuizBoardClinique(props) {
                                     {props.moduleName}
                                   </li>
                                 </div>
+                                <div
+                                  className={`${classes.full_note_commentary_clinique_phone} `}
+                                >
+                                  <div className={`${classes.note_phone} `}>
+                                    <img
+                                      src={noteimage}
+                                      height="100%"
+                                      width="30"
+                                      onClick={(e) => {
+                                        handleNoteQcmBtn();
+                                      }}
+                                    />
+                                  </div>
+                                </div>
                               </div>
                               <hr className={`${classes.hr_phone} `} />
 
@@ -3694,7 +3736,7 @@ function QuizBoardClinique(props) {
                               </div>
 
                               <div
-                                className={`${classes.cascliniquecontent_phone} shadow `}
+                                className={`${classes.cascliniquecontent_phone}  `}
                                 onCopy={disableCopyPaste}
                                 onCut={disableCopyPaste}
                                 onPaste={disableCopyPaste}
@@ -3708,60 +3750,64 @@ function QuizBoardClinique(props) {
                             </div>
                           );
                       })}
+                      <div
+                        className={`${classes.qcmnbr_commentary_div_phone} `}
+                      >
+                        {ShowQcm.map((qcm, index) => {
+                          if (index === VisibiliteCasCliniqueIndex) {
+                            return (
+                              <div className={classes.btnqcmclinique_phone}>
+                                <ul>
+                                  {qcm.map((qcmCln, indexqcmClnq) => (
+                                    <button
+                                      onClick={(e) => {
+                                        setQcmIndex(indexqcmClnq);
+                                        console.log(indexqcmClnq);
+                                        setShowDescQcm(false);
+                                        setQcmIdNote(qcmCln.id);
+                                        try {
+                                          if (
+                                            saveCaseCliniqueIndex.value[
+                                              VisibiliteCasCliniqueIndex
+                                            ][indexqcmClnq] === indexqcmClnq
+                                          ) {
+                                            console.log(indexqcmClnq);
+                                            console.log(
+                                              VisibiliteCasCliniqueIndex
+                                            );
 
-                      {ShowQcm.map((qcm, index) => {
-                        if (index === VisibiliteCasCliniqueIndex) {
-                          return (
-                            <div className={classes.btnqcmclinique_phone}>
-                              <ul>
-                                {qcm.map((qcmCln, indexqcmClnq) => (
-                                  <button
-                                    onClick={(e) => {
-                                      setQcmIndex(indexqcmClnq);
-                                      console.log(indexqcmClnq);
-                                      setShowDescQcm(false);
-                                      try {
-                                        if (
-                                          saveCaseCliniqueIndex.value[
-                                            VisibiliteCasCliniqueIndex
-                                          ][indexqcmClnq] === indexqcmClnq
-                                        ) {
-                                          console.log(indexqcmClnq);
+                                            setShowDescRpnsBtn(true);
+                                            setShowVerifierRpnsBtn(false);
+                                            setSlectCliniquePropo(
+                                              VisibiliteCasCliniqueIndex
+                                            );
+                                            setTrueInsertClrClick(true);
+                                            setTrueInsertClr(indexqcmClnq);
+                                          } else {
+                                            setShowDescRpnsBtn(false);
+                                            setShowVerifierRpnsBtn(true);
+                                          }
+                                        } catch (Exception) {
                                           console.log(
-                                            VisibiliteCasCliniqueIndex
+                                            "no check in this clinique"
                                           );
-
-                                          setShowDescRpnsBtn(true);
-                                          setShowVerifierRpnsBtn(false);
-                                          setSlectCliniquePropo(
-                                            VisibiliteCasCliniqueIndex
-                                          );
-                                          setTrueInsertClrClick(true);
-                                          setTrueInsertClr(indexqcmClnq);
-                                        } else {
-                                          setShowDescRpnsBtn(false);
-                                          setShowVerifierRpnsBtn(true);
                                         }
-                                      } catch (Exception) {
-                                        console.log(
-                                          "no check in this clinique"
-                                        );
-                                      }
-                                      setShowDescQcm(false);
+                                        setShowDescQcm(false);
 
-                                      setvisisbleDescInsert(false);
-                                      setVisisbleDescUpdate(false);
-                                    }}
-                                    value={indexqcmClnq}
-                                  >
-                                    {indexqcmClnq + 1}
-                                  </button>
-                                ))}
-                              </ul>
-                            </div>
-                          );
-                        }
-                      })}
+                                        setvisisbleDescInsert(false);
+                                        setVisisbleDescUpdate(false);
+                                      }}
+                                      value={indexqcmClnq}
+                                    >
+                                      {indexqcmClnq + 1}
+                                    </button>
+                                  ))}
+                                </ul>
+                              </div>
+                            );
+                          }
+                        })}
+                      </div>
 
                       {ShowQcm.map((qcmClinique, indexClinique) => {
                         if (indexClinique === VisibiliteCasCliniqueIndex) {
@@ -3818,6 +3864,9 @@ function QuizBoardClinique(props) {
                                             </button>
                                           )}
                                         </div>
+                                      )}
+                                      {visibleNoteQcm && (
+                                        <NoteQcmClinique qcmId={qcm.id} />
                                       )}
                                       {visisbleDescInsert && (
                                         <div className={classes.imgdescdiv}>
@@ -3918,7 +3967,7 @@ function QuizBoardClinique(props) {
                                         </div>
                                       )}
                                       <div
-                                        className={`${classes.qcmfeild_phone} table-hover shadow`}
+                                        className={`${classes.qcmfeild_phone} `}
                                         onCopy={disableCopyPaste}
                                         onCut={disableCopyPaste}
                                         onPaste={disableCopyPaste}

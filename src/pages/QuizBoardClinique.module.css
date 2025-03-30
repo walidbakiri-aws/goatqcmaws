@@ -140,7 +140,7 @@
   font-style: normal;
 }
 .btnqcmclinique {
-  width: 100%;
+  width: 800px;
 }
 
 .btnqcmclinique button {
@@ -575,7 +575,18 @@
   font-size: 25px;
   color: rgb(83, 81, 81);
 }
+.qcmnbr_commentary_div {
+  margin-top: 5px;
+  display: flex;
+  height: 30px;
+}
+.full_note_commentary {
+  margin-left: 50px;
+  width: 100px;
+  height: 100%;
 
+  display: flex;
+}
 /***end list qcms******************************************************/
 /*****phone*********************************************/
 
@@ -669,7 +680,7 @@
 }
 .modulediv_phone {
   width: 100%;
-
+  background-color: #6f7174;
   margin-top: -15px;
   font-size: 13px;
 }
@@ -1207,5 +1218,8 @@
   font-size: 15px;
   color: rgb(83, 81, 81);
 }
-
+.full_note_commentary_clinique_phone {
+  float: right;
+  right: 0;
+}
 /***end list qcms******************************************************/
