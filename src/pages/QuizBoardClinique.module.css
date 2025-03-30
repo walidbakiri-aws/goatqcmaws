@@ -678,18 +678,17 @@
   overflow-y: auto;
   background-color: var(--background-color-full);
 }
-.full_note_commentary_clinique_phone {
-  float: right;
-  right: 0;
-}
+
 .modulediv_phone {
+  display: flex;
   width: 100%;
-  background-color: #6f7174;
+
   margin-top: -15px;
   font-size: 13px;
 }
 .child_phone {
   float: left;
+  left: 0;
   background-color: var(--background-modulename-color);
   background-color: rgb(37, 176, 233, 0.9);
   padding: 3px;
@@ -697,6 +696,13 @@
 }
 .modulename {
   font-style: initial;
+}
+.full_note_commentary_clinique_phone {
+  width: 30px;
+
+  margin-left: 160px;
+  float: right;
+  right: 0;
 }
 .homebtn {
   margin-left: 210px;
