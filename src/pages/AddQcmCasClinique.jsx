@@ -26,7 +26,11 @@ function AddQcmCasClinique(props) {
   let CurrentPropo = "";
   let CurrentBoolReponse = false;
   let InputProposition = useSignal(["", "", "", "", ""]);
-
+  let getCrntInputPropo1 = useSignal("");
+  let getCrntInputPropo2 = useSignal("");
+  let getCrntInputPropo3 = useSignal("");
+  let getCrntInputPropo4 = useSignal("");
+  let getCrntInputPropo5 = useSignal("");
   let InputCheckBox = useSignal([false, false, false, false, false]);
   const NombrePropo = ["4 Proposition", "5 Proposition"];
 
@@ -150,7 +154,8 @@ function AddQcmCasClinique(props) {
       if (NbrPropoSelect == "4 Proposition") {
         for (let i = 0; i <= 3; i++) {
           console.log(getFinalCheckBox.value[i]);
-          Proposition.propositionQcmClinique = InputProposition.value[i];
+          CurrentPropo = InputProposition.value[i];
+          Proposition.propositionQcmClinique = CurrentPropo;
           Proposition.reponseBoolClinique = getFinalCheckBox.value[i];
 
           await axios
@@ -171,12 +176,12 @@ function AddQcmCasClinique(props) {
           checkBoxPropo2: false,
           checkBoxPropo3: false,
           checkBoxPropo4: false,
-          checkBoxPropo5: false,
         });
       } else if (NbrPropoSelect == "5 Proposition") {
         for (let i = 0; i <= 4; i++) {
           console.log(getFinalCheckBox.value[i]);
-          Proposition.propositionQcmClinique = InputProposition.value[i];
+          CurrentPropo = InputProposition.value[i];
+          Proposition.propositionQcmClinique = CurrentPropo;
           Proposition.reponseBoolClinique = getFinalCheckBox.value[i];
 
           await axios
@@ -219,22 +224,7 @@ function AddQcmCasClinique(props) {
     );
   };
   //***************************************************************************** */
-  //******initial input****************************************************** */
-  function initilaizationInput() {
-    document.getElementById("qcmarea").value = "";
-    document.getElementById("nbrpropositionselect").value = "";
-    document.getElementById("checkbox1").checked = false;
-    document.getElementById("checkbox2").checked = false;
-    document.getElementById("checkbox3").checked = false;
-    document.getElementById("checkbox4").checked = false;
-    document.getElementById("checkbox5").checked = false;
-    document.getElementById("propo1").value = "";
-    document.getElementById("propo2").value = "";
-    document.getElementById("propo3").value = "";
-    document.getElementById("propo4").value = "";
-    document.getElementById("propo5").value = "";
-  }
-  //************************************************************************* */
+
   //**********check empty check********************************************* */
   function onCheckEmpty() {
     testIsEmptyCheckPropo.value = true;
@@ -473,7 +463,8 @@ function AddQcmCasClinique(props) {
                     height: 40,
                   }}
                   onChange={(e) => {
-                    InputProposition.value[0] = e.target.value;
+                    getCrntInputPropo1.value = e.target.value;
+                    InputProposition.value[0] = getCrntInputPropo1.value;
                   }}
                 />
               </div>
@@ -501,7 +492,8 @@ function AddQcmCasClinique(props) {
                   id="propo2"
                   style={{ height: 40 }}
                   onChange={(e) => {
-                    InputProposition.value[1] = e.target.value;
+                    getCrntInputPropo2.value = e.target.value;
+                    InputProposition.value[1] = getCrntInputPropo2.value;
                   }}
                 />
               </div>
@@ -529,7 +521,8 @@ function AddQcmCasClinique(props) {
                   id="propo3"
                   style={{ height: 40 }}
                   onChange={(e) => {
-                    InputProposition.value[2] = e.target.value;
+                    getCrntInputPropo3.value = e.target.value;
+                    InputProposition.value[2] = getCrntInputPropo3.value;
                   }}
                 />
               </div>
@@ -558,7 +551,8 @@ function AddQcmCasClinique(props) {
                   id="propo4"
                   style={{ height: 40 }}
                   onChange={(e) => {
-                    InputProposition.value[3] = e.target.value;
+                    getCrntInputPropo4.value = e.target.value;
+                    InputProposition.value[3] = getCrntInputPropo4.value;
                   }}
                 />
               </div>
@@ -587,7 +581,8 @@ function AddQcmCasClinique(props) {
                     id="propo5"
                     style={{ height: 40 }}
                     onChange={(e) => {
-                      InputProposition.value[4] = e.target.value;
+                      getCrntInputPropo5.value = e.target.value;
+                      InputProposition.value[4] = getCrntInputPropo5.value;
                     }}
                   />
                 </div>
