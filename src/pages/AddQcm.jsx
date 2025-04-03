@@ -68,7 +68,6 @@ function AddQcm(props) {
     "2022",
     "2023",
     "2024",
-    "2025",
   ];
   const category = ["Externat Blida", "Résidanat Blida"];
   const [VisibleGroupe, setVisibleGroupe] = useState(false);
@@ -175,7 +174,7 @@ function AddQcm(props) {
   //const QcmEdit = [Qcm.qcmContent, Qcm.qcmModele, Qcm.qcmGroupe, Qcm.qcmYear];
   //********************************************************************** */
   const transferReponse = () => {
-    if (NbrPropoSelect.value == "4 Proposition") {
+    if (NbrPropoSelect.value === "4 Proposition") {
       for (let i = 0; i <= 3; i++) {
         if (i == 0) {
           getFinalCheckBox.value[0] = checkBoxPropo.checkBoxPropo1;
@@ -194,7 +193,7 @@ function AddQcm(props) {
           console.log(getFinalCheckBox.value[3]);
         }
       }
-    } else if (NbrPropoSelect.value == "5 Proposition") {
+    } else if (NbrPropoSelect.value === "5 Proposition") {
       for (let i = 0; i <= 4; i++) {
         if (i == 0) {
           getFinalCheckBox.value[0] = checkBoxPropo.checkBoxPropo1;
@@ -235,6 +234,31 @@ function AddQcm(props) {
       if (NbrPropoSelect.value == "4 Proposition") {
         for (let i = 0; i <= 3; i++) {
           CurrentPropo = InputProposition.value[i];
+          Proposition.propositionQcm = CurrentPropo;
+          Proposition.reponseBool = getFinalCheckBox.value[i];
+
+          await axios
+            .post("https://goatqcm-instance.com/reponses", Proposition, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
+            .then((res) => {})
+            .catch((err) => console.log(err));
+        }
+        toast.success("successful Adding Qcm!");
+        initilaizationInput();
+        for (let i = 0; i <= 3; i++) {
+          getFinalCheckBox.value[i] = false;
+        }
+        setcheckBoxPropo((prevState) => ({
+          ...prevState,
+          checkBoxPropo1: false,
+          checkBoxPropo2: false,
+          checkBoxPropo3: false,
+          checkBoxPropo4: false,
+        }));
+      } else if (NbrPropoSelect.value == "5 Proposition") {
+        for (let i = 0; i <= 4; i++) {
+          CurrentPropo = InputProposition.value[i];
 
           Proposition.propositionQcm = CurrentPropo;
           Proposition.reponseBool = getFinalCheckBox.value[i];
@@ -247,32 +271,20 @@ function AddQcm(props) {
             .catch((err) => console.log(err));
         }
         toast.success("successful Adding Qcm!");
-      } else if (NbrPropoSelect.value == "5 Proposition") {
+        initilaizationInput();
         for (let i = 0; i <= 4; i++) {
-          CurrentPropo = InputProposition.value[i];
-
-          Proposition.propositionQcm = CurrentPropo;
-          Proposition.reponseBool = getFinalCheckBox.value[i];
-
-          await axios
-            .post("https://goatqcm-instance.com/reponses", Proposition, {
-              headers: { Authorization: `Bearer ${token}` },
-            })
-            .then((res) => {
-              initilaizationInput();
-            })
-            .catch((err) => console.log(err));
+          getFinalCheckBox.value[i] = false;
         }
+
+        setcheckBoxPropo((prevState) => ({
+          ...prevState,
+          checkBoxPropo1: false,
+          checkBoxPropo2: false,
+          checkBoxPropo3: false,
+          checkBoxPropo4: false,
+          checkBoxPropo5: false,
+        }));
       }
-      toast.success("successful Adding Qcm!");
-      initilaizationInput();
-      setcheckBoxPropo({
-        checkBoxPropo1: false,
-        checkBoxPropo2: false,
-        checkBoxPropo3: false,
-        checkBoxPropo4: false,
-        checkBoxPropo5: false,
-      });
     } else {
       console.log(Proposition.qcmStandard.id);
       if (ValidatEnterQcm === true) {
@@ -316,19 +328,23 @@ function AddQcm(props) {
       document.getElementById("groupeselect").value = "";
     }
     document.getElementById("yearselect").value = "";
+
     document.getElementById("nbrpropositionselect").value = "";
     document.getElementById("checkbox1").checked = false;
     document.getElementById("checkbox2").checked = false;
     document.getElementById("checkbox3").checked = false;
     document.getElementById("checkbox4").checked = false;
-    if (NbrPropoSelect.value == "5 Proposition") {
+    if (NbrPropoSelect.value === "5 Proposition") {
       document.getElementById("checkbox5").checked = false;
     }
+
     document.getElementById("propo1").value = "";
     document.getElementById("propo2").value = "";
     document.getElementById("propo3").value = "";
     document.getElementById("propo4").value = "";
-    document.getElementById("propo5").value = "";
+    if (NbrPropoSelect.value === "5 Proposition") {
+      document.getElementById("propo5").value = "";
+    }
   }
   //************************************************************************* */
   //load all cours pour afficher de selection module *************************
@@ -451,7 +467,18 @@ function AddQcm(props) {
     }
   };
   //************************************************************************* */
+  //************************************************************************* */
+  function handletest() {
+    console.log(checkBoxPropo.checkBoxPropo1);
+    console.log(checkBoxPropo.checkBoxPropo2);
+    console.log(checkBoxPropo.checkBoxPropo3);
+    console.log(checkBoxPropo.checkBoxPropo4);
+    console.log(checkBoxPropo.checkBoxPropo5);
+    console.log("check how to show");
 
+    // getFinalCheckBox.value = checkBoxPropo.data;
+  }
+  //**************************
   //***********************************************************************/
   return (
     <>
@@ -735,6 +762,13 @@ function AddQcm(props) {
       </div>
 
       <Toaster />
+      <button
+        onClick={(e) => {
+          handletest();
+        }}
+      >
+        test
+      </button>
     </>
   );
 }

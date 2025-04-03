@@ -26,11 +26,7 @@ function AddQcmCasClinique(props) {
   let CurrentPropo = "";
   let CurrentBoolReponse = false;
   let InputProposition = useSignal(["", "", "", "", ""]);
-  let getCrntInputPropo1 = useSignal("");
-  let getCrntInputPropo2 = useSignal("");
-  let getCrntInputPropo3 = useSignal("");
-  let getCrntInputPropo4 = useSignal("");
-  let getCrntInputPropo5 = useSignal("");
+
   let InputCheckBox = useSignal([false, false, false, false, false]);
   const NombrePropo = ["4 Proposition", "5 Proposition"];
 
@@ -154,18 +150,13 @@ function AddQcmCasClinique(props) {
       if (NbrPropoSelect == "4 Proposition") {
         for (let i = 0; i <= 3; i++) {
           console.log(getFinalCheckBox.value[i]);
-          CurrentPropo = InputProposition.value[i];
-          Proposition.propositionQcmClinique = CurrentPropo;
+          Proposition.propositionQcmClinique = InputProposition.value[i];
           Proposition.reponseBoolClinique = getFinalCheckBox.value[i];
 
           await axios
-            .post(
-              "https://goatqcm-instance.com/reponsesclinique",
-              Proposition,
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            )
+            .post("https://goatqcm-instance.com/reponsesclinique", Proposition, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
             .then((res) => {})
             .catch((err) => console.log(err));
         }
@@ -180,18 +171,13 @@ function AddQcmCasClinique(props) {
       } else if (NbrPropoSelect == "5 Proposition") {
         for (let i = 0; i <= 4; i++) {
           console.log(getFinalCheckBox.value[i]);
-          CurrentPropo = InputProposition.value[i];
-          Proposition.propositionQcmClinique = CurrentPropo;
+          Proposition.propositionQcmClinique = InputProposition.value[i];
           Proposition.reponseBoolClinique = getFinalCheckBox.value[i];
 
           await axios
-            .post(
-              "https://goatqcm-instance.com/reponsesclinique",
-              Proposition,
-              {
-                headers: { Authorization: `Bearer ${token}` },
-              }
-            )
+            .post("https://goatqcm-instance.com/reponsesclinique", Proposition, {
+              headers: { Authorization: `Bearer ${token}` },
+            })
             .then((res) => {})
             .catch((err) => console.log(err));
         }
@@ -216,12 +202,9 @@ function AddQcmCasClinique(props) {
   //********************************************************************* */
   //*****delete Qcm if not Enter************************************************* */
   const deleteLastQcm = async (getQcmId) => {
-    await axios.delete(
-      `https://goatqcm-instance.com/qcmsclinique/${getQcmId}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    await axios.delete(`https://goatqcm-instance.com/qcmsclinique/${getQcmId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   };
   //***************************************************************************** */
 
@@ -261,7 +244,9 @@ function AddQcmCasClinique(props) {
     document.getElementById("propo2").value = "";
     document.getElementById("propo3").value = "";
     document.getElementById("propo4").value = "";
-    document.getElementById("propo5").value = "";
+    if (NbrPropoSelect.value == "5 Proposition") {
+      document.getElementById("propo5").value = "";
+    }
   }
   //************************************************************************* */
   //*******check box proposition 1**********************************************
@@ -463,8 +448,7 @@ function AddQcmCasClinique(props) {
                     height: 40,
                   }}
                   onChange={(e) => {
-                    getCrntInputPropo1.value = e.target.value;
-                    InputProposition.value[0] = getCrntInputPropo1.value;
+                    InputProposition.value[0] = e.target.value;
                   }}
                 />
               </div>
@@ -492,8 +476,7 @@ function AddQcmCasClinique(props) {
                   id="propo2"
                   style={{ height: 40 }}
                   onChange={(e) => {
-                    getCrntInputPropo2.value = e.target.value;
-                    InputProposition.value[1] = getCrntInputPropo2.value;
+                    InputProposition.value[1] = e.target.value;
                   }}
                 />
               </div>
@@ -521,8 +504,7 @@ function AddQcmCasClinique(props) {
                   id="propo3"
                   style={{ height: 40 }}
                   onChange={(e) => {
-                    getCrntInputPropo3.value = e.target.value;
-                    InputProposition.value[2] = getCrntInputPropo3.value;
+                    InputProposition.value[2] = e.target.value;
                   }}
                 />
               </div>
@@ -551,8 +533,7 @@ function AddQcmCasClinique(props) {
                   id="propo4"
                   style={{ height: 40 }}
                   onChange={(e) => {
-                    getCrntInputPropo4.value = e.target.value;
-                    InputProposition.value[3] = getCrntInputPropo4.value;
+                    InputProposition.value[3] = e.target.value;
                   }}
                 />
               </div>
@@ -581,8 +562,7 @@ function AddQcmCasClinique(props) {
                     id="propo5"
                     style={{ height: 40 }}
                     onChange={(e) => {
-                      getCrntInputPropo5.value = e.target.value;
-                      InputProposition.value[4] = getCrntInputPropo5.value;
+                      InputProposition.value[4] = e.target.value;
                     }}
                   />
                 </div>
