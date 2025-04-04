@@ -17,11 +17,11 @@ function Abounement(props) {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2025",
-      priceAbn: "3000 DA ",
+      priceAbn: "4700 DA ",
     },
     {
       nameAbn: "1ér Année Médecine",
-      priceAbn: "1100 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "2éme Année Médecine",
