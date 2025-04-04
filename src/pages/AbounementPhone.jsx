@@ -30,12 +30,26 @@ function AbounementPhone() {
           <h2>Résidanat 2025</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>4700 </span>DA<br></br>
+            <span>4500 </span>DA<br></br>
              
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
-          <img src={ramadan} height="130px" width="100%" />
+          <ul>
+            <li>
+              <i className="fa fa-check-circle"></i>Tous les Modules 6éme Année
+            </li>
+
+            <li>
+              <i className="fa fa-check-circle"></i>Correction Fiable
+            </li>
+            <li>
+              <i className="fa fa-check-circle"></i>Avec Explication
+            </li>
+          </ul>
+          <button>
+            <a href="/register">Registrer</a>
+          </button>
         </div>
       </div>
       <div className={classes.cardfinal_phone}>
