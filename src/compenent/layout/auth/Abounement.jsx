@@ -23,11 +23,28 @@ function Abounement() {
               <p>
                 <i className="fa fa-rupee"></i>
                 <span>4500 </span>DA<br></br>
-                
+                <span>2X4000 </span>DA<br></br>
               </p>
             </div>
             <div className={`${classes.card_content}`}>
-              <img src={ramadan} height="160px" width="100%" />
+              <div className={`${classes.card_content}`}>
+                <ul>
+                  <li>
+                    <i className="fa fa-check-circle"></i>Tous les Modules 1ér
+                    jusqu'a 6éme Année
+                  </li>
+
+                  <li>
+                    <i className="fa fa-check-circle"></i>Correction Fiable
+                  </li>
+                  <li>
+                    <i className="fa fa-check-circle"></i>Avec Explication
+                  </li>
+                </ul>
+                <button>
+                  <a href="/register">Registrer</a>
+                </button>
+              </div>
             </div>
           </div>
           <div className={classes.card}>

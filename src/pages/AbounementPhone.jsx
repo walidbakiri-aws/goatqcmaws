@@ -31,13 +31,14 @@ function AbounementPhone() {
           <p>
             <i className="fa fa-rupee"></i>
             <span>4500 </span>DA<br></br>
-             
+            <span>2 X 4000 </span>DA<br></br>
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
           <ul>
             <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 6éme Année
+              <i className="fa fa-check-circle"></i>Tous les Modules 1ér jusqu'a
+              6éme Année
             </li>
 
             <li>
