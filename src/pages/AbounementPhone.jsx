@@ -37,8 +37,7 @@ function AbounementPhone() {
         <div className={`${classes.card_content_phone}`}>
           <ul>
             <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 1ér jusqu'a
-              6éme Année
+              <i className="fa fa-check-circle"></i>Tous les Modules
             </li>
 
             <li>
