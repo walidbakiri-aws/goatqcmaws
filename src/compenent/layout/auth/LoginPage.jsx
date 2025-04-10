@@ -322,6 +322,7 @@ function LoginPage() {
               </form>
               <div className={classes.registertbn_phone}>
                 <button
+                  className="btn btn-success"
                   style={{ marginTop: 10 }}
                   type="button"
                   href="/register"

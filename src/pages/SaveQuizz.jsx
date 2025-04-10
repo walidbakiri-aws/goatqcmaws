@@ -307,9 +307,12 @@ function SaveQuizz() {
   //******************************************************************************* */
   //**handle delete quizz ********************************************************* */
   const handleDeteQizzQcmQcasCliniqeBtn = async (quizzId) => {
-    await axios.delete(`https://goatqcm-instance.com/qcmsclinique/${quizzId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await axios.delete(
+      `https://goatqcm-instance.com/qcmcliniquequizz/${quizzId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     //****refresh quizz liste after delete*********************** */
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
