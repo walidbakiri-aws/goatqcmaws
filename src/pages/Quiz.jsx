@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import BtnAdd from "../compenent/layout/BtnAdd";
 import NavigationBar from "../compenent/layout/NavigationBar";
 import classes from "./Quiz.module.css";
@@ -12,6 +12,9 @@ import { useMediaQuery } from "react-responsive";
 import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 function Quiz() {
+  const radioRefs = useRef([]);
+  const checkBoxAllCoursRefs = useRef([]);
+  const [isChecked, setIsChecked] = useState(false);
   const refreshPage = useSignal(0);
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   const token = localStorage.getItem("tokengoat");
@@ -178,6 +181,17 @@ function Quiz() {
   //******************************************************************* */
   //*******handle Change Module**********************************************
   const handleChangeModule = (e) => {
+    /****type qcm  iniialisation************** */
+    radioRefs.current.forEach((radio) => {
+      if (radio) radio.checked = false;
+    });
+    setSelectMultipleCours("");
+    try {
+      document.getElementById("flexRadioAllCours").checked = false;
+    } catch (Exception) {
+      console.log("sdsd");
+    }
+    /****************************************** */
     setSelectMultipleCours([]); //initialiszer for check each time change module
     setMinMaxYearFinal([]);
     setMaxYearValue("");
@@ -344,7 +358,75 @@ function Quiz() {
     }
   };
   //****************************************************************************/
+  //*******handle handleChangeCours************************************************
+  const handleSelectAllCours = async (e) => {
+    console.log(AllCours.length);
+    //****get single cour****************************************************** */
+    if (e.target.checked) {
+      setSelectMultipleCours([
+        ...SelectedCours,
+        ...AllCours.map((course) => course.id),
+      ]);
+      checkBoxAllCoursRefs.current.forEach((radio) => {
+        if (radio) radio.checked = true;
+      });
 
+      //**************get min max multiople cours */
+      for (let indexCour = 0; indexCour < AllCours.length; indexCour++) {
+        try {
+          const result = await axios.get(
+            `https://goatqcm-instance.com/qcms/get_minmax_year/${AllCours[indexCour].id}/${QcmTypeSelectedRsdntExetrnt}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+
+          setMinYearMultipleCours((minYear) => [...minYear, result.data[0]]);
+
+          setMaxYearMultipleCours((maxYear) => [...maxYear, result.data[1]]);
+        } catch (Exception) {
+          console.log("no year of this qcm");
+        }
+      }
+
+      //**************get min max multiople cours */
+      for (let indexCour = 0; indexCour < AllCours.length; indexCour++) {
+        try {
+          const resultClinique = await axios.get(
+            `https://goatqcm-instance.com/casclinique/get_minmax_year/${AllCours[indexCour].id}/${QcmTypeSelectedRsdntExetrnt}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          console.log(AllCours[indexCour]);
+          setMinYearMultipleCoursClinique((minYear) => [
+            ...minYear,
+            resultClinique.data[0],
+          ]);
+
+          setMaxYearMultipleCoursClinique((maxYear) => [
+            ...maxYear,
+            resultClinique.data[1],
+          ]);
+        } catch (Exception) {
+          console.log("no year of this casClinique");
+        }
+      }
+
+      /* if (minYearMultipleCoursClinique.length > 0) {
+          setExisteCasClinique(true);
+        }*/
+    } else {
+      setSelectMultipleCours("");
+      checkBoxAllCoursRefs.current.forEach((radio) => {
+        if (radio) radio.checked = false;
+      });
+      setExisteCasClinique(false);
+    }
+
+    //************************************************************************ */
+  };
+  //****************************************************************************** */
   //*******qcm casclinique toutes************************************************
   const handleRadioQcmType = (e) => {
     console.log(SelectedCoursCommencerBtn);
@@ -838,7 +920,7 @@ function Quiz() {
   const handleShowCours = () => {
     console.log(ExisteQcmInTous.value);
     console.log(ExisteCasClinique);
-    console.log(SelectedCours);
+    console.log(selectMultipleCours);
   };
 
   return (
@@ -851,6 +933,7 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
+            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div
@@ -939,26 +1022,48 @@ function Quiz() {
                   </div>
                   <div className={classes.childmodulecoursdiv}>
                     {VisibleParCourDiv && (
-                      <div className="form-check">
-                        {AllCours.map((cour, index) => (
-                          <div key={cour.id} className={classes.moduleitem}>
+                      <>
+                        <div className="form-check">
+                          <div className={classes.moduleitem}>
                             <input
                               className="form-check-input fs-6 "
                               type="checkbox"
-                              name="flexRadioDefaultCours"
-                              id={cour.coursName}
-                              value={cour.id}
-                              onChange={handleChangeCours}
+                              id="flexRadioAllCours"
+                              name="flexRadioAllCours"
+                              onChange={handleSelectAllCours}
                             />
 
                             <h6
                               className={`${classes.typesujeth6} form-check-label `}
                             >
-                              {cour.coursName}
+                              Sélectionner Tous
                             </h6>
                           </div>
-                        ))}
-                      </div>
+                        </div>
+                        <div className="form-check">
+                          {AllCours.map((cour, index) => (
+                            <div key={cour.id} className={classes.moduleitem}>
+                              <input
+                                className="form-check-input fs-6 "
+                                type="checkbox"
+                                name="flexRadioDefaultCours"
+                                ref={(el) =>
+                                  (checkBoxAllCoursRefs.current[index] = el)
+                                }
+                                id={cour.coursName}
+                                value={cour.id}
+                                onChange={handleChangeCours}
+                              />
+
+                              <h6
+                                className={`${classes.typesujeth6} form-check-label `}
+                              >
+                                {cour.coursName}
+                              </h6>
+                            </div>
+                          ))}
+                        </div>
+                      </>
                     )}
                   </div>
                   <div className={classes.vlmodule}></div>
@@ -984,6 +1089,7 @@ function Quiz() {
                             className="form-check-input fs-6 "
                             type="radio"
                             name="typeqcm"
+                            ref={(el) => (radioRefs.current[index] = el)}
                             value={typeQcm}
                             id={typeQcm}
                             onChange={handleRadioQcmType}
@@ -1157,26 +1263,44 @@ function Quiz() {
                   {showCoursDiv && (
                     <div className={classes.childmodulecoursdivphone}>
                       {VisibleParCourDiv && (
-                        <div className="form-check">
-                          {AllCours.map((cour, index) => (
-                            <div
-                              key={cour.id}
-                              className={classes.moduleitem_phone}
-                            >
+                        <>
+                          <div className="form-check">
+                            <div className={classes.moduleitem_phone}>
                               <input
                                 className="form-check-input fs-6 "
                                 type="checkbox"
                                 name="flexRadioDefaultCours"
-                                id={cour.coursName}
-                                value={cour.id}
-                                onChange={handleChangeCours}
+                                onChange={handleSelectAllCours}
                               />
                               <label className="form-check-label fs-6 ">
-                                {cour.coursName}
+                                Selecionner Tous
                               </label>
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                          <div className="form-check">
+                            {AllCours.map((cour, index) => (
+                              <div
+                                key={cour.id}
+                                className={classes.moduleitem_phone}
+                              >
+                                <input
+                                  className="form-check-input fs-6 "
+                                  type="checkbox"
+                                  name="flexRadioDefaultCours"
+                                  ref={(el) =>
+                                    (checkBoxAllCoursRefs.current[index] = el)
+                                  }
+                                  id={cour.coursName}
+                                  value={cour.id}
+                                  onChange={handleChangeCours}
+                                />
+                                <label className="form-check-label fs-6 ">
+                                  {cour.coursName}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </>
                       )}
                     </div>
                   )}
