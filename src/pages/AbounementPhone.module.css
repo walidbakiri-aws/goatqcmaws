@@ -19,24 +19,24 @@
 }
 .statique_phone {
   width: 100%;
-  height: 380px;
+  height: 420px;
 }
 .statiquetext_phone {
   margin-left: 10px;
   width: 100%;
-  height: 130px;
+  height: 160px;
 
   font-family: "Helvetica Neue", Arial, sans-serif;
   line-height: 1.6; /* Améliore la lisibilité */
   color: rgb(148, 139, 139);
 }
 .statiqueicon {
-  margin-left: 43px;
+  margin-left: 60px;
 }
 .deuxversionlogin {
   width: 100%;
-  height: 160px;
-  margin-left: 25px;
+  height: 180px;
+  margin-left: 37px;
 }
 .hr_phone {
   height: 1px;
