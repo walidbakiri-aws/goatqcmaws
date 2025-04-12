@@ -83,7 +83,7 @@ ChartJS.register(
 function QuizBoard(props) {
   // Retry config: 3 retries, with exponential backoff
   axiosRetry(axios, {
-    retries: 3,
+    retries: 6,
     retryDelay: axiosRetry.exponentialDelay,
     retryCondition: (error) => {
       return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";

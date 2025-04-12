@@ -73,13 +73,13 @@ ChartJS.register(
 );
 function QuizBoardClinique(props) {
   // Retry config: 3 retries, with exponential backoff
-axiosRetry(axios, {
-  retries: 3,
-  retryDelay: axiosRetry.exponentialDelay,
-  retryCondition: (error) => {
-    return axiosRetry.isNetworkError(error) || error.code === 'ECONNABORTED';
-  },
-});
+  axiosRetry(axios, {
+    retries: 6,
+    retryDelay: axiosRetry.exponentialDelay,
+    retryCondition: (error) => {
+      return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
+    },
+  });
   const Date = new DateObject();
   const sourceSaveQuizzBtn = "savequizzsource";
   const sourceSaveSessionBtn = "savesessionsource";
