@@ -89,15 +89,15 @@
 }
 .button_instagram {
   display: block;
-  width: 130px;
+  width: 224px;
   max-width: 100%;
-  margin-left: 80px;
+  margin-left: 30px;
   overflow: hidden;
   position: relative;
   transform: translatez(0);
   text-decoration: none;
   box-sizing: border-box;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: normal;
   box-shadow: 0 9px 18px rgba(0, 0, 0, 0.2);
   text-align: center;

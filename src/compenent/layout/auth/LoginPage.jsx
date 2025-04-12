@@ -320,17 +320,16 @@ function LoginPage() {
                   </button>
                 </div>
               </form>
-              <div className={classes.registertbn_phone}>
-                <button
-                  className="btn btn-success"
-                  style={{ marginTop: 10 }}
-                  type="button"
-                  href="/register"
-                  onClick={handleResiterBtn}
-                >
-                  Acheter Abounnement
-                </button>
-              </div>
+
+              <button
+                className={classes.button_instagram}
+                style={{ marginTop: 10 }}
+                type="button"
+                href="/register"
+                onClick={handleResiterBtn}
+              >
+                Acheter Abounnement
+              </button>
             </div>
           </div>
         )}
