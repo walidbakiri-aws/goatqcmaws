@@ -371,6 +371,8 @@ function QuizBoard(props) {
   //*********************************************************************** */
   const [modalDeleteCourIsOpen, setModalDeleteCourIsOpen] = useState(false);
   const qcmIddelete = useSignal("");
+  //**************************** */
+  const [ExisteNote, setExisteNote] = useState(false);
   //***get image from local distination and display it****** */
   const getFile = (e) => {
     setFile(e.target.files[0]);
@@ -422,9 +424,24 @@ function QuizBoard(props) {
     //getFullDesc.value = fullDescResult.data;
   };
   //******************************************* */
-  const handleNoteQcmBtn = async () => {
-    setVisibleNoteQcm(true);
+  const handleNoteQcmBtn = async (qcmId) => {
+    testNoteExsite(qcmId);
+    setVisibleNoteQcm(!visibleNoteQcm);
   };
+  //****test if desc existe******************** */
+  const testNoteExsite = async (qcmId) => {
+    console.log(qcmId);
+    console.log(userId);
+
+    try {
+      const fullDescResultiniial = await axios.get(
+        `https://goatqcm-instance.com/noteqcm/${qcmId}/${userId}`
+      );
+      console.log(fullDescResultiniial.data);
+      setExisteNote(true);
+    } catch (Exception) {}
+  };
+  //******************************************* *
 
   ///*****update image************************************** */
   const UpdateImage = async (qcmId) => {
@@ -689,19 +706,20 @@ function QuizBoard(props) {
 
             getQcms.value = result.data;
             saveAllQcms.value = result.data;
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
-              ...QcmsCourNameStatique,
-              result.data[0].coursMed.coursName,
-            ]);
-            //***************************************************************************** */
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-              ...QcmsNbrStatique,
-              result.data.length,
-            ]);
-            //***************************************************************************** */
-
+            if (result.data.length > 0) {
+              //save nombre qcms ////////***************************************************** */
+              setSaveQcmsCourNameStatique((QcmsCourNameStatique) => [
+                ...QcmsCourNameStatique,
+                result.data[0].coursMed.coursName,
+              ]);
+              //***************************************************************************** */
+              //save nombre qcms ////////***************************************************** */
+              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+                ...QcmsNbrStatique,
+                result.data.length,
+              ]);
+              //***************************************************************************** */
+            
             if (
               props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
               props.commingFrom !== "savesession" &&
@@ -721,6 +739,7 @@ function QuizBoard(props) {
               setSaveEachLineStatique(newStateEachLineStatique);
             }
             //******************************************************************************* */
+          }
           } catch {
             console.log("qmc not find");
           }
@@ -759,13 +778,14 @@ function QuizBoard(props) {
           const result = await axios.get(
             `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
           );
-
+          if (result.data.length > 0) {
           //save nombre qcms ////////***************************************************** */
           setSaveQcmsNbrStatique((QcmsNbrStatique) => [
             ...QcmsNbrStatique,
             result.data.length,
           ]);
           //***************************************************************************** */
+        }
           currentIndex.value = 0;
           setVisibiliteQcmIndex(0);
           setShowQcm([]);
@@ -1024,13 +1044,14 @@ function QuizBoard(props) {
                 const result = await axios.get(
                   `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`
                 );
-
+                if (result.data.length > 0) {
                 //save nombre qcms ////////***************************************************** */
                 setSaveQcmsNbrStatique((QcmsNbrStatique) => [
                   ...QcmsNbrStatique,
                   result.data.length,
                 ]);
                 //***************************************************************************** */
+              }
                 currentIndex.value = 0;
                 setVisibiliteQcmIndex(0);
                 setShowQcm([]);
@@ -1127,12 +1148,14 @@ function QuizBoard(props) {
               const result = await axios.get(
                 `${BASE_URL}/qcms/getqcqms/biologie/${props.moduleId}/${getCurrentYear}/Biologie`
               );
+              if (result.data.length > 0) {
               //save nombre qcms ////////***************************************************** */
               setSaveQcmsNbrStatique((QcmsNbrStatique) => [
                 ...QcmsNbrStatique,
                 result.data.length,
               ]);
               //***************************************************************************** */
+            }
               currentIndex.value = 0;
               setVisibiliteQcmIndex(0);
               setShowQcm([]);
@@ -1181,12 +1204,14 @@ function QuizBoard(props) {
             const result = await axios.get(
               `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
             );
+            if (result.data.length > 0) {
             //save nombre qcms ////////***************************************************** */
             setSaveQcmsNbrStatique((QcmsNbrStatique) => [
               ...QcmsNbrStatique,
               result.data.length,
             ]);
             //***************************************************************************** */
+          }
             currentIndex.value = 0;
             setVisibiliteQcmIndex(0);
             setShowQcm([]);
@@ -1228,12 +1253,14 @@ function QuizBoard(props) {
             const result = await axios.get(
               `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`
             );
+            if (result.data.length > 0) {
             //save nombre qcms ////////***************************************************** */
             setSaveQcmsNbrStatique((QcmsNbrStatique) => [
               ...QcmsNbrStatique,
               result.data.length,
             ]);
             //***************************************************************************** */
+          }
             currentIndex.value = 0;
             setVisibiliteQcmIndex(0);
             setShowQcm([]);
@@ -1369,6 +1396,7 @@ function QuizBoard(props) {
   //********************************************************************** */
   //********handel qcm change**********************************************
   const handlePrevClick = () => {
+    setExisteNote(false);
     setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
 
@@ -1402,6 +1430,7 @@ function QuizBoard(props) {
   };
 
   const handleNextClick = () => {
+    setExisteNote(false);
     setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
     currentIndex.value = currentIndex.value + 1;
@@ -2047,6 +2076,7 @@ function QuizBoard(props) {
   //*********************************************************** */
   const handleItemClick = (qcmId, qcmIndex) => {
     currentIndex.value = qcmIndex;
+    setExisteNote(false);
     setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
 
@@ -2177,13 +2207,9 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2523,7 +2549,7 @@ function QuizBoard(props) {
                                       height="100%"
                                       width="30"
                                       onClick={(e) => {
-                                        handleNoteQcmBtn();
+                                        handleNoteQcmBtn(qcm.id);
                                       }}
                                     />
                                   </div>
