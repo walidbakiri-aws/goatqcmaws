@@ -17,7 +17,7 @@ import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
 import E from "../compenent/layout/img/E.png";
-
+import axiosRetry from "axios-retry";
 import DateObject from "react-date-object";
 
 import smileimoji from "../compenent/layout/img/smileimoji.png";
@@ -81,6 +81,14 @@ ChartJS.register(
 );
 
 function QuizBoard(props) {
+  // Retry config: 3 retries, with exponential backoff
+  axiosRetry(axios, {
+    retries: 3,
+    retryDelay: axiosRetry.exponentialDelay,
+    retryCondition: (error) => {
+      return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
+    },
+  });
   const Date = new DateObject();
   const sourceBtnSaveQuizz = "saveQuizz";
   const sourceBtnSaveSession = "saveSession";
@@ -719,27 +727,27 @@ function QuizBoard(props) {
                 result.data.length,
               ]);
               //***************************************************************************** */
-            
-            if (
-              props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
-              props.commingFrom !== "savesession" &&
-              props.commingFrom !== "savequizz"
-            ) {
-              newStateEachLineStatique.push([0, 0, result.data.length]);
-              setSaveEachLineStatique(newStateEachLineStatique);
+
+              if (
+                props.backFromCliniqueAllQcmCliniqueprSujet !== true &&
+                props.commingFrom !== "savesession" &&
+                props.commingFrom !== "savequizz"
+              ) {
+                newStateEachLineStatique.push([0, 0, result.data.length]);
+                setSaveEachLineStatique(newStateEachLineStatique);
+              }
+              //****************************************************************************** */
+              //***exception add statiqe session et savequizz********************************* */
+              if (
+                props.savePieStatique === null &&
+                (props.commingFrom === "savesession" ||
+                  props.commingFrom === "savequizz")
+              ) {
+                newStateEachLineStatique.push([0, 0, result.data.length]);
+                setSaveEachLineStatique(newStateEachLineStatique);
+              }
+              //******************************************************************************* */
             }
-            //****************************************************************************** */
-            //***exception add statiqe session et savequizz********************************* */
-            if (
-              props.savePieStatique === null &&
-              (props.commingFrom === "savesession" ||
-                props.commingFrom === "savequizz")
-            ) {
-              newStateEachLineStatique.push([0, 0, result.data.length]);
-              setSaveEachLineStatique(newStateEachLineStatique);
-            }
-            //******************************************************************************* */
-          }
           } catch {
             console.log("qmc not find");
           }
@@ -779,13 +787,13 @@ function QuizBoard(props) {
             `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
           );
           if (result.data.length > 0) {
-          //save nombre qcms ////////***************************************************** */
-          setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-            ...QcmsNbrStatique,
-            result.data.length,
-          ]);
-          //***************************************************************************** */
-        }
+            //save nombre qcms ////////***************************************************** */
+            setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+              ...QcmsNbrStatique,
+              result.data.length,
+            ]);
+            //***************************************************************************** */
+          }
           currentIndex.value = 0;
           setVisibiliteQcmIndex(0);
           setShowQcm([]);
@@ -1045,13 +1053,13 @@ function QuizBoard(props) {
                   `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`
                 );
                 if (result.data.length > 0) {
-                //save nombre qcms ////////***************************************************** */
-                setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                  ...QcmsNbrStatique,
-                  result.data.length,
-                ]);
-                //***************************************************************************** */
-              }
+                  //save nombre qcms ////////***************************************************** */
+                  setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+                    ...QcmsNbrStatique,
+                    result.data.length,
+                  ]);
+                  //***************************************************************************** */
+                }
                 currentIndex.value = 0;
                 setVisibiliteQcmIndex(0);
                 setShowQcm([]);
@@ -1149,13 +1157,13 @@ function QuizBoard(props) {
                 `${BASE_URL}/qcms/getqcqms/biologie/${props.moduleId}/${getCurrentYear}/Biologie`
               );
               if (result.data.length > 0) {
-              //save nombre qcms ////////***************************************************** */
-              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-                ...QcmsNbrStatique,
-                result.data.length,
-              ]);
-              //***************************************************************************** */
-            }
+                //save nombre qcms ////////***************************************************** */
+                setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+                  ...QcmsNbrStatique,
+                  result.data.length,
+                ]);
+                //***************************************************************************** */
+              }
               currentIndex.value = 0;
               setVisibiliteQcmIndex(0);
               setShowQcm([]);
@@ -1205,13 +1213,13 @@ function QuizBoard(props) {
               `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
             );
             if (result.data.length > 0) {
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-              ...QcmsNbrStatique,
-              result.data.length,
-            ]);
-            //***************************************************************************** */
-          }
+              //save nombre qcms ////////***************************************************** */
+              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+                ...QcmsNbrStatique,
+                result.data.length,
+              ]);
+              //***************************************************************************** */
+            }
             currentIndex.value = 0;
             setVisibiliteQcmIndex(0);
             setShowQcm([]);
@@ -1254,13 +1262,13 @@ function QuizBoard(props) {
               `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`
             );
             if (result.data.length > 0) {
-            //save nombre qcms ////////***************************************************** */
-            setSaveQcmsNbrStatique((QcmsNbrStatique) => [
-              ...QcmsNbrStatique,
-              result.data.length,
-            ]);
-            //***************************************************************************** */
-          }
+              //save nombre qcms ////////***************************************************** */
+              setSaveQcmsNbrStatique((QcmsNbrStatique) => [
+                ...QcmsNbrStatique,
+                result.data.length,
+              ]);
+              //***************************************************************************** */
+            }
             currentIndex.value = 0;
             setVisibiliteQcmIndex(0);
             setShowQcm([]);
@@ -2207,9 +2215,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"

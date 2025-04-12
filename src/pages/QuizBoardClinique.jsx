@@ -42,7 +42,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import dropright from "../compenent/layout/img/dropright.png";
 import { useStopwatch } from "react-timer-hook";
 import { IoPlayCircleOutline } from "react-icons/io5";
-
+import axiosRetry from "axios-retry";
 import { IoPauseCircleOutline } from "react-icons/io5";
 import { MdOutlineReplay } from "react-icons/md";
 import { TfiClose } from "react-icons/tfi";
@@ -72,6 +72,14 @@ ChartJS.register(
   BarElement
 );
 function QuizBoardClinique(props) {
+  // Retry config: 3 retries, with exponential backoff
+axiosRetry(axios, {
+  retries: 3,
+  retryDelay: axiosRetry.exponentialDelay,
+  retryCondition: (error) => {
+    return axiosRetry.isNetworkError(error) || error.code === 'ECONNABORTED';
+  },
+});
   const Date = new DateObject();
   const sourceSaveQuizzBtn = "savequizzsource";
   const sourceSaveSessionBtn = "savesessionsource";

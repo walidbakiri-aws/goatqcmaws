@@ -1057,7 +1057,7 @@ function Quiz() {
                             <h6
                               className={`${classes.typesujeth6} form-check-label `}
                             >
-                              Sélectionner Tous
+                              Selectionner tous
                             </h6>
                           </div>
                         </div>
@@ -1295,7 +1295,7 @@ function Quiz() {
                                 onChange={handleSelectAllCours}
                               />
                               <label className="form-check-label fs-6 ">
-                                Selecionner Tous
+                                Selectionner tous
                               </label>
                             </div>
                           </div>
