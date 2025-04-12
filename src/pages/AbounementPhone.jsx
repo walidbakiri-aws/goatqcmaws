@@ -29,9 +29,11 @@ function AbounementPhone() {
       <div className={classes.fullpub}>
         <div className={classes.parcoursujetpub_phone}>
           <div className={classes.parcoursujetpubtext_phone}>
-            Révision intelligente, double efficacité ! 🚀 Par cours →
-            Progression structurée | 🎯 Par sujets → Maîtrise ciblée Préparation
-            simplifiée ↠maximisez votreréussite ! ✨
+            Révision intelligente, double efficacité ! <br />
+            🚀 Par cours →<br />
+            Progression structurée <br />
+            🎯 Par sujets →<br /> Maîtrise ciblée Préparation simplifiée
+            ↠maximisez votreréussite ! ✨
           </div>
           <div className={classes.deuxversionlogin}>
             <img
@@ -44,8 +46,11 @@ function AbounementPhone() {
         <div className={classes.statique_phone}>
           <div className={classes.statiquetext_phone}>
             📊 Statistiques de Réponses : Votre Boussole Pédagogique ! 🔍
+            <br />
             Analysez les tendances, suivez la progression, agissez avec
-            précision. Des données claires pour des décisions éclairées ! 🚀
+            précision.
+            <br />
+            Des données claires pour des décisions éclairées ! 🚀
           </div>
           <div className={classes.statiqueicon}>
             <img style={{ width: 200, height: 240 }} src={statique}></img>
