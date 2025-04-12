@@ -373,27 +373,21 @@ function Quiz() {
       });
 
       //**************get min max multiople cours */
-      for (let indexCour = 0; indexCour < AllCours.length; indexCour++) {
-        try {
-          const result = await axios.get(
-            `https://goatqcm-instance.com/qcms/get_minmax_year/${AllCours[indexCour].id}/${QcmTypeSelectedRsdntExetrnt}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          if (result.data.length > 0) {
-            setMinYearMultipleCours((minYear) => [...minYear, result.data[0]]);
 
-            setMaxYearMultipleCours((maxYear) => [...maxYear, result.data[1]]);
-          }
-        } catch (Exception) {
-          console.log("no year of this qcm");
-        }
+      if (SelectedSourceExmn.value === "Résidanat Blida") {
+        setMinYearMultipleCours((minYear) => [...minYear, "2015"]);
+
+        setMaxYearMultipleCours((maxYear) => [...maxYear, "2025"]);
+      } else if (SelectedSourceExmn.value === "Externat Blida") {
+        setMinYearMultipleCours((minYear) => [...minYear, "2017"]);
+
+        setMaxYearMultipleCours((maxYear) => [...maxYear, "2025"]);
       }
 
       //**************get min max multiople cours */
-
-      for (let indexCour = 0; indexCour < AllCours.length; indexCour++) {
+      let indexCour = 0;
+      let isFind = false;
+      while (indexCour < AllCours.length && isFind === false) {
         try {
           const resultClinique = await axios.get(
             `https://goatqcm-instance.com/casclinique/get_minmax_year/${AllCours[indexCour].id}/${QcmTypeSelectedRsdntExetrnt}`,
@@ -402,21 +396,43 @@ function Quiz() {
             }
           );
 
-          console.log(AllCours[indexCour]);
-          if (resultClinique.data.length > 0) {
-            setMinYearMultipleCoursClinique((minYear) => [
-              ...minYear,
-              resultClinique.data[0],
-            ]);
+          if (SelectedSourceExmn.value === "Résidanat Blida") {
+            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2015"]);
 
-            setMaxYearMultipleCoursClinique((maxYear) => [
-              ...maxYear,
-              resultClinique.data[1],
-            ]);
+            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+          } else if (SelectedSourceExmn.value === "Externat Blida") {
+            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2017"]);
+
+            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+          }
+          if (resultClinique.data.length > 0) {
+            if (SelectedSourceExmn.value === "Résidanat Blida") {
+              setMinYearMultipleCoursClinique((minYear) => [
+                ...minYear,
+                "2015",
+              ]);
+
+              setMaxYearMultipleCoursClinique((maxYear) => [
+                ...maxYear,
+                "2025",
+              ]);
+            } else if (SelectedSourceExmn.value === "Externat Blida") {
+              setMinYearMultipleCoursClinique((minYear) => [
+                ...minYear,
+                "2017",
+              ]);
+
+              setMaxYearMultipleCoursClinique((maxYear) => [
+                ...maxYear,
+                "2025",
+              ]);
+            }
+            isFind = true;
           }
         } catch (Exception) {
           console.log("no year of this casClinique");
         }
+        indexCour++;
       }
     } else {
       setSelectMultipleCours("");
