@@ -91,7 +91,7 @@
   display: block;
   width: 224px;
   max-width: 100%;
-  margin-left: 43px;
+  margin-left: 45px;
   overflow: hidden;
   position: relative;
   transform: translatez(0);
@@ -242,13 +242,10 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, -1);
   cursor: pointer;
   font-size: 16px;
-
-  font-weight: 700;
 }
 .wrapperregisterlinkphone {
   text-align: center;
   margin-top: 20px;
-  margin-left: 18px;
 }
 .registertbn_phone button {
   border: transparent;
