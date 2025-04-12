@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import BtnAdd from "../compenent/layout/BtnAdd";
 import NavigationBar from "../compenent/layout/NavigationBar";
 import classes from "./Quiz.module.css";
@@ -12,6 +12,9 @@ import { useMediaQuery } from "react-responsive";
 import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 function Quiz() {
+  const radioRefs = useRef([]);
+  const checkBoxAllCoursRefs = useRef([]);
+
   const refreshPage = useSignal(0);
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   const token = localStorage.getItem("tokengoat");
@@ -178,6 +181,11 @@ function Quiz() {
   //******************************************************************* */
   //*******handle Change Module**********************************************
   const handleChangeModule = (e) => {
+    /****type qcm  iniialisation************** */
+    radioRefs.current.forEach((radio) => {
+      if (radio) radio.checked = false;
+    });
+    /****************************************** */
     setSelectMultipleCours([]); //initialiszer for check each time change module
     setMinMaxYearFinal([]);
     setMaxYearValue("");
@@ -344,7 +352,27 @@ function Quiz() {
     }
   };
   //****************************************************************************/
+  //*******handle handleChangeCours************************************************
+  const handleSelectAllCours = async (e) => {
+    //****get single cour****************************************************** */
+    if (e.target.checked) {
+      setSelectedCours([
+        ...SelectedCours,
+        ...AllCours.map((course) => course.id),
+      ]);
+      checkBoxAllCoursRefs.current.forEach((radio) => {
+        if (radio) radio.checked = true;
+      });
+    } else {
+      setSelectedCours("");
+      checkBoxAllCoursRefs.current.forEach((radio) => {
+        if (radio) radio.checked = false;
+      });
+    }
 
+    //************************************************************************ */
+  };
+  //****************************************************************************** */
   //*******qcm casclinique toutes************************************************
   const handleRadioQcmType = (e) => {
     console.log(SelectedCoursCommencerBtn);
@@ -939,26 +967,47 @@ function Quiz() {
                   </div>
                   <div className={classes.childmodulecoursdiv}>
                     {VisibleParCourDiv && (
-                      <div className="form-check">
-                        {AllCours.map((cour, index) => (
-                          <div key={cour.id} className={classes.moduleitem}>
+                      <>
+                        <div className="form-check">
+                          <div className={classes.moduleitem}>
                             <input
                               className="form-check-input fs-6 "
                               type="checkbox"
                               name="flexRadioDefaultCours"
-                              id={cour.coursName}
-                              value={cour.id}
-                              onChange={handleChangeCours}
+                              onChange={handleSelectAllCours}
                             />
 
                             <h6
                               className={`${classes.typesujeth6} form-check-label `}
                             >
-                              {cour.coursName}
+                              Sélectionner Tous{" "}
                             </h6>
-                          </div>
-                        ))}
-                      </div>
+                          </div>{" "}
+                        </div>
+                        <div className="form-check">
+                          {AllCours.map((cour, index) => (
+                            <div key={cour.id} className={classes.moduleitem}>
+                              <input
+                                className="form-check-input fs-6 "
+                                type="checkbox"
+                                name="flexRadioDefaultCours"
+                                ref={(el) =>
+                                  (checkBoxAllCoursRefs.current[index] = el)
+                                }
+                                id={cour.coursName}
+                                value={cour.id}
+                                onChange={handleChangeCours}
+                              />
+
+                              <h6
+                                className={`${classes.typesujeth6} form-check-label `}
+                              >
+                                {cour.coursName}
+                              </h6>
+                            </div>
+                          ))}
+                        </div>
+                      </>
                     )}
                   </div>
                   <div className={classes.vlmodule}></div>
@@ -984,6 +1033,7 @@ function Quiz() {
                             className="form-check-input fs-6 "
                             type="radio"
                             name="typeqcm"
+                            ref={(el) => (radioRefs.current[index] = el)}
                             value={typeQcm}
                             id={typeQcm}
                             onChange={handleRadioQcmType}
