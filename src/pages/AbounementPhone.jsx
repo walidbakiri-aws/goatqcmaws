@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import classes from "./AbounementPhone.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import ramadan from "../compenent/layout/img/Ramadan.png";
-
+import deuxversionlogin from "../compenent/layout/img/deuxversionlogin.png";
+import statique from "../compenent/layout/img/statique.jpg";
 import "react-toastify/dist/ReactToastify.css";
 
 function AbounementPhone() {
@@ -25,6 +26,33 @@ function AbounementPhone() {
 
   return (
     <>
+      <div className={classes.fullpub}>
+        <div className={classes.parcoursujetpub_phone}>
+          <div className={classes.parcoursujetpubtext_phone}>
+            Révision intelligente, double efficacité ! 🚀 Par cours →
+            Progression structurée | 🎯 Par sujets → Maîtrise ciblée Préparation
+            simplifiée ↠maximisez votreréussite ! ✨
+          </div>
+          <div className={classes.deuxversionlogin}>
+            <img
+              style={{ width: 240, height: 200 }}
+              src={deuxversionlogin}
+            ></img>
+          </div>
+        </div>
+        <hr className={`${classes.hr_phone} `} />
+        <div className={classes.statique_phone}>
+          <div className={classes.statiquetext_phone}>
+            📊 Statistiques de Réponses : Votre Boussole Pédagogique ! 🔍
+            Analysez les tendances, suivez la progression, agissez avec
+            précision. Des données claires pour des décisions éclairées ! 🚀
+          </div>
+          <div className={classes.statiqueicon}>
+            <img style={{ width: 200, height: 240 }} src={statique}></img>
+          </div>
+        </div>
+        <hr className={`${classes.hr_phone} `} />
+      </div>
       <div className={classes.cardfinal_phone}>
         <div className={`${classes.card_title_phone}`}>
           <h2>Résidanat 2025</h2>

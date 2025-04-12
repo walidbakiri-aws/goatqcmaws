@@ -1,7 +1,62 @@
+.fullpub {
+  width: 95%;
+  height: auto;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+.parcoursujetpub_phone {
+  width: 100%;
+  height: 330px;
+}
+.parcoursujetpubtext_phone {
+  margin-left: 10px;
+  width: 100%;
+  height: 130px;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6; /* Améliore la lisibilité */
+  color: rgb(148, 139, 139);
+}
+.statique_phone {
+  width: 100%;
+  height: 380px;
+}
+.statiquetext_phone {
+  margin-left: 10px;
+  width: 100%;
+  height: 130px;
+
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6; /* Améliore la lisibilité */
+  color: rgb(148, 139, 139);
+}
+.statiqueicon {
+  margin-left: 43px;
+}
+.deuxversionlogin {
+  width: 100%;
+  height: 160px;
+  margin-left: 25px;
+}
+.hr_phone {
+  height: 1px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(13, 8, 96, 1) 0%,
+    rgba(9, 9, 121, 1) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
 .cardfinal_phone {
   margin-top: 10px;
   margin-bottom: 5px;
-  margin-left: 40px;
+  margin-left: 30px;
   width: 250px;
   height: 300px;
   padding: 10px 0;
