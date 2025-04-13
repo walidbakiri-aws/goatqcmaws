@@ -1348,6 +1348,7 @@ function Quiz() {
                       {typeQcmCasClinique.map((typeQcm, index) => (
                         <div key={index} className={classes.typeqcm_phone}>
                           <input
+                            ref={(el) => (radioRefs.current[index] = el)}
                             className="form-check-input fs-6 "
                             type="radio"
                             name="typeqcm"
