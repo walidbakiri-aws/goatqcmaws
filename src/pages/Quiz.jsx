@@ -361,6 +361,7 @@ function Quiz() {
   //****************************************************************************/
   //*******handle handleChangeCours************************************************
   const handleSelectAllCours = async (e) => {
+    setVisibleMinMaxYear(false);
     console.log(AllCours.length);
     //****get single cour****************************************************** */
     if (e.target.checked) {
@@ -390,22 +391,23 @@ function Quiz() {
       while (indexCour < AllCours.length && isFind === false) {
         try {
           const resultClinique = await axios.get(
-            `https://goatqcm-instance.com/casclinique/get_minmax_year/${AllCours[indexCour].id}/${QcmTypeSelectedRsdntExetrnt}`,
+            `http://localhost:8080/casclinique/get_minmax_year/${AllCours[indexCour].id}/${QcmTypeSelectedRsdntExetrnt}`,
             {
               headers: { Authorization: `Bearer ${token}` },
             }
           );
 
-          if (SelectedSourceExmn.value === "Résidanat Blida") {
-            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2015"]);
-
-            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
-          } else if (SelectedSourceExmn.value === "Externat Blida") {
-            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2017"]);
-
-            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
-          }
+          /*  if (SelectedSourceExmn.value === "Résidanat Blida") {
+              setMinYearMultipleCoursClinique((minYear) => [...minYear, "2015"]);
+  
+              setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+            } else if (SelectedSourceExmn.value === "Externat Blida") {
+              setMinYearMultipleCoursClinique((minYear) => [...minYear, "2017"]);
+  
+              setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+            }*/
           if (resultClinique.data.length > 0) {
+            setVisibleMinMaxYear(true);
             if (SelectedSourceExmn.value === "Résidanat Blida") {
               setMinYearMultipleCoursClinique((minYear) => [
                 ...minYear,
@@ -432,7 +434,11 @@ function Quiz() {
         } catch (Exception) {
           console.log("no year of this casClinique");
         }
+
         indexCour++;
+        if (indexCour === AllCours.length) {
+          setVisibleMinMaxYear(true);
+        }
       }
     } else {
       setSelectMultipleCours("");
