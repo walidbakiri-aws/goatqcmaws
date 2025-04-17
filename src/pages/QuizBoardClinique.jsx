@@ -777,6 +777,9 @@ function QuizBoardClinique(props) {
           donePropoShow.value === true &&
           incCour.value < props.selectMultipleCours.length
         ) {
+          if( incCours.value === props.selectMultipleCours.length-1){
+            setShowCancelQuizzPhone(true);
+          }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
           AllNbrQcmsOfCourEachCasCliniqe.value = 0;
           console.log("get clinique of this cour");
@@ -874,6 +877,9 @@ function QuizBoardClinique(props) {
           donePropoShow.value === true &&
           incCour.value < props.selectMultipleCours.length
         ) {
+          if( incCours.value === props.selectMultipleCours.length-1){
+            setShowCancelQuizzPhone(true);
+          }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
           AllNbrQcmsOfCourEachCasCliniqe.value = 0;
           console.log("get clinique of this cour");
@@ -1357,16 +1363,13 @@ function QuizBoardClinique(props) {
         }
 
         setShowPorposition((p) => [...p, getQcms.value[clncIdex]]);
-        if (
-          clncIdex === getCasClinique.value.length - 1 &&
-          incCour.value === props.selectMultipleCours.length
-        ) {
+        if (clncIdex === getCasClinique.value.length ) {
           console.log("done upload qcmss");
           console.log("done upload qcmss");
           indexCurrentCalinique.value = getCasClinique.value.length;
           const doneLoadPropo = true;
           loadCasClinique(doneLoadPropo);
-          setShowCancelQuizzPhone(true);
+          
           //*****save quizz**************************************** */
           if (props.qcmType === "Cas Clinique") {
             if (props.commingFrom === "quizz") {
