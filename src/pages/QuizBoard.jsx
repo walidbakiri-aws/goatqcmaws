@@ -1326,7 +1326,10 @@ function QuizBoard(props) {
         const result = await axios.get(
           `${BASE_URL}/qcms/${getQcms.value[increment].id}/reponses`
         );
-        if (increment === getQcms.value.length - 1) {
+        if (
+          increment === getQcms.value.length - 1 &&
+          incCours.value  === props.selectMultipleCours.length
+        ) {
           setShowCancelQuizzPhone(true);
           if (props.qcmType === "Qcm") {
             if (props.commingFrom === "quizz") {

@@ -397,15 +397,6 @@ function Quiz() {
             }
           );
 
-          /* if (SelectedSourceExmn.value === "Résidanat Blida") {
-            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2015"]);
-
-            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
-          } else if (SelectedSourceExmn.value === "Externat Blida") {
-            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2017"]);
-
-            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
-          }*/
           if (resultClinique.data.length > 0) {
             setVisibleMinMaxYear(true);
             if (SelectedSourceExmn.value === "Résidanat Blida") {

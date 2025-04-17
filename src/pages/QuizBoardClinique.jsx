@@ -1357,7 +1357,10 @@ function QuizBoardClinique(props) {
         }
 
         setShowPorposition((p) => [...p, getQcms.value[clncIdex]]);
-        if (clncIdex === getCasClinique.value.length - 1) {
+        if (
+          clncIdex === getCasClinique.value.length - 1 &&
+          incCour.value === props.selectMultipleCours.length
+        ) {
           console.log("done upload qcmss");
           console.log("done upload qcmss");
           indexCurrentCalinique.value = getCasClinique.value.length;
