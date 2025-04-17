@@ -703,9 +703,6 @@ function QuizBoard(props) {
           doneUplaodQcm.value === true &&
           incCours.value < props.selectMultipleCours.length
         ) {
-          if (incCours.value === props.selectMultipleCours.length) {
-            setShowCancelQuizzPhone(true);
-          }
           doneUplaodQcm.value = false;
           try {
             const result = await axios.get(
@@ -840,9 +837,6 @@ function QuizBoard(props) {
             doneUplaodQcm.value === true &&
             incCours.value < props.selectMultipleCours.length
           ) {
-            if (incCours.value === props.selectMultipleCours.length) {
-              setShowCancelQuizzPhone(true);
-            }
             doneUplaodQcm.value = false;
             try {
               const result = await axios.get(
@@ -947,9 +941,6 @@ function QuizBoard(props) {
             doneUplaodQcm.value === true &&
             incCours.value < props.selectMultipleCours.length
           ) {
-            if (incCours.value === props.selectMultipleCours.length) {
-              setShowCancelQuizzPhone(true);
-            }
             doneUplaodQcm.value = false;
             try {
               const result = await axios.get(
@@ -1336,6 +1327,7 @@ function QuizBoard(props) {
           `${BASE_URL}/qcms/${getQcms.value[increment].id}/reponses`
         );
         if (increment === getQcms.value.length - 1) {
+          setShowCancelQuizzPhone(true);
           if (props.qcmType === "Qcm") {
             if (props.commingFrom === "quizz") {
               console.log("hupaa");
