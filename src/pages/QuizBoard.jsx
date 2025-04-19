@@ -83,7 +83,7 @@ ChartJS.register(
 function QuizBoard(props) {
   // Retry config: 3 retries, with exponential backoff
   axiosRetry(axios, {
-    retries: 6,
+    retries: 3,
     retryDelay: axiosRetry.exponentialDelay,
     retryCondition: (error) => {
       return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
@@ -510,7 +510,7 @@ function QuizBoard(props) {
     formData.append("desc", description);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post("https://goatqcm-instance.com/image/uploadesc", formData, {
+      .post("http://localhost:8080/image/uploadesc", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -703,6 +703,10 @@ function QuizBoard(props) {
           doneUplaodQcm.value === true &&
           incCours.value < props.selectMultipleCours.length
         ) {
+          if (incCours.value === props.selectMultipleCours.length - 1) {
+            setShowCancelQuizzPhone(true);
+            console.log("we good show it");
+          }
           doneUplaodQcm.value = false;
           try {
             const result = await axios.get(
@@ -837,6 +841,9 @@ function QuizBoard(props) {
             doneUplaodQcm.value === true &&
             incCours.value < props.selectMultipleCours.length
           ) {
+            if (incCours.value === props.selectMultipleCours.length - 1) {
+              setShowCancelQuizzPhone(true);
+            }
             doneUplaodQcm.value = false;
             try {
               const result = await axios.get(
@@ -941,6 +948,9 @@ function QuizBoard(props) {
             doneUplaodQcm.value === true &&
             incCours.value < props.selectMultipleCours.length
           ) {
+            if (incCours.value === props.selectMultipleCours.length - 1) {
+              setShowCancelQuizzPhone(true);
+            }
             doneUplaodQcm.value = false;
             try {
               const result = await axios.get(
@@ -1327,7 +1337,6 @@ function QuizBoard(props) {
           `${BASE_URL}/qcms/${getQcms.value[increment].id}/reponses`
         );
         if (increment === getQcms.value.length - 1) {
-          setShowCancelQuizzPhone(true);
           if (props.qcmType === "Qcm") {
             if (props.commingFrom === "quizz") {
               console.log("hupaa");
@@ -2384,52 +2393,54 @@ function QuizBoard(props) {
                   </div>
                 )}
                 <div className={classes.container_save_qcm_timer}>
-                  <div className={classes.full_save_qcm}>
-                    {showSaveSessionQcmBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          handleSaveQcmQuizz(sourceBtnSaveSession);
-                        }}
-                      >
-                        Fin Session
-                      </button>
-                    )}
-                    {showUpdateSessionQcmBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          handleUpdateQcmQuizz();
-                        }}
-                      >
-                        Save Modification
-                      </button>
-                    )}
-                    {showSaveQcmBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          setModalSaveQuizzIsOpen(true);
-                        }}
-                      >
-                        Sauvegarder Qcm
-                      </button>
-                    )}
-                    {showUpdateQcmBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          handleUpdateQcmQuizz();
-                        }}
-                      >
-                        Save modification
-                      </button>
-                    )}
-                  </div>
+                  {ShowCancelQuizzPhone && (
+                    <div className={classes.full_save_qcm}>
+                      {showSaveSessionQcmBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            handleSaveQcmQuizz(sourceBtnSaveSession);
+                          }}
+                        >
+                          Fin Session
+                        </button>
+                      )}
+                      {showUpdateSessionQcmBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            handleUpdateQcmQuizz();
+                          }}
+                        >
+                          Save Modification
+                        </button>
+                      )}
+                      {showSaveQcmBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            setModalSaveQuizzIsOpen(true);
+                          }}
+                        >
+                          Sauvegarder Qcm
+                        </button>
+                      )}
+                      {showUpdateQcmBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            handleUpdateQcmQuizz();
+                          }}
+                        >
+                          Save modification
+                        </button>
+                      )}
+                    </div>
+                  )}
                   <div className={classes.fullchronotime}>
                     <div className={classes.timediv}>
                       <span>

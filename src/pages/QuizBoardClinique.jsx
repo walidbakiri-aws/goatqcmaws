@@ -15,7 +15,7 @@ import A from "../compenent/layout/img/A.png";
 import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
-
+import axiosRetry from "axios-retry";
 import E from "../compenent/layout/img/E.png";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
 import externatlogo from "../compenent/layout/externatlogo.svg";
@@ -42,7 +42,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import dropright from "../compenent/layout/img/dropright.png";
 import { useStopwatch } from "react-timer-hook";
 import { IoPlayCircleOutline } from "react-icons/io5";
-import axiosRetry from "axios-retry";
+
 import { IoPauseCircleOutline } from "react-icons/io5";
 import { MdOutlineReplay } from "react-icons/md";
 import { TfiClose } from "react-icons/tfi";
@@ -72,14 +72,6 @@ ChartJS.register(
   BarElement
 );
 function QuizBoardClinique(props) {
-  // Retry config: 3 retries, with exponential backoff
-  axiosRetry(axios, {
-    retries: 6,
-    retryDelay: axiosRetry.exponentialDelay,
-    retryCondition: (error) => {
-      return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
-    },
-  });
   const Date = new DateObject();
   const sourceSaveQuizzBtn = "savequizzsource";
   const sourceSaveSessionBtn = "savesessionsource";
@@ -190,7 +182,7 @@ function QuizBoardClinique(props) {
   const getSavVal = useSignal([]);
   //****************************************************************** */
   //***********description methodes********************************************************* */
-
+  const waliss = "";
   //*****description variable********************** */
   const [file, setFile] = useState();
   const [fileEdite, setFileEdite] = useState();
@@ -551,10 +543,7 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(
-        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
-        formData
-      )
+      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -574,15 +563,11 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post(
-        "https://goatqcm-instance.com/image/clinique/uploadimage",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -777,6 +762,10 @@ function QuizBoardClinique(props) {
           donePropoShow.value === true &&
           incCour.value < props.selectMultipleCours.length
         ) {
+          if (incCour.value === props.selectMultipleCours.length - 1) {
+            console.log(incCours.value);
+            setShowCancelQuizzPhone(true);
+          }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
           AllNbrQcmsOfCourEachCasCliniqe.value = 0;
           console.log("get clinique of this cour");
@@ -874,6 +863,10 @@ function QuizBoardClinique(props) {
           donePropoShow.value === true &&
           incCour.value < props.selectMultipleCours.length
         ) {
+          if (incCour.value === props.selectMultipleCours.length - 1) {
+            console.log(incCours.value);
+            setShowCancelQuizzPhone(true);
+          }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
           AllNbrQcmsOfCourEachCasCliniqe.value = 0;
           console.log("get clinique of this cour");
@@ -1455,7 +1448,7 @@ function QuizBoardClinique(props) {
               }
 
               //******************************************************** */
-              console.log("fin get propo");
+              console.log("fin get propo done");
             });
 
           //***********save empty propo ****************************************** */
@@ -1843,12 +1836,9 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(
-        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2349,13 +2339,9 @@ function QuizBoardClinique(props) {
     //******************************************************************************** */
     saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2500,13 +2486,9 @@ function QuizBoardClinique(props) {
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2514,7 +2496,7 @@ function QuizBoardClinique(props) {
 
         if (fullSessionsListeLength >= 5) {
           handleDeleteSession();
-          console.log("succes deleting d");
+          console.log("succes deleting");
         }
         navigateHome("/goatqcm", {
           state: {
@@ -2782,104 +2764,106 @@ function QuizBoardClinique(props) {
                 data-theme={isDark ? "dark" : "light"}
               >
                 <div className={classes.container_save_casclinique_timer}>
-                  <div className={classes.full_save_casclinique}>
-                    {showSaveCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          setModalSaveQuizzIsOpen(true);
-                        }}
-                      >
-                        Sauvegarder CasClinique
-                      </button>
-                    )}
-                    {showUpdateCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          handleUpdateCasCliniqueQuizz();
-                        }}
-                      >
-                        Save modification
-                      </button>
-                    )}
-                    {showSaveQcmCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          setModalSaveQuizzIsOpen(true);
-                        }}
-                      >
-                        Sauvegarder Quizz
-                      </button>
-                    )}
-                    {showUpdateQcmCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          handleUpdateQcmCasCliniqueQuizz();
-                        }}
-                      >
-                        Save modification
-                      </button>
-                    )}
+                  {ShowCancelQuizzPhone && (
+                    <div className={classes.full_save_casclinique}>
+                      {showSaveCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            setModalSaveQuizzIsOpen(true);
+                          }}
+                        >
+                          Sauvegarder CasClinique
+                        </button>
+                      )}
+                      {showUpdateCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-info"
+                          onClick={() => {
+                            handleUpdateCasCliniqueQuizz();
+                          }}
+                        >
+                          Save modification
+                        </button>
+                      )}
+                      {showSaveQcmCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            setModalSaveQuizzIsOpen(true);
+                          }}
+                        >
+                          Sauvegarder Quizz
+                        </button>
+                      )}
+                      {showUpdateQcmCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-info"
+                          onClick={() => {
+                            handleUpdateQcmCasCliniqueQuizz();
+                          }}
+                        >
+                          Save modification
+                        </button>
+                      )}
 
-                    {showSaveSessionCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          handleSaveCasCliniqueQuizz(
-                            sourceSessionName,
-                            sourceSaveSessionBtn
-                          );
-                        }}
-                      >
-                        Fin Session
-                      </button>
-                    )}
-                    {showUpdateSessionCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          handleUpdateCasCliniqueQuizz();
-                        }}
-                      >
-                        Save Modification
-                      </button>
-                    )}
+                      {showSaveSessionCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            handleSaveCasCliniqueQuizz(
+                              sourceSessionName,
+                              sourceSaveSessionBtn
+                            );
+                          }}
+                        >
+                          Fin Session
+                        </button>
+                      )}
+                      {showUpdateSessionCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-info"
+                          onClick={() => {
+                            handleUpdateCasCliniqueQuizz();
+                          }}
+                        >
+                          Save Modification
+                        </button>
+                      )}
 
-                    {showSaveSessionQcmCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={() => {
-                          handleSaveQcmCasCliniqueQuizz(
-                            sourceSessionName,
-                            sourceSaveSessionBtn
-                          );
-                        }}
-                      >
-                        Fin Session
-                      </button>
-                    )}
-                    {showUpdateSessionQcmCasCliniqueBtn && (
-                      <button
-                        type="button"
-                        className="btn btn-info"
-                        onClick={() => {
-                          handleUpdateQcmCasCliniqueQuizz();
-                        }}
-                      >
-                        Save modification
-                      </button>
-                    )}
-                  </div>
+                      {showSaveSessionQcmCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-primary"
+                          onClick={() => {
+                            handleSaveQcmCasCliniqueQuizz(
+                              sourceSessionName,
+                              sourceSaveSessionBtn
+                            );
+                          }}
+                        >
+                          Fin Session
+                        </button>
+                      )}
+                      {showUpdateSessionQcmCasCliniqueBtn && (
+                        <button
+                          type="button"
+                          className="btn btn-info"
+                          onClick={() => {
+                            handleUpdateQcmCasCliniqueQuizz();
+                          }}
+                        >
+                          Save modification
+                        </button>
+                      )}
+                    </div>
+                  )}
 
                   <div className={classes.fullchronotime}>
                     <div className={classes.timediv}>

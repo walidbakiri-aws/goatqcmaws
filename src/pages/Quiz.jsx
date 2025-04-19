@@ -905,7 +905,7 @@ function Quiz() {
         moduleName: moduleName.value,
         courId: SelectedCours[0],
         checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
-        qcmType: QcmTypeSelected.value,
+        qcmType: ExisteCasClinique ? QcmTypeSelected.value : "Qcm",
         QcmSujetTypeSelected: QcmTypeParSjtParCours,
         SelectedSourceExmn: QcmTypeSelectedRsdntExetrnt,
         minYearQcm: MinYearValue,
