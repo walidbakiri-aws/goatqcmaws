@@ -33,8 +33,8 @@
   background-color: rgb(223, 220, 226);
 }
 .eachsession {
-  margin-left: 50px;
-  width: 800px;
+  margin-left: 150px;
+  width: 600px;
   height: 100px;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -42,33 +42,37 @@
   background-color: rgb(246, 248, 248);
   display: flex;
 }
-.playicondiv {
+.full_module_iconplay {
   left: 0px;
   float: left;
-  width: 150px;
+  width: 400px;
   height: 100%;
-  border-radius: 10px;
-
-  padding-top: 20px;
+  padding-top: 5px;
   padding-left: 30px;
 }
 .modulename {
-  padding-top: 30px;
+  padding-top: 5px;
   padding-left: 10px;
   left: 0px;
   float: left;
   width: 200px;
-  height: 100%;
+  height: 30px;
   border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(138, 141, 141);
 }
-.quizztype {
-  padding-top: 30px;
-  padding-left: 10px;
-  left: 0px;
-  float: left;
-  width: 200px;
-  height: 100%;
+.playicondiv {
+  border: 3px solid #9d00ff;
   border-radius: 10px;
+  width: 300px;
+  height: 40px;
+  display: flex;
+  margin-top: 10px;
+  padding-left: 6px;
+  padding-top: 3px;
+}
+.icondiv {
+  margin-right: 10px;
 }
 .yearquizz {
   padding-top: 30px;
@@ -78,6 +82,61 @@
   width: 200px;
   height: 100%;
   border-radius: 10px;
+  color: rgb(105, 114, 111);
+}
+.threepoint {
+  float: right;
+  right: 0px;
+  margin-top: 20px;
+  margin-right: 5px;
+}
+.quizzdiv_container {
+  position: relative;
+  margin-top: 50px;
+}
+.detail {
+  width: 120px;
+  height: 70px;
+
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 1;
+
+  color: var(--primary-text-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.detail button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+.hr_desk {
+  margin-left: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(159, 157, 202) 0%,
+    rgb(159, 157, 202) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }
 /*****phone****************************************************/
 .contanerspace_phone {
@@ -102,39 +161,109 @@
 .eachsession_phone {
   margin-left: 5px;
   width: 320px;
-  height: 80px;
+  height: 85px;
   margin-top: 20px;
   margin-bottom: 10px;
   border-radius: 10px;
   background-color: rgb(246, 248, 248);
   display: flex;
 }
-.playicondiv_phone {
+
+.full_module_iconplay_phone {
   left: 0px;
   float: left;
-  width: 80px;
+  width: 100x;
   height: 100%;
-  border-radius: 10px;
-
-  padding-top: 15px;
+  padding-top: 5px;
   padding-left: 5px;
 }
 .modulename_phone {
-  padding-top: 15px;
-  padding-left: 5px;
-  left: 0px;
-  float: left;
-  width: 100px;
-  height: 100%;
-  border-radius: 10px;
-}
-.quizztype_phone {
   padding-top: 5px;
-  padding-left: 15px;
+  padding-left: 10px;
   left: 0px;
   float: left;
   width: 100px;
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(138, 141, 141);
+}
+.playicondiv_phone {
+  border: 3px solid #9d00ff;
+  border-radius: 10px;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  margin-top: 10px;
+  padding-left: 6px;
+  padding-top: 3px;
+  padding-bottom: 10px;
+}
+.icondiv_phone {
+  margin-right: 10px;
+}
+.yearquizz_phone {
+  padding-top: 20px;
+  padding-left: 5px;
+
+  left: 0px;
+  float: left;
+  width: 50px;
   height: 100%;
   border-radius: 10px;
-  margin-left: 10px;
+  color: rgb(105, 114, 111);
+}
+.threepoint_phone {
+  float: right;
+  right: 0px;
+  margin-top: 25px;
+  margin-right: 5px;
+}
+.quizzdiv_container_phone {
+  position: relative;
+  margin-top: 50px;
+}
+.detail_phone {
+  width: 120px;
+  height: 70px;
+
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 1;
+
+  color: var(--primary-text-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.detail_phone button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail_phone button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+.hr_desk_phone {
+  margin-left: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(159, 157, 202) 0%,
+    rgb(159, 157, 202) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
 }

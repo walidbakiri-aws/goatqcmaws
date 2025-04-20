@@ -4,9 +4,9 @@ import axios from "axios";
 import { useMediaQuery } from "react-responsive";
 import useLocalStorage from "use-local-storage";
 import { useSignal } from "@preact/signals-react";
-function ModalDetail(props) {
+function ModalDetailSession(props) {
   const [allCours, setAllCours] = useState([]);
-  const token = localStorage.getItem("tokengoat");
+  const token = localStorage.getItem("token");
   const quizInfo = ["Nome de quizz :", "Module : ", "Année : ", "Cours : "];
   function cancelHandler(props) {
     props.onCancel();
@@ -27,7 +27,7 @@ function ModalDetail(props) {
     const coursId = JSON.parse(props.detailQuizz.selectMultipleCours);
     for (let inc = 0; inc < coursId.length; inc++) {
       const result = await axios.get(
-        `https://goatqcm-instance.com/cours/${coursId[inc]}`,
+        `http://localhost:8080/cours/${coursId[inc]}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -39,7 +39,7 @@ function ModalDetail(props) {
   //*********************************************************************** */
   useEffect(() => {
     loadModulesSelet();
-    console.log(JSON.parse(props.detailQuizz.selectMultipleCours).length);
+    console.log(JSON.parse(props.detailQuizz.selectMultipleCours));
   }, []);
   //************************************************************* */
 
@@ -129,4 +129,4 @@ function ModalDetail(props) {
   );
 }
 
-export default ModalDetail;
+export default ModalDetailSession;

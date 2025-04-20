@@ -35,9 +35,11 @@
   display: flex;
 }
 .listecours {
-  overflow: scroll;
-  overflow-x: hidden;
   height: 200px;
+}
+.full_listecours {
+  overflow-y: scroll;
+  height: auto;
 }
 
 /****phone*******************************************/
@@ -79,7 +81,9 @@
   display: flex;
 }
 .listecours_phone {
-  overflow: scroll;
-  overflow-x: hidden;
-  height: 70px;
+  height: 200px;
+}
+.full_listecours_phone {
+  overflow-y: scroll;
+  height: auto;
 }

@@ -8,7 +8,10 @@ import { useMediaQuery } from "react-responsive";
 import useLocalStorage from "use-local-storage";
 import { useNavigate } from "react-router-dom";
 import playsessionicon from "../compenent/layout/img/playsession.png";
+import detail from "../compenent/layout/img/detailicon.png";
 import UserService from "../compenent/layout/service/UserService";
+import ModalDetailSession from "./ModalDetailSession";
+import Backdrop from "./Backdrop";
 function SaveSession() {
   //******SideBare Change************************************* */
   function etatsidebare(etat) {
@@ -32,6 +35,9 @@ function SaveSession() {
   const [QcmCasCliniqueQuizz, setQcmCasCliniqueQuizz] = useState([]);
   let navigateBoardQuiz = useNavigate();
   let [fullSessionsListe, setFullSessionsListe] = useState([]);
+  const [quizzIndex, setQuizzIndex] = useState(undefined);
+  const [detailQuizz, setDetailQuizz] = useState([]);
+  const [modalDetalSessionIsOpen, setModalDetalSessionIsOpen] = useState(false);
   //**************************************************************************** */
   useEffect(() => {
     getAllQcmsSaves();
@@ -274,6 +280,38 @@ function SaveSession() {
     }
   };
   /******************************************************************** */
+  const handleDeteSession = async (quizzId, qcmType) => {
+    let qcmTypeFinal;
+    if (qcmType === "Qcm") {
+      qcmTypeFinal = "qcmsession";
+    } else if (qcmType === "Cas Clinique") {
+      qcmTypeFinal = "cliniquesession";
+    } else if (qcmType === "Tous (Qcm,Cas Clinique)") {
+      qcmTypeFinal = "qcmcliniquesession";
+    }
+    await axios.delete(
+      `https://goatqcm-instance.com/${qcmTypeFinal}/${quizzId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    //****refresh quizz liste after delete*********************** */
+    if (window.localStorage) {
+      if (!localStorage.getItem("reload")) {
+        localStorage["reload"] = true;
+        window.location.reload();
+      } else {
+        localStorage.removeItem("reload");
+      }
+    }
+  };
+  //******************************************************************************* */
+  //******************************************************************************** */
+  function closeModalHandler() {
+    setModalDetalSessionIsOpen(false);
+  }
+  //******************************************************************************** */
+
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />
@@ -286,30 +324,63 @@ function SaveSession() {
           >
             <div className={classes.quizzContainer}>
               {fullSessionsListe.map((session, index) => (
-                <div
-                  className={classes.eachsession}
-                  key={index}
-                  onClick={() => {
-                    handleCheckSession(session.qcmType, session.id, index);
-                  }}
-                >
-                  <div className={classes.playicondiv}>
-                    <img
-                      onClick={(e) => {}}
-                      src={playsessionicon}
-                      height="60%"
-                      width="50%"
-                    />
-                  </div>
-                  <div className={classes.infosession}>
+                <div className={classes.eachsession} key={index}>
+                  <div className={classes.full_module_iconplay}>
                     <div className={classes.modulename}>
                       {session.moduleName}
                     </div>
-                    <div className={classes.quizztype}>{session.qcmType}</div>
+                    <div
+                      className={classes.playicondiv}
+                      onClick={() => {
+                        handleCheckSession(session.qcmType, session.id, index);
+                      }}
+                    >
+                      <div className={classes.icondiv}>
+                        <img src={playsessionicon} height="30px" width="30px" />
+                      </div>
+                      <div>Contenue le Quizz!</div>
+                    </div>
+                  </div>
+                  <div className={classes.infosession}>
                     <div className={classes.yearquizz}>
                       <div>{session.minYearQcm}</div>
                       <div>{session.maxYearQcm}</div>
                     </div>
+                  </div>
+                  <div
+                    className={classes.threepoint}
+                    onClick={() => {
+                      quizzIndex === session.id
+                        ? setQuizzIndex(undefined)
+                        : setQuizzIndex(session.id);
+                    }}
+                  >
+                    <img src={detail} height="30px" width="30px" />
+                  </div>
+                  <div className={classes.quizzdiv_container} key={session.id}>
+                    {session.id === quizzIndex && (
+                      <div className={classes.detail}>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            handleDeteSession(session.id, session.qcmType);
+                            setQuizzIndex(undefined);
+                          }}
+                        >
+                          Delete
+                        </button>
+                        <hr className={`${classes.hr_desk} `} />
+                        <button
+                          onClick={() => {
+                            setModalDetalSessionIsOpen(true);
+                            setDetailQuizz(session);
+                            setQuizzIndex(undefined);
+                          }}
+                        >
+                          Détail
+                        </button>
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -317,41 +388,81 @@ function SaveSession() {
           </div>
         )}
         {isTabletOrMobile && (
-          <div
-            className={classes.contanerspace_phone}
-            data-theme={isDark ? "dark" : "light"}
-          >
-            <div className={classes.quizzContainer_phone}>
-              {fullSessionsListe.map((session, index) => (
-                <div
-                  className={classes.eachsession_phone}
-                  key={index}
-                  onClick={() => {
-                    handleCheckSession(session.qcmType, session.id, index);
-                  }}
-                >
-                  <div className={classes.playicondiv_phone}>
-                    <img
-                      onClick={(e) => {}}
-                      src={playsessionicon}
-                      height="60%"
-                      width="50%"
-                    />
+          <div className={classes.quizzContainer_phone}>
+            {fullSessionsListe.map((session, index) => (
+              <div className={classes.eachsession_phone} key={index}>
+                <div className={classes.full_module_iconplay_phone}>
+                  <div className={classes.modulename_phone}>
+                    {session.moduleName}
                   </div>
-                  <div className={classes.infosession_phone}>
-                    <div className={classes.modulename_phone}>
-                      {session.moduleName}
+                  <div
+                    className={classes.playicondiv_phone}
+                    onClick={() => {
+                      handleCheckSession(session.qcmType, session.id, index);
+                    }}
+                  >
+                    <div className={classes.icondiv_phone}>
+                      <img src={playsessionicon} height="30px" width="30px" />
                     </div>
-                    <div className={classes.quizztype_phone}>
-                      {session.qcmType}
-                    </div>
+                    <div>Contenue le Quizz!</div>
                   </div>
                 </div>
-              ))}
-            </div>
+                <div className={classes.infosession_phone}>
+                  <div className={classes.yearquizz_phone}>
+                    <div>{session.minYearQcm}</div>
+                    <div>{session.maxYearQcm}</div>
+                  </div>
+                </div>
+                <div
+                  className={classes.threepoint_phone}
+                  onClick={() => {
+                    quizzIndex === session.id
+                      ? setQuizzIndex(undefined)
+                      : setQuizzIndex(session.id);
+                  }}
+                >
+                  <img src={detail} height="30px" width="30px" />
+                </div>
+                <div
+                  className={classes.quizzdiv_container_phone}
+                  key={session.id}
+                >
+                  {session.id === quizzIndex && (
+                    <div className={classes.detail_phone}>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          handleDeteSession(session.id, session.qcmType);
+                          setQuizzIndex(undefined);
+                        }}
+                      >
+                        Delete
+                      </button>
+                      <hr className={`${classes.hr_desk_phone} `} />
+                      <button
+                        onClick={() => {
+                          setModalDetalSessionIsOpen(true);
+                          setDetailQuizz(session);
+                          setQuizzIndex(undefined);
+                        }}
+                      >
+                        Détail
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </div>
+      {modalDetalSessionIsOpen && (
+        <ModalDetailSession
+          onCancel={closeModalHandler}
+          detailQuizz={detailQuizz}
+        />
+      )}
+      {modalDetalSessionIsOpen && <Backdrop onCancel={closeModalHandler} />}
     </>
   );
 }
