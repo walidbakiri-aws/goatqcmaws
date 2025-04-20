@@ -32,6 +32,7 @@ import SaveQuizz from "./pages/SaveQuizz";
 import ShowPdfResidanat from "./pages/ShowPdfResidanat";
 import DriversCours from "./pages/DriversCours";
 import DriversYearsLinks from "./pages/DriversYearsLinks";
+import SaveSession from "./pages/SaveSession";
 
 function App() {
   const isAuthenticated = UserService.isAuthenticated();
