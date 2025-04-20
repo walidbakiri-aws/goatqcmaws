@@ -338,7 +338,7 @@ function SaveSession() {
                       <div className={classes.icondiv}>
                         <img src={playsessionicon} height="30px" width="30px" />
                       </div>
-                      <div>Contenue le Quizz!</div>
+                      <div>Continue le Quizz!</div>
                     </div>
                   </div>
                   <div className={classes.infosession}>
@@ -404,7 +404,7 @@ function SaveSession() {
                     <div className={classes.icondiv_phone}>
                       <img src={playsessionicon} height="30px" width="30px" />
                     </div>
-                    <div>Contenue le Quizz!</div>
+                    <div>Continue le Quizz!</div>
                   </div>
                 </div>
                 <div className={classes.infosession_phone}>

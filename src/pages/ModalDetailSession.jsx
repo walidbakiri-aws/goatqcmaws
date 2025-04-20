@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import classes from "./ModalDetail.module.css";
+import classes from "./ModalDetailSession.module.css";
 import axios from "axios";
 import { useMediaQuery } from "react-responsive";
 import useLocalStorage from "use-local-storage";
