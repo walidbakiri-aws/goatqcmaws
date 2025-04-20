@@ -94,6 +94,9 @@ function App() {
           <Route exact path="/goatqcm" element={<GoatQcm />}></Route>
         )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route exact path="/savesession" element={<SaveSession />}></Route>
+        )}
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route
             exact
             path="/myabonnement"

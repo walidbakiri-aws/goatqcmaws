@@ -19,6 +19,7 @@ import { Navigate } from "react-router-dom";
 import Toggle from "../compenent/layout/Toggle";
 function Sidebar() {
   const navigatLogin = useNavigate();
+  const navigasavesession = useNavigate();
   //******************************************************************* */
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   const isDesktopOrLaptop = useMediaQuery({
@@ -105,6 +106,7 @@ function Sidebar() {
   }, []);
   //*********button show session*********************************** */
   const handleShowSessionBtn = () => {
+    navigasavesession("/savesession");
     setShowSessionsList(!ShowSessionsList);
   };
   /**************************************************************** */
@@ -390,7 +392,7 @@ function Sidebar() {
                 <span className="fs-6 p-2">Crée un Quiz </span>
               </Link>
             </li>
-
+            <button onClick={handleShowSession}>test</button>
             <li className="nav-item p-1">
               <Link
                 to={"/quizz"}

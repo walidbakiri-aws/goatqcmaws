@@ -1,0 +1,139 @@
+.addingdiv {
+  width: 100%;
+
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.contanerspace {
+  margin-top: 20px;
+  position: absolute;
+  display: inline-block;
+  background-color: var(--background-color-full);
+  height: auto;
+  width: 100%;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+}
+
+.quizzContainer {
+  margin-left: 200px;
+  width: 1200px;
+  height: 650px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  border-radius: 10px;
+
+  background-color: rgb(223, 220, 226);
+}
+.eachsession {
+  margin-left: 50px;
+  width: 800px;
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: rgb(246, 248, 248);
+  display: flex;
+}
+.playicondiv {
+  left: 0px;
+  float: left;
+  width: 150px;
+  height: 100%;
+  border-radius: 10px;
+
+  padding-top: 20px;
+  padding-left: 30px;
+}
+.modulename {
+  padding-top: 30px;
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 200px;
+  height: 100%;
+  border-radius: 10px;
+}
+.quizztype {
+  padding-top: 30px;
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 200px;
+  height: 100%;
+  border-radius: 10px;
+}
+.yearquizz {
+  padding-top: 30px;
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 200px;
+  height: 100%;
+  border-radius: 10px;
+}
+/*****phone****************************************************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color-full);
+}
+
+.quizzContainer_phone {
+  margin-left: 5px;
+  width: 350px;
+  height: 700x;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  border-radius: 10px;
+  background-color: rgb(223, 220, 226);
+}
+.eachsession_phone {
+  margin-left: 5px;
+  width: 320px;
+  height: 80px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: rgb(246, 248, 248);
+  display: flex;
+}
+.playicondiv_phone {
+  left: 0px;
+  float: left;
+  width: 80px;
+  height: 100%;
+  border-radius: 10px;
+
+  padding-top: 15px;
+  padding-left: 5px;
+}
+.modulename_phone {
+  padding-top: 15px;
+  padding-left: 5px;
+  left: 0px;
+  float: left;
+  width: 100px;
+  height: 100%;
+  border-radius: 10px;
+}
+.quizztype_phone {
+  padding-top: 5px;
+  padding-left: 15px;
+  left: 0px;
+  float: left;
+  width: 100px;
+  height: 100%;
+  border-radius: 10px;
+  margin-left: 10px;
+}
