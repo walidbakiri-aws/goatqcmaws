@@ -2241,12 +2241,11 @@ function QuizBoard(props) {
           console.log("succes deleting");
         }
 
-        navigateHome("/goatqcm", {
-          state: {
-            getUserName: username,
-            userId: userId,
-          },
-        });
+        if (getSourceBtnSaveQuizzSession === "saveQuizz") {
+                 navigateHome("/quizz");
+               } else if (getSourceBtnSaveQuizzSession === "saveSession") {
+                 navigateHome("/savesession");
+               }
       })
       .catch((err) => console.log(err));
 
@@ -2290,12 +2289,11 @@ function QuizBoard(props) {
       )
       .then((res) => {
         toast.success("succes modification!");
-        navigateHome("/goatqcm", {
-          state: {
-            getUserName: username,
-            userId: userId,
-          },
-        });
+        if (props.commingFrom === "savequizz") {
+          navigateHome("/quizz");
+        } else if (props.commingFrom === "savesession") {
+          navigateHome("/savesession");
+        }
       })
       .catch((err) => console.log(err));
   };

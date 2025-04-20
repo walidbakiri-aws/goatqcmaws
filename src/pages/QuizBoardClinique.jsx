@@ -543,7 +543,10 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
+      .put(
+        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
+        formData
+      )
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -563,11 +566,15 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://goatqcm-instance.com/image/clinique/uploadimage",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -1836,9 +1843,12 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .put(
+        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2339,9 +2349,13 @@ function QuizBoardClinique(props) {
     //******************************************************************************** */
     saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2351,12 +2365,12 @@ function QuizBoardClinique(props) {
           handleDeleteSession();
           console.log("succes deleting");
         }
-        navigateHome("/goatqcm", {
-          state: {
-            getUserName: username,
-            userId: userId,
-          },
-        });
+
+        if (sourceQuizzSessionName === "quizzname") {
+          navigateHome("/quizz");
+        } else if (sourceQuizzSessionName === "sessionname") {
+          navigateHome("/savesession");
+        }
       })
       .catch((err) => console.log(err));
 
@@ -2486,9 +2500,13 @@ function QuizBoardClinique(props) {
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2498,12 +2516,11 @@ function QuizBoardClinique(props) {
           handleDeleteSession();
           console.log("succes deleting");
         }
-        navigateHome("/goatqcm", {
-          state: {
-            getUserName: username,
-            userId: userId,
-          },
-        });
+        if (sourceQuizzSessionName === "quizzname") {
+          navigateHome("/quizz");
+        } else if (sourceQuizzSessionName === "sessionname") {
+          navigateHome("/savesession");
+        }
       })
       .catch((err) => console.log(err));
 
@@ -2565,12 +2582,11 @@ function QuizBoardClinique(props) {
       )
       .then((res) => {
         toast.success("succes modification!");
-        navigateHome("/goatqcm", {
-          state: {
-            getUserName: username,
-            userId: userId,
-          },
-        });
+        if (props.commingFrom === "savequizz") {
+          navigateHome("/quizz");
+        } else if (props.commingFrom === "savesession") {
+          navigateHome("/savesession");
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -2671,12 +2687,11 @@ function QuizBoardClinique(props) {
       )
       .then((res) => {
         toast.success("succes modification!");
-        navigateHome("/goatqcm", {
-          state: {
-            getUserName: username,
-            userId: userId,
-          },
-        });
+        if (props.commingFrom === "savequizz") {
+          navigateHome("/quizz");
+        } else if (props.commingFrom === "savesession") {
+          navigateHome("/savesession");
+        }
       })
       .catch((err) => console.log(err));
   };

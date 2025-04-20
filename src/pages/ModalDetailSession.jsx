@@ -6,7 +6,7 @@ import useLocalStorage from "use-local-storage";
 import { useSignal } from "@preact/signals-react";
 function ModalDetailSession(props) {
   const [allCours, setAllCours] = useState([]);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokengoat");
   const quizInfo = ["Nome de quizz :", "Module : ", "Année : ", "Cours : "];
   function cancelHandler(props) {
     props.onCancel();
@@ -27,7 +27,7 @@ function ModalDetailSession(props) {
     const coursId = JSON.parse(props.detailQuizz.selectMultipleCours);
     for (let inc = 0; inc < coursId.length; inc++) {
       const result = await axios.get(
-        `http://localhost:8080/cours/${coursId[inc]}`,
+        `https://goatqcm-instance.com/cours/${coursId[inc]}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
