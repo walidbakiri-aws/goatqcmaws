@@ -59,8 +59,8 @@ function DriversCours() {
     { year: '1ère année', modules: 10 },
     { year: '2ème année', modules: 7 },
     { year: '3ème année', modules: 10 },
-    { year: '4ème année', modules: 7 },
-    { year: '5ème année', modules: 7 },
+    { year: '4ème année', modules: 6 },
+    { year: '5ème année', modules: 6 },
     { year: '6ème année', modules: 9 },
   ];
   return(<><NavigationBar changeetatsidebar={etatsidebare} />
