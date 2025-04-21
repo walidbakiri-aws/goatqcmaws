@@ -392,7 +392,7 @@ function Sidebar() {
                 <span className="fs-6 p-2">Crée un Quiz </span>
               </Link>
             </li>
-            <button onClick={handleShowSession}>test</button>
+          
             <li className="nav-item p-1">
               <Link
                 to={"/quizz"}

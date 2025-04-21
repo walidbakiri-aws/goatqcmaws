@@ -12,6 +12,8 @@ import { useMediaQuery } from "react-responsive";
 import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 function Quiz() {
+  const [visibleCommenceBtn,setVisibleCommenceBtn]= useState(false);
+  const [module, setModule] = useState([]);
   const radioRefs = useRef([]);
   const checkBoxAllCoursRefs = useRef([]);
   const [isChecked, setIsChecked] = useState(false);
@@ -102,6 +104,7 @@ function Quiz() {
   const [AllModules, setAllModules] = useState([]);
   //**************************liste cour data */***************
   useEffect(() => {
+    localStorage.setItem("checkcascliniqueexiste", "false");
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
@@ -181,6 +184,7 @@ function Quiz() {
   //******************************************************************* */
   //*******handle Change Module**********************************************
   const handleChangeModule = (e) => {
+    setModule({ ...module, existCasclinique: true });
     /****type qcm  iniialisation************** */
     radioRefs.current.forEach((radio) => {
       if (radio) radio.checked = false;
@@ -397,6 +401,15 @@ function Quiz() {
             }
           );
 
+          if (SelectedSourceExmn.value === "Résidanat Blida") {
+            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2015"]);
+
+            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+          } else if (SelectedSourceExmn.value === "Externat Blida") {
+            setMinYearMultipleCoursClinique((minYear) => [...minYear, "2017"]);
+
+            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+          }
           if (resultClinique.data.length > 0) {
             setVisibleMinMaxYear(true);
             if (SelectedSourceExmn.value === "Résidanat Blida") {
@@ -458,7 +471,7 @@ function Quiz() {
       if (QcmTypeSelected.value !== "Tous (Qcm,Cas Clinique)") {
         console.log(QcmTypeSelected.value);
         loadMinMaxYears();
-
+    
         setVisibleMinMaxYear(true);
       } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
         loadMinMaxYears();
@@ -577,12 +590,9 @@ function Quiz() {
 
   //**********************get module name************************************** */
   const getModuleName = async (moduleId) => {
-    const result = await axios.get(
-      `https://goatqcm-instance.com/module/${moduleId}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const result = await axios.get(`https://goatqcm-instance.com/module/${moduleId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     moduleName.value = result.data.moduleName;
   };
 
@@ -756,9 +766,11 @@ function Quiz() {
         if (maxYearMultipleCoursClinique.length > 0) {
           console.log(minYearMultipleCoursClinique.length);
           setExisteCasClinique(true);
+          setVisibleCommenceBtn(true);
         } else if (maxYearMultipleCoursClinique.length === 0) {
           console.log(minYearMultipleCoursClinique.length);
           setExisteCasClinique(false);
+          setVisibleCommenceBtn(true);
         }
         setMinYearValue(minMaxYear[0]);
         setMaxYearValue(minMaxYear[1]);
@@ -844,9 +856,11 @@ function Quiz() {
         if (minCliniqueYear.length > 0) {
           console.log(minCliniqueYear.length);
           setExisteCasClinique(true);
+          setVisibleCommenceBtn(true);
         } else if (minCliniqueYear.length === 0) {
           console.log(minCliniqueYear.length);
           setExisteCasClinique(false);
+          setVisibleCommenceBtn(true);
         }
         let MinMaxMultipleFinalClinique = [];
         MinMaxMultipleFinalClinique[0] = Math.min(...minYear).toString();
@@ -1055,7 +1069,7 @@ function Quiz() {
                             <h6
                               className={`${classes.typesujeth6} form-check-label `}
                             >
-                              Selectionner tous
+                              Sélectionner Tous
                             </h6>
                           </div>
                         </div>
@@ -1169,7 +1183,7 @@ function Quiz() {
                   </div>
                 </div>
               )}
-              <div className={classes.btnCommencer}>
+             {visibleCommenceBtn &&<div className={classes.btnCommencer}>
                 <button
                   type="button"
                   className="btn btn-primary "
@@ -1181,7 +1195,7 @@ function Quiz() {
                 >
                   Commencer
                 </button>
-              </div>
+              </div>}
             </div>
           </div>
         )}
@@ -1293,7 +1307,7 @@ function Quiz() {
                                 onChange={handleSelectAllCours}
                               />
                               <label className="form-check-label fs-6 ">
-                                Selectionner tous
+                                Selecionner Tous
                               </label>
                             </div>
                           </div>
@@ -1346,7 +1360,6 @@ function Quiz() {
                       {typeQcmCasClinique.map((typeQcm, index) => (
                         <div key={index} className={classes.typeqcm_phone}>
                           <input
-                            ref={(el) => (radioRefs.current[index] = el)}
                             className="form-check-input fs-6 "
                             type="radio"
                             name="typeqcm"
@@ -1410,7 +1423,7 @@ function Quiz() {
                   </div>
                 </div>
               )}
-              <div className={classes.btnCommencer}>
+                {visibleCommenceBtn &&<div className={classes.btnCommencer}>
                 <button
                   type="button"
                   className="btn btn-primary "
@@ -1423,7 +1436,7 @@ function Quiz() {
                 >
                   Commencer
                 </button>
-              </div>
+              </div>}
             </div>
           </div>
         )}
