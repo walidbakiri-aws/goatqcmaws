@@ -770,7 +770,7 @@ function QuizBoardClinique(props) {
           incCour.value < props.selectMultipleCours.length
         ) {
           if (incCour.value === props.selectMultipleCours.length - 1) {
-            console.log(incCours.value);
+           
             setShowCancelQuizzPhone(true);
           }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
@@ -871,7 +871,7 @@ function QuizBoardClinique(props) {
           incCour.value < props.selectMultipleCours.length
         ) {
           if (incCour.value === props.selectMultipleCours.length - 1) {
-            console.log(incCours.value);
+            
             setShowCancelQuizzPhone(true);
           }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
