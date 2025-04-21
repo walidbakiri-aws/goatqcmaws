@@ -167,17 +167,21 @@ function Quiz() {
       if (QcmSujetTypeSelected.value === "Par Sujet") {
         setVisibleQcmType(false);
         setVisibleMinMaxYear(false);
+        setVisibilitePorpoIndex(true)
       } else if (QcmSujetTypeSelected.value === "Par Cour") {
         setVisibleQcmType(true);
         setVisibleMinMaxYear(true);
+        setVisibilitePorpoIndex(false)
       }
     } else if (SelectedSourceExmn.value === "Externat Blida") {
       if (QcmSujetTypeSelected.value === "Par Cour") {
         setVisibleQcmType(true);
         setVisibleMinMaxYear(true);
+        setVisibilitePorpoIndex(false)
       } else if (QcmSujetTypeSelected.value === "Par Sujet") {
         setVisibleQcmType(false);
         setVisibleMinMaxYear(false);
+        setVisibilitePorpoIndex(true)
       }
     }
   };
