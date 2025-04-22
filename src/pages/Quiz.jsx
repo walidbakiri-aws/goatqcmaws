@@ -713,6 +713,7 @@ function Quiz() {
           MinMaxMultipleFinal[1] = Math.max(...maxYearMultipleCours).toString();
 
           minMaxYear = MinMaxMultipleFinal;
+          setVisibleCommenceBtn(true);
           console.log(minMaxYear);
         } catch {
           console.log("Cours not selected");
@@ -731,6 +732,7 @@ function Quiz() {
           ).toString();
 
           minMaxYear = MinMaxMultipleFinalClinique;
+          setVisibleCommenceBtn(true);
           console.log(minMaxYear);
         } catch {
           console.log("Cours not selected");
@@ -790,6 +792,7 @@ function Quiz() {
             }
           );
           minMaxYear = result.data;
+          setVisibleCommenceBtn(true);
           console.log(minMaxYear);
         } catch {
           console.log("Cours not selected");
@@ -803,6 +806,7 @@ function Quiz() {
             }
           );
           minMaxYear = result.data;
+          setVisibleCommenceBtn(true);
           console.log(minMaxYear);
         } catch {
           console.log("Cours not selected");
