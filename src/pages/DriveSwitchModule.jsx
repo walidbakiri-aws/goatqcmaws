@@ -26,7 +26,7 @@ function DriveSwitchModule() {
   /*********adresse Ip***************************** */
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
-  const token = localStorage.getItem("tokengoat");
+  const token = localStorage.getItem("token");
   const userIdToken = localStorage.getItem("userId");
   //************************************************* */
   const isAuthenticated = UserService.isAuthenticated();
@@ -121,7 +121,59 @@ function DriveSwitchModule() {
           </div>
         )}
         {isTabletOrMobile && (
-          <div className={classes.quizzContainer_phone}></div>
+          <div className={classes.quizzContainer_phone}>
+            <div
+              className={classes.contanerspace_phone}
+              data-theme={isDark ? "dark" : "light"}
+            >
+              <div className={classes.quizzContainer_phone}>
+                <div className={classes.container_phone}>
+                  <div className={classes.header_phone}>
+                    <h2>
+                      Bienvenue sur <span>GOAT Cours</span>
+                    </h2>
+                    <p>Votre nouvelle plateforme de cours</p>
+                  </div>
+                  <div className={classes.grid_phone}>
+                    <div className={classes.card_phone}>
+                      <h3>Par Drive</h3>
+                      <p className={classes.modules_phone}>
+                        <span role="img" aria-label="eye">
+                          👁️
+                        </span>{" "}
+                        modules
+                      </p>
+                      <button
+                        className={classes.button_phone}
+                        onClick={() => {
+                          handleDriverLinks();
+                        }}
+                      >
+                        Consulter
+                      </button>
+                    </div>
+                    <div className={classes.card_phone}>
+                      <h3>Par Module</h3>
+                      <p className={classes.modules_phone}>
+                        <span role="img" aria-label="eye">
+                          👁️
+                        </span>{" "}
+                        modules
+                      </p>
+                      <button
+                        className={classes.button_phone}
+                        onClick={() => {
+                          handleDriverLinkModuleName();
+                        }}
+                      >
+                        Consulter
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </>
