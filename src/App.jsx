@@ -51,6 +51,7 @@ function App() {
         <Route exact path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<LoginPage />}></Route>
         <Route exact path="/login" element={<LoginPage />}></Route>
+        <Route exact path="/myquizz" element={<SaveQuizz />}></Route>
         <Route exact path="/showpdf" element={<ShowPdfResidanat />}></Route>
         <Route exact path="/driverscours" element={<DriversCours />}></Route>
         <Route
@@ -79,13 +80,6 @@ function App() {
         {isAdmin && isAuthenticated && (
           <Route
             exact
-            path="/admin/abonner-management"
-            element={<UserAbounementManager />}
-          ></Route>
-        )}
-        {isAdmin && isAuthenticated && (
-          <Route
-            exact
             path="/admin/update-user/:userId"
             element={<EditUser />}
           ></Route>
@@ -101,15 +95,18 @@ function App() {
           <Route exact path="/home" element={<Home />}></Route>
         )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
-          <Route
-            exact
-            path="/goatqcm"
-            element={<ProtectedRoute component={GoatQcm} />}
-          ></Route>
+          <Route exact path="/goatqcm" element={<GoatQcm />}></Route>
         )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route exact path="/savesession" element={<SaveSession />}></Route>
-        )}{" "}
+        )}
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route
+            exact
+            path="/myabonnement"
+            element={<ShowMyAbonnement />}
+          ></Route>
+        )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route
             exact
@@ -134,13 +131,7 @@ function App() {
             element={<DriveCoursNames />}
           ></Route>
         )}
-        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
-          <Route
-            exact
-            path="/myabonnement"
-            element={<ShowMyAbonnement />}
-          ></Route>
-        )}
+
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route exact path="/quiz" element={<Quiz />}></Route>
         )}
@@ -156,6 +147,7 @@ function App() {
         {(isAdmin || isParcitipate) && isAuthenticated && (
           <Route exact path="/cours" element={<AddCours />}></Route>
         )}
+
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route
             exact
