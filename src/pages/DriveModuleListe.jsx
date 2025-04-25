@@ -90,7 +90,7 @@ function DriveModuleListe() {
                     <div key={index} className={classes.card}>
                       <h2>{module.moduleName}</h2>
                       <img
-                        src={`http://localhost:8080/module/image/${module.id}/${module.imageName}`}
+                        src={`https://goatqcm-instance.com/module/image/${module.id}/${module.imageName}`}
                         alt={module.moduleName}
                         style={{ width: 60, height: 60 }}
                       />
@@ -125,7 +125,7 @@ function DriveModuleListe() {
                       <div key={index} className={classes.card_phone}>
                         <h2>{module.moduleName}</h2>
                         <img
-                          src={`http://localhost:8080/module/image/${module.id}/${module.imageName}`}
+                          src={`hhttps://goatqcm-instance.com/module/image/${module.id}/${module.imageName}`}
                           alt={module.moduleName}
                           style={{ width: 60, height: 60 }}
                         />
