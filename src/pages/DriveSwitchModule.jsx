@@ -82,7 +82,7 @@ function DriveSwitchModule() {
                 </div>
                 <div className={classes.grid}>
                   <div className={classes.card}>
-                    <h3>Par Drive</h3>
+                    <h3>Par Année</h3>
                     <p className={classes.modules}>
                       <span role="img" aria-label="eye">
                         👁️
@@ -136,7 +136,7 @@ function DriveSwitchModule() {
                   </div>
                   <div className={classes.grid_phone}>
                     <div className={classes.card_phone}>
-                      <h3>Par Drive</h3>
+                      <h3>Par Année</h3>
                       <p className={classes.modules_phone}>
                         <span role="img" aria-label="eye">
                           👁️
