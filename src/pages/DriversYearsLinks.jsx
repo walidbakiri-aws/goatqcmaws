@@ -58,8 +58,8 @@ function DriversYearsLinks() {
       "https://drive.google.com/drive/folders/1gmTor--nOGEfKVU_5ZJ1aEf0QErBR159?usp=drive_link",
     sixYear:
       "https://drive.google.com/drive/folders/1k-NZ5fBemEoD-dPMrD2fMdbJePMYO1ez?usp=drive_link",
-    samediYear: 
-    "https://drive.google.com/drive/folders/1MsRFY98XABNIs-4lsN-prWGzYJVE1aDs?usp=drive_link",
+    samediYear:
+      "https://drive.google.com/drive/folders/1MsRFY98XABNIs-4lsN-prWGzYJVE1aDs?usp=drive_link",
   };
   const yearsLinks24 = {
     firstYear:
@@ -75,7 +75,7 @@ function DriversYearsLinks() {
     sixYear:
       "https://drive.google.com/drive/folders/1k-NZ5fBemEoD-dPMrD2fMdbJePMYO1ez?usp=drive_link",
     samediYear:
-    "https://drive.google.com/drive/folders/10cw4PZi97bvBqq6mmX0lInkK-80aZXZQ?usp=drive_link",
+      "https://drive.google.com/drive/folders/10cw4PZi97bvBqq6mmX0lInkK-80aZXZQ?usp=drive_link",
   };
   //**************************************************************** */
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
@@ -102,7 +102,6 @@ function DriversYearsLinks() {
       window.location.href = yearsLinks25.fifthYear;
     } else if (getYearMed === yearsName.sixYear) {
       window.location.href = yearsLinks25.sixYear;
-    
     } else if (getYearMed === yearsName.samediYear) {
       window.location.href = yearsLinks25.samediYear;
     }
@@ -120,7 +119,6 @@ function DriversYearsLinks() {
       window.location.href = yearsLinks24.fifthYear;
     } else if (getYearMed === yearsName.sixYear) {
       window.location.href = yearsLinks24.sixYear;
-    
     } else if (getYearMed === yearsName.samediYear) {
       window.location.href = yearsLinks24.samediYear;
     }

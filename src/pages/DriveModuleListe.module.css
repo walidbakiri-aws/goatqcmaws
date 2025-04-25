@@ -1,0 +1,115 @@
+.addingdiv {
+  width: 100%;
+
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.contanerspace {
+  margin-top: 20px;
+  position: absolute;
+  display: inline-block;
+  background-color: var(--background-color-full);
+  height: auto;
+  width: 100%;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+}
+
+.quizzContainer {
+  margin-left: 200px;
+  width: 1130px;
+  height: 650px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding: 10px;
+  padding-top: 20px;
+  border-radius: 10px;
+
+  background-color: rgb(223, 220, 226);
+}
+.header {
+  background-color: #800080;
+  width: 1100px;
+  height: 120px;
+
+  color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+
+  margin-bottom: 2rem;
+}
+
+.header span {
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Optional: centers vertically if height is set */
+  text-align: center;
+}
+
+.card img {
+  margin-top: 10px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.card button {
+  background-color: #e0dcfd;
+  color: #5a4fcb;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+  background-color: #cbc3fa;
+}
+/*****phone****************************************************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color-full);
+}
+
+.quizzContainer_phone {
+  margin-left: 5px;
+  width: 350px;
+  height: 700x;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(223, 220, 226);
+}

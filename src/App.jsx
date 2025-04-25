@@ -30,10 +30,15 @@ import ShowMyAbonnement from "./pages/ShowMyAbonnement";
 import GoatWelcome from "./compenent/layout/auth/GoatWelcome";
 import SaveQuizz from "./pages/SaveQuizz";
 import ShowPdfResidanat from "./pages/ShowPdfResidanat";
+import UserAbounementManager from "./compenent/layout/userspages/UserAbounementManager";
 import DriversCours from "./pages/DriversCours";
 import DriversYearsLinks from "./pages/DriversYearsLinks";
+import ProtectedRoute from "./pages/ProtectedRoute";
 import SaveSession from "./pages/SaveSession";
-
+import DriveSwitchModule from "./pages/DriveSwitchModule";
+import AddDriveInfo from "./pages/AddDriveInfo";
+import DriveModuleListe from "./pages/DriveModuleListe";
+import DriveCoursNames from "./pages/DriveCoursNames";
 function App() {
   const isAuthenticated = UserService.isAuthenticated();
   const isAdmin = UserService.isAdmin();
@@ -48,7 +53,6 @@ function App() {
         <Route exact path="*" element={<Navigate to="/" />} />
         <Route exact path="/" element={<LoginPage />}></Route>
         <Route exact path="/login" element={<LoginPage />}></Route>
-        <Route exact path="/myquizz" element={<SaveQuizz />}></Route>
         <Route exact path="/showpdf" element={<ShowPdfResidanat />}></Route>
         <Route exact path="/driverscours" element={<DriversCours />}></Route>
         <Route
@@ -77,6 +81,13 @@ function App() {
         {isAdmin && isAuthenticated && (
           <Route
             exact
+            path="/admin/abonner-management"
+            element={<UserAbounementManager />}
+          ></Route>
+        )}
+        {isAdmin && isAuthenticated && (
+          <Route
+            exact
             path="/admin/update-user/:userId"
             element={<EditUser />}
           ></Route>
@@ -92,10 +103,38 @@ function App() {
           <Route exact path="/home" element={<Home />}></Route>
         )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
-          <Route exact path="/goatqcm" element={<GoatQcm />}></Route>
+          <Route
+            exact
+            path="/goatqcm"
+            element={<ProtectedRoute component={GoatQcm} />}
+          ></Route>
         )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route exact path="/savesession" element={<SaveSession />}></Route>
+        )}{" "}
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route
+            exact
+            path="/switchdrive"
+            element={<DriveSwitchModule />}
+          ></Route>
+        )}
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route exact path="/adddrivelinks" element={<AddDriveInfo />}></Route>
+        )}
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route
+            exact
+            path="/drivemoduleliste"
+            element={<DriveModuleListe />}
+          ></Route>
+        )}
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route
+            exact
+            path="/drivecoursnames"
+            element={<DriveCoursNames />}
+          ></Route>
         )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route
@@ -119,7 +158,6 @@ function App() {
         {(isAdmin || isParcitipate) && isAuthenticated && (
           <Route exact path="/cours" element={<AddCours />}></Route>
         )}
-
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route
             exact
