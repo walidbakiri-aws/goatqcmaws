@@ -32,7 +32,6 @@ import SaveQuizz from "./pages/SaveQuizz";
 import ShowPdfResidanat from "./pages/ShowPdfResidanat";
 import DriversCours from "./pages/DriversCours";
 import DriversYearsLinks from "./pages/DriversYearsLinks";
-import ProtectedRoute from "./pages/ProtectedRoute";
 import SaveSession from "./pages/SaveSession";
 import DriveSwitchModule from "./pages/DriveSwitchModule";
 import AddDriveInfo from "./pages/AddDriveInfo";
