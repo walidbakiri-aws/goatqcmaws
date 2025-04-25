@@ -30,7 +30,6 @@ import ShowMyAbonnement from "./pages/ShowMyAbonnement";
 import GoatWelcome from "./compenent/layout/auth/GoatWelcome";
 import SaveQuizz from "./pages/SaveQuizz";
 import ShowPdfResidanat from "./pages/ShowPdfResidanat";
-import UserAbounementManager from "./compenent/layout/userspages/UserAbounementManager";
 import DriversCours from "./pages/DriversCours";
 import DriversYearsLinks from "./pages/DriversYearsLinks";
 import ProtectedRoute from "./pages/ProtectedRoute";
