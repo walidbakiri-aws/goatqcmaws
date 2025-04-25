@@ -34,7 +34,7 @@
   margin-bottom: 30px;
 }
 .header {
-  background-color: #800080;
+  background-color: #b5179e;
   width: 1100px;
   height: 120px;
   color: rgb(255, 255, 255);
@@ -55,25 +55,28 @@
 }
 .eachcour {
   width: 800px;
+  font-style: unset;
   height: 50px;
   border-radius: 10px;
   background-color: aliceblue;
   margin-top: 10px;
   margin-left: 30px;
   padding: 10px;
-  font-family: Arial, sans-serif;
+
   font-size: 16px;
-  color: #333;
+  color: #5a6569;
+  font-weight: bold;
   line-height: 1.6;
 }
 .cournmbr {
   width: 50px;
   height: 50px;
+  color: aliceblue;
   margin-top: 10px;
   border-radius: 10px;
-  background-color: aquamarine;
+  background-color: #892b64;
   padding: 10px;
-  padding-left: 15px;
+  padding-left: 17px;
 }
 .button {
   background-color: #e0dcfd;
@@ -110,4 +113,64 @@
   border-radius: 10px;
   padding-bottom: 10px;
   background-color: rgb(223, 220, 226);
+}
+
+.header_phone {
+  background-color: #b5179e;
+  width: 320px;
+  height: 100px;
+  text: 50px;
+  color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  padding-bottom: 10px;
+}
+
+.header_phone span {
+  font-weight: bold;
+}
+.fullcour_nbrcour_phone {
+  width: 95%;
+  height: auto;
+  display: flex;
+}
+.eachcour_phone {
+  width: 100%;
+  height: 70px;
+  border-radius: 10px;
+  background-color: aliceblue;
+  margin-top: 10px;
+  margin-left: 5px;
+  padding: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+.cournmbr_phone {
+  width: 30px;
+  height: 70px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: #892b64;
+  padding-top: 17px;
+  padding-left: 5px;
+}
+.button_phone {
+  background-color: #e0dcfd;
+  color: #5a4fcb;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  float: right;
+  margin-left: 600px;
+}
+
+.button_phone:hover {
+  background-color: #cbc3fa;
 }

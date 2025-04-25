@@ -13,7 +13,8 @@ import UserService from "../compenent/layout/service/UserService";
 import ModalDetailSession from "./ModalDetailSession";
 import Backdrop from "./Backdrop";
 import { useLocation } from "react-router-dom";
-
+import toast, { Toaster } from "react-hot-toast";
+import "react-toastify/dist/ReactToastify.css";
 function DriveCoursNames() {
   //******SideBare Change************************************* */
   function etatsidebare(etat) {
@@ -77,7 +78,13 @@ function DriveCoursNames() {
     fetchPDFs();
   }, []);
   const handleDriverLinks = (driverLink) => {
-    window.open(driverLink, "_blank", "noopener,noreferrer");
+    console.log(driverLink);
+    if (driverLink) {
+      window.open(driverLink, "_blank", "noopener,noreferrer");
+    } else if (driverLink === null) {
+      console.log("mamam");
+      toast.success("Nous ajouterons le lien bientot!");
+    }
   };
   return (
     <>
@@ -123,9 +130,47 @@ function DriveCoursNames() {
           </div>
         )}
         {isTabletOrMobile && (
-          <div className={classes.quizzContainer_phone}></div>
+          <div className={classes.quizzContainer_phone}>
+            {" "}
+            <div
+              className={classes.contanerspace_phone}
+              data-theme={isDark ? "dark" : "light"}
+            >
+              <div className={classes.quizzContainer_phone}>
+                <div className={classes.header_phone}>
+                  <div>
+                    <h2>
+                      <span>{module.moduleName}</span>
+                    </h2>
+                  </div>
+                  <div>
+                    <button
+                      className={classes.button_phone}
+                      onClick={() => {
+                        handleDriverLinks(module.driveLink);
+                      }}
+                    >
+                      Consulter
+                    </button>
+                  </div>
+                </div>
+
+                {pdfFiles.map((file, index) => (
+                  <div className={classes.fullcour_nbrcour_phone}>
+                    <div className={classes.eachcour_phone}>
+                      <li className="list-group-item" key={file.id}>
+                        {file.name}
+                      </li>
+                    </div>
+                    <div className={classes.cournmbr_phone}>{index}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         )}
       </div>
+      <Toaster />
     </>
   );
 }

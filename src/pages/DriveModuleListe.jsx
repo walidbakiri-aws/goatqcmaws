@@ -109,7 +109,40 @@ function DriveModuleListe() {
           </div>
         )}
         {isTabletOrMobile && (
-          <div className={classes.quizzContainer_phone}></div>
+          <div className={classes.quizzContainer_phone}>
+            <div
+              className={classes.contanerspace_phone}
+              data-theme={isDark ? "dark" : "light"}
+            >
+              <div className={classes.quizzContainer_phone}>
+                <div>
+                  <div className={classes.header_phone}>
+                    <h2>{yearMed}</h2>
+                    <p>{Modules.length} modules disponibles</p>
+                  </div>
+                  <div className={classes.grid_phone}>
+                    {Modules.map((module, index) => (
+                      <div key={index} className={classes.card_phone}>
+                        <h2>{module.moduleName}</h2>
+                        <img
+                          src={`http://localhost:8080/module/image/${module.id}/${module.imageName}`}
+                          alt={module.moduleName}
+                          style={{ width: 60, height: 60 }}
+                        />
+                        <button
+                          onClick={(e) => {
+                            handleDriverLinks(module);
+                          }}
+                        >
+                          Consulter ›
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         )}
       </div>
     </>

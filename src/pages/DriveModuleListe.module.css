@@ -34,7 +34,7 @@
   background-color: rgb(223, 220, 226);
 }
 .header {
-  background-color: #800080;
+  background-color: #b5179e;
   width: 1100px;
   height: 120px;
 
@@ -112,4 +112,66 @@
   border-radius: 10px;
   padding-bottom: 10px;
   background-color: rgb(223, 220, 226);
+}
+.header_phone {
+  background-color: #b5179e;
+  width: 300px;
+  height: 100px;
+  text: 50px;
+  color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 10px;
+  margin-left: 25px;
+}
+
+.header_phone span {
+  font-weight: bold;
+}
+
+.grid_phone {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.card_phone {
+  width: 85%;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Optional: centers vertically if height is set */
+  text-align: center;
+  margin-left: 25px;
+}
+
+.card_phone img {
+  margin-top: 10px;
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.card_phone h2 {
+  font-size: 16px;
+  margin: 0;
+}
+
+.card_phone button {
+  background-color: #e0dcfd;
+  color: #5a4fcb;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.card_phone button:hover {
+  background-color: #cbc3fa;
 }
