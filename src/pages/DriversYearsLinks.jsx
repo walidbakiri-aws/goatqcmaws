@@ -91,36 +91,36 @@ function DriversYearsLinks() {
 
   const handleOpenDrivelLink2025 = (getYearMed) => {
     if (getYearMed === yearsName.firstYear) {
-      window.location.href = yearsLinks25.firstYear;
+      window.open(yearsLinks25.firstYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.secondeYear) {
-      window.location.href = yearsLinks25.secondeYear;
+      window.open(yearsLinks25.secondeYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.thirdYear) {
-      window.location.href = yearsLinks25.thirdYear;
+      window.open(yearsLinks25.thirdYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.fourthYear) {
-      window.location.href = yearsLinks25.fourthYear;
+      window.open(yearsLinks25.fourthYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.fifthYear) {
-      window.location.href = yearsLinks25.fifthYear;
+      window.open(yearsLinks25.fifthYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.sixYear) {
-      window.location.href = yearsLinks25.sixYear;
+      window.open(yearsLinks25.sixYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.samediYear) {
       window.location.href = yearsLinks25.samediYear;
     }
   };
   const handleOpenDrivelLink2024 = (getYearMed) => {
     if (getYearMed === yearsName.firstYear) {
-      window.location.href = yearsLinks24.firstYear;
+      window.open(yearsLinks24.firstYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.secondeYear) {
-      window.location.href = yearsLinks24.secondeYear;
+      window.open(yearsLinks24.secondeYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.thirdYear) {
-      window.location.href = yearsLinks24.thirdYear;
+      window.open(yearsLinks24.thirdYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.fourthYear) {
-      window.location.href = yearsLinks24.fourthYear;
+      window.open(yearsLinks24.fourthYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.fifthYear) {
-      window.location.href = yearsLinks24.fifthYear;
+      window.open(yearsLinks24.fifthYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.sixYear) {
-      window.location.href = yearsLinks24.sixYear;
+      window.open(yearsLinks24.sixYear, "_blank", "noopener,noreferrer");
     } else if (getYearMed === yearsName.samediYear) {
-      window.location.href = yearsLinks24.samediYear;
+      window.open(yearsLinks24.samediYear, "_blank", "noopener,noreferrer");
     }
   };
   return (

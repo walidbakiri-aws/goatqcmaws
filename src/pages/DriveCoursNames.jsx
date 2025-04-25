@@ -76,7 +76,9 @@ function DriveCoursNames() {
 
     fetchPDFs();
   }, []);
-
+  const handleDriverLinks = (driverLink) => {
+    window.open(driverLink, "_blank", "noopener,noreferrer");
+  };
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />
@@ -99,7 +101,7 @@ function DriveCoursNames() {
                   <button
                     className={classes.button}
                     onClick={() => {
-                      handleDriverLinks(yearsMed[index]);
+                      handleDriverLinks(module.driveLink);
                     }}
                   >
                     Consulter
