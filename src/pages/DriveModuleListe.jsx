@@ -89,11 +89,7 @@ function DriveModuleListe() {
                   {Modules.map((module, index) => (
                     <div key={index} className={classes.card}>
                       <h2>{module.moduleName}</h2>
-                      <img
-                        src={`https://goatqcm-instance.com/module/image/${module.id}/${module.imageName}`}
-                        alt={module.moduleName}
-                        style={{ width: 60, height: 60 }}
-                      />
+
                       <button
                         onClick={(e) => {
                           handleDriverLinks(module);
@@ -124,11 +120,7 @@ function DriveModuleListe() {
                     {Modules.map((module, index) => (
                       <div key={index} className={classes.card_phone}>
                         <h2>{module.moduleName}</h2>
-                        <img
-                          src={`hhttps://goatqcm-instance.com/module/image/${module.id}/${module.imageName}`}
-                          alt={module.moduleName}
-                          style={{ width: 60, height: 60 }}
-                        />
+
                         <button
                           onClick={(e) => {
                             handleDriverLinks(module);
