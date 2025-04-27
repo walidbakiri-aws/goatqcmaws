@@ -12,7 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 function Quiz() {
-  const [visibleCommenceBtn,setVisibleCommenceBtn]= useState(false);
+  const [visibleCommenceBtn, setVisibleCommenceBtn] = useState(false);
   const [module, setModule] = useState([]);
   const radioRefs = useRef([]);
   const checkBoxAllCoursRefs = useRef([]);
@@ -167,21 +167,17 @@ function Quiz() {
       if (QcmSujetTypeSelected.value === "Par Sujet") {
         setVisibleQcmType(false);
         setVisibleMinMaxYear(false);
-        setVisibleCommenceBtn(true);
       } else if (QcmSujetTypeSelected.value === "Par Cour") {
         setVisibleQcmType(true);
         setVisibleMinMaxYear(true);
-        setVisibleCommenceBtn(false);
       }
     } else if (SelectedSourceExmn.value === "Externat Blida") {
       if (QcmSujetTypeSelected.value === "Par Cour") {
         setVisibleQcmType(true);
         setVisibleMinMaxYear(true);
-        setVisibleCommenceBtn(false);
       } else if (QcmSujetTypeSelected.value === "Par Sujet") {
         setVisibleQcmType(false);
         setVisibleMinMaxYear(false);
-        setVisibleCommenceBtn(true);
       }
     }
   };
@@ -475,7 +471,7 @@ function Quiz() {
       if (QcmTypeSelected.value !== "Tous (Qcm,Cas Clinique)") {
         console.log(QcmTypeSelected.value);
         loadMinMaxYears();
-    
+
         setVisibleMinMaxYear(true);
       } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
         loadMinMaxYears();
@@ -594,9 +590,12 @@ function Quiz() {
 
   //**********************get module name************************************** */
   const getModuleName = async (moduleId) => {
-    const result = await axios.get(`https://goatqcm-instance.com/module/${moduleId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const result = await axios.get(
+      `https://goatqcm-instance.com/module/${moduleId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     moduleName.value = result.data.moduleName;
   };
 
@@ -974,7 +973,7 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
-            
+            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div
@@ -1191,19 +1190,21 @@ function Quiz() {
                   </div>
                 </div>
               )}
-             {visibleCommenceBtn &&<div className={classes.btnCommencer}>
-                <button
-                  type="button"
-                  className="btn btn-primary "
-                  style={{
-                    width: 120,
-                    float: "right",
-                  }}
-                  onClick={handelCommencerBnt}
-                >
-                  Commencer
-                </button>
-              </div>}
+              {visibleCommenceBtn && (
+                <div className={classes.btnCommencer}>
+                  <button
+                    type="button"
+                    className="btn btn-primary "
+                    style={{
+                      width: 120,
+                      float: "right",
+                    }}
+                    onClick={handelCommencerBnt}
+                  >
+                    Commencer
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -1431,20 +1432,22 @@ function Quiz() {
                   </div>
                 </div>
               )}
-                {visibleCommenceBtn &&<div className={classes.btnCommencer}>
-                <button
-                  type="button"
-                  className="btn btn-primary "
-                  style={{
-                    width: 120,
-                    position: "absolute",
-                    right: 0,
-                  }}
-                  onClick={handelCommencerBnt}
-                >
-                  Commencer
-                </button>
-              </div>}
+              {visibleCommenceBtn && (
+                <div className={classes.btnCommencer}>
+                  <button
+                    type="button"
+                    className="btn btn-primary "
+                    style={{
+                      width: 120,
+                      position: "absolute",
+                      right: 0,
+                    }}
+                    onClick={handelCommencerBnt}
+                  >
+                    Commencer
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}
