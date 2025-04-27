@@ -510,7 +510,7 @@ function QuizBoard(props) {
     formData.append("desc", description);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post("http://localhost:8080/image/uploadesc", formData, {
+      .post("https://goatqcm-instance.com/image/uploadesc", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -2240,12 +2240,11 @@ function QuizBoard(props) {
           handleDeleteSession();
           console.log("succes deleting");
         }
-
         if (getSourceBtnSaveQuizzSession === "saveQuizz") {
-                 navigateHome("/quizz");
-               } else if (getSourceBtnSaveQuizzSession === "saveSession") {
-                 navigateHome("/savesession");
-               }
+          navigateHome("/quizz");
+        } else if (getSourceBtnSaveQuizzSession === "saveSession") {
+          navigateHome("/savesession");
+        }
       })
       .catch((err) => console.log(err));
 
