@@ -732,6 +732,7 @@ function Quiz() {
 
           minMaxYear = MinMaxMultipleFinalClinique;
           setVisibleCommenceBtn(true);
+          setExisteCasClinique(true);
           console.log(minMaxYear);
         } catch {
           console.log("Cours not selected");
@@ -806,6 +807,7 @@ function Quiz() {
           );
           minMaxYear = result.data;
           setVisibleCommenceBtn(true);
+          setExisteCasClinique(true);
           console.log(minMaxYear);
         } catch {
           console.log("Cours not selected");
