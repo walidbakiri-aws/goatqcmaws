@@ -280,7 +280,7 @@ function NavigationBar(props) {
                           handlecodediscussionBtn();
                         }}
                       >
-                        Entre Code discussion
+                        Entrer le Code discussion
                       </button>
                       <button
                         type="button"
@@ -289,7 +289,7 @@ function NavigationBar(props) {
                           handlenewdiscussion();
                         }}
                       >
-                        Cree nouvelle discussion
+                        Crée une nouvelle discussion
                       </button>
                     </div>
                   )}
@@ -411,7 +411,7 @@ function NavigationBar(props) {
                           handlecodediscussionBtn();
                         }}
                       >
-                        Entre Code discussion
+                        Entrer le Code discussion
                       </button>
                       <button
                         type="button"
@@ -420,7 +420,7 @@ function NavigationBar(props) {
                           handlenewdiscussion();
                         }}
                       >
-                        Cree nouvelle discussion
+                        Crée une nouvelle discussion
                       </button>
                     </div>
                   )}
