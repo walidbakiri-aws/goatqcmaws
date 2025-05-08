@@ -6,6 +6,7 @@ import UserService from "./service/UserService";
 import { useLocation } from "react-router-dom";
 import { TfiClose } from "react-icons/tfi";
 import { useMediaQuery } from "react-responsive";
+import sendmessage from "../layout/img/sendmessage.png";
 
 function ChatBox(props) {
   let [ShowDiscsussionDiv, setShowDiscsussionDiv] = useState(true);
@@ -143,13 +144,14 @@ function ChatBox(props) {
               onChange={(e) => setMessage(e.target.value)}
               className={styles.messageInput}
             />
-            <button
+            <img
+              src={sendmessage}
+              style={{ marginTop: 5 }}
+              height="30"
+              width="30"
               onClick={sendMessage}
               disabled={!message.trim()}
-              className={styles.sendButton}
-            >
-              Send
-            </button>
+            />
           </div>
         </div>
       )}
@@ -196,13 +198,14 @@ function ChatBox(props) {
               onChange={(e) => setMessage(e.target.value)}
               className={styles.messageInput}
             />
-            <button
+            <img
+              style={{ marginTop: 5 }}
+              src={sendmessage}
+              height="30"
+              width="30"
               onClick={sendMessage}
               disabled={!message.trim()}
-              className={styles.sendButton}
-            >
-              Send
-            </button>
+            />
           </div>
         </div>
       )}
