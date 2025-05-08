@@ -1,7 +1,6 @@
 import BtnAdd from "./BtnAdd";
 import classes from "./NavigationBar.module.css";
 import goatlogonavbare from "./goatlogonavbare.png";
-import chaticon from "./img/chat.png";
 import { useEffect, useState } from "react";
 import UserService from "./service/UserService";
 //import ModalChat from "./ModalChat";
