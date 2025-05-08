@@ -5,7 +5,7 @@ import classes from "./Quiz.module.css";
 import Sidebar from "./Sidebar";
 import { useSignal } from "@preact/signals-react/runtime";
 import axios from "axios";
-
+import ChatBox from "./ChatBox";
 import { useNavigate } from "react-router-dom";
 import UserService from "../compenent/layout/service/UserService";
 import { useMediaQuery } from "react-responsive";

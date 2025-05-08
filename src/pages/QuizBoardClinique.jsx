@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ChatBox from "./ChatBox";
 import NavigationBar from "../compenent/layout/NavigationBar";
 import classes from "./QuizBoardClinique.module.css";
 import Sidebar from "./Sidebar";
