@@ -79,8 +79,9 @@ ChartJS.register(
   LinearScale,
   BarElement
 );
-import ChatBox from "./ChatBox";
-function QuizBoard(props) {
+import ChatBox from "../compenent/layout/ChatBox";
+
+ function QuizBoard(props) {
    //**chat Box*************************************************************** */
    const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
    const codechatlocation = localStorage.getItem("codechatlocation");

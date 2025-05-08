@@ -5,12 +5,13 @@ import classes from "./Quiz.module.css";
 import Sidebar from "./Sidebar";
 import { useSignal } from "@preact/signals-react/runtime";
 import axios from "axios";
-import ChatBox from "./ChatBox";
+ 
 import { useNavigate } from "react-router-dom";
 import UserService from "../compenent/layout/service/UserService";
 import { useMediaQuery } from "react-responsive";
 import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
+import ChatBox from "../compenent/layout/ChatBox";
 function Quiz() {
   //**chat Box*************************************************************** */
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
