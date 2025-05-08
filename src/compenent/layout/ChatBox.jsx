@@ -7,8 +7,11 @@ import { useLocation } from "react-router-dom";
 import { TfiClose } from "react-icons/tfi";
 import { useMediaQuery } from "react-responsive";
 import sendmessage from "../layout/img/sendmessage.png";
-
+import settings from "../layout/img/settings.png";
+import ModalDeleteChat from "./ModalDeleteChat";
+import Backdrop from "./Backdrop";
 function ChatBox(props) {
+  const [modalIsDteleChat, setModalIsDteleChat] = useState(false);
   let [ShowDiscsussionDiv, setShowDiscsussionDiv] = useState(true);
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
@@ -18,7 +21,7 @@ function ChatBox(props) {
   const [stompClient, setStompClient] = useState(null);
   const username = localStorage.getItem("username");
   const token = localStorage.getItem("tokengoat");
-  const codechat = localStorage.getItem("codechat");
+
   let userId = localStorage.getItem("userId");
   let saveUser = {
     name: "",
@@ -100,7 +103,14 @@ function ChatBox(props) {
       setMessage("");
     }
   };
-
+  const handlesettingBtn = () => {
+    setModalIsDteleChat(true);
+    setShowDiscsussionDiv(false);
+  };
+  function closeModalHandler() {
+    setModalIsDteleChat(false);
+    setShowDiscsussionDiv(false);
+  }
   return (
     <>
       {ShowDiscsussionDiv && isDesktopOrLaptop && (
@@ -111,6 +121,17 @@ function ChatBox(props) {
                 onClick={(e) => {
                   setShowDiscsussionDiv(false);
                 }}
+              />
+            </div>
+            <div className={styles.settings}>
+              <img
+                src={settings}
+                height="24"
+                width="25"
+                onClick={(e) => {
+                  handlesettingBtn();
+                }}
+                disabled={!message.trim()}
               />
             </div>
           </div>
@@ -165,6 +186,17 @@ function ChatBox(props) {
                 }}
               />
             </div>
+            <div className={styles.settings_phone}>
+              <img
+                src={settings}
+                height="24"
+                width="25"
+                onClick={(e) => {
+                  handlesettingBtn();
+                }}
+                disabled={!message.trim()}
+              />
+            </div>
           </div>
 
           <div className={styles.messageList_phone}>
@@ -209,6 +241,8 @@ function ChatBox(props) {
           </div>
         </div>
       )}
+      {modalIsDteleChat && <Backdrop onCancel={closeModalHandler} />}
+      {modalIsDteleChat && <ModalDeleteChat codechat={chatCode} />}
     </>
   );
 }

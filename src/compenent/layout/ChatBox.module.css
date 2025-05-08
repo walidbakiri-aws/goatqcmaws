@@ -25,6 +25,12 @@
 
   margin-right: 10px;
 }
+
+.settings {
+  float: left;
+
+  margin-left: 10px;
+}
 .messageList {
   flex: 1;
   overflow-y: auto;
@@ -163,6 +169,11 @@
   float: right;
 
   margin-right: 10px;
+}
+.settings_phone {
+  float: left;
+
+  margin-left: 10px;
 }
 .messageList_phone {
   flex: 1;

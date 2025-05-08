@@ -1,0 +1,28 @@
+.modal {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: rgb(224, 219, 219);
+  padding: 1rem;
+  text-align: center;
+  width: 800px;
+  height: 200px;
+  z-index: 20;
+  position: fixed;
+
+  top: 20vh;
+  left: calc(38% - 15rem);
+}
+/**phone**********************/
+.modal_phone {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: rgb(224, 219, 219);
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  z-index: 20;
+  position: fixed;
+
+  top: 20vh;
+}
