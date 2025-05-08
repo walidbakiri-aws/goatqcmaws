@@ -45,6 +45,8 @@ function ModalDeleteChat(props) {
       chatId.value = resultLoadChat.data[0].id;
       setDiscussion(resultLoadChat.data[0]);
       console.log(resultLoadChat.data[0]);
+      localStorage.removeItem("showdiscussiondiv");
+      localStorage.removeItem("codechatlocation");
     } catch (Exception) {}
   };
   /**************************************************************** */

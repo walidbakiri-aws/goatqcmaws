@@ -3731,6 +3731,7 @@ function QuizBoard(props) {
                                 handlesendComment();
                               }}
                               src={sendcomentary}
+                              style={{marginLeft:10}}
                               height="70%"
                               width="25"
                             />
