@@ -658,7 +658,10 @@
 .closequizz_phone {
   position: fixed;
   right: 0;
-  margin-right: 10px;
+  margin-right: 5px;
+
+  width: 100px;
+  display: flex;
 }
 .full_parsujets_timer_container_phone {
   display: flex;
