@@ -72,6 +72,10 @@ ChartJS.register(
   BarElement
 );
 function QuizBoardClinique(props) {
+  //**chat Box*************************************************************** */
+  const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
+  const codechatlocation = localStorage.getItem("codechatlocation");
+  //************************************************************************ */
   const Date = new DateObject();
   const sourceSaveQuizzBtn = "savequizzsource";
   const sourceSaveSessionBtn = "savesessionsource";
@@ -770,7 +774,6 @@ function QuizBoardClinique(props) {
           incCour.value < props.selectMultipleCours.length
         ) {
           if (incCour.value === props.selectMultipleCours.length - 1) {
-           
             setShowCancelQuizzPhone(true);
           }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
@@ -871,7 +874,6 @@ function QuizBoardClinique(props) {
           incCour.value < props.selectMultipleCours.length
         ) {
           if (incCour.value === props.selectMultipleCours.length - 1) {
-            
             setShowCancelQuizzPhone(true);
           }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
@@ -5162,6 +5164,12 @@ function QuizBoardClinique(props) {
             Terminer
           </button>
         </div>
+      )}
+      {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && (
+        <ChatBox chatcode={codechatlocation} />
+      )}
+      {isTabletOrMobile && getDuiscussionDivStatus == "true" && (
+        <ChatBox chatcode={codechatlocation} />
       )}
     </>
   );

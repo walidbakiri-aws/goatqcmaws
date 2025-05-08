@@ -81,6 +81,10 @@ ChartJS.register(
 );
 
 function QuizBoard(props) {
+   //**chat Box*************************************************************** */
+   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
+   const codechatlocation = localStorage.getItem("codechatlocation");
+   //************************************************************************ */
   // Retry config: 3 retries, with exponential backoff
   axiosRetry(axios, {
     retries: 3,
@@ -4193,6 +4197,12 @@ function QuizBoard(props) {
           </button>
         </div>
       )}
+       {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && (
+              <ChatBox chatcode={codechatlocation} />
+            )}
+            {isTabletOrMobile && getDuiscussionDivStatus == "true" && (
+              <ChatBox chatcode={codechatlocation} />
+            )}
     </>
   );
 }

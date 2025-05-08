@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.15.21",
     "@preact/signals": "^1.2.3",
     "@preact/signals-react": "^2.0.2",
+    "@stomp/stompjs": "^7.1.1",
     "axios": "^1.8.4",
     "axios-retry": "^4.5.0",
     "bootstrap": "^5.3.3",
@@ -41,6 +42,7 @@
     "react-timer-hook": "^3.0.7",
     "react-toastify": "^10.0.5",
     "reactjs-editor": "^10.0.1",
+    "sockjs-client": "^1.6.1",
     "stopwatch-node": "^1.1.0",
     "use-local-storage": "^3.0.0"
   },

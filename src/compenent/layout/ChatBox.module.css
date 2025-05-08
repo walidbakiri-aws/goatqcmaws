@@ -1,0 +1,276 @@
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  max-width: 400px;
+  margin: auto;
+  background: #f0f2f5;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  z-index: 50;
+  position: fixed;
+  float: right bottom;
+  right: 5px;
+  bottom: 0px;
+}
+.discussionheader {
+  width: 100%;
+  height: 30px;
+  background-color: #a0cfff;
+}
+.closeicon {
+  float: right;
+
+  margin-right: 10px;
+}
+.messageList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.messageItem {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.messageItem.sent {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.messageContent {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.messageItem.sent .messageContent {
+  background-color: #0084ff;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.messageItem.received .messageContent {
+  background-color: #fff;
+  color: #000;
+  border-bottom-left-radius: 4px;
+}
+
+.avatarContainer {
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+}
+.fulldiscussion {
+  width: 500px;
+  height: auto;
+}
+.nickname {
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-left: 5px;
+  color: #b6abab;
+}
+.timestamp {
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 4px;
+  margin-left: 60px;
+  color: #b6abab;
+}
+.inputContainer {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.nicknameInput {
+  flex: 1;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+}
+
+.messageInput {
+  flex: 3;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+}
+
+.sendButton {
+  background-color: #0084ff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.sendButton:disabled {
+  background-color: #a0cfff;
+  cursor: not-allowed;
+}
+
+/**phone**********************************/
+.chatContainer_phone {
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  max-width: 80%;
+  margin: auto;
+  background: #f0f2f5;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: "Segoe UI", sans-serif;
+  z-index: 50;
+  position: fixed;
+  float: right bottom;
+  right: 5px;
+  bottom: 0px;
+}
+.discussionheader_phone {
+  width: 100%;
+  height: 30px;
+  background-color: #a0cfff;
+}
+.closeicon_phone {
+  float: right;
+
+  margin-right: 10px;
+}
+.messageList_phone {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.messageItem_phone {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.messageItem_phone.sent {
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+}
+
+.messageContent_phone {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 18px;
+  font-size: 15px;
+  line-height: 1.4;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.messageItem_phone.sent .messageContent_phone {
+  background-color: #0084ff;
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.messageItem.received .messageContent {
+  background-color: #fff;
+  color: #000;
+  border-bottom-left-radius: 4px;
+}
+
+.avatarContainer_phone {
+  flex-shrink: 0;
+}
+
+.avatar_phone {
+  width: 36px;
+  height: 36px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+}
+.fulldiscussion_phone {
+  width: 500px;
+  height: auto;
+}
+.nickname_phone {
+  font-weight: 500;
+  margin-bottom: 4px;
+  margin-left: 5px;
+  color: #b6abab;
+}
+.timestamp_phone {
+  font-weight: 500;
+  font-size: 15px;
+  margin-bottom: 4px;
+  margin-left: 60px;
+  color: #b6abab;
+}
+.inputContainer_phone {
+  display: flex;
+  padding: 12px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.nicknameInput_phone {
+  flex: 1;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+}
+
+.messageInput_phone {
+  flex: 3;
+  margin-right: 8px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 18px;
+}
+
+.sendButton_phone {
+  background-color: #0084ff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 18px;
+  cursor: pointer;
+}
+
+.sendButton_phone:disabled {
+  background-color: #a0cfff;
+  cursor: not-allowed;
+}

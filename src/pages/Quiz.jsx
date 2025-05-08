@@ -12,6 +12,10 @@ import { useMediaQuery } from "react-responsive";
 import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 function Quiz() {
+  //**chat Box*************************************************************** */
+  const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
+  const codechatlocation = localStorage.getItem("codechatlocation");
+  //************************************************************************ */
   const [visibleCommenceBtn, setVisibleCommenceBtn] = useState(false);
   const [module, setModule] = useState([]);
   const radioRefs = useRef([]);
@@ -1454,6 +1458,12 @@ function Quiz() {
           </div>
         )}
       </div>
+      {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && (
+        <ChatBox chatcode={codechatlocation} />
+      )}
+      {isTabletOrMobile && getDuiscussionDivStatus == "true" && (
+        <ChatBox chatcode={codechatlocation} />
+      )}
     </>
   );
 }

@@ -1,0 +1,52 @@
+.title {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 24px;
+  margin-top: 20px;
+}
+
+.userList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.userButton {
+  padding: 10px;
+  background-color: lightgray;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selectedUser {
+  padding: 10px;
+  background-color: lightgreen;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.createButtonWrapper {
+  margin-top: 20px;
+}
+
+.createButton {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.groupList {
+  margin-top: 20px;
+}
+
+.groupItem {
+  margin-bottom: 10px;
+}
