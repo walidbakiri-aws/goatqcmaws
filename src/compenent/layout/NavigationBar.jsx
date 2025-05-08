@@ -297,7 +297,7 @@ function NavigationBar(props) {
                       <div className="mb-3">
                         <input
                           type="text"
-                          placeholder="Nome discussion"
+                          placeholder="Nom de discussion"
                           className="form-control"
                           id="exampleInputEmail1"
                           aria-describedby="emailHelp"
@@ -308,7 +308,7 @@ function NavigationBar(props) {
                       </div>
                       <div className="mb-3">
                         <input
-                          placeholder="Code discussion"
+                          placeholder="Code de discussion"
                           type="text"
                           className="form-control"
                           id="exampleInputPassword1"
@@ -428,7 +428,7 @@ function NavigationBar(props) {
                       <div className="mb-3">
                         <input
                           type="text"
-                          placeholder="Nome discussion"
+                          placeholder="Nom de discussion"
                           className="form-control"
                           id="exampleInputEmail1"
                           aria-describedby="emailHelp"
@@ -439,7 +439,7 @@ function NavigationBar(props) {
                       </div>
                       <div className="mb-3">
                         <input
-                          placeholder="Code discussion"
+                          placeholder="Code de discussion"
                           type="text"
                           className="form-control"
                           id="exampleInputPassword1"
