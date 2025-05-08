@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ChatBox from "../compenent/layout/ChatBox";
 import NavigationBar from "../compenent/layout/NavigationBar";
 import classes from "./QuizBoardClinique.module.css";
 import Sidebar from "./Sidebar";
@@ -43,6 +42,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import dropright from "../compenent/layout/img/dropright.png";
 import { useStopwatch } from "react-timer-hook";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import messanger from "../compenent/layout/img/messanger.png";
 
 import { IoPauseCircleOutline } from "react-icons/io5";
 import { MdOutlineReplay } from "react-icons/md";
@@ -63,6 +63,7 @@ import {
   BarElement,
 } from "chart.js";
 import NoteQcmClinique from "./NoteQcmClinique";
+import ChatBox from "../compenent/layout/ChatBox";
 ChartJS.register(
   ArcElement,
   Title,
@@ -73,7 +74,7 @@ ChartJS.register(
   BarElement
 );
 function QuizBoardClinique(props) {
-  //**chat Box*************************************************************** */
+  /**chat Box*************************************************************** */
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
   const codechatlocation = localStorage.getItem("codechatlocation");
   //************************************************************************ */
@@ -503,7 +504,7 @@ function QuizBoardClinique(props) {
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
-      `https://goatqcm-instance.com/fulldesc/clinique/descqcm/${qcmId}`
+      `https://goatqcm-instance.comfulldesc/clinique/descqcm/${qcmId}`
     );
 
     console.log(fullDescResult.data);
@@ -548,10 +549,7 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(
-        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
-        formData
-      )
+      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -571,15 +569,11 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post(
-        "https://goatqcm-instance.com/image/clinique/uploadimage",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -875,6 +869,7 @@ function QuizBoardClinique(props) {
           incCour.value < props.selectMultipleCours.length
         ) {
           if (incCour.value === props.selectMultipleCours.length - 1) {
+            console.log(incCours.value);
             setShowCancelQuizzPhone(true);
           }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
@@ -1846,12 +1841,9 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(
-        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2352,13 +2344,9 @@ function QuizBoardClinique(props) {
     //******************************************************************************** */
     saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2503,13 +2491,9 @@ function QuizBoardClinique(props) {
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2727,6 +2711,10 @@ function QuizBoardClinique(props) {
     setVisibleNoteQcm(!visibleNoteQcm);
   };
   /***************************************************************** */
+  const handleChatBtn = () => {
+    console.log("hey walid");
+    setShowDiscsussionDiv(true);
+  };
   return (
     <>
       {!OpenBoardQcm && (
@@ -3670,6 +3658,14 @@ function QuizBoardClinique(props) {
                                 }}
                               />
                             </li>
+                            <img
+                              src={messanger}
+                              height="100%"
+                              width="30"
+                              onClick={(e) => {
+                                handleChatBtn();
+                              }}
+                            />
                           </div>
                         </div>
                       )}

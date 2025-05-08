@@ -652,6 +652,12 @@
 }
 .closequizz_phone {
   margin-left: 10px;
+  position: fixed;
+  right: 0;
+  margin-right: 5px;
+
+  width: 100px;
+  display: flex;
 }
 
 /************************************************************************/

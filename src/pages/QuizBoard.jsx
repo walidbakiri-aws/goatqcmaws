@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import messanger from "../compenent/layout/img/messanger.png";
+
 import NavigationBar from "../compenent/layout/NavigationBar";
 import classes from "./QuizBoard.module.css";
 import Sidebar from "./Sidebar";
@@ -70,6 +72,7 @@ import {
   BarElement,
 } from "chart.js";
 import NoteQcm from "./NoteQcm.jsx";
+import ChatBox from "../compenent/layout/ChatBox.jsx";
 ChartJS.register(
   ArcElement,
   Title,
@@ -79,13 +82,13 @@ ChartJS.register(
   LinearScale,
   BarElement
 );
-import ChatBox from "../compenent/layout/ChatBox";
 
- function QuizBoard(props) {
-   //**chat Box*************************************************************** */
-   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
-   const codechatlocation = localStorage.getItem("codechatlocation");
-   //************************************************************************ */
+function QuizBoard(props) {
+  const [ShowDiscsussionDiv, setShowDiscsussionDiv] = useState(false);
+  //**chat Box*************************************************************** */
+  const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
+  const codechatlocation = localStorage.getItem("codechatlocation");
+  //************************************************************************ */
   // Retry config: 3 retries, with exponential backoff
   axiosRetry(axios, {
     retries: 3,
@@ -2229,13 +2232,9 @@ import ChatBox from "../compenent/layout/ChatBox";
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2329,7 +2328,10 @@ import ChatBox from "../compenent/layout/ChatBox";
       }
     );
   };
-
+  const handleChatBtn = () => {
+    console.log("hey walid");
+     setShowDiscsussionDiv(true);
+  };
   return (
     <>
       {!OpenBoardClinique && (
@@ -3124,6 +3126,14 @@ import ChatBox from "../compenent/layout/ChatBox";
                                     }}
                                   />
                                 </li>
+                                <img
+                                  src={messanger}
+                                  height="100%"
+                                  width="30"
+                                  onClick={(e) => {
+                                    handleChatBtn();
+                                  }}
+                                />
                               </div>
                             </>
                           )}
@@ -4058,6 +4068,13 @@ import ChatBox from "../compenent/layout/ChatBox";
           {isTabletOrMobile && ShowModalStatique && (
             <BackdropSaveQuizPhone onCancel={closeModalDoneQuizHandler} />
           )}
+
+          {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && ShowDiscsussionDiv &&(
+            <ChatBox chatcode={codechatlocation} />
+          )}
+          {isTabletOrMobile && getDuiscussionDivStatus == "true"&& ShowDiscsussionDiv && (
+            <ChatBox chatcode={codechatlocation} />
+          )}
         </>
       )}
       {OpenBoardClinique && (
@@ -4198,12 +4215,6 @@ import ChatBox from "../compenent/layout/ChatBox";
           </button>
         </div>
       )}
-       {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && (
-              <ChatBox chatcode={codechatlocation} />
-            )}
-            {isTabletOrMobile && getDuiscussionDivStatus == "true" && (
-              <ChatBox chatcode={codechatlocation} />
-            )}
     </>
   );
 }
