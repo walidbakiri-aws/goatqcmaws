@@ -190,7 +190,7 @@ function ChatBox(props) {
             ))}
           </div>
 
-          <div className={styles.inputContainer}>
+          <div className={styles.inputContainer_phone}>
             <input
               type="text"
               placeholder="Type a message"

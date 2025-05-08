@@ -240,11 +240,18 @@
 }
 .inputContainer_phone {
   display: flex;
-  padding: 12px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   border-top: 1px solid #ccc;
   background-color: #fff;
 }
-
+.inputContainer_phone input {
+  width: 50px;
+}
+.inputContainer_phone img {
+  right: 0px;
+  margin-right: 1px;
+}
 .nicknameInput_phone {
   flex: 1;
   margin-right: 8px;
