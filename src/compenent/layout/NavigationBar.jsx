@@ -1,7 +1,7 @@
 import BtnAdd from "./BtnAdd";
 import classes from "./NavigationBar.module.css";
 import goatlogonavbare from "./goatlogonavbare.png";
-
+import chaticon from "./img/chat.png";
 import { useEffect, useState } from "react";
 import UserService from "./service/UserService";
 //import ModalChat from "./ModalChat";
@@ -46,9 +46,9 @@ function NavigationBar(props) {
   const [showButtonChoseFirstAction, setShowButtonChoseFirstAction] =
     useState(true);
   const [showAddNewChat, setshowAddNewChat] = useState(false);
+  const [showEnterCodeChat, setShowEnterCodeChat] = useState(false);
 
   const [showFullChatDiv, setShowFullChatDiv] = useState(true);
-  const [showEnterCodeChat, setShowEnterCodeChat] = useState(false);
   const [chat, setChat] = useState({
     chatName: "",
     chatCode: "",
@@ -70,6 +70,8 @@ function NavigationBar(props) {
     setMoladIsOpen(false);
   }
   const handleChatBtn = () => {
+    setshowAddNewChat(false);
+    setShowEnterCodeChat(false);
     console.log("hey walid");
     setMoladIsOpen(true);
     loadChatUserId(userId);
@@ -324,7 +326,7 @@ function NavigationBar(props) {
                           handleAddChat(e);
                         }}
                       >
-                        Submit
+                        Crée
                       </button>
                     </form>
                   )}
@@ -399,9 +401,9 @@ function NavigationBar(props) {
           {modalIsOpen && (
             <>
               {showFullChatDiv && (
-                <div className={`${classes.modal} `}>
+                <div className={`${classes.modal_phone} `}>
                   {showButtonChoseFirstAction && (
-                    <div className={`${classes.buttonchose} `}>
+                    <div className={`${classes.buttonchose_phone} `}>
                       <button
                         type="button"
                         className="btn btn-primary"
@@ -423,7 +425,7 @@ function NavigationBar(props) {
                     </div>
                   )}
                   {showAddNewChat && (
-                    <form className={`${classes.addnewchat} `}>
+                    <form className={`${classes.addnewchat_phone} `}>
                       <div className="mb-3">
                         <input
                           type="text"
@@ -455,12 +457,12 @@ function NavigationBar(props) {
                           handleAddChat(e);
                         }}
                       >
-                        Submit
+                        Crée
                       </button>
                     </form>
                   )}
                   {showEnterCodeChat && (
-                    <div className={`${classes.addnewchat} `}>
+                    <div className={`${classes.addnewchat_phone} `}>
                       <div className="mb-3">
                         <input
                           type="text"
