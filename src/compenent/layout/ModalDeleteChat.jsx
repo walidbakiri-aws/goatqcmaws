@@ -22,7 +22,7 @@ function ModalDeleteChat(props) {
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
 
   //************************************************************************ */
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokengoat");
   const username = localStorage.getItem("username");
   let userId = localStorage.getItem("userId");
   const [discussion, setDiscussion] = useState([]);
@@ -37,7 +37,7 @@ function ModalDeleteChat(props) {
   const loadChatUserId = async () => {
     try {
       const resultLoadChat = await axios.get(
-        `http://localhost:8080/chat/getbyuserid/${userId}`,
+        `https://goatqcm-instance.com/chat/getbyuserid/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -51,7 +51,7 @@ function ModalDeleteChat(props) {
   };
   /**************************************************************** */
   const handleneDeteleChat = async () => {
-    await axios.delete(`http://localhost:8080/chat/${chatId.value}`, {
+    await axios.delete(`https://goatqcm-instance.com/chat/${chatId.value}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     setShowodalDeleteChat(false);
