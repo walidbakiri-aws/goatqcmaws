@@ -1641,6 +1641,7 @@ function QuizBoard(props) {
 
   //**get all commentary of qcms******************************************
   const getCommentaryQcm = async (qcmId) => {
+    setQcmCommentary([]);
     const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
