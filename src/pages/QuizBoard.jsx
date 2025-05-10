@@ -1642,23 +1642,30 @@ function QuizBoard(props) {
   //**get all commentary of qcms******************************************
   const getCommentaryQcm = async (qcmId) => {
     setQcmCommentary([]);
-    const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    getCommentaryById.data = [];
+    try {
+      const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    console.log(result.data);
-    for (let inc = 0; inc < result.data.length; inc++) {
-      const getCommentaryById = await axios.get(
-        `${BASE_URL}/commentary/${result.data[inc].id}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
-      console.log(getCommentaryById.data);
-      saveEachCommentary.value[inc] = getCommentaryById.data;
+      console.log(result.data);
+    } catch (Exception) {
+      console.log("heyy");
     }
-    console.log(saveEachCommentary.value);
-    setQcmCommentary(saveEachCommentary.value);
+    if (result.data.length > 0) {
+      for (let inc = 0; inc < result.data.length; inc++) {
+        const getCommentaryById = await axios.get(
+          `${BASE_URL}/commentary/${result.data[inc].id}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        console.log(getCommentaryById.data);
+        saveEachCommentary.value[inc] = getCommentaryById.data;
+      }
+      console.log(saveEachCommentary.value);
+      setQcmCommentary(saveEachCommentary.value);
+    }
   };
   //********************************************************************** */
   //****************submit qcm ****************************************/
