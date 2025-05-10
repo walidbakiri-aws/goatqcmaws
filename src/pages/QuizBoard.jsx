@@ -221,7 +221,8 @@ function QuizBoard(props) {
     ourUsers: {},
     qcmStandard: {},
   });
-
+  const [list, setList] = useState([]);
+  let saveEachCommentary = useSignal([]);
   //************************************************* */
 
   //****save propo selected******************************************* */
@@ -251,7 +252,14 @@ function QuizBoard(props) {
   const [ShowPauseBtn, setShowPauseBtn] = useState(true);
 
   //****************************************************************** */
-
+  //*****save qcm******************************************* */
+  const saveUserQcm = {
+    id: "",
+    name: "",
+    lastname: "",
+    password: "",
+    role: "",
+  };
   //*********commnetaire************************************************** */
   const getUser = async () => {
     console.log(userId);
@@ -297,14 +305,7 @@ function QuizBoard(props) {
   let [SavePercentageAmount, setSavePercentageAmount] = useState([]);
   let saveCurrentAmount = [];
   //********************************************************* */
-  //*****save qcm******************************************* */
-  const saveUserQcm = {
-    id: "",
-    name: "",
-    lastname: "",
-    password: "",
-    role: "",
-  };
+
   const [SaveQcmQuizz, setSaveQcmQuizz] = useState({
     nameQcmQuizz: "",
     qcmSujetTypeSelected: "",
@@ -1640,9 +1641,23 @@ function QuizBoard(props) {
 
   //**get all commentary of qcms******************************************
   const getCommentaryQcm = async (qcmId) => {
-    const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`);
+    const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
     console.log(result.data);
-    setQcmCommentary(result.data);
+    for (let inc = 0; inc < result.data.length; inc++) {
+      const getCommentaryById = await axios.get(
+        `${BASE_URL}/commentary/${result.data[inc].id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(getCommentaryById.data);
+      saveEachCommentary.value[inc] = getCommentaryById.data;
+    }
+    console.log(saveEachCommentary.value);
+    setQcmCommentary(saveEachCommentary.value);
   };
   //********************************************************************** */
   //****************submit qcm ****************************************/
@@ -1662,9 +1677,28 @@ function QuizBoard(props) {
   //**************************************************************** */
   const handlesendComment = async () => {
     console.log(userFinal);
-
+    //****get user*************************************** */
+    try {
+      const resultUserFinal = await UserService.getUserByuserName(
+        username,
+        token
+      );
+      console.log(resultUserFinal);
+      (saveUserQcm.id = resultUserFinal.id),
+        (saveUserQcm.name = resultUserFinal.name),
+        (saveUserQcm.lastname = resultUserFinal.lastname),
+        (saveUserQcm.username = resultUserFinal.username),
+        (saveUserQcm.password = resultUserFinal.password),
+        (saveUserQcm.role = resultUserFinal.role);
+    } catch (Exception) {
+      console.log("user not found");
+    }
+    Commentary.ourUsers = saveUserQcm;
+    //***************************************************** */
     Commentary.commentaryStudent = inputStr;
     console.log(Commentary);
+    console.log(Commentary.ourUsers);
+    console.log(Commentary.qcmStandard);
     console.log(inputStr);
     axios
       .post("https://goatqcm-instance.com/commentary", Commentary, {
@@ -2232,9 +2266,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2330,7 +2368,7 @@ function QuizBoard(props) {
   };
   const handleChatBtn = () => {
     console.log("hey walid");
-     setShowDiscsussionDiv(true);
+    setShowDiscsussionDiv(true);
   };
   return (
     <>
@@ -3731,7 +3769,7 @@ function QuizBoard(props) {
                                 handlesendComment();
                               }}
                               src={sendcomentary}
-                              style={{marginLeft:10}}
+                              style={{ marginLeft: 10 }}
                               height="70%"
                               width="25"
                             />
@@ -4070,12 +4108,12 @@ function QuizBoard(props) {
             <BackdropSaveQuizPhone onCancel={closeModalDoneQuizHandler} />
           )}
 
-          {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && ShowDiscsussionDiv &&(
-            <ChatBox chatcode={codechatlocation} />
-          )}
-          {isTabletOrMobile && getDuiscussionDivStatus == "true"&& ShowDiscsussionDiv && (
-            <ChatBox chatcode={codechatlocation} />
-          )}
+          {isDesktopOrLaptop &&
+            getDuiscussionDivStatus == "true" &&
+            ShowDiscsussionDiv && <ChatBox chatcode={codechatlocation} />}
+          {isTabletOrMobile &&
+            getDuiscussionDivStatus == "true" &&
+            ShowDiscsussionDiv && <ChatBox chatcode={codechatlocation} />}
         </>
       )}
       {OpenBoardClinique && (
