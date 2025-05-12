@@ -1641,31 +1641,41 @@ function QuizBoard(props) {
 
   //**get all commentary of qcms******************************************
   const getCommentaryQcm = async (qcmId) => {
-    setQcmCommentary([]);
-    getCommentaryById.data = [];
-    try {
-      const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      console.log(result.data);
-    } catch (Exception) {
-      console.log("heyy");
-    }
-    if (result.data.length > 0) {
-      for (let inc = 0; inc < result.data.length; inc++) {
-        const getCommentaryById = await axios.get(
-          `${BASE_URL}/commentary/${result.data[inc].id}`,
-          {
+    console.log(qcmId);
+        getQcmCommentary(qcmId);
+        getUser();
+    
+        getCommentaryQcm(qcmId);
+        setVisibleCommentaryStudent(true);
+      };
+      //************************************************************ */
+    
+      //**get all commentary of qcms******************************************
+      const getCommentaryQcm = async (qcmId) => {
+        saveEachCommentary.value=[];
+        setQcmCommentary([]);
+        try {
+          const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`, {
             headers: { Authorization: `Bearer ${token}` },
+          });
+    
+          console.log(result.data);
+    
+          for (let inc = 0; inc < result.data.length; inc++) {
+            const getCommentaryById = await axios.get(
+              `${BASE_URL}/commentary/${result.data[inc].id}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
+            console.log(getCommentaryById.data);
+            saveEachCommentary.value[inc] = getCommentaryById.data;
           }
-        );
-        console.log(getCommentaryById.data);
-        saveEachCommentary.value[inc] = getCommentaryById.data;
-      }
-      console.log(saveEachCommentary.value);
-      setQcmCommentary(saveEachCommentary.value);
-    }
+          console.log(saveEachCommentary.value);
+          setQcmCommentary(saveEachCommentary.value);
+        } catch (Exception) {
+          console.log("hey");
+        }
   };
   //********************************************************************** */
   //****************submit qcm ****************************************/
