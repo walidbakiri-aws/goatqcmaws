@@ -5,7 +5,7 @@ import classes from "./Quiz.module.css";
 import Sidebar from "./Sidebar";
 import { useSignal } from "@preact/signals-react/runtime";
 import axios from "axios";
- 
+
 import { useNavigate } from "react-router-dom";
 import UserService from "../compenent/layout/service/UserService";
 import { useMediaQuery } from "react-responsive";
@@ -13,10 +13,6 @@ import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 import ChatBox from "../compenent/layout/ChatBox";
 function Quiz() {
-  //**chat Box*************************************************************** */
-  const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
-  const codechatlocation = localStorage.getItem("codechatlocation");
-  //************************************************************************ */
   const [visibleCommenceBtn, setVisibleCommenceBtn] = useState(false);
   const [module, setModule] = useState([]);
   const radioRefs = useRef([]);
@@ -108,7 +104,14 @@ function Quiz() {
   //********get All Modules ************************************************* */
   const [AllModules, setAllModules] = useState([]);
   //**************************liste cour data */***************
+  //**chat Box*************************************************************** */
+  const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
+  const codechatlocation = localStorage.getItem("codechatlocation");
+  //************************************************************************ */
+
   useEffect(() => {
+    console.log(getDuiscussionDivStatus);
+    console.log(codechatlocation);
     localStorage.setItem("checkcascliniqueexiste", "false");
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
@@ -172,6 +175,7 @@ function Quiz() {
       if (QcmSujetTypeSelected.value === "Par Sujet") {
         setVisibleQcmType(false);
         setVisibleMinMaxYear(false);
+        QcmTypeSelected.value = "Tous (Qcm,Cas Clinique)";
       } else if (QcmSujetTypeSelected.value === "Par Cour") {
         setVisibleQcmType(true);
         setVisibleMinMaxYear(true);
@@ -225,9 +229,7 @@ function Quiz() {
       setVisibleQcmType(false);
       // loadCoursOfModule();
     }
-    /*if (SelectedSourceExmn.value === "Résidanat Blida") {
-      QcmTypeSelected.value = "Tous (Qcm,Cas Clinique)";
-    }*/
+
     setMinYearValue([""]);
     setMaxYearValue([""]);
 
@@ -736,8 +738,8 @@ function Quiz() {
           ).toString();
 
           minMaxYear = MinMaxMultipleFinalClinique;
-          setVisibleCommenceBtn(true);
           setExisteCasClinique(true);
+          setVisibleCommenceBtn(true);
           console.log(minMaxYear);
         } catch {
           console.log("Cours not selected");
@@ -933,7 +935,15 @@ function Quiz() {
         moduleName: moduleName.value,
         courId: SelectedCours[0],
         checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
-        qcmType: ExisteCasClinique ? QcmTypeSelected.value : "Qcm",
+
+        qcmType:
+          QcmSujetTypeSelected.value === "Par Sujet" &&
+          SelectedSourceExmn.value === "Résidanat Blida"
+            ? "Tous (Qcm,Cas Clinique)"
+            : ExisteCasClinique
+            ? QcmTypeSelected.value
+            : "Qcm",
+
         QcmSujetTypeSelected: QcmTypeParSjtParCours,
         SelectedSourceExmn: QcmTypeSelectedRsdntExetrnt,
         minYearQcm: MinYearValue,
@@ -1459,6 +1469,7 @@ function Quiz() {
           </div>
         )}
       </div>
+
       {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && (
         <ChatBox chatcode={codechatlocation} />
       )}

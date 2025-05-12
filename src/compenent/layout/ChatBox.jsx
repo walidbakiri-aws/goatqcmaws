@@ -110,6 +110,7 @@ function ChatBox(props) {
   function closeModalHandler() {
     setModalIsDteleChat(false);
     setShowDiscsussionDiv(false);
+    localStorage.setItem("showdiscussiondiv", "false");
   }
   return (
     <>

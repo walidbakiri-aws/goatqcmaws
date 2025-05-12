@@ -566,6 +566,7 @@ function QuizBoard(props) {
     console.log(props.SelectedSourceExmn); //Externat/Residanant
     console.log(props.moduleId); //module id
     console.log(props.selectMultipleCours); //cours Ids
+
     console.log(props.qcmType); //Qcm/casClinique/Qcm et casClinque
     console.log(props.minYearQcm); //minYear-parCours)
     console.log(props.maxYearQcm); //minMax-parCours)
@@ -1213,7 +1214,7 @@ function QuizBoard(props) {
           /////
         } else if (props.SelectedSourceExmn === "Résidanat Blida") {
           //  if (props.QuizQcmQclinique === true) {
-
+          console.log("heyyy walikk");
           if (props.backFromCliniqueAllQcmCliniqueprSujet === false) {
             //************get length of cas clinique if existe***************************** */
             try {
