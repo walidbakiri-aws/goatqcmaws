@@ -700,7 +700,7 @@
 }
 .modulediv_phone {
   width: 100%;
-  color: var(--primary-text-color-info);
+  color: white;
   display: flex;
   margin-top: -15px;
   font-size: 13px;
@@ -900,14 +900,17 @@
 .commentarydiv_phone {
   top: 20px;
   left: 10px;
-
+  border-radius: 8px;
   position: absolute;
-  background-color: #faf3f3;
+  background-color: #f4f1f8;
+  padding-left: 10px;
+  padding-top: 10px;
   width: 90%;
   margin-bottom: 5px;
 }
 
 .close_commentary_phone {
+  margin-top: -13px;
   float: right;
   border: 1px solid rgb(255, 250, 250);
 }
@@ -919,13 +922,17 @@
   overflow: auto;
 }
 .commentary_likes_phone {
+  border-radius: 8px;
   resize: both;
   height: auto;
+  width: 95%;
+  background-color: #fdfdfd;
   border: 1px solid rgb(192, 186, 186);
   padding-bottom: 0px;
 }
 .eachcommentary_phone {
   margin-top: 0px;
+
   width: 95%;
   height: 100%;
   margin-top: 5px;
