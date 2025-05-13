@@ -205,8 +205,12 @@ function NavigationBar(props) {
         localStorage.setItem("showdiscussiondiv", "true");
         localStorage.setItem("codechatlocation", dicsussion.value);
         console.log(ShowDiscsussionDiv);
+        if (ShowDiscsussionDiv === true) {
+          setShowDiscsussionDiv(false);
+        } else {
+          setShowDiscsussionDiv(true);
+        }
 
-        setShowDiscsussionDiv(true);
         setMoladIsOpen(false);
         /********************************************** */
       } else {
