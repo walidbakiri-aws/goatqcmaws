@@ -97,7 +97,7 @@ function QuizBoard(props) {
     retryCondition: (error) => {
       return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
     },
-  });
+  });trim
   const Date = new DateObject();
   const sourceBtnSaveQuizz = "saveQuizz";
   const sourceBtnSaveSession = "saveSession";
@@ -642,7 +642,7 @@ function QuizBoard(props) {
     console.log(props.savePieStatiqueClinique);
     /***************************************************************************************************/
     loadShareUserId();
-    if (!chatroom.trim()) return;
+    //if (!chatroom.trim()) return;
     console.log(chatroom);
     fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
       .then((res) => res.json())
@@ -1072,7 +1072,7 @@ function QuizBoard(props) {
               VisibleNextBtn.value = true;
             }
           }
-
+           
           //********************************************************************************* */
 
           //***get commentary number************************************* */
