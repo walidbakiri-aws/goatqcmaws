@@ -97,7 +97,7 @@ function QuizBoard(props) {
     retryCondition: (error) => {
       return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
     },
-  });trim
+  });
   const Date = new DateObject();
   const sourceBtnSaveQuizz = "saveQuizz";
   const sourceBtnSaveSession = "saveSession";
@@ -1072,7 +1072,7 @@ function QuizBoard(props) {
               VisibleNextBtn.value = true;
             }
           }
-           
+
           //********************************************************************************* */
 
           //***get commentary number************************************* */
