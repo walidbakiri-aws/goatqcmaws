@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import messanger from "../compenent/layout/img/messanger.png";
 
 import NavigationBar from "../compenent/layout/NavigationBar";
@@ -82,7 +82,8 @@ ChartJS.register(
   LinearScale,
   BarElement
 );
-
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 function QuizBoard(props) {
   const [ShowDiscsussionDiv, setShowDiscsussionDiv] = useState(false);
   //**chat Box*************************************************************** */
@@ -554,10 +555,26 @@ function QuizBoard(props) {
     }
   }
   const [shoCopyParModule, setShoCopyParModule] = useState(true);
+
+  /**share screen variable********************************************************* */
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [chatroom, setChatroom] = useState("default");
+  const [connected, setConnected] = useState(false);
+  const [stompClient, setStompClient] = useState(null);
+  let shareScreenCode = localStorage.getItem("sharescreencode");
+  let saveUser = {
+    name: "",
+  };
+  /**share screen variable********************************************************* */
+
   useEffect(() => {
-    if (props.moduleName === "Biochimie_3eme") {
-      setShoCopyParModule(false);
-    }
+    /**share screen **************************************************************************** */
+    console.log(shareScreenCode);
+    getUserShare();
+
+    /**share screen ***************************************************************************** */
 
     console.log(props.sessionsLength);
     console.log(props.selectMultipleCours[0]);
@@ -566,7 +583,6 @@ function QuizBoard(props) {
     console.log(props.SelectedSourceExmn); //Externat/Residanant
     console.log(props.moduleId); //module id
     console.log(props.selectMultipleCours); //cours Ids
-
     console.log(props.qcmType); //Qcm/casClinique/Qcm et casClinque
     console.log(props.minYearQcm); //minYear-parCours)
     console.log(props.maxYearQcm); //minMax-parCours)
@@ -624,8 +640,130 @@ function QuizBoard(props) {
     console.log(props.SaveIsClickedCounterClinique);
     console.log(props.SaveEachLineStatiqueClinique);
     console.log(props.savePieStatiqueClinique);
-  }, []);
+    /***************************************************************************************************/
+    loadShareUserId();
+    if (!chatroom.trim()) return;
+    console.log(chatroom);
+    fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
+      .then((res) => res.json())
+      .then((data) => setMessages(data));
 
+    const client = new Client({
+      webSocketFactory: () => new SockJS("https://goatqcm-instance.com/ws"),
+      reconnectDelay: 5000,
+      onConnect: () => {
+        setConnected(true);
+        client.subscribe(`/topic/messages/${chatroom}`, (frame) => {
+          const receivedMessage = JSON.parse(frame.body);
+          setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        });
+      },
+    });
+
+    client.activate();
+    setStompClient(client);
+
+    return () => {
+      client.deactivate();
+      setConnected(false);
+      setMessages([]);
+    };
+
+    /***************************************************************************************************/
+  }, [chatroom]);
+
+  /**share screen effect******************************************************* */
+  const [lastMessage, setLastMessage] = useState(null);
+  const isCall = useRef(true); // stays true across renders
+  const cameFrome = ["propoClicked", "useEffectCalling"];
+  useEffect(() => {
+    /*setSelectQcmIndex(Number(latest.content));
+      setVisibiliteQcmIndex(Number(latest.content));
+      setVisibilitePorpoIndex(Number(latest.content));
+      console.log("Receiver got new last message:", Number(latest.content));*/
+
+    if (messages.length > 0) {
+      const latest = messages[messages.length - 1];
+      setLastMessage(latest.content);
+      console.log(latest.content);
+      console.log(username);
+
+      if (latest.content.startsWith("QcmIndex")) {
+        const extractedValue = latest.content.slice("QcmIndex".length);
+        console.log("Extracted value:", extractedValue);
+
+        setSelectQcmIndex(Number(extractedValue));
+        setVisibiliteQcmIndex(Number(extractedValue));
+        setVisibilitePorpoIndex(Number(extractedValue));
+        console.log("Receiver got new last message:", Number(extractedValue));
+      } else if (!latest.content.startsWith("QcmIndex")) {
+        try {
+          const parsedArray = JSON.parse(latest.content);
+
+          if (Array.isArray(parsedArray) && parsedArray.length === 5) {
+            const [propoId, QcmIndex, indexPropo, qcmId, courName] =
+              parsedArray;
+            console.log(isCall.current);
+
+            if (latest.usernameshare !== username) {
+              console.log(latest.usernameshare);
+              console.log(username);
+
+              handlePropoClick(
+                undefined,
+                propoId,
+                QcmIndex,
+                indexPropo,
+                qcmId,
+                courName,
+                cameFrome[1]
+              );
+            }
+          }
+        } catch (e) {
+          console.error("Failed to parse content", e);
+        }
+      }
+    }
+  }, [messages]);
+  /**end share  screen effect******************************************************* */
+  /********Share***************************************************/
+  const [isToggled, setIsToggled] = useState(false);
+  const loadShareUserId = async () => {
+    try {
+      const resultLoadChat = await axios.get(
+        `https://goatqcm-instance.com/sharescreen/getbyuserid/${userId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      setIsToggled(resultLoadChat.data[0].isSharing);
+      console.log(resultLoadChat.data[0].isSharing);
+    } catch (Exception) {}
+  };
+  /**************************************************************** */
+  //*********getUser************************************************** */
+  const [usernameshare, setUserNameShare] = useState("");
+  const getUserShare = async () => {
+    console.log(userId);
+    console.log(token);
+    try {
+      const resultUserFinal = await UserService.getUserByuserName(
+        username,
+        token
+      );
+
+      (saveUser.name = resultUserFinal.name), console.log(saveUser);
+      console.log(resultUserFinal.name);
+      setNickname(resultUserFinal.name);
+      setUserNameShare(username);
+      setChatroom(shareScreenCode);
+    } catch (Exception) {
+      console.log("user not found");
+    }
+  };
+  //*****************************************************************
   //***get years props*************************** *****************************/
   function loadyearQcmsParSujet() {
     setGetYearProps((GetYearProps) => props.minMaxYearParSujetsFinal);
@@ -1214,7 +1352,7 @@ function QuizBoard(props) {
           /////
         } else if (props.SelectedSourceExmn === "Résidanat Blida") {
           //  if (props.QuizQcmQclinique === true) {
-          console.log("heyyy walikk");
+
           if (props.backFromCliniqueAllQcmCliniqueprSujet === false) {
             //************get length of cas clinique if existe***************************** */
             try {
@@ -1431,6 +1569,25 @@ function QuizBoard(props) {
     setSelectQcmIndex(currentIndex.value);
     setVisibiliteQcmIndex(currentIndex.value);
     setVisibilitePorpoIndex(currentIndex.value);
+    /***share screen************************************************************ */
+    if (isToggled === true) {
+      setMessage("heyyy mamamaaa");
+      if (stompClient && connected) {
+        const sendIndex = currentIndex.value + 1;
+        const chatMessage = {
+          nickname,
+          content: "QcmIndex" + sendIndex,
+        };
+        stompClient.publish({
+          destination: `/app/chat/${chatroom}`,
+          body: JSON.stringify(chatMessage),
+        });
+        console.log(chatMessage.content);
+
+        setMessage("");
+      }
+    }
+    /**************************************************************************** */
     console.log(currentIndex.value);
 
     if (currentIndex.value > 0) {
@@ -1466,6 +1623,25 @@ function QuizBoard(props) {
     setVisibilitePorpoIndex(currentIndex.value);
     VisibleNextBtn.value = true;
     VisiblePrevBtn.value = true;
+    /***share screen************************************************************ */
+    if (isToggled === true) {
+      setMessage("heyyy mamamaaa");
+      if (stompClient && connected) {
+        const sendIndex = currentIndex.value + 1;
+        const chatMessage = {
+          nickname,
+          content: "QcmIndex" + sendIndex,
+        };
+        stompClient.publish({
+          destination: `/app/chat/${chatroom}`,
+          body: JSON.stringify(chatMessage),
+        });
+        console.log(chatMessage.content);
+
+        setMessage("");
+      }
+    }
+    /**************************************************************************** */
     //*****check if kayn cas clinique*********************** */
     if (props.QcmSujetTypeSelected === "Par Cour") {
       if (currentIndex.value === ShowQcm.length - 1) {
@@ -1834,8 +2010,39 @@ function QuizBoard(props) {
     QcmIndex,
     indexPropo,
     qcmId,
-    courName
+    courName,
+    comingFrom
   ) => {
+    isCall.current = true;
+    if (e?.preventDefault) e.preventDefault();
+    console.log(comingFrom);
+    console.log(isToggled);
+    if (isToggled === true) {
+      if (comingFrom === cameFrome[0]) {
+        console.log("is click on propo");
+        const propoParametres = [
+          propoId,
+          QcmIndex,
+          indexPropo,
+          qcmId,
+          courName,
+        ];
+        console.log(propoParametres);
+        if (stompClient && connected) {
+          const chatMessage = {
+            usernameshare,
+            nickname,
+            content: JSON.stringify(propoParametres),
+          };
+          stompClient.publish({
+            destination: `/app/chat/${chatroom}`,
+            body: JSON.stringify(chatMessage),
+          });
+          setMessage("");
+        }
+        // isCall.current = false;
+      }
+    }
     console.log(courName);
     //initialiser TrueFullInsertClr************************
     setTrueFullInsertClr(false);
@@ -2150,6 +2357,27 @@ function QuizBoard(props) {
     setSelectQcmIndex(currentIndex.value);
     setVisibiliteQcmIndex(currentIndex.value);
     setVisibilitePorpoIndex(currentIndex.value);
+
+    /***share screen************************************************************ */
+    if (isToggled === true) {
+      setMessage("heyyy mamamaaa");
+      if (stompClient && connected) {
+        const sendIndex = currentIndex.value + 1;
+        const chatMessage = {
+          nickname,
+          content: "QcmIndex" + sendIndex,
+        };
+        stompClient.publish({
+          destination: `/app/chat/${chatroom}`,
+          body: JSON.stringify(chatMessage),
+        });
+        console.log(chatMessage.content);
+
+        setMessage("");
+      }
+    }
+    /**************************************************************************** */
+
     VisibleNextBtn.value = true;
     VisiblePrevBtn.value = true;
 
@@ -2274,13 +2502,9 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2851,7 +3075,8 @@ function QuizBoard(props) {
                                           VisibiliteQcmIndex,
                                           indexPropo,
                                           propo.qcmStandard.id,
-                                          propo.qcmStandard.coursMed.coursName
+                                          propo.qcmStandard.coursMed.coursName,
+                                          cameFrome[0]
                                         );
                                       }}
                                     >
@@ -3535,7 +3760,8 @@ function QuizBoard(props) {
                                               indexPropo,
                                               propo.qcmStandard.id,
                                               propo.qcmStandard.coursMed
-                                                .coursName
+                                                .coursName,
+                                              cameFrome[0]
                                             );
                                           }}
                                         >

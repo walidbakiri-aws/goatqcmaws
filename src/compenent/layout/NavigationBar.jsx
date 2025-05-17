@@ -13,6 +13,9 @@ import { useSignal } from "@preact/signals-react";
 import axios from "axios";
 import ChatBox from "./ChatBox";
 import messanger from "../layout/img/messanger.png";
+import sharescreenicon from "../layout/img/share.png";
+import ShareScreenTagel from "./ShareScreenTagel";
+
 function NavigationBar(props) {
   //******************************************************************* */
 
@@ -34,26 +37,47 @@ function NavigationBar(props) {
     }
   };
 
-  const [modalIsOpen, setMoladIsOpen] = useState(false);
   //************************************************************* */
   const [ShowDiscsussionDiv, setShowDiscsussionDiv] = useState(false);
+  const [ShowShareScreenDiv, setShowShareScreenDiv] = useState(false);
   const token = localStorage.getItem("tokengoat");
   const username = localStorage.getItem("username");
   let userId = localStorage.getItem("userId");
 
   const navigate = useNavigate();
+  /************chat function********************************************************************************************* */
+  const [modalIsOpen, setMoladIsOpen] = useState(false);
   const [showButtonChoseFirstAction, setShowButtonChoseFirstAction] =
     useState(true);
   const [showAddNewChat, setshowAddNewChat] = useState(false);
-  const [showEnterCodeChat, setShowEnterCodeChat] = useState(false);
 
   const [showFullChatDiv, setShowFullChatDiv] = useState(true);
+  const [showEnterCodeChat, setShowEnterCodeChat] = useState(false);
   const [chat, setChat] = useState({
     chatName: "",
     chatCode: "",
     ourUsers: {},
   });
   const [codeChat, setCodeChat] = useState("");
+  let dicsussion = useSignal("");
+  /************end var********************************************************************************************* */
+  /************sharescreen function********************************************************************************************* */
+  const [modalIsOpenShare, setMoladIsOpenShare] = useState(false);
+  const [showButtonChoseFirstActionShare, setShowButtonChoseFirstActionShare] =
+    useState(true);
+  const [showAddNewShare, setshowAddNewShare] = useState(false);
+
+  const [showFullShareDiv, setShowFullShareDiv] = useState(true);
+  const [showEnterCodeShare, setShowEnterCodeShare] = useState(false);
+  const [share, setShare] = useState({
+    shareScreenName: "",
+    shareScreenCode: "",
+    ourUsers: {},
+  });
+  const [codeShare, setCodeShare] = useState("");
+  let screensharecode = useSignal("");
+  /************end var********************************************************************************************* */
+
   let saveUser = {
     id: "",
     name: "",
@@ -62,18 +86,19 @@ function NavigationBar(props) {
     role: "",
   };
 
-  let dicsussion = useSignal("");
+  /************chat function********************************************************************************************* */
 
   /*********************************************** */
   function closeModalHandler() {
     setMoladIsOpen(false);
+    setShowDiscsussionDiv(false);
   }
-  const handleChatBtn = () => {
+  const handleChatBtn = async (e) => {
+    loadChatUserId(userId);
     setshowAddNewChat(false);
     setShowEnterCodeChat(false);
     console.log("hey walid");
     setMoladIsOpen(true);
-    loadChatUserId(userId);
   };
 
   /***model chat************************************************************* */
@@ -186,7 +211,7 @@ function NavigationBar(props) {
 
   /***get  chat by userID***************************************************** */
   const loadChatUserId = async (getUserId) => {
-    setShowDiscsussionDiv(false);
+    console.log("mama");
     console.log(getUserId);
     try {
       const resultLoadChat = await axios.get(
@@ -199,18 +224,14 @@ function NavigationBar(props) {
       if (resultLoadChat.data.length > 0) {
         // setShowButtonChoseFirstAction(false);
         console.log("mama");
-        dicsussion.value = resultLoadChat.data[0].chatName;
+        dicsussion.value = resultLoadChat.data[0].chatCode;
 
         /***open discussion**************************** */
         localStorage.setItem("showdiscussiondiv", "true");
         localStorage.setItem("codechatlocation", dicsussion.value);
         console.log(ShowDiscsussionDiv);
-        if (ShowDiscsussionDiv === true) {
-          setShowDiscsussionDiv(false);
-        } else {
-          setShowDiscsussionDiv(true);
-        }
-
+        //  setShowDiscsussionDiv(false);
+        setShowDiscsussionDiv(!ShowDiscsussionDiv);
         setMoladIsOpen(false);
         /********************************************** */
       } else {
@@ -218,6 +239,199 @@ function NavigationBar(props) {
       }
     } catch (Exception) {}
   };
+  /************end chat function********************************************************************************************* */
+  /**
+ 2éme Anneé
+   u1(histo,Biochimie,Anatomie,Physio)
+   u2(histo,Biochimie,Anatomie,Physio)
+   u3(histo,Biochimie,Anatomie,Physio)
+   Immuno
+ 3éme Année
+   u1(phyiopath,Semio,Radio,Biochimie)
+   Immuno
+ 4éme Année
+   Cardio G04
+   Infectieuse G01
+   Neuro G02
+   Cardio G05
+   Hemato P2
+   Neuro G03
+  5éme Année
+   Endorino G03
+   Pédiatrie G02
+   Traumato G01
+   Uro-Nephro G03
+   Psychiatrie G02
+   Endocrino G02
+   Pediatrie G04
+   Traumato G03
+  6éme Année
+   Dérmato G04
+   Epidémio P1
+   Med-travaille P1
+   Urgence G01
+   Maladie-Systéme G02
+   Epidémio G03
+   Légal G01
+   Ophtalmo G04
+   Urgence G02
+   Med-travaille G04
+   Urgence G03
+  
+
+ */
+  /************share function********************************************************************************************* */
+
+  /*********************************************** */
+  function closeModalHandler() {
+    setMoladIsOpen(false);
+    setMoladIsOpenShare(false);
+    setShowShareScreenDiv(false);
+  }
+  const handleShareBtn = async (e) => {
+    loadShareUserId(userId);
+    setshowAddNewShare(false);
+    setShowEnterCodeShare(false);
+    console.log("hey walid");
+    setMoladIsOpenShare(true);
+  };
+
+  /***model share************************************************************* */
+
+  //****button action////////////////////////////////////////// */
+  const handleCodeShareScreenBtn = () => {
+    setShowButtonChoseFirstActionShare(false);
+    setShowEnterCodeShare(true);
+  };
+  const handlenewShareScreen = () => {
+    setShowButtonChoseFirstActionShare(false);
+    setshowAddNewShare(true);
+  };
+  //****button action******************************************
+  /**********add new chat************************************ */
+  const handleAddShare = async (e) => {
+    e.preventDefault();
+    try {
+      const resultUserFinal = await UserService.getUserByuserName(
+        username,
+        token
+      );
+      (saveUser.id = resultUserFinal.id),
+        (saveUser.name = resultUserFinal.name),
+        (saveUser.lastname = resultUserFinal.lastname),
+        (saveUser.username = resultUserFinal.username),
+        (saveUser.password = resultUserFinal.password),
+        (saveUser.role = resultUserFinal.role);
+
+      console.log(saveUser);
+    } catch (Exception) {
+      console.log("user not found");
+    }
+    console.log(saveUser);
+    share.ourUsers = saveUser;
+
+    axios
+      .post("https://goatqcm-instance.com/sharescreen", share, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log("succes insert Screen Share");
+        toast.success("successful ajouter nouvelle Screen Share!");
+        setShowShareScreenDiv(false);
+        setMoladIsOpenShare(false);
+      })
+      .catch((err) => console.log(err));
+  };
+  /**************************************************************** */
+  /**********add frined chat************************************ */
+  const handleAddShareFriend = async (shareName, shareCode) => {
+    try {
+      const resultUserFinal = await UserService.getUserByuserName(
+        username,
+        token
+      );
+      (saveUser.id = resultUserFinal.id),
+        (saveUser.name = resultUserFinal.name),
+        (saveUser.lastname = resultUserFinal.lastname),
+        (saveUser.username = resultUserFinal.username),
+        (saveUser.password = resultUserFinal.password),
+        (saveUser.role = resultUserFinal.role);
+
+      console.log(saveUser);
+    } catch (Exception) {
+      console.log("user not found");
+    }
+
+    share.ourUsers = saveUser;
+    share.shareScreenName = shareName;
+    share.shareScreenCode = shareCode;
+    axios
+      .post("https://goatqcm-instance.com/sharescreen", share, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log("succes insert sharescreen");
+        toast.success("successful ajouter nouvelle sharescreen!");
+        setShowShareScreenDiv(false);
+      })
+      .catch((err) => console.log(err));
+  };
+  /**************************************************************** */
+  const handleFindShare = async (e) => {
+    e.preventDefault();
+    console.log(codeShare);
+    const resultLoadShare = await axios.get(
+      `https://goatqcm-instance.com/sharescreen/getbycodeshare/${codeShare}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    console.log(resultLoadShare.data);
+    if (resultLoadShare.data.length < 6) {
+      for (let inc = 0; inc < resultLoadShare.data.length; inc++) {
+        if (resultLoadShare.data[inc].ourUsers.id !== userId) {
+          handleAddShareFriend(
+            resultLoadShare.data[inc].shareScreenName,
+            resultLoadShare.data[inc].shareScreenCode
+          );
+        }
+      }
+    } else {
+      toast.error("cette Share Screen est deja contient 5 personnes!");
+    }
+  };
+
+  /***get  chat by userID***************************************************** */
+  const loadShareUserId = async (getUserId) => {
+    console.log("mama");
+    console.log(getUserId);
+    try {
+      const resultLoadShare = await axios.get(
+        `https://goatqcm-instance.com/sharescreen/getbyuserid/${getUserId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      console.log(resultLoadShare.data);
+      if (resultLoadShare.data.length > 0) {
+        // setShowButtonChoseFirstAction(false);
+        console.log("mama");
+        screensharecode.value = resultLoadShare.data[0].shareScreenCode;
+
+        /***open discussion**************************** */
+        localStorage.setItem("showsharescreendiv", "true");
+        localStorage.setItem("codesharescreenlocation", screensharecode.value);
+        console.log(ShowShareScreenDiv);
+        //  setShowDiscsussionDiv(false);
+        setShowShareScreenDiv(!ShowShareScreenDiv);
+        setMoladIsOpenShare(false);
+        /********************************************** */
+      } else {
+        setShowButtonChoseFirstActionShare(true);
+      }
+    } catch (Exception) {}
+  };
+  /************end share function********************************************************************************************* */
 
   return (
     <>
@@ -268,6 +482,15 @@ function NavigationBar(props) {
               }}
               style={{ width: 50, height: 50 }}
             />
+            <img
+              src={sharescreenicon}
+              height="100%"
+              width="80"
+              onClick={(e) => {
+                handleShareBtn();
+              }}
+              style={{ width: 50, height: 50 }}
+            />
           </div>
 
           {modalIsOpen && (
@@ -283,7 +506,7 @@ function NavigationBar(props) {
                           handlecodediscussionBtn();
                         }}
                       >
-                        Entrer le Code discussion
+                        Entre Code discussion
                       </button>
                       <button
                         type="button"
@@ -292,7 +515,7 @@ function NavigationBar(props) {
                           handlenewdiscussion();
                         }}
                       >
-                        Crée une nouvelle discussion
+                        Cree nouvelle discussion
                       </button>
                     </div>
                   )}
@@ -301,7 +524,7 @@ function NavigationBar(props) {
                       <div className="mb-3">
                         <input
                           type="text"
-                          placeholder="Nom de discussion"
+                          placeholder="Nome discussion"
                           className="form-control"
                           id="exampleInputEmail1"
                           aria-describedby="emailHelp"
@@ -312,7 +535,7 @@ function NavigationBar(props) {
                       </div>
                       <div className="mb-3">
                         <input
-                          placeholder="Code de discussion"
+                          placeholder="Code discussion"
                           type="text"
                           className="form-control"
                           id="exampleInputPassword1"
@@ -364,6 +587,109 @@ function NavigationBar(props) {
           )}
           {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
           {ShowDiscsussionDiv && <ChatBox chatcode={dicsussion.value} />}
+
+          {modalIsOpenShare && (
+            <>
+              {showFullShareDiv && (
+                <div className={`${classes.modal} `}>
+                  {showButtonChoseFirstActionShare && (
+                    <div className={`${classes.buttonchose} `}>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          handleCodeShareScreenBtn();
+                        }}
+                      >
+                        Entre Code partage
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={(e) => {
+                          handlenewShareScreen();
+                        }}
+                      >
+                        Cree nouvelle Partage Quizz
+                      </button>
+                    </div>
+                  )}
+                  {showAddNewShare && (
+                    <form className={`${classes.addnewchat} `}>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          placeholder="Nome discussion"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          onChange={(e) =>
+                            setShare({
+                              ...share,
+                              shareScreenName: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          placeholder="Code discussion"
+                          type="text"
+                          className="form-control"
+                          id="exampleInputPassword1"
+                          onChange={(e) =>
+                            setShare({
+                              ...share,
+                              shareScreenCode: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          handleAddShare(e);
+                        }}
+                      >
+                        Crée
+                      </button>
+                    </form>
+                  )}
+                  {showEnterCodeShare && (
+                    <div className={`${classes.addnewchat} `}>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          placeholder="Entrer code de discussion"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          onChange={(e) => setCodeShare(e.target.value)}
+                        />
+                      </div>
+
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          handleFindShare(e);
+                        }}
+                      >
+                        Ouvrir
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+              <Toaster />
+            </>
+          )}
+          {ShowShareScreenDiv && <Backdrop onCancel={closeModalHandler} />}
+          {ShowShareScreenDiv && (
+            <ShareScreenTagel screensharecode={screensharecode.value} />
+          )}
         </nav>
       )}
       {isTabletOrMobile && (
@@ -377,6 +703,7 @@ function NavigationBar(props) {
               aria-controls="navbarToggleExternalContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
+              style={{ marginRight: -10 }}
               onClick={() => {
                 navButtonHndler(), props.changeetatsidebar(BtnNav);
               }}
@@ -388,16 +715,26 @@ function NavigationBar(props) {
             <img
               src={goatlogonavbare}
               height="100%"
-              width="60"
-              style={{ marginRight: 5 }}
+              width="50"
+              style={{ marginRight: 2, marginLeft: -6 }}
             />
             <img
               src={messanger}
               height="100%"
-              width="30"
+              width="25"
               onClick={(e) => {
-                handleChatBtn();
+                handleChatBtn(e);
               }}
+              style={{ marginLeft: 5 }}
+            />
+            <img
+              src={sharescreenicon}
+              height="100%"
+              width="25"
+              onClick={(e) => {
+                handleShareBtn();
+              }}
+              style={{ width: 30, height: 30, marginLeft: 5 }}
             />
           </div>
 
@@ -414,7 +751,7 @@ function NavigationBar(props) {
                           handlecodediscussionBtn();
                         }}
                       >
-                        Entrer le Code discussion
+                        Entre Code discussion
                       </button>
                       <button
                         type="button"
@@ -423,7 +760,7 @@ function NavigationBar(props) {
                           handlenewdiscussion();
                         }}
                       >
-                        Crée une nouvelle discussion
+                        Cree nouvelle discussion
                       </button>
                     </div>
                   )}
@@ -432,7 +769,7 @@ function NavigationBar(props) {
                       <div className="mb-3">
                         <input
                           type="text"
-                          placeholder="Nom de discussion"
+                          placeholder="Nome discussion"
                           className="form-control"
                           id="exampleInputEmail1"
                           aria-describedby="emailHelp"
@@ -443,7 +780,7 @@ function NavigationBar(props) {
                       </div>
                       <div className="mb-3">
                         <input
-                          placeholder="Code de discussion"
+                          placeholder="Code discussion"
                           type="text"
                           className="form-control"
                           id="exampleInputPassword1"
@@ -495,6 +832,109 @@ function NavigationBar(props) {
           )}
           {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
           {ShowDiscsussionDiv && <ChatBox chatcode={dicsussion.value} />}
+
+          {modalIsOpenShare && (
+            <>
+              {showFullShareDiv && (
+                <div className={`${classes.modal_phone} `}>
+                  {showButtonChoseFirstActionShare && (
+                    <div className={`${classes.buttonchose_phone} `}>
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          handleCodeShareScreenBtn();
+                        }}
+                      >
+                        Entre Code partage
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-secondary"
+                        onClick={(e) => {
+                          handlenewShareScreen();
+                        }}
+                      >
+                        Cree nouvelle Partage Quizz
+                      </button>
+                    </div>
+                  )}
+                  {showAddNewShare && (
+                    <form className={`${classes.addnewchat_phone} `}>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          placeholder="Nome discussion"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          onChange={(e) =>
+                            setShare({
+                              ...share,
+                              shareScreenName: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          placeholder="Code discussion"
+                          type="text"
+                          className="form-control"
+                          id="exampleInputPassword1"
+                          onChange={(e) =>
+                            setShare({
+                              ...share,
+                              shareScreenCode: e.target.value,
+                            })
+                          }
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          handleAddShare(e);
+                        }}
+                      >
+                        Crée
+                      </button>
+                    </form>
+                  )}
+                  {showEnterCodeShare && (
+                    <div className={`${classes.addnewchat_phone} `}>
+                      <div className="mb-3">
+                        <input
+                          type="text"
+                          placeholder="Entrer code de discussion"
+                          className="form-control"
+                          id="exampleInputEmail1"
+                          aria-describedby="emailHelp"
+                          onChange={(e) => setCodeShare(e.target.value)}
+                        />
+                      </div>
+
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={(e) => {
+                          handleFindShare(e);
+                        }}
+                      >
+                        Ouvrir
+                      </button>
+                    </div>
+                  )}
+                </div>
+              )}
+              <Toaster />
+            </>
+          )}
+          {ShowShareScreenDiv && <Backdrop onCancel={closeModalHandler} />}
+          {ShowShareScreenDiv && (
+            <ShareScreenTagel screensharecode={screensharecode.value} />
+          )}
         </nav>
       )}
     </>

@@ -1,0 +1,125 @@
+.modal {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  width: 800px;
+  height: 300px;
+  z-index: 20;
+  position: fixed;
+
+  top: 20vh;
+  left: calc(38% - 15rem);
+}
+.toggleContainer {
+  margin-left: 280px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.4s;
+  cursor: pointer;
+}
+
+.toggleSwitch.active {
+  background-color: #4caf50;
+}
+
+.slider {
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+.toggleSwitch.active .slider {
+  transform: translateX(26px);
+}
+
+/* The p tag selector remains the same if it's global, 
+   or add a class if you want to scope it */
+p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
+/***phone**********************************/
+.modal_phone {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background-color: rgb(224, 219, 219);
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  z-index: 20;
+  position: fixed;
+
+  top: 20vh;
+}
+.shareInfo_phone {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+}
+.toggleContainer_phone {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+}
+
+.toggleSwitch_phone {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+  background-color: #ccc;
+  border-radius: 34px;
+  transition: background-color 0.4s;
+  cursor: pointer;
+}
+
+.toggleSwitch_phone.active {
+  background-color: #4caf50;
+}
+
+.slider_phone {
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.4s;
+}
+
+.toggleSwitch_phone .active .slider_phone {
+  transform: translateX(26px);
+}
+
+/* The p tag selector remains the same if it's global, 
+   or add a class if you want to scope it */
+p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+}
