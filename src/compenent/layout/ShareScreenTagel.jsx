@@ -25,7 +25,7 @@ function ShareScreenTagel(props) {
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
 
   //************************************************************************ */
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokengoat");
   const username = localStorage.getItem("username");
   let userId = localStorage.getItem("userId");
 
@@ -37,7 +37,7 @@ function ShareScreenTagel(props) {
   const loadShareUserId = async () => {
     try {
       const resultLoadChat = await axios.get(
-        `http://localhost:8080/sharescreen/getbyuserid/${userId}`,
+        `https://goatqcm-instance.com/sharescreen/getbyuserid/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -51,9 +51,12 @@ function ShareScreenTagel(props) {
   };
   /**************************************************************** */
   const handleneDeteleShareScreen = async () => {
-    await axios.delete(`http://localhost:8080/sharescreen/${shareScreen.id}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    await axios.delete(
+      `https://goatqcm-instance.com/sharescreen/${shareScreen.id}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
     setShowlodalShare(false);
   };
@@ -65,7 +68,7 @@ function ShareScreenTagel(props) {
 
     try {
       await axios.put(
-        `http://localhost:8080/sharescreen/${shareScreen.id}/status`,
+        `https://goatqcm-instance.com/sharescreen/${shareScreen.id}/status`,
         { isSharing: newState },
         { headers: { Authorization: `Bearer ${token}` } }
       );
