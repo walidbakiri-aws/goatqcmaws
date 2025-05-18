@@ -641,8 +641,8 @@ function QuizBoard(props) {
     console.log(props.SaveEachLineStatiqueClinique);
     console.log(props.savePieStatiqueClinique);
     /***************************************************************************************************/
-    loadShareUserId();
-    if (!chatroom.trim()) return;
+    // loadShareUserId();
+    //if (!chatroom.trim()) return;
     console.log(chatroom);
     fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
       .then((res) => res.json())
