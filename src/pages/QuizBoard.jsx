@@ -3318,7 +3318,7 @@ function QuizBoard(props) {
             )}
 
             {VisibleQmcContainer && isTabletOrMobile && (
-              <div className={classes.modal}>
+              <div className={classes.modal_phone}>
                 <div className={classes.contanerspace_phone}>
                   <div className={classes.fullqcmcontainer_commentary}>
                     <div
