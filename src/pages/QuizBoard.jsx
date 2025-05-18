@@ -642,7 +642,7 @@ function QuizBoard(props) {
     console.log(props.savePieStatiqueClinique);
     /***************************************************************************************************/
     loadShareUserId();
-    //if (!chatroom.trim()) return;
+     if (!chatroom.trim()) return;
     console.log(chatroom);
     fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
       .then((res) => res.json())
@@ -676,12 +676,7 @@ function QuizBoard(props) {
   const [lastMessage, setLastMessage] = useState(null);
   const isCall = useRef(true); // stays true across renders
   const cameFrome = ["propoClicked", "useEffectCalling"];
-  useEffect(() => {
-    /*setSelectQcmIndex(Number(latest.content));
-      setVisibiliteQcmIndex(Number(latest.content));
-      setVisibilitePorpoIndex(Number(latest.content));
-      console.log("Receiver got new last message:", Number(latest.content));*/
-
+  /*useEffect(() => {
     if (messages.length > 0) {
       const latest = messages[messages.length - 1];
       setLastMessage(latest.content);
@@ -725,7 +720,7 @@ function QuizBoard(props) {
         }
       }
     }
-  }, [messages]);
+  }, [messages]);*/
   /**end share  screen effect******************************************************* */
   /********Share***************************************************/
   const [isToggled, setIsToggled] = useState(false);
@@ -2013,7 +2008,7 @@ function QuizBoard(props) {
     courName,
     comingFrom
   ) => {
-    isCall.current = true;
+    /*isCall.current = true;
     if (e?.preventDefault) e.preventDefault();
     console.log(comingFrom);
     console.log(isToggled);
@@ -2042,7 +2037,7 @@ function QuizBoard(props) {
         }
         // isCall.current = false;
       }
-    }
+    }*/
     console.log(courName);
     //initialiser TrueFullInsertClr************************
     setTrueFullInsertClr(false);
