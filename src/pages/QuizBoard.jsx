@@ -642,7 +642,7 @@ function QuizBoard(props) {
     console.log(props.savePieStatiqueClinique);
     /***************************************************************************************************/
     loadShareUserId();
-     if (!chatroom.trim()) return;
+    if (!chatroom.trim()) return;
     console.log(chatroom);
     fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
       .then((res) => res.json())
@@ -1565,7 +1565,7 @@ function QuizBoard(props) {
     setVisibiliteQcmIndex(currentIndex.value);
     setVisibilitePorpoIndex(currentIndex.value);
     /***share screen************************************************************ */
-    if (isToggled === true) {
+    /* if (isToggled === true) {
       setMessage("heyyy mamamaaa");
       if (stompClient && connected) {
         const sendIndex = currentIndex.value + 1;
@@ -1581,7 +1581,7 @@ function QuizBoard(props) {
 
         setMessage("");
       }
-    }
+    }*/
     /**************************************************************************** */
     console.log(currentIndex.value);
 
@@ -1619,7 +1619,7 @@ function QuizBoard(props) {
     VisibleNextBtn.value = true;
     VisiblePrevBtn.value = true;
     /***share screen************************************************************ */
-    if (isToggled === true) {
+    /*if (isToggled === true) {
       setMessage("heyyy mamamaaa");
       if (stompClient && connected) {
         const sendIndex = currentIndex.value + 1;
@@ -1635,7 +1635,7 @@ function QuizBoard(props) {
 
         setMessage("");
       }
-    }
+    }*/
     /**************************************************************************** */
     //*****check if kayn cas clinique*********************** */
     if (props.QcmSujetTypeSelected === "Par Cour") {
@@ -2354,7 +2354,7 @@ function QuizBoard(props) {
     setVisibilitePorpoIndex(currentIndex.value);
 
     /***share screen************************************************************ */
-    if (isToggled === true) {
+    /* if (isToggled === true) {
       setMessage("heyyy mamamaaa");
       if (stompClient && connected) {
         const sendIndex = currentIndex.value + 1;
@@ -2370,7 +2370,7 @@ function QuizBoard(props) {
 
         setMessage("");
       }
-    }
+    }*/
     /**************************************************************************** */
 
     VisibleNextBtn.value = true;
