@@ -3574,7 +3574,7 @@ function QuizBoardClinique(props) {
               </div>
             )}
             {VisibleQmcContainer && isTabletOrMobile && (
-              <div className={classes.modal}>
+              <div className={classes.modal_phone}>
                 <div className={classes.contanerspace_phone}>
                   <div
                     className={`${classes.quizcontainer_phone} card text-white  py-1`}

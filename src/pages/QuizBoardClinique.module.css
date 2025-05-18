@@ -673,6 +673,10 @@
   height: auto;
   width: 100%;
 }
+.modal_phone {
+  margin-top: 20px;
+}
+
 .quizcontainer_phone {
   display: flex;
   height: 100px;
