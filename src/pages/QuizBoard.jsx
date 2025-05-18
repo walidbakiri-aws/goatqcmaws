@@ -572,7 +572,7 @@ function QuizBoard(props) {
   useEffect(() => {
     /**share screen **************************************************************************** */
     console.log(shareScreenCode);
-    getUserShare();
+    //getUserShare();
 
     /**share screen ***************************************************************************** */
 
@@ -643,6 +643,7 @@ function QuizBoard(props) {
     /***************************************************************************************************/
     // loadShareUserId();
     //if (!chatroom.trim()) return;
+    /*
     console.log(chatroom);
     fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
       .then((res) => res.json())
@@ -668,9 +669,9 @@ function QuizBoard(props) {
       setConnected(false);
       setMessages([]);
     };
-
+*/
     /***************************************************************************************************/
-  }, [chatroom]);
+  }, []);
 
   /**share screen effect******************************************************* */
   const [lastMessage, setLastMessage] = useState(null);
