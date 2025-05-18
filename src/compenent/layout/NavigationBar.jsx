@@ -695,21 +695,26 @@ function NavigationBar(props) {
       {isTabletOrMobile && (
         <nav className={`${classes.navdiv_phone} navbar navbar-dark `}>
           <div className="container-fluid">
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarToggleExternalContent"
-              aria-controls="navbarToggleExternalContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-              style={{ marginRight: -10 }}
-              onClick={() => {
-                navButtonHndler(), props.changeetatsidebar(BtnNav);
-              }}
-            >
-              <span className="navbar-toggler-icon"></span>
-            </button>
+            {props.cameFrom === "quizzboard" ? (
+              <button> </button>
+            ) : (
+              <button
+                className="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarToggleExternalContent"
+                aria-controls="navbarToggleExternalContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                style={{ marginRight: -10, height: 32, marginTop: -5 }}
+                onClick={() => {
+                  navButtonHndler();
+                  props.changeetatsidebar(BtnNav);
+                }}
+              >
+                <span className="navbar-toggler-icon"></span>
+              </button>
+            )}
 
             <BtnAdd />
             <img

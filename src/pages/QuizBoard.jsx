@@ -2607,7 +2607,10 @@ function QuizBoard(props) {
     <>
       {!OpenBoardClinique && (
         <>
-          <NavigationBar changeetatsidebar={etatsidebare} />
+          <NavigationBar
+            changeetatsidebar={etatsidebare}
+            cameFrom={"quizzboard"}
+          />
           <div className={classes.addingdiv}>
             <div className={classes.sidebare}>
               {ShowSideBare && <Sidebar />}
@@ -3398,14 +3401,6 @@ function QuizBoard(props) {
                                     }}
                                   />
                                 </li>
-                                <img
-                                  src={messanger}
-                                  height="100%"
-                                  width="30"
-                                  onClick={(e) => {
-                                    handleChatBtn();
-                                  }}
-                                />
                               </div>
                             </>
                           )}
