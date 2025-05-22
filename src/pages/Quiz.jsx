@@ -937,8 +937,9 @@ function Quiz() {
         checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
 
         qcmType:
-          QcmSujetTypeSelected.value === "Par Sujet" &&
-          SelectedSourceExmn.value === "Résidanat Blida"
+          (QcmSujetTypeSelected.value === "Par Sujet" &&
+            SelectedSourceExmn.value === "Résidanat Blida") ||
+          SelectedSourceExmn.value === "Externat Blida"
             ? "Tous (Qcm,Cas Clinique)"
             : ExisteCasClinique
             ? QcmTypeSelected.value
