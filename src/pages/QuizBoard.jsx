@@ -563,7 +563,9 @@ function QuizBoard(props) {
   const [chatroom, setChatroom] = useState("default");
   const [connected, setConnected] = useState(false);
   const [stompClient, setStompClient] = useState(null);
-  let shareScreenCode = localStorage.getItem("sharescreencode");
+  let isToggled = localStorage.getItem("isSharingState");
+  let shareScreenCode = localStorage.getItem("codeSharingCode");
+  let firstCallClear = false;
   let saveUser = {
     name: "",
   };
@@ -571,6 +573,7 @@ function QuizBoard(props) {
 
   useEffect(() => {
     /**share screen **************************************************************************** */
+    console.log(isToggled);
     console.log(shareScreenCode);
     //getUserShare();
 
@@ -643,9 +646,15 @@ function QuizBoard(props) {
     /***************************************************************************************************/
     // loadShareUserId();
     //if (!chatroom.trim()) return;
-    /*
-    console.log(chatroom);
-    fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
+    if (firstCallClear === false) {
+      clearChat();
+      firstCallClear = true;
+      console.log("kakaka");
+    }
+
+    getUserShare();
+
+    fetch(`https://goatqcm-instance.com/chat/history/${shareScreenCode}`)
       .then((res) => res.json())
       .then((data) => setMessages(data));
 
@@ -654,7 +663,7 @@ function QuizBoard(props) {
       reconnectDelay: 5000,
       onConnect: () => {
         setConnected(true);
-        client.subscribe(`/topic/messages/${chatroom}`, (frame) => {
+        client.subscribe(`/topic/messages/${shareScreenCode}`, (frame) => {
           const receivedMessage = JSON.parse(frame.body);
           setMessages((prevMessages) => [...prevMessages, receivedMessage]);
         });
@@ -669,7 +678,6 @@ function QuizBoard(props) {
       setConnected(false);
       setMessages([]);
     };
-*/
     /***************************************************************************************************/
   }, []);
 
@@ -677,58 +685,75 @@ function QuizBoard(props) {
   const [lastMessage, setLastMessage] = useState(null);
   const isCall = useRef(true); // stays true across renders
   const cameFrome = ["propoClicked", "useEffectCalling"];
-  /*useEffect(() => {
+  let [senderName, setSenderName] = useState("");
+  const clearChat = async () => {
+    try {
+      setMessages([]);
+      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
+        method: "POST",
+      });
+    } catch (Exception) {}
+  };
+  /***************************************************************************************/
+  useEffect(() => {
+    console.log("heyyyy");
+
     if (messages.length > 0) {
-      const latest = messages[messages.length - 1];
-      setLastMessage(latest.content);
-      console.log(latest.content);
-      console.log(username);
+      setSenderName(messages[messages.length - 1].nickname);
+      console.log(messages[messages.length - 1].nickname);
+      console.log(nickname);
+      if (messages[messages.length - 1].nickname !== nickname) {
+        const latest = messages[messages.length - 1];
+        setLastMessage(latest.content);
+        console.log(latest.content);
+        console.log(username);
 
-      if (latest.content.startsWith("QcmIndex")) {
-        const extractedValue = latest.content.slice("QcmIndex".length);
-        console.log("Extracted value:", extractedValue);
+        if (latest.content.startsWith("QcmIndex+")) {
+          const indexQcm = latest.content.slice("QcmIndex+".length);
+          console.log(indexQcm);
+          handleNextClick({ value: indexQcm });
+        } else if (latest.content.startsWith("QcmIndex-")) {
+          const indexQcm = latest.content.slice("QcmIndex-".length);
+          console.log(indexQcm);
+          handlePrevClick({ value: indexQcm });
+        } else if (!latest.content.startsWith("QcmIndex")) {
+          try {
+            const parsedArray = JSON.parse(latest.content);
 
-        setSelectQcmIndex(Number(extractedValue));
-        setVisibiliteQcmIndex(Number(extractedValue));
-        setVisibilitePorpoIndex(Number(extractedValue));
-        console.log("Receiver got new last message:", Number(extractedValue));
-      } else if (!latest.content.startsWith("QcmIndex")) {
-        try {
-          const parsedArray = JSON.parse(latest.content);
+            if (Array.isArray(parsedArray) && parsedArray.length === 5) {
+              const [propoId, QcmIndex, indexPropo, qcmId, courName] =
+                parsedArray;
+              console.log(isCall.current);
 
-          if (Array.isArray(parsedArray) && parsedArray.length === 5) {
-            const [propoId, QcmIndex, indexPropo, qcmId, courName] =
-              parsedArray;
-            console.log(isCall.current);
+              if (latest.usernameshare !== username) {
+                console.log(latest.usernameshare);
+                console.log(username);
 
-            if (latest.usernameshare !== username) {
-              console.log(latest.usernameshare);
-              console.log(username);
-
-              handlePropoClick(
-                undefined,
-                propoId,
-                QcmIndex,
-                indexPropo,
-                qcmId,
-                courName,
-                cameFrome[1]
-              );
+                handlePropoClick(
+                  undefined,
+                  propoId,
+                  QcmIndex,
+                  indexPropo,
+                  qcmId,
+                  courName,
+                  cameFrome[1]
+                );
+              }
             }
+          } catch (e) {
+            console.error("Failed to parse content", e);
           }
-        } catch (e) {
-          console.error("Failed to parse content", e);
         }
       }
     }
-  }, [messages]);*/
+  }, [messages]);
   /**end share  screen effect******************************************************* */
+
   /********Share***************************************************/
-  const [isToggled, setIsToggled] = useState(false);
-  const loadShareUserId = async () => {
+  /*const loadShareUserId = async () => {
     try {
       const resultLoadChat = await axios.get(
-        `https://goatqcm-instance.com/sharescreen/getbyuserid/${userId}`,
+        `http://localhost:8080/sharescreen/getbyuserid/${userId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -737,7 +762,7 @@ function QuizBoard(props) {
       setIsToggled(resultLoadChat.data[0].isSharing);
       console.log(resultLoadChat.data[0].isSharing);
     } catch (Exception) {}
-  };
+  };*/
   /**************************************************************** */
   //*********getUser************************************************** */
   const [usernameshare, setUserNameShare] = useState("");
@@ -753,8 +778,6 @@ function QuizBoard(props) {
       (saveUser.name = resultUserFinal.name), console.log(saveUser);
       console.log(resultUserFinal.name);
       setNickname(resultUserFinal.name);
-      setUserNameShare(username);
-      setChatroom(shareScreenCode);
     } catch (Exception) {
       console.log("user not found");
     }
@@ -1579,7 +1602,13 @@ function QuizBoard(props) {
   };
   //********************************************************************** */
   //********handel qcm change**********************************************
-  const handlePrevClick = () => {
+  function handlePrevClick({ event, value } = {}) {
+    if (value) {
+      currentIndex.value = Number(value);
+      console.log(currentIndex.value);
+    } else {
+      currentIndex.value = currentIndex.value + 1;
+    }
     setExisteNote(false);
     setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
@@ -1589,26 +1618,25 @@ function QuizBoard(props) {
     setVisibiliteQcmIndex(currentIndex.value);
     setVisibilitePorpoIndex(currentIndex.value);
     /***share screen************************************************************ */
-    /* if (isToggled === true) {
-      setMessage("heyyy mamamaaa");
-      if (stompClient && connected) {
-        const sendIndex = currentIndex.value + 1;
-        const chatMessage = {
-          nickname,
-          content: "QcmIndex" + sendIndex,
-        };
-        stompClient.publish({
-          destination: `/app/chat/${chatroom}`,
-          body: JSON.stringify(chatMessage),
-        });
-        console.log(chatMessage.content);
+    if (event) {
+      console.log(isToggled);
+      if (isToggled === "true") {
+        if (stompClient && connected) {
+          const chatMessage = {
+            nickname,
+            content: "QcmIndex-" + currentIndex.value,
+          };
+          stompClient.publish({
+            destination: `/app/chat/${shareScreenCode}`,
+            body: JSON.stringify(chatMessage),
+          });
+          console.log(chatMessage.content);
 
-        setMessage("");
+          setMessage("");
+        }
       }
-    }*/
+    }
     /**************************************************************************** */
-    console.log(currentIndex.value);
-
     if (currentIndex.value > 0) {
       VisiblePrevBtn.value = true;
     } else {
@@ -1630,36 +1658,47 @@ function QuizBoard(props) {
     }
     setShowDescQcm(false);
     setDisabled(false);
-  };
+  }
 
-  const handleNextClick = () => {
+  function handleNextClick({ event, value } = {}) {
+    console.log(value);
+    console.log(currentIndex.value);
+    /***share screen************************************************************ */
+    if (value) {
+      currentIndex.value = Number(value);
+      console.log(currentIndex.value);
+    } else {
+      currentIndex.value = currentIndex.value + 1;
+    }
     setExisteNote(false);
     setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
-    currentIndex.value = currentIndex.value + 1;
+
     setSelectQcmIndex(currentIndex.value);
     setVisibiliteQcmIndex(currentIndex.value);
     setVisibilitePorpoIndex(currentIndex.value);
     VisibleNextBtn.value = true;
     VisiblePrevBtn.value = true;
-    /***share screen************************************************************ */
-    /*if (isToggled === true) {
-      setMessage("heyyy mamamaaa");
-      if (stompClient && connected) {
-        const sendIndex = currentIndex.value + 1;
-        const chatMessage = {
-          nickname,
-          content: "QcmIndex" + sendIndex,
-        };
-        stompClient.publish({
-          destination: `/app/chat/${chatroom}`,
-          body: JSON.stringify(chatMessage),
-        });
-        console.log(chatMessage.content);
+    console.log(currentIndex.value);
+    if (event) {
+      console.log(isToggled);
+      if (isToggled === "true") {
+        if (stompClient && connected) {
+          const chatMessage = {
+            nickname,
+            content: "QcmIndex+" + currentIndex.value,
+          };
+          stompClient.publish({
+            destination: `/app/chat/${shareScreenCode}`,
+            body: JSON.stringify(chatMessage),
+          });
+          console.log(chatMessage.content);
 
-        setMessage("");
+          setMessage("");
+        }
       }
-    }*/
+    }
+
     /**************************************************************************** */
     //*****check if kayn cas clinique*********************** */
     if (props.QcmSujetTypeSelected === "Par Cour") {
@@ -1741,7 +1780,7 @@ function QuizBoard(props) {
     setShowDescQcm(false);
     setDisabled(false);
     selectSaveIndex.value = [];
-  };
+  }
 
   const deleteQcmHndler = async (getQcmId) => {
     await axios.delete(`${BASE_URL}/qcms/${getQcmId}`).then((res) => {
@@ -2521,13 +2560,9 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3140,7 +3175,9 @@ function QuizBoard(props) {
                                     <button
                                       type="button"
                                       className={`${classes.btnPrecdent} btn btn-warning`}
-                                      onClick={handlePrevClick}
+                                      onClick={(e) =>
+                                        handlePrevClick({ event: e })
+                                      }
                                     >
                                       Précédent
                                     </button>
@@ -3188,7 +3225,9 @@ function QuizBoard(props) {
                                     <button
                                       type="button"
                                       className={`${classes.btnsuivant} btn btn-warning`}
-                                      onClick={handleNextClick}
+                                      onClick={(e) =>
+                                        handleNextClick({ event: e })
+                                      }
                                     >
                                       Suivant
                                     </button>
@@ -3820,7 +3859,9 @@ function QuizBoard(props) {
                                         <GrPrevious
                                           className={classes.btnPrecdent_phone}
                                           type="button"
-                                          onClick={handlePrevClick}
+                                          onClick={(e) =>
+                                            handlePrevClick({ event: e })
+                                          }
                                         />
                                       )}
                                       {SaveQcmIsAnswer[VisibiliteQcmIndex] ===
@@ -3869,7 +3910,9 @@ function QuizBoard(props) {
                                           <GrNext
                                             className={classes.btnsuivant_phone}
                                             type="button"
-                                            onClick={handleNextClick}
+                                            onClick={(e) =>
+                                              handleNextClick({ event: e })
+                                            }
                                           />
                                         </div>
                                       ) : (
