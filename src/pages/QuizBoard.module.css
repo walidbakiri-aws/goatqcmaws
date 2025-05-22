@@ -265,7 +265,9 @@
   font-size: 18px;
   font-style: normal;
 }
-
+.qcmfeild p {
+  color: var(--primary-text-color);
+}
 .nmbrqcm {
   width: 140px;
 }
