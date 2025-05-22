@@ -3,10 +3,11 @@ import classes from "./Description.module.css";
 import axios from "axios";
 import { useMediaQuery } from "react-responsive";
 import UserService from "../compenent/layout/service/UserService";
+import useLocalStorage from "use-local-storage";
 
 function DescriptionClinique(props) {
   //******************************************************************* */
-
+  const [isDark, setIsDark] = useLocalStorage("isDark", false);
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",
   });
@@ -35,7 +36,7 @@ function DescriptionClinique(props) {
     }
   }
   useEffect(() => {
-    // document.onmousedown = killCopy;
+    document.onmousedown = killCopy;
 
     console.log(props.qcmIdPropsQcmDesc);
     getFullDesc(props.qcmIdPropsQcmDesc);
@@ -66,7 +67,10 @@ function DescriptionClinique(props) {
   return (
     <>
       {isDesktopOrLaptop && (
-        <div className={`${classes.fulldesccontainer} `}>
+        <div
+          className={`${classes.fulldesccontainer} `}
+          data-theme={isDark ? "dark" : "light"}
+        >
           <div className={`${classes.desccontainer} shadow `}>
             {displyImage && (
               <div className={`${classes.imagedesc} shadow `}>
@@ -82,7 +86,10 @@ function DescriptionClinique(props) {
         </div>
       )}
       {isTabletOrMobile && (
-        <div className={`${classes.desccontainer_phone} shadow `}>
+        <div
+          className={`${classes.desccontainer_phone} shadow `}
+          data-theme={isDark ? "dark" : "light"}
+        >
           {displyImage && (
             <div className={`${classes.imagedesc_phone} shadow `}>
               <img src={SrcImageLink} />

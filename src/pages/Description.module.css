@@ -35,8 +35,12 @@
   font-size: 18px;
   font-style: normal;
 }
+.carddesc p {
+  color: var(--primary-text-color);
+}
 /************phone **************************/
 .desccontainer_phone {
+  background-color: var(--background-color);
   width: 100%;
   height: auto;
   border: 1px solid rgb(194, 192, 192);
@@ -55,7 +59,7 @@
 }
 .carddesc_phone {
   border-radius: 3px;
-  background-color: var(--background-color);
+
   color: var(--primary-text-color);
   height: auto;
   margin-top: 5px;
@@ -65,4 +69,7 @@
   font-family: 1.2rem "Fira Sans", sans-serif;
   font-size: 16px;
   font-style: normal;
+}
+.carddesc_phone p {
+  color: var(--primary-text-color);
 }
