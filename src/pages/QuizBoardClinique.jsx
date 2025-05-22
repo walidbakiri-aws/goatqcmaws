@@ -549,7 +549,10 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
+      .put(
+        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
+        formData
+      )
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -569,11 +572,15 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://goatqcm-instance.com/image/clinique/uploadimage",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -869,7 +876,6 @@ function QuizBoardClinique(props) {
           incCour.value < props.selectMultipleCours.length
         ) {
           if (incCour.value === props.selectMultipleCours.length - 1) {
-            console.log(incCours.value);
             setShowCancelQuizzPhone(true);
           }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
@@ -1841,9 +1847,12 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .put(
+        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2344,9 +2353,13 @@ function QuizBoardClinique(props) {
     //******************************************************************************** */
     saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2491,9 +2504,13 @@ function QuizBoardClinique(props) {
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2719,7 +2736,10 @@ function QuizBoardClinique(props) {
     <>
       {!OpenBoardQcm && (
         <>
-          <NavigationBar changeetatsidebar={etatsidebare} cameFrom={"quizzboard"} />
+          <NavigationBar
+            changeetatsidebar={etatsidebare}
+            cameFrom={"quizzboard"}
+          />
           <div className={classes.addingdiv}>
             <div className={classes.sidebare}>
               {ShowSideBare && <Sidebar />}
@@ -3658,7 +3678,6 @@ function QuizBoardClinique(props) {
                                 }}
                               />
                             </li>
-                            
                           </div>
                         </div>
                       )}
