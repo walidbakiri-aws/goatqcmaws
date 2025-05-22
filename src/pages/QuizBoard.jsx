@@ -1296,16 +1296,39 @@ function QuizBoard(props) {
 
             //******************************************************************** */
           } else if (props.checkParSjtBiologieClinique === "BiologieParSujet") {
-            getCurrentYear = getYear.value;
-            getCurrentGroupePerm = getGroupePerm.value;
-            try {
-              if (props.backFromCliniqueAllQcmCliniqueprSujet === true) {
+            if (props.backFromCliniqueAllQcmCliniqueprSujet === true) {
+              console.log("we back from");
+              try {
                 getCurrentYear = props.getYear;
                 getCurrentGroupePerm = props.getGroupePerm;
-              }
-            } catch (Exception) {}
-            console.log("we here biologie");
-            console.log(getCurrentGroupePerm);
+                const getresultCasClinqiue = await axios.get(
+                  `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
+                );
+                getCasCliniqueLength = getresultCasClinqiue.data.length;
+                finalgetCasCliniqueLength.value = getCasCliniqueLength;
+                setgetlengthCasCliniqueParSjr(getCasCliniqueLength);
+                console.log(finalgetCasCliniqueLength.value);
+              } catch (Exception) {}
+            } else {
+              console.log("we start");
+              try {
+                getCurrentYear = getYear.value;
+                getCurrentGroupePerm = getGroupePerm.value;
+
+                getCurrentYear = document.getElementById("year").value;
+
+                const getresultCasClinqiue = await axios.get(
+                  `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
+                );
+                getCasCliniqueLength = getresultCasClinqiue.data.length;
+                finalgetCasCliniqueLength.value = getCasCliniqueLength;
+                setgetlengthCasCliniqueParSjr(getCasCliniqueLength);
+                console.log(finalgetCasCliniqueLength.value);
+                console.log("we here biologie");
+                console.log(getCurrentGroupePerm);
+              } catch (Exception) {}
+            }
+
             try {
               const result = await axios.get(
                 `${BASE_URL}/qcms/getqcqms/biologie/${props.moduleId}/${getCurrentYear}/Biologie`
