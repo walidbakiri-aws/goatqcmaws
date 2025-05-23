@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import NavigationBar from "../compenent/layout/NavigationBar";
 import classes from "./QuizBoardClinique.module.css";
 import Sidebar from "./Sidebar";
@@ -73,7 +73,10 @@ ChartJS.register(
   LinearScale,
   BarElement
 );
+import { Client } from "@stomp/stompjs";
+import SockJS from "sockjs-client";
 function QuizBoardClinique(props) {
+  const currentQcmIndex = useSignal(0);
   /**chat Box*************************************************************** */
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
   const codechatlocation = localStorage.getItem("codechatlocation");
@@ -504,7 +507,7 @@ function QuizBoardClinique(props) {
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
-      `https://goatqcm-instance.comfulldesc/clinique/descqcm/${qcmId}`
+      `https://goatqcm-instance.com/fulldesc/clinique/descqcm/${qcmId}`
     );
 
     console.log(fullDescResult.data);
@@ -549,10 +552,7 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(
-        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
-        formData
-      )
+      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -572,15 +572,11 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post(
-        "https://goatqcm-instance.com/image/clinique/uploadimage",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -636,7 +632,25 @@ function QuizBoardClinique(props) {
       return false;
     }
   }
+  /**share screen variable********************************************************* */
+  const [messages, setMessages] = useState([]);
+  const [message, setMessage] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [chatroom, setChatroom] = useState("default");
+  const [connected, setConnected] = useState(false);
+  const [stompClient, setStompClient] = useState(null);
+  let isToggled = localStorage.getItem("isSharingState");
+  let shareScreenCode = localStorage.getItem("codeSharingCode");
+  let firstCallClear = false;
+  let saveUser = {
+    name: "",
+  };
+  /**share screen variable********************************************************* */
   useEffect(() => {
+    /**share screen **************************************************************************** */
+    console.log(isToggled);
+    console.log(shareScreenCode);
+    //********************************************************************************************* */
     console.log(localStorage.getItem("lastSessionId"));
     console.log(localStorage.getItem("fullSessionsListeLength"));
     //for timer**************************
@@ -722,7 +736,154 @@ function QuizBoardClinique(props) {
     console.log(props.SaveEachLineStatiqueClinique);
     console.log(props.savePieStatiqueClinique);
     // loadProposition();
+    if (firstCallClear === false) {
+      clearChat();
+      firstCallClear = true;
+      console.log("kakaka");
+    }
+
+    getUserShare();
+
+    fetch(`https://goatqcm-instance.com/chat/history/${shareScreenCode}`)
+      .then((res) => res.json())
+      .then((data) => setMessages(data));
+
+    const client = new Client({
+      webSocketFactory: () => new SockJS("https://goatqcm-instance.com/ws"),
+      reconnectDelay: 5000,
+      onConnect: () => {
+        setConnected(true);
+        client.subscribe(`/topic/messages/${shareScreenCode}`, (frame) => {
+          const receivedMessage = JSON.parse(frame.body);
+          setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        });
+      },
+    });
+
+    client.activate();
+    setStompClient(client);
+
+    return () => {
+      client.deactivate();
+      setConnected(false);
+      setMessages([]);
+    };
+    /***************************************************************************************************/
   }, []);
+  /**share screen effect******************************************************* */
+  const [lastMessage, setLastMessage] = useState(null);
+  const isCall = useRef(true); // stays true across renders
+  const cameFrome = ["propoClicked", "useEffectCalling"];
+  let [senderName, setSenderName] = useState("");
+  const clearChat = async () => {
+    try {
+      setMessages([]);
+      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
+        method: "POST",
+      });
+    } catch (Exception) {}
+  };
+  /***************************************************************************************/
+  /***************************************************************************************/
+  useEffect(() => {
+    console.log("heyyyy");
+
+    if (messages.length > 0) {
+      setSenderName(messages[messages.length - 1].nickname);
+      console.log(messages[messages.length - 1].nickname);
+      console.log(nickname);
+      if (messages[messages.length - 1].nickname !== nickname) {
+        const latest = messages[messages.length - 1];
+        setLastMessage(latest.content);
+        console.log(latest.content);
+        console.log(username);
+
+        if (latest.content.startsWith("CliniqueIndex+")) {
+          const indexClinique = latest.content.slice("CliniqueIndex+".length);
+          console.log(indexClinique);
+          handleNextClick({ value: indexClinique });
+        } else if (latest.content.startsWith("CliniqueIndex-")) {
+          const indexClinique = latest.content.slice("CliniqueIndex-".length);
+          console.log(indexClinique);
+          handlePrevClick({ value: indexClinique });
+        } else if (latest.content.startsWith("CliniqueClickIndex")) {
+          const indexClinique = latest.content.slice(
+            "CliniqueClickIndex".length
+          );
+          console.log(indexClinique);
+          handleItemClick({ casCliniqueIndex: indexClinique });
+        } else if (latest.content.startsWith("QcmClickIndex")) {
+          const indexQcmClinique = latest.content.slice("QcmClickIndex".length);
+          console.log(indexQcmClinique);
+          handlQcmClickNav({ indexqcmClnq: indexQcmClinique });
+        } else {
+          console.log("hruuu");
+          const parsedArray = JSON.parse(latest.content);
+          try {
+            if (Array.isArray(parsedArray)) {
+              const [
+                VisibiliteCasCliniqueIndex,
+                QcmIndex,
+                indexPropofinal,
+                propoId,
+                qcmId,
+                courName,
+              ] = parsedArray;
+
+              handlePropoClick(
+                undefined,
+                VisibiliteCasCliniqueIndex,
+                QcmIndex,
+                indexPropofinal,
+                propoId,
+                qcmId,
+                courName,
+                cameFrome[1]
+              );
+            }
+          } catch (e) {
+            console.error("Failed to parse content", e);
+          }
+        }
+      }
+    }
+  }, [messages]);
+  /**end share  screen effect******************************************************* */
+
+  /********Share***************************************************/
+  /*const loadShareUserId = async () => {
+      try {
+        const resultLoadChat = await axios.get(
+          `http://localhost:8080/sharescreen/getbyuserid/${userId}`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+  
+        setIsToggled(resultLoadChat.data[0].isSharing);
+        console.log(resultLoadChat.data[0].isSharing);
+      } catch (Exception) {}
+    };*/
+  /**************************************************************** */
+  //*********getUser************************************************** */
+  const [usernameshare, setUserNameShare] = useState("");
+  const getUserShare = async () => {
+    console.log(userId);
+    console.log(token);
+    try {
+      const resultUserFinal = await UserService.getUserByuserName(
+        username,
+        token
+      );
+
+      (saveUser.name = resultUserFinal.name), console.log(saveUser);
+      console.log(resultUserFinal.name);
+      setNickname(resultUserFinal.name);
+    } catch (Exception) {
+      console.log("user not found");
+    }
+  };
+  //*****************************************************************
   //******par sujet methodes****************************************** */
   //***get years props*************************** *****************************/
   function loadyearQcmsParSujet() {
@@ -876,6 +1037,7 @@ function QuizBoardClinique(props) {
           incCour.value < props.selectMultipleCours.length
         ) {
           if (incCour.value === props.selectMultipleCours.length - 1) {
+            //  console.log(incCours.value);
             setShowCancelQuizzPhone(true);
           }
           /**inializer QcmsOfCourEachCasCliniqe for next cours qcms************************************ */
@@ -1491,12 +1653,39 @@ function QuizBoardClinique(props) {
     }
   };
   //********************************************************************** */
-  const handlePrevClick = () => {
+  function handlePrevClick({ event, value } = {}) {
+    /***share screen************************************************************ */
+    if (value) {
+      currentIndex.value = Number(value);
+      console.log(currentIndex.value);
+    } else {
+      currentIndex.value = currentIndex.value - 1;
+    }
+
     setVisibleNoteQcm(false);
-    currentIndex.value = currentIndex.value - 1;
+
     setSelectcasCliniqueIndex(currentIndex.value);
     setVisibiliteCasCliniqueIndex(currentIndex.value);
     //setVisibilitePorpoIndex(currentIndex.value);
+    if (event) {
+      console.log(isToggled);
+      if (isToggled === "true") {
+        if (stompClient && connected) {
+          const chatMessage = {
+            nickname,
+            content: "CliniqueIndex-" + currentIndex.value,
+          };
+          stompClient.publish({
+            destination: `/app/chat/${shareScreenCode}`,
+            body: JSON.stringify(chatMessage),
+          });
+          console.log(chatMessage.content);
+
+          setMessage("");
+        }
+      }
+    }
+    /*********************************************************** */
     setQcmIndex(0);
     if (currentIndex.value === -1) {
       //**all statique********************************************************************************************** */
@@ -1570,10 +1759,10 @@ function QuizBoardClinique(props) {
     VisibleNextBtn.value = true;
     setvisisbleDescInsert(false);
     setVisisbleDescUpdate(false);
-  };
+  }
 
   //************************************************************************* */
-  const handleNextClick = () => {
+  function handleNextClick({ event, value } = {}) {
     setVisibleNoteQcm(false);
     //saveIncrValueOfeachClinique.value[VisibiliteCasCliniqueIndex] = 0;
 
@@ -1583,12 +1772,36 @@ function QuizBoardClinique(props) {
     ) {*/
     incrtValue.value = 0;
     saveQcmIndex.value = [];
+    /***share screen************************************************************ */
+    if (value) {
+      currentIndex.value = Number(value);
+      console.log(currentIndex.value);
+    } else {
+      currentIndex.value = currentIndex.value + 1;
+    }
 
-    currentIndex.value = currentIndex.value + 1;
     setSelectcasCliniqueIndex(currentIndex.value);
     setVisibiliteCasCliniqueIndex(currentIndex.value);
     setQcmIndex(0);
     console.log(currentIndex.value);
+    if (event) {
+      console.log(isToggled);
+      if (isToggled === "true") {
+        if (stompClient && connected) {
+          const chatMessage = {
+            nickname,
+            content: "CliniqueIndex+" + currentIndex.value,
+          };
+          stompClient.publish({
+            destination: `/app/chat/${shareScreenCode}`,
+            body: JSON.stringify(chatMessage),
+          });
+          console.log(chatMessage.content);
+
+          setMessage("");
+        }
+      }
+    }
     if (currentIndex.value === ShowCasClinique.length - 1) {
       VisibleNextBtn.value = false;
     }
@@ -1619,8 +1832,144 @@ function QuizBoardClinique(props) {
     }*/
     setvisisbleDescInsert(false);
     setVisisbleDescUpdate(false);
-  };
+    //***drope down************************************** */
+
+    try {
+      setCasCliniqueClicked(
+        CasCliniqueClicked.filter(
+          (clinique) => clinique !== saveLastCliniqueOpenIndex.value
+        )
+      );
+    } catch (Exception) {
+      console.log("not click yet");
+    }
+    if (CasCliniqueClicked[currentIndex.value] !== currentIndex.value) {
+      setCasCliniqueClicked(currentIndex.value);
+    } else if (CasCliniqueClicked === currentIndex.value) {
+      setCasCliniqueClicked(
+        CasCliniqueClicked.filter((clinique) => clinique !== currentIndex.value)
+      );
+    }
+
+    saveLastCliniqueOpenIndex.value = currentIndex.value;
+  }
   //*************************************************************************** */
+
+  //*********************************************************** */
+  function handleItemClick({ event, casCliniqueIndex } = {}) {
+    console.log(casCliniqueIndex);
+    setQcmIndex(0);
+    incrtValue.value = 0;
+    saveQcmIndex.value = [];
+
+    currentIndex.value = Number(casCliniqueIndex);
+    console.log(currentIndex.value);
+
+    //currentIndex.value = casCliniqueIndex;
+    setSelectcasCliniqueIndex(currentIndex.value);
+    console.log(currentIndex.value);
+    setVisibiliteCasCliniqueIndex(currentIndex.value);
+    VisiblePrevBtn.value = true;
+    VisibleNextBtn.value = true;
+    /***share screen************************************************************ */
+    if (event) {
+      console.log(isToggled);
+      if (isToggled === "true") {
+        if (stompClient && connected) {
+          const chatMessage = {
+            nickname,
+            content: "CliniqueClickIndex" + currentIndex.value,
+          };
+          stompClient.publish({
+            destination: `/app/chat/${shareScreenCode}`,
+            body: JSON.stringify(chatMessage),
+          });
+          console.log(chatMessage.content);
+
+          setMessage("");
+        }
+      }
+    }
+    /**************************************************************************** */
+    if (currentIndex.value === ShowCasClinique.length - 1) {
+      VisibleNextBtn.value = false;
+      VisiblePrevBtn.value = true;
+    } else if (currentIndex.value === 0) {
+      if (props.qcmType === "Tous (Qcm,Cas Clinique)") {
+        VisibleNextBtn.value = true;
+        VisiblePrevBtn.value = true;
+      } else {
+        VisibleNextBtn.value = true;
+        VisiblePrevBtn.value = false;
+      }
+    }
+    try {
+      if (saveCaseCliniqueIndex.value[currentIndex.value][0] === 0) {
+        console.log("first qcm is check nextbtn walid");
+        console.log(saveCaseCliniqueIndex.value[currentIndex.value][0]);
+        setTrueInsertClr(0);
+        setSlectCliniquePropo(currentIndex.value);
+        setTrueInsertClrClick(true);
+
+        setShowDescRpnsBtn(true);
+        setShowVerifierRpnsBtn(false);
+      }
+    } catch (Exception) {
+      console.log("first not chek reponse");
+    }
+
+    //***drope down************************************** */
+
+    try {
+      setCasCliniqueClicked(
+        CasCliniqueClicked.filter(
+          (clinique) => clinique !== saveLastCliniqueOpenIndex.value
+        )
+      );
+    } catch (Exception) {
+      console.log("not click yet");
+    }
+    if (CasCliniqueClicked[currentIndex.value] !== currentIndex.value) {
+      setCasCliniqueClicked(currentIndex.value);
+    } else if (CasCliniqueClicked === currentIndex.value) {
+      setCasCliniqueClicked(
+        CasCliniqueClicked.filter((clinique) => clinique !== currentIndex.value)
+      );
+    }
+
+    saveLastCliniqueOpenIndex.value = currentIndex.value;
+  }
+  //********************************************************* */
+  //*********************************************************** */
+
+  function handlQcmClickNav({ event, indexqcmClnq } = {}) {
+    currentQcmIndex.value = Number(indexqcmClnq);
+    console.log(currentQcmIndex.value);
+
+    /***share screen************************************************************ */
+    if (event) {
+      console.log(isToggled);
+      if (isToggled === "true") {
+        if (stompClient && connected) {
+          const chatMessage = {
+            nickname,
+            content: "QcmClickIndex" + currentQcmIndex.value,
+          };
+          stompClient.publish({
+            destination: `/app/chat/${shareScreenCode}`,
+            body: JSON.stringify(chatMessage),
+          });
+          console.log(chatMessage.content);
+
+          setMessage("");
+        }
+      }
+    }
+    setQcmIndex(currentQcmIndex.value);
+    setShowDescQcm(false);
+    setVisibleNoteQcm(false);
+  }
+  //******************************************************************** */
   //delete function cas cliqnieu*//////////////////////////////////////////////////////////
   const DeleteCasClinique = async (casCliniqueId) => {
     currentCasCliniqueId.value = casCliniqueId;
@@ -1777,14 +2126,44 @@ function QuizBoardClinique(props) {
   };
   //***handle propo click**************************************************** */
   const handlePropoClick = async (
+    e,
     VisibiliteCasCliniqueIndex,
     QcmIndex,
     indexPropofinal,
     propoId,
     qcmId,
-    courName
+    courName,
+    comingFrom
   ) => {
+    if (e?.preventDefault) e.preventDefault();
     console.log(courName);
+    if (isToggled === "true") {
+      if (comingFrom === cameFrome[0]) {
+        console.log("is click on propo");
+        const propoParametres = [
+          VisibiliteCasCliniqueIndex,
+          QcmIndex,
+          indexPropofinal,
+          propoId,
+          qcmId,
+          courName,
+        ];
+        console.log(propoParametres);
+        if (stompClient && connected) {
+          const chatMessage = {
+            nickname,
+
+            content: JSON.stringify(propoParametres),
+          };
+          stompClient.publish({
+            destination: `/app/chat/${shareScreenCode}`,
+            body: JSON.stringify(chatMessage),
+          });
+          setMessage("");
+        }
+        // isCall.current = false;
+      }
+    }
     //save proposition selected &&ClickedCounter*********************************************************
     const updatedArraySavePropositionsClinique = savePropositionsClinique.map(
       (innerArray) => [...innerArray]
@@ -1847,12 +2226,9 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(
-        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2192,71 +2568,7 @@ function QuizBoardClinique(props) {
   function handlerCancelShowAllReponse() {
     setModalDoneQuizIsOpen(false);
   }
-  //*********************************************************** */
-  //*********************************************************** */
-  const handleItemClick = (casCliniqueId, casCliniqueIndex) => {
-    setQcmIndex(0);
-    incrtValue.value = 0;
-    saveQcmIndex.value = [];
-    currentIndex.value = casCliniqueIndex;
-    setSelectcasCliniqueIndex(casCliniqueIndex);
-    console.log(casCliniqueIndex);
-    setVisibiliteCasCliniqueIndex(casCliniqueIndex);
-    VisiblePrevBtn.value = true;
-    VisibleNextBtn.value = true;
-    if (currentIndex.value === ShowCasClinique.length - 1) {
-      VisibleNextBtn.value = false;
-      VisiblePrevBtn.value = true;
-    } else if (currentIndex.value === 0) {
-      if (props.qcmType === "Tous (Qcm,Cas Clinique)") {
-        VisibleNextBtn.value = true;
-        VisiblePrevBtn.value = true;
-      } else {
-        VisibleNextBtn.value = true;
-        VisiblePrevBtn.value = false;
-      }
-    }
-    try {
-      if (saveCaseCliniqueIndex.value[currentIndex.value][0] === 0) {
-        console.log("first qcm is check nextbtn walid");
-        console.log(saveCaseCliniqueIndex.value[currentIndex.value][0]);
-        setTrueInsertClr(0);
-        setSlectCliniquePropo(currentIndex.value);
-        setTrueInsertClrClick(true);
 
-        setShowDescRpnsBtn(true);
-        setShowVerifierRpnsBtn(false);
-      }
-    } catch (Exception) {
-      console.log("first not chek reponse");
-    }
-
-    //***drope down************************************** */
-
-    try {
-      setCasCliniqueClicked(
-        CasCliniqueClicked.filter(
-          (clinique) => clinique !== saveLastCliniqueOpenIndex.value
-        )
-      );
-    } catch (Exception) {
-      console.log("not click yet");
-    }
-    if (CasCliniqueClicked[casCliniqueIndex] !== casCliniqueIndex) {
-      setCasCliniqueClicked(casCliniqueIndex);
-    } else if (CasCliniqueClicked === casCliniqueIndex) {
-      setCasCliniqueClicked(
-        CasCliniqueClicked.filter((clinique) => clinique !== casCliniqueIndex)
-      );
-    }
-
-    saveLastCliniqueOpenIndex.value = casCliniqueIndex;
-  };
-  //********************************************************* */
-  const handlQcmClickNav = (indexqcmClnq) => {
-    setQcmIndex(indexqcmClnq);
-  };
-  //******************************************************************** */
   //***show qcms liste*********************************** */
   const handleShowListeQcms = () => {
     setShowListQcms(!ShowListQcms);
@@ -2353,13 +2665,9 @@ function QuizBoardClinique(props) {
     //******************************************************************************** */
     saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2504,13 +2812,9 @@ function QuizBoardClinique(props) {
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3052,10 +3356,59 @@ function QuizBoardClinique(props) {
                                         backgroundColor: backGroundBtn,
                                       }}
                                       onClick={(e) => {
+                                        if (isToggled === "true") {
+                                          if (stompClient && connected) {
+                                            const chatMessage = {
+                                              nickname,
+                                              content:
+                                                "QcmClickIndex" + indexqcmClnq,
+                                            };
+                                            stompClient.publish({
+                                              destination: `/app/chat/${shareScreenCode}`,
+                                              body: JSON.stringify(chatMessage),
+                                            });
+                                            console.log(chatMessage.content);
+
+                                            setMessage("");
+                                          }
+                                        }
                                         setQcmIndex(indexqcmClnq);
                                         console.log(indexqcmClnq);
+
                                         setShowDescQcm(false);
-                                        setVisibleNoteQcm(false);
+                                        setQcmIdNote(qcmCln.id);
+
+                                        try {
+                                          if (
+                                            saveCaseCliniqueIndex.value[
+                                              VisibiliteCasCliniqueIndex
+                                            ][indexqcmClnq] === indexqcmClnq
+                                          ) {
+                                            console.log(indexqcmClnq);
+                                            console.log(
+                                              VisibiliteCasCliniqueIndex
+                                            );
+
+                                            setShowDescRpnsBtn(true);
+                                            setShowVerifierRpnsBtn(false);
+                                            setSlectCliniquePropo(
+                                              VisibiliteCasCliniqueIndex
+                                            );
+                                            setTrueInsertClrClick(true);
+                                            setTrueInsertClr(indexqcmClnq);
+                                          } else {
+                                            setShowDescRpnsBtn(false);
+                                            setShowVerifierRpnsBtn(true);
+                                          }
+                                        } catch (Exception) {
+                                          console.log(
+                                            "no check in this clinique"
+                                          );
+                                        }
+                                        setShowDescQcm(false);
+
+                                        setvisisbleDescInsert(false);
+                                        setVisisbleDescUpdate(false);
                                       }}
                                       value={indexqcmClnq}
                                     >
@@ -3338,8 +3691,9 @@ function QuizBoardClinique(props) {
                                                         ? "list-group-item active"
                                                         : "list-group-item"
                                                     }
-                                                    onClick={() => {
+                                                    onClick={(e) => {
                                                       handlePropoClick(
+                                                        e,
                                                         VisibiliteCasCliniqueIndex,
                                                         QcmIndex,
                                                         indexPropofinal,
@@ -3347,7 +3701,8 @@ function QuizBoardClinique(props) {
                                                         propo.qcmClinique.id,
                                                         propo.qcmClinique
                                                           .casClinique.coursMed
-                                                          .coursName
+                                                          .coursName,
+                                                        cameFrome[0]
                                                       );
                                                     }}
                                                   >
@@ -3470,7 +3825,9 @@ function QuizBoardClinique(props) {
                                     <button
                                       type="button"
                                       className={`${classes.btnsuivant} btn btn-warning`}
-                                      onClick={handleNextClick}
+                                      onClick={(e) =>
+                                        handleNextClick({ event: e })
+                                      }
                                     >
                                       Suivant
                                     </button>
@@ -3479,7 +3836,9 @@ function QuizBoardClinique(props) {
                                     <button
                                       type="button"
                                       className={`${classes.btnPrecdent} btn btn-warning`}
-                                      onClick={handlePrevClick}
+                                      onClick={(e) =>
+                                        handlePrevClick({ event: e })
+                                      }
                                     >
                                       Précédent
                                     </button>
@@ -3514,10 +3873,10 @@ function QuizBoardClinique(props) {
                               >
                                 <div
                                   onClick={(e) => {
-                                    handleItemClick(
-                                      casClinique.id,
-                                      casCliniqueIndex
-                                    );
+                                    handleItemClick({
+                                      event: e,
+                                      casCliniqueIndex: casCliniqueIndex,
+                                    });
                                   }}
                                 >
                                   <a className={`${classes.title_casclinique}`}>
@@ -3541,11 +3900,13 @@ function QuizBoardClinique(props) {
                                                 className={`${classes.div_qcm}`}
                                               >
                                                 <a
-                                                  onClick={(e) =>
-                                                    handlQcmClickNav(
-                                                      indexqcmClnq
-                                                    )
-                                                  }
+                                                  onClick={(e) => {
+                                                    handlQcmClickNav({
+                                                      event: e,
+                                                      indexqcmClnq:
+                                                        indexqcmClnq,
+                                                    });
+                                                  }}
                                                 >
                                                   Question {indexqcmClnq + 1}
                                                 </a>
@@ -3594,7 +3955,7 @@ function QuizBoardClinique(props) {
               </div>
             )}
             {VisibleQmcContainer && isTabletOrMobile && (
-              <div className={classes.modal_phone}>
+              <div className={classes.modal}>
                 <div className={classes.contanerspace_phone}>
                   <div
                     className={`${classes.quizcontainer_phone} card text-white  py-1`}
@@ -3795,10 +4156,28 @@ function QuizBoardClinique(props) {
                                   {qcm.map((qcmCln, indexqcmClnq) => (
                                     <button
                                       onClick={(e) => {
+                                        if (isToggled === "true") {
+                                          if (stompClient && connected) {
+                                            const chatMessage = {
+                                              nickname,
+                                              content:
+                                                "QcmClickIndex" + indexqcmClnq,
+                                            };
+                                            stompClient.publish({
+                                              destination: `/app/chat/${shareScreenCode}`,
+                                              body: JSON.stringify(chatMessage),
+                                            });
+                                            console.log(chatMessage.content);
+
+                                            setMessage("");
+                                          }
+                                        }
                                         setQcmIndex(indexqcmClnq);
                                         console.log(indexqcmClnq);
+
                                         setShowDescQcm(false);
                                         setQcmIdNote(qcmCln.id);
+
                                         try {
                                           if (
                                             saveCaseCliniqueIndex.value[
@@ -4050,9 +4429,7 @@ function QuizBoardClinique(props) {
                                                 (propo, indexPropofinal) => {
                                                   currentQcmIdOfPropo.value =
                                                     propo.qcmClinique.id;
-                                                  console.log(
-                                                    currentQcmIdOfPropo.value
-                                                  );
+
                                                   return (
                                                     <li
                                                       key={indexPropofinal}
@@ -4110,8 +4487,9 @@ function QuizBoardClinique(props) {
                                                           ? "list-group-item active"
                                                           : "list-group-item"
                                                       }
-                                                      onClick={() => {
+                                                      onClick={(e) => {
                                                         handlePropoClick(
+                                                          e,
                                                           VisibiliteCasCliniqueIndex,
                                                           QcmIndex,
                                                           indexPropofinal,
@@ -4119,7 +4497,8 @@ function QuizBoardClinique(props) {
                                                           propo.qcmClinique.id,
                                                           propo.qcmClinique
                                                             .casClinique
-                                                            .coursMed.coursName
+                                                            .coursMed.coursName,
+                                                          cameFrome[0]
                                                         );
                                                       }}
                                                     >
@@ -4236,14 +4615,18 @@ function QuizBoardClinique(props) {
                                         <GrNext
                                           className={classes.btnsuivant_phone}
                                           type="button"
-                                          onClick={handleNextClick}
+                                          onClick={(e) =>
+                                            handleNextClick({ event: e })
+                                          }
                                         />
                                       </div>
                                     )}
                                     {VisiblePrevBtn.value && (
                                       <GrPrevious
                                         className={classes.btnPrecdent_phone}
-                                        onClick={handlePrevClick}
+                                        onClick={(e) =>
+                                          handlePrevClick({ event: e })
+                                        }
                                       />
                                     )}
                                   </div>
@@ -4290,10 +4673,10 @@ function QuizBoardClinique(props) {
                                   >
                                     <div
                                       onClick={(e) => {
-                                        handleItemClick(
-                                          casClinique.id,
-                                          casCliniqueIndex
-                                        );
+                                        handleItemClick({
+                                          event: e,
+                                          casCliniqueIndex: casCliniqueIndex,
+                                        });
                                       }}
                                     >
                                       <a
@@ -4321,11 +4704,13 @@ function QuizBoardClinique(props) {
                                                       className={`${classes.div_qcm_phone}`}
                                                     >
                                                       <a
-                                                        onClick={(e) =>
-                                                          handlQcmClickNav(
-                                                            indexqcmClnq
-                                                          )
-                                                        }
+                                                        onClick={(e) => {
+                                                          handlQcmClickNav({
+                                                            event: e,
+                                                            indexqcmClnq:
+                                                              indexqcmClnq,
+                                                          });
+                                                        }}
                                                       >
                                                         Question{" "}
                                                         {indexqcmClnq + 1}

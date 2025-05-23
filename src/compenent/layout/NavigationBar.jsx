@@ -227,8 +227,8 @@ function NavigationBar(props) {
         dicsussion.value = resultLoadChat.data[0].chatCode;
 
         /***open discussion**************************** */
-        localStorage.setItem("showdiscussiondiv", "true");
-        localStorage.setItem("codechatlocation", dicsussion.value);
+        // localStorage.setItem("showdiscussiondiv", "true");
+        //localStorage.setItem("codechatlocation", dicsussion.value);
         console.log(ShowDiscsussionDiv);
         //  setShowDiscsussionDiv(false);
         setShowDiscsussionDiv(!ShowDiscsussionDiv);
@@ -337,8 +337,9 @@ function NavigationBar(props) {
       .then((res) => {
         console.log("succes insert Screen Share");
         toast.success("successful ajouter nouvelle Screen Share!");
-        setShowShareScreenDiv(false);
+
         setMoladIsOpenShare(false);
+        setShowShareScreenDiv(false);
       })
       .catch((err) => console.log(err));
   };
@@ -372,6 +373,8 @@ function NavigationBar(props) {
       .then((res) => {
         console.log("succes insert sharescreen");
         toast.success("successful ajouter nouvelle sharescreen!");
+
+        setMoladIsOpenShare(false);
         setShowShareScreenDiv(false);
       })
       .catch((err) => console.log(err));
@@ -419,8 +422,8 @@ function NavigationBar(props) {
         screensharecode.value = resultLoadShare.data[0].shareScreenCode;
 
         /***open discussion**************************** */
-        localStorage.setItem("showsharescreendiv", "true");
-        localStorage.setItem("codesharescreenlocation", screensharecode.value);
+
+        // localStorage.setItem("codesharescreenlocation", screensharecode.value);
         console.log(ShowShareScreenDiv);
         //  setShowDiscsussionDiv(false);
         setShowShareScreenDiv(!ShowShareScreenDiv);
@@ -686,6 +689,7 @@ function NavigationBar(props) {
               <Toaster />
             </>
           )}
+          {modalIsOpenShare && <Backdrop onCancel={closeModalHandler} />}
           {ShowShareScreenDiv && <Backdrop onCancel={closeModalHandler} />}
           {ShowShareScreenDiv && (
             <ShareScreenTagel screensharecode={screensharecode.value} />
@@ -936,6 +940,7 @@ function NavigationBar(props) {
               <Toaster />
             </>
           )}
+          {modalIsOpenShare && <Backdrop onCancel={closeModalHandler} />}
           {ShowShareScreenDiv && <Backdrop onCancel={closeModalHandler} />}
           {ShowShareScreenDiv && (
             <ShareScreenTagel screensharecode={screensharecode.value} />

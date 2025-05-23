@@ -28,7 +28,7 @@ function ShareScreenTagel(props) {
   const token = localStorage.getItem("tokengoat");
   const username = localStorage.getItem("username");
   let userId = localStorage.getItem("userId");
-
+  const codesharescreen = useSignal("");
   useEffect(() => {
     console.log(props.screensharecode);
     loadShareUserId();
@@ -45,6 +45,7 @@ function ShareScreenTagel(props) {
       setShareScreen(resultLoadChat.data[0]);
       setShowlodalShare(true);
       setIsToggled(resultLoadChat.data[0].isSharing);
+      codesharescreen.value = resultLoadChat.data[0].shareScreenCode;
       console.log(resultLoadChat.data[0].isSharing);
       console.log(resultLoadChat.data);
     } catch (Exception) {}
@@ -65,13 +66,26 @@ function ShareScreenTagel(props) {
   const handleToggle = async () => {
     const newState = !isToggled;
     setIsToggled(newState);
-
+    console.log(codesharescreen.value);
+    localStorage.removeItem("codeSharingCode");
+    try {
+      setMessages([]);
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${codesharescreen.value}`,
+        {
+          method: "POST",
+        }
+      );
+    } catch (Exception) {}
     try {
       await axios.put(
         `https://goatqcm-instance.com/sharescreen/${shareScreen.id}/status`,
         { isSharing: newState },
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
+      localStorage.setItem("isSharingState", String(newState));
+      localStorage.setItem("codeSharingCode", codesharescreen.value);
       toast.success("Status updated successfully");
       let shareScreenCode = localStorage.setItem(
         "sharescreencode",
