@@ -58,7 +58,8 @@ function ShareScreenTagel(props) {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-
+    localStorage.removeItem("isSharingState");
+    localStorage.removeItem("codeSharingCode");
     setShowlodalShare(false);
   };
 
