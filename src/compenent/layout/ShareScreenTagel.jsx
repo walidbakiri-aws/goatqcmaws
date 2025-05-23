@@ -68,7 +68,7 @@ function ShareScreenTagel(props) {
     const newState = !isToggled;
     setIsToggled(newState);
     console.log(codesharescreen.value);
-    if (newState === false) {
+    if (localStorage.getItem("codeSharingCode")) {
       localStorage.removeItem("codeSharingCode");
     }
 
