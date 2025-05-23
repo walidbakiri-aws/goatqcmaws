@@ -69,10 +69,10 @@ function ShareScreenTagel(props) {
     setIsToggled(newState);
     console.log(codesharescreen.value);
 
-    //if (localStorage.getItem("codeSharingCode").length > 0) {
-    //localStorage.removeItem("codeSharingCode");
-
-    //}
+    if (localStorage.getItem("codeSharingCode").length > 0) {
+      localStorage.removeItem("codeSharingCode");
+      console.log(localStorage.getItem("codeSharingCode"));
+    }
 
     try {
       setMessages([]);
@@ -95,10 +95,6 @@ function ShareScreenTagel(props) {
       console.log(localStorage.setItem("isSharingState"));
       console.log(localStorage.setItem("codeSharingCode"));
       toast.success("Status updated successfully");
-      let shareScreenCode = localStorage.setItem(
-        "sharescreencode",
-        shareScreen.shareScreenCode
-      );
     } catch (error) {
       setIsToggled(!newState); // Revert on error
       toast.error("Failed to update sharing status");
