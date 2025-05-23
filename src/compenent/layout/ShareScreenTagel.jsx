@@ -68,7 +68,7 @@ function ShareScreenTagel(props) {
     const newState = !isToggled;
     setIsToggled(newState);
     console.log(codesharescreen.value);
-    localStorage.removeItem("codeSharingCode");
+    //localStorage.removeItem("codeSharingCode");
     try {
       setMessages([]);
       await fetch(
@@ -87,6 +87,8 @@ function ShareScreenTagel(props) {
 
       localStorage.setItem("isSharingState", String(newState));
       localStorage.setItem("codeSharingCode", codesharescreen.value);
+      console.log(localStorage.setItem("isSharingState"));
+      console.log(localStorage.setItem("codeSharingCode"));
       toast.success("Status updated successfully");
       let shareScreenCode = localStorage.setItem(
         "sharescreencode",
