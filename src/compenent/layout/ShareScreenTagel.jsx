@@ -71,6 +71,8 @@ function ShareScreenTagel(props) {
     console.log(localStorage.getItem("codeSharingCode").length);
     if (localStorage.getItem("codeSharingCode").length > 0) {
       localStorage.removeItem("codeSharingCode");
+      localStorage.removeItem("isSharingState");
+      console.log(localStorage.getItem("isSharingState"));
       console.log(localStorage.getItem("codeSharingCode"));
     }
 
@@ -85,11 +87,12 @@ function ShareScreenTagel(props) {
     } catch (Exception) {}
     try {
       await axios.put(
-        `https://goatqcm-instance.com/sharescreen/${shareScreen.id}/status`,
+        `https://goatqcm-instance.comsharescreen/${shareScreen.id}/status`,
         { isSharing: newState },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-
+      console.log(newState);
+      console.log(codesharescreen.value);
       localStorage.setItem("isSharingState", String(newState));
       localStorage.setItem("codeSharingCode", codesharescreen.value);
       toast.success("Status updated successfully");
