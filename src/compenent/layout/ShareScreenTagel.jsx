@@ -87,7 +87,7 @@ function ShareScreenTagel(props) {
     } catch (Exception) {}
     try {
       await axios.put(
-        `https://goatqcm-instance.comsharescreen/${shareScreen.id}/status`,
+        `https://goatqcm-instance.com/sharescreen/${shareScreen.id}/status`,
         { isSharing: newState },
         { headers: { Authorization: `Bearer ${token}` } }
       );
