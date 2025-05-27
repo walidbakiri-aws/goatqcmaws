@@ -1468,13 +1468,6 @@ function Quiz() {
           </div>
         )}
       </div>
-
-      {isDesktopOrLaptop && getDuiscussionDivStatus == "true" && (
-        <ChatBox chatcode={codechatlocation} />
-      )}
-      {isTabletOrMobile && getDuiscussionDivStatus == "true" && (
-        <ChatBox chatcode={codechatlocation} />
-      )}
     </>
   );
 }

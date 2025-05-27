@@ -14,7 +14,9 @@ import axios from "axios";
 import ChatBox from "./ChatBox";
 import messanger from "../layout/img/messanger.png";
 import sharescreenicon from "../layout/img/share.png";
+import globmessage from "../layout/img/globmessage.png";
 import ShareScreenTagel from "./ShareScreenTagel";
+import ChatBoxGlobal from "./ChatBoxGlobal";
 
 function NavigationBar(props) {
   //******************************************************************* */
@@ -46,6 +48,9 @@ function NavigationBar(props) {
 
   const navigate = useNavigate();
   /************chat function********************************************************************************************* */
+  const [modalGlobChatIsOpen, setModalGlobChatIsOpen] = useState(false);
+  const [ShowDiscsussionGlobChatDiv, setShowDiscsussionGlobChatDiv] =
+    useState(false);
   const [modalIsOpen, setMoladIsOpen] = useState(false);
   const [showButtonChoseFirstAction, setShowButtonChoseFirstAction] =
     useState(true);
@@ -60,6 +65,7 @@ function NavigationBar(props) {
   });
   const [codeChat, setCodeChat] = useState("");
   let dicsussion = useSignal("");
+  let dicsussionglobchat = useSignal("globchatgoatqcm");
   /************end var********************************************************************************************* */
   /************sharescreen function********************************************************************************************* */
   const [modalIsOpenShare, setMoladIsOpenShare] = useState(false);
@@ -99,6 +105,10 @@ function NavigationBar(props) {
     setShowEnterCodeChat(false);
     console.log("hey walid");
     setMoladIsOpen(true);
+  };
+  const handleChatGobablBtn = async (e) => {
+    setModalGlobChatIsOpen(true);
+    setShowDiscsussionGlobChatDiv(!ShowDiscsussionGlobChatDiv);
   };
 
   /***model chat************************************************************* */
@@ -226,9 +236,6 @@ function NavigationBar(props) {
         console.log("mama");
         dicsussion.value = resultLoadChat.data[0].chatCode;
 
-        /***open discussion**************************** */
-        // localStorage.setItem("showdiscussiondiv", "true");
-        //localStorage.setItem("codechatlocation", dicsussion.value);
         console.log(ShowDiscsussionDiv);
         //  setShowDiscsussionDiv(false);
         setShowDiscsussionDiv(!ShowDiscsussionDiv);
@@ -240,46 +247,7 @@ function NavigationBar(props) {
     } catch (Exception) {}
   };
   /************end chat function********************************************************************************************* */
-  /**
- 2éme Anneé
-   u1(histo,Biochimie,Anatomie,Physio)
-   u2(histo,Biochimie,Anatomie,Physio)
-   u3(histo,Biochimie,Anatomie,Physio)
-   Immuno
- 3éme Année
-   u1(phyiopath,Semio,Radio,Biochimie)
-   Immuno
- 4éme Année
-   Cardio G04
-   Infectieuse G01
-   Neuro G02
-   Cardio G05
-   Hemato P2
-   Neuro G03
-  5éme Année
-   Endorino G03
-   Pédiatrie G02
-   Traumato G01
-   Uro-Nephro G03
-   Psychiatrie G02
-   Endocrino G02
-   Pediatrie G04
-   Traumato G03
-  6éme Année
-   Dérmato G04
-   Epidémio P1
-   Med-travaille P1
-   Urgence G01
-   Maladie-Systéme G02
-   Epidémio G03
-   Légal G01
-   Ophtalmo G04
-   Urgence G02
-   Med-travaille G04
-   Urgence G03
-  
 
- */
   /************share function********************************************************************************************* */
 
   /*********************************************** */
@@ -474,7 +442,7 @@ function NavigationBar(props) {
               src={goatlogonavbare}
               height="100%"
               width="80"
-              style={{ marginRight: 870 }}
+              style={{ marginRight: 800 }}
             />
             <img
               src={messanger}
@@ -485,6 +453,20 @@ function NavigationBar(props) {
               }}
               style={{ width: 50, height: 50 }}
             />
+            <div className={`${classes.globmessage} `}>
+              <span className={`${classes.nbrGlobMessage} `}>
+                {Number(localStorage.getItem("messageCount"))}
+              </span>
+              <img
+                src={globmessage}
+                height="100%"
+                width="80"
+                onClick={(e) => {
+                  handleChatGobablBtn();
+                }}
+                style={{ width: 50, height: 50 }}
+              />
+            </div>
             <img
               src={sharescreenicon}
               height="100%"
@@ -590,6 +572,10 @@ function NavigationBar(props) {
           )}
           {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
           {ShowDiscsussionDiv && <ChatBox chatcode={dicsussion.value} />}
+
+          {ShowDiscsussionGlobChatDiv && (
+            <ChatBoxGlobal chatglobcode={dicsussionglobchat.value} />
+          )}
 
           {modalIsOpenShare && (
             <>
@@ -710,7 +696,7 @@ function NavigationBar(props) {
                 aria-controls="navbarToggleExternalContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
-                style={{ marginRight: -10, height: 32, marginTop: -5 }}
+                style={{ marginRight: -25, height: 32, marginTop: -5 }}
                 onClick={() => {
                   navButtonHndler();
                   props.changeetatsidebar(BtnNav);
@@ -736,6 +722,19 @@ function NavigationBar(props) {
               }}
               style={{ marginLeft: 5 }}
             />
+            <div className={`${classes.globmessage_phone} `}>
+              <span className={`${classes.nbrGlobMessage_phone} `}>
+                {Number(localStorage.getItem("messageCount"))}
+              </span>
+              <img
+                src={globmessage}
+                height="100%"
+                width="25"
+                onClick={(e) => {
+                  handleChatGobablBtn(e);
+                }}
+              />
+            </div>
             <img
               src={sharescreenicon}
               height="100%"
@@ -841,7 +840,9 @@ function NavigationBar(props) {
           )}
           {modalIsOpen && <Backdrop onCancel={closeModalHandler} />}
           {ShowDiscsussionDiv && <ChatBox chatcode={dicsussion.value} />}
-
+          {ShowDiscsussionGlobChatDiv && (
+            <ChatBoxGlobal chatglobcode={dicsussionglobchat.value} />
+          )}
           {modalIsOpenShare && (
             <>
               {showFullShareDiv && (
