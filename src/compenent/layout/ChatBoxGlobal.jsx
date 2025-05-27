@@ -20,7 +20,7 @@ function ChatBoxGlobal(props) {
   const [connected, setConnected] = useState(false);
   const [stompClient, setStompClient] = useState(null);
   const username = localStorage.getItem("username");
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokengoat");
 
   let userId = localStorage.getItem("userId");
   let saveUser = {
@@ -49,13 +49,13 @@ function ChatBoxGlobal(props) {
 
     //if (!chatroom.trim()) return;
 
-    fetch(`http://localhost:8080/chat/history/${chatroom}`)
+    fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
       .then((res) => res.json())
       .then((data) => setMessages(data))
       .then((data) => console.log(data));
 
     const client = new Client({
-      webSocketFactory: () => new SockJS("http://localhost:8080/ws"),
+      webSocketFactory: () => new SockJS("https://goatqcm-instance.com/ws"),
       reconnectDelay: 5000,
       onConnect: () => {
         setConnected(true);
