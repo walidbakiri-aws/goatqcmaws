@@ -109,6 +109,7 @@ function NavigationBar(props) {
   const handleChatGobablBtn = async (e) => {
     setModalGlobChatIsOpen(true);
     setShowDiscsussionGlobChatDiv(!ShowDiscsussionGlobChatDiv);
+    localStorage.setItem("messageCount", Number("0"));
   };
 
   /***model chat************************************************************* */
@@ -247,7 +248,46 @@ function NavigationBar(props) {
     } catch (Exception) {}
   };
   /************end chat function********************************************************************************************* */
+  /**
+ 2éme Anneé
+   u1(histo,Biochimie,Anatomie,Physio)
+   u2(histo,Biochimie,Anatomie,Physio)
+   u3(histo,Biochimie,Anatomie,Physio)
+   Immuno
+ 3éme Année
+   u1(phyiopath,Semio,Radio,Biochimie)
+   Immuno
+ 4éme Année
+   Cardio G04
+   Infectieuse G01
+   Neuro G02
+   Cardio G05
+   Hemato P2
+   Neuro G03
+  5éme Année
+   Endorino G03
+   Pédiatrie G02
+   Traumato G01
+   Uro-Nephro G03
+   Psychiatrie G02
+   Endocrino G02
+   Pediatrie G04
+   Traumato G03
+  6éme Année
+   Dérmato G04
+   Epidémio P1
+   Med-travaille P1
+   Urgence G01
+   Maladie-Systéme G02
+   Epidémio G03
+   Légal G01
+   Ophtalmo G04
+   Urgence G02
+   Med-travaille G04
+   Urgence G03
+  
 
+ */
   /************share function********************************************************************************************* */
 
   /*********************************************** */

@@ -40,13 +40,12 @@ function ChatBoxGlobal(props) {
 
   //************************************************************************ */
   useEffect(() => {
-    localStorage.setItem("messageCount", Number(0));
+    // clearChat();
     if (ShowDiscsussionDiv === false) {
       setShowDiscsussionDiv(true);
     }
     console.log(ShowDiscsussionDiv);
     getUser();
-
     //if (!chatroom.trim()) return;
 
     fetch(`https://goatqcm-instance.com/chat/history/${chatroom}`)
@@ -62,6 +61,10 @@ function ChatBoxGlobal(props) {
         client.subscribe(`/topic/messages/${chatroom}`, (frame) => {
           const receivedMessage = JSON.parse(frame.body);
           setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+          localStorage.setItem(
+            "messageCount",
+            Number(localStorage.getItem("messageCount")) + 1
+          );
         });
       },
     });
@@ -75,7 +78,14 @@ function ChatBoxGlobal(props) {
       setMessages([]);
     };
   }, [chatroom]);
-
+  const clearChat = async () => {
+    try {
+      setMessages([]);
+      await fetch(`https://goatqcm-instance.com/chat/clear/${chatroom}`, {
+        method: "POST",
+      });
+    } catch (Exception) {}
+  };
   //*********getUser************************************************** */
   const getUser = async () => {
     console.log(userId);
@@ -103,10 +113,6 @@ function ChatBoxGlobal(props) {
         body: JSON.stringify(chatMessage),
       });
       setMessage("");
-      localStorage.setItem(
-        "messageCount",
-        Number(localStorage.getItem("messageCount")) + 1
-      );
     }
   };
   const handlesettingBtn = async () => {
