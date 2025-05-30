@@ -19,6 +19,7 @@ function ChatBoxGlobal(props) {
   const [chatroom, setChatroom] = useState("default");
   const [connected, setConnected] = useState(false);
   const [stompClient, setStompClient] = useState(null);
+  const [isAnonyme, setIsAnonyme] = useState(false);
   const username = localStorage.getItem("username");
   const token = localStorage.getItem("tokengoat");
 
@@ -114,7 +115,10 @@ function ChatBoxGlobal(props) {
   //*****************************************************************
   const sendMessage = async () => {
     if (message.trim() && stompClient && connected) {
-      const chatMessage = { nickname, content: message };
+      const chatMessage = {
+        nickname: isAnonyme ? "Anonyme" : nickname,
+        content: message,
+      };
       stompClient.publish({
         destination: `/app/chat/${chatroom}`,
         body: JSON.stringify(chatMessage),
@@ -143,13 +147,6 @@ function ChatBoxGlobal(props) {
       {ShowDiscsussionDiv && isDesktopOrLaptop && (
         <div className={styles.chatContainer}>
           <div className={styles.discussionheader}>
-            <div className={styles.closeicon}>
-              <TfiClose
-                onClick={(e) => {
-                  setShowDiscsussionDiv(false);
-                }}
-              />
-            </div>
             <div className={styles.settings}>
               <img
                 src={settings}
@@ -159,6 +156,25 @@ function ChatBoxGlobal(props) {
                   handlesettingBtn();
                 }}
                 disabled={!message.trim()}
+              />
+            </div>
+            <div className={styles.toggleAnonyme}>
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  checked={isAnonyme}
+                  onChange={(e) => setIsAnonyme(e.target.checked)}
+                />
+                <span className={styles.slider}></span>
+              </label>
+              <span className={styles.anonymeLabel}>Anonyme</span>
+            </div>
+
+            <div className={styles.closeicon}>
+              <TfiClose
+                onClick={(e) => {
+                  setShowDiscsussionDiv(false);
+                }}
               />
             </div>
           </div>
@@ -206,6 +222,17 @@ function ChatBoxGlobal(props) {
       {ShowDiscsussionDiv && isTabletOrMobile && (
         <div className={styles.chatContainer_phone}>
           <div className={styles.discussionheader_phone}>
+            <div className={styles.toggleAnonyme_phone}>
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  checked={isAnonyme}
+                  onChange={(e) => setIsAnonyme(e.target.checked)}
+                />
+                <span className={styles.slider}></span>
+              </label>
+              <span className={styles.anonymeLabel_phone}>Anonyme</span>
+            </div>
             <div className={styles.closeicon_phone}>
               <TfiClose
                 onClick={(e) => {

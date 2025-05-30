@@ -43,14 +43,72 @@
 .discussionheader {
   width: 100%;
   height: 30px;
-  background-color: #9370db;
+  background-color: #26baee;
+  display: flex;
 }
 .closeicon {
   float: right;
-
-  margin-right: 10px;
+  right: 5px;
+  position: absolute;
+}
+.toggleAnonyme {
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  gap: 8px;
 }
 
+.anonymeLabel {
+  color: #291f1f;
+  font-family: "Lucida Console", "Courier New", monospace;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 20px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.3s;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 16px;
+  width: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.switch input:checked + .slider {
+  background-color: #4caf50;
+}
+
+.switch input:checked + .slider:before {
+  transform: translateX(20px);
+}
 .settings {
   float: left;
 
@@ -188,17 +246,29 @@
 .discussionheader_phone {
   width: 100%;
   height: 30px;
-  background-color: #9370db;
+  background-color: #26baee;
+  display: flex;
 }
 .closeicon_phone {
   float: right;
+  right: 5px;
 
-  margin-right: 10px;
+  position: absolute;
 }
+
 .settings_phone {
   float: left;
+  left: 5px;
 
-  margin-left: 10px;
+  position: absolute;
+}
+.toggleAnonyme_phone {
+  margin-left: 40px;
+  margin-top: 5px;
+}
+.anonymeLabel_phone {
+  margin-bottom: 10px;
+  margin-left: 5px;
 }
 .messageList_phone {
   flex: 1;
