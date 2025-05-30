@@ -20,7 +20,9 @@ import ChatBoxGlobal from "./ChatBoxGlobal";
 
 function NavigationBar(props) {
   //******************************************************************* */
-
+  const [messageCount, setMessageCount] = useState(
+    Number(localStorage.getItem("messageCount")) || 0
+  );
   const isDesktopOrLaptop = useMediaQuery({
     query: "(min-width: 1224px)",
   });
@@ -109,12 +111,23 @@ function NavigationBar(props) {
   const handleChatGobablBtn = async (e) => {
     setModalGlobChatIsOpen(true);
     setShowDiscsussionGlobChatDiv(!ShowDiscsussionGlobChatDiv);
-    localStorage.setItem("messageCount", Number("0"));
+    localStorage.setItem("messageCount", "0");
+    window.dispatchEvent(new Event("newGlobalMessage"));
   };
 
   /***model chat************************************************************* */
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const handleMessageUpdate = () => {
+      setMessageCount(Number(localStorage.getItem("messageCount")));
+    };
+
+    window.addEventListener("newGlobalMessage", handleMessageUpdate);
+
+    return () => {
+      window.removeEventListener("newGlobalMessage", handleMessageUpdate);
+    };
+  }, []);
 
   //****button action////////////////////////////////////////// */
   const handlecodediscussionBtn = () => {
@@ -495,7 +508,7 @@ function NavigationBar(props) {
             />
             <div className={`${classes.globmessage} `}>
               <span className={`${classes.nbrGlobMessage} `}>
-                {Number(localStorage.getItem("messageCount"))}
+                {messageCount}
               </span>
               <img
                 src={globmessage}
@@ -764,7 +777,7 @@ function NavigationBar(props) {
             />
             <div className={`${classes.globmessage_phone} `}>
               <span className={`${classes.nbrGlobMessage_phone} `}>
-                {Number(localStorage.getItem("messageCount"))}
+                {messageCount}
               </span>
               <img
                 src={globmessage}

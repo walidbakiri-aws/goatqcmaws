@@ -61,10 +61,17 @@ function ChatBoxGlobal(props) {
         client.subscribe(`/topic/messages/${chatroom}`, (frame) => {
           const receivedMessage = JSON.parse(frame.body);
           setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-          localStorage.setItem(
+          // Increment localStorage message count
+          const prevCount = Number(localStorage.getItem("messageCount")) || 0;
+          const newCount = prevCount + 1;
+          localStorage.setItem("messageCount", newCount);
+
+          // Notify all listeners
+          window.dispatchEvent(new Event("newGlobalMessage"));
+          /*  localStorage.setItem(
             "messageCount",
             Number(localStorage.getItem("messageCount")) + 1
-          );
+          );*/
         });
       },
     });
