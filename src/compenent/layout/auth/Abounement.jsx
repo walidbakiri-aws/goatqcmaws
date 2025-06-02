@@ -22,7 +22,7 @@ function Abounement() {
               <h2>Résidanat 2025</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>3000 </span>DA<br></br>
+                <span>4000 </span>DA<br></br>
                 <span>mai </span>DA<br></br>
               </p>
             </div>
