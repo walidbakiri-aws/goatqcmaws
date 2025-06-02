@@ -13,7 +13,7 @@ function AbounementPhone() {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2025",
-      priceAbn: "3000 DA",
+      priceAbn: "4000 DA",
     },
     {
       nameAbn: "Externat Blida",
@@ -63,8 +63,8 @@ function AbounementPhone() {
           <h2>Résidanat 2025</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>3000 </span>DA<br></br>
-            <span>31 mai </span>
+            <span>4000 </span>DA
+            
             <br></br>
           </p>
         </div>
