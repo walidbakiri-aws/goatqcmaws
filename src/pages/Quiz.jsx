@@ -110,6 +110,7 @@ function Quiz() {
   //************************************************************************ */
 
   useEffect(() => {
+    localStorage.removeItem("showdiscussiondiv");
     console.log(getDuiscussionDivStatus);
     console.log(codechatlocation);
     localStorage.setItem("checkcascliniqueexiste", "false");
@@ -175,7 +176,6 @@ function Quiz() {
       if (QcmSujetTypeSelected.value === "Par Sujet") {
         setVisibleQcmType(false);
         setVisibleMinMaxYear(false);
-        QcmTypeSelected.value = "Tous (Qcm,Cas Clinique)";
       } else if (QcmSujetTypeSelected.value === "Par Cour") {
         setVisibleQcmType(true);
         setVisibleMinMaxYear(true);
@@ -229,7 +229,9 @@ function Quiz() {
       setVisibleQcmType(false);
       // loadCoursOfModule();
     }
-
+    /*if (SelectedSourceExmn.value === "Résidanat Blida") {
+      QcmTypeSelected.value = "Tous (Qcm,Cas Clinique)";
+    }*/
     setMinYearValue([""]);
     setMaxYearValue([""]);
 
@@ -309,7 +311,7 @@ function Quiz() {
         setSelectMultipleCours(
           selectMultipleCours.filter((cour) => cour !== value)
         );
-
+        console.log("im here ani na7it");
         console.log(SelectedSourceExmn.value);
         //**************get min max multiople cours */
         const result = await axios.get(
@@ -320,6 +322,8 @@ function Quiz() {
         );
         console.log(result.data[0]);
         console.log(result.data[1]);
+        console.log(minYearMultipleCours);
+        console.log(maxYearMultipleCours);
         findMinYear.value = false;
 
         while (findMinYear.value === false) {
@@ -378,8 +382,9 @@ function Quiz() {
     if (e.target.checked) {
       setSelectMultipleCours([
         ...SelectedCours,
-        ...AllCours.map((course) => course.id),
+        ...AllCours.map((course) => String(course.id)),
       ]);
+
       checkBoxAllCoursRefs.current.forEach((radio) => {
         if (radio) radio.checked = true;
       });
@@ -416,7 +421,6 @@ function Quiz() {
       }
 
       //**************get min max multiople cours */
-      console.log("heruuu");
       let indexCour = 0;
       let isFind = false;
       while (indexCour < AllCours.length && isFind === false) {
@@ -955,7 +959,6 @@ function Quiz() {
         moduleName: moduleName.value,
         courId: SelectedCours[0],
         checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
-
         qcmType:
           QcmSujetTypeSelected.value === "Par Sujet" &&
           (SelectedSourceExmn.value === "Résidanat Blida" ||
@@ -998,6 +1001,7 @@ function Quiz() {
     console.log(ExisteQcmInTous.value);
     console.log(ExisteCasClinique);
     console.log(minYearMultipleCours);
+    console.log(selectMultipleCours);
   };
 
   return (
@@ -1010,6 +1014,7 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
+            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div
