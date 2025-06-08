@@ -397,6 +397,7 @@ function Quiz() {
       }
 
       //**************get min max multiople cours */
+      console.log("heruuu");
       let indexCour = 0;
       let isFind = false;
       while (indexCour < AllCours.length && isFind === false) {
