@@ -435,7 +435,13 @@ function Sidebar() {
             <li className="nav-item p-1">
               <Link to={"/driverscours"} className="nav-link fs-6">
                 <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
-                <span className="fs-6 p-2">GOAT Cours </span>
+                <span className="fs-6 p-2">GOAT Cours</span>
+              </Link>
+            </li>
+            <li className="nav-item p-1">
+              <Link to={"/residantsujet"} className="nav-link fs-6">
+                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+                <span className="fs-6 p-2">Extra</span>
               </Link>
             </li>
           </ul>
@@ -521,6 +527,7 @@ function Sidebar() {
                 <span className="p-2">Crée un Quiz </span>
               </Link>
             </li>
+
             <li
               className="nav-item p-1"
               style={{ marginTop: -15, marginLeft: 50 }}
@@ -574,6 +581,12 @@ function Sidebar() {
                 <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
                 <span className="fs-7 " style={{ marginLeft: 8 }}>
                   GOAT Cours
+                </span>
+              </Link>
+              <Link to={"/residantsujet"} className="nav-link  fs-7">
+                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+                <span className="fs-7 " style={{ marginLeft: 8 }}>
+                  Extra
                 </span>
               </Link>
             </li>
