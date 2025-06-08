@@ -387,13 +387,32 @@ function Quiz() {
       //**************get min max multiople cours */
 
       if (SelectedSourceExmn.value === "Résidanat Blida") {
-        setMinYearMultipleCours((minYear) => [...minYear, "2015"]);
+        setMinYearMultipleCours((minYear) => [
+          ...minYear,
+          ...Array.from({ length: 2025 - 2015 + 1 }, (_, i) =>
+            (2015 + i).toString()
+          ),
+        ]);
 
-        setMaxYearMultipleCours((maxYear) => [...maxYear, "2025"]);
+        setMaxYearMultipleCours((minYear) => [
+          ...minYear,
+          ...Array.from({ length: 2025 - 2017 + 1 }, (_, i) =>
+            (2017 + i).toString()
+          ),
+        ]);
       } else if (SelectedSourceExmn.value === "Externat Blida") {
-        setMinYearMultipleCours((minYear) => [...minYear, "2017"]);
-
-        setMaxYearMultipleCours((maxYear) => [...maxYear, "2025"]);
+        setMinYearMultipleCours((minYear) => [
+          ...minYear,
+          ...Array.from({ length: 2025 - 2017 + 1 }, (_, i) =>
+            (2017 + i).toString()
+          ),
+        ]);
+        setMaxYearMultipleCours((minYear) => [
+          ...minYear,
+          ...Array.from({ length: 2025 - 2017 + 1 }, (_, i) =>
+            (2017 + i).toString()
+          ),
+        ]);
       }
 
       //**************get min max multiople cours */
