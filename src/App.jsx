@@ -37,6 +37,7 @@ import DriveSwitchModule from "./pages/DriveSwitchModule";
 import AddDriveInfo from "./pages/AddDriveInfo";
 import DriveModuleListe from "./pages/DriveModuleListe";
 import DriveCoursNames from "./pages/DriveCoursNames";
+import CardResidanatSujet from "./pages/CardResidanatSujet";
 function App() {
   const isAuthenticated = UserService.isAuthenticated();
   const isAdmin = UserService.isAdmin();
@@ -131,7 +132,20 @@ function App() {
             element={<DriveCoursNames />}
           ></Route>
         )}
-
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route
+            exact
+            path="/shopdfresidant"
+            element={<ShowPdfResidanat />}
+          ></Route>
+        )}
+        {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
+          <Route
+            exact
+            path="/residantsujet"
+            element={<CardResidanatSujet />}
+          ></Route>
+        )}
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route exact path="/quiz" element={<Quiz />}></Route>
         )}
