@@ -1,0 +1,85 @@
+.addingdiv {
+  width: 100%;
+
+  overflow: hidden;
+  border: 1px solid (240, 240, 240);
+  background-color: rgb(240, 240, 240);
+  display: flex;
+}
+.contanerspace {
+  margin-top: 20px;
+  position: absolute;
+  display: inline-block;
+  background-color: var(--background-color-full);
+  height: auto;
+  width: 100%;
+}
+.sidebare {
+  width: 200px;
+  display: inline-block;
+  position: absolute;
+  z-index: 2;
+}
+
+.quizzContainer {
+  margin-left: 200px;
+  width: 1400px;
+  height: 800px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-top: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  background-color: rgb(242, 239, 245);
+}
+.cardyear {
+  border-radius: 5px;
+  margin-right: 30px;
+  height: 200px;
+  width: 250px;
+  background: linear-gradient(45deg, #4099ff, #73b4ff);
+}
+.cartitle {
+  margin-top: 60px;
+  margin-left: 30px;
+  font-size: 30px;
+  color: aliceblue;
+}
+
+/*****phone****************************************************/
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color-full);
+  margin-top: 30px;
+}
+
+.quizzContainer_phone {
+  width: 100%;
+  height: 100px;
+
+  padding-left: 10px;
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  background-color: rgb(242, 239, 245);
+}
+.cardyear_phone {
+  border-radius: 5px;
+  margin-right: 30px;
+  height: 100px;
+  width: 100%;
+  background: linear-gradient(45deg, #4099ff, #73b4ff);
+}
+.cartitle_phone {
+  margin-top: 20px;
+  margin-left: 30px;
+  font-size: 30px;
+  color: aliceblue;
+}

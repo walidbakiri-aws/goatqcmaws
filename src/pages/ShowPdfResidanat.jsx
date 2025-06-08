@@ -6,11 +6,34 @@ import { useMediaQuery } from "react-responsive";
 import axios from "axios";
 import { Document, Page } from "react-pdf";
 import useLocalStorage from "use-local-storage";
-import sjtresidanat from "../compenent/layout/pdf/sjtresidanat.pdf";
-
+import sjtresidanat_2015 from "../compenent/layout/pdf/2015.pdf";
+import sjtresidanat_2016 from "../compenent/layout/pdf/2016.pdf";
+import sjtresidanat_2017 from "../compenent/layout/pdf/2017.pdf";
+import sjtresidanat_2018 from "../compenent/layout/pdf/2018.pdf";
+import sjtresidanat_2019 from "../compenent/layout/pdf/2019.pdf";
+import sjtresidanat_2020 from "../compenent/layout/pdf/2020.pdf";
+import sjtresidanat_2021 from "../compenent/layout/pdf/2021.pdf";
+import sjtresidanat_2022 from "../compenent/layout/pdf/2022.pdf";
+import sjtresidanat_2023 from "../compenent/layout/pdf/2023.pdf";
+import { useLocation } from "react-router-dom";
 /* This is required only if the project file is located 
 inside the app. Otherwise you can use the external link of the pdf file*/
 function ShowPdfResidanat(props) {
+  const { state } = useLocation();
+  const pdfMap = {
+    2015: sjtresidanat_2015,
+    2016: sjtresidanat_2016,
+    2017: sjtresidanat_2017,
+    2018: sjtresidanat_2018,
+    2019: sjtresidanat_2019,
+    2020: sjtresidanat_2020,
+    2021: sjtresidanat_2021,
+    2022: sjtresidanat_2022,
+    2023: sjtresidanat_2023,
+  };
+  const [sjtresidanat, setSjtresidanat] = useState(null);
+
+  let { sjetResidant } = state;
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   //******SideBare Change************************************* */
   const [ShowSideBare, setShowSideBare] = useState(false);
@@ -37,7 +60,15 @@ function ShowPdfResidanat(props) {
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
   }
-  useEffect(() => {}, []);
+
+  useEffect(() => {
+    if (state?.sjetResidant) {
+      const pdf = pdfMap[state.sjetResidant];
+      if (pdf) {
+        setSjtresidanat(pdf);
+      }
+    }
+  }, [state]);
 
   const prevPage = () => {
     setPageNumber(pageNumber - 1 <= 1 ? 1 : pageNumber - 1);
