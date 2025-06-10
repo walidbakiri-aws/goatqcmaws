@@ -108,7 +108,27 @@ function Quiz() {
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
   const codechatlocation = localStorage.getItem("codechatlocation");
   //************************************************************************ */
+  //****check if user get abounement****************************** */
 
+  const getUserAdressIp = async () => {
+    console.log(ipAdresse.value);
+    try {
+      const result = await axios.get(
+        `https://goatqcm-instance.com/abounement/${userIdToken}`
+      );
+      getUserAdresseIp.value = result.data.adresseIp;
+      console.log(getUserAdresseIp.value);
+      if (getUserAdresseIp.value === ipAdresse.value) {
+        console.log("are the same");
+      } else {
+        UserService.logout();
+        navigatLogin("/");
+      }
+    } catch (Exception) {
+      console.log("no abnmt found");
+    }
+  };
+  //*************************************************************** */
   useEffect(() => {
     localStorage.removeItem("showdiscussiondiv");
     console.log(getDuiscussionDivStatus);
@@ -117,6 +137,7 @@ function Quiz() {
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
+        getUserAdressIp();
         window.location.reload();
       } else {
         localStorage.removeItem("reload");
@@ -1014,7 +1035,6 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
-            
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div
