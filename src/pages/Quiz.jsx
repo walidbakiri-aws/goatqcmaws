@@ -13,6 +13,8 @@ import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 import ChatBox from "../compenent/layout/ChatBox";
 function Quiz() {
+  let ipAdresse = useSignal("");
+  let getUserAdresseIp = useSignal("");
   const [visibleCommenceBtn, setVisibleCommenceBtn] = useState(false);
   const [module, setModule] = useState([]);
   const radioRefs = useRef([]);
