@@ -22,6 +22,7 @@ function Quiz() {
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   const token = localStorage.getItem("tokengoat");
   const username = localStorage.getItem("username");
+  const userIdToken = localStorage.getItem("userId");
   let nameModule = useSignal("");
   let SelectedAllCours = useSignal("");
   const [CheckAllCours, setCheckAllCours] = useState(false);
@@ -108,6 +109,19 @@ function Quiz() {
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
   const codechatlocation = localStorage.getItem("codechatlocation");
   //************************************************************************ */
+  //****get ip adress and location user******************************* */
+  const fetchIp = async () => {
+    try {
+      const response = await fetch("https://api.ipify.org");
+      const data = await response.text();
+      ipAdresse.value = data;
+      console.log(ipAdresse.value);
+      getUserAdressIp();
+    } catch (error) {
+      console.error("failed to fetch IP:", error);
+    }
+  };
+  //****************************************************************** */
   //****check if user get abounement****************************** */
 
   const getUserAdressIp = async () => {
@@ -138,6 +152,7 @@ function Quiz() {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
         getUserAdressIp();
+        fetchIp();
         window.location.reload();
       } else {
         localStorage.removeItem("reload");
