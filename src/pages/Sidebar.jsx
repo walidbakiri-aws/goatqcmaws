@@ -98,7 +98,7 @@ function Sidebar() {
   const handleCreatQquez = () => {};
   /***************************************************************** */
   useEffect(() => {
-    fetchIp();
+    //fetchIp();
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();
