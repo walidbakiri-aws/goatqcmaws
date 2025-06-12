@@ -95,10 +95,11 @@ function Sidebar() {
   };
   //*************************************************************** */
   //**************************************************************** */
-  const handleCreatQquez = () => {};
+  const handleCreatQquez = () => {
+    fetchIp();
+  };
   /***************************************************************** */
   useEffect(() => {
-    fetchIp();
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();
