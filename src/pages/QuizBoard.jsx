@@ -21,7 +21,7 @@ import D from "../compenent/layout/img/D.png";
 import E from "../compenent/layout/img/E.png";
 import axiosRetry from "axios-retry";
 import DateObject from "react-date-object";
-
+import { watch } from "vue";
 import smileimoji from "../compenent/layout/img/smileimoji.png";
 import sendcomentary from "../compenent/layout/img/sendcomentary.png";
 import noteimage from "../compenent/layout/img/note.png";
@@ -85,6 +85,12 @@ ChartJS.register(
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 function QuizBoard(props) {
+  const userIdToken = localStorage.getItem("userId");
+  let ipAdresse = useSignal("");
+  let getUserAdresseIp = useSignal("");
+  const navigatLogin = useNavigate();
+  let currentIndexFetch = 0;
+  let lastTriggeredIndex = 0;
   const [ShowDiscsussionDiv, setShowDiscsussionDiv] = useState(false);
   //**chat Box*************************************************************** */
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
@@ -689,9 +695,12 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
-        method: "POST",
-      });
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
+        {
+          method: "POST",
+        }
+      );
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -1601,11 +1610,11 @@ function QuizBoard(props) {
   //********************************************************************** */
   //********handel qcm change**********************************************
   function handlePrevClick({ event, value } = {}) {
-    if (value) {
+    if (event) {
+      currentIndex.value = currentIndex.value - 1;
+    } else {
       currentIndex.value = Number(value);
       console.log(currentIndex.value);
-    } else {
-      currentIndex.value = currentIndex.value - 1;
     }
     setExisteNote(false);
     setVisibleNoteQcm(false);
@@ -1656,16 +1665,62 @@ function QuizBoard(props) {
     setShowDescQcm(false);
     setDisabled(false);
   }
+  //****get ip adress and location user******************************* */
+  const fetchIp = async () => {
+    try {
+      const response = await fetch("https://api.ipify.org");
+      const data = await response.text();
+      ipAdresse.value = data;
+      console.log(ipAdresse.value);
+      getUserAdressIp();
+    } catch (error) {
+      console.error("failed to fetch IP:", error);
+    }
+  };
+  //****************************************************************** */
+  //****check if user get abounement****************************** */
 
+  const getUserAdressIp = async () => {
+    try {
+      const result = await axios.get(
+        `https://goatqcm-instance.com/abounement/${userIdToken}`
+      );
+      getUserAdresseIp.value = result.data.adresseIp;
+      console.log(getUserAdresseIp.value);
+      if (getUserAdresseIp.value === ipAdresse.value) {
+        console.log("are the same");
+      } else {
+        UserService.logout();
+        navigatLogin("/");
+      }
+    } catch (Exception) {
+      console.log("no abnmt found");
+    }
+  };
+  //*************************************************************** */
+  function updateIndex(newIndex) {
+    currentIndexFetch = newIndex;
+
+    if (
+      currentIndexFetch > 0 &&
+      currentIndexFetch % 5 === 0 &&
+      currentIndexFetch !== lastTriggeredIndex
+    ) {
+      lastTriggeredIndex = currentIndexFetch;
+      fetchIp();
+    }
+  }
   function handleNextClick({ event, value } = {}) {
+    updateIndex(currentIndex.value);
+    clearChat();
     console.log(value);
     console.log(currentIndex.value);
     /***share screen************************************************************ */
-    if (value) {
+    if (event) {
+      currentIndex.value = currentIndex.value + 1;
+    } else {
       currentIndex.value = Number(value);
       console.log(currentIndex.value);
-    } else {
-      currentIndex.value = currentIndex.value + 1;
     }
     setExisteNote(false);
     setVisibleNoteQcm(false);
@@ -2404,10 +2459,8 @@ function QuizBoard(props) {
   //*********************************************************** */
 
   function handleItemClick({ event, qcmIndex } = {}) {
-    
-      currentIndex.value = Number(qcmIndex);
-      console.log(currentIndex.value);
-    
+    currentIndex.value = Number(qcmIndex);
+    console.log(currentIndex.value);
 
     console.log(currentIndex.value);
     setExisteNote(false);
@@ -2563,9 +2616,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
