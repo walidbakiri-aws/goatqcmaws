@@ -4615,6 +4615,7 @@ function QuizBoard(props) {
           </button>
         </div>
       )}
+      <Toaster />
     </>
   );
 }
