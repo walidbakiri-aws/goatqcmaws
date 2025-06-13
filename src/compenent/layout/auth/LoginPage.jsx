@@ -15,6 +15,7 @@ import Backdrop from "../../../pages/Backdrop";
 
 import toast, { Toaster } from "react-hot-toast";
 function LoginPage() {
+  let userFinalId = useSignal("");
   const [username, setUserName] = useState("");
   const userAbnId = useSignal("");
   const userAbnValidAbn = useSignal("");
@@ -145,7 +146,7 @@ function LoginPage() {
         getUsername,
         getToken
       );
-
+      userFinalId.value = resultUserFinal.id;
       getUserAbn(resultUserFinal.id, getRole);
     } catch (error) {
       console.log("Error fetching profile information", error);
@@ -188,6 +189,7 @@ function LoginPage() {
     }
 
     if (userValidateAbn === "ADMIN") {
+      await fetchIp(userFinalId.value);
       navigate("/goatqcm", {
         state: { getUserName: username },
       });

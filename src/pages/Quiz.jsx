@@ -153,8 +153,7 @@ function Quiz() {
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
-        getUserAdressIp();
-        //fetchIp();
+
         console.log("heyy");
         window.location.reload();
       } else {
