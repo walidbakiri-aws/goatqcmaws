@@ -37,6 +37,7 @@ function LoginPage() {
   let getAbnIfExist = useSignal([]);
   const [showPassword, setShowPassword] = useState(false);
   const refreshPage = useSignal(0);
+  let doneFetchIp = useSignal(false);
   //***************************************************************** */
   const UpdtAbn = {
     stateActiveLogin: true,
@@ -57,18 +58,23 @@ function LoginPage() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-  const getIsAlreadyUserValidate = localStorage.getItem(
-    "isAlreadyUserValidate"
-  );
+
   //************************************************************************ */
   const [userIdTkn, setUserIdTkn] = useState(
     +localStorage.getItem("userId") || 0
   );
   //***registre******************************************************** */
   const handleResiterBtn = (e) => {
+    UserService.logout();
     navigate("/register");
   };
   //***************************************************************** */
+  const [hasReloaded, setHasReloaded] = useState(
+    sessionStorage.getItem("hasReloaded") === "true"
+  );
+  const getIsAlreadyUserValidate = localStorage.getItem(
+    "isAlreadyUserValidate"
+  );
   useEffect(() => {
     const checkUser = async () => {
       if (window.localStorage) {
@@ -79,11 +85,12 @@ function LoginPage() {
           localStorage.removeItem("reload");
           console.log(getIsAlreadyUserValidate);
           await handlerGetTokenAlreadyUser();
-          if (
-            getIsAlreadyUserValidate &&
-            localStorage.getItem("username") &&
-            localStorage.getItem("password")
-          ) {
+          if (getIsAlreadyUserValidate) {
+            console.log(localStorage.getItem("username"));
+            console.log(localStorage.getItem("userId"));
+            console.log(localStorage.getItem("tokengoat"));
+            console.log(localStorage.getItem("password"));
+
             navigate("/goatqcm", {
               state: {
                 getUserName: localStorage.getItem("username"),
@@ -96,8 +103,6 @@ function LoginPage() {
     };
     checkUser();
   }, [refreshPage.value]);
-  //*****************************************************************
-  //******handlerGetTokenAlreadyUser****************************************************
   const handlerGetTokenAlreadyUser = async (e) => {
     try {
       const userData = await UserService.login(
@@ -114,19 +119,22 @@ function LoginPage() {
     UserService.logout();
     e.preventDefault();
 
-    // if (userData.token !== null) {
     try {
       const userData = await UserService.login(username, password);
-      localStorage.setItem("username", username);
       localStorage.setItem("password", password);
       localStorage.setItem("tokengoat", userData.token);
       localStorage.setItem("role", userData.role);
+      localStorage.setItem("username", username);
 
-      console.log(userData);
       const FullUser = await UserService.getUserByuserName(
         username,
         localStorage.getItem("tokengoat")
       );
+      console.log("tokengoat aff" + localStorage.getItem("tokengoat"));
+      console.log("password aff" + localStorage.getItem("password"));
+      console.log("username aff" + localStorage.getItem("username"));
+      console.log("role aff" + localStorage.getItem("role"));
+
       localStorage.setItem("userId", FullUser.id);
       getUser(username, userData.token, userData.role);
     } catch (error) {
@@ -136,7 +144,6 @@ function LoginPage() {
         setError("");
       }, 5000);
     }
-    //}
   };
   //*********************************************************************************** */
   //*****get user********************************************************** */
@@ -167,14 +174,13 @@ function LoginPage() {
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
         localStorage.setItem("isAlreadyUserValidate", "isAlreadyUserValidate");
-
         await fetchIp(getresultUserFinalId);
+
+        // Set flag in sessionStorage and reload the page
 
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
-
-        console.log("didn't navigate");
       } else if (getAbnIfExist.value.statusAbn === false) {
         console.log("we in home not confirm yet");
         navigate("/home", {
@@ -220,7 +226,9 @@ function LoginPage() {
         `https://goatqcm-instance.com/auth/updateAdresseip/${userId}`,
         UpdtAbnAdressIp
       )
-      .then((res) => {})
+      .then((res) => {
+        console.log(UpdtAbnAdressIp);
+      })
       .catch((err) =>
         console.log("user not have abnt yet to update adress ip")
       );
