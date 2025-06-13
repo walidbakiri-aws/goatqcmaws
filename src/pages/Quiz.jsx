@@ -154,7 +154,8 @@ function Quiz() {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
         getUserAdressIp();
-       // fetchIp();
+        //fetchIp();
+        console.log(heyy);
         window.location.reload();
       } else {
         localStorage.removeItem("reload");
