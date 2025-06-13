@@ -153,7 +153,7 @@ function Quiz() {
     if (window.localStorage) {
       if (!localStorage.getItem("reload")) {
         localStorage["reload"] = true;
-
+        
         console.log("heyy");
         window.location.reload();
       } else {
