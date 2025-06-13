@@ -22,7 +22,7 @@ function CardResidanatSujet() {
   /*********adresse Ip***************************** */
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
-  const token = localStorage.getItem("tokengoat");
+  const token = localStorage.getItem("token");
   const userIdToken = localStorage.getItem("userId");
   //************************************************* */
   const isAuthenticated = UserService.isAuthenticated();
@@ -51,6 +51,7 @@ function CardResidanatSujet() {
     "2021",
     "2022",
     "2023",
+    "2024",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2015") {
@@ -105,6 +106,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "2023",
+        },
+      });
+    } else if (getYearMed === "2024") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "2024",
         },
       });
     }
