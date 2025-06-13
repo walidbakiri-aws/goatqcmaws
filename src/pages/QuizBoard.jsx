@@ -1695,7 +1695,7 @@ function QuizBoard(props) {
         );
         setTimeout(() => {
           UserService.logout();
-          navigate("/");
+          navigateLo("/");
         }, 5000);
       }
     } catch (Exception) {
@@ -1716,7 +1716,7 @@ function QuizBoard(props) {
     }
   }
   function handleNextClick({ event, value } = {}) {
-    updateIndex(currentIndex.value);
+    //  updateIndex(currentIndex.value);
     clearChat();
     console.log(value);
     console.log(currentIndex.value);
