@@ -16,7 +16,8 @@ import sjtresidanat_2021 from "../compenent/layout/pdf/2021.pdf";
 import sjtresidanat_2022 from "../compenent/layout/pdf/2022.pdf";
 import sjtresidanat_2023 from "../compenent/layout/pdf/2023.pdf";
 import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
-import Genetique from "../compenent/layout/pdf/Genetique.pdf";
+import fond from "../compenent/layout/pdf/fond.pdf";
+import clinique from "../compenent/layout/pdf/clinique.pdf";
 
 import { useLocation } from "react-router-dom";
 /* This is required only if the project file is located 
@@ -34,7 +35,8 @@ function ShowPdfResidanat(props) {
     2022: sjtresidanat_2022,
     2023: sjtresidanat_2023,
     2024: sjtresidanat_2024,
-    Genetique: Genetique,
+    fond: fond,
+    clinique: clinique,
   };
   const [sjtresidanat, setSjtresidanat] = useState(null);
 
