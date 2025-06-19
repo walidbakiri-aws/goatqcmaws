@@ -116,16 +116,16 @@ function CardResidanatSujet() {
           sjetResidant: "2024",
         },
       });
-    } else if (getYearMed === "fond") {
+    } else if (getYearMed === "Fondamentaux") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "fond",
+          sjetResidant: "Fondamentaux",
         },
       });
-    } else if (getYearMed === "clinique") {
+    } else if (getYearMed === "Clinique") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "clinique",
+          sjetResidant: "Clinique",
         },
       });
     }
