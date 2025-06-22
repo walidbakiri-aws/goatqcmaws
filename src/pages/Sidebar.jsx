@@ -83,12 +83,6 @@ function Sidebar() {
       );
       getUserAdresseIp.value = result.data.adresseIp;
       console.log(getUserAdresseIp.value);
-      if (getUserAdresseIp.value === ipAdresse.value) {
-        console.log("are the same");
-      } else {
-        UserService.logout();
-        navigatLogin("/");
-      }
     } catch (Exception) {
       console.log("no abnmt found");
     }
@@ -100,6 +94,7 @@ function Sidebar() {
   };
   /***************************************************************** */
   useEffect(() => {
+    fetchIp();
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();
