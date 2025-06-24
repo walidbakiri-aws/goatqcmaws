@@ -22,8 +22,7 @@ function Abounement() {
               <h2>Résidanat 2025</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>4000 </span>DA<br></br>
-                <span>mai </span>DA<br></br>
+                <span>3000 </span>DA<br></br>
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -78,15 +77,14 @@ function Abounement() {
               <h2>2éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
               <div className={`${classes.card_title}`}>
                 <p>
                   <i className="fa fa-rupee"></i>
-                  <span>u-03 300</span> DA<br></br>
-                  <span>2 X 500</span>DA
+                  <span> 500</span>DA
                 </p>
               </div>
               <button>
@@ -99,7 +97,7 @@ function Abounement() {
               <h2>3éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -127,7 +125,7 @@ function Abounement() {
               <h2>4éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1000</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -154,7 +152,7 @@ function Abounement() {
               <h2>5éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -180,7 +178,7 @@ function Abounement() {
               <h2>6éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
