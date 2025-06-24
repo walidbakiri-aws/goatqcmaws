@@ -94,7 +94,7 @@ function Sidebar() {
   };
   /***************************************************************** */
   useEffect(() => {
-    fetchIp();
+    //fetchIp();
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();

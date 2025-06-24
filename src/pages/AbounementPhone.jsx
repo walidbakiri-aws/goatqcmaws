@@ -13,11 +13,11 @@ function AbounementPhone() {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2025",
-      priceAbn: "4000 DA",
+      priceAbn: "3000 DA",
     },
     {
       nameAbn: "Externat Blida",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
   ];
 
@@ -63,8 +63,7 @@ function AbounementPhone() {
           <h2>Résidanat 2025</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>4000 </span>DA
-            
+            <span>3000 </span>DA
             <br></br>
           </p>
         </div>
@@ -117,7 +116,7 @@ function AbounementPhone() {
           <h2>2éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
+            <span>500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -143,7 +142,7 @@ function AbounementPhone() {
           <h2>3éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
+            <span>500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -169,7 +168,7 @@ function AbounementPhone() {
           <h2>4éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
+            <span>500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -195,7 +194,7 @@ function AbounementPhone() {
           <h2>5éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
+            <span>500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -221,7 +220,7 @@ function AbounementPhone() {
           <h2>6éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
+            <span>500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
