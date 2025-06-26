@@ -1666,7 +1666,7 @@ function QuizBoard(props) {
     setDisabled(false);
   }
   //****get ip adress and location user******************************* */
-  const fetchIp = async () => {
+  /*const fetchIp = async () => {
     try {
       const response = await fetch("https://api.ipify.org");
       const data = await response.text();
@@ -1676,7 +1676,7 @@ function QuizBoard(props) {
     } catch (error) {
       console.error("failed to fetch IP:", error);
     }
-  };
+  };*/
   //****************************************************************** */
   //****check if user get abounement****************************** */
 
@@ -1703,7 +1703,7 @@ function QuizBoard(props) {
     }
   };
   //*************************************************************** */
-  function updateIndex(newIndex) {
+  /*function updateIndex(newIndex) {
     currentIndexFetch = newIndex;
 
     if (
@@ -1712,11 +1712,10 @@ function QuizBoard(props) {
       currentIndexFetch !== lastTriggeredIndex
     ) {
       lastTriggeredIndex = currentIndexFetch;
-      fetchIp();
+    //  fetchIp();
     }
-  }
+  }*/
   function handleNextClick({ event, value } = {}) {
-    updateIndex(currentIndex.value);
     clearChat();
     console.log(value);
     console.log(currentIndex.value);
