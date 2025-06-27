@@ -695,12 +695,9 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(
-        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
-        {
-          method: "POST",
-        }
-      );
+      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
+        method: "POST",
+      });
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -933,6 +930,7 @@ function QuizBoard(props) {
           if (saveAllQcms.value.length > 0) {
             for (let inc = 0; inc < getQcms.value.length; inc++) {
               setShowQcm((ShowQcm) => [...ShowQcm, getQcms.value[inc]]);
+
               numberCommentaryQcm.value[inc] = getQcms.value[inc].id;
               if (inc === getQcms.value.length - 1) {
                 loadProposition();
@@ -940,6 +938,7 @@ function QuizBoard(props) {
                 doneUplaodQcm.value = false;
               }
             }
+            setVisibiliteQcmIndex(currentIndex.value);
           } else {
             if (incCours.value <= props.selectMultipleCours.length) {
               doneUplaodQcm.value = true;
@@ -1680,10 +1679,10 @@ function QuizBoard(props) {
   //****************************************************************** */
   //****check if user get abounement****************************** */
 
-  const getUserAdressIp = async () => {
+  /*const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
-        `https://goatqcm-instance.com/abounement/${userIdToken}`
+        `http://localhost:8080/abounement/${userIdToken}`
       );
       getUserAdresseIp.value = result.data.adresseIp;
       console.log(getUserAdresseIp.value);
@@ -1695,13 +1694,13 @@ function QuizBoard(props) {
         );
         setTimeout(() => {
           UserService.logout();
-          navigateLogin("/");
+          navigate("/");
         }, 5000);
       }
     } catch (Exception) {
       console.log("no abnmt found");
     }
-  };
+  };*/
   //*************************************************************** */
   /*function updateIndex(newIndex) {
     currentIndexFetch = newIndex;
@@ -1712,10 +1711,11 @@ function QuizBoard(props) {
       currentIndexFetch !== lastTriggeredIndex
     ) {
       lastTriggeredIndex = currentIndexFetch;
-    //  fetchIp();
+      fetchIp();
     }
   }*/
   function handleNextClick({ event, value } = {}) {
+    //updateIndex(currentIndex.value);
     clearChat();
     console.log(value);
     console.log(currentIndex.value);
@@ -2620,13 +2620,9 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2734,7 +2730,10 @@ function QuizBoard(props) {
             cameFrom={"quizzboard"}
           />
           <div className={classes.addingdiv}>
-            <div className={classes.sidebare}>
+            <div
+              className={classes.sidebare}
+              data-theme={isDark ? "dark" : "light"}
+            >
               {ShowSideBare && <Sidebar />}
             </div>
 
@@ -2914,9 +2913,9 @@ function QuizBoard(props) {
                       data-theme={isDark ? "dark" : "light"}
                     >
                       {ShowQcm.map((qcm, index) => {
-                        if (index === VisibiliteQcmIndex) {
+                        if (index === currentIndex.value) {
                           return (
-                            <div key={index}>
+                            <div key={currentIndex.value}>
                               <div className={`${classes.qcmInfoHeader} `}>
                                 <div className={`${classes.qcmInfo} `}>
                                   <ul
@@ -2960,7 +2959,8 @@ function QuizBoard(props) {
                                     className={`${classes.nmbrqcm} list-group-item`}
                                     style={{ color: "#007FFF" }}
                                   >
-                                    Question {index + 1} sur {ShowQcm.length}
+                                    Question {currentIndex.value + 1} sur{" "}
+                                    {ShowQcm.length}
                                   </li>
                                 </div>
                                 <div
@@ -2978,7 +2978,11 @@ function QuizBoard(props) {
                                   </div>
                                   <div className={`${classes.commentary} `}>
                                     <span className={`${classes.nbrComent} `}>
-                                      {numbreCommentaryFinal.value[index]}
+                                      {
+                                        numbreCommentaryFinal.value[
+                                          currentIndex.value
+                                        ]
+                                      }
                                     </span>
                                     <img
                                       src={comment}
@@ -3139,7 +3143,7 @@ function QuizBoard(props) {
 
                       <div className={`${classes.propofeild} card `}>
                         {ShowPropositions.map((Proposition, QcmPropoIndex) => {
-                          if (QcmPropoIndex === VisibiliteQcmIndex) {
+                          if (QcmPropoIndex === currentIndex.value) {
                             return (
                               <>
                                 <ul
@@ -3160,27 +3164,27 @@ function QuizBoard(props) {
                                       style={{
                                         backgroundColor:
                                           SaveVerfieReponses[
-                                            VisibiliteQcmIndex
-                                          ] === VisibiliteQcmIndex
+                                            currentIndex.value
+                                          ] === currentIndex.value
                                             ? propo.reponseBool === true
                                               ? COLORS[1]
                                               : savePropositions[
-                                                  VisibiliteQcmIndex
+                                                  currentIndex.value
                                                 ][indexPropo] === propo.id &&
                                                 propo.reponseBool === false
                                               ? COLORS[0]
                                               : ""
                                             : (SaveClickSelectVerfieAll[
-                                                VisibiliteQcmIndex
-                                              ] === VisibiliteQcmIndex &&
+                                                currentIndex.value
+                                              ] === currentIndex.value &&
                                                 TrueFullInsertClr === true) ||
                                               SaveQcmIsAnswer[
-                                                VisibiliteQcmIndex
-                                              ] === VisibiliteQcmIndex
+                                                currentIndex.value
+                                              ] === currentIndex.value
                                             ? propo.reponseBool === true
                                               ? COLORS[1]
                                               : savePropositions[
-                                                  VisibiliteQcmIndex
+                                                  currentIndex.value
                                                 ][indexPropo] === propo.id &&
                                                 propo.reponseBool === false
                                               ? COLORS[0]
@@ -3188,7 +3192,7 @@ function QuizBoard(props) {
                                             : "",
                                       }}
                                       className={
-                                        savePropositions[VisibiliteQcmIndex][
+                                        savePropositions[currentIndex.value][
                                           indexPropo
                                         ] === propo.id
                                           ? "list-group-item active  "
@@ -3198,7 +3202,7 @@ function QuizBoard(props) {
                                         handlePropoClick(
                                           e,
                                           propo.id,
-                                          VisibiliteQcmIndex,
+                                          currentIndex.value,
                                           indexPropo,
                                           propo.qcmStandard.id,
                                           propo.qcmStandard.coursMed.coursName,
@@ -3217,15 +3221,15 @@ function QuizBoard(props) {
                                         width="30"
                                       />
                                       {propo.propositionQcm}
-                                      {SaveQcmIsAnswer[VisibiliteQcmIndex] ===
-                                        VisibiliteQcmIndex && (
+                                      {SaveQcmIsAnswer[currentIndex.value] ===
+                                        currentIndex.value && (
                                         <div
                                           className={`${classes.percentage} `}
                                         >
                                           {(
                                             (propo.countSelect * 100) /
                                             SavePercentageAmount[
-                                              VisibiliteQcmIndex
+                                              currentIndex.value
                                             ]
                                           ).toFixed(0)}
                                           %
@@ -3246,32 +3250,32 @@ function QuizBoard(props) {
                                       Précédent
                                     </button>
                                   )}
-                                  {SaveQcmIsAnswer[VisibiliteQcmIndex] ===
+                                  {SaveQcmIsAnswer[currentIndex.value] ===
                                     "" && (
                                     <button
                                       type="button"
                                       className={`${classes.BntVerifierrpnse} btn btn-warning`}
                                       onClick={(e) => {
                                         handleClickiVerifieReponse(
-                                          VisibiliteQcmIndex
+                                          currentIndex.value
                                         );
 
-                                        setTrueInsertClr(VisibiliteQcmIndex);
+                                        setTrueInsertClr(currentIndex.value);
 
-                                        saveQcmIndex.value[VisibiliteQcmIndex] =
-                                          VisibiliteQcmIndex;
+                                        saveQcmIndex.value[currentIndex.value] =
+                                          currentIndex.value;
                                         console.log(
-                                          saveQcmIndex.value[VisibiliteQcmIndex]
+                                          saveQcmIndex.value[currentIndex.value]
                                         );
                                       }}
                                     >
                                       Vérifer la réponse
                                     </button>
                                   )}
-                                  {(SaveQcmIsAnswer[VisibiliteQcmIndex] ===
-                                    VisibiliteQcmIndex ||
-                                    SaveVerfieReponses[VisibiliteQcmIndex] ===
-                                      VisibiliteQcmIndex) && (
+                                  {(SaveQcmIsAnswer[currentIndex.value] ===
+                                    currentIndex.value ||
+                                    SaveVerfieReponses[currentIndex.value] ===
+                                      currentIndex.value) && (
                                     <button
                                       type="button"
                                       disabled={isDisabled}
@@ -3580,7 +3584,7 @@ function QuizBoard(props) {
                         data-theme={isDark ? "dark" : "light"}
                       >
                         {ShowQcm.map((qcm, index) => {
-                          if (index === VisibiliteQcmIndex) {
+                          if (index === currentIndex.value) {
                             return (
                               <div key={index}>
                                 <div className={`${classes.modulediv_phone} `}>
@@ -3635,7 +3639,7 @@ function QuizBoard(props) {
                                         className="list-group-item"
                                         style={{ color: "#007FFF" }}
                                       >
-                                        Question {index + 1} sur{" "}
+                                        Question {currentIndex.value + 1} sur{" "}
                                         {ShowQcm.length}
                                       </li>
                                     </div>
@@ -3815,7 +3819,7 @@ function QuizBoard(props) {
                         <div className={`${classes.propofeild_phone} card `}>
                           {ShowPropositions.map(
                             (Proposition, QcmPropoIndex) => {
-                              if (QcmPropoIndex === VisibiliteQcmIndex) {
+                              if (QcmPropoIndex === currentIndex.value) {
                                 return (
                                   <>
                                     <ul
@@ -3837,29 +3841,29 @@ function QuizBoard(props) {
                                           style={{
                                             backgroundColor:
                                               SaveVerfieReponses[
-                                                VisibiliteQcmIndex
-                                              ] === VisibiliteQcmIndex
+                                                currentIndex.value
+                                              ] === currentIndex.value
                                                 ? propo.reponseBool === true
                                                   ? COLORS[1]
                                                   : savePropositions[
-                                                      VisibiliteQcmIndex
+                                                      currentIndex.value
                                                     ][indexPropo] ===
                                                       propo.id &&
                                                     propo.reponseBool === false
                                                   ? COLORS[0]
                                                   : ""
                                                 : (SaveClickSelectVerfieAll[
-                                                    VisibiliteQcmIndex
-                                                  ] === VisibiliteQcmIndex &&
+                                                    currentIndex.value
+                                                  ] === currentIndex.value &&
                                                     TrueFullInsertClr ===
                                                       true) ||
                                                   SaveQcmIsAnswer[
-                                                    VisibiliteQcmIndex
-                                                  ] === VisibiliteQcmIndex
+                                                    currentIndex.value
+                                                  ] === currentIndex.value
                                                 ? propo.reponseBool === true
                                                   ? COLORS[1]
                                                   : savePropositions[
-                                                      VisibiliteQcmIndex
+                                                      currentIndex.value
                                                     ][indexPropo] ===
                                                       propo.id &&
                                                     propo.reponseBool === false
@@ -3869,7 +3873,7 @@ function QuizBoard(props) {
                                           }}
                                           className={
                                             savePropositions[
-                                              VisibiliteQcmIndex
+                                              currentIndex.value
                                             ][indexPropo] === propo.id
                                               ? "list-group-item active  "
                                               : "list-group-item"
@@ -3878,7 +3882,7 @@ function QuizBoard(props) {
                                             handlePropoClick(
                                               e,
                                               propo.id,
-                                              VisibiliteQcmIndex,
+                                              currentIndex.value,
                                               indexPropo,
                                               propo.qcmStandard.id,
                                               propo.qcmStandard.coursMed
@@ -3899,15 +3903,15 @@ function QuizBoard(props) {
                                           />
                                           {propo.propositionQcm}
                                           {SaveQcmIsAnswer[
-                                            VisibiliteQcmIndex
-                                          ] === VisibiliteQcmIndex && (
+                                            currentIndex.value
+                                          ] === currentIndex.value && (
                                             <div
                                               className={`${classes.percentage_phone} `}
                                             >
                                               {(
                                                 (propo.countSelect * 100) /
                                                 SavePercentageAmount[
-                                                  VisibiliteQcmIndex
+                                                  currentIndex.value
                                                 ]
                                               ).toFixed(0)}
                                               %
@@ -3928,35 +3932,35 @@ function QuizBoard(props) {
                                           }
                                         />
                                       )}
-                                      {SaveQcmIsAnswer[VisibiliteQcmIndex] ===
+                                      {SaveQcmIsAnswer[currentIndex.value] ===
                                         "" && (
                                         <FaRegCheckCircle
                                           className={`${classes.BntVerifierrpnse_phone} `}
                                           onClick={(e) => {
                                             handleClickiVerifieReponse(
-                                              VisibiliteQcmIndex
+                                              currentIndex.value
                                             );
 
                                             setTrueInsertClr(
-                                              VisibiliteQcmIndex
+                                              currentIndex.value
                                             );
 
                                             saveQcmIndex.value[
-                                              VisibiliteQcmIndex
-                                            ] = VisibiliteQcmIndex;
+                                              currentIndex.value
+                                            ] = currentIndex.value;
                                             console.log(
                                               saveQcmIndex.value[
-                                                VisibiliteQcmIndex
+                                                currentIndex.value
                                               ]
                                             );
                                           }}
                                         />
                                       )}
-                                      {(SaveQcmIsAnswer[VisibiliteQcmIndex] ===
-                                        VisibiliteQcmIndex ||
+                                      {(SaveQcmIsAnswer[currentIndex.value] ===
+                                        currentIndex.value ||
                                         SaveVerfieReponses[
-                                          VisibiliteQcmIndex
-                                        ] === VisibiliteQcmIndex) && (
+                                          currentIndex.value
+                                        ] === currentIndex.value) && (
                                         <button
                                           type="button"
                                           className={`${classes.button_10} `}
