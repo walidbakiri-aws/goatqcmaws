@@ -647,6 +647,7 @@ function Quiz() {
         `https://goatqcm-instance.com/module/${SelectedModule}/cours/Résidanat Blida`,
         {
           headers: { Authorization: `Bearer ${token}` },
+          withCredentials: true  
         }
       );
       SetAllcours(result.data);
