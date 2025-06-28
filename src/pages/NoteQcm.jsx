@@ -67,7 +67,9 @@ function NoteQcm(props) {
   const AjouterImage = async (qcmId) => {
     testDescExsite(qcmId);
 
-    const result = await axios.get(`http://localhost:8080/qcms/${qcmId}`);
+    const result = await axios.get(
+      `https://goatqcm-instance.com/qcms/${qcmId}`
+    );
 
     //****get user*************************************** */
     console.log(username);
@@ -97,7 +99,7 @@ function NoteQcm(props) {
     formData.append("qcmStandard", JSON.stringify(result.data));
     formData.append("OurUsers", JSON.stringify(saveUserQcm));
     axios
-      .post("http://localhost:8080/noteqcm/uploadimage", formData, {
+      .post("https://goatqcm-instance.com/noteqcm/uploadimage", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -112,7 +114,9 @@ function NoteQcm(props) {
   //***store description to database*************************** */
   const AjouterDesc = async (qcmId) => {
     testDescExsite(qcmId);
-    const result = await axios.get(`http://localhost:8080/qcms/${qcmId}`);
+    const result = await axios.get(
+      `https://goatqcm-instance.com/qcms/${qcmId}`
+    );
     console.log(result.data);
     /***get user***************************************************** */
 
@@ -140,7 +144,7 @@ function NoteQcm(props) {
     formData.append("OurUsers", JSON.stringify(saveUserQcm));
     console.log("TOKEN:", token);
     axios
-      .post("http://localhost:8080/noteqcm/uploanoteqcm", formData, {
+      .post("https://goatqcm-instance.com/noteqcm/uploanoteqcm", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -162,11 +166,11 @@ function NoteQcm(props) {
 
     try {
       const fullDescResultiniial = await axios.get(
-        `http://localhost:8080/noteqcm/${qcmId}/${userId}`
+        `https://goatqcm-instance.com/noteqcm/${qcmId}/${userId}`
       );
       console.log(fullDescResultiniial.data.id);
       getResultNote.value = await axios.get(
-        `http://localhost:8080/noteqcm/${fullDescResultiniial.data.id}`
+        `https://goatqcm-instance.com/noteqcm/${fullDescResultiniial.data.id}`
       );
       console.log(getResultNote.value.data.imageName);
     } catch (Exception) {}
@@ -176,7 +180,7 @@ function NoteQcm(props) {
         setNoteQcmEdite(getResultNote.value.data);
 
         setFileDisplayEdite(
-          `http://localhost:8080/noteqcm/image/${getResultNote.value.data.id}/${getResultNote.value.data.imageName}`
+          `https://goatqcm-instance.com/noteqcm/image/${getResultNote.value.data.id}/${getResultNote.value.data.imageName}`
         );
 
         setLoadImage(getResultNote.value.data);
@@ -204,7 +208,7 @@ function NoteQcm(props) {
 
     await axios
       .put(
-        `http://localhost:8080/noteqcm/updateimage/${getResultNote.value.data.id}`,
+        `https://goatqcm-instance.com/noteqcm/updateimage/${getResultNote.value.data.id}`,
         formData
       )
       .then((res) => {
@@ -221,7 +225,7 @@ function NoteQcm(props) {
     formData.append("noteqcm", noteQcmEdite.noteQcm);
     await axios
       .put(
-        `http://localhost:8080/noteqcm/${getResultNote.value.data.id}`,
+        `https://goatqcm-instance.com/noteqcm/${getResultNote.value.data.id}`,
         formData
       )
       .then((res) => {
@@ -234,7 +238,7 @@ function NoteQcm(props) {
   //delete function*//////////////////////////////////////////////////////////
   const deleteFullDesc = async (qcmId) => {
     await axios.delete(
-      `http://localhost:8080/noteqcm/${getResultNote.value.data.id}`
+      `https://goatqcm-instance.com/noteqcm/${getResultNote.value.data.id}`
     );
     console.log("hry");
     /* qcmIddelete.value = qcmId;
