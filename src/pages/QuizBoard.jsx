@@ -104,6 +104,7 @@ function QuizBoard(props) {
       return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
     },
   });
+
   const Date = new DateObject();
   const sourceBtnSaveQuizz = "saveQuizz";
   const sourceBtnSaveSession = "saveSession";
@@ -695,9 +696,12 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
-        method: "POST",
-      });
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
+        {
+          method: "POST",
+        }
+      );
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2620,9 +2624,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"

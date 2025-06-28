@@ -146,12 +146,17 @@ function NoteQcm(props) {
       .post("https://goatqcm-instance.com/noteqcm/uploanoteqcm", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
         setvisisbleDescInsert(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("Status:", err.response?.status);
+        console.error("Headers:", err.response?.headers);
+        console.error("Body:", err.response?.data);
+      });
   };
   //******************************************************* */
   //****test if desc existe******************** */
