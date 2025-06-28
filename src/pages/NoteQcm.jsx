@@ -240,6 +240,7 @@ function NoteQcm(props) {
     await axios.delete(
       `https://goatqcm-instance.com/noteqcm/${getResultNote.value.data.id}`
     );
+    console.log("hry")
     /* qcmIddelete.value = qcmId;
       setModalDeleteCourIsOpen(true);*/
   };
