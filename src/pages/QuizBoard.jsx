@@ -3715,7 +3715,7 @@ function QuizBoard(props) {
                                           height="100%"
                                           width="30"
                                           onClick={(e) => {
-                                            handleChatGptBtn();
+                                            handleChatGptBtn(qcm.id);
                                           }}
                                         />
                                       </div>
@@ -3727,7 +3727,7 @@ function QuizBoard(props) {
                                           height="100%"
                                           width="30"
                                           onClick={(e) => {
-                                            handleDeepSeekBtn();
+                                            handleDeepSeekBtn(qcm.id);
                                           }}
                                         />
                                       </div>
