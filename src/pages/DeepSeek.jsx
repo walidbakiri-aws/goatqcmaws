@@ -40,7 +40,7 @@ function DeepSeek(props) {
   /*********adresse Ip***************************** */
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokengoat");
   const userIdToken = localStorage.getItem("userId");
   //************************************************* */
   const isAuthenticated = UserService.isAuthenticated();
@@ -63,13 +63,16 @@ function DeepSeek(props) {
   }, []);
 
   const getQcm = async (qcmId) => {
-    const result = await axios.get(`http://localhost:8080/qcms/${qcmId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const result = await axios.get(
+      `https://goatqcm-instance.com/qcms/${qcmId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const content = result.data.qcmContent;
 
     const response = await axios.get(
-      `http://localhost:8080/qcms/${qcmId}/reponses`
+      `https://goatqcm-instance.com/qcms/${qcmId}/reponses`
     );
     console.log(response.data);
     const allPropositions = response.data.propositionQcm || [];
