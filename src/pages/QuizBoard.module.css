@@ -1,8 +1,9 @@
 .addingdiv {
   width: 100%;
+  height: auto;
   overflow: hidden;
   border: 1px solid (240, 240, 240);
-  background-color: rgb(240, 240, 240);
+  background: var(--background-color);
   display: flex;
 }
 
@@ -18,7 +19,7 @@
   display: inline-block;
   background-color: var(--background-color-full);
   height: 100%;
-  width: 100%;
+  width: auto;
 }
 .container_save_qcm_timer {
   margin-left: 830px;
@@ -87,6 +88,10 @@
   background-color: var(--background-color);
   border: 1px solid rgb(192, 186, 186);
 }
+.chatgptdiv {
+  margin-left: 1300px;
+  margin-top: -680px;
+}
 .eachcommentary h6 {
   margin-top: 2px;
 
@@ -138,9 +143,9 @@
 }
 .full_note_commentary {
   margin-left: 610px;
-  width: 100px;
+  width: 150px;
   height: 100%;
-
+  padding-right: 3px;
   display: flex;
 }
 .commentary {
@@ -148,6 +153,7 @@
   width: 25px;
   height: 100%;
 }
+
 .nbrNote {
   position: absolute;
   z-index: 3;
@@ -161,7 +167,7 @@
   position: absolute;
   z-index: 3;
   top: 53px;
-  left: 823px;
+  left: 875px;
   color: #5389db;
   font-size: 20px;
   font-weight: bold;
@@ -394,6 +400,7 @@
   position: absolute;
   display: inline-block;
   width: 100%;
+  background: var(--background-color);
 }
 
 .card_done_quiz {
@@ -594,6 +601,7 @@
 /***********phone designe***************************************************/
 .modal_phone {
   margin-top: 20px;
+  background: var(--background-color);
 }
 
 .headerquizz_phone {
@@ -1006,8 +1014,9 @@
 }
 .full_note_commentary_phone {
   display: flex;
-  width: 60px;
+  width: 125px;
   height: 30px;
+
   float: right;
   right: 0;
 }
@@ -1015,7 +1024,11 @@
   margin-left: 5px;
   height: 100%;
 }
-
+.chatgptdiv_phone {
+  border: 1px solid rgb(185, 190, 209);
+  margin-top: 5px;
+  border-radius: 5px;
+}
 .nbrComent_phone {
   position: absolute;
   z-index: 10px;

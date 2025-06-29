@@ -19,6 +19,9 @@ import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
 import E from "../compenent/layout/img/E.png";
+
+import chatgpt from "../compenent/layout/img/chatgpt.png";
+import deepseek from "../compenent/layout/img/deepseek.png";
 import axiosRetry from "axios-retry";
 import DateObject from "react-date-object";
 
@@ -30,6 +33,7 @@ import dropright from "../compenent/layout/img/dropright.png";
 import jadore from "../compenent/layout/img/jadore.png";
 import { AiOutlineComment } from "react-icons/ai";
 import BackdropQuiz from "./BackdropQuiz";
+import ChatGptfinal from "./ChatGptfinal";
 import UserService from "../compenent/layout/service/UserService";
 import BackdropDeleteCour from "./BackdropDeleteCour";
 import ModalDeleteFullDesc from "./ModalDeleteFullDesc";
@@ -84,6 +88,7 @@ ChartJS.register(
 );
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import DeepSeek from "./DeepSeek.jsx";
 function QuizBoard(props) {
   const userIdToken = localStorage.getItem("userId");
   let ipAdresse = useSignal("");
@@ -104,7 +109,6 @@ function QuizBoard(props) {
       return axiosRetry.isNetworkError(error) || error.code === "ECONNABORTED";
     },
   });
-
   const Date = new DateObject();
   const sourceBtnSaveQuizz = "saveQuizz";
   const sourceBtnSaveSession = "saveSession";
@@ -576,6 +580,9 @@ function QuizBoard(props) {
   let saveUser = {
     name: "",
   };
+  const [showChatGpt, setShowChatGpt] = useState(false);
+  const [showDeepSeek, setShowDeepSeek] = useState(false);
+  let qcmIdChatGptDeepSeek = useSignal("");
   /**share screen variable********************************************************* */
 
   useEffect(() => {
@@ -1613,6 +1620,8 @@ function QuizBoard(props) {
   //********************************************************************** */
   //********handel qcm change**********************************************
   function handlePrevClick({ event, value } = {}) {
+    setShowChatGpt(false);
+    setShowDeepSeek(false);
     if (event) {
       currentIndex.value = currentIndex.value - 1;
     } else {
@@ -1719,6 +1728,8 @@ function QuizBoard(props) {
     }
   }*/
   function handleNextClick({ event, value } = {}) {
+    setShowChatGpt(false);
+    setShowDeepSeek(false);
     //updateIndex(currentIndex.value);
     clearChat();
     console.log(value);
@@ -1931,6 +1942,8 @@ function QuizBoard(props) {
 
     getCommentaryQcm(qcmId);
     setVisibleCommentaryStudent(true);
+    setShowDeepSeek(false);
+    setShowChatGpt(false);
   };
   //************************************************************ */
 
@@ -2729,6 +2742,16 @@ function QuizBoard(props) {
     console.log("hey walid");
     setShowDiscsussionDiv(true);
   };
+  const handleChatGptBtn = async (qcmId) => {
+    setShowChatGpt(true);
+    setShowDeepSeek(false);
+    qcmIdChatGptDeepSeek.value = qcmId;
+  };
+  const handleDeepSeekBtn = async (qcmId) => {
+    setShowDeepSeek(true);
+    setShowChatGpt(false);
+    qcmIdChatGptDeepSeek.value = qcmId;
+  };
   return (
     <>
       {!OpenBoardClinique && (
@@ -2974,6 +2997,26 @@ function QuizBoard(props) {
                                 <div
                                   className={`${classes.full_note_commentary} `}
                                 >
+                                  <div className={`${classes.chatgpt} `}>
+                                    <img
+                                      src={chatgpt}
+                                      height="100%"
+                                      width="30"
+                                      onClick={(e) => {
+                                        handleChatGptBtn(qcm.id);
+                                      }}
+                                    />
+                                  </div>
+                                  <div className={`${classes.deepseek} `}>
+                                    <img
+                                      src={deepseek}
+                                      height="100%"
+                                      width="30"
+                                      onClick={(e) => {
+                                        handleDeepSeekBtn(qcm.id);
+                                      }}
+                                    />
+                                  </div>
                                   <div className={`${classes.note} `}>
                                     <img
                                       src={noteimage}
@@ -3452,6 +3495,16 @@ function QuizBoard(props) {
                 {ShowDescQcm && (
                   <Description qcmIdPropsQcmDesc={qcmIdPropsQcmDesc} />
                 )}
+                {showChatGpt && (
+                  <div className={`${classes.chatgptdiv}`}>
+                    <ChatGptfinal qcmId={qcmIdChatGptDeepSeek.value} />
+                  </div>
+                )}
+                {showDeepSeek && (
+                  <div className={`${classes.chatgptdiv}`}>
+                    <DeepSeek qcmId={qcmIdChatGptDeepSeek.value} />
+                  </div>
+                )}
               </div>
             )}
 
@@ -3654,6 +3707,30 @@ function QuizBoard(props) {
                                     <div
                                       className={`${classes.full_note_commentary_phone} `}
                                     >
+                                      <div
+                                        className={`${classes.chatgpt_phone} `}
+                                      >
+                                        <img
+                                          src={chatgpt}
+                                          height="100%"
+                                          width="30"
+                                          onClick={(e) => {
+                                            handleChatGptBtn();
+                                          }}
+                                        />
+                                      </div>
+                                      <div
+                                        className={`${classes.deepseek_phone} `}
+                                      >
+                                        <img
+                                          src={deepseek}
+                                          height="100%"
+                                          width="30"
+                                          onClick={(e) => {
+                                            handleDeepSeekBtn();
+                                          }}
+                                        />
+                                      </div>
                                       <div className={`${classes.note_phone} `}>
                                         <img
                                           src={noteimage}
@@ -4012,6 +4089,16 @@ function QuizBoard(props) {
 
                   {ShowDescQcm && (
                     <Description qcmIdPropsQcmDesc={qcmIdPropsQcmDesc} />
+                  )}
+                  {showChatGpt && (
+                    <div className={`${classes.chatgptdiv_phone}`}>
+                      <ChatGptfinal qcmId={qcmIdChatGptDeepSeek.value} />
+                    </div>
+                  )}
+                  {showDeepSeek && (
+                    <div className={`${classes.chatgptdiv_phone}`}>
+                      <DeepSeek qcmId={qcmIdChatGptDeepSeek.value} />
+                    </div>
                   )}
                 </div>
                 <div
