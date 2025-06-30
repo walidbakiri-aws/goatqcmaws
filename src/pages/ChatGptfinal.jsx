@@ -166,7 +166,6 @@ function ChatGptfinal(props) {
         setIsTyping(false);
       });
   }
-
   return (
     <>
       {isDesktopOrLaptop && (
@@ -217,45 +216,49 @@ function ChatGptfinal(props) {
       )}
       {isTabletOrMobile && (
         <>
-          <div className={`${classes.fulllogo_phone}`}>
-            <img src={fullchatgpt} height="50" width="50" />
-          </div>
-          <div style={{ position: "relative", height: "400px", width: "100%" }}>
-            <MainContainer>
-              <ChatContainer>
-                <MessageList
-                  scrollBehavior="smooth"
-                  typingIndicator={
-                    isTyping ? (
-                      <TypingIndicator content="ChatGpt is typing" />
-                    ) : null
-                  }
-                >
-                  {messages.map((message, i) => (
-                    <Message
-                      key={i}
-                      model={{
-                        message: message.message,
-                        sentTime: message.sentTime,
-                        sender: message.sender,
-                        direction:
-                          message.sender === "user" ? "outgoing" : "incoming",
-                        position: "single",
-                      }}
-                    />
-                  ))}
-                </MessageList>
-                <MessageInput
-                  placeholder="Type message here"
-                  value={inputValue}
-                  onChange={(val) => setInputValue(val)}
-                  onSend={() => {
-                    handleSend(inputValue);
-                    setInputValue(""); // reset input after send
-                  }}
-                />
-              </ChatContainer>
-            </MainContainer>
+          <div className={`${classes.quizzContainer_phone}`}>
+            <div className={`${classes.fulllogo_phone}`}>
+              <img src={fullchatgpt} height="50" width="50" />
+            </div>
+            <div
+              style={{ position: "relative", height: "400px", width: "100%" }}
+            >
+              <MainContainer>
+                <ChatContainer>
+                  <MessageList
+                    scrollBehavior="smooth"
+                    typingIndicator={
+                      isTyping ? (
+                        <TypingIndicator content="ChatGpt is typing" />
+                      ) : null
+                    }
+                  >
+                    {messages.map((message, i) => (
+                      <Message
+                        key={i}
+                        model={{
+                          message: message.message,
+                          sentTime: message.sentTime,
+                          sender: message.sender,
+                          direction:
+                            message.sender === "user" ? "outgoing" : "incoming",
+                          position: "single",
+                        }}
+                      />
+                    ))}
+                  </MessageList>
+                  <MessageInput
+                    placeholder="Type message here"
+                    value={inputValue}
+                    onChange={(val) => setInputValue(val)}
+                    onSend={() => {
+                      handleSend(inputValue);
+                      setInputValue(""); // reset input after send
+                    }}
+                  />
+                </ChatContainer>
+              </MainContainer>
+            </div>
           </div>
         </>
       )}
