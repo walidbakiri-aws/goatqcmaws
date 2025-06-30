@@ -25,7 +25,7 @@ import {
 
 function DeepSeek(props) {
   const API_KEY =
-    "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";
+    "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";
 
   const systemMessage = {
     role: "system",
@@ -102,7 +102,7 @@ function DeepSeek(props) {
     }));
 
     const apiRequestBody = {
-      model: "deepseek/deepseek-chat-v3:free",
+      model: "deepseek/deepseek-chat-v3-0324:free",
       messages: [systemMessage, ...apiMessages],
     };
 
