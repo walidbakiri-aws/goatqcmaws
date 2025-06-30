@@ -400,7 +400,9 @@
   position: absolute;
   display: inline-block;
   width: 100%;
+  height: auto;
   background: var(--background-color);
+  scroll-behavior: auto;
 }
 
 .card_done_quiz {
