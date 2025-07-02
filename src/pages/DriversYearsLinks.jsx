@@ -19,7 +19,7 @@ import { useLocation } from "react-router-dom";
 function DriversYearsLinks() {
   const [modalDetalIsOpen, setModalDetalIsOpen] = useState(false);
   const [showDivDeleteDetail, setShowDivDeleteDetail] = useState(false);
-  const token = localStorage.getItem("tokengoat");
+  const token = localStorage.getItem("token");
   const userIdToken = localStorage.getItem("userId");
   const { state } = useLocation();
   const { yearMed } = state;
@@ -59,7 +59,7 @@ function DriversYearsLinks() {
     sixYear:
       "https://drive.google.com/drive/folders/1k-NZ5fBemEoD-dPMrD2fMdbJePMYO1ez?usp=drive_link",
     samediYear:
-"https://drive.google.com/drive/folders/1XuR_eVGVYNoSGqYdoTfaiemJe5SZsGYl?usp=sharing",
+      "https://drive.google.com/drive/folders/1MsRFY98XABNIs-4lsN-prWGzYJVE1aDs?usp=drive_link",
   };
   const yearsLinks24 = {
     firstYear:
