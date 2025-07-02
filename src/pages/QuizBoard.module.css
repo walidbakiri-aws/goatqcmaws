@@ -19,7 +19,11 @@
   display: inline-block;
   background-color: var(--background-color-full);
   height: 100%;
+<<<<<<< HEAD
   width: auto;
+=======
+  width: 100%;
+>>>>>>> ab82c03 (Inknhsklkjfsfdfklkjssslsdldsssss)
 }
 .container_save_qcm_timer {
   margin-left: 830px;
