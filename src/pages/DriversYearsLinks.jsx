@@ -59,7 +59,7 @@ function DriversYearsLinks() {
     sixYear:
       "https://drive.google.com/drive/folders/1k-NZ5fBemEoD-dPMrD2fMdbJePMYO1ez?usp=drive_link",
     samediYear:
-      "https://drive.google.com/drive/folders/1MsRFY98XABNIs-4lsN-prWGzYJVE1aDs?usp=drive_link",
+      "https://drive.google.com/drive/folders/1XuR_eVGVYNoSGqYdoTfaiemJe5SZsGYl?usp=drive_link",
   };
   const yearsLinks24 = {
     firstYear:
