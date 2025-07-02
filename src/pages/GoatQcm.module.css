@@ -112,11 +112,7 @@
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
   box-shadow: 0 15px 0 rgba(0, 0, 0, 0.1), inset 0 -8px 0 #fff;
-<<<<<<< HEAD
-  z-index: 100;
-=======
   z-index: 5;
->>>>>>> ab82c03 (Inknhsklkjfsfdfklkjssslsdldsssss)
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -150,11 +146,7 @@
   color: #fff;
   position: relative;
   font-size: 6em;
-<<<<<<< HEAD
-  z-index: 1000;
-=======
   z-index: 5;
->>>>>>> ab82c03 (Inknhsklkjfsfdfklkjssslsdldsssss)
   --ionicon-stroke-width: 24px;
 }
 
@@ -340,13 +332,8 @@
   --toggle-fg: #eefa4c;
 }
 [data-theme="dark"] {
-<<<<<<< HEAD
-  --background-color-full: #191c22;
-  --background-color: #272b33;
-=======
   --background-color-full: #32324a;
   --background-color: #32324a;
->>>>>>> ab82c03 (Inknhsklkjfsfdfklkjssslsdldsssss)
   --background-color_headerquizz: #272b33;
   --background-modulename-color: #272b33;
   --foreground-color: #3c8eec;
