@@ -24,7 +24,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 function ChatGptfinal(props) {
   const API_KEY =
-    "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";
+    "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";
   // "Explain things like you would to a 10 year old learning how to code."
   const systemMessage = {
     //  Explain things like you're talking to a software professional with 5 years of experience.
@@ -136,7 +136,7 @@ function ChatGptfinal(props) {
     // and the messages which we formatted above. We add a system message in the front to'
     // determine how we want chatGPT to act.
     const apiRequestBody = {
-      model: "gpt-3.5-turbo-0613",
+      model: "gpt-4",
       messages: [
         systemMessage, // The system message DEFINES the logic of our chatGPT
         ...apiMessages, // The messages from our chat with ChatGPT
