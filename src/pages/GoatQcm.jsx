@@ -7,6 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import axios from "axios";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
 import UserService from "../compenent/layout/service/UserService";
+import useLocalStorage from "use-local-storage";
 
 import { useSignal } from "@preact/signals-react";
 function GoatQcm() {
@@ -24,7 +25,7 @@ function GoatQcm() {
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
   /******************************************************************* */
-
+  const [isDark, setIsDark] = useLocalStorage("isDark", false);
   useEffect(() => {
     console.log(localStorage.getItem("tokengoat"));
   }, []);
@@ -34,7 +35,10 @@ function GoatQcm() {
       <div className={classes.addingdiv}>
         <div className={classes.sidebare}>{ShowSideBare && <Sidebar />}</div>
         {isDesktopOrLaptop && (
-          <div className={classes.contanerspace}>
+          <div
+            className={classes.contanerspace}
+            data-theme={isDark ? "dark" : "light"}
+          >
             <div className={classes.bienvenulogo}>
               <div className={classes.bienvuenwlcm}>Bienvenue au GoatQcm!</div>
               <div className={classes.logogoat}>
@@ -83,7 +87,10 @@ function GoatQcm() {
           </div>
         )}
         {isTabletOrMobile && (
-          <div className={classes.contanerspace_phone}>
+          <div
+            className={classes.contanerspace_phone}
+            data-theme={isDark ? "dark" : "light"}
+          >
             <div className={classes.bienvenulogo_phone}>
               <div className={classes.bienvuenwlcm_phone}>
                 Bienvenue au GoatQcm!

@@ -22,13 +22,13 @@
   position: absolute;
   display: inline-block;
 
-  margin-top: 20px;
+  margin-top: 10px;
   transition: background-color 250ms ease-in-out;
 }
 
 .bienvenulogo {
   width: 700px;
-  margin-left: 500px;
+  margin-left: 600px;
   height: 160px;
   margin-bottom: 0px;
 }
@@ -171,7 +171,7 @@
 .contanerspace_phone {
   position: absolute;
   display: inline-block;
-
+  background-color: var(--background-color-full);
   margin-top: 20px;
 }
 
@@ -183,7 +183,10 @@
 .bienvuenwlcm_phone {
   height: 50px;
   text-align: center;
-  font-size: 15px;
+  font-size: 20px;
+  font-family: "Comic Sans MS", cursive;
+  font-weight: bold;
+  color: var(--primary-text-color);
 }
 .logogoat_phone {
   margin-top: -20px;
@@ -214,8 +217,8 @@
   justify-content: center;
 
   position: relative;
-  width: 200px;
-  height: 270px;
+  width: 230px;
+  height: 340px;
   margin-bottom: 20px;
   border-radius: 20px;
   font-size: 10px;
@@ -338,7 +341,7 @@
   --background-modulename-color: #272b33;
   --foreground-color: #3c8eec;
   --primary-text-color-info: #e99653;
-  --primary-text-color:rgb(235, 229, 229);
+  --primary-text-color: rgb(247, 241, 241);
   --primary-text-color-propo: #ddd8d8;
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #070707;
