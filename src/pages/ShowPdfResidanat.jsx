@@ -217,99 +217,38 @@ function ShowPdfResidanat() {
       {isTabletOrMobile && (
         <>
           <NavigationBar changeetatsidebar={etatsidebare} />
+          <div className={classes.contentContainer}>
+            {ShowSideBare && (
+              <div className={classes.sidebar}>
+                <Sidebar />
+              </div>
+            )}
+          </div>
           <div
-            className={classes.container_phone}
+            className={classes.contanerspace_phone}
             data-theme={isDark ? "dark" : "light"}
           >
-            <div className={classes.contentContainer_phone}>
-              {ShowSideBare && (
-                <div className={classes.sidebar}>
-                  <Sidebar />
-                </div>
-              )}
-
-              <div className={classes.mainContent_phone}>
-                {!sjtresidanat ? (
-                  <div className={classes.loading}>Loading document...</div>
-                ) : (
-                  <div
-                    className={classes.pdfViewerWrapper}
-                    ref={pdfContainerRef}
-                  >
-                    {/* Watermark overlay */}
-
-                    {/* Transparent overlay to intercept events */}
-                    <div className={classes.pdfProtectionOverlay}></div>
-
-                    <div className={classes.pdfControls_phone}>
-                      <div className={classes.pageControls_phone}>
-                        <button
-                          onClick={() => changePage(-1)}
-                          disabled={pageNumber <= 1}
-                          className={classes.controlBtn}
-                        >
-                          Prec
-                        </button>
-
-                        <span className={classes.pageInfo}>
-                          Page {pageNumber} of {numPages || "--"}
-                        </span>
-
-                        <button
-                          onClick={() => changePage(1)}
-                          disabled={pageNumber >= (numPages || 0)}
-                          className={classes.controlBtn}
-                        >
-                          Next
-                        </button>
-                      </div>
-
-                      <div className={classes.zoomControls_phone}>
-                        <button
-                          className={classes.zoomBtn}
-                          onClick={zoomOut}
-                          disabled={zoom <= 0.5}
-                        >
-                          -
-                        </button>
-                        <button className={classes.zoomBtn} onClick={resetZoom}>
-                          {Math.round(zoom * 100)}%
-                        </button>
-                        <button
-                          className={classes.zoomBtn}
-                          onClick={zoomIn}
-                          disabled={zoom >= 2}
-                        >
-                          +
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className={classes.pdfContainer_phone}>
-                      {isLoading && (
-                        <div className={classes.loading}>Loading page...</div>
-                      )}
-
-                      <Document
-                        file={sjtresidanat}
-                        onLoadSuccess={onDocumentLoadSuccess}
-                        loading={
-                          <div className={classes.loading}>
-                            Loading document...
-                          </div>
-                        }
-                      >
-                        <Page
-                          className={classes.pdfPage_phone}
-                          pageNumber={pageNumber}
-                          width={isTabletOrMobile ? 250 * zoom : 500 * zoom}
-                          renderTextLayer={false}
-                          renderAnnotationLayer={false}
-                        />
-                      </Document>
-                    </div>
+            <div className="d-flex align-items-center justify-content-center flex-column">
+              <div className={classes.documentdiv_phone}>
+                <Document
+                  file={sjtresidanat}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                >
+                  <div className={classes.documentpage_phone}>
+                    {Array.apply(null, Array(numPages))
+                      .map((x, i) => i + 1)
+                      .map((page) => {
+                        return (
+                          <Page
+                            width={300}
+                            pageNumber={page}
+                            renderTextLayer={false}
+                            renderAnnotationLayer={false}
+                          />
+                        );
+                      })}
                   </div>
-                )}
+                </Document>
               </div>
             </div>
           </div>
