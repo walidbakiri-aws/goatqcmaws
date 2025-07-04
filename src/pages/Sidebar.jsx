@@ -70,7 +70,7 @@ function Sidebar() {
     }
   };
   //****get ip adress and location user******************************* */
-  const fetchIp = async () => {
+  /* const fetchIp = async () => {
     try {
       const response = await fetch("https://api.ipify.org");
       const data = await response.text();
@@ -80,10 +80,10 @@ function Sidebar() {
     } catch (error) {
       console.error("failed to fetch IP:", error);
     }
-  };
+  };*/
   //****************************************************************** */
   //****check if user get abounement****************************** */
-
+  /*
   const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
@@ -94,13 +94,12 @@ function Sidebar() {
     } catch (Exception) {
       console.log("no abnmt found");
     }
-  };
+  };*/
   //*************************************************************** */
   //**************************************************************** */
   const handleCreatQquez = () => {};
   /***************************************************************** */
   useEffect(() => {
-    // fetchIp();
     console.log("wwdd");
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
@@ -383,14 +382,7 @@ function Sidebar() {
           <hr className="text-secondary p-0 m-0" />
           <ul className="nav nav-pills flex-column p-0 m-0">
             <li className="nav-item p-1">
-              <Link
-                to={"/quiz"}
-                className="nav-link fs-6"
-                onClick={(e) => {
-                  handleShowSession();
-                  handleCreatQquez();
-                }}
-              >
+              <Link to={"/quiz"} className="nav-link fs-6">
                 <img src={creequizz} height="100%" width="25" />
                 <span className="fs-6 p-2">Crée un Quiz </span>
               </Link>
