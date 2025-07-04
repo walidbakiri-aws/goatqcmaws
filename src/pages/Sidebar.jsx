@@ -17,6 +17,12 @@ import { useEffect, useState } from "react";
 import { useSignal } from "@preact/signals-react";
 import { Navigate } from "react-router-dom";
 import Toggle from "../compenent/layout/Toggle";
+import myabounement from "../compenent/layout/img/myabounement.png";
+import mysession from "../compenent/layout/img/mysession.png";
+import mycours from "../compenent/layout/img/mycours.png";
+import myquizz from "../compenent/layout/img/myquizz.png";
+import home from "../compenent/layout/img/home.png";
+import creequizz from "../compenent/layout/img/creequizz.png";
 function Sidebar() {
   const navigatLogin = useNavigate();
   const navigasavesession = useNavigate();
@@ -32,11 +38,12 @@ function Sidebar() {
 
   //************************************************************************ */
   /*********adresse Ip***************************** */
-  let ipAdresse = useSignal("");
-  let getUserAdresseIp = useSignal("");
+
   const token = localStorage.getItem("tokengoat");
 
   const userIdToken = localStorage.getItem("userId");
+  let ipAdresse = useSignal("");
+  let getUserAdresseIp = useSignal("");
   //************************************************* */
   const isAuthenticated = UserService.isAuthenticated();
   const isAdmin = UserService.isAdmin();
@@ -52,6 +59,7 @@ function Sidebar() {
   const [sessionsLength, setSessionsLength] = useState("");
   const [LastSessionIdDelete, setLastSessionIdDelete] = useState("");
   /******************************************************************************* */
+  const [isOpen, setIsOpen] = useState(false);
   const handleLogout = () => {
     const confirmDelete = window.confirm(
       "Are you sure you want to logout this user"
@@ -67,6 +75,7 @@ function Sidebar() {
       const response = await fetch("https://api.ipify.org");
       const data = await response.text();
       ipAdresse.value = data;
+      console.log(ipAdresse.value);
       getUserAdressIp();
     } catch (error) {
       console.error("failed to fetch IP:", error);
@@ -76,7 +85,6 @@ function Sidebar() {
   //****check if user get abounement****************************** */
 
   const getUserAdressIp = async () => {
-    console.log(ipAdresse.value);
     try {
       const result = await axios.get(
         `https://goatqcm-instance.com/abounement/${userIdToken}`
@@ -89,15 +97,14 @@ function Sidebar() {
   };
   //*************************************************************** */
   //**************************************************************** */
-  const handleCreatQquez = () => {
-    //fetchIp();
-  };
+  const handleCreatQquez = () => {};
   /***************************************************************** */
   useEffect(() => {
-    //fetchIp();
+    fetchIp();
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();
+    setIsOpen((prev) => !prev);
   }, []);
   //*********button show session*********************************** */
   const handleShowSessionBtn = () => {
@@ -439,6 +446,12 @@ function Sidebar() {
                 <span className="fs-6 p-2">Extra</span>
               </Link>
             </li>
+            <li className="nav-item p-1">
+              <Link to={"/chatgpt"} className="nav-link fs-6">
+                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+                <span className="fs-6 p-2">ChatGpt</span>
+              </Link>
+            </li>
           </ul>
           <div className={classes.title}>
             <hr className="text-secondary p-0 m-0 " />
@@ -491,52 +504,59 @@ function Sidebar() {
       )}
       {isTabletOrMobile && (
         <div
-          className={`${classes.sidebar_phone} d-flex flex-column justify-space-between p-2 vh-100`}
+          className={`
+          ${classes.sidebar_phone}
+          d-flex flex-column justify-space-between  vh-100
+          ${isOpen ? classes.open : ""}
+        `}
         >
           <a className={classes.goatlogo_phone}>
             <img src={goatlogonavbare} height="40" width="80" />
           </a>
           <div className={classes.title_phone}>
             <hr className="text-secondary  " />
-            <span>Tableau de Bord</span>
+            <span style={{ fontWeight: "bold" }}>Tableau de Bord</span>
           </div>
           <hr className="text-secondary p-0 m-0" />
           <ul className="nav nav-pills flex-column p-0 m-0">
             <li className={` nav-item p-1`}>
-              <Link to={"/goatqcm"} className="nav-link">
-                <FontAwesomeIcon icon={faHouse} color="#c5c5c5" />
+              <Link to={"/goatqcm"}>
+                <img src={home} height="100%" width="20" />
                 <span className=" p-2">Accueil</span>
               </Link>
             </li>
           </ul>
-
+          <hr className="text-secondary p-0 m-0 " />
           <div className={classes.title_phone}>
             <hr className="text-secondary p-0 m-0 " />
-            <span>Revision</span>
+            <span style={{ fontWeight: "bold" }}>Revision</span>
           </div>
           <hr className="text-secondary p-0 m-0" />
-          <ul className="nav nav-pills flex-column p-0 m-0">
-            <li className="nav-item p-1" onClick={handleShowSession()}>
-              <Link to={"/quiz"} className="nav-link ">
-                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
-                <span className="p-2">Crée un Quiz </span>
+          <hr className="text-secondary p-0 m-0" />
+          <ul
+            className={`${classes.listeitem_phone} nav nav-pills flex-column p-0 m-0`}
+          >
+            <li
+              className="nav-item p-1"
+              style={{}}
+              onClick={handleShowSession()}
+            >
+              <Link to={"/quiz"}>
+                <img src={creequizz} height="100%" width="20" />
+                <span className="fs-7 ">Crée un Quiz </span>
               </Link>
             </li>
 
-            <li
-              className="nav-item p-1"
-              style={{ marginTop: -15, marginLeft: 50 }}
-            >
+            <li className="nav-item p-1" style={{}}>
               <Link
                 to={"/quizz"}
-                className="nav-link fs-7"
                 onClick={(e) => {
                   handleShowMyQuizz();
                 }}
               >
-                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
-                <span className="fs-7 " style={{ marginLeft: 8 }}>
-                  Mes Quizz{" "}
+                <img src={myquizz} height="100%" width="25" />
+                <span className="fs-7 " style={{}}>
+                  Mes Quizz
                 </span>
               </Link>
             </li>
@@ -545,42 +565,26 @@ function Sidebar() {
                 handleShowSessionBtn();
               }}
               className="nav-item p-1"
-              style={{ marginTop: -15, marginLeft: 66 }}
+              style={{}}
             >
-              <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
-              <span className="fs-7 " style={{ marginLeft: 8 }}>
+              <img src={mysession} height="100%" width="25" />
+              <span className="fs-7 " style={{}}>
                 Mes Session
               </span>
-              <IoMdArrowDropdown color="#c5c5c5" style={{ marginLeft: 15 }} />
             </li>
-            {ShowSessionsList && (
-              <ul className={`${classes.session_ul} nav-item p-1`}>
-                {fullSessionsListe.map((session, index) => (
-                  <li
-                    className="nav-item p-1"
-                    key={index}
-                    onClick={() => {
-                      handleCheckSession(session.qcmType, session.id, index);
-                    }}
-                  >
-                    session {index + 1}
-                  </li>
-                ))}
-              </ul>
-            )}
-            <li
-              className="nav-item p-1"
-              style={{ marginTop: -15, marginLeft: 50 }}
-            >
-              <Link to={"/driverscours"} className="nav-link  fs-7">
-                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
-                <span className="fs-7 " style={{ marginLeft: 8 }}>
+
+            <li className="nav-item p-1" style={{}}>
+              <Link to={"/driverscours"}>
+                <img src={mycours} height="100%" width="20" />
+                <span className="fs-7 " style={{}}>
                   GOAT Cours
                 </span>
               </Link>
-              <Link to={"/residantsujet"} className="nav-link  fs-7">
+            </li>
+            <li className="nav-item p-1" style={{}}>
+              <Link to={"/residantsujet"}>
                 <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
-                <span className="fs-7 " style={{ marginLeft: 8 }}>
+                <span className="fs-7 " style={{}}>
                   Extra
                 </span>
               </Link>
@@ -588,16 +592,17 @@ function Sidebar() {
           </ul>
           <div className={classes.title_phone}>
             <hr className="text-secondary p-0 m-0 " />
-            <span>Abonnements</span>
+            <span style={{ fontWeight: "bold" }}>Abonnements</span>
           </div>
           <hr className="text-secondary p-0 m-0" />
           <ul className="nav nav-pills flex-column p-0 m-0">
             <li className={`${classes.lisidebareabd_phone} nav-item p-1`}>
-              <Link to={"/myabonnement"} className="nav-link  ">
+              <Link to={"/myabonnement"}>
                 <FontAwesomeIcon icon={faFolderClosed} color="#c5c5c5" />
                 <span className="p-2">Mes Abonnements </span>
               </Link>
             </li>
+            <hr className="text-secondary p-0 m-0" />
             <li>
               <Toggle
                 isChecked={isDark}
@@ -634,7 +639,9 @@ function Sidebar() {
               <li className={`${classes.deconnect_phone} nav-link `}>
                 <Link to={"/"} onClick={handleLogout}>
                   <BiLogOut color="#c5c5c5" />
-                  <span className=" p-2">Déconnecter </span>
+                  <span style={{ fontWeight: "bold" }} className=" p-2">
+                    Déconnecter{" "}
+                  </span>
                 </Link>
               </li>
             </>

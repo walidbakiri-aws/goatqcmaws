@@ -47,35 +47,39 @@
 }
 /*****phone********************/
 .sidebar_phone {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  scroll-behavior: auto;
+  position: fixed;
+
+  left: -230px;
+  width: 230px;
+  height: 100vh;
   background-color: #36454f;
   padding: 1rem;
-
-  width: 30rem;
-  z-index: 10;
-  position: fixed;
-  height: 100px;
-  width: 300px;
-  top: 20vh;
-  left: calc(50% - 15rem);
+  margin: 0 !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 0;
   color: #c5c5c5;
-  font-family: "Lato", sans-serif;
+  font-family: "Inter", sans-serif;
   font-weight: 500;
   font-style: normal;
-  margin-top: -60px;
+  transition: left 0.4s ease;
+  z-index: 1000;
+  top: 41px;
+  border-radius: 10px;
 }
-.goatlogo_phone {
-  margin-left: 120px;
+
+.sidebar_phone.open {
+  left: 0;
+}
+
+.sidebar_phone ul li {
+  margin-bottom: 5px;
+  margin-left: 0;
+  padding-left: 0.75rem; /* optional */
 }
 .sidebar_phone .nav {
   padding: 0px !important;
 }
-.sidebar_phone ul li {
-  color: #c5c5c5;
-  margin-left: 50px;
-}
+
 .sidebar_phone ul li span {
   color: #c5c5c5;
 }
@@ -83,13 +87,13 @@
   color: #c5c5c5;
   background-color: #36454f;
 }
-.title_phone {
-  font-weight: bold;
-  margin-left: 65px;
-}
+.goatlogo_phone,
+.title_phone,
 .deconnect_phone {
-  margin-left: 70px;
+  margin-left: 0;
+  text-align: center;
 }
+
 .deconnect_phone span {
   color: #c5c5c5;
   font-family: "Lato", sans-serif;
