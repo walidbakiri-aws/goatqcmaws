@@ -369,7 +369,7 @@ function Sidebar() {
           <ul className="nav nav-pills flex-column p-0 m-0">
             <li className="nav-item p-1">
               <Link to={"/goatqcm"} className="nav-link  fs-6">
-                <FontAwesomeIcon icon={faHouse} color="#c5c5c5" />
+                <img src={home} height="100%" width="25" />
                 <span className="fs-6 p-2">Accueil</span>
               </Link>
             </li>
@@ -390,7 +390,7 @@ function Sidebar() {
                   handleCreatQquez();
                 }}
               >
-                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+                <img src={creequizz} height="100%" width="25" />
                 <span className="fs-6 p-2">Crée un Quiz </span>
               </Link>
             </li>
@@ -403,7 +403,7 @@ function Sidebar() {
                   handleShowMyQuizz();
                 }}
               >
-                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+                <img src={myquizz} height="100%" width="25" />
                 <span className="fs-6 p-2">Mes Quizz </span>
               </Link>
             </li>
@@ -414,9 +414,8 @@ function Sidebar() {
               className="nav-item p-1"
               style={{ marginLeft: "16px" }}
             >
-              <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+              <img src={mysession} height="60%" width="25" />
               <span className="fs-6 p-2">Mes Sessions</span>
-              <IoMdArrowDropdown color="#c5c5c5" />
             </li>
             {ShowSessionsList && (
               <ul className={`${classes.session_ul} nav-item p-1`}>
@@ -436,7 +435,7 @@ function Sidebar() {
 
             <li className="nav-item p-1">
               <Link to={"/driverscours"} className="nav-link fs-6">
-                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+                <img src={mycours} height="100%" width="25" />
                 <span className="fs-6 p-2">GOAT Cours</span>
               </Link>
             </li>
@@ -444,12 +443,6 @@ function Sidebar() {
               <Link to={"/residantsujet"} className="nav-link fs-6">
                 <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
                 <span className="fs-6 p-2">Extra</span>
-              </Link>
-            </li>
-            <li className="nav-item p-1">
-              <Link to={"/chatgpt"} className="nav-link fs-6">
-                <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
-                <span className="fs-6 p-2">ChatGpt</span>
               </Link>
             </li>
           </ul>
@@ -461,7 +454,7 @@ function Sidebar() {
           <ul className="nav nav-pills flex-column p-0 m-0">
             <li className="nav-item p-1">
               <Link to={"/myabonnement"} className="nav-link fs-6">
-                <FontAwesomeIcon icon={faFolderClosed} color="#c5c5c5" />
+                <img src={myabounement} height="100%" width="25" />
                 <span className="fs-6 p-2">Mes Abonnements </span>
               </Link>
             </li>
@@ -598,7 +591,7 @@ function Sidebar() {
           <ul className="nav nav-pills flex-column p-0 m-0">
             <li className={`${classes.lisidebareabd_phone} nav-item p-1`}>
               <Link to={"/myabonnement"}>
-                <FontAwesomeIcon icon={faFolderClosed} color="#c5c5c5" />
+                <img src={myabounement} height="100%" width="25" />
                 <span className="p-2">Mes Abonnements </span>
               </Link>
             </li>
