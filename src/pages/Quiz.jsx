@@ -142,7 +142,7 @@ function Quiz() {
 
   //************************************************************************ */
   //****get ip adress and location user******************************* */
-  const fetchIp = async () => {
+  /* const fetchIp = async () => {
     try {
       const response = await fetch("https://api.ipify.org");
       const data = await response.text();
@@ -152,10 +152,10 @@ function Quiz() {
     } catch (error) {
       console.error("failed to fetch IP:", error);
     }
-  };
+  };*/
   //****************************************************************** */
   //****check if user get abounement****************************** */
-
+  /*
   const getUserAdressIp = async () => {
     console.log(ipAdresse.value);
     try {
@@ -173,7 +173,7 @@ function Quiz() {
     } catch (Exception) {
       console.log("no abnmt found");
     }
-  };
+  };*/
   //*************************************************************** */
   //******parCours ParSujet**************************************************************/
   const handleRadioTypeSujet = (e) => {
