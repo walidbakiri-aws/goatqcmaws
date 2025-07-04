@@ -111,6 +111,36 @@ function Quiz() {
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
   const codechatlocation = localStorage.getItem("codechatlocation");
   //************************************************************************ */
+
+  useEffect(() => {
+    localStorage.removeItem("showdiscussiondiv");
+    console.log(getDuiscussionDivStatus);
+    console.log(codechatlocation);
+    localStorage.setItem("checkcascliniqueexiste", "false");
+    if (window.localStorage) {
+      if (!localStorage.getItem("reload")) {
+        localStorage["reload"] = true;
+
+        window.location.reload();
+        getUserAdressIp();
+      } else {
+        localStorage.removeItem("reload");
+      }
+    }
+    console.log(username);
+  }, [refreshPage.value]);
+  //**************get user**************************************** */
+  //******************************************************************* */
+
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
+  const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
+  const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
+
+  //************************************************************************ */
   //****get ip adress and location user******************************* */
   const fetchIp = async () => {
     try {
@@ -145,35 +175,6 @@ function Quiz() {
     }
   };
   //*************************************************************** */
-  useEffect(() => {
-    localStorage.removeItem("showdiscussiondiv");
-    console.log(getDuiscussionDivStatus);
-    console.log(codechatlocation);
-    localStorage.setItem("checkcascliniqueexiste", "false");
-    if (window.localStorage) {
-      if (!localStorage.getItem("reload")) {
-        localStorage["reload"] = true;
-        
-        console.log("heyy");
-        window.location.reload();
-      } else {
-        localStorage.removeItem("reload");
-      }
-    }
-    console.log(username);
-  }, [refreshPage.value]);
-  //**************get user**************************************** */
-  //******************************************************************* */
-
-  const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  });
-  const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
-  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-
-  //************************************************************************ */
   //******parCours ParSujet**************************************************************/
   const handleRadioTypeSujet = (e) => {
     localStorage.setItem("DoneClinqueShow", false);
@@ -647,7 +648,6 @@ function Quiz() {
         `https://goatqcm-instance.com/module/${SelectedModule}/cours/Résidanat Blida`,
         {
           headers: { Authorization: `Bearer ${token}` },
-          withCredentials: true  
         }
       );
       SetAllcours(result.data);
@@ -1109,7 +1109,11 @@ function Quiz() {
               </div>
               <div
                 className={`${classes.modulecoursdiv} table-hover shadow `}
-                style={{ border: "1px solid #A0A0A0", width: "90%" }}
+                style={{
+                  border: "1px solid #A0A0A0",
+                  width: "90%",
+                  height: "300px",
+                }}
               >
                 <div
                   className={classes.cadrheader}
@@ -1117,7 +1121,12 @@ function Quiz() {
                 >
                   Modules
                 </div>
-                <div className={`${classes.modulecours_full}  card-body`}>
+                <div
+                  className={`${classes.modulecours_full}  card-body`}
+                  style={{
+                    height: "300px",
+                  }}
+                >
                   <div className={classes.childmodulecoursdiv}>
                     <div className={"form-check"}>
                       {AllModules.map((module, index) => (

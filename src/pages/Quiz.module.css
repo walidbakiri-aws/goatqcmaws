@@ -32,12 +32,13 @@
   width: 100%;
   position: absolute;
   display: inline-block;
-  height: auto;
+  height: 1000px;
   margin-top: 20px;
 }
 .allcards {
   width: 900px;
   margin-left: 350px;
+  height: auto;
 }
 .qcmmodele {
   height: 130px;
@@ -63,23 +64,23 @@
   margin-left: 350px;
   left: 46%;
 }
-.modulecours_full {
-  background-color: var(--background-color);
-}
+
 .modulecoursdiv {
-  background-color: var(--background-color);
   z-index: 1;
   border-radius: 8px;
   margin-bottom: 20px;
   margin-left: 40px;
 
-  height: 150px;
   width: 90%;
+  margin-bottom: 20px;
+}
+.modulecours_full {
+  height: 290px;
 }
 .vlmodule {
   border-left: 4px solid rgb(159, 161, 159);
-  height: 170px;
-  margin-top: -170px;
+  height: 240px;
+  margin-top: -250px;
   margin-left: 380px;
   left: 46%;
 }
@@ -132,7 +133,7 @@
   width: 45%;
   margin-right: 30px;
   margin-left: 10px;
-  height: 180px;
+  height: 260px;
   display: inline-block;
   vertical-align: middle;
   overflow-x: hidden;
