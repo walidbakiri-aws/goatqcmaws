@@ -101,6 +101,7 @@ function Sidebar() {
   /***************************************************************** */
   useEffect(() => {
     // fetchIp();
+    console.log("wwdd");
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();
