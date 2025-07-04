@@ -335,13 +335,13 @@
   --toggle-fg: #eefa4c;
 }
 [data-theme="dark"] {
-  --background-color-full: #32324a;
-  --background-color: #32324a;
+  --background-color-full: #12163b;
+  --background-color: #12163b;
   --background-color_headerquizz: #272b33;
   --background-modulename-color: #272b33;
   --foreground-color: #3c8eec;
   --primary-text-color-info: #e99653;
-  --primary-text-color: rgb(231, 228, 228);
+  --primary-text-color: rgb(245, 237, 237);
   --primary-text-color-propo: #ddd8d8;
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #070707;
