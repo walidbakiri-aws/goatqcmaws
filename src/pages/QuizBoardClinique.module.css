@@ -141,6 +141,9 @@
 }
 .cascliniquecontent p {
   color: var(--primary-text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
 }
 .btnqcmclinique {
   width: 800px;
@@ -192,12 +195,12 @@
   color: var(--primary-text-color);
   background-color: var(--background-color);
   white-space: pre-line;
-  font-family: 1.2rem "Fira Sans", sans-serif;
-  font-size: 18px;
-  font-style: normal;
 }
 .qcmfeild p {
   color: var(--primary-text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
 }
 
 .propofeild {
@@ -790,8 +793,9 @@
   height: auto;
   border: 1px solid rgb(192, 186, 186);
   padding: 3px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 14px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px; /* Adjust as needed */
+  font-weight: 400; /* Regular weight */
   background-color: var(--background-color);
   color: var(--primary-text-color);
   overflow: hidden;
@@ -834,14 +838,16 @@
 }
 
 .cascliniquecontent_phone p {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
   color: var(--primary-text-color);
 }
 
 .qcmfeild_phone p {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 16px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
   color: var(--primary-text-color);
 }
 

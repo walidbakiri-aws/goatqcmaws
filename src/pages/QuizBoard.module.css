@@ -774,8 +774,8 @@
 }
 .qcmfeild_phone p {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 20px; /* Adjust as needed */
-  font-weight: 600; /* Regular weight */
+  font-size: 18px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -790,7 +790,7 @@
 
   padding: 3px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 20px; /* Adjust as needed */
+  font-size: 18px; /* Adjust as needed */
   font-weight: 400; /* Regular weight */
   color: var(--primary-text-color);
   background-color: var(--background-color);
