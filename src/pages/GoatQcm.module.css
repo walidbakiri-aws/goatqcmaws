@@ -335,8 +335,8 @@
   --toggle-fg: #eefa4c;
 }
 [data-theme="dark"] {
-  --background-color-full: #12163b;
-  --background-color: #12163b;
+  --background-color-full: #28283c;
+  --background-color: #28283c;
   --background-color_headerquizz: #272b33;
   --background-modulename-color: #272b33;
   --foreground-color: #3c8eec;
