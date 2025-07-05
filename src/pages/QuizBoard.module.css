@@ -19,11 +19,7 @@
   display: inline-block;
   background-color: var(--background-color-full);
   height: 100%;
- 
-  width: auto;
- 
   width: 100%;
- 
 }
 .container_save_qcm_timer {
   margin-left: 830px;
@@ -270,13 +266,12 @@
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   white-space: pre-line;
   border-radius: 8px;
-
-  font-family: 1.2rem "Fira Sans", sans-serif;
-  font-size: 18px;
-  font-style: normal;
 }
 .qcmfeild p {
   color: var(--primary-text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 600; /* Regular weight */
 }
 .nmbrqcm {
   width: 140px;
@@ -298,9 +293,9 @@
   padding: 3px;
 
   overflow: hidden;
-  font-family: 1.2rem "Fira Sans", sans-serif;
-  font-size: 18px;
-  font-style: normal;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 600; /* Regular weight */
 }
 .percentage {
   width: 50px;
@@ -778,8 +773,9 @@
   background-color: var(--background-color);
 }
 .qcmfeild_phone p {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 17px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 600; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -793,8 +789,9 @@
   height: auto;
 
   padding: 3px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 17px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 400; /* Regular weight */
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
