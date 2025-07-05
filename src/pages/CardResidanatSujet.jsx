@@ -22,7 +22,7 @@ function CardResidanatSujet() {
   /*********adresse Ip***************************** */
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokengoat");
   const userIdToken = localStorage.getItem("userId");
   //************************************************* */
   const isAuthenticated = UserService.isAuthenticated();
@@ -42,6 +42,9 @@ function CardResidanatSujet() {
 
   //************************************************************************ */
   const yearsName = [
+    "2010",
+    "2011",
+    "2013",
     "2015",
     "2016",
     "2017",
@@ -52,10 +55,30 @@ function CardResidanatSujet() {
     "2022",
     "2023",
     "2024",
-    "Fondamentaux",
-    "Clinique",
+    "Genetique",
   ];
   const hanleOnclickYear = (getYearMed) => {
+    if (getYearMed === "2010") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "2010",
+        },
+      });
+    }
+    if (getYearMed === "2011") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "2011",
+        },
+      });
+    }
+    if (getYearMed === "2013") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "2013",
+        },
+      });
+    }
     if (getYearMed === "2015") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
@@ -116,21 +139,14 @@ function CardResidanatSujet() {
           sjetResidant: "2024",
         },
       });
-    } else if (getYearMed === "Fondamentaux") {
+    } else if (getYearMed === "Genetique") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "Fondamentaux",
-        },
-      });
-    } else if (getYearMed === "Clinique") {
-      navigateBoardQuiz(`/shopdfresidant`, {
-        state: {
-          sjetResidant: "Clinique",
+          sjetResidant: "Genetique",
         },
       });
     }
   };
-
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />

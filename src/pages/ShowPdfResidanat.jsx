@@ -6,6 +6,9 @@ import { useMediaQuery } from "react-responsive";
 import { Document, Page } from "react-pdf";
 import useLocalStorage from "use-local-storage";
 import { useLocation, useNavigate } from "react-router-dom";
+import sjtresidanat_2010 from "../compenent/layout/pdf/2010.pdf";
+import sjtresidanat_2011 from "../compenent/layout/pdf/2011.pdf";
+import sjtresidanat_2013 from "../compenent/layout/pdf/2013.pdf";
 import sjtresidanat_2015 from "../compenent/layout/pdf/2015.pdf";
 import sjtresidanat_2016 from "../compenent/layout/pdf/2016.pdf";
 import sjtresidanat_2017 from "../compenent/layout/pdf/2017.pdf";
@@ -18,6 +21,9 @@ import sjtresidanat_2023 from "../compenent/layout/pdf/2023.pdf";
 import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
 import Genetique from "../compenent/layout/pdf/Genetique.pdf";
 const pdfMap = {
+  2010: sjtresidanat_2010,
+  2011: sjtresidanat_2011,
+  2013: sjtresidanat_2013,
   2015: sjtresidanat_2015,
   2016: sjtresidanat_2016,
   2017: sjtresidanat_2017,
