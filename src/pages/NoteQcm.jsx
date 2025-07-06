@@ -138,15 +138,18 @@ function NoteQcm(props) {
     }
     //***************************************************** */
     //***************************************************************** */
-    const formData = new FormData();
-    formData.append("noteqcm", noteQcm);
-    formData.append("qcmStandard", JSON.stringify(result.data));
-    formData.append("OurUsers", JSON.stringify(saveUserQcm));
+    const formData = {
+      noteQcm: noteQcm,
+      qcmStandard: result.data, // or full object if needed
+      ourUsers: saveUserQcm,
+    };
+
     console.log("TOKEN:", token);
+    console.log(formData);
     axios
       .post("https://goatqcm-instance.com/noteqcm/uploanoteqcm", formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
       })
       .then((res) => {

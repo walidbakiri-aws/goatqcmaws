@@ -59,6 +59,9 @@ function Sidebar() {
   const [sessionsLength, setSessionsLength] = useState("");
   const [LastSessionIdDelete, setLastSessionIdDelete] = useState("");
   /******************************************************************************* */
+  const UpdtAbnAdressIp = {
+    adresseIp: "",
+  };
   const [isOpen, setIsOpen] = useState(false);
   const handleLogout = () => {
     const confirmDelete = window.confirm(
@@ -70,36 +73,42 @@ function Sidebar() {
     }
   };
   //****get ip adress and location user******************************* */
-  /* const fetchIp = async () => {
+  const fetchIp = async (userId) => {
     try {
       const response = await fetch("https://api.ipify.org");
       const data = await response.text();
       ipAdresse.value = data;
-      console.log(ipAdresse.value);
-      getUserAdressIp();
+      updateAdresseIp(ipAdresse.value, userId);
     } catch (error) {
       console.error("failed to fetch IP:", error);
     }
-  };*/
+  };
   //****************************************************************** */
-  //****check if user get abounement****************************** */
-  /*
-  const getUserAdressIp = async () => {
-    try {
-      const result = await axios.get(
-        `https://goatqcm-instance.com/abounement/${userIdToken}`
+  //**update login etate active********************************
+
+  const updateAdresseIp = async (adressIp, userId) => {
+    console.log(adressIp);
+    UpdtAbnAdressIp.adresseIp = adressIp;
+
+    await axios
+      .put(
+        `https://goatqcm-instance.com/auth/updateAdresseip/${userId}`,
+        UpdtAbnAdressIp
+      )
+      .then((res) => {
+        console.log(UpdtAbnAdressIp);
+      })
+      .catch((err) =>
+        console.log("user not have abnt yet to update adress ip")
       );
-      getUserAdresseIp.value = result.data.adresseIp;
-      console.log(getUserAdresseIp.value);
-    } catch (Exception) {
-      console.log("no abnmt found");
-    }
-  };*/
-  //*************************************************************** */
+  };
+  //********************************************************************** */
   //**************************************************************** */
   const handleCreatQquez = () => {};
   /***************************************************************** */
   useEffect(() => {
+    fetchIp(userIdToken);
+
     console.log("wwdd");
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
