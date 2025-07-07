@@ -166,6 +166,8 @@ function Quiz() {
       console.log(getUserAdresseIp.value);
       if (getUserAdresseIp.value === ipAdresse.value) {
         console.log("are the same");
+      } else if (getUserAdresseIp.value === "") {
+        console.log("are the same");
       } else {
         UserService.logout();
         navigatLogin("/");
