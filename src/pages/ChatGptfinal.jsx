@@ -24,9 +24,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 function ChatGptfinal(props) {
   const API_KEY = "key";
-  /*const API_KEY =
-    "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";
-  */
+  // "Explain things like you would to a 10 year old learning how to code."
   const systemMessage = {
     //  Explain things like you're talking to a software professional with 5 years of experience.
     role: "system",
@@ -41,7 +39,7 @@ function ChatGptfinal(props) {
   /*********adresse Ip***************************** */
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
-  const token = localStorage.getItem("tokengoat");
+  const token = localStorage.getItem("token");
   const userIdToken = localStorage.getItem("userId");
   //************************************************* */
   const isAuthenticated = UserService.isAuthenticated();
@@ -64,16 +62,13 @@ function ChatGptfinal(props) {
   }, []);
 
   const getQcm = async (qcmId) => {
-    const result = await axios.get(
-      `https://goatqcm-instance.com/qcms/${qcmId}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
+    const result = await axios.get(`http://localhost:8080/qcms/${qcmId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const content = result.data.qcmContent;
 
     const response = await axios.get(
-      `https://goatqcm-instance.com/qcms/${qcmId}/reponses`
+      `http://localhost:8080/qcms/${qcmId}/reponses`
     );
     console.log(response.data);
     const allPropositions = response.data.propositionQcm || [];
@@ -144,17 +139,14 @@ function ChatGptfinal(props) {
       ],
     };
 
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + API_KEY,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(apiRequestBody),
-      }
-    )
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer " + API_KEY,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(apiRequestBody),
+    })
       .then((data) => {
         return data.json();
       })
@@ -170,6 +162,7 @@ function ChatGptfinal(props) {
         setIsTyping(false);
       });
   }
+
   return (
     <>
       {isDesktopOrLaptop && (
@@ -210,7 +203,7 @@ function ChatGptfinal(props) {
                   onChange={(val) => setInputValue(val)}
                   onSend={() => {
                     handleSend(inputValue);
-¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ẌẌẌ^x^x^^^^^xẌẌẌẌẌXẌẌẌ¨¨Ẍ¨¨¨^x^X¨¨X¨^^^^^^^x^x^x^x^x^xx^^x^x                    setInputValue(""); // reset input after send
+                    setInputValue(""); // reset input after send
                   }}
                 />
               </ChatContainer>
