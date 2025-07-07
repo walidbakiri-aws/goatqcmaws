@@ -73,7 +73,7 @@ function Sidebar() {
     }
   };
   //****get ip adress and location user******************************* */
-  const fetchIp = async (userId) => {
+  /* const fetchIp = async (userId) => {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
@@ -97,7 +97,7 @@ function Sidebar() {
   };
   //****************************************************************** */
   //**update login etate active********************************
-
+  /*
   const updateAdresseIp = async (adressIp, userId) => {
     console.log(adressIp);
     UpdtAbnAdressIp.adresseIp = adressIp;
@@ -113,13 +113,13 @@ function Sidebar() {
       .catch((err) =>
         console.log("user not have abnt yet to update adress ip")
       );
-  };
+  };*/
   //********************************************************************** */
   //**************************************************************** */
   const handleCreatQquez = () => {};
   /***************************************************************** */
   useEffect(() => {
-    fetchIp(userIdToken);
+    //fetchIp(userIdToken);
 
     console.log("wwdd");
     getAllQcmsSaves();
