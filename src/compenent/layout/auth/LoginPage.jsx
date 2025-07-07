@@ -174,7 +174,7 @@ function LoginPage() {
     if (getAbnIfExist.value !== null) {
       if (getAbnIfExist.value.statusAbn === true) {
         localStorage.setItem("isAlreadyUserValidate", "isAlreadyUserValidate");
-        await fetchIp(getresultUserFinalId);
+        //  await fetchIp(getresultUserFinalId);
 
         // Set flag in sessionStorage and reload the page
 

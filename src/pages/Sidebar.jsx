@@ -75,12 +75,24 @@ function Sidebar() {
   //****get ip adress and location user******************************* */
   const fetchIp = async (userId) => {
     try {
-      const response = await fetch("https://api.ipify.org");
-      const data = await response.text();
-      ipAdresse.value = data;
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+      const response = await fetch("https://api.ipify.org?format=text", {
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const ip = await response.text();
+      ipAdresse.value = ip;
       updateAdresseIp(ipAdresse.value, userId);
     } catch (error) {
-      console.error("failed to fetch IP:", error);
+      console.error("Failed to fetch IP address:", error.message || error);
     }
   };
   //****************************************************************** */

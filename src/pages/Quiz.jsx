@@ -144,13 +144,24 @@ function Quiz() {
   //****get ip adress and location user******************************* */
   const fetchIp = async () => {
     try {
-      const response = await fetch("https://api.ipify.org");
-      const data = await response.text();
-      ipAdresse.value = data;
-      console.log(ipAdresse.value);
-      getUserAdressIp();
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
+
+      const response = await fetch("https://api.ipify.org?format=text", {
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const ip = await response.text();
+      ipAdresse.value = ip;
+      updateAdresseIp(ipAdresse.value, userId);
     } catch (error) {
-      console.error("failed to fetch IP:", error);
+      console.error("Failed to fetch IP address:", error.message || error);
     }
   };
   //****************************************************************** */
@@ -165,8 +176,6 @@ function Quiz() {
       getUserAdresseIp.value = result.data.adresseIp;
       console.log(getUserAdresseIp.value);
       if (getUserAdresseIp.value === ipAdresse.value) {
-        console.log("are the same");
-      } else if (getUserAdresseIp.value === "") {
         console.log("are the same");
       } else {
         UserService.logout();
