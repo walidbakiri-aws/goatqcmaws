@@ -142,7 +142,7 @@ function Quiz() {
 
   //************************************************************************ */
   //****get ip adress and location user******************************* */
-  const fetchIp = async () => {
+/*  const fetchIp = async () => {
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
@@ -163,10 +163,10 @@ function Quiz() {
     } catch (error) {
       console.error("Failed to fetch IP address:", error.message || error);
     }
-  };
+  };*/
   //****************************************************************** */
   //****check if user get abounement****************************** */
-
+/*
   const getUserAdressIp = async () => {
     console.log(ipAdresse.value);
     try {
@@ -184,11 +184,11 @@ function Quiz() {
     } catch (Exception) {
       console.log("no abnmt found");
     }
-  };
+  };*/
   //*************************************************************** */
   //******parCours ParSujet**************************************************************/
   const handleRadioTypeSujet = (e) => {
-    fetchIp();
+   
     localStorage.setItem("DoneClinqueShow", false);
     localStorage.setItem("passQcmCasClinique", false);
 
