@@ -71,17 +71,7 @@ function Sidebar() {
     }
   };
   //****get ip adress and location user******************************* */
-  const fetchIp = async () => {
-    try {
-      const response = await fetch("https://api.ipify.org");
-      const data = await response.text();
-      ipAdresse.value = data;
-      console.log(ipAdresse.value);
-      getUserAdressIp();
-    } catch (error) {
-      console.error("failed to fetch IP:", error);
-    }
-  };
+
   //****************************************************************** */
 
   //********************************************************************** */
@@ -91,8 +81,7 @@ function Sidebar() {
 
   useEffect(() => {
     console.log("cccc");
-    console.log(deviceId);
-    console.log(userAgent);
+
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();
