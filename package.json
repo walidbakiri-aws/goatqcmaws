@@ -47,7 +47,8 @@
     "reactjs-editor": "^10.0.1",
     "sockjs-client": "^1.6.1",
     "stopwatch-node": "^1.1.0",
-    "use-local-storage": "^3.0.0"
+    "use-local-storage": "^3.0.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
