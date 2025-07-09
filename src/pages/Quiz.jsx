@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import { FcPrevious } from "react-icons/fc";
 import useLocalStorage from "use-local-storage";
 import ChatBox from "../compenent/layout/ChatBox";
+import { v4 as uuidv4 } from "uuid";
 function Quiz() {
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
@@ -142,53 +143,45 @@ function Quiz() {
 
   //************************************************************************ */
   //****get ip adress and location user******************************* */
-/*  const fetchIp = async () => {
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
-
-      const response = await fetch("https://api.ipify.org?format=text", {
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const ip = await response.text();
-      ipAdresse.value = ip;
-      updateAdresseIp(ipAdresse.value, userId);
-    } catch (error) {
-      console.error("Failed to fetch IP address:", error.message || error);
+  const getOrCreateDeviceId = () => {
+    let id = localStorage.getItem("deviceId");
+    if (!id) {
+      id = uuidv4();
+      localStorage.setItem("deviceId", id);
     }
-  };*/
+    return id;
+  };
   //****************************************************************** */
   //****check if user get abounement****************************** */
-/*
-  const getUserAdressIp = async () => {
-    console.log(ipAdresse.value);
-    try {
-      const result = await axios.get(
-        `https://goatqcm-instance.com/abounement/${userIdToken}`
+  //****************************************************************** */
+  const UpdtAbnAdressIp = {
+    adresseIp: "",
+  };
+  //**update login etate active********************************
+  const updateAdresseIp = async (adressIp) => {
+    console.log(adressIp);
+    UpdtAbnAdressIp.adresseIp = adressIp;
+    console.log(UpdtAbnAdressIp.adresseIp);
+    await axios
+      .put(
+        `https://goatqcm-instance.com/auth/updateAdresseip/${userIdToken}`,
+        UpdtAbnAdressIp
+      )
+      .then((res) => {
+        console.log(UpdtAbnAdressIp);
+      })
+      .catch((err) =>
+        console.log("user not have abnt yet to update adress ip")
       );
-      getUserAdresseIp.value = result.data.adresseIp;
-      console.log(getUserAdresseIp.value);
-      if (getUserAdresseIp.value === ipAdresse.value) {
-        console.log("are the same");
-      } else {
-        UserService.logout();
-        navigatLogin("/");
-      }
-    } catch (Exception) {
-      console.log("no abnmt found");
-    }
-  };*/
+  };
+  //********************************************************************** */
+
   //*************************************************************** */
   //******parCours ParSujet**************************************************************/
   const handleRadioTypeSujet = (e) => {
-   
+    const deviceId = getOrCreateDeviceId();
+    const userAgent = navigator.userAgent;
+    updateAdresseIp(deviceId);
     localStorage.setItem("DoneClinqueShow", false);
     localStorage.setItem("passQcmCasClinique", false);
 
@@ -1065,6 +1058,7 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
+            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div
@@ -1309,7 +1303,10 @@ function Quiz() {
           </div>
         )}
         {isTabletOrMobile && (
-          <div className={classes.contanerspacephone}>
+          <div
+            className={classes.contanerspacephone}
+            data-theme={isDark ? "dark" : "light"}
+          >
             <div className={classes.allcardsphone}>
               <div
                 className={`${classes.qcmmodelephone} card text-white bg-light mb-3`}

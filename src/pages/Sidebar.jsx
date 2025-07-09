@@ -23,7 +23,6 @@ import mycours from "../compenent/layout/img/mycours.png";
 import myquizz from "../compenent/layout/img/myquizz.png";
 import home from "../compenent/layout/img/home.png";
 import creequizz from "../compenent/layout/img/creequizz.png";
-import { v4 as uuidv4 } from "uuid";
 
 function Sidebar() {
   const navigatLogin = useNavigate();
@@ -84,43 +83,13 @@ function Sidebar() {
     }
   };
   //****************************************************************** */
-  const UpdtAbnAdressIp = {
-    adresseIp: "",
-  };
-  //**update login etate active********************************
-  const updateAdresseIp = async (adressIp) => {
-    console.log(adressIp);
-    UpdtAbnAdressIp.adresseIp = adressIp;
-    console.log(UpdtAbnAdressIp.adresseIp);
-    await axios
-      .put(
-        `https://goatqcm-instance.com/auth/updateAdresseip/${userIdToken}`,
-        UpdtAbnAdressIp
-      )
-      .then((res) => {
-        console.log(UpdtAbnAdressIp);
-      })
-      .catch((err) =>
-        console.log("user not have abnt yet to update adress ip")
-      );
-  };
+
   //********************************************************************** */
   //**************************************************************** */
   const handleCreatQquez = () => {};
   /***************************************************************** */
-  const getOrCreateDeviceId = () => {
-    let id = localStorage.getItem("deviceId");
-    if (!id) {
-      id = uuidv4();
-      localStorage.setItem("deviceId", id);
-    }
-    return id;
-  };
 
   useEffect(() => {
-    const deviceId = getOrCreateDeviceId();
-    const userAgent = navigator.userAgent;
-    updateAdresseIp(deviceId);
     console.log("cccc");
     console.log(deviceId);
     console.log(userAgent);
