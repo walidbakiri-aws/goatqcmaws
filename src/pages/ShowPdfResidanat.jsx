@@ -19,7 +19,7 @@ import sjtresidanat_2021 from "../compenent/layout/pdf/2021.pdf";
 import sjtresidanat_2022 from "../compenent/layout/pdf/2022.pdf";
 import sjtresidanat_2023 from "../compenent/layout/pdf/2023.pdf";
 import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
-import Genetique from "../compenent/layout/pdf/Genetique.pdf";
+
 const pdfMap = {
   2010: sjtresidanat_2010,
   2011: sjtresidanat_2011,
@@ -34,7 +34,6 @@ const pdfMap = {
   2022: sjtresidanat_2022,
   2023: sjtresidanat_2023,
   2024: sjtresidanat_2024,
-  Genetique: Genetique,
 };
 
 function ShowPdfResidanat() {

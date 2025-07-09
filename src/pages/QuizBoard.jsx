@@ -583,6 +583,7 @@ function QuizBoard(props) {
   const [showChatGpt, setShowChatGpt] = useState(false);
   const [showDeepSeek, setShowDeepSeek] = useState(false);
   let qcmIdChatGptDeepSeek = useSignal("");
+  let deviceId = localStorage.getItem("deviceId");
   /**share screen variable********************************************************* */
 
   useEffect(() => {
@@ -1677,29 +1678,17 @@ function QuizBoard(props) {
     setShowDescQcm(false);
     setDisabled(false);
   }
-  //****get ip adress and location user******************************* */
-  /*const fetchIp = async () => {
-    try {
-      const response = await fetch("https://api.ipify.org");
-      const data = await response.text();
-      ipAdresse.value = data;
-      console.log(ipAdresse.value);
-      getUserAdressIp();
-    } catch (error) {
-      console.error("failed to fetch IP:", error);
-    }
-  };*/
-  //****************************************************************** */
+
   //****check if user get abounement****************************** */
 
-  /*const getUserAdressIp = async () => {
+  const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8080/abounement/${userIdToken}`
+        `https://goatqcm-instance.com/abounement/${userIdToken}`
       );
       getUserAdresseIp.value = result.data.adresseIp;
       console.log(getUserAdresseIp.value);
-      if (getUserAdresseIp.value === ipAdresse.value) {
+      if (getUserAdresseIp.value === deviceId) {
         console.log("are the same");
       } else {
         toast.error(
@@ -1713,9 +1702,9 @@ function QuizBoard(props) {
     } catch (Exception) {
       console.log("no abnmt found");
     }
-  };*/
+  };
   //*************************************************************** */
-  /*function updateIndex(newIndex) {
+  function updateIndex(newIndex) {
     currentIndexFetch = newIndex;
 
     if (
@@ -1724,13 +1713,13 @@ function QuizBoard(props) {
       currentIndexFetch !== lastTriggeredIndex
     ) {
       lastTriggeredIndex = currentIndexFetch;
-      fetchIp();
+      getUserAdressIp();
     }
-  }*/
+  }
   function handleNextClick({ event, value } = {}) {
     setShowChatGpt(false);
     setShowDeepSeek(false);
-    //updateIndex(currentIndex.value);
+    updateIndex(currentIndex.value);
     clearChat();
     console.log(value);
     console.log(currentIndex.value);

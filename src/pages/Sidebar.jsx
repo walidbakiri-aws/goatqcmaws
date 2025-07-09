@@ -23,6 +23,8 @@ import mycours from "../compenent/layout/img/mycours.png";
 import myquizz from "../compenent/layout/img/myquizz.png";
 import home from "../compenent/layout/img/home.png";
 import creequizz from "../compenent/layout/img/creequizz.png";
+import { v4 as uuidv4 } from "uuid";
+
 function Sidebar() {
   const navigatLogin = useNavigate();
   const navigasavesession = useNavigate();
@@ -59,9 +61,6 @@ function Sidebar() {
   const [sessionsLength, setSessionsLength] = useState("");
   const [LastSessionIdDelete, setLastSessionIdDelete] = useState("");
   /******************************************************************************* */
-  const UpdtAbnAdressIp = {
-    adresseIp: "",
-  };
   const [isOpen, setIsOpen] = useState(false);
   const handleLogout = () => {
     const confirmDelete = window.confirm(
@@ -73,38 +72,29 @@ function Sidebar() {
     }
   };
   //****get ip adress and location user******************************* */
-  /* const fetchIp = async (userId) => {
+  const fetchIp = async () => {
     try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000); // 5s timeout
-
-      const response = await fetch("https://api.ipify.org?format=text", {
-        signal: controller.signal,
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const ip = await response.text();
-      ipAdresse.value = ip;
-      updateAdresseIp(ipAdresse.value, userId);
+      const response = await fetch("https://api.ipify.org");
+      const data = await response.text();
+      ipAdresse.value = data;
+      console.log(ipAdresse.value);
+      getUserAdressIp();
     } catch (error) {
-      console.error("Failed to fetch IP address:", error.message || error);
+      console.error("failed to fetch IP:", error);
     }
   };
   //****************************************************************** */
+  const UpdtAbnAdressIp = {
+    adresseIp: "",
+  };
   //**update login etate active********************************
-  /*
-  const updateAdresseIp = async (adressIp, userId) => {
+  const updateAdresseIp = async (adressIp) => {
     console.log(adressIp);
     UpdtAbnAdressIp.adresseIp = adressIp;
-
+    console.log(UpdtAbnAdressIp.adresseIp);
     await axios
       .put(
-        `https://goatqcm-instance.com/auth/updateAdresseip/${userId}`,
+        `https://goatqcm-instance.com/auth/updateAdresseip/${userIdToken}`,
         UpdtAbnAdressIp
       )
       .then((res) => {
@@ -113,15 +103,27 @@ function Sidebar() {
       .catch((err) =>
         console.log("user not have abnt yet to update adress ip")
       );
-  };*/
+  };
   //********************************************************************** */
   //**************************************************************** */
   const handleCreatQquez = () => {};
   /***************************************************************** */
-  useEffect(() => {
-    //fetchIp(userIdToken);
+  const getOrCreateDeviceId = () => {
+    let id = localStorage.getItem("deviceId");
+    if (!id) {
+      id = uuidv4();
+      localStorage.setItem("deviceId", id);
+    }
+    return id;
+  };
 
-    console.log("wwdd");
+  useEffect(() => {
+    const deviceId = getOrCreateDeviceId();
+    const userAgent = navigator.userAgent;
+    updateAdresseIp(deviceId);
+    console.log("cccc");
+    console.log(deviceId);
+    console.log(userAgent);
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
     getAllQcmCasCliniqueSaves();
@@ -403,7 +405,14 @@ function Sidebar() {
           <hr className="text-secondary p-0 m-0" />
           <ul className="nav nav-pills flex-column p-0 m-0">
             <li className="nav-item p-1">
-              <Link to={"/quiz"} className="nav-link fs-6">
+              <Link
+                to={"/quiz"}
+                className="nav-link fs-6"
+                onClick={(e) => {
+                  handleShowSession();
+                  handleCreatQquez();
+                }}
+              >
                 <img src={creequizz} height="100%" width="25" />
                 <span className="fs-6 p-2">Crée un Quiz </span>
               </Link>
