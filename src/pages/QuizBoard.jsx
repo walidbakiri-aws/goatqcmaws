@@ -1695,7 +1695,8 @@ function QuizBoard(props) {
           "Un autre appareil a été connecté en même temps, veuillez vous déconnecter. "
         );
         // setTimeout(() => {
-        UserService.logout();
+         UserService.logout();
+      navigatLogin("/");
         // navigate("/");
         //   }, 5000);
       }
