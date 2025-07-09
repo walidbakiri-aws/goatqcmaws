@@ -1694,10 +1694,10 @@ function QuizBoard(props) {
         toast.error(
           "Un autre appareil a été connecté en même temps, veuillez vous déconnecter. "
         );
-        setTimeout(() => {
-          UserService.logout();
-          navigate("/");
-        }, 5000);
+        // setTimeout(() => {
+        UserService.logout();
+        // navigate("/");
+        //   }, 5000);
       }
     } catch (Exception) {
       console.log("no abnmt found");
