@@ -146,10 +146,10 @@ function CardResidanatSujet() {
           sjetResidant: "fondamentaux",
         },
       });
-    } else if (getYearMed === "Clinique") {
+    } else if (getYearMed === "clinique") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "Clinique",
+          sjetResidant: "clinique",
         },
       });
     }
