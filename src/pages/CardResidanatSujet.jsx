@@ -56,7 +56,7 @@ function CardResidanatSujet() {
     "2023",
     "2024",
     "fondamentaux",
-    "Clinique",
+    "clinique",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
