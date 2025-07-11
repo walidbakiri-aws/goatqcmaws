@@ -19,7 +19,8 @@ import sjtresidanat_2021 from "../compenent/layout/pdf/2021.pdf";
 import sjtresidanat_2022 from "../compenent/layout/pdf/2022.pdf";
 import sjtresidanat_2023 from "../compenent/layout/pdf/2023.pdf";
 import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
-
+import fond from "../compenent/layout/pdf/fond.pdf";
+import clinique from "../compenent/layout/pdf/clinique.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
   2011: sjtresidanat_2011,
@@ -34,6 +35,8 @@ const pdfMap = {
   2022: sjtresidanat_2022,
   2023: sjtresidanat_2023,
   2024: sjtresidanat_2024,
+  fond: fond,
+  clinique: clinique,
 };
 
 function ShowPdfResidanat() {

@@ -55,7 +55,8 @@ function CardResidanatSujet() {
     "2022",
     "2023",
     "2024",
-    "Genetique",
+    "Partie fondamentaux",
+    "Partie Clinique",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -139,10 +140,16 @@ function CardResidanatSujet() {
           sjetResidant: "2024",
         },
       });
-    } else if (getYearMed === "Genetique") {
+    } else if (getYearMed === "Partie fondamentaux") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "Genetique",
+          sjetResidant: "Partie fondamentaux",
+        },
+      });
+    } else if (getYearMed === "Partie Clinique") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Partie Clinique",
         },
       });
     }
