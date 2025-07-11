@@ -55,8 +55,8 @@ function CardResidanatSujet() {
     "2022",
     "2023",
     "2024",
-    "Partie fondamentaux",
-    "Partie Clinique",
+    "fondamentaux",
+    "Clinique",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -140,16 +140,16 @@ function CardResidanatSujet() {
           sjetResidant: "2024",
         },
       });
-    } else if (getYearMed === "Partie fondamentaux") {
+    } else if (getYearMed === "fondamentaux") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "Partie fondamentaux",
+          sjetResidant: "fondamentaux",
         },
       });
-    } else if (getYearMed === "Partie Clinique") {
+    } else if (getYearMed === "Clinique") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "Partie Clinique",
+          sjetResidant: "Clinique",
         },
       });
     }
