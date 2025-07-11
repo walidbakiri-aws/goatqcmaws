@@ -23,7 +23,8 @@ import {
   TypingIndicator,
 } from "@chatscope/chat-ui-kit-react";
 function ChatGptfinal(props) {
-  const API_KEY = "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";
+  const API_KEY =
+    "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";
   // "Explain things like you would to a 10 year old learning how to code."
   const systemMessage = {
     //  Explain things like you're talking to a software professional with 5 years of experience.
@@ -142,14 +143,17 @@ function ChatGptfinal(props) {
       ],
     };
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: "Bearer " + API_KEY,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(apiRequestBody),
-    })
+    const response = await fetch(
+      "https://openrouter.ai/api/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + API_KEY,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(apiRequestBody),
+      }
+    )
       .then((data) => {
         return data.json();
       })
