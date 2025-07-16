@@ -338,7 +338,7 @@ function LoginPage() {
                 href="/register"
                 onClick={handleResiterBtn}
               >
-                Acheter Abounnement
+                S'inscrit
               </button>
             </div>
           </div>
@@ -447,7 +447,7 @@ function LoginPage() {
                     href="/register"
                     onClick={handleResiterBtn}
                   >
-                    Acheter Abounnement
+                    S'inscrit
                   </button>
                 </div>
               </div>
