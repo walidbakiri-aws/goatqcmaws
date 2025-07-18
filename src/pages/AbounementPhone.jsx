@@ -85,12 +85,12 @@ function AbounementPhone() {
           </button>
         </div>
       </div>
-       <div className={classes.cardfinal_phone}>
+      <div className={classes.cardfinal_phone}>
         <div className={`${classes.card_title_phone}`}>
           <h2>Résidanat 2026</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>4500 </span>DA
+            <span>4000 Promo!</span>DA
             <br></br>
           </p>
         </div>
