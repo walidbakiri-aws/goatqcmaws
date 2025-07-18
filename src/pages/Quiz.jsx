@@ -600,7 +600,7 @@ function Quiz() {
         `https://goatqcm-instance.com/abounement/${getresultUserFinal.id}`
       );
       nameModule.value = result.data.nameAbn;
-      if (nameModule.value === "Résidanat 2024") {
+      if (nameModule.value === "Résidanat 2026") {
         loadAllModules();
       }
       if (nameModule.value === "Résidanat 2025") {

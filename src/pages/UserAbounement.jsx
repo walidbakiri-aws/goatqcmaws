@@ -16,12 +16,12 @@ function UserAbounement() {
   const setExpdDateUpdate = useSignal("");
   const abounementDates = [
     {
-      nameAbn: "Résidanat 2024",
-      dateExp: "2024-10-28",
-    },
-    {
       nameAbn: "Résidanat 2025",
       dateExp: "2025-10-18",
+    },
+    {
+      nameAbn: "Résidanat 2026",
+      dateExp: "2026-10-18",
     },
     {
       nameAbn: "1ér Année Médecine",
