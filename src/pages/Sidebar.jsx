@@ -70,9 +70,6 @@ function Sidebar() {
       navigatLogin("/");
     }
   };
-  //****get ip adress and location user******************************* */
-
-  //****************************************************************** */
 
   //********************************************************************** */
   //**************************************************************** */
@@ -80,6 +77,9 @@ function Sidebar() {
   /***************************************************************** */
 
   useEffect(() => {
+    const deviceId = getOrCreateDeviceId();
+    const userAgent = navigator.userAgent;
+    updateAdresseIp(deviceId);
     console.log("cccc");
 
     getAllQcmsSaves();
@@ -88,6 +88,37 @@ function Sidebar() {
     setIsOpen((prev) => !prev);
   }, []);
   //*********button show session*********************************** */
+  const UpdtAbnAdressIp = {
+    adresseIp: "",
+  };
+  //****get ip adress and location user******************************* */
+  const getOrCreateDeviceId = () => {
+    let id = localStorage.getItem("deviceId");
+    if (!id) {
+      id = uuidv4();
+      localStorage.setItem("deviceId", id);
+    }
+    return id;
+  };
+  //****************************************************************** */
+  //**update login etate active********************************
+  const updateAdresseIp = async (adressIp) => {
+    console.log(adressIp);
+    UpdtAbnAdressIp.adresseIp = adressIp;
+    console.log(UpdtAbnAdressIp.adresseIp);
+    await axios
+      .put(
+        `https://goatqcm-instance.com/auth/updateAdresseip/${userIdToken}`,
+        UpdtAbnAdressIp
+      )
+      .then((res) => {
+        console.log(UpdtAbnAdressIp);
+      })
+      .catch((err) =>
+        console.log("user not have abnt yet to update adress ip")
+      );
+  };
+  //********************************************************************** */
   const handleShowSessionBtn = () => {
     navigasavesession("/savesession");
     setShowSessionsList(!ShowSessionsList);
