@@ -177,17 +177,19 @@ function LoginPage() {
         //  await fetchIp(getresultUserFinalId);
 
         // Set flag in sessionStorage and reload the page
-
+        localStorage.setItem("verificatioeCode", false);
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
       } else if (getAbnIfExist.value.statusAbn === false) {
+        localStorage.setItem("verificatioeCode", true);
         console.log("we in home not confirm yet");
         navigate("/home", {
           state: { getUserName: username },
         });
       }
     } else if (getAbnIfExist.value === null) {
+      localStorage.setItem("verificatioeCode", true);
       console.log("not demande yet");
       navigate("/home", {
         state: { getUserName: username },
@@ -196,6 +198,7 @@ function LoginPage() {
 
     if (userValidateAbn === "ADMIN") {
       await fetchIp(userFinalId.value);
+      localStorage.setItem("verificatioeCode", false);
       navigate("/goatqcm", {
         state: { getUserName: username },
       });

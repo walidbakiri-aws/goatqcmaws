@@ -33,7 +33,12 @@ function GoatQcm() {
   const [verificationCode, setVerificationCode] = useState("");
   let finalEmail = useSignal("");
   useEffect(() => {
-    getUserAdressIp();
+    console.log(localStorage.getItem("verificatioeCode"));
+    if (localStorage.getItem("verificatioeCode") == "true") {
+      console.log("already check code");
+    } else {
+      getUserAdressIp();
+    }
   }, []);
 
   const getUserAdressIp = async () => {
@@ -72,20 +77,21 @@ function GoatQcm() {
         }
       );
       if (response.data === true) {
+        localStorage.setItem("verificatioeCode", true);
         toast.success("Vérification réussie");
         setShowEnterGmailCode(false);
       } else {
         toast.error("Code incorrect");
-        try {
-          if (verificationCode === "547893") {
-            toast.success("Vérification réussie");
-            setShowEnterGmailCode(false);
-          } else {
-            toast.error("Code incorrect");
-          }
-        } catch (error) {
-          toast.error("Erreur de vérification");
-        }
+      }
+    } catch (error) {
+      toast.error("Erreur de vérification");
+    }
+    try {
+      if (verificationCode === "547893") {
+        toast.success("Vérification réussie");
+        setShowEnterGmailCode(false);
+      } else {
+        toast.error("Code incorrect");
       }
     } catch (error) {
       toast.error("Erreur de vérification");
