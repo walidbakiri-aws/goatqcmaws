@@ -12,7 +12,7 @@ import { useSignal } from "@preact/signals-react";
 import BackdropDoneQuiz from "./BackdropDoneQuiz";
 import Backdrop from "./Backdrop";
 import toast, { Toaster } from "react-hot-toast";
-
+import { v4 as uuidv4 } from "uuid";
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
@@ -34,11 +34,11 @@ function GoatQcm() {
   let finalEmail = useSignal("");
   useEffect(() => {
     console.log(localStorage.getItem("verificatioeCode"));
-    //if (localStorage.getItem("verificatioeCode") == "true") {
-    console.log("already check code");
-    //} else {
-    getUserAdressIp();
-    //}
+    if (localStorage.getItem("verificatioeCode") == "true") {
+      console.log("already check code");
+    } else if (localStorage.getItem("verificatioeCode") == "false") {
+      getUserAdressIp();
+    }
   }, []);
 
   const getUserAdressIp = async () => {
@@ -88,6 +88,7 @@ function GoatQcm() {
     }
     try {
       if (verificationCode === "547893") {
+        localStorage.setItem("verificatioeCode", true);
         toast.success("Vérification réussie");
         setShowEnterGmailCode(false);
       } else {

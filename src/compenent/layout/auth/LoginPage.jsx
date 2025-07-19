@@ -118,7 +118,7 @@ function LoginPage() {
   const handlerSubmit = async (e) => {
     UserService.logout();
     e.preventDefault();
-
+    localStorage.setItem("verificatioeCode", false);
     try {
       const userData = await UserService.login(username, password);
       localStorage.setItem("password", password);
@@ -177,12 +177,11 @@ function LoginPage() {
         //  await fetchIp(getresultUserFinalId);
 
         // Set flag in sessionStorage and reload the page
-        localStorage.setItem("verificatioeCode", false);
+
         navigate("/goatqcm", {
           state: { getUserName: username, userId: getresultUserFinalId },
         });
       } else if (getAbnIfExist.value.statusAbn === false) {
-        localStorage.setItem("verificatioeCode", true);
         console.log("we in home not confirm yet");
         navigate("/home", {
           state: { getUserName: username },
