@@ -34,11 +34,11 @@ function GoatQcm() {
   let finalEmail = useSignal("");
   useEffect(() => {
     console.log(localStorage.getItem("verificatioeCode"));
-    if (localStorage.getItem("verificatioeCode") == "true") {
-      console.log("already check code");
-    } else {
-      getUserAdressIp();
-    }
+    //if (localStorage.getItem("verificatioeCode") == "true") {
+    console.log("already check code");
+    //} else {
+    getUserAdressIp();
+    //}
   }, []);
 
   const getUserAdressIp = async () => {
