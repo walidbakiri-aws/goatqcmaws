@@ -76,16 +76,16 @@ function GoatQcm() {
         setShowEnterGmailCode(false);
       } else {
         toast.error("Code incorrect");
-      }
-    } catch (error) {
-      toast.error("Erreur de vérification");
-    }
-    try {
-      if (verificationCode === "547893") {
-        toast.success("Vérification réussie");
-        setShowEnterGmailCode(false);
-      } else {
-        toast.error("Code incorrect");
+        try {
+          if (verificationCode === "547893") {
+            toast.success("Vérification réussie");
+            setShowEnterGmailCode(false);
+          } else {
+            toast.error("Code incorrect");
+          }
+        } catch (error) {
+          toast.error("Erreur de vérification");
+        }
       }
     } catch (error) {
       toast.error("Erreur de vérification");
