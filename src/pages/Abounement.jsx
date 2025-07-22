@@ -94,7 +94,7 @@ function Abounement(props) {
         toast.success(
           "votre abounemet a éte confirmer , visite la page pour continue"
         );
-
+        console.log("eyy");
         UserService.logout();
         navigateValid("/");
       })
