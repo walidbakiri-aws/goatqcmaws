@@ -87,7 +87,7 @@ function GoatQcm() {
       toast.error("Erreur de vérification");
     }
     try {
-      if (verificationCode === "547893") {
+      if (verificationCode === "54789393") {
         localStorage.setItem("verificatioeCode", true);
         toast.success("Vérification réussie");
         setShowEnterGmailCode(false);
