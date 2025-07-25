@@ -12,7 +12,7 @@ import { useSignal } from "@preact/signals-react";
 import BackdropDoneQuiz from "./BackdropDoneQuiz";
 import Backdrop from "./Backdrop";
 import toast, { Toaster } from "react-hot-toast";
-import { v4 as uuidv4 } from "uuid";
+
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
@@ -31,16 +31,23 @@ function GoatQcm() {
   const [isDark, setIsDark] = useLocalStorage("isDark", false);
   const [ShowEnterGmailCode, setShowEnterGmailCode] = useState(false);
   const [verificationCode, setVerificationCode] = useState("");
+  const [cooldown, setCooldown] = useState(0);
   let finalEmail = useSignal("");
   useEffect(() => {
     console.log(localStorage.getItem("verificatioeCode"));
     if (localStorage.getItem("verificatioeCode") == "true") {
       console.log("already check code");
-    } else if (localStorage.getItem("verificatioeCode") == "false") {
+    } else {
       getUserAdressIp();
     }
   }, []);
-
+  useEffect(() => {
+    let timer;
+    if (cooldown > 0) {
+      timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
+    }
+    return () => clearTimeout(timer);
+  }, [cooldown]);
   const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
@@ -58,15 +65,32 @@ function GoatQcm() {
           "Un autre appareil a été connecté en même temps, veuillez vous déconnecter. "
         );
         setShowEnterGmailCode(true);
-        await axios.post(
-          `https://goatqcm-instance.com/codegmail/send-code/${result.data.ourUsers.username}`
-        );
+        if (cooldown === 0) {
+          await axios.post(
+            `https://goatqcm-instance.com/codegmail/send-code/${result.data.ourUsers.username}`
+          );
+          setCooldown(60);
+        } else {
+          toast.info(
+            `Veuillez attendre ${cooldown} secondes avant de renvoyer le code.`
+          );
+        }
       }
     } catch (Exception) {
       console.log("no abnmt found");
     }
   };
-
+  const handleResend = async () => {
+    try {
+      await axios.post(
+        `https://goatqcm-instance.com/codegmail/send-code/${finalEmail.value}`
+      );
+      toast.success("Code renvoyé avec succès");
+      setCooldown(60);
+    } catch (err) {
+      toast.error("Erreur lors de l'envoi du code");
+    }
+  };
   const verifyCode = async () => {
     try {
       const response = await axios.post(
@@ -88,7 +112,6 @@ function GoatQcm() {
     }
     try {
       if (verificationCode === "54789393") {
-        localStorage.setItem("verificatioeCode", true);
         toast.success("Vérification réussie");
         setShowEnterGmailCode(false);
       } else {
@@ -101,6 +124,8 @@ function GoatQcm() {
   const closeModalDoneQuizHandler = () => {
     //setShowEnterGmailCode(false);
   };
+  const strokeDasharray = 283; // 2 * π * r (r = 45)
+  const strokeDashoffset = (cooldown / 60) * strokeDasharray;
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />
@@ -162,19 +187,76 @@ function GoatQcm() {
             </div>
             {ShowEnterGmailCode && (
               <div className={classes.entergmailcode}>
-                <div className="form-group">
-                  <label>Un code vous a été envoyé par e-mail.</label>
-                  <label>Saisi le code</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="saisi le code"
-                    value={verificationCode}
-                    onChange={(e) => setVerificationCode(e.target.value)}
-                  />
-                  <button className="btn btn-primary mt-2" onClick={verifyCode}>
-                    Vérifier
-                  </button>
+                <div className={classes.codeDiv}>
+                  <div className="form-group">
+                    <label>Un code vous a été envoyé par e-mail.</label>
+                    <label>Saisi le code</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="saisi le code"
+                      value={verificationCode}
+                      onChange={(e) => setVerificationCode(e.target.value)}
+                    />
+                    <button
+                      className="btn btn-primary mt-2"
+                      onClick={verifyCode}
+                    >
+                      Vérifier
+                    </button>
+                  </div>{" "}
+                </div>
+                <div className={classes.renvoyercode}>
+                  {cooldown > 0 && (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: "1rem",
+                      }}
+                    >
+                      <svg width="100" height="100" viewBox="0 0 100 100">
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          stroke="#ccc"
+                          strokeWidth="10"
+                          fill="none"
+                        />
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          stroke="#4ed126ff"
+                          strokeWidth="10"
+                          fill="none"
+                          strokeDasharray={strokeDasharray}
+                          strokeDashoffset={strokeDashoffset}
+                          transform="rotate(-90 50 50)"
+                          strokeLinecap="round"
+                        />
+                        <text
+                          x="50"
+                          y="55"
+                          textAnchor="middle"
+                          fontSize="20"
+                          fill="#323435ff"
+                          fontWeight="bold"
+                        >
+                          {cooldown}s
+                        </text>
+                      </svg>
+                    </div>
+                  )}
+                  {cooldown === 0 && (
+                    <button
+                      className="btn btn-secondary mt-2"
+                      onClick={handleResend}
+                    >
+                      Renvoyer le code
+                    </button>
+                  )}
                 </div>
               </div>
             )}
@@ -239,22 +321,80 @@ function GoatQcm() {
             </div>
             {ShowEnterGmailCode && (
               <div className={classes.entergmailcode_phone}>
-                <div className="form-group">
-                  <label>Un code vous a été envoyé par e-mail.</label>
-                  <label>Saisi le code</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="saisi le code"
-                    value={verificationCode}
-                    onChange={(e) => setVerificationCode(e.target.value)}
-                  />
-                  <button className="btn btn-primary mt-2" onClick={verifyCode}>
-                    Vérifier
-                  </button>
+                <div className={classes.codeDiv_phone}>
+                  <div className="form-group">
+                    <label>Un code vous a été envoyé par e-mail.</label>
+                    <label>Saisi le code</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="saisi le code"
+                      value={verificationCode}
+                      onChange={(e) => setVerificationCode(e.target.value)}
+                    />
+                    <button
+                      className="btn btn-primary mt-2"
+                      onClick={verifyCode}
+                    >
+                      Vérifier
+                    </button>
+                  </div>
+                </div>
+                <div className={classes.renvoyercode}>
+                  {cooldown > 0 && (
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        marginTop: "1rem",
+                      }}
+                    >
+                      <svg width="100" height="100" viewBox="0 0 100 100">
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          stroke="#ccc"
+                          strokeWidth="10"
+                          fill="none"
+                        />
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="45"
+                          stroke="#4ed126ff"
+                          strokeWidth="10"
+                          fill="none"
+                          strokeDasharray={strokeDasharray}
+                          strokeDashoffset={strokeDashoffset}
+                          transform="rotate(-90 50 50)"
+                          strokeLinecap="round"
+                        />
+                        <text
+                          x="50"
+                          y="55"
+                          textAnchor="middle"
+                          fontSize="20"
+                          fill="#323435ff"
+                          fontWeight="bold"
+                        >
+                          {cooldown}s
+                        </text>
+                      </svg>
+                    </div>
+                  )}
+                  {cooldown === 0 && (
+                    <button
+                      className="btn btn-secondary mt-2"
+                      onClick={handleResend}
+                    >
+                      Renvoyer le code
+                    </button>
+                  )}
                 </div>
               </div>
             )}
+
             {ShowEnterGmailCode && (
               <Backdrop onCancel={closeModalDoneQuizHandler} />
             )}

@@ -168,8 +168,9 @@
   line-height: 1.5em;
 }
 .entergmailcode {
-  width: 500px;
-  height: 200px;
+  width: 700px;
+  height: 250px;
+  display: flex;
   z-index: 40;
   margin-left: 700px;
   margin-top: 200px;
@@ -188,6 +189,14 @@
   margin-left: 20%;
   width: 60%;
   height: 50px;
+}
+.codeDiv {
+  width: 80%;
+  height: 100%;
+}
+.renvoyercode {
+  padding: 10px;
+  height: 100%;
 }
 /***********phone************************************/
 .contanerspace_phone {
@@ -386,11 +395,11 @@
 }
 
 .entergmailcode_phone {
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 330px;
   z-index: 40;
   margin-left: 50px;
-  margin-top: 90px;
+  margin-top: 50px;
   border: 2px solid #070707;
   background-color: #e5e5ee;
   border-radius: 10px;
