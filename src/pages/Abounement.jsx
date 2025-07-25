@@ -151,10 +151,11 @@ function Abounement(props) {
             <h5 className="card-title">Methode de paiement</h5>
             <div className={`${classes.paymentdiv} `}>
               <ul style={{ color: "#3457D5" }}>
-                <h6> 1-Paiment avec CCP</h6>
+                <h6> Paiment avec Baridi</h6>
                 <li className="list-group-item" style={{ color: "#000000" }}>
                   <h6>RIP : 00799999001630355448</h6>
                 </li>
+                <h6> Paiment avec CCP</h6>
                 <li className="list-group-item" style={{ color: "#000000" }}>
                   <h6>CCP : 16303554 clé 90 Bakiri walid</h6>
                 </li>
