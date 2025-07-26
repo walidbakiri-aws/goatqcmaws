@@ -362,6 +362,98 @@ function QuizBoard(props) {
     saveEachLineStatique: "",
     ourUsers: {},
   });
+
+  const [SaveQcmCasCliniqueQuizz, setSaveQcmCasCliniqueQuizz] = useState({
+    nameQcmCasCliniqueQuizz: "",
+    qcmSujetTypeSelected: "",
+    selectedSourceExmn: "",
+    moduleId: "",
+    moduleName: "",
+    selectMultipleCours: "",
+    qcmType: "",
+    minYearQcm: "",
+    maxYearQcm: "",
+    savePropositionsClinique: "",
+    saveClickSelectVerfieAllClinique: "",
+    saveVerfieReponsesClinique: "",
+    saveQcmIsAnswerClinique: "",
+    savePercentageCliniqueAmount: "",
+    savePropositions: "",
+    saveClickSelectVerfieAll: "",
+    saveVerfieReponses: "",
+    saveQcmIsAnswer: "",
+    savePercentageAmount: "",
+    existeCasClinique: "",
+    doneGetAllClinique: "",
+
+    saveCorrectAnswer: "",
+    saveIsClickedCounter: "",
+    savePieStatique: "",
+    saveEachLineStatique: "",
+    saveCorrectAnswerClinique: "",
+    saveIsClickedCounterClinique: "",
+    savePieStatiqueClinique: "",
+    saveEachLineStatiqueClinique: "",
+    ourUsers: {},
+  });
+  const [SaveQcmCasCliniqueSession, setSaveQcmCasCliniqueSession] = useState({
+    nameQcmCasCliniqueSession: "",
+    qcmSujetTypeSelected: "",
+    selectedSourceExmn: "",
+    moduleId: "",
+    moduleName: "",
+    selectMultipleCours: "",
+    qcmType: "",
+    minYearQcm: "",
+    maxYearQcm: "",
+    savePropositionsClinique: "",
+    saveClickSelectVerfieAllClinique: "",
+    saveVerfieReponsesClinique: "",
+    saveQcmIsAnswerClinique: "",
+    savePercentageCliniqueAmount: "",
+    savePropositions: "",
+    saveClickSelectVerfieAll: "",
+    saveVerfieReponses: "",
+    saveQcmIsAnswer: "",
+    savePercentageAmount: "",
+    existeCasClinique: "",
+    doneGetAllClinique: "",
+
+    saveCorrectAnswer: "",
+    saveIsClickedCounter: "",
+    savePieStatique: "",
+    saveEachLineStatique: "",
+    saveCorrectAnswerClinique: "",
+    saveIsClickedCounterClinique: "",
+    savePieStatiqueClinique: "",
+    saveEachLineStatiqueClinique: "",
+    ourUsers: {},
+  });
+
+  //****update qcmquizz************************************** */
+  const [updateQcmCasCliniqueQuizz, setUpdateQcmCasCliniqueQuizz] = useState({
+    savePropositions: "",
+    saveClickSelectVerfieAll: "",
+    saveVerfieReponses: "",
+    saveQcmIsAnswer: "",
+    savePercentageAmount: "",
+    savePropositionsClinique: "",
+    saveClickSelectVerfieAllClinique: "",
+    saveVerfieReponsesClinique: "",
+    saveQcmIsAnswerClinique: "",
+    savePercentageCliniqueAmount: "",
+
+    saveCorrectAnswer: "",
+    saveIsClickedCounter: "",
+    savePieStatique: "",
+    saveEachLineStatique: "",
+    saveCorrectAnswerClinique: "",
+    saveIsClickedCounterClinique: "",
+    savePieStatiqueClinique: "",
+    saveEachLineStatiqueClinique: "",
+  });
+  //********************************************************** */
+
   let [ShowCancelQuizzPhone, setShowCancelQuizzPhone] = useState(false);
   let [showSaveQcmBtn, setShowSaveQcmBtn] = useState(false);
   let [showUpdateQcmBtn, setShowUpdateQcmBtn] = useState(false);
@@ -590,6 +682,7 @@ function QuizBoard(props) {
     /**share screen **************************************************************************** */
     console.log(isToggled);
     console.log(shareScreenCode);
+    console.log(props.doneGetAllClinique);
     //getUserShare();
 
     /**share screen ***************************************************************************** */
@@ -605,11 +698,11 @@ function QuizBoard(props) {
     console.log(props.minYearQcm); //minYear-parCours)
     console.log(props.maxYearQcm); //minMax-parCours)
     //************************************************************** */
-
+    console.log(props.ExisteCasClinique);
     /* console.log(props.checkParSjtBiologieClinique);
      console.log(props.TrueFullInsertClr); 
      console.log(props.savePropositionsClinique);
-    console.log(props.ExisteCasClinique);
+   
     console.log(props.minMaxYearParSujetsFinal);
     console.log(props.QuizQcmQclinique);*/
 
@@ -1028,6 +1121,7 @@ function QuizBoard(props) {
           ) {
             if (incCours.value === props.selectMultipleCours.length - 1) {
               setShowCancelQuizzPhone(true);
+              console.log("we good walidd");
             }
             doneUplaodQcm.value = false;
             try {
@@ -1545,25 +1639,25 @@ function QuizBoard(props) {
           `${BASE_URL}/qcms/${getQcms.value[increment].id}/reponses`
         );
         if (increment === getQcms.value.length - 1) {
-          if (props.qcmType === "Qcm") {
-            if (props.commingFrom === "quizz") {
-              console.log("hupaa");
-              setShowSaveQcmBtn(true);
-              setShowUpdateQcmBtn(false);
-              setShowSaveSessionQcmBtn(true);
-              setShowUpdateSessionQcmBtn(false);
-            } else if (props.commingFrom === "savequizz") {
-              setShowSaveQcmBtn(false);
-              setShowUpdateQcmBtn(true);
-              setShowSaveSessionQcmBtn(false);
-              setShowUpdateSessionQcmBtn(false);
-            } else if (props.commingFrom === "savesession") {
-              setShowSaveQcmBtn(false);
-              setShowUpdateQcmBtn(false);
-              setShowSaveSessionQcmBtn(false);
-              setShowUpdateSessionQcmBtn(true);
-            }
+          //if (props.qcmType === "Qcm") {
+          if (props.commingFrom === "quizz") {
+            console.log("hupaa");
+            setShowSaveQcmBtn(true);
+            setShowUpdateQcmBtn(false);
+            setShowSaveSessionQcmBtn(true);
+            setShowUpdateSessionQcmBtn(false);
+          } else if (props.commingFrom === "savequizz") {
+            setShowSaveQcmBtn(false);
+            setShowUpdateQcmBtn(true);
+            setShowSaveSessionQcmBtn(false);
+            setShowUpdateSessionQcmBtn(false);
+          } else if (props.commingFrom === "savesession") {
+            setShowSaveQcmBtn(false);
+            setShowUpdateQcmBtn(false);
+            setShowSaveSessionQcmBtn(false);
+            setShowUpdateSessionQcmBtn(true);
           }
+          // }
           console.log("get all prpos");
           doneUplaodQcm.value = true;
           if (incCours.value < props.selectMultipleCours.length) {
@@ -2564,7 +2658,15 @@ function QuizBoard(props) {
   //*********************************************************** */
   //**save qcm funtions************************************************************ */
   const handleSaveQcmQuizz = (sourceBtnSaveQuizzSession) => {
-    handleSaveQcm(sourceBtnSaveQuizzSession);
+    if (props.qcmType !== "Tous (Qcm,Cas Clinique)") {
+      handleSaveQcm(sourceBtnSaveQuizzSession);
+    } else if (props.qcmType === "Tous (Qcm,Cas Clinique)") {
+      if (props.ExisteCasClinique === true) {
+        handleSaveQcmCasCliniqueQuizz(sourceBtnSaveQuizzSession);
+      } else if (props.ExisteCasClinique === false) {
+        handleSaveQcm(sourceBtnSaveQuizzSession);
+      }
+    }
   };
   const handleSaveQcm = async (getSourceBtnSaveQuizzSession) => {
     //****get user*************************************** */
@@ -2603,7 +2705,7 @@ function QuizBoard(props) {
     saveQcmQuizzSession.selectMultipleCours = JSON.stringify(
       props.selectMultipleCours
     );
-    saveQcmQuizzSession.qcmType = props.qcmType;
+    saveQcmQuizzSession.qcmType = "Qcm";
     saveQcmQuizzSession.minYearQcm = props.minYearQcm;
     saveQcmQuizzSession.maxYearQcm = props.maxYearQcm;
     saveQcmQuizzSession.savePropositions = JSON.stringify(savePropositions);
@@ -2654,6 +2756,278 @@ function QuizBoard(props) {
     setModalSaveQuizzIsOpen(false);
   };
   //******************************************************************************* */
+  //********************************************************************* */
+  const handleSaveQcmCasCliniqueQuizz = async (sourceSaveBtn) => {
+    //************************************************ */
+    let sourceCommingFrom;
+    let saveQuizzSession;
+    if (sourceSaveBtn === "saveQuizz") {
+      saveQuizzSession = SaveQcmCasCliniqueQuizz;
+      console.log(saveQuizzSession);
+      sourceCommingFrom = "qcmcliniquequizz";
+
+      saveQuizzSession.nameQcmCasCliniqueQuizz = qcmQuizzName;
+    } else if (sourceSaveBtn === "saveSession") {
+      saveQuizzSession = SaveQcmCasCliniqueSession;
+      sourceCommingFrom = "qcmcliniquesession";
+      console.log(saveQuizzSession);
+      saveQuizzSession.nameQcmCasCliniqueSession = "session";
+    }
+
+    /****************************************************** */
+    //****get user*************************************** */
+    try {
+      const resultUserFinal = await UserService.getUserByuserName(
+        username,
+        token
+      );
+      (saveUserQcm.id = resultUserFinal.id),
+        (saveUserQcm.name = resultUserFinal.name),
+        (saveUserQcm.lastname = resultUserFinal.lastname),
+        (saveUserQcm.username = resultUserFinal.username),
+        (saveUserQcm.password = resultUserFinal.password),
+        (saveUserQcm.role = resultUserFinal.role);
+    } catch (Exception) {
+      console.log("user not found");
+    }
+    //***************************************************** */
+
+    console.log(props.QcmSujetTypeSelected);
+    console.log(props.SelectedSourceExmn);
+    console.log(props.moduleId);
+    console.log(props.moduleName);
+    console.log(props.selectMultipleCours);
+
+    saveQuizzSession.ourUsers = saveUserQcm;
+    /* if (sourceQuizzSessionName === "quizzname") {
+        saveQuizzSession.nameQcmCasCliniqueQuizz = casCliniqueQuizzName;
+      } else if (sourceQuizzSessionName === "sessionname") {
+        saveQuizzSession.nameQcmCasCliniqueSession = "session";
+      }*/
+
+    saveQuizzSession.qcmSujetTypeSelected = props.QcmSujetTypeSelected;
+    saveQuizzSession.selectedSourceExmn = props.SelectedSourceExmn;
+    saveQuizzSession.moduleId = props.moduleId;
+    saveQuizzSession.moduleName = props.moduleName;
+    saveQuizzSession.selectMultipleCours = JSON.stringify(
+      props.selectMultipleCours
+    );
+    saveQuizzSession.qcmType = props.qcmType;
+    saveQuizzSession.minYearQcm = props.minYearQcm;
+    saveQuizzSession.maxYearQcm = props.maxYearQcm;
+
+    //***proposition cas clinique*********************************************** */
+    saveQuizzSession.savePropositionsClinique = JSON.stringify(
+      props.savePropositionsClinique
+    );
+    saveQuizzSession.saveClickSelectVerfieAllClinique = JSON.stringify(
+      props.SaveClickSelectVerfieAllClinique
+    );
+    saveQuizzSession.saveVerfieReponsesClinique = JSON.stringify(
+      props.SaveVerfieReponsesClinique
+    );
+    saveQuizzSession.saveQcmIsAnswerClinique = JSON.stringify(
+      props.SaveQcmIsAnswerClinique
+    );
+    saveQuizzSession.savePercentageCliniqueAmount = JSON.stringify(
+      props.SavePercentageCliniqueAmount
+    );
+    //************************************************************************** */
+
+    //*****proposition Qcm CasClinique****************************************** */
+    saveQuizzSession.savePropositions = JSON.stringify(savePropositions);
+    saveQuizzSession.saveClickSelectVerfieAll = JSON.stringify(
+      SaveClickSelectVerfieAll
+    );
+    saveQuizzSession.saveVerfieReponses = JSON.stringify(SaveVerfieReponses);
+    console.log(props.veriferAllreponseClicked);
+    if (props.veriferAllreponseClicked === true) {
+      saveQuizzSession.saveQcmIsAnswer = JSON.stringify(
+        SaveClickSelectVerfieAll
+      );
+    } else if (
+      props.veriferAllreponseClicked === false ||
+      props.veriferAllreponseClicked === undefined
+    ) {
+      console.log(props.veriferAllreponseClicked);
+      saveQuizzSession.saveQcmIsAnswer = JSON.stringify(SaveQcmIsAnswer);
+    }
+
+    saveQuizzSession.savePercentageAmount =
+      JSON.stringify(SavePercentageAmount);
+    //*************************************************************************** */
+
+    //**statique ***************************************************************** */
+    saveQuizzSession.saveCorrectAnswer = JSON.stringify(SaveCorrectAnswer);
+    saveQuizzSession.saveIsClickedCounter =
+      JSON.stringify(SaveIsClickedCounter);
+    saveQuizzSession.savePieStatique = JSON.stringify(savePieStatique);
+    saveQuizzSession.saveEachLineStatique =
+      JSON.stringify(SaveEachLineStatique);
+    //****************************************************************************** */
+    /**statique Arrays*************************************************************** */
+    saveQuizzSession.saveCorrectAnswerClinique = JSON.stringify(
+      props.SaveCorrectAnswerClinique
+    );
+    saveQuizzSession.saveIsClickedCounterClinique = JSON.stringify(
+      props.SaveIsClickedCounterClinique
+    );
+    saveQuizzSession.savePieStatiqueClinique = JSON.stringify(
+      props.savePieStatiqueClinique
+    );
+    saveQuizzSession.saveEachLineStatiqueClinique = JSON.stringify(
+      props.SaveEachLineStatiqueClinique
+    );
+    //******************************************************************************** */
+    saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
+    saveQuizzSession.existeCasClinique = true;
+    console.log(props.doneGetAllClinique);
+    if (!props.doneGetAllClinique) {
+      saveQuizzSession.doneGetAllClinique = false;
+      console.log("is false");
+    } else {
+      console.log("is true");
+      saveQuizzSession.doneGetAllClinique = true;
+    }
+
+    await axios
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        let fullSessionsListeLength = +localStorage.getItem(
+          "fullSessionsListeLength"
+        );
+
+        if (fullSessionsListeLength >= 5) {
+          handleDeleteSession();
+          console.log("succes deleting");
+        }
+        if (sourceSaveBtn === "saveQuizz") {
+          navigateHome("/quizz");
+        } else if (sourceSaveBtn === "saveSession") {
+          navigateHome("/savesession");
+        }
+      })
+      .catch((err) => console.log(err));
+
+    setModalSaveQuizzIsOpen(false);
+  };
+  //********************************************************************* */
+  const handleUpdateQcmQuizzFilter = () => {
+    if (props.qcmType !== "Tous (Qcm,Cas Clinique)") {
+      handleUpdateQcmQuizz();
+    } else if (props.qcmType === "Tous (Qcm,Cas Clinique)") {
+      if (props.ExisteCasClinique === true) {
+        handleUpdateQcmCasCliniqueQuizz();
+      } else if (props.ExisteCasClinique === true) {
+        handleUpdateQcmQuizz();
+      }
+    }
+  };
+  //****save cas clinique*********************************** */
+  const handleUpdateQcmCasCliniqueQuizz = async () => {
+    let sourceCommingFrom;
+    if (props.commingFrom === "savequizz") {
+      sourceCommingFrom = "qcmcliniquequizz";
+    } else if (props.commingFrom === "savesession") {
+      sourceCommingFrom = "qcmcliniquesession";
+    }
+    //**************************************************** */
+    const qcmQuizzId = localStorage.getItem("qcmquizzid");
+
+    //*****update qcm ************************************************************** */
+    updateQcmCasCliniqueQuizz.savePropositions =
+      JSON.stringify(savePropositions);
+    updateQcmCasCliniqueQuizz.saveClickSelectVerfieAll = JSON.stringify(
+      SaveClickSelectVerfieAll
+    );
+    updateQcmCasCliniqueQuizz.saveVerfieReponses =
+      JSON.stringify(SaveVerfieReponses);
+    console.log(props.veriferAllreponseClicked);
+    if (props.veriferAllreponseClicked === true) {
+      updateQcmCasCliniqueQuizz.saveQcmIsAnswer = JSON.stringify(
+        SaveClickSelectVerfieAll
+      );
+    } else if (
+      props.veriferAllreponseClicked === false ||
+      props.veriferAllreponseClicked === undefined
+    ) {
+      updateQcmCasCliniqueQuizz.saveQcmIsAnswer =
+        JSON.stringify(SaveQcmIsAnswer);
+    }
+    updateQcmCasCliniqueQuizz.savePercentageAmount =
+      JSON.stringify(SavePercentageAmount);
+    //*********************************************************************************** */
+
+    //****update cas clinque******************************************************* */
+    console.log(props.doneGetAllClinique);
+
+    updateQcmCasCliniqueQuizz.savePropositionsClinique = JSON.stringify(
+      props.savePropositionsClinique
+    );
+    updateQcmCasCliniqueQuizz.saveClickSelectVerfieAllClinique = JSON.stringify(
+      props.SaveClickSelectVerfieAllClinique
+    );
+    updateQcmCasCliniqueQuizz.saveVerfieReponsesClinique = JSON.stringify(
+      props.SaveVerfieReponsesClinique
+    );
+    updateQcmCasCliniqueQuizz.saveQcmIsAnswerClinique = JSON.stringify(
+      props.SaveQcmIsAnswerClinique
+    );
+    updateQcmCasCliniqueQuizz.savePercentageCliniqueAmount = JSON.stringify(
+      props.SavePercentageCliniqueAmount
+    );
+
+    //**statique ***************************************************************** */
+    updateQcmCasCliniqueQuizz.saveCorrectAnswer =
+      JSON.stringify(SaveCorrectAnswer);
+    updateQcmCasCliniqueQuizz.saveIsClickedCounter =
+      JSON.stringify(SaveIsClickedCounter);
+    updateQcmCasCliniqueQuizz.savePieStatique = JSON.stringify(savePieStatique);
+    updateQcmCasCliniqueQuizz.saveEachLineStatique =
+      JSON.stringify(SaveEachLineStatique);
+    //****************************************************************************** */
+
+    //**statique ***************************************************************** */
+
+    updateQcmCasCliniqueQuizz.saveCorrectAnswerClinique = JSON.stringify(
+      props.SaveCorrectAnswerClinique
+    );
+    updateQcmCasCliniqueQuizz.saveIsClickedCounterClinique = JSON.stringify(
+      props.SaveIsClickedCounterClinique
+    );
+    updateQcmCasCliniqueQuizz.savePieStatiqueClinique = JSON.stringify(
+      props.savePieStatiqueClinique
+    );
+    updateQcmCasCliniqueQuizz.saveEachLineStatiqueClinique = JSON.stringify(
+      props.SaveEachLineStatiqueClinique
+    );
+
+    //****************************************************************************** */
+    console.log(updateQcmCasCliniqueQuizz);
+    await axios
+      .put(
+        `https://goatqcm-instance.com/${sourceCommingFrom}/${qcmQuizzId}`,
+        updateQcmCasCliniqueQuizz,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
+      .then((res) => {
+        toast.success("succes modification!");
+        if (props.commingFrom === "savequizz") {
+          navigateHome("/quizz");
+        } else if (props.commingFrom === "savesession") {
+          navigateHome("/savesession");
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   //***update qcm quizz************************************************************* */
   const handleUpdateQcmQuizz = async () => {
     let sourceCommingFrom;
@@ -2831,7 +3205,7 @@ function QuizBoard(props) {
                           type="button"
                           className="btn btn-primary"
                           onClick={() => {
-                            handleUpdateQcmQuizz();
+                            handleUpdateQcmQuizzFilter();
                           }}
                         >
                           Save Modification
@@ -2853,7 +3227,7 @@ function QuizBoard(props) {
                           type="button"
                           className="btn btn-primary"
                           onClick={() => {
-                            handleUpdateQcmQuizz();
+                            handleUpdateQcmQuizzFilter();
                           }}
                         >
                           Save modification
@@ -3570,7 +3944,7 @@ function QuizBoard(props) {
                           </div>
                         </div>
                         <div className={classes.full_save_close_quizz}>
-                          {ShowCancelQuizzPhone && props.qcmType === "Qcm" && (
+                          {ShowCancelQuizzPhone && (
                             <>
                               <div className={`${classes.closequizz_phone} `}>
                                 <li
@@ -4655,7 +5029,7 @@ function QuizBoard(props) {
               style={{ marginBottom: 8, width: 200 }}
               className="btn btn-primary"
               onClick={() => {
-                handleUpdateQcmQuizz();
+                handleUpdateQcmQuizzFilter();
               }}
             >
               Save Modification
@@ -4680,7 +5054,7 @@ function QuizBoard(props) {
               style={{ marginBottom: 8, width: 200 }}
               className="btn btn-primary"
               onClick={() => {
-                handleUpdateQcmQuizz();
+                handleUpdateQcmQuizzFilter();
               }}
             >
               Save modification
