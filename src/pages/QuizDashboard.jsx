@@ -15,6 +15,7 @@ function QuizDashboard(props) {
     maxYearQcm,
     QcmSujetTypeSelected,
     moduleId,
+    sessionName,
     minMaxYearParSujets,
     minMaxYearParSujetsFinal,
     QuizQcmQclinique,
@@ -71,6 +72,7 @@ function QuizDashboard(props) {
           courId={courId}
           selectMultipleCours={selectMultipleCours}
           qcmType={qcmType}
+          sessionName={sessionName}
           minYearQcm={minYearQcm}
           maxYearQcm={maxYearQcm}
           QcmSujetTypeSelected={QcmSujetTypeSelected}
@@ -100,6 +102,7 @@ function QuizDashboard(props) {
         <QuizBoardClinique
           moduleName={moduleName}
           courId={courId}
+          sessionName={sessionName}
           selectMultipleCours={selectMultipleCours}
           qcmType={qcmType}
           minYearQcm={minYearQcm}
@@ -133,6 +136,7 @@ function QuizDashboard(props) {
           courId={courId}
           selectMultipleCours={selectMultipleCours}
           qcmType={qcmType}
+          sessionName={sessionName}
           minYearQcm={minYearQcm}
           maxYearQcm={maxYearQcm}
           QcmSujetTypeSelected={QcmSujetTypeSelected}
