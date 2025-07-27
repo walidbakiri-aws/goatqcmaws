@@ -1002,33 +1002,7 @@ function Quiz() {
   //******************************************************************* */ */
   //**********************************************************************
   function handelCommencerBnt() {
-    let valid = true;
-    console.log(MinYearValue.length);
-    if (!sessionName.trim()) {
-      setShowWarning(true);
-      valid = false;
-    } else {
-      setShowWarning(false);
-    }
-    if (MinYearValue.length === 1) {
-      setShowSelectWarning(true);
-      valid = false;
-      console.log("not select");
-    } else {
-      setShowSelectWarning(false);
-      console.log("is select");
-    }
-    if (MaxYearValue.length === 1) {
-      setShowSelectWarningMaxYear(true);
-      valid = false;
-      console.log("not select");
-    } else {
-      setShowSelectWarningMaxYear(false);
-      console.log("is select");
-    }
-
-    if (valid) {
-      //<QuizFilter courId={SelectedCours.value} qcmType={QcmTypeSelected.value} />;
+    if (QcmSujetTypeSelected.value === "Par Sujet") {
       navigateBoardQuiz(`/quiz/quizdashboard`, {
         state: {
           ExisteCasClinique: ExisteCasClinique,
@@ -1060,7 +1034,67 @@ function Quiz() {
           commingFrom: "quizz",
         },
       });
-      console.log("Submitted:", sessionName);
+    } else if (QcmSujetTypeSelected.value === "Par Cour") {
+      let valid = true;
+      console.log(MinYearValue.length);
+      if (!sessionName.trim()) {
+        setShowWarning(true);
+        valid = false;
+      } else {
+        setShowWarning(false);
+      }
+      if (MinYearValue.length === 1) {
+        setShowSelectWarning(true);
+        valid = false;
+        console.log("not select");
+      } else {
+        setShowSelectWarning(false);
+        console.log("is select");
+      }
+      if (MaxYearValue.length === 1) {
+        setShowSelectWarningMaxYear(true);
+        valid = false;
+        console.log("not select");
+      } else {
+        setShowSelectWarningMaxYear(false);
+        console.log("is select");
+      }
+
+      if (valid) {
+        //<QuizFilter courId={SelectedCours.value} qcmType={QcmTypeSelected.value} />;
+        navigateBoardQuiz(`/quiz/quizdashboard`, {
+          state: {
+            ExisteCasClinique: ExisteCasClinique,
+            selectMultipleCours: selectMultipleCours,
+            moduleName: moduleName.value,
+            courId: SelectedCours[0],
+            sessionName: sessionName,
+            checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
+            qcmType:
+              QcmSujetTypeSelected.value === "Par Sujet" &&
+              (SelectedSourceExmn.value === "Résidanat Blida" ||
+                SelectedSourceExmn.value === "Externat Blida")
+                ? "Tous (Qcm,Cas Clinique)"
+                : ExisteCasClinique
+                ? QcmTypeSelected.value
+                : "Qcm",
+            QcmSujetTypeSelected: QcmTypeParSjtParCours,
+            SelectedSourceExmn: QcmTypeSelectedRsdntExetrnt,
+            minYearQcm: MinYearValue,
+            maxYearQcm: MaxYearValue,
+            moduleId: ModuleIdCommencerBtn,
+            minMaxYearParSujetsFinal: minMaxYearParSujetsFinal.value,
+            QuizQcmQclinique: QuizQcmQclinique,
+
+            goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt:
+              goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt.value,
+            backFromCliniqueAllQcmCliniqueprSujet:
+              backFromCliniqueAllQcmCliniqueprSujet.value,
+            commingFrom: "quizz",
+          },
+        });
+        console.log("Submitted:", sessionName);
+      }
     }
   }
   //******************************************************************* */ */()
