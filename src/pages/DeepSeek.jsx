@@ -24,8 +24,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 
 function DeepSeek(props) {
-  const API_KEY =
-    "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";
+  const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
   const systemMessage = {
     role: "system",
