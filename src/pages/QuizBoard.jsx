@@ -797,12 +797,9 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(
-        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
-        {
-          method: "POST",
-        }
-      );
+      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
+        method: "POST",
+      });
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2693,7 +2690,7 @@ function QuizBoard(props) {
       sourceCommingFrom = "qcmquizz";
     } else if (getSourceBtnSaveQuizzSession === "saveSession") {
       saveQcmQuizzSession = SaveQcmSession;
-      saveQcmQuizzSession.nameQcmSession = "session";
+      saveQcmQuizzSession.nameQcmSession = props.sessionName;
       sourceCommingFrom = "qcmsession";
     }
     saveQcmQuizzSession.ourUsers = saveUserQcm;
@@ -2729,19 +2726,15 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 5) {
+        if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
         }
@@ -2771,7 +2764,7 @@ function QuizBoard(props) {
       saveQuizzSession = SaveQcmCasCliniqueSession;
       sourceCommingFrom = "qcmcliniquesession";
       console.log(saveQuizzSession);
-      saveQuizzSession.nameQcmCasCliniqueSession = "session";
+      saveQuizzSession.nameQcmCasCliniqueSession = props.sessionName;
     }
 
     /****************************************************** */
@@ -2891,19 +2884,15 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 5) {
+        if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
         }

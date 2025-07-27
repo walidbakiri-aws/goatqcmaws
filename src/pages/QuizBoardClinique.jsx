@@ -786,7 +786,7 @@ function QuizBoardClinique(props) {
     try {
       setMessages([]);
       await fetch(
-        `https://goatqcm-instance.com0/chat/clear/${shareScreenCode}`,
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
         {
           method: "POST",
         }
@@ -2653,7 +2653,7 @@ function QuizBoardClinique(props) {
     if (sourceQuizzSessionName === "quizzname") {
       saveQuizzSession.nameCasCliniqueQuizz = casCliniqueQuizzName;
     } else if (sourceQuizzSessionName === "sessionname") {
-      saveQuizzSession.nameCasCliniqueSession = "session";
+      saveQuizzSession.nameCasCliniqueSession = props.sessionName;
     }
 
     saveQuizzSession.qcmSujetTypeSelected = props.QcmSujetTypeSelected;
@@ -2709,7 +2709,7 @@ function QuizBoardClinique(props) {
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 5) {
+        if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
         }
@@ -2768,7 +2768,7 @@ function QuizBoardClinique(props) {
     if (sourceQuizzSessionName === "quizzname") {
       saveQuizzSession.nameQcmCasCliniqueQuizz = casCliniqueQuizzName;
     } else if (sourceQuizzSessionName === "sessionname") {
-      saveQuizzSession.nameQcmCasCliniqueSession = "session";
+      saveQuizzSession.nameQcmCasCliniqueSession = props.sessionName;
     }
 
     saveQuizzSession.qcmSujetTypeSelected = props.QcmSujetTypeSelected;
@@ -2860,7 +2860,7 @@ function QuizBoardClinique(props) {
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 5) {
+        if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
         }

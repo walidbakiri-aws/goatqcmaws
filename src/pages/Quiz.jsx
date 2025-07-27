@@ -112,6 +112,11 @@ function Quiz() {
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
   const codechatlocation = localStorage.getItem("codechatlocation");
   //************************************************************************ */
+  const [sessionName, setSessionName] = useState("");
+  const [showWarning, setShowWarning] = useState(false);
+  const [showSelectWarning, setShowSelectWarning] = useState(false);
+  const [showSelectWarningMaxYear, setShowSelectWarningMaxYear] =
+    useState(false);
 
   useEffect(() => {
     localStorage.removeItem("showdiscussiondiv");
@@ -986,46 +991,77 @@ function Quiz() {
   //********************************************************************** */
   function minYearHandler(event) {
     setMinYearValue(event.target.value);
+    setShowSelectWarning(false); // remove warning on change
     console.log(MaxYearValue);
   }
   function maxYearHandler(event) {
     setMaxYearValue(event.target.value);
+    setShowSelectWarningMaxYear(false); // remove warning on change
     console.log(MinYearValue);
   }
   //******************************************************************* */ */
   //**********************************************************************
   function handelCommencerBnt() {
-    //<QuizFilter courId={SelectedCours.value} qcmType={QcmTypeSelected.value} />;
-    navigateBoardQuiz(`/quiz/quizdashboard`, {
-      state: {
-        ExisteCasClinique: ExisteCasClinique,
-        selectMultipleCours: selectMultipleCours,
-        moduleName: moduleName.value,
-        courId: SelectedCours[0],
-        checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
-        qcmType:
-          QcmSujetTypeSelected.value === "Par Sujet" &&
-          (SelectedSourceExmn.value === "Résidanat Blida" ||
-            SelectedSourceExmn.value === "Externat Blida")
-            ? "Tous (Qcm,Cas Clinique)"
-            : ExisteCasClinique
-            ? QcmTypeSelected.value
-            : "Qcm",
-        QcmSujetTypeSelected: QcmTypeParSjtParCours,
-        SelectedSourceExmn: QcmTypeSelectedRsdntExetrnt,
-        minYearQcm: MinYearValue,
-        maxYearQcm: MaxYearValue,
-        moduleId: ModuleIdCommencerBtn,
-        minMaxYearParSujetsFinal: minMaxYearParSujetsFinal.value,
-        QuizQcmQclinique: QuizQcmQclinique,
+    let valid = true;
+    console.log(MinYearValue.length);
+    if (!sessionName.trim()) {
+      setShowWarning(true);
+      valid = false;
+    } else {
+      setShowWarning(false);
+    }
+    if (MinYearValue.length === 1) {
+      setShowSelectWarning(true);
+      valid = false;
+      console.log("not select");
+    } else {
+      setShowSelectWarning(false);
+      console.log("is select");
+    }
+    if (MaxYearValue.length === 1) {
+      setShowSelectWarningMaxYear(true);
+      valid = false;
+      console.log("not select");
+    } else {
+      setShowSelectWarningMaxYear(false);
+      console.log("is select");
+    }
 
-        goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt:
-          goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt.value,
-        backFromCliniqueAllQcmCliniqueprSujet:
-          backFromCliniqueAllQcmCliniqueprSujet.value,
-        commingFrom: "quizz",
-      },
-    });
+    if (valid) {
+      //<QuizFilter courId={SelectedCours.value} qcmType={QcmTypeSelected.value} />;
+      navigateBoardQuiz(`/quiz/quizdashboard`, {
+        state: {
+          ExisteCasClinique: ExisteCasClinique,
+          selectMultipleCours: selectMultipleCours,
+          moduleName: moduleName.value,
+          courId: SelectedCours[0],
+          sessionName: sessionName,
+          checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
+          qcmType:
+            QcmSujetTypeSelected.value === "Par Sujet" &&
+            (SelectedSourceExmn.value === "Résidanat Blida" ||
+              SelectedSourceExmn.value === "Externat Blida")
+              ? "Tous (Qcm,Cas Clinique)"
+              : ExisteCasClinique
+              ? QcmTypeSelected.value
+              : "Qcm",
+          QcmSujetTypeSelected: QcmTypeParSjtParCours,
+          SelectedSourceExmn: QcmTypeSelectedRsdntExetrnt,
+          minYearQcm: MinYearValue,
+          maxYearQcm: MaxYearValue,
+          moduleId: ModuleIdCommencerBtn,
+          minMaxYearParSujetsFinal: minMaxYearParSujetsFinal.value,
+          QuizQcmQclinique: QuizQcmQclinique,
+
+          goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt:
+            goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt.value,
+          backFromCliniqueAllQcmCliniqueprSujet:
+            backFromCliniqueAllQcmCliniqueprSujet.value,
+          commingFrom: "quizz",
+        },
+      });
+      console.log("Submitted:", sessionName);
+    }
   }
   //******************************************************************* */ */()
   function handleNextBtn() {
@@ -1250,40 +1286,94 @@ function Quiz() {
                   </div>
                   <div className={` card-body`}>
                     <div className={`${classes.yearSelectBody}`}>
-                      <select
-                        style={{ width: 160 }}
-                        className={`form-select`}
-                        id="yearselect"
-                        aria-label="Default select example"
-                        onChange={minYearHandler}
-                        value={MinYearValue}
-                      >
-                        <option value="" disabled="disabled">
-                          Select Min Year
-                        </option>
-                        {MinMaxYearFinal.map((minyear, index) => (
-                          <option key={index}>{minyear}</option>
-                        ))}
-                      </select>
-                      <select
-                        style={{ width: 160 }}
-                        className={` form-select`}
-                        id="yearselect"
-                        aria-label="Default select example"
-                        onChange={maxYearHandler}
-                        value={MaxYearValue}
-                      >
-                        <option value="" disabled="disabled">
-                          Select Max Year
-                        </option>
-                        {MinMaxYearFinal.map((minyear, index) => (
-                          <option key={index}>{minyear}</option>
-                        ))}
-                      </select>
+                      <div className={`${classes.yearMin}`}>
+                        <select
+                          style={{ width: 160 }}
+                          className={`form-select`}
+                          id="yearselect"
+                          aria-label="Default select example"
+                          onChange={minYearHandler}
+                          value={MinYearValue}
+                        >
+                          <option value="" disabled="disabled">
+                            Select Min Year
+                          </option>
+                          {MinMaxYearFinal.map((minyear, index) => (
+                            <option key={index}>{minyear}</option>
+                          ))}
+                        </select>
+                        {showSelectWarning && (
+                          <div
+                            style={{
+                              color: "gray",
+                              fontSize: "14px",
+                              marginTop: "4px",
+                            }}
+                          >
+                            Veuillez sélectionner une année.
+                          </div>
+                        )}
+                      </div>
+                      <div className={`${classes.yearMax}`}>
+                        <select
+                          style={{ width: 160 }}
+                          className={` form-select`}
+                          id="yearselect"
+                          aria-label="Default select example"
+                          onChange={maxYearHandler}
+                          value={MaxYearValue}
+                        >
+                          <option value="" disabled="disabled">
+                            Select Max Year
+                          </option>
+                          {MinMaxYearFinal.map((minyear, index) => (
+                            <option key={index}>{minyear}</option>
+                          ))}
+                        </select>
+                        {showSelectWarningMaxYear && (
+                          <div
+                            style={{
+                              color: "gray",
+                              fontSize: "14px",
+                              marginTop: "4px",
+                            }}
+                          >
+                            Veuillez sélectionner une année.
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
+              <div
+                className={classes.sessionname}
+                data-theme={isDark ? "dark" : "light"}
+              >
+                <label for="exampleInputEmail1" className="form-label">
+                  Nom de Session
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Nom de la session"
+                  value={sessionName}
+                  onChange={(e) => setSessionName(e.target.value)}
+                />
+                {showWarning && (
+                  <div
+                    style={{
+                      color: "blue",
+                      fontSize: "17px",
+                      marginTop: "4px",
+                    }}
+                  >
+                    Veuillez remplir ce champ.
+                  </div>
+                )}
+              </div>
               {visibleCommenceBtn && (
                 <div className={classes.btnCommencer}>
                   <button
@@ -1495,40 +1585,94 @@ function Quiz() {
                   </div>
                   <div className={` card-body`}>
                     <div className={`${classes.yearSelectBodyphone}`}>
-                      <select
-                        style={{ width: 160 }}
-                        className={`form-select`}
-                        id="yearselect"
-                        aria-label="Default select example"
-                        onChange={minYearHandler}
-                        value={MinYearValue}
-                      >
-                        <option value="" disabled="disabled">
-                          Select Min Year
-                        </option>
-                        {MinMaxYearFinal.map((minyear, index) => (
-                          <option key={index}>{minyear}</option>
-                        ))}
-                      </select>
-                      <select
-                        style={{ width: 160 }}
-                        className={` form-select`}
-                        id="yearselect"
-                        aria-label="Default select example"
-                        onChange={maxYearHandler}
-                        value={MaxYearValue}
-                      >
-                        <option value="" disabled="disabled">
-                          Select Max Year
-                        </option>
-                        {MinMaxYearFinal.map((minyear, index) => (
-                          <option key={index}>{minyear}</option>
-                        ))}
-                      </select>
+                      <>
+                        <select
+                          style={{ width: 160 }}
+                          className={`form-select`}
+                          id="yearselect"
+                          aria-label="Default select example"
+                          onChange={minYearHandler}
+                          value={MinYearValue}
+                        >
+                          <option value="" disabled="disabled">
+                            Select Min Year
+                          </option>
+                          {MinMaxYearFinal.map((minyear, index) => (
+                            <option key={index}>{minyear}</option>
+                          ))}
+                        </select>
+
+                        {showSelectWarning && (
+                          <div
+                            style={{
+                              color: "gray",
+                              fontSize: "14px",
+                              marginTop: "4px",
+                            }}
+                          >
+                            Veuillez sélectionner une année.
+                          </div>
+                        )}
+
+                        <select
+                          style={{ width: 160 }}
+                          className={` form-select`}
+                          id="yearselect"
+                          aria-label="Default select example"
+                          onChange={maxYearHandler}
+                          value={MaxYearValue}
+                        >
+                          <option value="" disabled="disabled">
+                            Select Max Year
+                          </option>
+                          {MinMaxYearFinal.map((minyear, index) => (
+                            <option key={index}>{minyear}</option>
+                          ))}
+                        </select>
+                      </>
+                      {showSelectWarningMaxYear && (
+                        <div
+                          style={{
+                            color: "gray",
+                            fontSize: "14px",
+                            marginTop: "4px",
+                          }}
+                        >
+                          Veuillez sélectionner une année.
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               )}
+              <div
+                className={classes.sessionname_phone}
+                data-theme={isDark ? "dark" : "light"}
+              >
+                <label for="exampleInputEmail1" className="form-label">
+                  Nom de Session
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Nom de la session"
+                  value={sessionName}
+                  onChange={(e) => setSessionName(e.target.value)}
+                />
+                {showWarning && (
+                  <div
+                    style={{
+                      color: "blue",
+                      fontSize: "12px",
+                      marginTop: "0px",
+                    }}
+                  >
+                    Veuillez remplir ce champ.
+                  </div>
+                )}
+              </div>
               {visibleCommenceBtn && (
                 <div className={classes.btnCommencer}>
                   <button

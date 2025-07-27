@@ -106,6 +106,7 @@ function SaveSession() {
         selectMultipleCours: JSON.parse(
           fullSessionsListe[index].selectMultipleCours
         ),
+        sessionName: fullSessionsListe[index].nameQcmSession,
         qcmType: fullSessionsListe[index].qcmType,
         minYearQcm: JSON.parse(fullSessionsListe[index].minYearQcm),
         maxYearQcm: JSON.parse(fullSessionsListe[index].maxYearQcm),
@@ -157,6 +158,7 @@ function SaveSession() {
         minYearQcm: JSON.parse(fullSessionsListe[index].minYearQcm),
         maxYearQcm: JSON.parse(fullSessionsListe[index].maxYearQcm),
         moduleName: fullSessionsListe[index].moduleName,
+        sessionName: fullSessionsListe[index].nameCasCliniqueSession,
         //*****cas clinique *************************************************** */
         savePropositionsClinique: JSON.parse(
           fullSessionsListe[index].savePropositionsClinique
@@ -207,6 +209,7 @@ function SaveSession() {
         minYearQcm: JSON.parse(fullSessionsListe[index].minYearQcm),
         maxYearQcm: JSON.parse(fullSessionsListe[index].maxYearQcm),
         moduleName: fullSessionsListe[index].moduleName,
+        sessionName: fullSessionsListe[index].nameQcmCasCliniqueSession,
         //*****qcms *************************************************** */
         savePropositions: JSON.parse(fullSessionsListe[index].savePropositions),
         SaveClickSelectVerfieAll: JSON.parse(
@@ -326,6 +329,9 @@ function SaveSession() {
               {fullSessionsListe.map((session, index) => (
                 <div className={classes.eachsession} key={index}>
                   <div className={classes.full_module_iconplay}>
+                    <div className={classes.nameQcmSession}>
+                      {session.nameQcmSession}
+                    </div>
                     <div className={classes.modulename}>
                       {session.moduleName}
                     </div>
@@ -345,6 +351,9 @@ function SaveSession() {
                     <div className={classes.yearquizz}>
                       <div>{session.minYearQcm}</div>
                       <div>{session.maxYearQcm}</div>
+                      <div style={{ marginTop: 10 }}>
+                        {session.dateSaveQuizzSession}
+                      </div>
                     </div>
                   </div>
                   <div
@@ -392,8 +401,13 @@ function SaveSession() {
             {fullSessionsListe.map((session, index) => (
               <div className={classes.eachsession_phone} key={index}>
                 <div className={classes.full_module_iconplay_phone}>
-                  <div className={classes.modulename_phone}>
-                    {session.moduleName}
+                  <div className={classes.modulename_nameQcmSession_phone}>
+                    <div className={classes.nameQcmSession_phone}>
+                      {session.nameQcmSession}
+                    </div>
+                    <div className={classes.modulename_phone}>
+                      {session.moduleName}
+                    </div>{" "}
                   </div>
                   <div
                     className={classes.playicondiv_phone}
@@ -408,20 +422,25 @@ function SaveSession() {
                   </div>
                 </div>
                 <div className={classes.infosession_phone}>
-                  <div className={classes.yearquizz_phone}>
-                    <div>{session.minYearQcm}</div>
-                    <div>{session.maxYearQcm}</div>
+                  <div className={classes.yearquizz_threepoint_phone}>
+                    <div className={classes.yearquizz_phone}>
+                      <div>{session.minYearQcm}</div>
+                      <div>{session.maxYearQcm}</div>
+                    </div>
+                    <div
+                      className={classes.threepoint_phone}
+                      onClick={() => {
+                        quizzIndex === session.id
+                          ? setQuizzIndex(undefined)
+                          : setQuizzIndex(session.id);
+                      }}
+                    >
+                      <img src={detail} height="30px" width="30px" />
+                    </div>
                   </div>
-                </div>
-                <div
-                  className={classes.threepoint_phone}
-                  onClick={() => {
-                    quizzIndex === session.id
-                      ? setQuizzIndex(undefined)
-                      : setQuizzIndex(session.id);
-                  }}
-                >
-                  <img src={detail} height="30px" width="30px" />
+                  <div style={{ fontSize: 14, marginLeft: 5 }}>
+                    {session.dateSaveQuizzSession}
+                  </div>
                 </div>
                 <div
                   className={classes.quizzdiv_container_phone}

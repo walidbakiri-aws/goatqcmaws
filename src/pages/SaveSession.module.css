@@ -35,7 +35,7 @@
 .eachsession {
   margin-left: 150px;
   width: 600px;
-  height: 100px;
+  height: 130px;
   margin-top: 20px;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -50,6 +50,20 @@
   padding-top: 5px;
   padding-left: 30px;
 }
+.nameQcmSession {
+  padding-top: 5px;
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(138, 141, 141);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+}
 .modulename {
   padding-top: 5px;
   padding-left: 10px;
@@ -60,6 +74,9 @@
   border-radius: 10px;
   margin-bottom: 5px;
   color: rgb(138, 141, 141);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
 }
 .playicondiv {
   border: 3px solid #9d00ff;
@@ -161,7 +178,7 @@
 .eachsession_phone {
   margin-left: 5px;
   width: 320px;
-  height: 85px;
+  height: 120px;
   margin-top: 20px;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -177,16 +194,36 @@
   padding-top: 5px;
   padding-left: 5px;
 }
-.modulename_phone {
-  padding-top: 5px;
+.modulename_nameQcmSession_phone {
+  height: 70px;
+
+  display: grid;
+}
+.nameQcmSession_phone {
   padding-left: 10px;
   left: 0px;
   float: left;
   width: 100px;
-  height: 30px;
+
   border-radius: 10px;
   margin-bottom: 5px;
   color: rgb(138, 141, 141);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+.modulename_phone {
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 100px;
+
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(138, 141, 141);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
 }
 .playicondiv_phone {
   border: 3px solid #9d00ff;
@@ -194,7 +231,7 @@
   width: 200px;
   height: 40px;
   display: flex;
-  margin-top: 10px;
+
   padding-left: 6px;
   padding-top: 3px;
   padding-bottom: 10px;
@@ -216,12 +253,19 @@
 .threepoint_phone {
   float: right;
   right: 0px;
-  margin-top: 25px;
+  margin-top: 30px;
   margin-right: 5px;
 }
 .quizzdiv_container_phone {
   position: relative;
   margin-top: 50px;
+}
+.infosession_phone {
+  display: grid;
+}
+.yearquizz_threepoint_phone {
+  margin-top: -20px;
+  display: flex;
 }
 .detail_phone {
   width: 120px;

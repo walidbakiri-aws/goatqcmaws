@@ -218,7 +218,12 @@
   margin-bottom: 20px;
   margin-left: 40px;
   border: 0.2px solid rgb(109, 95, 81);
-  height: 100px;
+  height: 120px;
+}
+.yearSelectBody {
+  width: 90%;
+
+  display: flex;
 }
 .yearSelectBody select {
   display: inline-block;
@@ -226,7 +231,14 @@
 
   margin: 5px;
 }
-
+.yearMin {
+  width: 200px;
+  height: 100%;
+}
+.yearMax {
+  width: 200px;
+  height: 100%;
+}
 .btnCommencer {
   margin-right: 10px;
   height: 80px;
@@ -276,6 +288,69 @@
   height: 100%;
   float: left;
   background-color: rgb(220, 224, 224);
+}
+.sessionname {
+  position: relative;
+  padding: 10px;
+  margin-left: 35px;
+  width: 400px;
+
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  border: none;
+}
+
+.sessionname label {
+  color: var(--primary-text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 450;
+}
+
+.sessionname input {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--primary-text-color);
+  outline: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px;
+  font-weight: 450;
+}
+.sessionname input:focus {
+  background-color: transparent; /* prevents white background */
+  outline: none;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+
+.sessionname input::placeholder {
+  color: gray;
+  transition: opacity 0.3s ease;
+}
+
+.sessionname input:focus::placeholder {
+  opacity: 0;
+}
+.sessionname .arrow {
+  position: absolute;
+  right: 15px;
+  top: 58%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: gray;
+  pointer-events: none;
+}
+
+.sessionname::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 5px;
+  background: linear-gradient(to right, cyan, yellow);
 }
 .childmodulecoursdivphone {
   border: 1px solid rgb(218, 215, 215);
@@ -352,4 +427,68 @@
   display: inline-block;
   vertical-align: left;
   margin: 5px;
+}
+.sessionname_phone {
+  position: relative;
+  padding: 10px;
+  margin-left: 35px;
+  width: 200px;
+  height: 100px;
+  background-color: transparent;
+  box-shadow: rgba(53, 49, 49, 0.56) 2px 2px 2px 2px;
+  border: none;
+  margin-bottom: 10px;
+}
+
+.sessionname_phone label {
+  color: rgb(104, 100, 100);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.sessionname_phone input {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  font-size: 16px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: black;
+  outline: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+.sessionname_phone input:focus {
+  background-color: transparent; /* prevents white background */
+  outline: none;
+  border-color: transparent;
+  color: black;
+}
+
+.sessionname_phone input::placeholder {
+  color: gray;
+  transition: opacity 0.3s ease;
+}
+
+.sessionname_phone input:focus::placeholder {
+  opacity: 0;
+}
+.sessionname_phone .arrow {
+  position: absolute;
+  right: 15px;
+  top: 58%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: gray;
+  pointer-events: none;
+}
+
+.sessionname_phone::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 5px;
+  background: linear-gradient(to right, cyan, yellow);
 }
