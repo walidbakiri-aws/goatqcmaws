@@ -29,6 +29,20 @@ export default defineConfig({
   define: {
     global: "window",
   },
+  server: {
+    // Add fallback to index.html for all routes
+    fs: {
+      strict: false, // Allows serving from outside root
+    },
+  },
+  build: {
+    // Ensure build outputs correct paths
+    rollupOptions: {
+      input: {
+        main: "./index.html",
+      },
+    },
+  },
   optimizeDeps: {
     include: ["buffer", "process"],
   },
