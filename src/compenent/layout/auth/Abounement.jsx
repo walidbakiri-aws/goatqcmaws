@@ -110,12 +110,18 @@ function Abounement() {
               </p>
             </div>
             <div className={`${classes.card_content}`}>
-              <div className={`${classes.card_title}`}>
-                <p>
-                  <i className="fa fa-rupee"></i>
-                  <span> 500</span>DA
-                </p>
-              </div>
+              <ul>
+                <li>
+                  <i className="fa fa-check-circle"></i>2éme Année Medecine
+                </li>
+
+                <li>
+                  <i className="fa fa-check-circle"></i>Correction Fiable
+                </li>
+                <li>
+                  <i className="fa fa-check-circle"></i>Avec Explication
+                </li>
+              </ul>
               <button>
                 <a href="/register">Registrer</a>
               </button>
