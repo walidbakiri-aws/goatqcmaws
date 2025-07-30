@@ -47,19 +47,19 @@ function DriversYearsLinks() {
 
   const yearsLinks25 = {
     firstYear:
-      "https://drive.google.com/drive/folders/1iz7iuU_Cf8rjG_UNYq7rTvQdoelcAkYb?usp=drive_link",
+      "https://drive.google.com/drive/folders/1--VcYpjK_XKyj54o53HENuWAUFzC0gFB?usp=drive_link",
     secondeYear:
-      "https://drive.google.com/drive/folders/1UjaxyXp8pU56jlz-F7K-MGECj2pheF21?usp=drive_link",
+      "https://drive.google.com/drive/folders/16RRAsDI7WAunMWWFZEV1Mvj2nlh1jvFU?usp=drive_link",
     thirdYear:
-      "https://drive.google.com/drive/folders/19p1WjOICMCWFyGkIdiPmb8w3ejy6P_sc?usp=drive_link",
+      "https://drive.google.com/drive/folders/1-hP22KANfPYq5M9l0w3-aHn7xI_kmjAH?usp=drive_link",
     fourthYear:
       "https://drive.google.com/drive/folders/1-9r7Hk6zoUX69cuzWCr6ZqZ5BCBXpwqS?usp=drive_link",
     fifthYear:
-      "https://drive.google.com/drive/folders/1gmTor--nOGEfKVU_5ZJ1aEf0QErBR159?usp=drive_link",
+      "https://drive.google.com/drive/folders/1FfKDrTo9Btj6ET9tFtMVXmd1P8OZ3h9F",
     sixYear:
-      "https://drive.google.com/drive/folders/1k-NZ5fBemEoD-dPMrD2fMdbJePMYO1ez?usp=drive_link",
+      "https://drive.google.com/drive/folders/190n5URoP843vsLEbx0uyLt1ZsR3O6ONc",
     samediYear:
-      "https://drive.google.com/drive/folders/1XuR_eVGVYNoSGqYdoTfaiemJe5SZsGYl?usp=drive_link",
+      "https://drive.google.com/drive/folders/1MsRFY98XABNIs-4lsN-prWGzYJVE1aDs?usp=drive_link",
   };
   const yearsLinks24 = {
     firstYear:
