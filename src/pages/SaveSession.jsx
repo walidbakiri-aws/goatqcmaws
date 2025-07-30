@@ -330,7 +330,9 @@ function SaveSession() {
                 <div className={classes.eachsession} key={index}>
                   <div className={classes.full_module_iconplay}>
                     <div className={classes.nameQcmSession}>
-                      {session.nameQcmSession}
+                      {session.nameQcmSession ||
+                        session.nameQcmCasCliniqueSession ||
+                        session.nameCasCliniqueSession}
                     </div>
                     <div className={classes.modulename}>
                       {session.moduleName}
