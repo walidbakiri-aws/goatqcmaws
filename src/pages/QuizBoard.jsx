@@ -2741,10 +2741,10 @@ function QuizBoard(props) {
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 10) {
+       /* if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
-        }
+        }*/
         if (getSourceBtnSaveQuizzSession === "saveQuizz") {
           navigateHome("/quizz");
         } else if (getSourceBtnSaveQuizzSession === "saveSession") {

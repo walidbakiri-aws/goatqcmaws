@@ -2709,10 +2709,10 @@ function QuizBoardClinique(props) {
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 10) {
+        /*  if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
-        }
+        }*/
 
         if (sourceQuizzSessionName === "quizzname") {
           navigateHome("/quizz");
@@ -2860,10 +2860,10 @@ function QuizBoardClinique(props) {
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 10) {
+        /*  if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
-        }
+        }*/
         if (sourceQuizzSessionName === "quizzname") {
           navigateHome("/quizz");
         } else if (sourceQuizzSessionName === "sessionname") {
