@@ -404,9 +404,9 @@ function SaveSession() {
               <div className={classes.eachsession_phone} key={index}>
                 <div className={classes.full_module_iconplay_phone}>
                   <div className={classes.modulename_nameQcmSession_phone}>
-                    <div className={classes.nameQcmSession_phone}>
-                      {session.nameQcmSession}
-                    </div>
+                    {session.nameQcmSession ||
+                      session.nameQcmCasCliniqueSession ||
+                      session.nameCasCliniqueSession}
                     <div className={classes.modulename_phone}>
                       {session.moduleName}
                     </div>{" "}
