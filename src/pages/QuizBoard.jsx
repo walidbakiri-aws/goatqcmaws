@@ -797,9 +797,12 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
-        method: "POST",
-      });
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
+        {
+          method: "POST",
+        }
+      );
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2726,9 +2729,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2884,9 +2891,13 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -4938,6 +4949,7 @@ function QuizBoard(props) {
           getYear={getYear.value || props.getYear}
           minYearQcm={props.minYearQcm}
           maxYearQcm={props.maxYearQcm}
+          sessionName={props.sessionName}
           getGroupePerm={getGroupePerm.value || props.getGroupePerm}
           minMaxYearParSujetsFinal={props.minMaxYearParSujetsFinal}
           moduleId={props.moduleId}

@@ -5420,6 +5420,7 @@ function QuizBoardClinique(props) {
           moduleName={props.moduleName}
           minYearQcm={props.minYearQcm}
           maxYearQcm={props.maxYearQcm}
+          sessionName={props.sessionName}
           ExisteCasClinique={props.ExisteCasClinique}
           selectMultipleCours={props.selectMultipleCours}
           courId={courId}
