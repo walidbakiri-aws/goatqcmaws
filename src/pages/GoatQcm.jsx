@@ -12,7 +12,7 @@ import { useSignal } from "@preact/signals-react";
 import BackdropDoneQuiz from "./BackdropDoneQuiz";
 import Backdrop from "./Backdrop";
 import toast, { Toaster } from "react-hot-toast";
-
+import { ImageIcon, SmileIcon, UserPlus2Icon } from "lucide-react";
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
@@ -33,6 +33,13 @@ function GoatQcm() {
   const [verificationCode, setVerificationCode] = useState("");
   const [cooldown, setCooldown] = useState(0);
   let finalEmail = useSignal("");
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState({
+    content: "",
+    ourUsers: { id: userIdToken },
+  });
+  const [commentInputs, setCommentInputs] = useState({});
+  const [showCreatPub, setShowCreatPub] = useState(false);
   useEffect(() => {
     console.log(localStorage.getItem("verificatioeCode"));
     if (localStorage.getItem("verificatioeCode") == "true") {
@@ -42,6 +49,7 @@ function GoatQcm() {
     }
   }, []);
   useEffect(() => {
+    fetchPosts();
     let timer;
     if (cooldown > 0) {
       timer = setTimeout(() => setCooldown(cooldown - 1), 1000);
@@ -123,9 +131,56 @@ function GoatQcm() {
   };
   const closeModalDoneQuizHandler = () => {
     //setShowEnterGmailCode(false);
+    setShowCreatPub(false);
   };
   const strokeDasharray = 283; // 2 * π * r (r = 45)
   const strokeDashoffset = (cooldown / 60) * strokeDasharray;
+
+  const fetchPosts = async () => {
+    try {
+      const res = await axios.get(
+        `https://goatqcm-instance.com/publiction/posts`
+      );
+      setPosts(res.data);
+    } catch (err) {
+      console.error("Failed to fetch posts:", err);
+    }
+  };
+  const handlePostSubmit = async (e) => {
+    console.log(newPost);
+
+    try {
+      await axios.post(
+        `https://goatqcm-instance.com/publiction/posts`,
+        newPost
+      );
+      setNewPost({ content: "", ourUsers: { id: userIdToken } });
+      fetchPosts();
+    } catch (err) {
+      console.error("Failed to create post:", err);
+    }
+  };
+
+  const handleCommentChange = (postId, value) => {
+    setCommentInputs({ ...commentInputs, [postId]: value });
+  };
+
+  const handleCommentSubmit = async (e, postId) => {
+    e.preventDefault();
+    try {
+      await axios.post(
+        `https://goatqcm-instance.com/publiction/comments/${postId}/user/${userIdToken}`,
+        {
+          content: commentInputs[postId],
+        }
+      );
+      setCommentInputs({ ...commentInputs, [postId]: "" });
+      fetchPosts();
+    } catch (err) {
+      console.error("Failed to add comment:", err);
+    }
+  };
+
   return (
     <>
       <NavigationBar changeetatsidebar={etatsidebare} />
@@ -137,132 +192,202 @@ function GoatQcm() {
               className={classes.contanerspace}
               data-theme={isDark ? "dark" : "light"}
             >
-              <div className={classes.bienvenulogo}>
-                <div className={classes.bienvuenwlcm}>
-                  Bienvenue au GoatQcm!
-                </div>
-                <div className={classes.logogoat}>
-                  <img src={GoatLogo} height="100" width="200" />
-                </div>
-              </div>
-
-              <div className={classes.container}>
-                <div className={classes.card}>
-                  <div className={classes.icon}>
-                    <ion-icon className="globe-outline"></ion-icon>
+              <div className={classes.bienvenulogo_publication}>
+                <div className={classes.bienvenulogo}>
+                  <div className={classes.bienvuenwlcm}>
+                    Bienvenue au GoatQcm!
                   </div>
-                  <div className={classes.content}>
-                    <h2>+35 Modules</h2>
-                    <p>
-                      Modules de 1ér Année jusqu'à 6éme Année Médecine <br />
-                      Organisée par Cour et par Sujets.
-                    </p>
+                  <div className={classes.logogoat}>
+                    <img src={GoatLogo} height="100" width="200" />
                   </div>
                 </div>
-                <div className={classes.card}>
-                  <div className={classes.icon}>
-                    <ion-icon name="diamond-outline"></ion-icon>
-                  </div>
-                  <div className={classes.content}>
-                    <h2>+1 000 Cours</h2>
-                    <p>
-                      Plus de 1 000 Cours des modules d'externat de 1ér Année
-                      jusqu'à 6éme Année Médecine.
-                    </p>
-                  </div>
-                </div>
-                <div className={classes.card}>
-                  <div className={classes.icon}>
-                    <ion-icon name="rocket-outline"></ion-icon>
-                  </div>
-                  <div className={classes.content}>
-                    <h2>+10 000 QCM</h2>
-                    <p>
-                      Plus de 10 000 QCMs , Qcms ,Cas Clinque <br /> des Sujets
-                      d'Externat et de Résidanat
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {ShowEnterGmailCode && (
-              <div className={classes.entergmailcode}>
-                <div className={classes.codeDiv}>
-                  <div className="form-group">
-                    <label>Un code vous a été envoyé par e-mail.</label>
-                    <label>Saisi le code</label>
+                <div className={classes.publicationfull}>
+                  <div className={classes.inputeaddcomment}>
                     <input
                       type="text"
+                      id="inputPassword5"
                       className="form-control"
-                      placeholder="saisi le code"
-                      value={verificationCode}
-                      onChange={(e) => setVerificationCode(e.target.value)}
-                    />
-                    <button
-                      className="btn btn-primary mt-2"
-                      onClick={verifyCode}
-                    >
-                      Vérifier
-                    </button>
-                  </div>{" "}
-                </div>
-                <div className={classes.renvoyercode}>
-                  {cooldown > 0 && (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        marginTop: "1rem",
+                      placeholder="À quoi pensez-vous ?"
+                      onClick={() => {
+                        setShowCreatPub(true);
                       }}
+                    />
+                  </div>
+                  {showCreatPub && (
+                    <div
+                      className={classes.fullinputshow}
+                      data-theme={isDark ? "dark" : "light"}
                     >
-                      <svg width="100" height="100" viewBox="0 0 100 100">
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="45"
-                          stroke="#ccc"
-                          strokeWidth="10"
-                          fill="none"
-                        />
-                        <circle
-                          cx="50"
-                          cy="50"
-                          r="45"
-                          stroke="#4ed126ff"
-                          strokeWidth="10"
-                          fill="none"
-                          strokeDasharray={strokeDasharray}
-                          strokeDashoffset={strokeDashoffset}
-                          transform="rotate(-90 50 50)"
-                          strokeLinecap="round"
-                        />
-                        <text
-                          x="50"
-                          y="55"
-                          textAnchor="middle"
-                          fontSize="20"
-                          fill="#323435ff"
-                          fontWeight="bold"
-                        >
-                          {cooldown}s
-                        </text>
-                      </svg>
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          handlePostSubmit();
+                          setShowCreatPub(false);
+                        }}
+                      >
+                        <div className={classes.creatposttitle}>
+                          Cree Publication
+                        </div>
+                        <hr className={`${classes.hr} `} />
+                        <div className={classes.pubtextarea}>
+                          <textarea
+                            className="form-control"
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                            placeholder="What's on your mind?"
+                            value={newPost.content}
+                            onChange={(e) =>
+                              setNewPost({
+                                ...newPost,
+                                content: e.target.value,
+                              })
+                            }
+                          ></textarea>
+                        </div>
+                        <hr className={`${classes.hr} `} />
+                        <div className={classes.pustpubbutton}>
+                          <button type="submit" className="btn btn-primary">
+                            Post
+                          </button>
+                        </div>
+                      </form>
                     </div>
                   )}
-                  {cooldown === 0 && (
-                    <button
-                      className="btn btn-secondary mt-2"
-                      onClick={handleResend}
-                    >
-                      Renvoyer le code
-                    </button>
-                  )}
+                  {posts.map((post) => {
+                    return (
+                      <div className={classes.fullcommntary_post}>
+                        <div className={classes.showeachpost}>
+                          <p className={classes.postcontent}>{post.content}</p>
+                          <p className={classes.createdAt}>
+                            {new Date(post.createdAt).toLocaleString()}
+                          </p>
+                          <hr className={`${classes.hr} `} />
+                          {post.comments.map((cmt, indexcmnt) => {
+                            return (
+                              <div
+                                className={classes.commentdiv}
+                                key={indexcmnt}
+                                value={cmt.id}
+                              >
+                                <p className={classes.namecommentary}>
+                                  {cmt.ourUsers?.name}
+                                </p>
+                                <p className={classes.contentcommentary}>
+                                  {cmt.content}
+                                </p>
+                              </div>
+                            );
+                          })}
+                        </div>
+
+                        <div className="mt-4">
+                          <form
+                            onSubmit={(e) => handleCommentSubmit(e, post.id)}
+                            className="flex gap-2"
+                          >
+                            <input
+                              type="text"
+                              id="inputPassword5"
+                              className="form-control"
+                              placeholder="Ajouter commentaire ?"
+                              value={commentInputs[post.id] || ""}
+                              onChange={(e) =>
+                                handleCommentChange(post.id, e.target.value)
+                              }
+                            />
+                            <button type="submit" className="btn btn-success">
+                              Ajouter
+                            </button>
+                          </form>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            )}
-            {ShowEnterGmailCode && (
-              <Backdrop onCancel={closeModalDoneQuizHandler} />
-            )}
+              );
+              {ShowEnterGmailCode && (
+                <div className={classes.entergmailcode}>
+                  <div className={classes.codeDiv}>
+                    <div className="form-group">
+                      <label>Un code vous a été envoyé par e-mail.</label>
+                      <label>Saisi le code</label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        placeholder="saisi le code"
+                        value={verificationCode}
+                        onChange={(e) => setVerificationCode(e.target.value)}
+                      />
+                      <button
+                        className="btn btn-primary mt-2"
+                        onClick={verifyCode}
+                      >
+                        Vérifier
+                      </button>
+                    </div>{" "}
+                  </div>
+                  <div className={classes.renvoyercode}>
+                    {cooldown > 0 && (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          marginTop: "1rem",
+                        }}
+                      >
+                        <svg width="100" height="100" viewBox="0 0 100 100">
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="45"
+                            stroke="#ccc"
+                            strokeWidth="10"
+                            fill="none"
+                          />
+                          <circle
+                            cx="50"
+                            cy="50"
+                            r="45"
+                            stroke="#4ed126ff"
+                            strokeWidth="10"
+                            fill="none"
+                            strokeDasharray={strokeDasharray}
+                            strokeDashoffset={strokeDashoffset}
+                            transform="rotate(-90 50 50)"
+                            strokeLinecap="round"
+                          />
+                          <text
+                            x="50"
+                            y="55"
+                            textAnchor="middle"
+                            fontSize="20"
+                            fill="#323435ff"
+                            fontWeight="bold"
+                          >
+                            {cooldown}s
+                          </text>
+                        </svg>
+                      </div>
+                    )}
+                    {cooldown === 0 && (
+                      <button
+                        className="btn btn-secondary mt-2"
+                        onClick={handleResend}
+                      >
+                        Renvoyer le code
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+              {ShowEnterGmailCode && (
+                <Backdrop onCancel={closeModalDoneQuizHandler} />
+              )}
+              {showCreatPub && (
+                <Backdrop onCancel={closeModalDoneQuizHandler} />
+              )}
+            </div>
           </>
         )}
         {isTabletOrMobile && (

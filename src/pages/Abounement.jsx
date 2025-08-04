@@ -21,7 +21,7 @@ function Abounement(props) {
     },
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "4600 DA",
+      priceAbn: "4000 DA",
     },
 
     {

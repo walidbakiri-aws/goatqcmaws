@@ -90,7 +90,7 @@ function AbounementPhone() {
           <h2>Résidanat 2026</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>4600</span>DA
+            <span>4000 promo Aout!</span>DA
             <br></br>
           </p>
         </div>

@@ -16,6 +16,9 @@
   position: absolute;
   z-index: 2;
 }
+.bienvenulogo_publication {
+  display: grid;
+}
 .contanerspace {
   background-color: var(--background-color-full);
   width: 100%;
@@ -32,6 +35,134 @@
   height: 160px;
   margin-bottom: 0px;
 }
+.publicationfull {
+  margin-left: 400px;
+  width: 1000px;
+  border-radius: 5px;
+  border: 1px solid #ccc9c9;
+  margin-top: 10px;
+}
+
+.inputeaddcomment {
+  width: 95%;
+  margin-left: 10px;
+  height: 60px;
+  border-radius: 5px;
+  background-color: #1c2325;
+  border-radius: 8px;
+}
+.inputeaddcomment input {
+  height: 100%;
+}
+.fullinputshow {
+  width: 700px;
+  height: 450px;
+  z-index: 50;
+  border: 1px solid #888484;
+  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  background-color: var(--background-color-graywhite);
+  color: var(--primary-text-color);
+}
+.creatposttitle {
+  width: 100%;
+  height: 70px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
+  padding-left: 37%;
+  margin-top: 10px;
+}
+.hr {
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: var(--background-color-graywhite);
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  width: 100%;
+}
+.pubtextarea {
+  width: 100%;
+  height: 280px;
+  background-color: var(--background-color-graywhite);
+}
+.pubtextarea textarea {
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color-graywhite);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
+  color: var(--primary-text-color);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.pubtextarea textarea:focus {
+  background-color: var(--background-color-graywhite);
+  color: var(--primary-text-color);
+}
+.pustpubbutton {
+  width: 100%;
+  height: 50px;
+  margin-top: 10px;
+}
+.pustpubbutton button {
+  width: 90%;
+  margin-left: 20px;
+
+  height: 50px;
+}
+.showeachpost {
+  width: 80%;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #babdc2;
+  margin: 10px;
+  margin-top: 20px;
+  width: 90%;
+}
+.postcontent {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 30px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
+  color: var(--primary-text-color);
+  padding: 8px;
+}
+.createdAt {
+  font-size: 18px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
+  color: #636366;
+  margin-left: 20px;
+}
+.commentdiv {
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  border: 1px solid #babdc2;
+  padding: 10px;
+}
+.namecommentary {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 18px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
+  color: var(--primary-text-color);
+  padding: 5px;
+}
+.contentcommentary {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 200; /* Regular weight */
+  color: var(--primary-text-color);
+  padding-left: 10px;
+}
+/*********************************************************************/
 .bienvuenwlcm {
   height: 70px;
   color: var(--primary-text-color);
@@ -167,12 +298,14 @@
   color: #fff;
   line-height: 1.5em;
 }
+
 .entergmailcode {
   width: 700px;
   height: 250px;
   display: flex;
   z-index: 40;
-  margin-left: 700px;
+  float: left;
+  margin-left: -600px;
   margin-top: 200px;
   border: 2px solid #070707;
   background-color: #e5e5ee;
@@ -355,6 +488,7 @@
 :root {
   --background-color: #fffbfb;
   --background-color-full: #ffffff;
+  --background-color-graywhite: #f1ecec;
   --background-color_headerquizz: #f5e1fd;
   --background-modulename-color: rgb(37, 176, 233, 0.9);
   --foreground-color: #3c8eec;
@@ -366,6 +500,7 @@
   --toggle-fg: #eefa4c;
 }
 [data-theme="dark"] {
+  --background-color-graywhite: #494747;
   --background-color-full: #28283c;
   --background-color: #28283c;
   --background-color_headerquizz: #272b33;
