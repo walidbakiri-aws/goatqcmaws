@@ -12,7 +12,7 @@ import { useSignal } from "@preact/signals-react";
 import BackdropDoneQuiz from "./BackdropDoneQuiz";
 import Backdrop from "./Backdrop";
 import toast, { Toaster } from "react-hot-toast";
-import { ImageIcon, SmileIcon, UserPlus2Icon } from "lucide-react";
+
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
