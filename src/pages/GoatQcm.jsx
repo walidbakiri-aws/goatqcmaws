@@ -280,62 +280,68 @@ function GoatQcm() {
                       </form>
                     </div>
                   )}
-                  {posts.map((post) => {
-                    return (
-                      <div className={classes.fullcommntary_post}>
-                        <div className={classes.showeachpost}>
-                          <div className={classes.username}>
-                            <img src={user} height="50%" width="50" />
-                            <p>
-                              {post.anonyme ? "Anonyme" : post.ourUsers.name}
+                  {[...posts]
+                    .sort(
+                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                    )
+                    .map((post) => {
+                      return (
+                        <div className={classes.fullcommntary_post}>
+                          <div className={classes.showeachpost}>
+                            <div className={classes.username}>
+                              <img src={user} height="50%" width="50" />
+                              <p>
+                                {post.anonyme ? "Anonyme" : post.ourUsers.name}
+                              </p>
+                            </div>
+                            <p className={classes.postcontent}>
+                              {post.content}
                             </p>
+                            <p className={classes.createdAt}>
+                              {new Date(post.createdAt).toLocaleString()}
+                            </p>
+                            <hr className={`${classes.hr} `} />
+                            {post.comments.map((cmt, indexcmnt) => {
+                              return (
+                                <div
+                                  className={classes.commentdiv}
+                                  key={indexcmnt}
+                                  value={cmt.id}
+                                >
+                                  <p className={classes.namecommentary}>
+                                    {cmt.ourUsers?.name}
+                                  </p>
+
+                                  <p className={classes.contentcommentary}>
+                                    {cmt.content}
+                                  </p>
+                                </div>
+                              );
+                            })}
                           </div>
-                          <p className={classes.postcontent}>{post.content}</p>
-                          <p className={classes.createdAt}>
-                            {new Date(post.createdAt).toLocaleString()}
-                          </p>
-                          <hr className={`${classes.hr} `} />
-                          {post.comments.map((cmt, indexcmnt) => {
-                            return (
-                              <div
-                                className={classes.commentdiv}
-                                key={indexcmnt}
-                                value={cmt.id}
-                              >
-                                <p className={classes.namecommentary}>
-                                  {cmt.ourUsers?.name}
-                                </p>
 
-                                <p className={classes.contentcommentary}>
-                                  {cmt.content}
-                                </p>
-                              </div>
-                            );
-                          })}
+                          <div className={classes.addcommment}>
+                            <form
+                              onSubmit={(e) => handleCommentSubmit(e, post.id)}
+                            >
+                              <input
+                                type="text"
+                                id="inputPassword5"
+                                className="form-control"
+                                placeholder="Ajouter commentaire ?"
+                                value={commentInputs[post.id] || ""}
+                                onChange={(e) =>
+                                  handleCommentChange(post.id, e.target.value)
+                                }
+                              />
+                              <button type="submit" className="btn btn-info">
+                                Ajouter
+                              </button>
+                            </form>
+                          </div>
                         </div>
-
-                        <div className={classes.addcommment}>
-                          <form
-                            onSubmit={(e) => handleCommentSubmit(e, post.id)}
-                          >
-                            <input
-                              type="text"
-                              id="inputPassword5"
-                              className="form-control"
-                              placeholder="Ajouter commentaire ?"
-                              value={commentInputs[post.id] || ""}
-                              onChange={(e) =>
-                                handleCommentChange(post.id, e.target.value)
-                              }
-                            />
-                            <button type="submit" className="btn btn-info">
-                              Ajouter
-                            </button>
-                          </form>
-                        </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
                 </div>
               </div>
               );
