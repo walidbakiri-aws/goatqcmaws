@@ -20,7 +20,7 @@
   display: grid;
 }
 .contanerspace {
-  background-color: var(--background-color-full);
+  background-color: var(--background-color-graywhite);
   width: 100%;
   position: absolute;
   display: inline-block;
@@ -39,21 +39,55 @@
   margin-left: 400px;
   width: 1000px;
   border-radius: 5px;
-  border: 1px solid #ccc9c9;
+
   margin-top: 10px;
 }
-
+.fullcommntary_post {
+  width: 100%;
+  height: auto;
+  border: 1px solid #1c2325;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+  background-color: var(--background-color-graywhite_seconde);
+}
 .inputeaddcomment {
   width: 95%;
-  margin-left: 10px;
+  margin-left: 20px;
   height: 60px;
   border-radius: 5px;
   background-color: #1c2325;
   border-radius: 8px;
+  background-color: var(--background-color-graywhite_seconde);
 }
 .inputeaddcomment input {
   height: 100%;
+  background-color: var(--background-color-graywhite_seconde);
+  border-radius: 15px;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
+.inputeaddcomment input::placeholder {
+  height: 100%;
+  background-color: var(--background-color-graywhite_seconde);
+  color: var(--primary-text-color);
+}
+.username {
+  width: 200px;
+  padding: 5px;
+  display: flex;
+}
+.username p {
+  margin-top: 15px;
+  margin-left: 10px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px; /* Adjust as needed */
+  font-weight: 200; /* Regular weight */
+
+  color: var(--primary-text-color);
+}
+
 .fullinputshow {
   width: 700px;
   height: 450px;
@@ -82,7 +116,7 @@
   height: 3px;
   border: none;
   border-radius: 4px;
-  background: var(--background-color-graywhite);
+  background: var(--background-color-graywhite_seconde);
   width: 95%;
   margin-top: 2px;
   margin-bottom: 2px;
@@ -109,6 +143,10 @@
   background-color: var(--background-color-graywhite);
   color: var(--primary-text-color);
 }
+.pubtextarea textarea::placeholder {
+  background-color: var(--background-color-graywhite);
+  color: var(--primary-text-color);
+}
 .pustpubbutton {
   width: 100%;
   height: 50px;
@@ -120,11 +158,35 @@
 
   height: 50px;
 }
+.vertical-switch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vertical-switch .form-check-input {
+  transform: rotate(90deg);
+  transform-origin: center;
+  width: 2.5rem;
+  height: 1rem;
+  margin-bottom: 0.5rem;
+}
+.anonyme {
+  width: 300px;
+  height: 60px;
+
+  display: flex;
+  margin-left: 20px;
+}
+.anonyme label {
+  font-size: 20px;
+  margin-left: 5px;
+}
 .showeachpost {
   width: 80%;
   height: auto;
   border-radius: 5px;
-  border: 1px solid #babdc2;
+
   margin: 10px;
   margin-top: 20px;
   width: 90%;
@@ -142,11 +204,41 @@
   color: #636366;
   margin-left: 20px;
 }
+.addcommment {
+  width: 100%;
+  margin-left: 10px;
+  border-radius: 15px;
+  color: var(--primary-text-color);
+}
+.addcommment input::placeholder {
+  color: var(--primary-text-color);
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
+}
+.addcommment input {
+  font-size: 20px; /* Adjust as needed */
+  font-weight: 450; /* Regular weight */
+  width: 90%;
+  height: 70px;
+  background-color: var(--background-color-graywhite);
+  color: var(--primary-text-color);
+  border-radius: 15px;
+  border: 1px solid #242526;
+}
+.addcommment input:focus {
+  width: 90%;
+  height: 70px;
+  background-color: var(--background-color-graywhite);
+  color: var(--primary-text-color);
+  border-radius: 15px;
+  border: 1px solid #242526;
+}
 .commentdiv {
   width: auto;
   height: auto;
   border-radius: 5px;
-  border: 1px solid #babdc2;
+  border-radius: 15px;
+  border: 1px solid #898d8f;
   padding: 10px;
 }
 .namecommentary {
@@ -162,6 +254,13 @@
   font-weight: 200; /* Regular weight */
   color: var(--primary-text-color);
   padding-left: 10px;
+}
+
+.addcommment button {
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  width: 100px;
 }
 /*********************************************************************/
 .bienvuenwlcm {
@@ -492,6 +591,7 @@
   --background-color: #fffbfb;
   --background-color-full: #ffffff;
   --background-color-graywhite: #f1ecec;
+  --background-color-graywhite_seconde: #f1ecec;
   --background-color_headerquizz: #f5e1fd;
   --background-modulename-color: rgb(37, 176, 233, 0.9);
   --foreground-color: #3c8eec;
@@ -503,7 +603,8 @@
   --toggle-fg: #eefa4c;
 }
 [data-theme="dark"] {
-  --background-color-graywhite: #494747;
+  --background-color-graywhite: #18191a;
+  --background-color-graywhite_seconde: #242526;
   --background-color-full: #28283c;
   --background-color: #28283c;
   --background-color_headerquizz: #272b33;

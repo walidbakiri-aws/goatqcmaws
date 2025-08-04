@@ -12,6 +12,7 @@ import { useSignal } from "@preact/signals-react";
 import BackdropDoneQuiz from "./BackdropDoneQuiz";
 import Backdrop from "./Backdrop";
 import toast, { Toaster } from "react-hot-toast";
+import user from "../compenent/layout/img/user.png";
 
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
@@ -229,6 +230,30 @@ function GoatQcm() {
                           Cree Publication
                         </div>
                         <hr className={`${classes.hr} `} />
+                        <div
+                          className={`${classes.anonyme} form-check form-switch vertical-switch my-2 ms-1`}
+                        >
+                          <input
+                            style={{ width: 60, height: 30 }}
+                            className="form-check-input"
+                            type="checkbox"
+                            role="switch"
+                            id="anonymousSwitch"
+                            checked={newPost.anonymous}
+                            onChange={(e) =>
+                              setNewPost({
+                                ...newPost,
+                                anonyme: e.target.checked,
+                              })
+                            }
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="anonymousSwitch"
+                          >
+                            Post as anonyme
+                          </label>
+                        </div>
                         <div className={classes.pubtextarea}>
                           <textarea
                             className="form-control"
@@ -244,7 +269,9 @@ function GoatQcm() {
                             }
                           ></textarea>
                         </div>
+
                         <hr className={`${classes.hr} `} />
+
                         <div className={classes.pustpubbutton}>
                           <button type="submit" className="btn btn-primary">
                             Post
@@ -257,6 +284,12 @@ function GoatQcm() {
                     return (
                       <div className={classes.fullcommntary_post}>
                         <div className={classes.showeachpost}>
+                          <div className={classes.username}>
+                            <img src={user} height="50%" width="50" />
+                            <p>
+                              {post.anonyme ? "Anonyme" : post.ourUsers.name}
+                            </p>
+                          </div>
                           <p className={classes.postcontent}>{post.content}</p>
                           <p className={classes.createdAt}>
                             {new Date(post.createdAt).toLocaleString()}
@@ -272,6 +305,7 @@ function GoatQcm() {
                                 <p className={classes.namecommentary}>
                                   {cmt.ourUsers?.name}
                                 </p>
+
                                 <p className={classes.contentcommentary}>
                                   {cmt.content}
                                 </p>
@@ -280,10 +314,9 @@ function GoatQcm() {
                           })}
                         </div>
 
-                        <div className="mt-4">
+                        <div className={classes.addcommment}>
                           <form
                             onSubmit={(e) => handleCommentSubmit(e, post.id)}
-                            className="flex gap-2"
                           >
                             <input
                               type="text"
@@ -295,7 +328,7 @@ function GoatQcm() {
                                 handleCommentChange(post.id, e.target.value)
                               }
                             />
-                            <button type="submit" className="btn btn-success">
+                            <button type="submit" className="btn btn-info">
                               Ajouter
                             </button>
                           </form>
