@@ -445,41 +445,148 @@ function GoatQcm() {
               </div>
 
               <div className={classes.container_phone}>
-                <div className={classes.card_phone}>
-                  <div className={classes.icon_phone}>
-                    <ion-icon className="globe-outline"></ion-icon>
+                <div className={classes.publicationfull_phone}>
+                  <div className={classes.inputeaddcomment_phone}>
+                    <input
+                      type="text"
+                      id="inputPassword5"
+                      className="form-control"
+                      placeholder="À quoi pensez-vous ?"
+                      onClick={() => {
+                        setShowCreatPub(true);
+                      }}
+                    />
                   </div>
-                  <div className={classes.content_phone}>
-                    <h2>+35 Modules</h2>
-                    <p>
-                      Modules de 1ér Année jusqu'à 6éme Année Médecine <br />
-                      Organisée par Cour et par Sujets.
-                    </p>
-                  </div>
-                </div>
-                <div className={classes.card_phone}>
-                  <div className={classes.icon_phone}>
-                    <ion-icon name="diamond-outline"></ion-icon>
-                  </div>
-                  <div className={classes.content_phone}>
-                    <h2>+1 000 Cours</h2>
-                    <p>
-                      Plus de 1 000 Cours des modules d'externat de 1ér Année
-                      jusqu'à 6éme Année Médecine.
-                    </p>
-                  </div>
-                </div>
-                <div className={classes.card_phone}>
-                  <div className={classes.icon_phone}>
-                    <ion-icon name="rocket-outline"></ion-icon>
-                  </div>
-                  <div className={classes.content_phone}>
-                    <h2>+10 000 QCM</h2>
-                    <p>
-                      Plus de 10 000 QCMs , Qcms ,Cas Clinque <br /> des Sujets
-                      d'Externat et de Résidanat
-                    </p>
-                  </div>
+                  {showCreatPub && (
+                    <div
+                      className={classes.fullinputshow_phone}
+                      data-theme={isDark ? "dark" : "light"}
+                    >
+                      <form
+                        onSubmit={(e) => {
+                          e.preventDefault();
+                          handlePostSubmit();
+                          setShowCreatPub(false);
+                        }}
+                      >
+                        <div className={classes.creatposttitle_phone}>
+                          Cree Publication
+                        </div>
+                        <hr className={`${classes.hr_phone} `} />
+                        <div
+                          className={`${classes.anonyme_phone} form-check form-switch_phone vertical-switch_phone  my-2 ms-1`}
+                        >
+                          <input
+                            style={{ width: 15, height: 15 }}
+                            className="form-check-input"
+                            type="checkbox"
+                            role="switch"
+                            id="anonymousSwitch"
+                            checked={newPost.anonymous}
+                            onChange={(e) =>
+                              setNewPost({
+                                ...newPost,
+                                anonyme: e.target.checked,
+                              })
+                            }
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="anonymousSwitch"
+                          >
+                            Post as anonyme
+                          </label>
+                        </div>
+                        <div className={classes.pubtextarea_phone}>
+                          <textarea
+                            className="form-control"
+                            id="exampleFormControlTextarea1"
+                            rows="3"
+                            placeholder="What's on your mind?"
+                            value={newPost.content}
+                            onChange={(e) =>
+                              setNewPost({
+                                ...newPost,
+                                content: e.target.value,
+                              })
+                            }
+                          ></textarea>
+                        </div>
+
+                        <hr className={`${classes.hr_phone} `} />
+
+                        <div className={classes.pustpubbutton_phone}>
+                          <button type="submit" className="btn btn-primary">
+                            Post
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  )}
+                  {[...posts]
+                    .sort(
+                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                    )
+                    .map((post) => {
+                      return (
+                        <div className={classes.fullcommntary_post_phone}>
+                          <div className={classes.showeachpost_phone}>
+                            <div className={classes.username_phone}>
+                              <img src={user} height="30%" width="30" />
+                              <p>
+                                {post.anonyme ? "Anonyme" : post.ourUsers.name}
+                              </p>
+                            </div>
+                            <p className={classes.postcontent_phone}>
+                              {post.content}
+                            </p>
+                            <p className={classes.createdAt_phone}>
+                              {new Date(post.createdAt).toLocaleString()}
+                            </p>
+                            <hr className={`${classes.hr_phone} `} />
+                            {post.comments.map((cmt, indexcmnt) => {
+                              return (
+                                <div
+                                  className={classes.commentdiv_phone}
+                                  key={indexcmnt}
+                                  value={cmt.id}
+                                >
+                                  <p className={classes.namecommentary_phone}>
+                                    {cmt.ourUsers?.name}
+                                  </p>
+
+                                  <p
+                                    className={classes.contentcommentary_phone}
+                                  >
+                                    {cmt.content}
+                                  </p>
+                                </div>
+                              );
+                            })}
+                          </div>
+
+                          <div className={classes.addcommment_phone}>
+                            <form
+                              onSubmit={(e) => handleCommentSubmit(e, post.id)}
+                            >
+                              <input
+                                type="text"
+                                id="inputPassword5"
+                                className="form-control"
+                                placeholder="Ajouter commentaire ?"
+                                value={commentInputs[post.id] || ""}
+                                onChange={(e) =>
+                                  handleCommentChange(post.id, e.target.value)
+                                }
+                              />
+                              <button type="submit" className="btn btn-info">
+                                Ajouter
+                              </button>
+                            </form>
+                          </div>
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -558,7 +665,7 @@ function GoatQcm() {
                 </div>
               </div>
             )}
-
+            {showCreatPub && <Backdrop onCancel={closeModalDoneQuizHandler} />}
             {ShowEnterGmailCode && (
               <Backdrop onCancel={closeModalDoneQuizHandler} />
             )}
