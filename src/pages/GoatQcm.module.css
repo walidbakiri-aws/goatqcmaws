@@ -403,12 +403,14 @@
   width: 700px;
   height: 250px;
   display: flex;
+
   position: fixed;
   transform: translate(-50%, -50%);
-  z-index: 40;
-  float: left;
-  margin-left: 900px;
-  margin-top: -1000px;
+  top: 50%;
+  left: 50%;
+
+  z-index: 20;
+
   border: 2px solid #070707;
   background-color: #e5e5ee;
   border-radius: 10px;
