@@ -604,7 +604,9 @@ function GoatQcm() {
                                   value={cmt.id}
                                 >
                                   <p className={classes.namecommentary_phone}>
-                                    {cmt.ourUsers?.name}
+                                    {cmt.anonyme
+                                      ? "Anonyme"
+                                      : cmt.ourUsers?.name}
                                   </p>
 
                                   <p
