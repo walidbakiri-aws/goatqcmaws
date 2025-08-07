@@ -38,6 +38,7 @@ function GoatQcm() {
   const [posts, setPosts] = useState([]);
   const [newPost, setNewPost] = useState({
     content: "",
+    anonyme: false,
     ourUsers: { id: userIdToken },
   });
   const [commentInputs, setCommentInputs] = useState({});
@@ -152,7 +153,6 @@ function GoatQcm() {
   const handlePostSubmit = async (e) => {
     console.log(newPost);
 
-    console.log(isAnonymous);
     try {
       await axios.post(
         `https://goatqcm-instance.com/publiction/posts`,
@@ -160,7 +160,7 @@ function GoatQcm() {
       );
       setNewPost({
         content: "",
-        anonyme: isAnonymous,
+        anonyme: false,
         ourUsers: { id: userIdToken },
       });
       fetchPosts();
@@ -252,7 +252,7 @@ function GoatQcm() {
                             type="checkbox"
                             role="switch"
                             id="anonymousSwitch"
-                            checked={newPost.anonymous}
+                            checked={newPost.anonyme}
                             onChange={(e) =>
                               setNewPost({
                                 ...newPost,
@@ -349,9 +349,6 @@ function GoatQcm() {
                                   role="switch"
                                   id={`anonymous-${post.id}`}
                                   checked={anonymousFlags[post.id] || false}
-                                  onClick={() => {
-                                    console.log(anonymousFlags[post.id]);
-                                  }}
                                   onChange={() =>
                                     handleAnonymousToggle(post.id)
                                   }
@@ -534,7 +531,7 @@ function GoatQcm() {
                             type="checkbox"
                             role="switch"
                             id="anonymousSwitch"
-                            checked={newPost.anonymous}
+                            checked={newPost.anonyme}
                             onChange={(e) =>
                               setNewPost({
                                 ...newPost,
