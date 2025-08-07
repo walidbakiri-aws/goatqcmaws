@@ -262,6 +262,12 @@
   margin-bottom: 10px;
   width: 100px;
 }
+.input_button {
+  display: flex;
+  padding: 12px;
+
+  background-color: var(--background-color-graywhite_seconde);
+}
 /*********************************************************************/
 .bienvuenwlcm {
   height: 70px;
@@ -813,6 +819,20 @@
   font-size: 13px;
   margin-left: 5px;
 }
+
+.anonymecmntre_phone {
+  margin-top: -5px;
+  width: 200px;
+  height: 10px;
+
+  display: flex;
+  margin-left: 5px;
+}
+.anonymecmntre_phone label {
+  font-size: 13px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
 .showeachpost_phone {
   width: 95%;
   height: auto;
@@ -831,8 +851,13 @@
   color: #636366;
   margin-left: 5px;
 }
+.input_button_phone {
+  display: flex;
+
+  background-color: var(--background-color-graywhite_seconde);
+}
 .addcommment_phone {
-  width: 100%;
+  width: 95%;
   margin-left: 10px;
   border-radius: 15px;
   color: var(--primary-text-color);
@@ -845,7 +870,7 @@
 .addcommment_phone input {
   font-size: 14px; /* Adjust as needed */
   font-weight: 300; /* Regular weight */
-  width: 90%;
+  width: 95%;
   height: 40px;
   background-color: var(--background-color-graywhite);
   color: var(--primary-text-color);
@@ -854,7 +879,7 @@
   margin-top: 5px;
 }
 .addcommment_phone input:focus {
-  width: 90%;
+  width: 80%;
   height: 70px;
   background-color: var(--background-color-graywhite);
   color: var(--primary-text-color);

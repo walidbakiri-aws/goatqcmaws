@@ -13,6 +13,7 @@ import BackdropDoneQuiz from "./BackdropDoneQuiz";
 import Backdrop from "./Backdrop";
 import toast, { Toaster } from "react-hot-toast";
 import user from "../compenent/layout/img/user.png";
+import sendmessage from "../compenent/layout/img/sendmessage.png";
 
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
@@ -40,6 +41,7 @@ function GoatQcm() {
     ourUsers: { id: userIdToken },
   });
   const [commentInputs, setCommentInputs] = useState({});
+  const [anonymousFlags, setAnonymousFlags] = useState({});
   const [showCreatPub, setShowCreatPub] = useState(false);
   useEffect(() => {
     console.log(localStorage.getItem("verificatioeCode"));
@@ -150,12 +152,17 @@ function GoatQcm() {
   const handlePostSubmit = async (e) => {
     console.log(newPost);
 
+    console.log(isAnonymous);
     try {
       await axios.post(
         `https://goatqcm-instance.com/publiction/posts`,
         newPost
       );
-      setNewPost({ content: "", ourUsers: { id: userIdToken } });
+      setNewPost({
+        content: "",
+        anonyme: isAnonymous,
+        ourUsers: { id: userIdToken },
+      });
       fetchPosts();
     } catch (err) {
       console.error("Failed to create post:", err);
@@ -165,18 +172,24 @@ function GoatQcm() {
   const handleCommentChange = (postId, value) => {
     setCommentInputs({ ...commentInputs, [postId]: value });
   };
-
+  const handleAnonymousToggle = (postId) => {
+    setAnonymousFlags((prev) => ({ ...prev, [postId]: !prev[postId] }));
+    console.log(anonymousFlags);
+  };
   const handleCommentSubmit = async (e, postId) => {
     e.preventDefault();
+    const isAnonymouse = anonymousFlags[postId] || false;
     try {
       await axios.post(
         `https://goatqcm-instance.com/publiction/comments/${postId}/user/${userIdToken}`,
         {
           content: commentInputs[postId],
+          anonyme: isAnonymouse,
         }
       );
       setCommentInputs({ ...commentInputs, [postId]: "" });
       fetchPosts();
+      setAnonymousFlags((prev) => ({ ...prev, [postId]: false }));
     } catch (err) {
       console.error("Failed to add comment:", err);
     }
@@ -309,7 +322,9 @@ function GoatQcm() {
                                   value={cmt.id}
                                 >
                                   <p className={classes.namecommentary}>
-                                    {cmt.ourUsers?.name}
+                                    {cmt.anonyme
+                                      ? "Anonyme"
+                                      : cmt.ourUsers?.name}
                                   </p>
 
                                   <p className={classes.contentcommentary}>
@@ -324,19 +339,56 @@ function GoatQcm() {
                             <form
                               onSubmit={(e) => handleCommentSubmit(e, post.id)}
                             >
-                              <input
-                                type="text"
-                                id="inputPassword5"
-                                className="form-control"
-                                placeholder="Ajouter commentaire ?"
-                                value={commentInputs[post.id] || ""}
-                                onChange={(e) =>
-                                  handleCommentChange(post.id, e.target.value)
-                                }
-                              />
-                              <button type="submit" className="btn btn-info">
-                                Ajouter
-                              </button>
+                              <div
+                                className={`${classes.anonyme} form-check form-switch vertical-switch my-2 ms-1`}
+                              >
+                                <input
+                                  style={{ width: 60, height: 30 }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  role="switch"
+                                  id={`anonymous-${post.id}`}
+                                  checked={anonymousFlags[post.id] || false}
+                                  onClick={() => {
+                                    console.log(anonymousFlags[post.id]);
+                                  }}
+                                  onChange={() =>
+                                    handleAnonymousToggle(post.id)
+                                  }
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={`anonymous-${post.id}`}
+                                >
+                                  Commenter en anonyme
+                                </label>
+                              </div>
+                              <div className={classes.input_button}>
+                                <input
+                                  style={{ marginTop: -20 }}
+                                  type="text"
+                                  id="inputPassword5"
+                                  className="form-control"
+                                  placeholder="Ajouter commentaire ?"
+                                  value={commentInputs[post.id] || ""}
+                                  onChange={(e) =>
+                                    handleCommentChange(post.id, e.target.value)
+                                  }
+                                />
+                                <button
+                                  type="submit"
+                                  className="btn p-0 border-0 bg-transparent"
+                                  style={{ marginLeft: -20, marginTop: -20 }}
+                                >
+                                  <img
+                                    src={sendmessage}
+                                    alt="Envoyer"
+                                    height="40"
+                                    width="40"
+                                    style={{ marginTop: 5 }}
+                                  />
+                                </button>
+                              </div>
                             </form>
                           </div>
                         </div>
@@ -569,19 +621,59 @@ function GoatQcm() {
                             <form
                               onSubmit={(e) => handleCommentSubmit(e, post.id)}
                             >
-                              <input
-                                type="text"
-                                id="inputPassword5"
-                                className="form-control"
-                                placeholder="Ajouter commentaire ?"
-                                value={commentInputs[post.id] || ""}
-                                onChange={(e) =>
-                                  handleCommentChange(post.id, e.target.value)
-                                }
-                              />
-                              <button type="submit" className="btn btn-info">
-                                Ajouter
-                              </button>
+                              <div
+                                className={`${classes.anonymecmntre_phone} form-check form-switch vertical-switch my-2 ms-1`}
+                              >
+                                <input
+                                  style={{ width: 40, height: 25 }}
+                                  className="form-check-input"
+                                  type="checkbox"
+                                  role="switch"
+                                  id={`anonymous-${post.id}`}
+                                  checked={anonymousFlags[post.id] || false}
+                                  onClick={() => {
+                                    console.log(anonymousFlags[post.id]);
+                                  }}
+                                  onChange={() =>
+                                    handleAnonymousToggle(post.id)
+                                  }
+                                />
+                                <label
+                                  className="form-check-label"
+                                  htmlFor={`anonymous-${post.id}`}
+                                >
+                                  Commenter en anonyme
+                                </label>
+                              </div>
+                              <div className={classes.input_button_phone}>
+                                <input
+                                  type="text"
+                                  id="inputPassword5"
+                                  className="form-control"
+                                  placeholder="Ajouter commentaire ?"
+                                  value={commentInputs[post.id] || ""}
+                                  onChange={(e) =>
+                                    handleCommentChange(post.id, e.target.value)
+                                  }
+                                />
+                                <button
+                                  type="submit"
+                                  className="btn p-0 border-0 bg-transparent"
+                                  style={{
+                                    marginLeft: 2,
+                                    marginTop: 5,
+                                    width: 20,
+                                  }}
+                                >
+                                  <img
+                                    src={sendmessage}
+                                    alt="Envoyer"
+                                    height="20"
+                                    width="20"
+                                    style={{ marginTop: 5 }}
+                                  />
+                                </button>
+                              </div>
                             </form>
                           </div>
                         </div>
