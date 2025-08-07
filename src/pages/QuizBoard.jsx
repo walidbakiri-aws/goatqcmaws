@@ -20,6 +20,7 @@ import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
 import E from "../compenent/layout/img/E.png";
 
+import pub from "../compenent/layout/img/pub.png";
 import chatgpt from "../compenent/layout/img/chatgpt.png";
 import deepseek from "../compenent/layout/img/deepseek.png";
 import axiosRetry from "axios-retry";
@@ -521,7 +522,12 @@ function QuizBoard(props) {
   const [SaveQcmsCourNameStatique, setSaveQcmsCourNameStatique] = useState([]);
   const [SaveEachLineStatique, setSaveEachLineStatique] = useState([]);
   const newStateEachLineStatique = [];
-
+  const [showCreatPub, setShowCreatPub] = useState(false);
+  const [newPost, setNewPost] = useState({
+    content: "",
+    anonyme: false,
+    ourUsers: { id: userIdToken },
+  });
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
@@ -797,12 +803,9 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(
-        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
-        {
-          method: "POST",
-        }
-      );
+      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
+        method: "POST",
+      });
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2519,6 +2522,7 @@ function QuizBoard(props) {
   function closeModalDoneQuizHandler() {
     setModalDoneQuizIsOpen(false);
     setShowModalStatique(false);
+    setShowCreatPub(false);
   }
   //**************************************************** */
   function handlerConfirmShowAllReponse() {
@@ -2729,22 +2733,18 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
         );
 
-       /* if (fullSessionsListeLength >= 10) {
+        if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
-        }*/
+        }
         if (getSourceBtnSaveQuizzSession === "saveQuizz") {
           navigateHome("/quizz");
         } else if (getSourceBtnSaveQuizzSession === "saveSession") {
@@ -2891,22 +2891,18 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
         );
 
-        if (fullSessionsListeLength >= 10) {
+        /*  if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
-        }
+        }*/
         if (sourceSaveBtn === "saveQuizz") {
           navigateHome("/quizz");
         } else if (sourceSaveBtn === "saveSession") {
@@ -3116,6 +3112,47 @@ function QuizBoard(props) {
     setShowChatGpt(false);
     qcmIdChatGptDeepSeek.value = qcmId;
   };
+
+  const handlePostSubmit = async (e) => {
+    console.log(newPost);
+
+    try {
+      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
+      setNewPost({
+        content: "",
+        anonyme: false,
+        ourUsers: { id: userIdToken },
+      });
+    } catch (err) {
+      console.error("Failed to create post:", err);
+    }
+  };
+  const [inputValue, setInputValue] = useState("");
+  const showPubFunction = async (qcmId) => {
+    setShowCreatPub(true);
+
+    const result = await axios.get(`https://goatqcm-instance.com/qcms/${qcmId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const content = result.data.qcmContent;
+
+    const response = await axios.get(
+      `https://goatqcm-instance.com/qcms/${qcmId}/reponses`
+    );
+    console.log(response.data);
+    const allPropositions = response.data.propositionQcm || [];
+
+    const propTexts = response.data.map((item, index) => {
+      const letter = String.fromCharCode(65 + index); // A=65
+      return `${letter}. ${item.propositionQcm}`;
+    });
+    console.log(propTexts);
+    //setPropositions(propTexts); // ["A. Paroxystique", "B. En coup de poignard", ...]
+
+    //setQcmContent(content);
+    setInputValue(inputValue + content + propTexts); // <-- set in MessageInput
+  };
+
   return (
     <>
       {!OpenBoardClinique && (
@@ -3361,6 +3398,19 @@ function QuizBoard(props) {
                                 <div
                                   className={`${classes.full_note_commentary} `}
                                 >
+                                  <div
+                                    className={`${classes.pubshare} `}
+                                    style={{ marginRight: 5 }}
+                                  >
+                                    <img
+                                      src={pub}
+                                      height="100%"
+                                      width="30"
+                                      onClick={() => {
+                                        showPubFunction(qcm.id);
+                                      }}
+                                    />
+                                  </div>
                                   <div className={`${classes.chatgpt} `}>
                                     <img
                                       src={chatgpt}
@@ -3869,6 +3919,72 @@ function QuizBoard(props) {
                     <DeepSeek qcmId={qcmIdChatGptDeepSeek.value} />
                   </div>
                 )}
+                {showCreatPub && (
+                  <div
+                    className={classes.fullinputshow}
+                    data-theme={isDark ? "dark" : "light"}
+                  >
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        handlePostSubmit();
+                        setShowCreatPub(false);
+                      }}
+                    >
+                      <div className={classes.creatposttitle}>
+                        Cree Publication
+                      </div>
+                      <hr className={`${classes.hr} `} />
+                      <div
+                        className={`${classes.anonyme} form-check form-switch vertical-switch my-2 ms-1`}
+                      >
+                        <input
+                          style={{ width: 60, height: 30 }}
+                          className="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          id="anonymousSwitch"
+                          checked={newPost.anonyme}
+                          onChange={(e) =>
+                            setNewPost({
+                              ...newPost,
+                              anonyme: e.target.checked,
+                            })
+                          }
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="anonymousSwitch"
+                        >
+                          Publie comme anonyme
+                        </label>
+                      </div>
+                      <div className={classes.pubtextarea}>
+                        <textarea
+                          className="form-control"
+                          id="exampleFormControlTextarea1"
+                          rows="3"
+                          placeholder="Ajouter ton question!"
+                          value={newPost.content}
+                          onChange={(e) =>
+                            setNewPost({
+                              ...newPost,
+                              content: e.target.value,
+                            })
+                          }
+                        ></textarea>
+                      </div>
+                      <div className={classes.qcmdisplay}>{inputValue}</div>
+                      <hr className={`${classes.hr} `} />
+
+                      <div className={classes.pustpubbutton}>
+                        <button type="submit" className="btn btn-primary">
+                          Post
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                )}
               </div>
             )}
 
@@ -4071,6 +4187,16 @@ function QuizBoard(props) {
                                     <div
                                       className={`${classes.full_note_commentary_phone} `}
                                     >
+                                      <div className={`${classes.pubcreat} `}>
+                                        <img
+                                          src={pub}
+                                          height="80%"
+                                          width="25"
+                                          onClick={(e) => {
+                                            showPubFunction(qcm.id);
+                                          }}
+                                        />
+                                      </div>
                                       <div
                                         className={`${classes.chatgpt_phone} `}
                                       >
@@ -4613,6 +4739,74 @@ function QuizBoard(props) {
                     )}
                   </div>
                 )}
+                {showCreatPub && (
+                  <div
+                    className={classes.fullinputshow_phone}
+                    data-theme={isDark ? "dark" : "light"}
+                  >
+                    <form
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        handlePostSubmit();
+                        setShowCreatPub(false);
+                      }}
+                    >
+                      <div className={classes.creatposttitle_phone}>
+                        Cree Publication
+                      </div>
+                      <hr className={`${classes.hr_phone} `} />
+                      <div
+                        className={`${classes.anonyme_phone} form-check form-switch vertical-switch my-2 ms-1`}
+                      >
+                        <input
+                          style={{ width: 35, height: 20 }}
+                          className="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          id="anonymousSwitch"
+                          checked={newPost.anonyme}
+                          onChange={(e) =>
+                            setNewPost({
+                              ...newPost,
+                              anonyme: e.target.checked,
+                            })
+                          }
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="anonymousSwitch"
+                        >
+                          anonyme
+                        </label>
+                      </div>
+                      <div className={classes.pubtextarea_phone}>
+                        <textarea
+                          className="form-control"
+                          id="exampleFormControlTextarea1"
+                          rows="3"
+                          placeholder="Ajouter ton question!"
+                          value={newPost.content}
+                          onChange={(e) =>
+                            setNewPost({
+                              ...newPost,
+                              content: e.target.value,
+                            })
+                          }
+                        ></textarea>
+                      </div>
+                      <div className={classes.qcmdisplay_phone}>
+                        {inputValue}
+                      </div>
+                      <hr className={`${classes.hr_phone} `} />
+
+                      <div className={classes.pustpubbutton_phone}>
+                        <button type="submit" className="btn btn-primary">
+                          Post
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                )}
               </div>
             )}
 
@@ -4712,6 +4906,9 @@ function QuizBoard(props) {
             </>
           )}
           {isTabletOrMobile && ModalDoneQuizIsOpen && (
+            <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
+          )}
+          {isTabletOrMobile && showCreatPub && (
             <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
           )}
           {isTabletOrMobile && ModalSaveQuizzIsOpen && (
@@ -4836,6 +5033,10 @@ function QuizBoard(props) {
           {isDesktopOrLaptop && ShowModalStatique && (
             <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
           )}
+          {isDesktopOrLaptop && showCreatPub && (
+            <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
+          )}
+
           {isTabletOrMobile &&
             ShowModalStatique &&
             ShowModalStatiqueParCour && (
@@ -4949,10 +5150,10 @@ function QuizBoard(props) {
           getYear={getYear.value || props.getYear}
           minYearQcm={props.minYearQcm}
           maxYearQcm={props.maxYearQcm}
-          sessionName={props.sessionName}
           getGroupePerm={getGroupePerm.value || props.getGroupePerm}
           minMaxYearParSujetsFinal={props.minMaxYearParSujetsFinal}
           moduleId={props.moduleId}
+          sessionName={props.sessionName}
           ExisteCasClinique={props.ExisteCasClinique}
           SelectedSourceExmn={props.SelectedSourceExmn}
           checkParSjtBiologieClinique={props.checkParSjtBiologieClinique}
