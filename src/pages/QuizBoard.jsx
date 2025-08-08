@@ -803,9 +803,12 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
-        method: "POST",
-      });
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
+        {
+          method: "POST",
+        }
+      );
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2733,9 +2736,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2891,9 +2898,13 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3115,9 +3126,12 @@ function QuizBoard(props) {
 
   const handlePostSubmit = async (e) => {
     console.log(newPost);
-
+    newPost = newPost + inputValue;
     try {
-      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
+      await axios.post(
+        `https://goatqcm-instance.com/publiction/posts`,
+        newPost
+      );
       setNewPost({
         content: "",
         anonyme: false,
@@ -3130,10 +3144,18 @@ function QuizBoard(props) {
   const [inputValue, setInputValue] = useState("");
   const showPubFunction = async (qcmId) => {
     setShowCreatPub(true);
-
-    const result = await axios.get(`https://goatqcm-instance.com/qcms/${qcmId}`, {
-      headers: { Authorization: `Bearer ${token}` },
+    setNewPost({
+      content: "",
+      anonyme: false,
+      ourUsers: { id: userIdToken },
     });
+    setInputValue("");
+    const result = await axios.get(
+      `https://goatqcm-instance.com/qcms/${qcmId}`,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
     const content = result.data.qcmContent;
 
     const response = await axios.get(
@@ -3150,7 +3172,7 @@ function QuizBoard(props) {
     //setPropositions(propTexts); // ["A. Paroxystique", "B. En coup de poignard", ...]
 
     //setQcmContent(content);
-    setInputValue(inputValue + content + propTexts); // <-- set in MessageInput
+    setInputValue(content + propTexts); // <-- set in MessageInput
   };
 
   return (
