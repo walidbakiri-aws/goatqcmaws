@@ -197,6 +197,11 @@
   font-weight: 450; /* Regular weight */
   color: var(--primary-text-color);
   padding: 8px;
+
+  /* Wrapping fixes */
+  overflow-wrap: break-word; /* modern standard */
+  word-break: break-word; /* older support */
+  white-space: normal; /* ensures text can wrap */
 }
 .createdAt {
   font-size: 18px; /* Adjust as needed */
@@ -254,6 +259,10 @@
   font-weight: 200; /* Regular weight */
   color: var(--primary-text-color);
   padding-left: 10px;
+  /* Wrapping fixes */
+  overflow-wrap: break-word; /* modern standard */
+  word-break: break-word; /* older support */
+  white-space: normal; /* ensures text can wrap */
 }
 
 .addcommment button {
@@ -844,6 +853,11 @@
   font-weight: 300; /* Regular weight */
   color: var(--primary-text-color);
   padding: 8px;
+
+  /* Wrapping fixes */
+  overflow-wrap: break-word; /* modern standard */
+  word-break: break-word; /* older support */
+  white-space: normal; /* ensures text can wrap */
 }
 .createdAt_phone {
   font-size: 13px; /* Adjust as needed */
@@ -907,6 +921,10 @@
   font-weight: 200; /* Regular weight */
   color: var(--primary-text-color);
   padding-left: 10px;
+  /* Wrapping fixes */
+  overflow-wrap: break-word; /* modern standard */
+  word-break: break-word; /* older support */
+  white-space: normal; /* ensures text can wrap */
 }
 
 .addcommment_phone button {
