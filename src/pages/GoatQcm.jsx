@@ -227,7 +227,9 @@ function GoatQcm() {
               className={classes.contanerspace}
               data-theme={isDark ? "dark" : "light"}
             >
-              <button id="installBtn">Install App</button>
+              <button id="installBtn" className="btn btn-primary">
+                Install comme Application
+              </button>
               <div className={classes.bienvenulogo_publication}>
                 <div className={classes.bienvenulogo}>
                   <div className={classes.bienvuenwlcm}>
@@ -506,7 +508,9 @@ function GoatQcm() {
               className={classes.contanerspace_phone}
               data-theme={isDark ? "dark" : "light"}
             >
-              <button id="installBtn">Install App</button>
+              <button id="installBtn" className="btn btn-primary">
+                Install comme Application
+              </button>
               <div className={classes.bienvenulogo_phone}>
                 <div className={classes.bienvuenwlcm_phone}>
                   Bienvenue au GoatQcm!
