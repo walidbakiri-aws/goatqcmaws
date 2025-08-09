@@ -33,6 +33,7 @@ function DriversYearsLinks() {
 
   useEffect(() => {
     console.log(yearMed);
+    console.log(yearMed);
   }, []);
   //******************************************************************* */
   const yearsName = {
