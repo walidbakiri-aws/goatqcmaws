@@ -523,7 +523,7 @@ function QuizBoard(props) {
   const [SaveEachLineStatique, setSaveEachLineStatique] = useState([]);
   const newStateEachLineStatique = [];
   const [showCreatPub, setShowCreatPub] = useState(false);
-  const [newPost, setNewPost] = useState({
+  let [newPost, setNewPost] = useState({
     content: "",
     anonyme: false,
     ourUsers: { id: userIdToken },
@@ -3141,7 +3141,7 @@ function QuizBoard(props) {
       console.error("Failed to create post:", err);
     }
   };
-  const [inputValue, setInputValue] = useState("");
+  let [inputValue, setInputValue] = useState("");
   const showPubFunction = async (qcmId) => {
     setShowCreatPub(true);
     setNewPost({

@@ -1,4 +1,4 @@
-package com.goatqcm.app;
+package com.goatqcm.dz;
 
 import com.getcapacitor.BridgeActivity;
 
