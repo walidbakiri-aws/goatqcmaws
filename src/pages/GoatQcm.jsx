@@ -60,6 +60,27 @@ function GoatQcm() {
     }
     return () => clearTimeout(timer);
   }, [cooldown]);
+  let deferredPrompt;
+
+  window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    showInstallButton();
+  });
+  function showInstallButton() {
+    const btn = document.getElementById("installBtn");
+    btn.style.display = "block";
+
+    btn.addEventListener("click", async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+
+      // Reset so it can appear again next visit
+      deferredPrompt = null;
+      btn.style.display = "none";
+    });
+  }
   const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
@@ -206,6 +227,7 @@ function GoatQcm() {
               className={classes.contanerspace}
               data-theme={isDark ? "dark" : "light"}
             >
+              <button id="installBtn">Install App</button>
               <div className={classes.bienvenulogo_publication}>
                 <div className={classes.bienvenulogo}>
                   <div className={classes.bienvuenwlcm}>
@@ -484,6 +506,7 @@ function GoatQcm() {
               className={classes.contanerspace_phone}
               data-theme={isDark ? "dark" : "light"}
             >
+              <button id="installBtn">Install App</button>
               <div className={classes.bienvenulogo_phone}>
                 <div className={classes.bienvuenwlcm_phone}>
                   Bienvenue au GoatQcm!
