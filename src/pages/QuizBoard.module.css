@@ -619,7 +619,7 @@
   height: 70px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 30px; /* Adjust as needed */
-  font-weight: 450; /* Regular weight */
+  font-weight: 350; /* Regular weight */
   padding-left: 37%;
   margin-top: 10px;
 }
@@ -890,7 +890,7 @@
 .qcmfeild_phone p {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px; /* Adjust as needed */
-  font-weight: 450; /* Regular weight */
+  font-weight: 350; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -906,7 +906,7 @@
   padding: 3px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px; /* Adjust as needed */
-  font-weight: 400; /* Regular weight */
+  font-weight: 350; /* Regular weight */
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;

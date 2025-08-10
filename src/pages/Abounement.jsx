@@ -104,6 +104,8 @@ function Abounement(props) {
 
   return (
     <>
+  {isDesktopOrLaptop && (
+        <>
       {VisibleAbounemet && (
         <div className={classes.abncard}>
           <div className={`${classes.cardabnprincipale} card py-1`}>
@@ -141,7 +143,48 @@ function Abounement(props) {
             </table>
           </div>
         </div>
-      )}
+      )}</>)} 
+      {isTabletOrMobile && (
+        <>
+      {VisibleAbounemet && (
+        <div className={classes.abncard_phone}>
+          <div className={`${classes.cardabnprincipale_phone} card py-1`}>
+            <table className="table border shadow">
+              <thead>
+                <tr>
+                  <th scope="col">Abounement</th>
+                  <th scope="col">Prix</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {abounementInf.map((abounement, index) => (
+                  <tr key={index}>
+                    <td>
+                      <h5>{abounement.nameAbn}</h5>
+                    </td>
+                    <td>
+                      <h5 style={{ color: "#318CE7" }}>
+                        {abounement.priceAbn}
+                      </h5>
+                    </td>
+                    <td>
+                      <button
+                      
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={(e) => handleAbounerBtn(index)}
+                      >
+                        Abouner
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}</>)} 
       {VisibleValideAbounemet && (
         <div className={`${classes.valideabncontainer} card text-center`}>
           <div className="card-header">

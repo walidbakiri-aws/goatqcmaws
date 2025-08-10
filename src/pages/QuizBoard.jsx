@@ -3124,14 +3124,14 @@ function QuizBoard(props) {
     qcmIdChatGptDeepSeek.value = qcmId;
   };
 
+  
   const handlePostSubmit = async (e) => {
-    console.log(newPost);
-    newPost = newPost + inputValue;
+    console.log(userIdToken)
+    newPost.ourUsers= { id: userIdToken };
+    newPost.content =newPost.content+   inputValue;
+    console.log( newPost);
     try {
-      await axios.post(
-        `https://goatqcm-instance.com/publiction/posts`,
-        newPost
-      );
+      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
       setNewPost({
         content: "",
         anonyme: false,
@@ -3143,36 +3143,33 @@ function QuizBoard(props) {
   };
   let [inputValue, setInputValue] = useState("");
   const showPubFunction = async (qcmId) => {
+    setInputValue("");
     setShowCreatPub(true);
     setNewPost({
       content: "",
       anonyme: false,
       ourUsers: { id: userIdToken },
     });
-    setInputValue("");
-    const result = await axios.get(
-      `https://goatqcm-instance.com/qcms/${qcmId}`,
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      }
-    );
-    const content = result.data.qcmContent;
+    let result = await axios.get(`https://goatqcm-instance.com/qcms/${qcmId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    let contentqcm = result.data.qcmContent;
 
-    const response = await axios.get(
+    let response = await axios.get(
       `https://goatqcm-instance.com/qcms/${qcmId}/reponses`
     );
     console.log(response.data);
-    const allPropositions = response.data.propositionQcm || [];
+    let allPropositions = response.data.propositionQcm || [];
 
     const propTexts = response.data.map((item, index) => {
-      const letter = String.fromCharCode(65 + index); // A=65
+      let letter = String.fromCharCode(65 + index); // A=65
       return `${letter}. ${item.propositionQcm}`;
     });
     console.log(propTexts);
     //setPropositions(propTexts); // ["A. Paroxystique", "B. En coup de poignard", ...]
 
     //setQcmContent(content);
-    setInputValue(content + propTexts); // <-- set in MessageInput
+    setInputValue(contentqcm + propTexts); // <-- set in MessageInput
   };
 
   return (

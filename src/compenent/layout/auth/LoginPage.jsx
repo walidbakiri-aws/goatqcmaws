@@ -352,7 +352,7 @@ function LoginPage() {
         {isDesktopOrLaptop && (
           <div className={classes.fullloginpage}>
             <div className={classes.child_phone}>
-              <button onClick={testbtn}>test</button>
+           
               <div className={classes.logoimage}>
                 <img src={logologingoat}></img>
               </div>
