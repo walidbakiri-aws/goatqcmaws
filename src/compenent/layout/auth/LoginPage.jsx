@@ -332,16 +332,18 @@ function LoginPage() {
                   </button>
                 </div>
               </form>
-
-              <button
-                className={classes.button_instagram}
-                style={{ marginTop: 10 }}
-                type="button"
-                href="/register"
-                onClick={handleResiterBtn}
-              >
-                S'inscrit
-              </button>
+              <div className={classes.creenvcompte_phone}>
+                <p> Pas encore inscrit ?</p>
+                <p
+                  style={{
+                    cursor: "pointer",
+                    color: "blue", // keep text color like normal text
+                  }}
+                  onClick={handleResiterBtn}
+                >
+                  Créez votre compte !
+                </p>
+              </div>
             </div>
           </div>
         )}
@@ -349,6 +351,7 @@ function LoginPage() {
         {isDesktopOrLaptop && (
           <div className={classes.fullloginpage}>
             <div className={classes.child_phone}>
+              <button onClick={testbtn}>test</button>
               <div className={classes.logoimage}>
                 <img src={logologingoat}></img>
               </div>
@@ -441,16 +444,18 @@ function LoginPage() {
                     </button>
                   </div>
                 </form>
-                <div className={classes.registertbn}>
-                  <button
-                    className="btn btn-success"
-                    style={{ marginTop: 10 }}
-                    type="button"
-                    href="/register"
+
+                <div className={classes.creenvcompte}>
+                  <p> Pas encore inscrit ?</p>
+                  <p
+                    style={{
+                      cursor: "pointer",
+                      color: "blue", // keep text color like normal text
+                    }}
                     onClick={handleResiterBtn}
                   >
-                    S'inscrit
-                  </button>
+                    Créez votre compte !
+                  </p>
                 </div>
               </div>
             </div>
