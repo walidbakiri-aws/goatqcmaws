@@ -216,7 +216,6 @@ function LoginPage() {
     } catch (error) {
       console.error("failed to fetch IP:", error);
     }
-    console.log("walid");
   };
   //****************************************************************** */
   //**update login etate active********************************
@@ -333,7 +332,8 @@ function LoginPage() {
                   </button>
                 </div>
               </form>
-              <div className={classes.creenvcompte_phone}>
+
+               <div className={classes.creenvcompte_phone}>
                 <p> Pas encore inscrit ?</p>
                 <p
                   style={{
@@ -352,7 +352,6 @@ function LoginPage() {
         {isDesktopOrLaptop && (
           <div className={classes.fullloginpage}>
             <div className={classes.child_phone}>
-           
               <div className={classes.logoimage}>
                 <img src={logologingoat}></img>
               </div>
@@ -445,19 +444,18 @@ function LoginPage() {
                     </button>
                   </div>
                 </form>
-
-                <div className={classes.creenvcompte}>
-                  <p> Pas encore inscrit ?</p>
-                  <p
-                    style={{
-                      cursor: "pointer",
-                      color: "blue", // keep text color like normal text
-                    }}
-                    onClick={handleResiterBtn}
-                  >
-                    Créez votre compte !
-                  </p>
-                </div>
+               <div className={classes.creenvcompte}>
+                <p> Pas encore inscrit ?</p>
+                <p
+                  style={{
+                    cursor: "pointer",
+                    color: "blue", // keep text color like normal text
+                  }}
+                  onClick={handleResiterBtn}
+                >
+                  Créez votre compte !
+                </p>
+              </div>
               </div>
             </div>
           </div>
