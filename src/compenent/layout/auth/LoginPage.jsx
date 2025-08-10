@@ -216,6 +216,7 @@ function LoginPage() {
     } catch (error) {
       console.error("failed to fetch IP:", error);
     }
+    console.log("walid");
   };
   //****************************************************************** */
   //**update login etate active********************************
