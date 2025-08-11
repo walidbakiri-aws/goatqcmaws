@@ -190,7 +190,8 @@ function Abounement(props) {
           )}
         </>
       )}
-      {VisibleValideAbounemet && (
+
+      {VisibleValideAbounemet && isDesktopOrLaptop && (
         <div className={`${classes.valideabncontainer} card text-center`}>
           <div className="card-header">
             <h5>Abounemet validation</h5>
@@ -229,7 +230,45 @@ function Abounement(props) {
           </div>
         </div>
       )}
-
+      {VisibleValideAbounemet && isTabletOrMobile && (
+        <div className={`${classes.valideabncontainer_phone} card text-center`}>
+          <div className="card-header">
+            <h5>Abounemet validation</h5>
+          </div>
+          <div className="card-body">
+            <h5 className="card-title">Methode de paiement</h5>
+            <div className={`${classes.paymentdiv_phone} `}>
+              <ul style={{ color: "#3457D5" }}>
+                <h6> Paiment avec Baridi</h6>
+                <li className="list-group-item" style={{ color: "#000000" }}>
+                  <h6>RIP : 00799999001630355448</h6>
+                </li>
+                <h6> Paiment avec CCP</h6>
+                <li className="list-group-item" style={{ color: "#000000" }}>
+                  <h6>CCP : 16303554 clé 90 Bakiri walid</h6>
+                </li>
+              </ul>
+              <ul style={{ color: "#3457D5" }}>
+                <h6>2-A fin de terminer le paiment clicki sur Confirmer</h6>
+              </ul>
+            </div>
+            <a
+              href="/home"
+              style={{ marginRight: 10 }}
+              className="btn btn-danger"
+            >
+              Cancel
+            </a>
+            <button
+              type="button"
+              onClick={() => handleVaildeAbn()}
+              className="btn btn-primary"
+            >
+              Confirmer
+            </button>
+          </div>
+        </div>
+      )}
       <Toaster />
     </>
   );
