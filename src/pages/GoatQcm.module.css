@@ -605,7 +605,7 @@
 }
 
 :root {
-  --background-color: #fffbfb;
+  --background-color: #ffffff;
   --background-color-full: #ffffff;
   --background-color-graywhite: #f1ecec;
   --background-color-graywhite_seconde: #f1ecec;
@@ -613,9 +613,9 @@
   --background-modulename-color: rgb(37, 176, 233, 0.9);
   --foreground-color: #3c8eec;
   --primary-text-color-info: #252424;
-  --primary-text-color: #252424;
+  --primary-text-color: #141414;
   --secondary-text-color: #f6f6f6;
-  --primary-text-color-propo: #252424;
+  --primary-text-color-propo: #141414;
   --toggle-bg: #f6f6f6;
   --toggle-fg: #eefa4c;
 }
