@@ -14,7 +14,8 @@ import Backdrop from "./Backdrop";
 import toast, { Toaster } from "react-hot-toast";
 import user from "../compenent/layout/img/user.png";
 import sendmessage from "../compenent/layout/img/sendmessage.png";
-
+import ios from "../compenent/layout/img/ios.png";
+import android from "../compenent/layout/img/android.png";
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
@@ -44,6 +45,8 @@ function GoatQcm() {
   const [commentInputs, setCommentInputs] = useState({});
   const [anonymousFlags, setAnonymousFlags] = useState({});
   const [showCreatPub, setShowCreatPub] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   useEffect(() => {
     console.log(localStorage.getItem("verificatioeCode"));
     if (localStorage.getItem("verificatioeCode") == "true") {
@@ -51,7 +54,37 @@ function GoatQcm() {
     } else {
       getUserAdressIp();
     }
+
+    const isIOS = /iphone|ipad|ipod/.test(
+      window.navigator.userAgent.toLowerCase()
+    );
+    const isInStandalone =
+      "standalone" in window.navigator && window.navigator.standalone;
+    const dismissed = localStorage.getItem("ios-install-dismissed") === "true";
+    const isSafari = /^((?!chrome|android).)*safari/i.test(
+      window.navigator.userAgent
+    );
+
+    if (isIOS && !isInStandalone && !dismissed && isSafari) {
+      setVisible(true);
+    }
+
+    if (!document.querySelector('meta[name="mobile-web-app-capable"]')) {
+      const metaTag = document.createElement("meta");
+      metaTag.name = "mobile-web-app-capable";
+      metaTag.content = "yes";
+      document.head.appendChild(metaTag);
+    }
   }, []);
+
+  const handleInstallClick = () => {
+    alert(
+      'On iOS: Tap the Share button in Safari, then choose "Add to Home Screen".'
+    );
+    localStorage.setItem("ios-install-dismissed", "true");
+    setVisible(false);
+  };
+
   useEffect(() => {
     fetchPosts();
     let timer;
@@ -227,9 +260,6 @@ function GoatQcm() {
               className={classes.contanerspace}
               data-theme={isDark ? "dark" : "light"}
             >
-              <button id="installBtn" className="btn btn-primary">
-                Install comme Application
-              </button>
               <div className={classes.bienvenulogo_publication}>
                 <div className={classes.bienvenulogo}>
                   <div className={classes.bienvuenwlcm}>
@@ -508,9 +538,15 @@ function GoatQcm() {
               className={classes.contanerspace_phone}
               data-theme={isDark ? "dark" : "light"}
             >
-              <button id="installBtn" className="btn btn-primary">
-                Install comme Application
-              </button>
+              <div className={classes.androidios_phone}>
+                <img src={android} height="30%" width="20" id="installBtn" />
+                <img
+                  src={ios}
+                  height="30%"
+                  width="20"
+                  onClick={handleInstallClick}
+                />
+              </div>
               <div className={classes.bienvenulogo_phone}>
                 <div className={classes.bienvuenwlcm_phone}>
                   Bienvenue au GoatQcm!
@@ -613,6 +649,7 @@ function GoatQcm() {
                                 {post.anonyme ? "Anonyme" : post.ourUsers.name}
                               </p>
                             </div>
+
                             <p className={classes.postcontent_phone}>
                               {post.content}
                             </p>

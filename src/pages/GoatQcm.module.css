@@ -457,7 +457,10 @@
   background-color: var(--background-color-full);
   margin-top: 20px;
 }
-
+.androidios_phone {
+  display: flex;
+  margin-left: 50%;
+}
 .bienvenulogo_phone {
   width: 100%;
   height: 70px;
@@ -605,7 +608,7 @@
 }
 
 :root {
-  --background-color: #ffffff;
+  --background-color: #fffbfb;
   --background-color-full: #ffffff;
   --background-color-graywhite: #f1ecec;
   --background-color-graywhite_seconde: #f1ecec;
@@ -613,9 +616,9 @@
   --background-modulename-color: rgb(37, 176, 233, 0.9);
   --foreground-color: #3c8eec;
   --primary-text-color-info: #252424;
-  --primary-text-color: #141414;
+  --primary-text-color: #252424;
   --secondary-text-color: #f6f6f6;
-  --primary-text-color-propo: #141414;
+  --primary-text-color-propo: #252424;
   --toggle-bg: #f6f6f6;
   --toggle-fg: #eefa4c;
 }
