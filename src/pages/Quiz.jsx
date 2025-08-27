@@ -690,7 +690,6 @@ function Quiz() {
               );
 
               if (result.data.length > 0) {
-                console.log(minYearMultipleCoursClinique.length);
                 setExisteCasClinique(true);
                 console.log("setVisibleCommenceBtn");
                 setVisibleCommenceBtn(true);
@@ -700,8 +699,8 @@ function Quiz() {
               console.log("Cours not selected");
             }
             inc++;
-            if (inc === minYearMultipleCoursClinique.length) {
-              console.log(minYearMultipleCoursClinique.length);
+
+            if (inc === selectMultipleCoursClinique.length) {
               console.log("setVisibleCommenceBtn");
               setExisteCasClinique(false);
               setVisibleCommenceBtn(true);
