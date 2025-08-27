@@ -622,7 +622,7 @@ function Quiz() {
                   headers: { Authorization: `Bearer ${token}` },
                 }
               );
-              if (result.data) {
+              if (result.data.length > 0) {
                 console.log(selectMultipleCours[inc]);
                 existQcmMultpleCour = true;
                 console.log(existQcmMultpleCour);
@@ -685,7 +685,8 @@ function Quiz() {
                 }
               );
 
-              if (result.data) {
+              if (result.data.length > 0) {
+                console.log(result.data);
                 console.log(selectMultipleCoursClinique[inc]);
                 existCliniqueMultpleCour = true;
 
@@ -786,9 +787,10 @@ function Quiz() {
                 headers: { Authorization: `Bearer ${token}` },
               }
             );
-
-            checkSpecifiqueYearExiste.value = result.data;
-            console.log(checkSpecifiqueYearExiste.value.length);
+            if (result.data.length > 0) {
+              checkSpecifiqueYearExiste.value = result.data;
+              console.log(checkSpecifiqueYearExiste.value.length);
+            }
           } catch {}
         }
         try {
