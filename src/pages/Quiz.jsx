@@ -699,7 +699,7 @@ function Quiz() {
               console.log("Cours not selected");
             }
             inc++;
-            if (inc === minYearMultipleCoursClinique.lengt) {
+            if (inc === minYearMultipleCoursClinique.length) {
               console.log(minYearMultipleCoursClinique.length);
               console.log("setVisibleCommenceBtn");
               setExisteCasClinique(false);
