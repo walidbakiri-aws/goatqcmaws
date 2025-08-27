@@ -694,6 +694,7 @@ function Quiz() {
                 setExisteCasClinique(true);
                 console.log("setVisibleCommenceBtn");
                 setVisibleCommenceBtn(true);
+                existCliniqueMultpleCour = true;
               }
             } catch {
               console.log("Cours not selected");
