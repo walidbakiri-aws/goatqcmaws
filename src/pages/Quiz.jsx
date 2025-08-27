@@ -1133,17 +1133,22 @@ function Quiz() {
       setShowWarning(false);
     }
     if (MinYearValue.length === 1) {
-      setShowSelectWarning(true);
-      valid = false;
-      console.log("not select");
+      if (QcmSujetTypeSelected.value === "Par Cour") {
+        setShowSelectWarning(true);
+        valid = false;
+        console.log("not select");
+      }
     } else {
       setShowSelectWarning(false);
       console.log("is select");
     }
+
     if (MaxYearValue.length === 1) {
-      setShowSelectWarningMaxYear(true);
-      valid = false;
-      console.log("not select");
+      if (QcmSujetTypeSelected.value === "Par Cour") {
+        setShowSelectWarningMaxYear(true);
+        valid = false;
+        console.log("not select");
+      }
     } else {
       setShowSelectWarningMaxYear(false);
       console.log("is select");
