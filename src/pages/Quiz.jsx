@@ -83,6 +83,8 @@ function Quiz() {
   let minMaxYearParSujetsFinal = useSignal([]);
   const [MinYearValue, setMinYearValue] = useState("");
   const [MaxYearValue, setMaxYearValue] = useState("");
+  let getMinYearValue = useSignal("");
+  let getMaxYearValue = useSignal("");
   const [VisibleQcmType, setVisibleQcmType] = useState(true);
   const [VisibleParCourDiv, setVisibleParCourDiv] = useState(true);
   const [VisibleMinMaxYear, setVisibleMinMaxYear] = useState(true);
@@ -115,6 +117,8 @@ function Quiz() {
   const [sessionName, setSessionName] = useState("");
   const [showWarning, setShowWarning] = useState(false);
   const [showSelectWarning, setShowSelectWarning] = useState(false);
+  let checkSpecifiqueYearExiste = useSignal("");
+  let selectBgnEndYear = useSignal(false);
   const [showSelectWarningMaxYear, setShowSelectWarningMaxYear] =
     useState(false);
 
@@ -425,11 +429,18 @@ function Quiz() {
   //****************************************************************************/
   //*******handle handleChangeCours************************************************
   const handleSelectAllCours = async (e) => {
-    setVisibleMinMaxYear(false);
+    document.getElementById("Qcm").checked = false;
+    document.getElementById("Cas Clinique").checked = false;
+    document.getElementById("Tous (Qcm,Cas Clinique)").checked = false;
+    isMultipleCours.value === true;
     console.log(AllCours.length);
     //****get single cour****************************************************** */
     if (e.target.checked) {
       setSelectMultipleCours([
+        ...SelectedCours,
+        ...AllCours.map((course) => String(course.id)),
+      ]);
+      setSelectMultipleCoursClinique([
         ...SelectedCours,
         ...AllCours.map((course) => String(course.id)),
       ]);
@@ -538,7 +549,320 @@ function Quiz() {
     }
     //************************************************************************ */
   };
-  //****************************************************************************** */
+  //****************************************************************************** */*
+  //**load Proposition***************************************************************
+  const loadMinMaxYears = async () => {
+    //***is select multiple cours ****************** */
+
+    console.log(selectMultipleCours);
+    console.log(selectMultipleCoursClinique);
+    console.log(QcmTypeSelected.value);
+    console.log("residanat we here");
+    minMaxYear = [{}];
+    if (selectMultipleCours.length > 1) {
+      isMultipleCours.value = true;
+    } else if (selectMultipleCours.length === 1) {
+      isMultipleCours.value = false;
+    }
+    //*********************************************** */
+    console.log(isMultipleCours.value);
+    console.log(SelectedCoursCommencerBtn);
+
+    if (isMultipleCours.value === true) {
+      console.log("multiple");
+      if (QcmTypeSelected.value === "Qcm") {
+        try {
+          console.log(minYearMultipleCours);
+          console.log(maxYearMultipleCours);
+
+          let MinMaxMultipleFinal = [];
+          MinMaxMultipleFinal[0] = Math.min(...minYearMultipleCours).toString();
+          MinMaxMultipleFinal[1] = Math.max(...maxYearMultipleCours).toString();
+
+          minMaxYear = MinMaxMultipleFinal;
+          setVisibleCommenceBtn(true);
+          console.log(minMaxYear);
+        } catch {
+          console.log("Cours not selected");
+        }
+      } else if (QcmTypeSelected.value === "Cas Clinique") {
+        try {
+          console.log(minYearMultipleCoursClinique);
+          console.log(maxYearMultipleCoursClinique);
+
+          let MinMaxMultipleFinalClinique = [];
+          MinMaxMultipleFinalClinique[0] = Math.min(
+            ...minYearMultipleCoursClinique
+          ).toString();
+          MinMaxMultipleFinalClinique[1] = Math.max(
+            ...maxYearMultipleCoursClinique
+          ).toString();
+
+          minMaxYear = MinMaxMultipleFinalClinique;
+          setExisteCasClinique(true);
+          setVisibleCommenceBtn(true);
+          console.log(minMaxYear);
+        } catch {
+          console.log("Cours not selected");
+        }
+      } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
+        console.log("casss clnq");
+        let existQcmMultpleCour = false;
+        if (selectBgnEndYear.value === true) {
+          let inc = 0;
+
+          while (
+            inc < selectMultipleCours.length &&
+            existQcmMultpleCour === false
+          ) {
+            try {
+              const result = await axios.get(
+                `https://goatqcm-instance.com/cours/${selectMultipleCours[inc]}/qcms/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              );
+              if (result.data) {
+                console.log(selectMultipleCours[inc]);
+                existQcmMultpleCour = true;
+                console.log(existQcmMultpleCour);
+              }
+            } catch {
+              console.log("Cours not selected");
+            }
+            inc++;
+          }
+        }
+
+        console.log("we here");
+        //****check if qcm existe************************************* */
+        if (selectBgnEndYear.value === true) {
+          console.log(minYearMultipleCours);
+          if (QcmSujetTypeSelected.value === "Par Cour") {
+            if (existQcmMultpleCour === true) {
+              ExisteQcmInTous.value = true;
+            } else {
+              QcmTypeSelected.value = "Cas Clinique";
+              ExisteQcmInTous.value = false;
+            }
+          }
+        }
+        //*********************************************************** */
+        let minYear = [];
+        let maxYear = [];
+
+        minYear[0] = Math.min(...minYearMultipleCours).toString();
+        minYear[1] = Math.min(...minYearMultipleCoursClinique).toString();
+
+        maxYear[0] = Math.max(...maxYearMultipleCours).toString();
+        maxYear[1] = Math.max(...maxYearMultipleCoursClinique).toString();
+        console.log(minYear);
+        console.log(maxYear);
+
+        let MinMaxMultipleFinalClinique = [];
+        MinMaxMultipleFinalClinique[0] = Math.min(...minYear).toString();
+        MinMaxMultipleFinalClinique[1] = Math.max(...maxYear).toString();
+        console.log(minYearMultipleCoursClinique);
+        console.log(maxYearMultipleCoursClinique);
+
+        minMaxYear = MinMaxMultipleFinalClinique;
+        console.log(minMaxYear);
+        let existCliniqueMultpleCour = false;
+
+        if (selectBgnEndYear.value === true) {
+          console.log(selectMultipleCoursClinique.length);
+          let inc = 0;
+
+          while (
+            inc < selectMultipleCoursClinique.length &&
+            existCliniqueMultpleCour === false
+          ) {
+            try {
+              const result = await axios.get(
+                `https://goatqcm-instance.com/cours/${selectMultipleCoursClinique[inc]}/qcmsclinique/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
+                {
+                  headers: { Authorization: `Bearer ${token}` },
+                }
+              );
+
+              if (result.data) {
+                console.log(selectMultipleCoursClinique[inc]);
+                existCliniqueMultpleCour = true;
+
+                console.log(existCliniqueMultpleCour);
+              }
+            } catch {
+              console.log("Cours not selected");
+            }
+            inc++;
+          }
+        }
+        if (existCliniqueMultpleCour === true) {
+          console.log(minYearMultipleCoursClinique.length);
+          setExisteCasClinique(true);
+          setVisibleCommenceBtn(true);
+        } else if (existCliniqueMultpleCour === false) {
+          console.log(minYearMultipleCoursClinique.length);
+          setExisteCasClinique(false);
+          setVisibleCommenceBtn(true);
+        }
+        /* setMinYearValue(minMaxYear[0]);
+        setMaxYearValue(minMaxYear[1]);*/
+      }
+    } else if (isMultipleCours.value === false) {
+      console.log("we jst select one cour");
+      if (QcmTypeSelected.value === "Qcm") {
+        try {
+          const result = await axios.get(
+            `https://goatqcm-instance.com/qcms/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          minMaxYear = result.data;
+          setVisibleCommenceBtn(true);
+          console.log(minMaxYear);
+        } catch {
+          console.log("Cours not selected");
+        }
+      } else if (QcmTypeSelected.value === "Cas Clinique") {
+        try {
+          const result = await axios.get(
+            `https://goatqcm-instance.com/casclinique/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          minMaxYear = result.data;
+          setVisibleCommenceBtn(true);
+          setExisteCasClinique(true);
+          console.log(minMaxYear);
+        } catch {
+          console.log("Cours not selected");
+        }
+      } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
+        console.log("we jst select one cr");
+        console.log(MinYearValue.length);
+        console.log(MaxYearValue.length);
+        if (selectBgnEndYear.value === true) {
+          try {
+            const result = await axios.get(
+              `https://goatqcm-instance.com/qcms/get_minmax_year/specefique/${SelectedCours[0]}/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
+            console.log(result.data);
+            if (QcmSujetTypeSelected.value === "Par Cour") {
+              ExisteQcmInTous.value = true;
+            }
+            console.log(minMaxYear);
+          } catch {
+            if (QcmSujetTypeSelected.value === "Par Cour") {
+              QcmTypeSelected.value = "Cas Clinique";
+              ExisteQcmInTous.value = false;
+            }
+            console.log("Cours not selected");
+          }
+        }
+
+        let minQcmYear = [];
+        let minCliniqueYear = [];
+        try {
+          const result = await axios.get(
+            `https://goatqcm-instance.com/qcms/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          minQcmYear = result.data;
+          console.log(result.data);
+        } catch {}
+        if (selectBgnEndYear.value === true) {
+          try {
+            const result = await axios.get(
+              `https://goatqcm-instance.com/casclinique/get_minmax_year/specefique/${SelectedCours[0]}/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
+              {
+                headers: { Authorization: `Bearer ${token}` },
+              }
+            );
+
+            checkSpecifiqueYearExiste.value = result.data;
+            console.log(checkSpecifiqueYearExiste.value.length);
+          } catch {}
+        }
+        try {
+          const result = await axios.get(
+            `https://goatqcm-instance.com/casclinique/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+
+          minCliniqueYear = result.data;
+          console.log(minCliniqueYear);
+        } catch {
+          console.log("Cours not selected");
+        }
+
+        let minYear = [];
+        let maxYear = [];
+
+        minYear[0] = Math.min(...minQcmYear).toString();
+        minYear[1] = Math.min(...minCliniqueYear).toString();
+
+        maxYear[0] = Math.max(...minQcmYear).toString();
+        maxYear[1] = Math.max(...minCliniqueYear).toString();
+        console.log(minYear);
+        console.log(maxYear);
+        console.log(minCliniqueYear);
+        if (checkSpecifiqueYearExiste.value.length > 1) {
+          console.log(checkSpecifiqueYearExiste.value.length);
+          setExisteCasClinique(true);
+          setVisibleCommenceBtn(true);
+        } else if (checkSpecifiqueYearExiste.value.length === 0) {
+          console.log(checkSpecifiqueYearExiste.value.length);
+          setExisteCasClinique(false);
+          setVisibleCommenceBtn(true);
+        }
+        let MinMaxMultipleFinalClinique = [];
+        MinMaxMultipleFinalClinique[0] = Math.min(...minYear).toString();
+        MinMaxMultipleFinalClinique[1] = Math.max(...maxYear).toString();
+
+        minMaxYear = MinMaxMultipleFinalClinique;
+        console.log(minMaxYear);
+        /*setMinYearValue(minMaxYear[0]);
+        setMaxYearValue(minMaxYear[1]);*/
+      }
+    }
+
+    //***************get min max of table year********************************** */
+    let maxIndex = 0;
+    console.log(minMaxYear);
+    //**get max fin indice********************* */
+    for (let i = 0; i < years.length; i++) {
+      if (years[i] === minMaxYear[1]) {
+        maxIndex = i;
+      }
+    }
+    //**************************************** */
+
+    let incMin = 0;
+    console.log(minMaxYear[0]);
+    for (let i = 0; i < years.length; i++) {
+      if (years[i] === minMaxYear[0]) {
+        for (let inc = i; inc <= maxIndex; inc++) {
+          minYearSaved[incMin] = years[inc];
+          console.log();
+          incMin++;
+        }
+      }
+    }
+    console.log(minYearSaved);
+    setMinMaxYearFinal(minYearSaved);
+    //******end upload ***************************************************** */
+  };
+  //********************************************************************** */
   //*******qcm casclinique toutes************************************************
   const handleRadioQcmType = (e) => {
     console.log(SelectedCoursCommencerBtn);
@@ -555,8 +879,8 @@ function Quiz() {
         setVisibleMinMaxYear(true);
       } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
         loadMinMaxYears();
-
-        setVisibleMinMaxYear(false);
+        console.log(QcmTypeSelected.value);
+        // setVisibleMinMaxYear(false);
       }
     } else if (QcmSujetTypeSelected.value === "Par Sujet") {
       if (QcmTypeSelected.value !== "Tous (Qcm,Cas Clinique)") {
@@ -767,242 +1091,64 @@ function Quiz() {
     console.log(minMaxYearParSujetsFinal.value);
   };
   //*************************************************************************** */
-  //**load Proposition***************************************************************
-  const loadMinMaxYears = async () => {
-    //***is select multiple cours ****************** */
-    console.log("residanat we here");
-    minMaxYear = [{}];
-    if (selectMultipleCours.length > 1) {
-      isMultipleCours.value = true;
-    } else if (selectMultipleCours.length === 1) {
-      isMultipleCours.value = false;
-    }
-    //*********************************************** */
-    console.log(isMultipleCours.value);
-    console.log(SelectedCoursCommencerBtn);
 
-    if (isMultipleCours.value === true) {
-      if (QcmTypeSelected.value === "Qcm") {
-        try {
-          console.log(minYearMultipleCours);
-          console.log(maxYearMultipleCours);
-
-          let MinMaxMultipleFinal = [];
-          MinMaxMultipleFinal[0] = Math.min(...minYearMultipleCours).toString();
-          MinMaxMultipleFinal[1] = Math.max(...maxYearMultipleCours).toString();
-
-          minMaxYear = MinMaxMultipleFinal;
-          setVisibleCommenceBtn(true);
-          console.log(minMaxYear);
-        } catch {
-          console.log("Cours not selected");
-        }
-      } else if (QcmTypeSelected.value === "Cas Clinique") {
-        try {
-          console.log(minYearMultipleCoursClinique);
-          console.log(maxYearMultipleCoursClinique);
-
-          let MinMaxMultipleFinalClinique = [];
-          MinMaxMultipleFinalClinique[0] = Math.min(
-            ...minYearMultipleCoursClinique
-          ).toString();
-          MinMaxMultipleFinalClinique[1] = Math.max(
-            ...maxYearMultipleCoursClinique
-          ).toString();
-
-          minMaxYear = MinMaxMultipleFinalClinique;
-          setExisteCasClinique(true);
-          setVisibleCommenceBtn(true);
-          console.log(minMaxYear);
-        } catch {
-          console.log("Cours not selected");
-        }
-      } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
-        console.log("we here");
-        //****check if qcm existe************************************* */
-        console.log(minYearMultipleCours);
-        if (QcmSujetTypeSelected.value === "Par Cour") {
-          if (minYearMultipleCours && minYearMultipleCours.length > 0) {
-            ExisteQcmInTous.value = true;
-          } else {
-            QcmTypeSelected.value = "Cas Clinique";
-            ExisteQcmInTous.value = false;
-          }
-        }
-        //*********************************************************** */
-        let minYear = [];
-        let maxYear = [];
-
-        minYear[0] = Math.min(...minYearMultipleCours).toString();
-        minYear[1] = Math.min(...minYearMultipleCoursClinique).toString();
-
-        maxYear[0] = Math.max(...maxYearMultipleCours).toString();
-        maxYear[1] = Math.max(...maxYearMultipleCoursClinique).toString();
-        console.log(minYear);
-        console.log(maxYear);
-
-        let MinMaxMultipleFinalClinique = [];
-        MinMaxMultipleFinalClinique[0] = Math.min(...minYear).toString();
-        MinMaxMultipleFinalClinique[1] = Math.max(...maxYear).toString();
-        console.log(minYearMultipleCoursClinique);
-        console.log(maxYearMultipleCoursClinique);
-
-        minMaxYear = MinMaxMultipleFinalClinique;
-        console.log(minMaxYear);
-        if (maxYearMultipleCoursClinique.length > 0) {
-          console.log(minYearMultipleCoursClinique.length);
-          setExisteCasClinique(true);
-          setVisibleCommenceBtn(true);
-        } else if (maxYearMultipleCoursClinique.length === 0) {
-          console.log(minYearMultipleCoursClinique.length);
-          setExisteCasClinique(false);
-          setVisibleCommenceBtn(true);
-        }
-        setMinYearValue(minMaxYear[0]);
-        setMaxYearValue(minMaxYear[1]);
-      }
-    } else if (isMultipleCours.value === false) {
-      console.log("we jst select one cour");
-      if (QcmTypeSelected.value === "Qcm") {
-        try {
-          const result = await axios.get(
-            `https://goatqcm-instance.com/qcms/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          minMaxYear = result.data;
-          setVisibleCommenceBtn(true);
-          console.log(minMaxYear);
-        } catch {
-          console.log("Cours not selected");
-        }
-      } else if (QcmTypeSelected.value === "Cas Clinique") {
-        try {
-          const result = await axios.get(
-            `https://goatqcm-instance.com/casclinique/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          minMaxYear = result.data;
-          setVisibleCommenceBtn(true);
-          setExisteCasClinique(true);
-          console.log(minMaxYear);
-        } catch {
-          console.log("Cours not selected");
-        }
-      } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
-        console.log("we hereoooo");
-
-        let minQcmYear = [];
-        let minCliniqueYear = [];
-        try {
-          const result = await axios.get(
-            `https://goatqcm-instance.com/qcms/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-          minQcmYear = result.data;
-          console.log(result.data.length);
-          if (QcmSujetTypeSelected.value === "Par Cour") {
-            ExisteQcmInTous.value = true;
-          }
-          console.log(minMaxYear);
-        } catch {
-          if (QcmSujetTypeSelected.value === "Par Cour") {
-            QcmTypeSelected.value = "Cas Clinique";
-            ExisteQcmInTous.value = false;
-          }
-          console.log("Cours not selected");
-        }
-        try {
-          const result = await axios.get(
-            `https://goatqcm-instance.com/casclinique/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
-            {
-              headers: { Authorization: `Bearer ${token}` },
-            }
-          );
-
-          minCliniqueYear = result.data;
-          console.log(minCliniqueYear);
-        } catch {
-          console.log("Cours not selected");
-        }
-
-        let minYear = [];
-        let maxYear = [];
-
-        minYear[0] = Math.min(...minQcmYear).toString();
-        minYear[1] = Math.min(...minCliniqueYear).toString();
-
-        maxYear[0] = Math.max(...minQcmYear).toString();
-        maxYear[1] = Math.max(...minCliniqueYear).toString();
-        console.log(minYear);
-        console.log(maxYear);
-        console.log(minCliniqueYear);
-        if (minCliniqueYear.length > 0) {
-          console.log(minCliniqueYear.length);
-          setExisteCasClinique(true);
-          setVisibleCommenceBtn(true);
-        } else if (minCliniqueYear.length === 0) {
-          console.log(minCliniqueYear.length);
-          setExisteCasClinique(false);
-          setVisibleCommenceBtn(true);
-        }
-        let MinMaxMultipleFinalClinique = [];
-        MinMaxMultipleFinalClinique[0] = Math.min(...minYear).toString();
-        MinMaxMultipleFinalClinique[1] = Math.max(...maxYear).toString();
-
-        minMaxYear = MinMaxMultipleFinalClinique;
-        console.log(minMaxYear);
-        setMinYearValue(minMaxYear[0]);
-        setMaxYearValue(minMaxYear[1]);
-      }
-    }
-
-    //***************get min max of table year********************************** */
-    let maxIndex = 0;
-    console.log(minMaxYear);
-    //**get max fin indice********************* */
-    for (let i = 0; i < years.length; i++) {
-      if (years[i] === minMaxYear[1]) {
-        maxIndex = i;
-      }
-    }
-    //**************************************** */
-
-    let incMin = 0;
-    console.log(minMaxYear[0]);
-    for (let i = 0; i < years.length; i++) {
-      if (years[i] === minMaxYear[0]) {
-        for (let inc = i; inc <= maxIndex; inc++) {
-          minYearSaved[incMin] = years[inc];
-          console.log();
-          incMin++;
-        }
-      }
-    }
-    console.log(minYearSaved);
-    setMinMaxYearFinal(minYearSaved);
-    //******end upload ***************************************************** */
-  };
-  //********************************************************************** */
   function minYearHandler(event) {
     setMinYearValue(event.target.value);
+    console.log(QcmTypeSelected.value);
+    getMinYearValue.value = event.target.value;
     setShowSelectWarning(false); // remove warning on change
     console.log(MaxYearValue);
+    if (MaxYearValue.length > 1) {
+      if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
+        selectBgnEndYear.value = true;
+        loadMinMaxYears();
+      }
+    }
   }
   function maxYearHandler(event) {
     setMaxYearValue(event.target.value);
+    getMaxYearValue.value = event.target.value;
+    console.log(QcmTypeSelected.value);
     setShowSelectWarningMaxYear(false); // remove warning on change
     console.log(MinYearValue);
+    if (MinYearValue.length > 1) {
+      if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
+        console.log(MinYearValue.length);
+        selectBgnEndYear.value = true;
+        loadMinMaxYears();
+      }
+    }
   }
   //******************************************************************* */ */
   //**********************************************************************
   function handelCommencerBnt() {
-    if (QcmSujetTypeSelected.value === "Par Sujet") {
+    let valid = true;
+    console.log(MinYearValue.length);
+    if (!sessionName.trim()) {
+      setShowWarning(true);
+      valid = false;
+    } else {
+      setShowWarning(false);
+    }
+    if (MinYearValue.length === 1) {
+      setShowSelectWarning(true);
+      valid = false;
+      console.log("not select");
+    } else {
+      setShowSelectWarning(false);
+      console.log("is select");
+    }
+    if (MaxYearValue.length === 1) {
+      setShowSelectWarningMaxYear(true);
+      valid = false;
+      console.log("not select");
+    } else {
+      setShowSelectWarningMaxYear(false);
+      console.log("is select");
+    }
+
+    if (valid) {
+      //<QuizFilter courId={SelectedCours.value} qcmType={QcmTypeSelected.value} />;
       navigateBoardQuiz(`/quiz/quizdashboard`, {
         state: {
           ExisteCasClinique: ExisteCasClinique,
@@ -1034,67 +1180,7 @@ function Quiz() {
           commingFrom: "quizz",
         },
       });
-    } else if (QcmSujetTypeSelected.value === "Par Cour") {
-      let valid = true;
-      console.log(MinYearValue.length);
-      if (!sessionName.trim()) {
-        setShowWarning(true);
-        valid = false;
-      } else {
-        setShowWarning(false);
-      }
-      if (MinYearValue.length === 1) {
-        setShowSelectWarning(true);
-        valid = false;
-        console.log("not select");
-      } else {
-        setShowSelectWarning(false);
-        console.log("is select");
-      }
-      if (MaxYearValue.length === 1) {
-        setShowSelectWarningMaxYear(true);
-        valid = false;
-        console.log("not select");
-      } else {
-        setShowSelectWarningMaxYear(false);
-        console.log("is select");
-      }
-
-      if (valid) {
-        //<QuizFilter courId={SelectedCours.value} qcmType={QcmTypeSelected.value} />;
-        navigateBoardQuiz(`/quiz/quizdashboard`, {
-          state: {
-            ExisteCasClinique: ExisteCasClinique,
-            selectMultipleCours: selectMultipleCours,
-            moduleName: moduleName.value,
-            courId: SelectedCours[0],
-            sessionName: sessionName,
-            checkParSjtBiologieClinique: CheckBiologieOrCliniqueParSjt,
-            qcmType:
-              QcmSujetTypeSelected.value === "Par Sujet" &&
-              (SelectedSourceExmn.value === "Résidanat Blida" ||
-                SelectedSourceExmn.value === "Externat Blida")
-                ? "Tous (Qcm,Cas Clinique)"
-                : ExisteCasClinique
-                ? QcmTypeSelected.value
-                : "Qcm",
-            QcmSujetTypeSelected: QcmTypeParSjtParCours,
-            SelectedSourceExmn: QcmTypeSelectedRsdntExetrnt,
-            minYearQcm: MinYearValue,
-            maxYearQcm: MaxYearValue,
-            moduleId: ModuleIdCommencerBtn,
-            minMaxYearParSujetsFinal: minMaxYearParSujetsFinal.value,
-            QuizQcmQclinique: QuizQcmQclinique,
-
-            goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt:
-              goFromQuizQuizToCLiniqueAllQcmCliniqueParSjt.value,
-            backFromCliniqueAllQcmCliniqueprSujet:
-              backFromCliniqueAllQcmCliniqueprSujet.value,
-            commingFrom: "quizz",
-          },
-        });
-        console.log("Submitted:", sessionName);
-      }
+      console.log("Submitted:", sessionName);
     }
   }
   //******************************************************************* */ */()
@@ -1128,7 +1214,6 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
-            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div
