@@ -246,6 +246,7 @@ function Quiz() {
   //******************************************************************* */
   //*******handle Change Module**********************************************
   const handleChangeModule = (e) => {
+    setVisibleCommenceBtn(false);
     setModule({ ...module, existCasclinique: true });
     /****type qcm  iniialisation************** */
     radioRefs.current.forEach((radio) => {
@@ -580,6 +581,7 @@ function Quiz() {
           MinMaxMultipleFinal[1] = Math.max(...maxYearMultipleCours).toString();
 
           minMaxYear = MinMaxMultipleFinal;
+          console.log("setVisibleCommenceBtn");
           setVisibleCommenceBtn(true);
           console.log(minMaxYear);
         } catch {
@@ -600,6 +602,7 @@ function Quiz() {
 
           minMaxYear = MinMaxMultipleFinalClinique;
           setExisteCasClinique(true);
+          console.log("setVisibleCommenceBtn");
           setVisibleCommenceBtn(true);
           console.log(minMaxYear);
         } catch {
@@ -608,6 +611,7 @@ function Quiz() {
       } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
         console.log("casss clnq");
         let existQcmMultpleCour = false;
+        console.log(selectBgnEndYear.value);
         if (selectBgnEndYear.value === true) {
           let inc = 0;
 
@@ -686,27 +690,35 @@ function Quiz() {
               );
 
               if (result.data.length > 0) {
-                console.log(result.data);
-                console.log(selectMultipleCoursClinique[inc]);
-                existCliniqueMultpleCour = true;
-
-                console.log(existCliniqueMultpleCour);
+                console.log(minYearMultipleCoursClinique.length);
+                setExisteCasClinique(true);
+                console.log("setVisibleCommenceBtn");
+                setVisibleCommenceBtn(true);
               }
             } catch {
               console.log("Cours not selected");
             }
             inc++;
+            if (inc === minYearMultipleCoursClinique) {
+              console.log(minYearMultipleCoursClinique.length);
+              console.log("setVisibleCommenceBtn");
+              setExisteCasClinique(false);
+              setVisibleCommenceBtn(true);
+            }
           }
         }
-        if (existCliniqueMultpleCour === true) {
+
+        /*  if (existCliniqueMultpleCour === true) {
           console.log(minYearMultipleCoursClinique.length);
           setExisteCasClinique(true);
+          console.log("setVisibleCommenceBtn");
           setVisibleCommenceBtn(true);
         } else if (existCliniqueMultpleCour === false) {
           console.log(minYearMultipleCoursClinique.length);
+          console.log("setVisibleCommenceBtn");
           setExisteCasClinique(false);
           setVisibleCommenceBtn(true);
-        }
+        }*/
         /* setMinYearValue(minMaxYear[0]);
         setMaxYearValue(minMaxYear[1]);*/
       }
@@ -821,10 +833,12 @@ function Quiz() {
         if (checkSpecifiqueYearExiste.value.length > 1) {
           console.log(checkSpecifiqueYearExiste.value.length);
           setExisteCasClinique(true);
+          console.log("setVisibleCommenceBtn");
           setVisibleCommenceBtn(true);
         } else if (checkSpecifiqueYearExiste.value.length === 0) {
           console.log(checkSpecifiqueYearExiste.value.length);
           setExisteCasClinique(false);
+          console.log("setVisibleCommenceBtn");
           setVisibleCommenceBtn(true);
         }
         let MinMaxMultipleFinalClinique = [];
@@ -867,6 +881,7 @@ function Quiz() {
   //********************************************************************** */
   //*******qcm casclinique toutes************************************************
   const handleRadioQcmType = (e) => {
+    setVisibleCommenceBtn(false);
     console.log(SelectedCoursCommencerBtn);
     QcmTypeSelected.value = e.target.value;
     setQcmTypeSelectedCommenceBtn(e.target.value);
@@ -1132,6 +1147,7 @@ function Quiz() {
     } else {
       setShowWarning(false);
     }
+
     if (MinYearValue.length === 1) {
       if (QcmSujetTypeSelected.value === "Par Cour") {
         setShowSelectWarning(true);
@@ -1221,6 +1237,7 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
+            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div
