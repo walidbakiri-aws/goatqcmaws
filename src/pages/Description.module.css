@@ -3,7 +3,6 @@
   height: auto;
   background-color: var(--background-color-full);
 }
-
 .desccontainer {
   width: 1000px;
   height: auto;
@@ -15,7 +14,33 @@
   margin-bottom: 10px;
   border-radius: 5px;
 }
+.fulldesccontainerzoom {
+  z-index: 60;
+  position: fixed;
+  top: 100px;
+  left: 50px;
+  width: 1500px;
+  height: 800px; /* fixed height */
+  background-color: var(--background-color-full);
+  overflow-y: auto;
+}
+.desccontainerzoom {
+  width: 1500px;
+  height: auto;
+  border: 1px solid rgb(194, 192, 192);
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
 
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+.eysezoom {
+  float: right;
+  right: 0px;
+  margin: 10px;
+}
 .imagedesc {
   width: 100%;
   height: auto;
@@ -31,12 +56,12 @@
   white-space: pre-line;
   height: auto;
   padding: 10px;
-  font-family: 1.2rem "Fira Sans", sans-serif;
-  font-size: 18px;
-  font-style: normal;
 }
 .carddesc p {
   color: var(--primary-text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 22px; /* Adjust as needed */
+  font-weight: 400; /* Regular weight */
 }
 /************phone **************************/
 .desccontainer_phone {

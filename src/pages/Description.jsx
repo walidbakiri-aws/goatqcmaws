@@ -4,8 +4,11 @@ import axios from "axios";
 import { useMediaQuery } from "react-responsive";
 import UserService from "../compenent/layout/service/UserService";
 import useLocalStorage from "use-local-storage";
-
+import eysezoom from "../compenent/layout/img/eysezoom.png";
 import { useSignal } from "@preact/signals-react";
+import BackdropQuiz from "./BackdropQuiz";
+import BackdropDoneQuiz from "./BackdropDoneQuiz";
+import BackdropDeleteCour from "./BackdropDeleteCour";
 function Description(props) {
   const disableCopyPaste = (e) => {
     e.preventDefault();
@@ -23,6 +26,7 @@ function Description(props) {
   const existDescreption = useSignal();
   const existImage = useSignal("");
   const existeImageName = useSignal("");
+  const [visibleDescZoom, setVisibleDescZoom] = useState(false);
   //************************************************************************ */
   const [FullDescription, setFullDescription] = useState({
     imageName: "",
@@ -78,7 +82,14 @@ function Description(props) {
       setDisplayDesc(false);
     }
   };
-
+  const handleEyseZoom = () => {
+    setVisibleDescZoom(true);
+  };
+  /*****done Quiz******************************************** */
+  function closeModalDoneQuizHandler() {
+    setVisibleDescZoom(false);
+  }
+  //**************************************************** */
   return (
     <>
       {isDesktopOrLaptop && (
@@ -87,6 +98,14 @@ function Description(props) {
           data-theme={isDark ? "dark" : "light"}
         >
           <div className={`${classes.desccontainer} shadow `}>
+            <div
+              className={`${classes.eysezoom}   `}
+              onClick={() => {
+                handleEyseZoom();
+              }}
+            >
+              <img src={eysezoom} height="30" width="30" />
+            </div>
             {displyImage && (
               <div className={`${classes.imagedesc} shadow `}>
                 <img src={SrcImageLink} />
@@ -124,6 +143,28 @@ function Description(props) {
             </div>
           )}
         </div>
+      )}
+      {isDesktopOrLaptop && visibleDescZoom && (
+        <div
+          className={`${classes.fulldesccontainerzoom} `}
+          data-theme={isDark ? "dark" : "light"}
+        >
+          <div className={`${classes.desccontainerzoom} shadow `}>
+            {displyImage && (
+              <div className={`${classes.imagedesczoom} shadow `}>
+                <img src={SrcImageLink} />
+              </div>
+            )}
+            {displayDesc && (
+              <div className={`${classes.carddesc} table-hover  `}>
+                <p className="card-text">{FullDescription.qcmDescription}</p>
+              </div>
+            )}
+          </div>{" "}
+        </div>
+      )}
+      {isDesktopOrLaptop && visibleDescZoom && (
+        <BackdropDeleteCour onCancel={closeModalDoneQuizHandler} />
       )}
     </>
   );

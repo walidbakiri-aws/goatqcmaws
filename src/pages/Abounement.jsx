@@ -19,11 +19,11 @@ function Abounement(props) {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2025",
-      priceAbn: "2000 DA ",
+      priceAbn: "3000 DA ",
     },
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "4000 DA",
+      priceAbn: "4500 DA",
     },
 
     {
