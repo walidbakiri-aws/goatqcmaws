@@ -15,6 +15,7 @@ import Backdrop from "../../../pages/Backdrop";
 
 import toast, { Toaster } from "react-hot-toast";
 function LoginPage() {
+  let navigateBnmtLogin = useNavigate();
   let userFinalId = useSignal("");
   const [username, setUserName] = useState("");
   const userAbnId = useSignal("");
@@ -239,6 +240,9 @@ function LoginPage() {
   const testbtn = () => {
     console.log(username);
     console.log(password);
+  };
+  const achterBounemment = () => {
+    navigateBnmtLogin("/abounementlogin");
   };
   return (
     <>
