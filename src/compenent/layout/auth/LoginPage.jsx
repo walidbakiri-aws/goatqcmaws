@@ -333,17 +333,16 @@ function LoginPage() {
                 </div>
               </form>
 
-               <div className={classes.creenvcompte_phone}>
-                <p> Pas encore inscrit ?</p>
-                <p
-                  style={{
-                    cursor: "pointer",
-                    color: "blue", // keep text color like normal text
+              <div className={classes.creenvcompte_phone}>
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    achterBounemment();
                   }}
-                  onClick={handleResiterBtn}
                 >
-                  Créez votre compte !
-                </p>
+                  Acheter Abonnement
+                </button>
               </div>
             </div>
           </div>
@@ -444,18 +443,17 @@ function LoginPage() {
                     </button>
                   </div>
                 </form>
-               <div className={classes.creenvcompte}>
-                <p> Pas encore inscrit ?</p>
-                <p
-                  style={{
-                    cursor: "pointer",
-                    color: "blue", // keep text color like normal text
-                  }}
-                  onClick={handleResiterBtn}
-                >
-                  Créez votre compte !
-                </p>
-              </div>
+                <div className={classes.creenvcompte}>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      achterBounemment();
+                    }}
+                  >
+                    Acheter Abonnement
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -83,13 +83,20 @@
   height: 600px;
   background-color: rgb(228, 224, 235);
 }
-.creenvcompte {
-  display: flex;
-  margin-top: 20px;
-  margin-left: 20px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 25px; /* Adjust as needed */
-  font-weight: 300; /* Regular weight */
+.creenvcompte button {
+  background-color: #ebf5fb;
+  color: #0047ab;
+  text-shadow: #0047ab;
+  height: 50px;
+  width: 280px;
+  margin-left: 32px;
+  margin-top: 10px;
+  border: 1px solid #0047ab;
+
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+  cursor: pointer;
+  font-size: 18px;
 }
 .buttoncontainer {
   margin-top: 50px;
@@ -221,14 +228,7 @@
   text-align: center;
   color: #010f0f;
 }
-.creenvcompte_phone {
-  margin-top: 20px;
-  margin-left: 60px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 13px; /* Adjust as needed */
-  font-weight: 300; /* Regular weight */
-  padding-bottom: -10px;
-}
+
 .logininputphone div {
   padding: 7px;
 }
@@ -238,6 +238,7 @@
 .password_div_phone button {
   width: 20px;
   height: 30px;
+
   background-color: transparent;
   border: 0px solid transparent;
 }
@@ -251,9 +252,23 @@
   cursor: pointer;
   font-size: 16px;
 }
+
 .wrapperregisterlinkphone {
   text-align: center;
   margin-top: 20px;
+}
+.creenvcompte_phone button {
+  background-color: #ebf5fb;
+  color: #0047ab;
+  text-shadow: #0047ab;
+  height: 40px;
+  margin-top: 10px;
+  width: 224px;
+  margin-left: 55px;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, -1);
+  cursor: pointer;
+  font-size: 16px;
 }
 .registertbn_phone button {
   border: transparent;

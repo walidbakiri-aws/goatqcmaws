@@ -38,6 +38,7 @@ import AddDriveInfo from "./pages/AddDriveInfo";
 import DriveModuleListe from "./pages/DriveModuleListe";
 import DriveCoursNames from "./pages/DriveCoursNames";
 import CardResidanatSujet from "./pages/CardResidanatSujet";
+import AbounementLogin from "./pages/AbounementLogin";
 function App() {
   const isAuthenticated = UserService.isAuthenticated();
   const isAdmin = UserService.isAdmin();
@@ -55,6 +56,11 @@ function App() {
         <Route exact path="/myquizz" element={<SaveQuizz />}></Route>
         <Route exact path="/showpdf" element={<ShowPdfResidanat />}></Route>
         <Route exact path="/driverscours" element={<DriversCours />}></Route>
+        <Route
+          exact
+          path="/abounementlogin"
+          element={<AbounementLogin />}
+        ></Route>
         <Route
           exact
           path="/driverslinks"
