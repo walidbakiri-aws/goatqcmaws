@@ -212,11 +212,15 @@
 }
 .ulcatogorycourname {
   display: flex;
-  color: var(--primary-text-color-info);
 }
 .ulcatogorycourname li {
   margin-right: 10px;
+  width: fit-content; /* size depends on text */
+  background-color: #17a9ec;
+  border-radius: 5px;
+  padding: 3px;
 }
+
 .ulcatogorycourname li {
   margin-right: 10px;
 }
@@ -766,14 +770,20 @@
 .qcmInfocatgrp_phone {
   float: left;
   display: flex;
-  color: var(--primary-text-color-info);
+  width: fit-content; /* size depends on text */
+  background-color: #17a9ec;
+  border-radius: 5px;
+  padding: 3px;
 }
 .courname_phone {
   font-size: 13px;
 }
 .qcmcourimgname_phone {
   display: flex;
-  color: var(--primary-text-color-info);
+  width: fit-content; /* size depends on text */
+  background-color: #17a9ec;
+  border-radius: 5px;
+  padding: 3px;
 }
 .propofeild_phone {
   width: 100%;
@@ -881,7 +891,7 @@
 
 .btnPrecdent_phone {
   width: 97px;
-  height: 22px;
+  height: 25px;
   background: #ff9800;
   color: #0c0c0c;
   font-family: "Open Sans", sans-serif;
@@ -891,14 +901,15 @@
   position: absolute;
   border-radius: 6px;
   left: 0;
-  margin-left: 5px;
+
   padding-right: 5px;
-  margin-top: 3px;
+
+  padding-top: 3px;
   display: flex;
 }
 .btnsuivant_phone {
   width: 85px;
-  height: 22px;
+  height: 25px;
   background: #ff9800;
   color: #0c0c0c;
   font-family: "Open Sans", sans-serif;
@@ -910,7 +921,8 @@
   right: 0;
   margin-right: 10px;
   padding-left: 5px;
-  margin-top: 3px;
+
+  padding-top: 3px;
   display: flex;
 }
 .BntVerifierrpnse_phone {

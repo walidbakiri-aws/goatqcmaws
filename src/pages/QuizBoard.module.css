@@ -244,10 +244,14 @@
 }
 .ulcatogorycourname {
   display: flex;
-  color: var(--primary-text-color-info);
+  color: #0c0c0c;
 }
 .ulcatogorycourname li {
   margin-right: 10px;
+  width: fit-content; /* size depends on text */
+  background-color: #17a9ec;
+  border-radius: 5px;
+  padding: 3px;
 }
 .goatlogo {
   position: absolute;
@@ -830,8 +834,11 @@
   background: var(--background-color);
 }
 .modulediv_phone {
-  width: 100%;
-  color: white;
+  font-style: initial;
+  width: fit-content; /* size depends on text */
+  background-color: #17a9ec;
+  border-radius: 3px;
+  height: fit-content;
   display: flex;
   margin-top: -15px;
   font-size: 13px;
@@ -844,12 +851,7 @@
   padding: 3px;
   border-radius: 4px;
 }
-
-.modulename {
-  font-style: initial;
-  color: var(--primary-text-color-info);
-}
-.homebtn {
+modulediv_phone .homebtn {
   margin-left: 20px;
 }
 .qcmInfoHeader_phone {
@@ -925,7 +927,11 @@
 
 .qcmcourimgname_phone {
   display: flex;
-  color: var(--primary-text-color-info);
+
+  width: fit-content; /* size depends on text */
+  background-color: #17a9ec;
+  border-radius: 3px;
+  padding: 3px 8px; /* add some breathing space */
 }
 .courname_phone {
   font-size: 13px;
@@ -935,8 +941,10 @@
   display: flex;
 }
 .qcmInfocatgrp_phone li {
-  font-size: 12px;
-  color: var(--primary-text-color-info);
+  font-size: 13px;
+  background-color: #17a9ec;
+  border-radius: 3px;
+  padding: 3px;
 }
 .goatlogo_phone {
   margin-left: 50px;
@@ -965,7 +973,7 @@
 
 .btnPrecdent_phone {
   width: 97px;
-  height: 22px;
+  height: 25px;
   background: #ff9800;
   color: #0c0c0c;
   font-family: "Open Sans", sans-serif;
@@ -975,14 +983,15 @@
   position: absolute;
   border-radius: 6px;
   left: 0;
-  margin-left: 5px;
+  padding-top: 3px;
+
   padding-right: 5px;
-  margin-top: 3px;
+
   display: flex;
 }
 .btnsuivant_phone {
   width: 85px;
-  height: 22px;
+  height: 25px;
   background: #ff9800;
   color: #0c0c0c;
   font-family: "Open Sans", sans-serif;
@@ -994,7 +1003,7 @@
   right: 0;
   margin-right: 10px;
   padding-left: 5px;
-  margin-top: 3px;
+  padding-top: 3px;
   display: flex;
 }
 .BntVerifierrpnse_phone {
