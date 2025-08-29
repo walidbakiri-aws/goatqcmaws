@@ -892,7 +892,7 @@ modulediv_phone .homebtn {
 .qcmfeild_phone p {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px; /* Adjust as needed */
-  font-weight: 390; /* Regular weight */
+  font-weight: 410; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -908,7 +908,7 @@ modulediv_phone .homebtn {
   padding: 3px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px; /* Adjust as needed */
-  font-weight: 380; /* Regular weight */
+  font-weight: 410; /* Regular weight */
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
