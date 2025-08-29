@@ -14,28 +14,31 @@
   margin-bottom: 10px;
   border-radius: 5px;
 }
+
 .fulldesccontainerzoom {
   z-index: 60;
   position: fixed;
   top: 100px;
-  left: 50px;
+  left: 80px;
   width: 1500px;
   height: 800px; /* fixed height */
   background-color: var(--background-color-full);
   overflow-y: auto;
 }
 .desccontainerzoom {
-  width: 1500px;
+  width: 100%;
   height: auto;
   border: 1px solid rgb(194, 192, 192);
-  background-color: var(--background-color);
+  background-color: aqua;
   color: var(--primary-text-color);
-
+  margin-left: 30px;
   margin-top: 5px;
   margin-bottom: 10px;
   border-radius: 5px;
 }
-
+.imagedesczoom img {
+  width: 100%;
+}
 .eysezoom {
   float: right;
   right: 0px;
