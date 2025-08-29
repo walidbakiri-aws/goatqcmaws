@@ -43,7 +43,8 @@ import dropright from "../compenent/layout/img/dropright.png";
 import { useStopwatch } from "react-timer-hook";
 import { IoPlayCircleOutline } from "react-icons/io5";
 import messanger from "../compenent/layout/img/messanger.png";
-
+import next from "../compenent/layout/img/next.png";
+import prev from "../compenent/layout/img/prev.png";
 import { IoPauseCircleOutline } from "react-icons/io5";
 import { MdOutlineReplay } from "react-icons/md";
 import { TfiClose } from "react-icons/tfi";
@@ -2709,7 +2710,7 @@ function QuizBoardClinique(props) {
           "fullSessionsListeLength"
         );
 
-        /*  if (fullSessionsListeLength >= 10) {
+        /* if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
         }*/
@@ -2860,10 +2861,10 @@ function QuizBoardClinique(props) {
           "fullSessionsListeLength"
         );
 
-        /*  if (fullSessionsListeLength >= 10) {
+        if (fullSessionsListeLength >= 10) {
           handleDeleteSession();
           console.log("succes deleting");
-        }*/
+        }
         if (sourceQuizzSessionName === "quizzname") {
           navigateHome("/quizz");
         } else if (sourceQuizzSessionName === "sessionname") {
@@ -4651,23 +4652,50 @@ function QuizBoardClinique(props) {
                                       )}
 
                                     {VisibleNextBtn.value && (
-                                      <div>
-                                        <GrNext
+                                      <div
+                                        onClick={(e) =>
+                                          handleNextClick({ event: e })
+                                        }
+                                      >
+                                        <button
                                           className={classes.btnsuivant_phone}
-                                          type="button"
-                                          onClick={(e) =>
-                                            handleNextClick({ event: e })
-                                          }
-                                        />
+                                        >
+                                          suivant
+                                          <img
+                                            style={{
+                                              marginLeft: 5,
+                                              paddingBottom: 3,
+                                            }}
+                                            height="20"
+                                            width="20"
+                                            src={next}
+                                            alt="next"
+                                          />
+                                        </button>
                                       </div>
                                     )}
                                     {VisiblePrevBtn.value && (
-                                      <GrPrevious
-                                        className={classes.btnPrecdent_phone}
+                                      <div
                                         onClick={(e) =>
                                           handlePrevClick({ event: e })
                                         }
-                                      />
+                                      >
+                                        <button
+                                          className={classes.btnPrecdent_phone}
+                                        >
+                                          <img
+                                            style={{
+                                              marginRight: 2,
+                                              paddingBottom: 3,
+                                            }}
+                                            height="20"
+                                            width="20"
+                                            src={prev}
+                                            alt="prev"
+                                          />
+                                          precedent
+                                        </button>
+                                      </div>
                                     )}
                                   </div>
                                 </div>
@@ -5420,10 +5448,10 @@ function QuizBoardClinique(props) {
           moduleName={props.moduleName}
           minYearQcm={props.minYearQcm}
           maxYearQcm={props.maxYearQcm}
-          sessionName={props.sessionName}
           ExisteCasClinique={props.ExisteCasClinique}
           selectMultipleCours={props.selectMultipleCours}
           courId={courId}
+          sessionName={props.sessionName}
           qcmType={qcmType}
           TrueFullInsertClr={
             JSON.parse(

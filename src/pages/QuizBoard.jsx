@@ -20,6 +20,9 @@ import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
 import E from "../compenent/layout/img/E.png";
 
+import next from "../compenent/layout/img/next.png";
+import prev from "../compenent/layout/img/prev.png";
+
 import pub from "../compenent/layout/img/pub.png";
 import chatgpt from "../compenent/layout/img/chatgpt.png";
 import deepseek from "../compenent/layout/img/deepseek.png";
@@ -3124,14 +3127,16 @@ function QuizBoard(props) {
     qcmIdChatGptDeepSeek.value = qcmId;
   };
 
-  
   const handlePostSubmit = async (e) => {
-    console.log(userIdToken)
-    newPost.ourUsers= { id: userIdToken };
-    newPost.content =newPost.content+   inputValue;
-    console.log( newPost);
+    console.log(userIdToken);
+    newPost.ourUsers = { id: userIdToken };
+    newPost.content = newPost.content + inputValue;
+    console.log(newPost);
     try {
-      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
+      await axios.post(
+        `https://goatqcm-instance.com/publiction/posts`,
+        newPost
+      );
       setNewPost({
         content: "",
         anonyme: false,
@@ -4518,13 +4523,29 @@ function QuizBoard(props) {
                                       className={`${classes.btnfooter_phone} `}
                                     >
                                       {VisiblePrevBtn.value && (
-                                        <GrPrevious
-                                          className={classes.btnPrecdent_phone}
-                                          type="button"
+                                        <div
                                           onClick={(e) =>
                                             handlePrevClick({ event: e })
                                           }
-                                        />
+                                        >
+                                          <button
+                                            className={
+                                              classes.btnPrecdent_phone
+                                            }
+                                          >
+                                            <img
+                                              style={{
+                                                marginRight: 2,
+                                                paddingBottom: 3,
+                                              }}
+                                              height="20"
+                                              width="20"
+                                              src={prev}
+                                              alt="prev"
+                                            />
+                                            precedent
+                                          </button>
+                                        </div>
                                       )}
                                       {SaveQcmIsAnswer[currentIndex.value] ===
                                         "" && (
@@ -4568,14 +4589,26 @@ function QuizBoard(props) {
                                         </button>
                                       )}
                                       {VisibleNextBtn.value ? (
-                                        <div>
-                                          <GrNext
+                                        <div
+                                          onClick={(e) =>
+                                            handleNextClick({ event: e })
+                                          }
+                                        >
+                                          <button
                                             className={classes.btnsuivant_phone}
-                                            type="button"
-                                            onClick={(e) =>
-                                              handleNextClick({ event: e })
-                                            }
-                                          />
+                                          >
+                                            suivant
+                                            <img
+                                              style={{
+                                                marginLeft: 5,
+                                                paddingBottom: 3,
+                                              }}
+                                              height="20"
+                                              width="20"
+                                              src={next}
+                                              alt="next"
+                                            />
+                                          </button>
                                         </div>
                                       ) : (
                                         <IoCheckmarkDoneSharp
