@@ -454,6 +454,13 @@
   width: 200px;
   font-size: 16px;
 }
+.eysezoom {
+  width: 30px;
+  height: 30px;
+  float: right;
+  right: 0px;
+  margin: 10px;
+}
 /***liste qcms******************************************************/
 .qcmsliste {
   width: 200px;
@@ -885,14 +892,17 @@ modulediv_phone .homebtn {
   padding: 5px;
   margin-bottom: 7px;
   z-index: 1;
-
+  padding: 3px;
   white-space: pre-line;
   background-color: var(--background-color);
 }
 .qcmfeild_phone p {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
+    "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
+    Arial, sans-serif;
+
   font-size: 18px; /* Adjust as needed */
-  font-weight: 410; /* Regular weight */
+  font-weight: 390; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -906,9 +916,11 @@ modulediv_phone .homebtn {
   height: auto;
 
   padding: 3px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
+    "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
+    Arial, sans-serif;
   font-size: 18px; /* Adjust as needed */
-  font-weight: 410; /* Regular weight */
+  font-weight: 380; /* Regular weight */
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
