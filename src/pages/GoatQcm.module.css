@@ -202,6 +202,8 @@
   overflow-wrap: break-word; /* modern standard */
   word-break: break-word; /* older support */
   white-space: normal; /* ensures text can wrap */
+
+ 
 }
 .createdAt {
   font-size: 18px; /* Adjust as needed */

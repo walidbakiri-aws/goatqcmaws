@@ -24,6 +24,7 @@ import {
 } from "@chatscope/chat-ui-kit-react";
 
 function DeepSeek(props) {
+  //const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
   const API_KEY =
     "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";
 
@@ -170,9 +171,29 @@ function DeepSeek(props) {
           <div
             style={{ position: "relative", height: "800px", width: "700px" }}
           >
-            <MainContainer>
-              <ChatContainer>
+            <MainContainer
+              style={{
+                userSelect: "none", // Prevent text selection
+                WebkitUserSelect: "none", // Safari/Chrome
+                MozUserSelect: "none", // Firefox
+                msUserSelect: "none", // IE/Edge
+              }}
+            >
+              <ChatContainer
+                style={{
+                  userSelect: "none", // Prevent text selection
+                  WebkitUserSelect: "none", // Safari/Chrome
+                  MozUserSelect: "none", // Firefox
+                  msUserSelect: "none", // IE/Edge
+                }}
+              >
                 <MessageList
+                  style={{
+                    userSelect: "none", // Prevent text selection
+                    WebkitUserSelect: "none", // Safari/Chrome
+                    MozUserSelect: "none", // Firefox
+                    msUserSelect: "none", // IE/Edge
+                  }}
                   scrollBehavior="smooth"
                   typingIndicator={
                     isTyping ? (
@@ -182,6 +203,12 @@ function DeepSeek(props) {
                 >
                   {messages.map((message, i) => (
                     <Message
+                      style={{
+                        userSelect: "none", // Prevent text selection
+                        WebkitUserSelect: "none", // Safari/Chrome
+                        MozUserSelect: "none", // Firefox
+                        msUserSelect: "none", // IE/Edge
+                      }}
                       key={i}
                       model={{
                         message: message.message,
@@ -195,6 +222,12 @@ function DeepSeek(props) {
                   ))}
                 </MessageList>
                 <MessageInput
+                  style={{
+                    userSelect: "none", // Prevent text selection
+                    WebkitUserSelect: "none", // Safari/Chrome
+                    MozUserSelect: "none", // Firefox
+                    msUserSelect: "none", // IE/Edge
+                  }}
                   placeholder="Type message here"
                   value={inputValue}
                   onChange={(val) => setInputValue(val)}
@@ -215,9 +248,29 @@ function DeepSeek(props) {
             <img src={deepseek} height="50" width="50" />
           </div>
           <div style={{ position: "relative", height: "400px", width: "100%" }}>
-            <MainContainer>
-              <ChatContainer>
+            <MainContainer
+              style={{
+                userSelect: "none", // Prevent text selection
+                WebkitUserSelect: "none", // Safari/Chrome
+                MozUserSelect: "none", // Firefox
+                msUserSelect: "none", // IE/Edge
+              }}
+            >
+              <ChatContainer
+                style={{
+                  userSelect: "none", // Prevent text selection
+                  WebkitUserSelect: "none", // Safari/Chrome
+                  MozUserSelect: "none", // Firefox
+                  msUserSelect: "none", // IE/Edge
+                }}
+              >
                 <MessageList
+                  style={{
+                    userSelect: "none", // Prevent text selection
+                    WebkitUserSelect: "none", // Safari/Chrome
+                    MozUserSelect: "none", // Firefox
+                    msUserSelect: "none", // IE/Edge
+                  }}
                   scrollBehavior="smooth"
                   typingIndicator={
                     isTyping ? (
@@ -227,6 +280,12 @@ function DeepSeek(props) {
                 >
                   {messages.map((message, i) => (
                     <Message
+                      style={{
+                        userSelect: "none", // Prevent text selection
+                        WebkitUserSelect: "none", // Safari/Chrome
+                        MozUserSelect: "none", // Firefox
+                        msUserSelect: "none", // IE/Edge
+                      }}
                       key={i}
                       model={{
                         message: message.message,
@@ -240,6 +299,12 @@ function DeepSeek(props) {
                   ))}
                 </MessageList>
                 <MessageInput
+                  style={{
+                    userSelect: "none", // Prevent text selection
+                    WebkitUserSelect: "none", // Safari/Chrome
+                    MozUserSelect: "none", // Firefox
+                    msUserSelect: "none", // IE/Edge
+                  }}
                   placeholder="Type message here"
                   value={inputValue}
                   onChange={(val) => setInputValue(val)}

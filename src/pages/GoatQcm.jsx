@@ -361,7 +361,7 @@ function GoatQcm() {
                                 {post.anonyme ? "Anonyme" : post.ourUsers.name}
                               </p>
                             </div>
-                            <p className={classes.postcontent}>
+                            <p className={classes.postcontent} style={{}}>
                               {post.content}
                             </p>
                             <p className={classes.createdAt}>

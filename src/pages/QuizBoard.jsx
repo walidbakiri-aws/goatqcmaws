@@ -19,7 +19,7 @@ import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
 import E from "../compenent/layout/img/E.png";
-
+import eysezoom from "../compenent/layout/img/eysezoom.png";
 import next from "../compenent/layout/img/next.png";
 import prev from "../compenent/layout/img/prev.png";
 
@@ -806,12 +806,9 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(
-        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
-        {
-          method: "POST",
-        }
-      );
+      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
+        method: "POST",
+      });
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2739,13 +2736,9 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2901,13 +2894,9 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3133,10 +3122,7 @@ function QuizBoard(props) {
     newPost.content = newPost.content + inputValue;
     console.log(newPost);
     try {
-      await axios.post(
-        `https://goatqcm-instance.com/publiction/posts`,
-        newPost
-      );
+      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
       setNewPost({
         content: "",
         anonyme: false,
@@ -3176,7 +3162,7 @@ function QuizBoard(props) {
     //setQcmContent(content);
     setInputValue(contentqcm + propTexts); // <-- set in MessageInput
   };
-
+  const handleEyseZoomPhoto = () => {};
   return (
     <>
       {!OpenBoardClinique && (
@@ -3523,6 +3509,13 @@ function QuizBoard(props) {
                                 <div className={classes.imgdescdiv}>
                                   <div className={classes.fulldescription}>
                                     <div className={classes.imagediv}>
+                                      <img
+                                        onClick={() => {
+                                          handleEyseZoomPhoto();
+                                        }}
+                                        src={eysezoom}
+                                        style={{ width: 25, height: 25 }}
+                                      />
                                       <img src={fileDisplay} />
                                       <input
                                         type="file"
@@ -3998,7 +3991,17 @@ function QuizBoard(props) {
                           }
                         ></textarea>
                       </div>
-                      <div className={classes.qcmdisplay}>{inputValue}</div>
+                      <div
+                        className={classes.qcmdisplay}
+                        style={{
+                          userSelect: "none", // Prevent text selection
+                          WebkitUserSelect: "none", // Safari/Chrome
+                          MozUserSelect: "none", // Firefox
+                          msUserSelect: "none", // IE/Edge
+                        }}
+                      >
+                        {inputValue}
+                      </div>
                       <hr className={`${classes.hr} `} />
 
                       <div className={classes.pustpubbutton}>
@@ -4846,7 +4849,15 @@ function QuizBoard(props) {
                           }
                         ></textarea>
                       </div>
-                      <div className={classes.qcmdisplay_phone}>
+                      <div
+                        className={classes.qcmdisplay_phone}
+                        style={{
+                          userSelect: "none", // Prevent text selection
+                          WebkitUserSelect: "none", // Safari/Chrome
+                          MozUserSelect: "none", // Firefox
+                          msUserSelect: "none", // IE/Edge
+                        }}
+                      >
                         {inputValue}
                       </div>
                       <hr className={`${classes.hr_phone} `} />
