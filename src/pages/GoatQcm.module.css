@@ -202,8 +202,6 @@
   overflow-wrap: break-word; /* modern standard */
   word-break: break-word; /* older support */
   white-space: normal; /* ensures text can wrap */
-
- 
 }
 .createdAt {
   font-size: 18px; /* Adjust as needed */
@@ -613,7 +611,7 @@
   --background-color: #fffbfb;
   --background-color-full: #ffffff;
   --background-color-graywhite: #f1ecec;
-  --background-color-graywhite_seconde: #f1ecec;
+  --background-color-graywhite_seconde: #fafafa;
   --background-color_headerquizz: #f5e1fd;
   --background-modulename-color: rgb(37, 176, 233, 0.9);
   --foreground-color: #3c8eec;
@@ -628,12 +626,12 @@
   --background-color-graywhite: #18191a;
   --background-color-graywhite_seconde: #242526;
   --background-color-full: #191919;
-  --background-color: #191919;
+  --background-color: #242526;
   --background-color_headerquizz: #272b33;
   --background-modulename-color: #272b33;
   --foreground-color: #3c8eec;
   --primary-text-color-info: #e99653;
-  --primary-text-color: rgb(255, 252, 252);
+  --primary-text-color: rgb(235, 231, 231);
   --primary-text-color-propo: #ddd8d8;
   --secondary-text-color: #0a0a0a;
   --toggle-bg: #070707;
