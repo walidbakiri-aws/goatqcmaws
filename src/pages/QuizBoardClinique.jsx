@@ -76,6 +76,9 @@ ChartJS.register(
 );
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import eysezoom from "../compenent/layout/img/eysezoom.png";
 function QuizBoardClinique(props) {
   const currentQcmIndex = useSignal(0);
   /**chat Box*************************************************************** */
@@ -493,18 +496,7 @@ function QuizBoardClinique(props) {
   //******************************************************************* */
   const [visibleNoteQcm, setVisibleNoteQcm] = useState(false);
   const [QcmIdNote, setQcmIdNote] = useState("");
-  //***get image from local distination and display it****** */
-  const getFile = (e) => {
-    setFile(e.target.files[0]);
-    setFileDisplay(URL.createObjectURL(e.target.files[0]));
-  };
-  //*************************************************** */
-  //***get image from local distination and display it****** */
-  const getFileEdite = (e) => {
-    setFileEdite(e.target.files[0]);
-    setFileDisplayEdite(URL.createObjectURL(e.target.files[0]));
-  };
-  //*************************************************** */
+
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
@@ -1788,7 +1780,10 @@ function QuizBoardClinique(props) {
     setShowDescQcm(false);
     VisibleNextBtn.value = true;
     setvisisbleDescInsert(false);
+    setvisisbleDescInsert(false);
     setVisisbleDescUpdate(false);
+    setFileDisplay("");
+    setFileDisplayEdite("");
   }
 
   //************************************************************************* */
@@ -1836,6 +1831,11 @@ function QuizBoardClinique(props) {
       VisibleNextBtn.value = false;
     }
     VisiblePrevBtn.value = true;
+
+    setvisisbleDescInsert(false);
+    setVisisbleDescUpdate(false);
+    setFileDisplay("");
+    setFileDisplayEdite("");
 
     setShowDescRpnsBtn(false);
     setShowVerifierRpnsBtn(true);
@@ -3077,6 +3077,95 @@ function QuizBoardClinique(props) {
     console.log("hey walid");
     setShowDiscsussionDiv(true);
   };
+  /*
+  const getFile = (e) => {
+    setFile(e.target.files[0]);
+    setFileDisplay(URL.createObjectURL(e.target.files[0]));
+  };
+  / 
+  const getFileEdite = (e) => {
+    setFileEdite(e.target.files[0]);
+    setFileDisplayEdite(URL.createObjectURL(e.target.files[0]));
+  };
+   */
+  const [open, setOpen] = useState(false);
+  const [crop, setCrop] = useState({ aspect: 1 });
+  const [completedCrop, setCompletedCrop] = useState(null);
+  const imgRef = useRef(null);
+
+  const getFile = (e) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFileDisplay(reader.result);
+    };
+    if (e.target.files && e.target.files.length > 0) {
+      reader.readAsDataURL(e.target.files[0]);
+
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const getFileEdite = (e) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFileDisplayEdite(reader.result);
+    };
+    if (e.target.files && e.target.files.length > 0) {
+      reader.readAsDataURL(e.target.files[0]);
+
+      setFileEdite(e.target.files[0]);
+    }
+  };
+
+  const saveCrop = () => {
+    if (!completedCrop || !imgRef.current) return;
+
+    const image = imgRef.current;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+
+    const pixelX = completedCrop.x * scaleX;
+    const pixelY = completedCrop.y * scaleY;
+    const pixelWidth = completedCrop.width * scaleX;
+    const pixelHeight = completedCrop.height * scaleY;
+
+    canvas.width = completedCrop.width;
+    canvas.height = completedCrop.height;
+
+    ctx.drawImage(
+      image,
+      pixelX,
+      pixelY,
+      pixelWidth,
+      pixelHeight,
+      0,
+      0,
+      completedCrop.width,
+      completedCrop.height
+    );
+
+    const croppedDataUrl = canvas.toDataURL("image/png");
+    setFileDisplay(croppedDataUrl); // replace preview
+    setFileDisplayEdite(croppedDataUrl); // replace preview
+    const fileObj = dataURLtoFile(croppedDataUrl, "cropped.png");
+    setFile(fileObj);
+    setFileEdite(fileObj);
+    setOpen(false); // close cropper
+  };
+  function dataURLtoFile(dataUrl, filename) {
+    let arr = dataUrl.split(",");
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
   return (
     <>
       {!OpenBoardQcm && (
@@ -3540,11 +3629,81 @@ function QuizBoardClinique(props) {
                                           className={classes.fulldescription}
                                         >
                                           <div className={classes.imagediv}>
-                                            <img src={fileDisplay} />
+                                            <img
+                                              onClick={() => setOpen(true)}
+                                              src={eysezoom}
+                                              style={{
+                                                width: 25,
+                                                height: 25,
+                                                cursor: "pointer",
+                                              }}
+                                              alt="zoom"
+                                            />
+
+                                            {fileDisplay && !open && (
+                                              <img
+                                                src={fileDisplay}
+                                                alt="preview"
+                                              />
+                                            )}
                                             <input
                                               type="file"
                                               onChange={getFile}
-                                            ></input>
+                                            />
+
+                                            {open && fileDisplay && (
+                                              <div
+                                                className={
+                                                  classes.cropContainer
+                                                }
+                                              >
+                                                <ReactCrop
+                                                  crop={crop}
+                                                  onChange={(_, percentCrop) =>
+                                                    setCrop(percentCrop)
+                                                  }
+                                                  onComplete={(c) =>
+                                                    setCompletedCrop(c)
+                                                  }
+                                                >
+                                                  <img
+                                                    style={{
+                                                      height: "95%",
+                                                      width: "95%",
+                                                      overflowY: "auto",
+                                                    }}
+                                                    ref={imgRef}
+                                                    src={fileDisplay}
+                                                    alt="crop-target"
+                                                  />
+                                                </ReactCrop>
+
+                                                <div
+                                                  className={
+                                                    classes.cropButtons
+                                                  }
+                                                >
+                                                  <button
+                                                    className="btn btn-primary"
+                                                    onClick={saveCrop}
+                                                    disabled={
+                                                      !completedCrop?.width ||
+                                                      !completedCrop?.height
+                                                    }
+                                                  >
+                                                    Save Crop
+                                                  </button>
+                                                  <button
+                                                    className="btn btn-danger"
+                                                    onClick={() =>
+                                                      setOpen(false)
+                                                    }
+                                                  >
+                                                    Cancel
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            )}
                                           </div>
                                           <div className={classes.descarea}>
                                             <textarea
@@ -3580,13 +3739,78 @@ function QuizBoardClinique(props) {
                                         >
                                           <div className={classes.imagediv}>
                                             <img
-                                              src={FileDisplayEdite}
-                                              onChange={getFileEdite}
+                                              onClick={() => setOpen(true)}
+                                              src={eysezoom}
+                                              style={{
+                                                width: 25,
+                                                height: 25,
+                                                cursor: "pointer",
+                                              }}
+                                              alt="zoom"
                                             />
+                                            {FileDisplayEdite && !open && (
+                                              <img
+                                                src={FileDisplayEdite}
+                                                alt="preview"
+                                              />
+                                            )}
                                             <input
                                               type="file"
                                               onChange={getFileEdite}
-                                            ></input>
+                                            />
+                                            {open && FileDisplayEdite && (
+                                              <div
+                                                className={
+                                                  classes.cropContainer
+                                                }
+                                              >
+                                                <ReactCrop
+                                                  crop={crop}
+                                                  onChange={(_, percentCrop) =>
+                                                    setCrop(percentCrop)
+                                                  }
+                                                  onComplete={(c) =>
+                                                    setCompletedCrop(c)
+                                                  }
+                                                >
+                                                  <img
+                                                    style={{
+                                                      height: "95%",
+                                                      width: "95%",
+                                                      overflowY: "auto",
+                                                    }}
+                                                    ref={imgRef}
+                                                    src={FileDisplayEdite}
+                                                    alt="crop-target"
+                                                  />
+                                                </ReactCrop>
+
+                                                <div
+                                                  className={
+                                                    classes.cropButtons
+                                                  }
+                                                >
+                                                  <button
+                                                    className="btn btn-primary"
+                                                    onClick={saveCrop}
+                                                    disabled={
+                                                      !completedCrop?.width ||
+                                                      !completedCrop?.height
+                                                    }
+                                                  >
+                                                    Save Crop
+                                                  </button>
+                                                  <button
+                                                    className="btn btn-danger"
+                                                    onClick={() =>
+                                                      setOpen(false)
+                                                    }
+                                                  >
+                                                    Cancel
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            )}
                                           </div>
                                           <div className={classes.descarea}>
                                             <textarea

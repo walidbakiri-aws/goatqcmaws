@@ -207,6 +207,31 @@
   margin-top: 15px;
 }
 /*************end commentary section***********************************************************/
+.cropContainer {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+
+  width: 90%; /* make it responsive */
+  max-width: 1200px;
+  max-height: 90vh; /* limit height relative to viewport */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  overflow-y: auto; /* ✅ enables vertical scroll */
+  overflow-x: hidden; /* optional: hide horizontal scroll */
+}
+
 .parsujetscontainer {
   background-color: var(--background-color-full);
 }
@@ -370,6 +395,8 @@
 }
 .imagediv {
   width: 45%;
+  height: 300px;
+
   border: 1px solid rgb(126, 197, 245);
 }
 .imagediv img {

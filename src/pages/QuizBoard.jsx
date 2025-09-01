@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import messanger from "../compenent/layout/img/messanger.png";
 
 import NavigationBar from "../compenent/layout/NavigationBar";
@@ -93,6 +93,8 @@ ChartJS.register(
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
 import DeepSeek from "./DeepSeek.jsx";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
 function QuizBoard(props) {
   const userIdToken = localStorage.getItem("userId");
   let ipAdresse = useSignal("");
@@ -498,18 +500,6 @@ function QuizBoard(props) {
   const qcmIddelete = useSignal("");
   //**************************** */
   const [ExisteNote, setExisteNote] = useState(false);
-  //***get image from local distination and display it****** */
-  const getFile = (e) => {
-    setFile(e.target.files[0]);
-    setFileDisplay(URL.createObjectURL(e.target.files[0]));
-  };
-  //*************************************************** */
-  //***get image from local distination and display it****** */
-  const getFileEdite = (e) => {
-    setFileEdite(e.target.files[0]);
-    setFileDisplayEdite(URL.createObjectURL(e.target.files[0]));
-  };
-  //*************************************************** */
 
   //****select liste qcms ***************************** */
   const [SelectQcmIndex, setSelectQcmIndex] = useState("");
@@ -806,9 +796,12 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
-        method: "POST",
-      });
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
+        {
+          method: "POST",
+        }
+      );
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -1732,7 +1725,10 @@ function QuizBoard(props) {
     setExisteNote(false);
     setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
-
+    setvisisbleDescInsert(false);
+    setVisisbleDescUpdate(false);
+    setFileDisplay("");
+    setFileDisplayEdite("");
     setSelectQcmIndex(currentIndex.value);
     setVisibiliteQcmIndex(currentIndex.value);
     setVisibilitePorpoIndex(currentIndex.value);
@@ -1834,7 +1830,10 @@ function QuizBoard(props) {
     setExisteNote(false);
     setVisibleNoteQcm(false);
     setVisibleCommentaryStudent(false);
-
+    setvisisbleDescInsert(false);
+    setVisisbleDescUpdate(false);
+    setFileDisplay("");
+    setFileDisplayEdite("");
     setSelectQcmIndex(currentIndex.value);
     setVisibiliteQcmIndex(currentIndex.value);
     setVisibilitePorpoIndex(currentIndex.value);
@@ -2526,6 +2525,7 @@ function QuizBoard(props) {
     setModalDoneQuizIsOpen(false);
     setShowModalStatique(false);
     setShowCreatPub(false);
+    setOpen(false);
   }
   //**************************************************** */
   function handlerConfirmShowAllReponse() {
@@ -2736,9 +2736,13 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2894,9 +2898,13 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3122,7 +3130,10 @@ function QuizBoard(props) {
     newPost.content = newPost.content + inputValue;
     console.log(newPost);
     try {
-      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
+      await axios.post(
+        `https://goatqcm-instance.com/publiction/posts`,
+        newPost
+      );
       setNewPost({
         content: "",
         anonyme: false,
@@ -3162,7 +3173,97 @@ function QuizBoard(props) {
     //setQcmContent(content);
     setInputValue(contentqcm + propTexts); // <-- set in MessageInput
   };
-  const handleEyseZoomPhoto = () => {};
+
+  //***get image from local distination and display it****** */
+  /*
+  const getFile = (e) => {
+    setFile(e.target.files[0]);
+    setFileDisplay(URL.createObjectURL(e.target.files[0]));
+  };
+
+  const getFileEdite = (e) => {
+    setFileEdite(e.target.files[0]);
+    setFileDisplayEdite(URL.createObjectURL(e.target.files[0]));
+  };
+*/
+  const [open, setOpen] = useState(false);
+  const [crop, setCrop] = useState({ aspect: 1 });
+  const [completedCrop, setCompletedCrop] = useState(null);
+  const imgRef = useRef(null);
+
+  const getFile = (e) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFileDisplay(reader.result);
+    };
+    if (e.target.files && e.target.files.length > 0) {
+      reader.readAsDataURL(e.target.files[0]);
+
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const getFileEdite = (e) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setFileDisplayEdite(reader.result);
+    };
+    if (e.target.files && e.target.files.length > 0) {
+      reader.readAsDataURL(e.target.files[0]);
+
+      setFileEdite(e.target.files[0]);
+    }
+  };
+
+  const saveCrop = () => {
+    if (!completedCrop || !imgRef.current) return;
+
+    const image = imgRef.current;
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+
+    const pixelX = completedCrop.x * scaleX;
+    const pixelY = completedCrop.y * scaleY;
+    const pixelWidth = completedCrop.width * scaleX;
+    const pixelHeight = completedCrop.height * scaleY;
+
+    canvas.width = completedCrop.width;
+    canvas.height = completedCrop.height;
+
+    ctx.drawImage(
+      image,
+      pixelX,
+      pixelY,
+      pixelWidth,
+      pixelHeight,
+      0,
+      0,
+      completedCrop.width,
+      completedCrop.height
+    );
+
+    const croppedDataUrl = canvas.toDataURL("image/png");
+    setFileDisplay(croppedDataUrl); // replace preview
+    setFileDisplayEdite(croppedDataUrl); // replace preview
+    const fileObj = dataURLtoFile(croppedDataUrl, "cropped.png");
+    setFile(fileObj);
+    setFileEdite(fileObj);
+    setOpen(false); // close cropper
+  };
+  function dataURLtoFile(dataUrl, filename) {
+    let arr = dataUrl.split(",");
+    let mime = arr[0].match(/:(.*?);/)[1];
+    let bstr = atob(arr[1]);
+    let n = bstr.length;
+    let u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
   return (
     <>
       {!OpenBoardClinique && (
@@ -3510,17 +3611,64 @@ function QuizBoard(props) {
                                   <div className={classes.fulldescription}>
                                     <div className={classes.imagediv}>
                                       <img
-                                        onClick={() => {
-                                          handleEyseZoomPhoto();
-                                        }}
+                                        onClick={() => setOpen(true)}
                                         src={eysezoom}
-                                        style={{ width: 25, height: 25 }}
+                                        style={{
+                                          width: 25,
+                                          height: 25,
+                                          cursor: "pointer",
+                                        }}
+                                        alt="zoom"
                                       />
-                                      <img src={fileDisplay} />
-                                      <input
-                                        type="file"
-                                        onChange={getFile}
-                                      ></input>
+
+                                      {fileDisplay && !open && (
+                                        <img src={fileDisplay} alt="preview" />
+                                      )}
+                                      <input type="file" onChange={getFile} />
+
+                                      {open && fileDisplay && (
+                                        <div className={classes.cropContainer}>
+                                          <ReactCrop
+                                            crop={crop}
+                                            onChange={(_, percentCrop) =>
+                                              setCrop(percentCrop)
+                                            }
+                                            onComplete={(c) =>
+                                              setCompletedCrop(c)
+                                            }
+                                          >
+                                            <img
+                                              style={{
+                                                height: "95%",
+                                                width: "95%",
+                                                overflowY: "auto",
+                                              }}
+                                              ref={imgRef}
+                                              src={fileDisplay}
+                                              alt="crop-target"
+                                            />
+                                          </ReactCrop>
+
+                                          <div className={classes.cropButtons}>
+                                            <button
+                                              className="btn btn-primary"
+                                              onClick={saveCrop}
+                                              disabled={
+                                                !completedCrop?.width ||
+                                                !completedCrop?.height
+                                              }
+                                            >
+                                              Save Crop
+                                            </button>
+                                            <button
+                                              className="btn btn-danger"
+                                              onClick={() => setOpen(false)}
+                                            >
+                                              Cancel
+                                            </button>
+                                          </div>
+                                        </div>
+                                      )}
                                     </div>
                                     <div className={classes.descarea}>
                                       <textarea
@@ -3554,13 +3702,68 @@ function QuizBoard(props) {
                                   <div className={classes.fulldescription}>
                                     <div className={classes.imagediv}>
                                       <img
-                                        src={FileDisplayEdite}
-                                        onChange={getFileEdite}
+                                        onClick={() => setOpen(true)}
+                                        src={eysezoom}
+                                        style={{
+                                          width: 25,
+                                          height: 25,
+                                          cursor: "pointer",
+                                        }}
+                                        alt="zoom"
                                       />
+                                      {FileDisplayEdite && !open && (
+                                        <img
+                                          src={FileDisplayEdite}
+                                          alt="preview"
+                                        />
+                                      )}
                                       <input
                                         type="file"
                                         onChange={getFileEdite}
-                                      ></input>
+                                      />
+                                      {open && FileDisplayEdite && (
+                                        <div className={classes.cropContainer}>
+                                          <ReactCrop
+                                            crop={crop}
+                                            onChange={(_, percentCrop) =>
+                                              setCrop(percentCrop)
+                                            }
+                                            onComplete={(c) =>
+                                              setCompletedCrop(c)
+                                            }
+                                          >
+                                            <img
+                                              style={{
+                                                height: "95%",
+                                                width: "95%",
+                                                overflowY: "auto",
+                                              }}
+                                              ref={imgRef}
+                                              src={FileDisplayEdite}
+                                              alt="crop-target"
+                                            />
+                                          </ReactCrop>
+
+                                          <div className={classes.cropButtons}>
+                                            <button
+                                              className="btn btn-primary"
+                                              onClick={saveCrop}
+                                              disabled={
+                                                !completedCrop?.width ||
+                                                !completedCrop?.height
+                                              }
+                                            >
+                                              Save Crop
+                                            </button>
+                                            <button
+                                              className="btn btn-danger"
+                                              onClick={() => setOpen(false)}
+                                            >
+                                              Cancel
+                                            </button>
+                                          </div>
+                                        </div>
+                                      )}
                                     </div>
                                     <div className={classes.descarea}>
                                       <textarea
@@ -5094,6 +5297,9 @@ function QuizBoard(props) {
               </>
             )}
           {isDesktopOrLaptop && ShowModalStatique && (
+            <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
+          )}
+          {isDesktopOrLaptop && open && (
             <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
           )}
           {isDesktopOrLaptop && showCreatPub && (
