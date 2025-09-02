@@ -181,11 +181,28 @@ function ChatGptfinal(props) {
               position: "relative",
               height: "800px",
               width: "700px",
+              userSelect: "none", // Prevent text selection
+              WebkitUserSelect: "none", // Safari/Chrome
+              MozUserSelect: "none", // Firefox
+              msUserSelect: "none",
             }}
           >
-            <MainContainer>
+            <MainContainer
+              style={{
+                userSelect: "none", // Prevent text selection
+                WebkitUserSelect: "none", // Safari/Chrome
+                MozUserSelect: "none", // Firefox
+                msUserSelect: "none", // IE/Edge
+              }}
+            >
               <ChatContainer>
                 <MessageList
+                  style={{
+                    userSelect: "none", // Prevent text selection
+                    WebkitUserSelect: "none", // Safari/Chrome
+                    MozUserSelect: "none", // Firefox
+                    msUserSelect: "none", // IE/Edge
+                  }}
                   scrollBehavior="smooth"
                   typingIndicator={
                     isTyping ? (
@@ -195,6 +212,12 @@ function ChatGptfinal(props) {
                 >
                   {messages.map((message, i) => (
                     <Message
+                      style={{
+                        userSelect: "none", // Prevent text selection
+                        WebkitUserSelect: "none", // Safari/Chrome
+                        MozUserSelect: "none", // Firefox
+                        msUserSelect: "none", // IE/Edge
+                      }}
                       key={i}
                       model={{
                         message: message.message,
@@ -208,6 +231,12 @@ function ChatGptfinal(props) {
                   ))}
                 </MessageList>
                 <MessageInput
+                  style={{
+                    userSelect: "none", // Prevent text selection
+                    WebkitUserSelect: "none", // Safari/Chrome
+                    MozUserSelect: "none", // Firefox
+                    msUserSelect: "none", // IE/Edge
+                  }}
                   placeholder="Type message here"
                   value={inputValue}
                   onChange={(val) => setInputValue(val)}
@@ -230,9 +259,29 @@ function ChatGptfinal(props) {
             <div
               style={{ position: "relative", height: "400px", width: "100%" }}
             >
-              <MainContainer>
-                <ChatContainer>
+              <MainContainer
+                style={{
+                  userSelect: "none", // Prevent text selection
+                  WebkitUserSelect: "none", // Safari/Chrome
+                  MozUserSelect: "none", // Firefox
+                  msUserSelect: "none", // IE/Edge
+                }}
+              >
+                <ChatContainer
+                  style={{
+                    userSelect: "none", // Prevent text selection
+                    WebkitUserSelect: "none", // Safari/Chrome
+                    MozUserSelect: "none", // Firefox
+                    msUserSelect: "none", // IE/Edge
+                  }}
+                >
                   <MessageList
+                    style={{
+                      userSelect: "none", // Prevent text selection
+                      WebkitUserSelect: "none", // Safari/Chrome
+                      MozUserSelect: "none", // Firefox
+                      msUserSelect: "none", // IE/Edge
+                    }}
                     scrollBehavior="smooth"
                     typingIndicator={
                       isTyping ? (
@@ -242,6 +291,12 @@ function ChatGptfinal(props) {
                   >
                     {messages.map((message, i) => (
                       <Message
+                        style={{
+                          userSelect: "none", // Prevent text selection
+                          WebkitUserSelect: "none", // Safari/Chrome
+                          MozUserSelect: "none", // Firefox
+                          msUserSelect: "none", // IE/Edge
+                        }}
                         key={i}
                         model={{
                           message: message.message,
@@ -255,6 +310,12 @@ function ChatGptfinal(props) {
                     ))}
                   </MessageList>
                   <MessageInput
+                    style={{
+                      userSelect: "none", // Prevent text selection
+                      WebkitUserSelect: "none", // Safari/Chrome
+                      MozUserSelect: "none", // Firefox
+                      msUserSelect: "none", // IE/Edge
+                    }}
                     placeholder="Type message here"
                     value={inputValue}
                     onChange={(val) => setInputValue(val)}
