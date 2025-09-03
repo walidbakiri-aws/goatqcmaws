@@ -152,7 +152,8 @@ function CardResidanatSujet() {
         state: {
           sjetResidant: "clinique",
         },
-      });else if (getYearMed === "epidemio") {
+      });
+    } else if (getYearMed === "epidemio") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "epidemio",
