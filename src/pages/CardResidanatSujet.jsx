@@ -57,6 +57,7 @@ function CardResidanatSujet() {
     "2024",
     "fondamentaux",
     "clinique",
+    "epidemio",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -150,6 +151,11 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "clinique",
+        },
+      });else if (getYearMed === "epidemio") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "epidemio",
         },
       });
     }

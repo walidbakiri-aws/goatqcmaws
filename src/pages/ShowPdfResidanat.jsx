@@ -21,6 +21,7 @@ import sjtresidanat_2023 from "../compenent/layout/pdf/2023.pdf";
 import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
 import fondamentaux from "../compenent/layout/pdf/fondamentaux.pdf";
 import clinique from "../compenent/layout/pdf/clinique.pdf";
+import epide from "../compenent/layout/pdf/epide.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
   2011: sjtresidanat_2011,
@@ -37,6 +38,7 @@ const pdfMap = {
   2024: sjtresidanat_2024,
   fondamentaux: fondamentaux,
   clinique: clinique,
+  epidemio: epide,
 };
 
 function ShowPdfResidanat() {
