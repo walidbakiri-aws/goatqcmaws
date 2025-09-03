@@ -20,7 +20,7 @@ function AbounementPhone() {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2025",
-      priceAbn: "3000 DA",
+      priceAbn: "2000 DA",
     },
     {
       nameAbn: "Externat Blida",
@@ -38,7 +38,7 @@ function AbounementPhone() {
           <h2>Résidanat 2025</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>3000 </span>DA<br></br>
+            <span>2000 </span>DA<br></br>
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
