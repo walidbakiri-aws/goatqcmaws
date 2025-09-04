@@ -9,12 +9,7 @@ function ModalDeleteFullDescClinique(props) {
     props.onCancel();
   }
   function confirmeHanler() {
-    if (props.qcmId_delete) {
-      if (passwordConfirm === "FPGAveraWALID") {
-        onSubmitDeleteCour();
-      }
-    }
-    props.onConfirm();
+    onSubmitDeleteCour();
   }
   useEffect(() => {
     console.log(props.qcmId_delete);
@@ -24,21 +19,12 @@ function ModalDeleteFullDescClinique(props) {
     await axios.delete(
       `https://goatqcm-instance.com/fulldesc/clinique/deletefulldesc/${props.qcmId_delete}`
     );
+    props.onConfirm();
   };
   //************************************************************* */
 
   return (
     <div className={`${classes.modal} `}>
-      <input
-        type={"text"}
-        name="yearName"
-        required
-        placeholder="Enter confirmation password "
-        className="form-control"
-        onChange={(e) => {
-          passwordConfirm = e.target.value;
-        }}
-      />
       <button
         className={`${classes.cancelbtn} btn btn-danger `}
         onClick={cancelHandler}

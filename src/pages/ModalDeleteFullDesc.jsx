@@ -10,12 +10,7 @@ function ModalDeleteFullDesc(props) {
     props.onCancel();
   }
   function confirmeHanler() {
-    if (props.qcmId_delete) {
-      if (passwordConfirm === "FPGAveraWALID") {
-        onSubmitDeleteCour();
-      }
-    }
-    props.onConfirm();
+    onSubmitDeleteCour();
   }
   useEffect(() => {
     console.log(props.qcmId_delete);
@@ -28,21 +23,12 @@ function ModalDeleteFullDesc(props) {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    props.onConfirm();
   };
   //************************************************************* */
 
   return (
     <div className={`${classes.modal} `}>
-      <input
-        type={"text"}
-        name="yearName"
-        required
-        placeholder="Enter confirmation password "
-        className="form-control"
-        onChange={(e) => {
-          passwordConfirm = e.target.value;
-        }}
-      />
       <button
         className={`${classes.cancelbtn} btn btn-danger `}
         onClick={cancelHandler}
