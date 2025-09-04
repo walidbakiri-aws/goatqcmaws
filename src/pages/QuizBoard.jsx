@@ -1980,6 +1980,7 @@ function QuizBoard(props) {
     /******intializer **************************************************************** */
     setShowQcm([]);
     setShowPropositions([]);
+    resultGetLoadPropo.value = [];
     setSaveClickSelectVerfieAll([]);
     setSavePropositions([]);
     setSaveQcmIsAnswer([]);
