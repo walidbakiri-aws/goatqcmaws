@@ -121,7 +121,7 @@ function Quiz() {
   let selectBgnEndYear = useSignal(false);
   const [showSelectWarningMaxYear, setShowSelectWarningMaxYear] =
     useState(false);
-
+  let findCasCliniqueFinalExiste = useSignal(false);
   useEffect(() => {
     localStorage.removeItem("showdiscussiondiv");
     console.log(getDuiscussionDivStatus);
@@ -609,6 +609,7 @@ function Quiz() {
           console.log("Cours not selected");
         }
       } else if (QcmTypeSelected.value === "Tous (Qcm,Cas Clinique)") {
+        findCasCliniqueFinalExiste.value === false;
         console.log("casss clnq");
         let existQcmMultpleCour = false;
         console.log(selectBgnEndYear.value);
@@ -672,18 +673,18 @@ function Quiz() {
         minMaxYear = MinMaxMultipleFinalClinique;
         console.log(minMaxYear);
         let existCliniqueMultpleCour = false;
-
+        console.log(selectMultipleCoursClinique.length);
         if (selectBgnEndYear.value === true) {
           console.log(selectMultipleCoursClinique.length);
           let inc = 0;
 
           while (
-            inc < selectMultipleCoursClinique.length &&
+            inc < selectMultipleCours.length &&
             existCliniqueMultpleCour === false
           ) {
             try {
               const result = await axios.get(
-                `https://goatqcm-instance.com/cours/${selectMultipleCoursClinique[inc]}/qcmsclinique/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
+                `https://goatqcm-instance.com/cours/${selectMultipleCours[inc]}/qcmsclinique/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
                 }
@@ -691,7 +692,7 @@ function Quiz() {
 
               if (result.data.length > 0) {
                 setExisteCasClinique(true);
-                console.log("setVisibleCommenceBtn");
+                console.log("setVisibleCommenceBtn l9ina");
                 setVisibleCommenceBtn(true);
                 existCliniqueMultpleCour = true;
               }
@@ -700,8 +701,12 @@ function Quiz() {
             }
             inc++;
 
-            if (inc === selectMultipleCoursClinique.length) {
-              console.log("setVisibleCommenceBtn");
+            if (
+              inc === selectMultipleCours.length &&
+              existCliniqueMultpleCour === false
+            ) {
+              console.log(existCliniqueMultpleCour);
+              console.log("setVisibleCommenceBtn mal9ach");
               setExisteCasClinique(false);
               setVisibleCommenceBtn(true);
             }
@@ -801,7 +806,8 @@ function Quiz() {
             );
             if (result.data.length > 0) {
               checkSpecifiqueYearExiste.value = result.data;
-              console.log(checkSpecifiqueYearExiste.value.length);
+              console.log(checkSpecifiqueYearExiste.value[0]);
+              console.log(SelectedCours[0]);
             }
           } catch {}
         }
