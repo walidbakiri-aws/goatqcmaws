@@ -830,12 +830,12 @@ function Quiz() {
         console.log(minYear);
         console.log(maxYear);
         console.log(minCliniqueYear);
-        if (checkSpecifiqueYearExiste.value.length > 1) {
+        if (checkSpecifiqueYearExiste.value[0] !== "null") {
           console.log(checkSpecifiqueYearExiste.value.length);
           setExisteCasClinique(true);
           console.log("setVisibleCommenceBtn");
           setVisibleCommenceBtn(true);
-        } else if (checkSpecifiqueYearExiste.value.length === 0) {
+        } else {
           console.log(checkSpecifiqueYearExiste.value.length);
           setExisteCasClinique(false);
           console.log("setVisibleCommenceBtn");
