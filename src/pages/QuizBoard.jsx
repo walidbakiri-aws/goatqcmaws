@@ -1979,8 +1979,11 @@ function QuizBoard(props) {
     setVisibleParSujet(true);
     /******intializer **************************************************************** */
     setShowQcm([]);
-    setShowPropositions([]);
+    
     resultGetLoadPropo.value = [];
+    currentIndex.value = 0;
+    getQcms.value.length = 0;
+    setShowPropositions([]);
     setSaveClickSelectVerfieAll([]);
     setSavePropositions([]);
     setSaveQcmIsAnswer([]);
@@ -1989,6 +1992,7 @@ function QuizBoard(props) {
     setSavePercentageAmount([]);
     setSelectQcmIndex(0);
     setVisibiliteQcmIndex(0);
+
     //******************************************************************************* */
     loadQcms();
     setVisibleQmcContainer(true);
