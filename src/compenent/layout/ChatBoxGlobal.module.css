@@ -229,8 +229,8 @@
 .chatContainer_phone {
   display: flex;
   flex-direction: column;
-  height: 60vh;
-  max-width: 80%;
+  height: 90vh;
+  max-width: 90%;
   margin: auto;
   background: #f0f2f5;
   border: 1px solid #ccc;
@@ -332,14 +332,15 @@
   height: auto;
 }
 .nickname_phone {
-  font-weight: 500;
+  font-weight: 400;
   margin-bottom: 4px;
   margin-left: 5px;
   color: #b6abab;
+  font-size: 12px;
 }
 .timestamp_phone {
-  font-weight: 500;
-  font-size: 15px;
+  font-weight: 300;
+  font-size: 12px;
   margin-bottom: 4px;
   margin-left: 60px;
   color: #b6abab;
