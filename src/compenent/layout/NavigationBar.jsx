@@ -85,7 +85,7 @@ function NavigationBar(props) {
   const [codeShare, setCodeShare] = useState("");
   let screensharecode = useSignal("");
   const [getChatCountFinal, setGetChatCountFinal] = useState("");
-
+  let getChatCountNavigate = useSignal("");
   /************end var********************************************************************************************* */
 
   let saveUser = {
@@ -113,8 +113,8 @@ function NavigationBar(props) {
   const handleChatGobablBtn = async (e) => {
     setModalGlobChatIsOpen(true);
     setShowDiscsussionGlobChatDiv(!ShowDiscsussionGlobChatDiv);
-    console.log(getChatCountFinal);
-    localStorage.setItem("messageCount", getChatCountFinal);
+    console.log(getChatCountNavigate.value);
+    localStorage.setItem("messageCount", getChatCountNavigate.value);
     setGetChatCountFinal("0");
 
     console.log(Number(localStorage.getItem("messageCount")));
@@ -140,6 +140,7 @@ function NavigationBar(props) {
     );
     console.log(Number(localStorage.getItem("messageCount")));
     console.log(resultgetChatCount.data.chatCount);
+    getChatCountNavigate.value = resultgetChatCount.data.chatCount;
     setGetChatCountFinal(
       resultgetChatCount.data.chatCount -
         Number(localStorage.getItem("messageCount"))

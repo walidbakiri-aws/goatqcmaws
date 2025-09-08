@@ -229,7 +229,7 @@
 .chatContainer_phone {
   display: flex;
   flex-direction: column;
-  height: 90vh;
+  height: 80vh;
   max-width: 90%;
   margin: auto;
   background: #f0f2f5;
