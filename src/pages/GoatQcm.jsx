@@ -135,7 +135,7 @@ function GoatQcm() {
           await axios.post(
             `https://goatqcm-instance.com/codegmail/send-code/${result.data.ourUsers.username}`
           );
-          setCooldown(60);
+          setCooldown(30);
         } else {
           toast.info(
             `Veuillez attendre ${cooldown} secondes avant de renvoyer le code.`
@@ -152,7 +152,7 @@ function GoatQcm() {
         `https://goatqcm-instance.com/codegmail/send-code/${finalEmail.value}`
       );
       toast.success("Code renvoyé avec succès");
-      setCooldown(60);
+      setCooldown(30);
     } catch (err) {
       toast.error("Erreur lors de l'envoi du code");
     }
@@ -192,7 +192,7 @@ function GoatQcm() {
     setShowCreatPub(false);
   };
   const strokeDasharray = 283; // 2 * π * r (r = 45)
-  const strokeDashoffset = (cooldown / 60) * strokeDasharray;
+  const strokeDashoffset = (cooldown / 30) * strokeDasharray;
 
   const fetchPosts = async () => {
     try {

@@ -84,6 +84,8 @@ function NavigationBar(props) {
   });
   const [codeShare, setCodeShare] = useState("");
   let screensharecode = useSignal("");
+  const [getChatCountFinal, setGetChatCountFinal] = useState("");
+
   /************end var********************************************************************************************* */
 
   let saveUser = {
@@ -111,24 +113,38 @@ function NavigationBar(props) {
   const handleChatGobablBtn = async (e) => {
     setModalGlobChatIsOpen(true);
     setShowDiscsussionGlobChatDiv(!ShowDiscsussionGlobChatDiv);
-    localStorage.setItem("messageCount", "0");
+    console.log(getChatCountFinal);
+    localStorage.setItem("messageCount", getChatCountFinal);
+    setGetChatCountFinal("0");
+
+    console.log(Number(localStorage.getItem("messageCount")));
     window.dispatchEvent(new Event("newGlobalMessage"));
   };
 
   /***model chat************************************************************* */
 
   useEffect(() => {
-    const handleMessageUpdate = () => {
-      setMessageCount(Number(localStorage.getItem("messageCount")));
-    };
+    getChatCount();
 
-    window.addEventListener("newGlobalMessage", handleMessageUpdate);
+    console.log(Number(localStorage.getItem("messageCount")));
+
+    /*window.addEventListener("newGlobalMessage", handleMessageUpdate);
 
     return () => {
       window.removeEventListener("newGlobalMessage", handleMessageUpdate);
-    };
+    };*/
   }, []);
-
+  const getChatCount = async (e) => {
+    const resultgetChatCount = await axios.get(
+      `https://goatqcm-instance.com/chatcount/1`
+    );
+    console.log(Number(localStorage.getItem("messageCount")));
+    console.log(resultgetChatCount.data.chatCount);
+    setGetChatCountFinal(
+      resultgetChatCount.data.chatCount -
+        Number(localStorage.getItem("messageCount"))
+    );
+  };
   //****button action////////////////////////////////////////// */
   const handlecodediscussionBtn = () => {
     setShowButtonChoseFirstAction(false);
@@ -262,45 +278,7 @@ function NavigationBar(props) {
   };
   /************end chat function********************************************************************************************* */
   /**
- 2éme Anneé
-   u1(histo,Biochimie,Anatomie,Physio)
-   u2(histo,Biochimie,Anatomie,Physio)
-   u3(histo,Biochimie,Anatomie,Physio)
-   Immuno
- 3éme Année
-   u1(phyiopath,Semio,Radio,Biochimie)
-   Immuno
- 4éme Année
-   Cardio G04
-   Infectieuse G01
-   Neuro G02
-   Cardio G05
-   Hemato P2
-   Neuro G03
-  5éme Année
-   Endorino G03
-   Pédiatrie G02
-   Traumato G01
-   Uro-Nephro G03
-   Psychiatrie G02
-   Endocrino G02
-   Pediatrie G04
-   Traumato G03
-  6éme Année
-   Dérmato G04
-   Epidémio P1
-   Med-travaille P1
-   Urgence G01
-   Maladie-Systéme G02
-   Epidémio G03
-   Légal G01
-   Ophtalmo G04
-   Urgence G02
-   Med-travaille G04
-   Urgence G03
-  
-
- */
+ 
   /************share function********************************************************************************************* */
 
   /*********************************************** */
@@ -310,6 +288,7 @@ function NavigationBar(props) {
     setShowShareScreenDiv(false);
   }
   const handleShareBtn = async (e) => {
+    getChatCount();
     loadShareUserId(userId);
     setshowAddNewShare(false);
     setShowEnterCodeShare(false);
@@ -508,7 +487,7 @@ function NavigationBar(props) {
             />
             <div className={`${classes.globmessage} `}>
               <span className={`${classes.nbrGlobMessage} `}>
-                {messageCount}
+                {getChatCountFinal}
               </span>
               <img
                 src={globmessage}
@@ -777,7 +756,7 @@ function NavigationBar(props) {
             />
             <div className={`${classes.globmessage_phone} `}>
               <span className={`${classes.nbrGlobMessage_phone} `}>
-                {messageCount}
+                {getChatCountFinal}
               </span>
               <img
                 src={globmessage}

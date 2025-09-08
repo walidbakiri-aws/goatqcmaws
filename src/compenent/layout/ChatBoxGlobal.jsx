@@ -10,6 +10,7 @@ import sendmessage from "../layout/img/sendmessage.png";
 import settings from "../layout/img/settings.png";
 import ModalDeleteChat from "./ModalDeleteChat";
 import Backdrop from "./Backdrop";
+import axios from "axios";
 function ChatBoxGlobal(props) {
   const [modalIsDteleChat, setModalIsDteleChat] = useState(false);
   let [ShowDiscsussionDiv, setShowDiscsussionDiv] = useState(true);
@@ -66,7 +67,7 @@ function ChatBoxGlobal(props) {
           const prevCount = Number(localStorage.getItem("messageCount")) || 0;
           const newCount = prevCount + 1;
           localStorage.setItem("messageCount", newCount);
-
+          incrementChatCount();
           // Notify all listeners
           window.dispatchEvent(new Event("newGlobalMessage"));
           /*  localStorage.setItem(
@@ -95,6 +96,14 @@ function ChatBoxGlobal(props) {
     } catch (Exception) {}
   };
   //*********getUser************************************************** */
+  //****uodate count******************************************************** */
+  const incrementChatCount = async () => {
+    const result = await axios.post(
+      `https://goatqcm-instance.com/chatcount/increment/1`
+    );
+    console.log(Number(localStorage.getItem("messageCount")));
+  };
+  ///**************************************************************************** */
   const getUser = async () => {
     console.log(userId);
     console.log(token);
