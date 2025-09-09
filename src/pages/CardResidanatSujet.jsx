@@ -58,6 +58,7 @@ function CardResidanatSujet() {
     "fondamentaux",
     "clinique",
     "epidemio",
+    "Rttrapage_gynéco",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -157,6 +158,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "epidemio",
+        },
+      });
+    } else if (getYearMed === "Rttrapage_gynéco") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rttrapage_gynéco",
         },
       });
     }
