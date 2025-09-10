@@ -22,7 +22,7 @@ import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
 import fondamentaux from "../compenent/layout/pdf/fondamentaux.pdf";
 import clinique from "../compenent/layout/pdf/clinique.pdf";
 import epide from "../compenent/layout/pdf/epide.pdf";
-import gygy2025 from "../compenent/layout/pdf/gygy2025.pdf";
+//import gygy2025 from "../compenent/layout/pdf/gygy2025.pdf";
 import infect2025 from "../compenent/layout/pdf/infect2025.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
