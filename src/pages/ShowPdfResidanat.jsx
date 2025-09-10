@@ -22,7 +22,8 @@ import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
 import fondamentaux from "../compenent/layout/pdf/fondamentaux.pdf";
 import clinique from "../compenent/layout/pdf/clinique.pdf";
 import epide from "../compenent/layout/pdf/epide.pdf";
-import gygy2024 from "../compenent/layout/pdf/gygy2024.pdf";
+import gygy2025 from "../compenent/layout/pdf/gygy2025.pdf";
+import infect2025 from "../compenent/layout/pdf/infect2025.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
   2011: sjtresidanat_2011,
@@ -40,10 +41,12 @@ const pdfMap = {
   fondamentaux: fondamentaux,
   clinique: clinique,
   epidemio: epide,
-  Rttrapage_gynéco: gygy2024,
+  //Rattrapage_gynéco: gygy2025,
+  Rattrapage_infect: infect2025,
 };
 
 function ShowPdfResidanat() {
+  const [startWithRattrapage, setStartWithRattrapage] = useState(false);
   const navigate = useNavigate();
   const { state } = useLocation();
   const [sjtresidanat, setSjtresidanat] = useState(null);
@@ -72,6 +75,13 @@ function ShowPdfResidanat() {
     }
 
     const pdfPath = pdfMap[state.sjetResidant];
+
+    if (state.sjetResidant?.startsWith("Rattrapage")) {
+      setStartWithRattrapage(true);
+    } else {
+      setStartWithRattrapage(false);
+    }
+
     if (pdfPath) {
       setSjtresidanat(pdfPath);
     } else {
@@ -125,7 +135,7 @@ function ShowPdfResidanat() {
 
   return (
     <>
-      {isDesktopOrLaptop && (
+      {isDesktopOrLaptop && !startWithRattrapage && (
         <div
           className={classes.container}
           data-theme={isDark ? "dark" : "light"}
@@ -225,8 +235,107 @@ function ShowPdfResidanat() {
           </div>
         </div>
       )}
+      {isDesktopOrLaptop && startWithRattrapage && (
+        <div
+          className={classes.container}
+          data-theme={isDark ? "dark" : "light"}
+        >
+          <NavigationBar changeetatsidebar={etatsidebare} />
 
-      {isTabletOrMobile && (
+          <div className={classes.contentContainer}>
+            {ShowSideBare && (
+              <div className={classes.sidebar}>
+                <Sidebar />
+              </div>
+            )}
+
+            <div className={classes.mainContent}>
+              {!sjtresidanat ? (
+                <div className={classes.loading}>Loading document...</div>
+              ) : (
+                <div className={classes.pdfViewerWrapper} ref={pdfContainerRef}>
+                  {/* Watermark overlay */}
+                  <div className={classes.watermark}>
+                    Confidential - Do Not Distribute
+                  </div>
+
+                  {/* Transparent overlay to intercept events */}
+                  <div className={classes.pdfProtectionOverlay}></div>
+
+                  <div className={classes.pdfControls}>
+                    <div className={classes.pageControls}>
+                      <button
+                        onClick={() => changePage(-1)}
+                        disabled={pageNumber <= 1}
+                        className={classes.controlBtn}
+                      >
+                        &larr; Prev
+                      </button>
+
+                      <span className={classes.pageInfo}>
+                        Page {pageNumber} of {numPages || "--"}
+                      </span>
+
+                      <button
+                        onClick={() => changePage(1)}
+                        disabled={pageNumber >= (numPages || 0)}
+                        className={classes.controlBtn}
+                      >
+                        Next &rarr;
+                      </button>
+                    </div>
+
+                    <div className={classes.zoomControls}>
+                      <button
+                        className={classes.zoomBtn}
+                        onClick={zoomOut}
+                        disabled={zoom <= 0.5}
+                      >
+                        -
+                      </button>
+                      <button className={classes.zoomBtn} onClick={resetZoom}>
+                        {Math.round(zoom * 100)}%
+                      </button>
+                      <button
+                        className={classes.zoomBtn}
+                        onClick={zoomIn}
+                        disabled={zoom >= 2}
+                      >
+                        +
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className={classes.pdfContainer_startrattra}>
+                    {isLoading && (
+                      <div className={classes.loading}>Loading page...</div>
+                    )}
+
+                    <Document
+                      file={sjtresidanat}
+                      onLoadSuccess={onDocumentLoadSuccess}
+                      loading={
+                        <div className={classes.loading}>
+                          Loading document...
+                        </div>
+                      }
+                    >
+                      <Page
+                        className={classes.pdfPage_startrattra}
+                        pageNumber={pageNumber}
+                        width={isDesktopOrLaptop ? 800 * zoom : 300 * zoom}
+                        renderTextLayer={false}
+                        renderAnnotationLayer={false}
+                      />
+                    </Document>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+      {isTabletOrMobile && !startWithRattrapage && (
         <>
           <NavigationBar changeetatsidebar={etatsidebare} />
           <div className={classes.contentContainer}>
@@ -253,6 +362,46 @@ function ShowPdfResidanat() {
                         return (
                           <Page
                             width={300}
+                            pageNumber={page}
+                            renderTextLayer={false}
+                            renderAnnotationLayer={false}
+                          />
+                        );
+                      })}
+                  </div>
+                </Document>
+              </div>
+            </div>
+          </div>
+        </>
+      )}{" "}
+      {isTabletOrMobile && startWithRattrapage && (
+        <>
+          <NavigationBar changeetatsidebar={etatsidebare} />
+          <div className={classes.contentContainer}>
+            {ShowSideBare && (
+              <div className={classes.sidebar}>
+                <Sidebar />
+              </div>
+            )}
+          </div>
+          <div
+            className={classes.contanerspace_phone}
+            data-theme={isDark ? "dark" : "light"}
+          >
+            <div className="d-flex align-items-center justify-content-center flex-column">
+              <div className={classes.documentdivratrra_phone}>
+                <Document
+                  file={sjtresidanat}
+                  onLoadSuccess={onDocumentLoadSuccess}
+                >
+                  <div className={classes.documentpageratrra_phone}>
+                    {Array.apply(null, Array(numPages))
+                      .map((x, i) => i + 1)
+                      .map((page) => {
+                        return (
+                          <Page
+                            width={600}
                             pageNumber={page}
                             renderTextLayer={false}
                             renderAnnotationLayer={false}

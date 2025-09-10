@@ -96,6 +96,15 @@
   overflow: auto;
   padding: 20px;
 }
+.pdfContainer_startrattra {
+  display: flex;
+
+  min-height: 240px;
+  height: 240px;
+  overflow: auto;
+  padding: 20px;
+  width: 100%;
+}
 .pdfControls {
   display: flex;
   justify-content: space-between;
@@ -159,6 +168,7 @@
 .zoomBtn:hover {
   background: #357ae8;
 }
+
 /***********phone************************************/
 .contanerspace_phone {
   position: absolute;
@@ -245,3 +255,4 @@
   margin-top: -20px;
   width: 100%;
 }
+ 

@@ -22,7 +22,7 @@ function CardResidanatSujet() {
   /*********adresse Ip***************************** */
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
-  const token = localStorage.getItem("tokengoat");
+  const token = localStorage.getItem("token");
   const userIdToken = localStorage.getItem("userId");
   //************************************************* */
   const isAuthenticated = UserService.isAuthenticated();
@@ -58,7 +58,9 @@ function CardResidanatSujet() {
     "fondamentaux",
     "clinique",
     "epidemio",
-    "Rttrapage_gynéco",
+
+    //"Rattrapage_gynéco",
+    "Rattrapage_infect",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -160,10 +162,16 @@ function CardResidanatSujet() {
           sjetResidant: "epidemio",
         },
       });
-    } else if (getYearMed === "Rttrapage_gynéco") {
+    } /*else if (getYearMed === "Rattrapage_gynéco") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "Rttrapage_gynéco",
+          sjetResidant: "Rattrapage_gynéco",
+        },
+      });
+    } */ else if (getYearMed === "Rattrapage_infect") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_infect",
         },
       });
     }
