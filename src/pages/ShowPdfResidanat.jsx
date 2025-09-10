@@ -389,8 +389,8 @@ function ShowPdfResidanat() {
             className={classes.contanerspace_phone}
             data-theme={isDark ? "dark" : "light"}
           >
-            <div className="d-flex align-items-center justify-content-center flex-column">
-              <div className={classes.documentdivratrra_phone}>
+            <div className={classes.documentdivratrra_phone}>
+              <div>
                 <Document
                   file={sjtresidanat}
                   onLoadSuccess={onDocumentLoadSuccess}
@@ -401,7 +401,7 @@ function ShowPdfResidanat() {
                       .map((page) => {
                         return (
                           <Page
-                            width={600}
+                            width={320}
                             pageNumber={page}
                             renderTextLayer={false}
                             renderAnnotationLayer={false}

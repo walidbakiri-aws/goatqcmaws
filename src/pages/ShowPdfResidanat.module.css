@@ -171,88 +171,24 @@
 
 /***********phone************************************/
 .contanerspace_phone {
-  position: absolute;
-  display: inline-block;
-  margin-top: 50px;
-  width: fit-content;
-}
-
-.fulldiv_phone {
-  position: relative;
-}
-
-.hidesavepdf_phone {
-  width: 80px;
-  height: 30px;
-  background-color: rgb(52, 54, 54);
-  position: relative;
-  z-index: 2;
-  margin-left: 290px;
-  margin-top: -20px;
-}
-.pdfsection_phone {
-  margin-top: -20px;
-}
-
-.contentContainer_phone {
-  display: flex;
-  flex: 1;
-}
-.container_phone {
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  background-color: #f5f7fa;
-  color: #333;
-}
-[data-theme="dark"] .container_phone {
-  background-color: #1a1a2e;
-  color: #f0f0f0;
-}
-.pdfControls_phone {
-  display: inline-block;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 1.5rem;
-  background: #f8f9fa;
-  border-bottom: 1px solid #e0e0e0;
+  margin-top: 40px;
   width: 100%;
-  margin-left: -20px;
-}
-
-[data-theme="dark"] .pdfControls_phone {
-  background: #34495e;
-  border-bottom: 1px solid #2c3e50;
-}
-.pageControls_phone {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 100%;
-}
-.pageControls_phone button {
-  width: 80px;
-  height: 30px;
-}
-
-.zoomControls_phone {
-  display: flex;
-  gap: 0.5rem;
-  width: 100%;
-  margin-left: 50px;
-}
-.pdfContainer_phone {
-  position: relative;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 500px;
-  overflow: auto;
+}
 
+.documentdivratrra_phone {
+  width: 100%;
+  max-width: 400px; /* adjust for phone/tablet */
+  height: 90px; /* 👈 fixed height you can control */
+  overflow-y: auto; /* 👈 vertical scroll */
+  border: 1px solid #ccc; /* optional: visible boundary */
+  border-radius: 8px;
+}
+
+.documentpageratrra_phone {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   width: 100%;
 }
-.pdfPage_phone {
-  margin-top: -20px;
-  width: 100%;
-}
- 
