@@ -61,6 +61,7 @@ function CardResidanatSujet() {
 
     //"Rattrapage_gynéco",
     "Rattrapage_infect",
+    "Rattrapage_hemato",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -172,6 +173,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_infect",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_hemato") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_hemato",
         },
       });
     }
