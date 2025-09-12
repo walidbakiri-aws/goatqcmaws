@@ -26,6 +26,7 @@ import gygy2025 from "../compenent/layout/pdf/gygy2025.pdf";
 import infect2025 from "../compenent/layout/pdf/infect2025.pdf";
 import hemato2025 from "../compenent/layout/pdf/hemato2025.pdf";
 import cardio2025 from "../compenent/layout/pdf/cardio2025.pdf";
+import u12025 from "../compenent/layout/pdf/u12025.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
   2011: sjtresidanat_2011,
@@ -47,6 +48,7 @@ const pdfMap = {
   Rattrapage_infect: infect2025,
   Rattrapage_hemato: hemato2025,
   Rattrapage_cardio: cardio2025,
+  Rattrapage_unite_01_3émeAnnée: u12025,
 };
 
 function ShowPdfResidanat() {

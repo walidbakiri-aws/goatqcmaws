@@ -63,6 +63,7 @@ function CardResidanatSujet() {
     "Rattrapage_infect",
     "Rattrapage_hemato",
     "Rattrapage_cardio",
+    "Rattrapage_unite_01_3émeAnnée",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -170,7 +171,7 @@ function CardResidanatSujet() {
           sjetResidant: "Rattrapage_gynéco",
         },
       });
-    }  else if (getYearMed === "Rattrapage_infect") {
+    } else if (getYearMed === "Rattrapage_infect") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_infect",
@@ -186,6 +187,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_cardio",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_unite_01_3émeAnnée") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_unite_01_3émeAnnée",
         },
       });
     }
