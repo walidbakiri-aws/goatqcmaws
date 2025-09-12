@@ -59,9 +59,9 @@ function CardResidanatSujet() {
     "clinique",
     "epidemio",
 
-    //"Rattrapage_gynéco",
+    "Rattrapage_gynéco",
     "Rattrapage_infect",
-    //"Rattrapage_hemato",
+    "Rattrapage_hemato",
     "Rattrapage_cardio",
   ];
   const hanleOnclickYear = (getYearMed) => {
@@ -164,13 +164,13 @@ function CardResidanatSujet() {
           sjetResidant: "epidemio",
         },
       });
-    } /*else if (getYearMed === "Rattrapage_gynéco") {
+    } else if (getYearMed === "Rattrapage_gynéco") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_gynéco",
         },
       });
-    } */ else if (getYearMed === "Rattrapage_infect") {
+    }  else if (getYearMed === "Rattrapage_infect") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_infect",

@@ -22,9 +22,9 @@ import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
 import fondamentaux from "../compenent/layout/pdf/fondamentaux.pdf";
 import clinique from "../compenent/layout/pdf/clinique.pdf";
 import epide from "../compenent/layout/pdf/epide.pdf";
-//import gygy2025 from "../compenent/layout/pdf/gygy2025.pdf";
+import gygy2025 from "../compenent/layout/pdf/gygy2025.pdf";
 import infect2025 from "../compenent/layout/pdf/infect2025.pdf";
-//import hemato2025 from "../compenent/layout/pdf/hemato2025.pdf";
+import hemato2025 from "../compenent/layout/pdf/hemato2025.pdf";
 import cardio2025 from "../compenent/layout/pdf/cardio2025.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
@@ -43,9 +43,9 @@ const pdfMap = {
   fondamentaux: fondamentaux,
   clinique: clinique,
   epidemio: epide,
-  //Rattrapage_gynéco: gygy2025,
+  Rattrapage_gynéco: gygy2025,
   Rattrapage_infect: infect2025,
-  //Rattrapage_hemato: hemato2025,
+  Rattrapage_hemato: hemato2025,
   Rattrapage_cardio: cardio2025,
 };
 
