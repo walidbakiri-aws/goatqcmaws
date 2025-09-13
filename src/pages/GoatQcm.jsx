@@ -16,6 +16,7 @@ import user from "../compenent/layout/img/user.png";
 import sendmessage from "../compenent/layout/img/sendmessage.png";
 import ios from "../compenent/layout/img/ios.png";
 import android from "../compenent/layout/img/android.png";
+import motivation from "../compenent/layout/img/motivation.jpg";
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
@@ -555,7 +556,7 @@ function GoatQcm() {
                   <img src={GoatLogo} height="70" width="100" />
                 </div>
               </div>
-
+               <div >  <img src={motivation} height="100" width="200" /></div>
               <div className={classes.container_phone}>
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>
