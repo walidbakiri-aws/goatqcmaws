@@ -23,6 +23,7 @@ function Abounement() {
               <p>
                 <i className="fa fa-rupee"></i>
                 <span>2000 </span>DA<br></br>
+                <span>2X1000 </span>DA<br></br>
               </p>
             </div>
             <div className={`${classes.card_content}`}>
