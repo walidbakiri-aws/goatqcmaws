@@ -62,9 +62,10 @@ function CardResidanatSujet() {
     "Rattrapage_gynéco",
     "Rattrapage_infect",
     "Rattrapage_hemato",
+
+    "Rattrapage_cardio",
     "Rattrapage_uronephro",
     "Rattrapage_microbio",
-    "Rattrapage_cardio",
     "Rattrapage_unite_01_3émeAnnée",
     "Rattrapage_unite_02_3émeAnnée",
     "Rattrapage_unite_01_2émeAnnée",
