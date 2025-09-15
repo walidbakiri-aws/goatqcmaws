@@ -62,8 +62,13 @@ function CardResidanatSujet() {
     "Rattrapage_gynéco",
     "Rattrapage_infect",
     "Rattrapage_hemato",
+    "Rattrapage_uronephro",
+    "Rattrapage_microbio",
     "Rattrapage_cardio",
-    "Rattrapage_unite_01_3émeAnnée","Rattrapage_unite_02_3émeAnnée","Rattrapage_unite_01_2émeAnnée","Rattrapage_unite_02_2émeAnnée",
+    "Rattrapage_unite_01_3émeAnnée",
+    "Rattrapage_unite_02_3émeAnnée",
+    "Rattrapage_unite_01_2émeAnnée",
+    "Rattrapage_unite_02_2émeAnnée",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -189,26 +194,37 @@ function CardResidanatSujet() {
           sjetResidant: "Rattrapage_cardio",
         },
       });
+    } else if (getYearMed === "Rattrapage_uronephro") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_uronephro",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_microbio") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_microbio",
+        },
+      });
     } else if (getYearMed === "Rattrapage_unite_01_3émeAnnée") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_unite_01_3émeAnnée",
         },
       });
-    }else if (getYearMed === "Rattrapage_unite_02_3émeAnnée") {
+    } else if (getYearMed === "Rattrapage_unite_02_3émeAnnée") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_unite_02_3émeAnnée",
         },
       });
-    }else if (getYearMed === "Rattrapage_unite_01_2émeAnnée") {
+    } else if (getYearMed === "Rattrapage_unite_01_2émeAnnée") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_unite_01_2émeAnnée",
         },
       });
-    }
-    else if (getYearMed === "Rattrapage_unite_02_2émeAnnée") {
+    } else if (getYearMed === "Rattrapage_unite_02_2émeAnnée") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_unite_02_2émeAnnée",
