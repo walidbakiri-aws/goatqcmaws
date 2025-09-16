@@ -68,6 +68,7 @@ function CardResidanatSujet() {
     "Rattrapage_microbio",
     "Rattrapage_unite_01_3émeAnnée",
     "Rattrapage_unite_02_3émeAnnée",
+    "Rattrapage_unite_04_3émeAnnée",
     "Rattrapage_unite_01_2émeAnnée",
     "Rattrapage_unite_02_2émeAnnée",
   ];
@@ -217,6 +218,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_unite_02_3émeAnnée",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_unite_04_3émeAnnée") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_unite_04_3émeAnnée",
         },
       });
     } else if (getYearMed === "Rattrapage_unite_01_2émeAnnée") {
