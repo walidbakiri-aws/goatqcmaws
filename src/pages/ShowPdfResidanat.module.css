@@ -180,7 +180,7 @@
 .documentdivratrra_phone {
   width: 100%;
   max-width: 400px; /* adjust for phone/tablet */
-  height: 160px; /* 👈 fixed height you can control */
+  height: 260px; /* 👈 fixed height you can control */
   overflow-y: auto; /* 👈 vertical scroll */
   border: 1px solid #ccc; /* optional: visible boundary */
   border-radius: 8px;
