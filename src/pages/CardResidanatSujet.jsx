@@ -67,6 +67,7 @@ function CardResidanatSujet() {
     "Rattrapage_uronephro",
     "Rattrapage_psyciatrie",
     "Rattrapage_microbio",
+    "Rattrapage_immuno",
     "Rattrapage_unite_01_3émeAnnée",
     "Rattrapage_unite_02_3émeAnnée",
     "Rattrapage_unite_04_3émeAnnée",
@@ -213,6 +214,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_microbio",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_immuno") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_immuno",
         },
       });
     } else if (getYearMed === "Rattrapage_unite_01_3émeAnnée") {
