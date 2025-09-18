@@ -2008,6 +2008,7 @@ function QuizBoardClinique(props) {
 
   function closeDeleteModalHandler() {
     setModalDeleteCliniqueIsOpen(false);
+    setModalDeleteCourIsOpen(false);
   }
   ////////////////////////////////////////////////////////////////////////////
   //delete function*//////////////////////////////////////////////////////////
