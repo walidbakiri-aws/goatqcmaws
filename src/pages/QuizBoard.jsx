@@ -22,6 +22,7 @@ import E from "../compenent/layout/img/E.png";
 import eysezoom from "../compenent/layout/img/eysezoom.png";
 import next from "../compenent/layout/img/next.png";
 import prev from "../compenent/layout/img/prev.png";
+import closecommentary from "../compenent/layout/img/closecommentary.png";
 
 import pub from "../compenent/layout/img/pub.png";
 import chatgpt from "../compenent/layout/img/chatgpt.png";
@@ -252,6 +253,7 @@ function QuizBoard(props) {
   let [SaveCorrectAnswer, setSaveCorrectAnswer] = useState([]);
   const [SaveIsClickedCounter, setSaveIsClickedCounter] = useState([]);
   const doneFirstUplaod = useSignal(false);
+  const [isAnonyme, setIsAnonyme] = useState(false);
   //**********fin propo selected************************************* */
   //**timer*********************************************************** */
   let {
@@ -1679,6 +1681,7 @@ function QuizBoard(props) {
       }
     } else if (props.QcmSujetTypeSelected === "Par Sujet") {
       console.log("mmom");
+
       for (let i = 0; i < getQcms.value.length; i++) {
         //**save verifier reponses***************************************** */
         if (!props.backFromCliniqueAllQcmCliniqueprSujet) {
@@ -1692,8 +1695,10 @@ function QuizBoard(props) {
         const result = await axios.get(
           `${BASE_URL}/qcms/${getQcms.value[i].id}/reponses`
         );
-
+        console.log(result.data);
         resultGetLoadPropo.value[i] = result.data;
+        console.log(getQcms.value[i].id);
+        console.log(i);
         //***save propositions*************************************************** */
         if (!props.backFromCliniqueAllQcmCliniqueprSujet) {
           saveCurrentPropo = [];
@@ -1703,6 +1708,7 @@ function QuizBoard(props) {
           setSavePropositions((p) => [...p, saveCurrentPropo]);
         }
         //*********************************************************************** */
+        //console.log(resultGetLoadPropo.value[0]);
         setShowPropositions((p) => [...p, resultGetLoadPropo.value[i]]);
       }
     }
@@ -1979,7 +1985,7 @@ function QuizBoard(props) {
     setVisibleParSujet(true);
     /******intializer **************************************************************** */
     setShowQcm([]);
-
+    console.log(currentIndex.value);
     resultGetLoadPropo.value = [];
     currentIndex.value = 0;
     getQcms.value.length = 0;
@@ -2085,30 +2091,25 @@ function QuizBoard(props) {
 
   //**************************************************************** */
   const handlesendComment = async () => {
-    console.log(userFinal);
-    //****get user*************************************** */
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
         token
       );
-      console.log(resultUserFinal);
-      (saveUserQcm.id = resultUserFinal.id),
-        (saveUserQcm.name = resultUserFinal.name),
-        (saveUserQcm.lastname = resultUserFinal.lastname),
-        (saveUserQcm.username = resultUserFinal.username),
-        (saveUserQcm.password = resultUserFinal.password),
-        (saveUserQcm.role = resultUserFinal.role);
+      saveUserQcm.id = resultUserFinal.id;
+      saveUserQcm.name = resultUserFinal.name;
+      saveUserQcm.lastname = resultUserFinal.lastname;
+      saveUserQcm.username = resultUserFinal.username;
+      saveUserQcm.password = resultUserFinal.password;
+      saveUserQcm.role = resultUserFinal.role;
     } catch (Exception) {
       console.log("user not found");
     }
+
     Commentary.ourUsers = saveUserQcm;
-    //***************************************************** */
     Commentary.commentaryStudent = inputStr;
-    console.log(Commentary);
-    console.log(Commentary.ourUsers);
-    console.log(Commentary.qcmStandard);
-    console.log(inputStr);
+    Commentary.anonyme = isAnonyme; // <-- key line
+
     axios
       .post("https://goatqcm-instance.com/commentary", Commentary, {
         headers: { Authorization: `Bearer ${token}` },
@@ -2116,9 +2117,11 @@ function QuizBoard(props) {
       .then((res) => {
         getCommentaryQcm(Commentary.qcmStandard.id);
         setInputStr("");
+        setIsAnonyme(false);
       })
       .catch((err) => console.log(err));
   };
+
   //**************************************************************** */
   //***close commentay************************************************ */
   const handleCloseCommentaryBtn = () => {
@@ -4043,6 +4046,19 @@ function QuizBoard(props) {
 
                   {visibleCommentaryStudent && (
                     <div className={`${classes.commentarydiv}`}>
+                      <div
+                        className={`${classes.anonymecmntre} form-check form-switch vertical-switch my-2 ms-1`}
+                      >
+                        <input
+                          style={{ width: 40, height: 25 }}
+                          className="form-check-input"
+                          type="checkbox"
+                          role="switch"
+                          checked={isAnonyme}
+                          onChange={(e) => setIsAnonyme(e.target.checked)}
+                        />
+                        <label className="form-check-label">Anonyme</label>
+                      </div>
                       {qcmCommentary.map((commentary, index) => (
                         <div id={index}>
                           <div className={`${classes.commentary_likes}`}>
@@ -4051,8 +4067,9 @@ function QuizBoard(props) {
                               style={{ backgroundColor: "#F5F5F5" }}
                             >
                               <h6>
-                                {commentary.ourUsers.name}{" "}
-                                {commentary.ourUsers.lastname}
+                                {commentary.anonyme
+                                  ? "Anonyme"
+                                  : `${commentary.ourUsers.name}  `}
                               </h6>
                               {commentary.commentaryStudent}
                             </div>
@@ -4907,12 +4924,28 @@ function QuizBoard(props) {
                     <li
                       className={`${classes.close_commentary_phone} list-group-item`}
                     >
-                      <FaRegWindowClose
+                      <img
+                        src={closecommentary}
+                        height="30"
+                        width="30"
                         onClick={(e) => {
                           handleCloseCommentaryBtn();
                         }}
                       />
                     </li>
+                    <div
+                      className={`${classes.anonymecmntre_phone} form-check form-switch vertical-switch my-2 ms-1`}
+                    >
+                      <input
+                        style={{ width: 40, height: 25 }}
+                        className="form-check-input"
+                        type="checkbox"
+                        role="switch"
+                        checked={isAnonyme}
+                        onChange={(e) => setIsAnonyme(e.target.checked)}
+                      />
+                      <label className="form-check-label">Anonyme</label>
+                    </div>
                     {qcmCommentary.map((commentary, index) => (
                       <div id={index}>
                         <div className={`${classes.commentary_likes_phone}`}>
@@ -4921,9 +4954,11 @@ function QuizBoard(props) {
                             style={{ backgroundColor: "#F5F5F5" }}
                           >
                             <h6>
-                              {commentary.ourUsers.name}{" "}
-                              {commentary.ourUsers.lastname}
+                              {commentary.anonyme
+                                ? "Anonyme"
+                                : `${commentary.ourUsers.name} `}
                             </h6>
+
                             <h5>{commentary.commentaryStudent}</h5>
                           </div>
                           <div className={`${classes.likes_phone}`}>
@@ -4990,7 +5025,6 @@ function QuizBoard(props) {
                         <div className={`${classes.pickerdiv_phone} `}></div>
                       </div>
                     </div>
-
                     {showPicker && (
                       <Picker
                         style={{ width: "100%" }}

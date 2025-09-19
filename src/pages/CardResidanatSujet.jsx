@@ -73,6 +73,7 @@ function CardResidanatSujet() {
     "Rattrapage_unite_04_3émeAnnée",
     "Rattrapage_unite_01_2émeAnnée",
     "Rattrapage_unite_02_2émeAnnée",
+    "Rattrapage_geriatrie",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -250,6 +251,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_unite_02_2émeAnnée",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_geriatrie") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_geriatrie",
         },
       });
     }

@@ -37,7 +37,7 @@ import u22025 from "../compenent/layout/pdf/u22025.pdf";
 import u42025 from "../compenent/layout/pdf/u42025.pdf";
 import u12eme2025 from "../compenent/layout/pdf/u12eme2025.pdf";
 import u22eme2025 from "../compenent/layout/pdf/u22eme2025.pdf";
-
+import geriatrie2025 from "../compenent/layout/pdf/geriatrie2025.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
   2011: sjtresidanat_2011,
@@ -68,6 +68,8 @@ const pdfMap = {
   Rattrapage_unite_04_3émeAnnée: u42025,
   Rattrapage_unite_01_2émeAnnée: u12eme2025,
   Rattrapage_unite_02_2émeAnnée: u22eme2025,
+
+  Rattrapage_geriatrie: geriatrie2025,
 };
 
 function ShowPdfResidanat() {

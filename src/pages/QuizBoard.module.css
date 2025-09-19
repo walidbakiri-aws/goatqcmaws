@@ -206,6 +206,7 @@
 .pickerdiv {
   margin-top: 15px;
 }
+
 /*************end commentary section***********************************************************/
 .cropContainer {
   position: fixed;
@@ -929,7 +930,7 @@ modulediv_phone .homebtn {
     Arial, sans-serif;
 
   font-size: 18px; /* Adjust as needed */
-  font-weight: 410; /* Regular weight */
+  font-weight: 390; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -947,7 +948,7 @@ modulediv_phone .homebtn {
     "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
     Arial, sans-serif;
   font-size: 18px; /* Adjust as needed */
-  font-weight: 410; /* Regular weight */
+  font-weight: 380; /* Regular weight */
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
@@ -1084,8 +1085,9 @@ modulediv_phone .homebtn {
   display: flex;
 }
 .commentarydiv_phone {
-  top: 20px;
-  left: 10px;
+  float: right;
+
+  right: 5px;
   border-radius: 8px;
   position: absolute;
   background-color: #f4f1f8;
@@ -1093,10 +1095,27 @@ modulediv_phone .homebtn {
   padding-top: 10px;
   width: 90%;
   margin-bottom: 5px;
+  z-index: 20;
+  /* hidden by default */
+  font-style: normal;
+  transition: bottom 1s ease;
 }
+.anonymecmntre_phone {
+  margin-top: -5px;
+  width: 200px;
+  height: 10px;
 
+  display: flex;
+  margin-left: 5px;
+}
+.anonymecmntre_phone label {
+  font-size: 13px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
 .close_commentary_phone {
-  margin-top: -13px;
+  margin-top: -11px;
+  margin-bottom: 10px;
   float: right;
   border: 1px solid rgb(255, 250, 250);
 }
@@ -1115,17 +1134,16 @@ modulediv_phone .homebtn {
   background-color: #fdfdfd;
   border: 1px solid rgb(192, 186, 186);
   padding-bottom: 0px;
+  margin-top: 15px;
 }
 .eachcommentary_phone {
-  margin-top: 0px;
-
   width: 95%;
   height: 100%;
-  margin-top: 5px;
+
   margin-left: 5px;
+
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   border: 1px solid #e9e2e2;
-  padding: 5px;
 }
 .eachcommentary_phone h6 {
   margin-top: 1px;
