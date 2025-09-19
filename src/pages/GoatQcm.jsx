@@ -559,7 +559,7 @@ function GoatQcm() {
               </div>
               <div>
                 <div>
-                  <h5>Commenter avec en Anonyme </h5>
+                  <h6>Commenter en Anonyme </h6>
                 </div>
                 <img src={pubgoat} height="400" width="350" />
               </div>
