@@ -17,6 +17,7 @@ import sendmessage from "../compenent/layout/img/sendmessage.png";
 import ios from "../compenent/layout/img/ios.png";
 import android from "../compenent/layout/img/android.png";
 import motivation from "../compenent/layout/img/motivation.jpg";
+import pubgoat from "../compenent/layout/img/pubgoat.jpg";
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
@@ -553,10 +554,16 @@ function GoatQcm() {
                   Bienvenue au GoatQcm!
                 </div>
                 <div className={classes.logogoat_phone}>
+                  <div>
+                    <h5>Commenter avec en Anonyme </h5>
+                  </div>
                   <img src={GoatLogo} height="70" width="100" />
                 </div>
               </div>
-               <div >  <img src={motivation} height="130" width="350" /></div>
+              <div>
+                {" "}
+                <img src={pubgoat} height="170" width="350" />
+              </div>
               <div className={classes.container_phone}>
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>
