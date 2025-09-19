@@ -554,15 +554,14 @@ function GoatQcm() {
                   Bienvenue au GoatQcm!
                 </div>
                 <div className={classes.logogoat_phone}>
-                  <div>
-                    <h5>Commenter avec en Anonyme </h5>
-                  </div>
                   <img src={GoatLogo} height="70" width="100" />
                 </div>
               </div>
               <div>
-                {" "}
-                <img src={pubgoat} height="170" width="350" />
+                <div>
+                  <h5>Commenter avec en Anonyme </h5>
+                </div>
+                <img src={pubgoat} height="400" width="350" />
               </div>
               <div className={classes.container_phone}>
                 <div className={classes.publicationfull_phone}>
