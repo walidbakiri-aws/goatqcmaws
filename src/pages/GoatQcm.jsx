@@ -557,12 +557,10 @@ function GoatQcm() {
                   <img src={GoatLogo} height="70" width="100" />
                 </div>
               </div>
-              <div>
-                <div>
-                  <h6>Commenter en Anonyme </h6>
-                </div>
+              {/*  <div>
+                 
                 <img src={pubgoat} height="400" width="350" />
-              </div>
+              </div>*/}
               <div className={classes.container_phone}>
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>

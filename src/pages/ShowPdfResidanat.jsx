@@ -28,6 +28,7 @@ import hemato2025 from "../compenent/layout/pdf/hemato2025.pdf";
 import cardio2025 from "../compenent/layout/pdf/cardio2025.pdf";
 import uronephro2025 from "../compenent/layout/pdf/uronephro2025.pdf";
 import psychiatrie2025 from "../compenent/layout/pdf/psychiatrie2025.pdf";
+import pediatrie2025 from "../compenent/layout/pdf/pediatrie2025.pdf";
 
 import microbio from "../compenent/layout/pdf/microbio.pdf";
 import immuno2025 from "../compenent/layout/pdf/immuno2025.pdf";
@@ -61,6 +62,8 @@ const pdfMap = {
   Rattrapage_cardio: cardio2025,
   Rattrapage_uronephro: uronephro2025,
   Rattrapage_psyciatrie: psychiatrie2025,
+
+  Rattrapage_pediatrie: pediatrie2025,
   Rattrapage_microbio: microbio,
   Rattrapage_immuno: immuno2025,
   Rattrapage_unite_01_3émeAnnée: u12025,

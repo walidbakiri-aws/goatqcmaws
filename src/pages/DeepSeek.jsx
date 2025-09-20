@@ -221,7 +221,7 @@ function DeepSeek(props) {
                     />
                   ))}
                 </MessageList>
-                <MessageInput
+                {/* <MessageInput
                   style={{
                     userSelect: "none", // Prevent text selection
                     WebkitUserSelect: "none", // Safari/Chrome
@@ -235,7 +235,7 @@ function DeepSeek(props) {
                     handleSend(inputValue);
                     setInputValue("");
                   }}
-                />
+                />*/}
               </ChatContainer>
             </MainContainer>
           </div>
@@ -298,7 +298,7 @@ function DeepSeek(props) {
                     />
                   ))}
                 </MessageList>
-                <MessageInput
+                {/*   <MessageInput
                   style={{
                     userSelect: "none", // Prevent text selection
                     WebkitUserSelect: "none", // Safari/Chrome
@@ -312,7 +312,7 @@ function DeepSeek(props) {
                     handleSend(inputValue);
                     setInputValue("");
                   }}
-                />
+                />*/}
               </ChatContainer>
             </MainContainer>
           </div>
