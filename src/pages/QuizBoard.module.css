@@ -930,7 +930,7 @@ modulediv_phone .homebtn {
     Arial, sans-serif;
 
   font-size: 18px; /* Adjust as needed */
-  font-weight: 390; /* Regular weight */
+  font-weight: 410; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
@@ -948,7 +948,7 @@ modulediv_phone .homebtn {
     "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
     Arial, sans-serif;
   font-size: 18px; /* Adjust as needed */
-  font-weight: 380; /* Regular weight */
+  font-weight: 410; /* Regular weight */
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
