@@ -65,7 +65,7 @@ function AbounementPhone() {
           <h2>Résidanat 2026</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>4900 </span>DA<br></br>
+            <span>4600 </span>DA<br></br>
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -91,7 +91,7 @@ function AbounementPhone() {
           <h2>1ér Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>500</span>DA
+            <span>1500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -117,7 +117,7 @@ function AbounementPhone() {
           <h2>2éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>500</span>DA
+            <span>1500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -143,7 +143,7 @@ function AbounementPhone() {
           <h2>3éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>500</span>DA
+            <span>1500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -169,7 +169,7 @@ function AbounementPhone() {
           <h2>4éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>500</span>DA
+            <span>1500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -195,7 +195,7 @@ function AbounementPhone() {
           <h2>5éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>500</span>DA
+            <span>1500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
@@ -221,7 +221,7 @@ function AbounementPhone() {
           <h2>6éme Année Médecine</h2>
           <p>
             <i className="fa fa-rupee"></i>
-            <span>500</span>DA
+            <span>1500</span>DA
           </p>
         </div>
         <div className={`${classes.card_content_phone}`}>
