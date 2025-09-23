@@ -33,213 +33,46 @@ function AbounementPhone() {
 
   return (
     <>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>Résidanat 2025</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>2000 </span>DA<br></br>
-            <span>2X1000 </span>DA<br></br>
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
+      <div className={`${classes.cardfinal_phone} card`}>
+        <div className={`${classes.card_title_phone}`}>Pack Résidanat 2025</div>
+        <div className="card-body">
+          <h5 className="card-title">2000 DA</h5>
+          <ul className={`${classes.feature_list_phone}`}>
+            <li>Tous les Modules </li>
+            <li>Correction Fiable</li>
+            <li>Avec Explication</li>
           </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
+          <a href="/abounementlogin" className="btn btn-primary">
+            Register
+          </a>
         </div>
       </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>Résidanat 2026</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>4600 </span>DA<br></br>
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
+      <div className={`${classes.cardfinal_phone} card`}>
+        <div className={`${classes.card_title_phone}`}>Pack Résidanat 2026</div>
+        <div className="card-body">
+          <h5 className="card-title">4900 DA</h5>
+          <ul className={`${classes.feature_list_phone}`}>
+            <li>Tous les Modules e</li>
+            <li>Correction Fiable</li>
+            <li>Avec Explication</li>
           </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
+          <a href="/abounementlogin" className="btn btn-primary">
+            Register
+          </a>
         </div>
       </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>1ér Année Médecine</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 1ér Année
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
+      <div className={`${classes.cardfinal_phone} card`}>
+        <div className={`${classes.card_title_phone}`}>Pack Externat</div>
+        <div className="card-body">
+          <h5 className="card-title">1500 DA</h5>
+          <ul className={`${classes.feature_list_phone}`}>
+            <li>Tous les Modules </li>
+            <li>Correction Fiable</li>
+            <li>Avec Explication</li>
           </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
-        </div>
-      </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>2éme Année Médecine</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 2éme Année
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
-          </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
-        </div>
-      </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>3éme Année Médecine</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 3éme Année
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
-          </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
-        </div>
-      </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>4éme Année Médecine</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 4éme Année
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
-          </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
-        </div>
-      </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>5éme Année Médecine</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 5éme Année
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
-          </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
-        </div>
-      </div>
-      <div className={classes.cardfinal_phone}>
-        <div className={`${classes.card_title_phone}`}>
-          <h2>6éme Année Médecine</h2>
-          <p>
-            <i className="fa fa-rupee"></i>
-            <span>1500</span>DA
-          </p>
-        </div>
-        <div className={`${classes.card_content_phone}`}>
-          <ul>
-            <li>
-              <i className="fa fa-check-circle"></i>Tous les Modules 6éme Année
-            </li>
-
-            <li>
-              <i className="fa fa-check-circle"></i>Correction Fiable
-            </li>
-            <li>
-              <i className="fa fa-check-circle"></i>Avec Explication
-            </li>
-          </ul>
-          <button>
-            <a href="/register">Registrer</a>
-          </button>
+          <a href="/abounementlogin" className="btn btn-primary">
+            Register
+          </a>
         </div>
       </div>
       <div className={classes.fullpub}>

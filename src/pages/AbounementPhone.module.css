@@ -51,70 +51,48 @@
 }
 .cardfinal_phone {
   margin-top: 10px;
-  margin-bottom: 5px;
-  margin-left: 30px;
-  width: 250px;
+  margin-bottom: 10px;
+  margin-left: 13px;
+  width: 90%;
   height: 300px;
-  padding: 10px 0;
-  text-align: center;
-  background: linear-gradient(135deg, #ee20d6 0%, #0a2fb6 100%);
-  border-radius: 15px;
-  box-shadow: 2px 5px 15px black;
-  transition: transform 0.3s;
-}
 
-.cardfinal_phone:hover {
-  transform: scale(1.05);
+  text-align: center;
+  color: rgb(37, 36, 36);
+  padding-top: 0px;
+  box-shadow: 2px 5px 15px black;
 }
 
 .card_title_phone {
+  padding-top: 5px;
   border-bottom: 2px solid gray;
+  background-color: #3e5dca;
+  color: #ffffff;
+  height: 50px;
+  font-size: 25px;
+}
+.feature_list_phone {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
 
-.card_title_phone h2 {
+.feature_list_phone li {
+  position: relative;
+  padding-left: 24px;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+}
+
+.feature_list_phone li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #007bff; /* blue check */
+  font-weight: bold;
+}
+.cardfinal_phone h5 {
   font-size: 25px;
 
-  color: yellow;
-}
-
-.card_title_phone p span {
-  font-size: 35px;
-  padding: 0 5px;
-  color: #ffffff;
-}
-
-.card_content_phone ul {
-  padding: 5px;
-}
-
-.card_content_phone ul li {
-  list-style: none;
-  padding: 3px 0;
-  color: rgb(207, 203, 196);
-}
-
-.card_content_phone ul li i {
-  margin-right: 4px;
-}
-
-.card_content_phone button {
-  width: 120px;
-  background: white;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.card_content_phone button:hover {
-  background: #17ead9;
-  letter-spacing: 1.2px;
-}
-
-.card_content_phone button a {
-  text-decoration: none;
-  color: black;
-  font-size: 15px;
+  color: #333;
 }
