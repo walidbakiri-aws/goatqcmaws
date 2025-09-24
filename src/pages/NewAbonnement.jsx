@@ -34,7 +34,9 @@ function NewAbonnement() {
   useEffect(() => {
     const fetchAbonnements = async () => {
       try {
-        const res = await axios.get("http://localhost:8080/checkabounement");
+        const res = await axios.get(
+          "https://goatqcm-instance.com/checkabounement"
+        );
         setAbonnements(res.data);
       } catch (err) {
         console.error("Erreur lors du chargement des abonnements", err);
