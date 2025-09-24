@@ -1,0 +1,56 @@
+.addingdiv {
+    width: 100%;
+  
+    overflow: hidden;
+    border: 1px solid (240, 240, 240);
+    background-color: rgb(240, 240, 240);
+    display: flex;
+  }
+  .contanerspace {
+    margin-top: 20px;
+    position: absolute;
+    display: inline-block;
+    background-color: var(--background-color-full);
+    height: auto;
+    width: 100%;
+  }
+  .sidebare {
+    width: 200px;
+    display: inline-block;
+    position: absolute;
+    z-index: 2;
+  }
+  
+  .quizzContainer {
+    margin-left: 200px;
+    width: 1200px;
+    height: 650px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    border-radius: 10px;
+  
+    background-color: rgb(223, 220, 226);
+  }
+   
+  /*****phone****************************************************/
+  .contanerspace_phone {
+    position: absolute;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background-color: var(--background-color-full);
+  }
+  
+  .quizzContainer_phone {
+    margin-left: 5px;
+    width: 350px;
+    height: 700x;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-top: 20px;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    background-color: rgb(223, 220, 226);
+  }
+   

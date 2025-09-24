@@ -23,6 +23,7 @@ import eysezoom from "../compenent/layout/img/eysezoom.png";
 import next from "../compenent/layout/img/next.png";
 import prev from "../compenent/layout/img/prev.png";
 import closecommentary from "../compenent/layout/img/closecommentary.png";
+import upimagecommentary from "../compenent/layout/img/upimagecommentary.png";
 
 import pub from "../compenent/layout/img/pub.png";
 import chatgpt from "../compenent/layout/img/chatgpt.png";
@@ -314,7 +315,7 @@ function QuizBoard(props) {
   const [isDisabled, setDisabled] = useState(false);
   //***************************************************************************** */
   const [countJadore, setCountJadore] = useState(0);
-
+  const [selectedFile, setSelectedFile] = useState(null);
   //******************************************************************* */
   //*****responde all ***********************************************// */
   const [IsRepondeAll, setIsRepondeAll] = useState(true);
@@ -798,12 +799,9 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(
-        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
-        {
-          method: "POST",
-        }
-      );
+      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
+        method: "POST",
+      });
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2051,29 +2049,35 @@ function QuizBoard(props) {
   const getCommentaryQcm = async (qcmId) => {
     saveEachCommentary.value = [];
     setQcmCommentary([]);
+
     try {
-      const result = await axios.get(`${BASE_URL}/commentary/qcm/${qcmId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const result = await axios.get(
+        `https://goatqcm-instance.com/commentary/qcm/${qcmId}`
+      );
 
-      console.log(result.data);
-
-      for (let inc = 0; inc < result.data.length; inc++) {
-        const getCommentaryById = await axios.get(
-          `${BASE_URL}/commentary/${result.data[inc].id}`,
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        console.log(getCommentaryById.data);
-        saveEachCommentary.value[inc] = getCommentaryById.data;
+      const comments = result.data;
+      console.log(comments);
+      // For each comment, fetch image if available
+      for (let comment of comments) {
+        if (comment.imageName) {
+          const imgRes = await axios.get(
+            `${BASE_URL}/commentary/image/${comment.id}`,
+            {
+              responseType: "blob",
+              headers: { Authorization: `Bearer ${token}` },
+            }
+          );
+          comment.imageUrl = URL.createObjectURL(imgRes.data);
+        }
       }
-      console.log(saveEachCommentary.value);
-      setQcmCommentary(saveEachCommentary.value);
-    } catch (Exception) {
-      console.log("hey");
+
+      saveEachCommentary.value = comments;
+      setQcmCommentary(comments);
+    } catch (err) {
+      console.error("Error fetching commentary:", err);
     }
   };
+
   //********************************************************************** */
   //****************submit qcm ****************************************/
 
@@ -2096,30 +2100,34 @@ function QuizBoard(props) {
         username,
         token
       );
-      saveUserQcm.id = resultUserFinal.id;
-      saveUserQcm.name = resultUserFinal.name;
-      saveUserQcm.lastname = resultUserFinal.lastname;
-      saveUserQcm.username = resultUserFinal.username;
-      saveUserQcm.password = resultUserFinal.password;
-      saveUserQcm.role = resultUserFinal.role;
-    } catch (Exception) {
-      console.log("user not found");
+
+      const formData = new FormData();
+      formData.append("commentaryStudent", inputStr);
+      formData.append("anonyme", isAnonyme);
+      formData.append("qcmId", Commentary.qcmStandard.id);
+      formData.append("userId", resultUserFinal.id);
+
+      if (selectedFile) {
+        formData.append("file", selectedFile);
+      }
+
+      await axios.post("https://goatqcm-instance.com/commentary/upload", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      // Refresh commentary list
+      getCommentaryQcm(Commentary.qcmStandard.id);
+
+      // Reset input
+      setInputStr("");
+      setSelectedFile(null);
+      setIsAnonyme(false);
+    } catch (err) {
+      console.log(err);
     }
-
-    Commentary.ourUsers = saveUserQcm;
-    Commentary.commentaryStudent = inputStr;
-    Commentary.anonyme = isAnonyme; // <-- key line
-
-    axios
-      .post("https://goatqcm-instance.com/commentary", Commentary, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        getCommentaryQcm(Commentary.qcmStandard.id);
-        setInputStr("");
-        setIsAnonyme(false);
-      })
-      .catch((err) => console.log(err));
   };
 
   //**************************************************************** */
@@ -2744,13 +2752,9 @@ function QuizBoard(props) {
     );
     console.log(Date.format("YYYY-MM-dd hh:mm:ss"));
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQcmQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2906,13 +2910,9 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(
-        `https://goatqcm-instance.com/${sourceCommingFrom}`,
-        saveQuizzSession,
-        {
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      )
+      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3138,10 +3138,7 @@ function QuizBoard(props) {
     newPost.content = newPost.content + inputValue;
     console.log(newPost);
     try {
-      await axios.post(
-        `https://goatqcm-instance.com/publiction/posts`,
-        newPost
-      );
+      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
       setNewPost({
         content: "",
         anonyme: false,
@@ -4060,49 +4057,65 @@ function QuizBoard(props) {
                         <label className="form-check-label">Anonyme</label>
                       </div>
                       {qcmCommentary.map((commentary, index) => (
-                        <div id={index}>
-                          <div className={`${classes.commentary_likes}`}>
-                            <div
-                              className={`${classes.eachcommentary} card`}
-                              style={{ backgroundColor: "#F5F5F5" }}
-                            >
-                              <h6>
-                                {commentary.anonyme
-                                  ? "Anonyme"
-                                  : `${commentary.ourUsers.name}  `}
-                              </h6>
-                              {commentary.commentaryStudent}
+                        <div
+                          key={index}
+                          className={`${classes.commentary_likes}`}
+                        >
+                          <div
+                            className={`${classes.eachcommentary} card`}
+                            style={{ backgroundColor: "#F5F5F5" }}
+                          >
+                            <h6>
+                              {commentary.anonyme
+                                ? "Anonyme"
+                                : `${commentary.ourUsers.name}`}
+                            </h6>
+                            {commentary.commentaryStudent && (
+                              <p>{commentary.commentaryStudent}</p>
+                            )}
+                            {commentary.imageName && (
+                              <img
+                                src={`https://goatqcm-instance.com/commentary/image/${commentary.id}`}
+                                alt="commentary"
+                                style={{
+                                  maxWidth: "100%",
+                                  height: "auto",
+                                  marginTop: "8px",
+                                }}
+                              />
+                            )}
+                          </div>
+                          <div className={`${classes.likes}`}>
+                            <div className={`${classes.btnjadore}`}>
+                              <button
+                                onClick={(e) => {
+                                  {
+                                    handlejadorebtn(
+                                      commentary.id,
+                                      commentary.likes,
+                                      commentary.qcmStandard.id
+                                    );
+                                  }
+                                }}
+                              >
+                                j'adore
+                              </button>
                             </div>
-                            <div className={`${classes.likes}`}>
-                              <div className={`${classes.btnjadore}`}>
-                                <button
-                                  onClick={(e) => {
-                                    {
-                                      handlejadorebtn(
-                                        commentary.id,
-                                        commentary.likes,
-                                        commentary.qcmStandard.id
-                                      );
-                                    }
-                                  }}
-                                >
-                                  j'adore
-                                </button>
-                              </div>
 
-                              <div className={`${classes.btnjadore_icon}`}>
-                                <h6>{commentary.likes}</h6>
+                            <div className={`${classes.btnjadore_icon}`}>
+                              <h6>{commentary.likes}</h6>
 
-                                <img src={jadore} height="50%" width="20" />
-                              </div>
+                              <img src={jadore} height="50%" width="20" />
                             </div>
                           </div>
                         </div>
                       ))}
+
                       <div
                         className={`${classes.inputcommentary} input-group `}
                       >
-                        <div className={`${classes.custom_search} `}>
+                        <div className={`${classes.custom_search}`}>
+                          {/* Text input */}
                           <input
                             type="text"
                             className={`${classes.custom_search_input} form-control`}
@@ -4110,10 +4123,27 @@ function QuizBoard(props) {
                             value={inputStr}
                             onChange={(e) => setInputStr(e.target.value)}
                           />
+                          {selectedFile && (
+                            <div className="preview">
+                              <img
+                                src={URL.createObjectURL(selectedFile)}
+                                alt="preview"
+                                style={{
+                                  width: "100%",
+                                  height: "200px",
+                                  borderRadius: "8px",
+                                  marginTop: "8px",
+                                }}
+                              />
+                            </div>
+                          )}
+
+                          {/* Right side icons (emoji, upload, send) */}
                           <div
                             className={`${classes.custom_search_botton} picker-container`}
                           >
-                            <div className={`${classes.imojiicon_btnsend} `}>
+                            <div className={`${classes.imojiicon_btnsend}`}>
+                              {/* Emoji button */}
                               <img
                                 className="emoji-icon"
                                 src={smileimoji}
@@ -4121,17 +4151,42 @@ function QuizBoard(props) {
                                 width="25"
                                 onClick={() => setShowPicker((val) => !val)}
                               />
+
+                              {/* Hidden file input */}
+                              <input
+                                type="file"
+                                accept="image/*"
+                                id="fileUpload"
+                                style={{ display: "none" }}
+                                onChange={(e) =>
+                                  setSelectedFile(e.target.files[0])
+                                }
+                              />
+
+                              {/* Upload icon instead of input */}
                               <img
-                                onClick={(e) => {
-                                  handlesendComment();
-                                }}
+                                src={upimagecommentary}
+                                alt="Upload"
+                                height="70%"
+                                width="25"
+                                className="cursor-pointer"
+                                onClick={() =>
+                                  document.getElementById("fileUpload").click()
+                                }
+                              />
+
+                              {/* Send button */}
+                              <img
+                                onClick={handlesendComment}
                                 src={sendcomentary}
                                 height="70%"
                                 width="25"
                               />
                             </div>
                           </div>
-                          <div className={`${classes.pickerdiv} `}></div>
+
+                          {/* Emoji picker container */}
+                          <div className={`${classes.pickerdiv}`} />
                         </div>
                       </div>
                       {showPicker && (
@@ -4960,6 +5015,17 @@ function QuizBoard(props) {
                             </h6>
 
                             <h5>{commentary.commentaryStudent}</h5>
+                            {commentary.imageName && (
+                              <img
+                                src={`https://goatqcm-instance.com/commentary/image/${commentary.id}`}
+                                alt="commentary"
+                                style={{
+                                  maxWidth: "100%",
+                                  height: "auto",
+                                  marginTop: "8px",
+                                }}
+                              />
+                            )}
                           </div>
                           <div className={`${classes.likes_phone}`}>
                             <div className={`${classes.btnjadore_phone}`}>
@@ -4990,7 +5056,8 @@ function QuizBoard(props) {
                     <div
                       className={`${classes.inputcommentary_phone} input-group `}
                     >
-                      <div className={`${classes.custom_search_phone} `}>
+                      <div className={`${classes.custom_search_phone}`}>
+                        {/* Text input */}
                         <input
                           type="text"
                           className={`${classes.custom_search_input_phone} form-control`}
@@ -4998,12 +5065,27 @@ function QuizBoard(props) {
                           value={inputStr}
                           onChange={(e) => setInputStr(e.target.value)}
                         />
+                        {selectedFile && (
+                          <div className="preview">
+                            <img
+                              src={URL.createObjectURL(selectedFile)}
+                              alt="preview"
+                              style={{
+                                width: "100%",
+                                height: "200px",
+                                borderRadius: "8px",
+                                marginTop: "8px",
+                              }}
+                            />
+                          </div>
+                        )}
+
+                        {/* Right side icons (emoji, upload, send) */}
                         <div
                           className={`${classes.custom_search_botton_phone} picker-container`}
                         >
-                          <div
-                            className={`${classes.imojiicon_btnsend_phone} `}
-                          >
+                          <div className={`${classes.imojiicon_btnsend_phone}`}>
+                            {/* Emoji button */}
                             <img
                               className="emoji-icon"
                               src={smileimoji}
@@ -5011,18 +5093,42 @@ function QuizBoard(props) {
                               width="25"
                               onClick={() => setShowPicker((val) => !val)}
                             />
+
+                            {/* Hidden file input */}
+                            <input
+                              type="file"
+                              accept="image/*"
+                              id="fileUpload"
+                              style={{ display: "none" }}
+                              onChange={(e) =>
+                                setSelectedFile(e.target.files[0])
+                              }
+                            />
+
+                            {/* Upload icon instead of input */}
                             <img
-                              onClick={(e) => {
-                                handlesendComment();
-                              }}
+                              src={upimagecommentary}
+                              alt="Upload"
+                              height="70%"
+                              width="25"
+                              className="cursor-pointer"
+                              onClick={() =>
+                                document.getElementById("fileUpload").click()
+                              }
+                            />
+
+                            {/* Send button */}
+                            <img
+                              onClick={handlesendComment}
                               src={sendcomentary}
-                              style={{ marginLeft: 10 }}
                               height="70%"
                               width="25"
                             />
                           </div>
                         </div>
-                        <div className={`${classes.pickerdiv_phone} `}></div>
+
+                        {/* Emoji picker container */}
+                        <div className={`${classes.pickerdiv_phone}`} />
                       </div>
                     </div>
                     {showPicker && (

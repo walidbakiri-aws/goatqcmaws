@@ -3,18 +3,20 @@ import { useEffect, useState } from "react";
 import classes from "./AbounementLogin.module.css";
 
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useSignal } from "@preact/signals-react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import UserService from "../compenent/layout/service/UserService";
 import { useMediaQuery } from "react-responsive";
 import "react-toastify/dist/ReactToastify.css";
-
+import received from "../compenent/layout/img/received.png";
 function AbounementLogin(props) {
   const navigateValid = useNavigate();
   const navigateLogin = useNavigate();
   const user = props.user;
   const [VisibleAbounemet, setVisibleAbounemet] = useState(true);
   const [VisibleValideAbounemet, setVisibleValideAbounemet] = useState(false);
+  const abonnementName = useSignal("");
 
   const abounementInf = [
     {
@@ -23,31 +25,31 @@ function AbounementLogin(props) {
     },
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "4600 DA",
+      priceAbn: "4900 DA",
     },
     {
       nameAbn: "1ér Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "2éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "3éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "4éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "5éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "6éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
   ];
   /***************************************** */
@@ -64,11 +66,51 @@ function AbounementLogin(props) {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   useEffect(() => {});
+  const [email, setEmail] = useState("");
+  const [file, setFile] = useState(null);
+  const [success, setSuccess] = useState(false); // controls Suivant visibility
+  const [fileName, setFileName] = useState("Aucun fichier choisi");
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setFile(selectedFile);
+    setFileName(selectedFile ? selectedFile.name : "Aucun fichier choisi");
+  };
+
+  const handleSubmit = async () => {
+    if (!email || !file) {
+      alert("Email et image sont obligatoires !");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("abonnement", abonnementName.value); // fixed value
+    formData.append("photo", file);
+
+    try {
+      await axios.post(
+        "https://goatqcm-instance.com/checkabounement",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      setSuccess(true);
+      alert("Données envoyées avec succès !");
+      setEmail("");
+      setFile(null);
+    } catch (err) {
+      console.error(err);
+      alert("Erreur lors de l’envoi");
+    }
+  };
 
   //*************************************************************** */
-  const handleAbounerBtn = async (abnIndex) => {
+  const handleAbounerBtn = async (abnName) => {
     setVisibleAbounemet(false);
     setVisibleValideAbounemet(true);
+    abonnementName.value = abnName;
   };
   //******************************************************************* */
   const handleVaildeAbn = async () => {
@@ -107,7 +149,9 @@ function AbounementLogin(props) {
                           <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={(e) => handleAbounerBtn(index)}
+                            onClick={(e) =>
+                              handleAbounerBtn(abounement.nameAbn)
+                            }
                           >
                             Abouner
                           </button>
@@ -183,6 +227,50 @@ function AbounementLogin(props) {
                 </li>
               </ul>
             </div>
+            <div
+              className="card text-center p-3"
+              style={{ maxWidth: "400px", margin: "auto" }}
+            >
+              <h5>Importer la preuve de paiement</h5>
+
+              <input
+                style={{ width: "300px", margin: "5px", height: "50px" }}
+                type="email"
+                className="form-control"
+                id="exampleInputEmail1"
+                aria-describedby="emailHelp"
+                placeholder="Entrez votre email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              ></input>
+
+              <div>
+                <h6>Reçu de paiement</h6>
+                <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
+                  <img src={received} alt="Upload" width="40" />
+                </label>
+
+                <input
+                  id="file-upload"
+                  type="file"
+                  style={{ display: "none" }}
+                  onChange={handleFileChange}
+                  accept="image/*"
+                />
+
+                <input
+                  type="text"
+                  value={fileName}
+                  readOnly
+                  className="form-control"
+                />
+              </div>
+
+              <button onClick={handleSubmit} className="btn btn-primary">
+                Envoyer
+              </button>
+            </div>
             <a
               href="/home"
               style={{ marginRight: 10 }}
@@ -194,13 +282,15 @@ function AbounementLogin(props) {
             >
               Annuler
             </a>
-            <button
-              type="button"
-              onClick={() => handleVaildeAbn()}
-              className="btn btn-primary"
-            >
-              c bon j'ai déja payé
-            </button>
+            {success && (
+              <button
+                type="button"
+                onClick={handleVaildeAbn}
+                className="btn btn-primary"
+              >
+                Suivant
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -226,6 +316,50 @@ function AbounementLogin(props) {
                   </li>
                 </ul>
               </div>
+              <div
+                className="card text-center p-3"
+                style={{ maxWidth: "400px", margin: "auto" }}
+              >
+                <h5>Importer la preuve de paiement</h5>
+
+                <input
+                  style={{ width: "300px", margin: "5px", height: "50px" }}
+                  type="email"
+                  className="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Entrez votre email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                ></input>
+
+                <div>
+                  <h6>Reçu de paiement</h6>
+                  <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
+                    <img src={received} alt="Upload" width="40" />
+                  </label>
+
+                  <input
+                    id="file-upload"
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={handleFileChange}
+                    accept="image/*"
+                  />
+
+                  <input
+                    type="text"
+                    value={fileName}
+                    readOnly
+                    className="form-control"
+                  />
+                </div>
+
+                <button onClick={handleSubmit} className="btn btn-primary">
+                  Envoyer
+                </button>
+              </div>
               <a
                 href="/home"
                 style={{ marginRight: 10 }}
@@ -233,13 +367,15 @@ function AbounementLogin(props) {
               >
                 Annuler
               </a>
-              <button
-                type="button"
-                onClick={() => handleVaildeAbn()}
-                className="btn btn-primary"
-              >
-                c bon j'ai déja payé
-              </button>
+              {success && (
+                <button
+                  type="button"
+                  onClick={handleVaildeAbn}
+                  className="btn btn-primary"
+                >
+                  Suivant
+                </button>
+              )}
             </div>
           </div>
         </div>

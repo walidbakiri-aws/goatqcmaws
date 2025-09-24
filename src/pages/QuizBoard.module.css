@@ -80,8 +80,8 @@
   display: flex;
 }
 .commentarydiv {
-  height: 500px;
-  width: 400px;
+  height: fit-content;
+  width: 600px;
   margin-left: 10px;
   margin-top: 50px;
   color: var(--primary-text-color);
@@ -201,7 +201,7 @@
   z-index: 4;
 }
 .imojiicon_btnsend {
-  width: 60px;
+  width: 90px;
 }
 .pickerdiv {
   margin-top: 15px;
@@ -1258,7 +1258,7 @@ modulediv_phone .homebtn {
   z-index: 4;
 }
 .imojiicon_btnsend_phone {
-  width: 60px;
+  width: 80px;
 }
 .pickerdiv_phone {
   margin-top: 15px;
