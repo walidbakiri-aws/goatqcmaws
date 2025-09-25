@@ -50,7 +50,7 @@ function DriversYearsLinks() {
     firstYear:
       "https://drive.google.com/drive/folders/1--VcYpjK_XKyj54o53HENuWAUFzC0gFB?usp=drive_link",
     secondeYear:
-      "https://drive.google.com/drive/folders/16RRAsDI7WAunMWWFZEV1Mvj2nlh1jvFU?usp=drive_link",
+      "https://drive.google.com/drive/mobile/folders/1UjaxyXp8pU56jlz-F7K-MGECj2pheF21?fbclid=IwY2xjawINfE1leHRuA2FlbQIxMQABHW12P39nFNaEzObj34D5ufPI6qciapERBbqUtnYS2EFC8EMFUdwp7quUxw_aem_3qaquHIHqhskYJTjmEBQ9A&sfnsn=wa",
     thirdYear:
       "https://drive.google.com/drive/folders/1-hP22KANfPYq5M9l0w3-aHn7xI_kmjAH?usp=drive_link",
     fourthYear:
