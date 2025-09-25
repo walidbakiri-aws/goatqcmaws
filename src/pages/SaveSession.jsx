@@ -387,9 +387,9 @@ function SaveSession() {
                     <div className={classes.modulename}>
                       {session.moduleName}
                     </div>
-                    <div className={classes.piestatique}>
+                    {/* <div className={classes.piestatique_phone}>
                       <Doughnut options={options} data={pieChartData[index]} />
-                    </div>
+                    </div>*/}
                   </div>
                   <div className={classes.infosession}>
                     <div className={classes.yearquizz}>
@@ -466,9 +466,9 @@ function SaveSession() {
                     <div className={classes.modulename_phone}>
                       {session.moduleName}
                     </div>
-                    <div className={classes.piestatique_phone}>
+                    {/* <div className={classes.piestatique_phone}>
                       <Doughnut options={options} data={pieChartData[index]} />
-                    </div>
+                    </div>*/}
                   </div>
                 </div>
                 <div className={classes.infosession_phone}>
