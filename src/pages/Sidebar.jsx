@@ -642,6 +642,12 @@ function Sidebar() {
                     <span className=" p-2">User Abounement </span>
                   </Link>
                 </li>
+                <li className="nav-item p-1">
+                  <Link to={"/admin/Newabonnement"} className="nav-link fs-6">
+                    <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
+                    <span className="fs-6 p-2">New Abonnement </span>
+                  </Link>
+                </li>
               </ul>
             </div>
           )}
