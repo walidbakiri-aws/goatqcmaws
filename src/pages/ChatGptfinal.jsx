@@ -223,7 +223,7 @@ function ChatGptfinal(props) {
                     />
                   ))}
                 </MessageList>
-                {/* <MessageInput
+                <MessageInput
                   style={{
                     userSelect: "none", // Prevent text selection
                     WebkitUserSelect: "none", // Safari/Chrome
@@ -237,7 +237,7 @@ function ChatGptfinal(props) {
                     handleSend(inputValue);
                     setInputValue(""); // reset input after send
                   }}
-                />*/}
+                />
               </ChatContainer>
             </MainContainer>
           </div>
@@ -295,7 +295,7 @@ function ChatGptfinal(props) {
                       />
                     ))}
                   </MessageList>
-                  {/*  <MessageInput
+                  <MessageInput
                     style={{
                       userSelect: "none", // Prevent text selection
                       WebkitUserSelect: "none", // Safari/Chrome
@@ -309,7 +309,7 @@ function ChatGptfinal(props) {
                       handleSend(inputValue);
                       setInputValue(""); // reset input after send
                     }}
-                  />*/}
+                  />
                 </ChatContainer>
               </MainContainer>
             </div>
