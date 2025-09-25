@@ -3,7 +3,7 @@ import NavigationBar from "../compenent/layout/NavigationBar";
 import Sidebar from "./Sidebar";
 import classes from "./ShowPdfResidanat.module.css";
 import { useMediaQuery } from "react-responsive";
-import "../polyfills/promiseWithResolvers";
+
 import { Document, Page } from "react-pdf";
 import useLocalStorage from "use-local-storage";
 import { useLocation, useNavigate } from "react-router-dom";
