@@ -166,8 +166,8 @@
 .nbrComent {
   position: absolute;
   z-index: 3;
-  top: 53px;
-  left: 875px;
+  top: 54px;
+  left: 919px;
   color: #5389db;
   font-size: 20px;
   font-weight: bold;
@@ -1203,7 +1203,7 @@ modulediv_phone .homebtn {
 }
 .full_note_commentary_phone {
   display: flex;
-  width: 155px;
+  width: 165px;
   height: 30px;
 
   float: right;

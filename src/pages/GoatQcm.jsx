@@ -194,7 +194,7 @@ function GoatQcm() {
     setShowCreatPub(false);
   };
   const strokeDasharray = 283; // 2 * π * r (r = 45)
-  const strokeDashoffset = (cooldown / 30) * strokeDasharray;
+  const strokeDashoffset = (cooldown / 60) * strokeDasharray;
 
   const fetchPosts = async () => {
     try {
