@@ -12,13 +12,24 @@ import detail from "../compenent/layout/img/detailicon.png";
 import UserService from "../compenent/layout/service/UserService";
 import ModalDetailSession from "./ModalDetailSession";
 import Backdrop from "./Backdrop";
+import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+} from "chart.js";
 function SaveSession() {
   //******SideBare Change************************************* */
   function etatsidebare(etat) {
     setShowSideBare(etat);
   }
   const [ShowSideBare, setShowSideBare] = useState(false);
-
+  const options = {};
   /*********adresse Ip***************************** */
   let ipAdresse = useSignal("");
   let getUserAdresseIp = useSignal("");
@@ -39,6 +50,7 @@ function SaveSession() {
   const [detailQuizz, setDetailQuizz] = useState([]);
   const [modalDetalSessionIsOpen, setModalDetalSessionIsOpen] = useState(false);
   //**************************************************************************** */
+  const savePieFinal = useSignal([]);
   useEffect(() => {
     getAllQcmsSaves();
     getAllCasCliniqueSaves();
@@ -53,8 +65,43 @@ function SaveSession() {
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
-
+  ChartJS.register(
+    ArcElement,
+    Title,
+    Tooltip,
+    Legend,
+    CategoryScale,
+    LinearScale,
+    BarElement
+  );
   //************************************************************************ */
+  const pieChartData = fullSessionsListe.map((row) => {
+    let values = [0, 0, 0];
+
+    try {
+      if (row.savePieStatique) {
+        values = JSON.parse(row.savePieStatique);
+      }
+    } catch (e) {
+      console.warn("Invalid savePieStatique:", row.savePieStatique);
+    }
+
+    return {
+      labels: ["vrai", "faux", "pas répondu"],
+      datasets: [
+        {
+          label: "Quizz Statique",
+          data: values,
+          backgroundColor: [
+            "rgba(21, 161, 56, 0.9)",
+            "rgba(207, 25, 25, 0.9)",
+            "rgba(69, 67, 163, 0.9)",
+          ],
+          hoverOffset: 4,
+        },
+      ],
+    };
+  });
 
   //****get qcms saves******************************************************** */
   const getAllQcmsSaves = async () => {
@@ -314,6 +361,9 @@ function SaveSession() {
     setModalDetalSessionIsOpen(false);
   }
   //******************************************************************************** */
+  const handleShowCours = () => {
+    console.log(fullSessionsListe);
+  };
 
   return (
     <>
@@ -337,16 +387,8 @@ function SaveSession() {
                     <div className={classes.modulename}>
                       {session.moduleName}
                     </div>
-                    <div
-                      className={classes.playicondiv}
-                      onClick={() => {
-                        handleCheckSession(session.qcmType, session.id, index);
-                      }}
-                    >
-                      <div className={classes.icondiv}>
-                        <img src={playsessionicon} height="30px" width="30px" />
-                      </div>
-                      <div>Continue le Quizz!</div>
+                    <div className={classes.piestatique}>
+                      <Doughnut options={options} data={pieChartData[index]} />
                     </div>
                   </div>
                   <div className={classes.infosession}>
@@ -356,6 +398,18 @@ function SaveSession() {
                       <div style={{ marginTop: 10 }}>
                         {session.dateSaveQuizzSession}
                       </div>
+                    </div>
+                    <div
+                      className={classes.playicondiv}
+                      onClick={() => {
+                        handleCheckSession(session.qcmType, session.id, index);
+                      }}
+                    >
+                      <div className={classes.icondiv}>
+                        <img src={playsessionicon} height="30px" width="30px" />
+                      </div>
+
+                      <div>Continue le Quizz!</div>
                     </div>
                   </div>
                   <div
@@ -404,23 +458,17 @@ function SaveSession() {
               <div className={classes.eachsession_phone} key={index}>
                 <div className={classes.full_module_iconplay_phone}>
                   <div className={classes.modulename_nameQcmSession_phone}>
-                    {session.nameQcmSession ||
-                      session.nameQcmCasCliniqueSession ||
-                      session.nameCasCliniqueSession}
+                    <div className={classes.nameQcmSession_phone}>
+                      {session.nameQcmSession ||
+                        session.nameQcmCasCliniqueSession ||
+                        session.nameCasCliniqueSession}
+                    </div>
                     <div className={classes.modulename_phone}>
                       {session.moduleName}
-                    </div>{" "}
-                  </div>
-                  <div
-                    className={classes.playicondiv_phone}
-                    onClick={() => {
-                      handleCheckSession(session.qcmType, session.id, index);
-                    }}
-                  >
-                    <div className={classes.icondiv_phone}>
-                      <img src={playsessionicon} height="30px" width="30px" />
                     </div>
-                    <div>Continue le Quizz!</div>
+                    <div className={classes.piestatique_phone}>
+                      <Doughnut options={options} data={pieChartData[index]} />
+                    </div>
                   </div>
                 </div>
                 <div className={classes.infosession_phone}>
@@ -442,6 +490,22 @@ function SaveSession() {
                   </div>
                   <div style={{ fontSize: 14, marginLeft: 5 }}>
                     {session.dateSaveQuizzSession}
+                  </div>
+                  <div className={classes.playicondiv_phone}>
+                    <div className={classes.icondiv_phone}>
+                      <img
+                        src={playsessionicon}
+                        height="40px"
+                        width="40px"
+                        onClick={() => {
+                          handleCheckSession(
+                            session.qcmType,
+                            session.id,
+                            index
+                          );
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div

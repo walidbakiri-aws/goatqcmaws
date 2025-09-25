@@ -14,6 +14,7 @@
   height: auto;
   width: 100%;
 }
+
 .sidebare {
   width: 200px;
   display: inline-block;
@@ -22,25 +23,31 @@
 }
 
 .quizzContainer {
-  margin-left: 200px;
+  margin-left: 300px;
   width: 1200px;
   height: 650px;
   margin-top: 10px;
   margin-bottom: 30px;
   padding-top: 20px;
   border-radius: 10px;
-
+  overflow-y: scroll;
   background-color: rgb(223, 220, 226);
 }
 .eachsession {
   margin-left: 150px;
   width: 600px;
-  height: 130px;
+  height: 250px;
   margin-top: 20px;
   margin-bottom: 10px;
   border-radius: 10px;
   background-color: rgb(246, 248, 248);
   display: flex;
+}
+.piestatique {
+  width: 180px;
+  height: 180px;
+}
+.infosession {
 }
 .full_module_iconplay {
   left: 0px;
@@ -73,7 +80,7 @@
   height: 30px;
   border-radius: 10px;
   margin-bottom: 5px;
-  color: rgb(138, 141, 141);
+  color: rgb(43, 44, 44);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 15px;
   font-weight: 400;
@@ -84,9 +91,12 @@
   width: 300px;
   height: 40px;
   display: flex;
-  margin-top: 10px;
+
   padding-left: 6px;
   padding-top: 3px;
+  float: right;
+  bottom: 0;
+  right: 10;
 }
 .icondiv {
   margin-right: 10px;
@@ -97,9 +107,9 @@
   left: 0px;
   float: left;
   width: 200px;
-  height: 100%;
+  height: 50%;
   border-radius: 10px;
-  color: rgb(105, 114, 111);
+  color: rgb(43, 44, 44);
 }
 .threepoint {
   float: right;
@@ -178,14 +188,18 @@
 .eachsession_phone {
   margin-left: 5px;
   width: 320px;
-  height: 120px;
+  height: 220px;
   margin-top: 20px;
   margin-bottom: 10px;
   border-radius: 10px;
   background-color: rgb(246, 248, 248);
   display: flex;
+  box-shadow: #535554;
 }
-
+.piestatique_phone {
+  width: 150px;
+  height: 150px;
+}
 .full_module_iconplay_phone {
   left: 0px;
   float: left;
@@ -207,7 +221,7 @@
 
   border-radius: 10px;
   margin-bottom: 5px;
-  color: rgb(138, 141, 141);
+  color: rgb(64, 68, 68);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 15px;
   font-weight: 400;
@@ -220,18 +234,16 @@
 
   border-radius: 10px;
   margin-bottom: 5px;
-  color: rgb(138, 141, 141);
+  color: rgb(64, 68, 68);
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   font-size: 12px;
   font-weight: 400;
 }
 .playicondiv_phone {
-  border: 3px solid #9d00ff;
-  border-radius: 10px;
-  width: 200px;
-  height: 40px;
+  width: 80px;
+  height: 70px;
   display: flex;
-
+  margin-left: 40px;
   padding-left: 6px;
   padding-top: 3px;
   padding-bottom: 10px;
