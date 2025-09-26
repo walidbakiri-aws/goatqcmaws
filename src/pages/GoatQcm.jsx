@@ -102,7 +102,7 @@ function GoatQcm() {
     deferredPrompt = e;
     showInstallButton();
   });
-  function showInstallButton() {
+  const showInstallButton = () => {
     const btn = document.getElementById("installBtn");
     btn.style.display = "block";
 
@@ -115,7 +115,7 @@ function GoatQcm() {
       deferredPrompt = null;
       btn.style.display = "none";
     });
-  }
+  };
   const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
@@ -541,7 +541,13 @@ function GoatQcm() {
               data-theme={isDark ? "dark" : "light"}
             >
               <div className={classes.androidios_phone}>
-                <img src={android} height="35%" width="30" id="installBtn" />
+                <img
+                  src={android}
+                  height="35%"
+                  width="30"
+                  id="installBtn"
+                  onClick={showInstallButton}
+                />
                 <img
                   src={ios}
                   height="35%"
