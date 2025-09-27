@@ -79,11 +79,24 @@ function SaveSession() {
     let values = [0, 0, 0];
 
     try {
-      if (row.savePieStatique) {
+      if (row.qcmType === "Qcm") {
+        console.log("Qcm");
         values = JSON.parse(row.savePieStatique);
+      } else if (row.qcmType === "Cas Clinique") {
+        console.log("Cas Clinique");
+        values = JSON.parse(row.savePieStatiqueClinique);
+      } else if (row.qcmType === "Tous (Qcm,Cas Clinique)") {
+        const qcmValues = JSON.parse(row.savePieStatique);
+        const cliniqueValues = JSON.parse(row.savePieStatiqueClinique);
+        console.log("Tous (Qcm,Cas Clinique)");
+        values = [
+          qcmValues[0] + cliniqueValues[0],
+          qcmValues[1] + cliniqueValues[1],
+          qcmValues[2] + cliniqueValues[2],
+        ];
       }
     } catch (e) {
-      console.warn("Invalid savePieStatique:", row.savePieStatique);
+      console.warn("Invalid pie data:", row, e);
     }
 
     return {
@@ -376,6 +389,13 @@ function SaveSession() {
             data-theme={isDark ? "dark" : "light"}
           >
             <div className={classes.quizzContainer}>
+              <button
+                onClick={() => {
+                  handleShowCours();
+                }}
+              >
+                test
+              </button>
               {fullSessionsListe.map((session, index) => (
                 <div className={classes.eachsession} key={index}>
                   <div className={classes.full_module_iconplay}>
@@ -387,9 +407,9 @@ function SaveSession() {
                     <div className={classes.modulename}>
                       {session.moduleName}
                     </div>
-                    {/* <div className={classes.piestatique_phone}>
+                    <div className={classes.piestatique}>
                       <Doughnut options={options} data={pieChartData[index]} />
-                    </div>*/}
+                    </div>
                   </div>
                   <div className={classes.infosession}>
                     <div className={classes.yearquizz}>
@@ -466,9 +486,9 @@ function SaveSession() {
                     <div className={classes.modulename_phone}>
                       {session.moduleName}
                     </div>
-                    {/* <div className={classes.piestatique_phone}>
+                    <div className={classes.piestatique_phone}>
                       <Doughnut options={options} data={pieChartData[index]} />
-                    </div>*/}
+                    </div>
                   </div>
                 </div>
                 <div className={classes.infosession_phone}>

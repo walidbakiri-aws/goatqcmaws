@@ -2440,6 +2440,7 @@ function QuizBoard(props) {
         }
 
         console.log("nothing");
+        console.log(savePieStatique);
       }
     } else if (props.QcmSujetTypeSelected === "Par Sujet") {
       /*************************************************************************** */
@@ -2692,6 +2693,8 @@ function QuizBoard(props) {
     }
   };
   const handleSaveQcm = async (getSourceBtnSaveQuizzSession) => {
+    savePieStatique[2] =
+      ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
     //****get user*************************************** */
     try {
       const resultUserFinal = await UserService.getUserByuserName(
@@ -2777,6 +2780,8 @@ function QuizBoard(props) {
   //******************************************************************************* */
   //********************************************************************* */
   const handleSaveQcmCasCliniqueQuizz = async (sourceSaveBtn) => {
+    savePieStatique[2] =
+      ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
     //************************************************ */
     let sourceCommingFrom;
     let saveQuizzSession;
@@ -2946,6 +2951,8 @@ function QuizBoard(props) {
   };
   //****save cas clinique*********************************** */
   const handleUpdateQcmCasCliniqueQuizz = async () => {
+    savePieStatique[2] =
+      ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
     let sourceCommingFrom;
     if (props.commingFrom === "savequizz") {
       sourceCommingFrom = "qcmcliniquequizz";
@@ -3045,6 +3052,9 @@ function QuizBoard(props) {
   };
   //***update qcm quizz************************************************************* */
   const handleUpdateQcmQuizz = async () => {
+    savePieStatique[2] =
+      ShowQcm.length - (savePieStatique[0] + savePieStatique[1]);
+    console.log(savePieStatique);
     let sourceCommingFrom;
     if (props.commingFrom === "savequizz") {
       sourceCommingFrom = "qcmquizz";
@@ -3269,6 +3279,9 @@ function QuizBoard(props) {
     }
     return new File([u8arr], filename, { type: mime });
   }
+  const handleTestBtn = () => {
+    console.log(savePieStatique);
+  };
   return (
     <>
       {!OpenBoardClinique && (
@@ -3290,6 +3303,13 @@ function QuizBoard(props) {
                 className={classes.contanerspace}
                 data-theme={isDark ? "dark" : "light"}
               >
+                <button
+                  onClick={() => {
+                    handleTestBtn();
+                  }}
+                >
+                  test
+                </button>
                 {VisibleParSujet && isDesktopOrLaptop && (
                   <div
                     className={`${classes.parsujetscontainer} `}
@@ -4510,7 +4530,7 @@ function QuizBoard(props) {
                                         <img
                                           src={chatgpt}
                                           height="100%"
-                                          width="30"
+                                          width="25"
                                           onClick={(e) => {
                                             handleChatGptBtn(qcm.id);
                                           }}
@@ -4522,7 +4542,7 @@ function QuizBoard(props) {
                                         <img
                                           src={deepseek}
                                           height="100%"
-                                          width="30"
+                                          width="25"
                                           onClick={(e) => {
                                             handleDeepSeekBtn(qcm.id);
                                           }}
@@ -4532,7 +4552,7 @@ function QuizBoard(props) {
                                         <img
                                           src={noteimage}
                                           height="100%"
-                                          width="30"
+                                          width="25"
                                           onClick={(e) => {
                                             handleNoteQcmBtn();
                                           }}
@@ -4548,8 +4568,8 @@ function QuizBoard(props) {
                                         </span>
                                         <img
                                           src={comment}
-                                          height="10%"
-                                          width="20"
+                                          height="40"
+                                          width="25"
                                           onClick={(e) => {
                                             handleCommentaryBtn(qcm.id);
                                           }}
