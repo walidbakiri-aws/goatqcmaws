@@ -36,7 +36,7 @@ function AbounementPhone() {
       <div className={`${classes.cardfinal_phone} card`}>
         <div className={`${classes.card_title_phone}`}>Pack Résidanat 2025</div>
         <div className="card-body">
-          <h5 className="card-title">2000 DA</h5>
+          <h5 className="card-title">800 DA promo!</h5>
           <ul className={`${classes.feature_list_phone}`}>
             <li>Tous les Modules </li>
             <li>Correction Fiable</li>
