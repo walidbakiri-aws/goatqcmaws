@@ -74,7 +74,12 @@ function CardResidanatSujet() {
     "Rattrapage_unite_04_3émeAnnée",
     "Rattrapage_unite_01_2émeAnnée",
     "Rattrapage_unite_02_2émeAnnée",
+    "Rattrapage_unite_03_2émeAnnée",
+    "Rattrapage_unite_04_2émeAnnée",
+    "Rattrapage_unite_05_2émeAnnée",
     "Rattrapage_geriatrie",
+    "Rattrapage_orl",
+    "Rattrapage_maladie_systéme",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "2010") {
@@ -260,10 +265,40 @@ function CardResidanatSujet() {
           sjetResidant: "Rattrapage_unite_02_2émeAnnée",
         },
       });
+    } else if (getYearMed === "Rattrapage_unite_03_2émeAnnée") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_unite_03_2émeAnnée",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_unite_04_2émeAnnée") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_unite_04_2émeAnnée",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_unite_05_2émeAnnée") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_unite_05_2émeAnnée",
+        },
+      });
     } else if (getYearMed === "Rattrapage_geriatrie") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_geriatrie",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_orl") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_orl",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_maladie_systéme") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_maladie_systéme",
         },
       });
     }

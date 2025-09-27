@@ -39,7 +39,13 @@ import u22025 from "../compenent/layout/pdf/u22025.pdf";
 import u42025 from "../compenent/layout/pdf/u42025.pdf";
 import u12eme2025 from "../compenent/layout/pdf/u12eme2025.pdf";
 import u22eme2025 from "../compenent/layout/pdf/u22eme2025.pdf";
+import u32eme2025 from "../compenent/layout/pdf/u32eme2025.pdf";
+import u42eme2025 from "../compenent/layout/pdf/u42eme2025.pdf";
+import u52eme2025 from "../compenent/layout/pdf/u52eme2025.pdf";
+
 import geriatrie2025 from "../compenent/layout/pdf/geriatrie2025.pdf";
+import orl from "../compenent/layout/pdf/orl.pdf";
+import maladiesysteme from "../compenent/layout/pdf/maladiesysteme.pdf";
 const pdfMap = {
   2010: sjtresidanat_2010,
   2011: sjtresidanat_2011,
@@ -72,8 +78,13 @@ const pdfMap = {
   Rattrapage_unite_04_3émeAnnée: u42025,
   Rattrapage_unite_01_2émeAnnée: u12eme2025,
   Rattrapage_unite_02_2émeAnnée: u22eme2025,
+  Rattrapage_unite_03_2émeAnnée: u32eme2025,
+  Rattrapage_unite_04_2émeAnnée: u42eme2025,
+  Rattrapage_unite_05_2émeAnnée: u52eme2025,
 
   Rattrapage_geriatrie: geriatrie2025,
+  Rattrapage_orl: orl,
+  Rattrapage_maladie_systéme: maladiesysteme,
 };
 
 function ShowPdfResidanat() {
