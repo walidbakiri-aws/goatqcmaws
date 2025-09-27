@@ -389,13 +389,13 @@ function SaveSession() {
             data-theme={isDark ? "dark" : "light"}
           >
             <div className={classes.quizzContainer}>
-              <button
+              {/*<button
                 onClick={() => {
                   handleShowCours();
                 }}
               >
                 test
-              </button>
+              </button>*/}
               {fullSessionsListe.map((session, index) => (
                 <div className={classes.eachsession} key={index}>
                   <div className={classes.full_module_iconplay}>
