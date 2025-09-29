@@ -10,15 +10,15 @@ import UserService from "../compenent/layout/service/UserService";
 import { useMediaQuery } from "react-responsive";
 import "react-toastify/dist/ReactToastify.css";
 import received from "../compenent/layout/img/received.png";
- import seconnecter from "../compenent/layout/img/seconnecter.png";
+import seconnecter from "../compenent/layout/img/seconnecter.png";
 function AbounementLogin(props) {
   const navigateValid = useNavigate();
   const navigateLogin = useNavigate();
   const user = props.user;
   const [VisibleAbounemet, setVisibleAbounemet] = useState(true);
   const [VisibleValideAbounemet, setVisibleValideAbounemet] = useState(false);
-  const[visibleSendRecueDiv,setVisibleSendRecueDiv]= useState(true);
-  const[visibleSeConnecterDiv,setVisibleSeConnecterDiv]= useState(false);
+  const [visibleSendRecueDiv, setVisibleSendRecueDiv] = useState(true);
+  const [visibleSeConnecterDiv, setVisibleSeConnecterDiv] = useState(false);
   const abonnementName = useSignal("");
 
   const abounementInf = [
@@ -32,27 +32,27 @@ function AbounementLogin(props) {
     },
     {
       nameAbn: "1ér Année Médecine",
-      priceAbn: "500 DA",
+      priceAbn: "1500 DA",
     },
     {
       nameAbn: "2éme Année Médecine",
-      priceAbn: "500 DA",
+      priceAbn: "1500 DA",
     },
     {
       nameAbn: "3éme Année Médecine",
-      priceAbn: "500 DA",
+      priceAbn: "1500 DA",
     },
     {
       nameAbn: "4éme Année Médecine",
-      priceAbn: "500 DA",
+      priceAbn: "1500 DA",
     },
     {
       nameAbn: "5éme Année Médecine",
-      priceAbn: "500 DA",
+      priceAbn: "1500 DA",
     },
     {
       nameAbn: "6éme Année Médecine",
-      priceAbn: "500 DA",
+      priceAbn: "1500 DA",
     },
   ];
   /***************************************** */
@@ -92,13 +92,17 @@ function AbounementLogin(props) {
     formData.append("photo", file);
 
     try {
-      await axios.post("https://goatqcm-instance.com/checkabounement", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://goatqcm-instance.com/checkabounement",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       setSuccess(true);
-        toast.success("le recue envoyee avec succès !!");
-        setVisibleSendRecueDiv(false);
-        setVisibleSeConnecterDiv(true);
+      toast.success("le recue envoyee avec succès !!");
+      setVisibleSendRecueDiv(false);
+      setVisibleSeConnecterDiv(true);
       setEmail("");
       setFile(null);
     } catch (err) {
@@ -229,88 +233,8 @@ function AbounementLogin(props) {
               </ul>
             </div>
 
-            {visibleSendRecueDiv &&<div
-              className="card text-center p-3"
-              style={{ maxWidth: "400px", margin: "auto" }}
-            >
-              <h5>Importer la preuve de paiement</h5>
-
-              <input
-                style={{ width: "300px", margin: "5px", height: "50px" }}
-                type="email"
-                className="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Entrez votre email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              ></input>
-
-              <div>
-                <h6>Reçu de paiement</h6>
-                <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
-                  <img src={received} alt="Upload" width="40" />
-                </label>
-
-                <input
-                  id="file-upload"
-                  type="file"
-                  style={{ display: "none" }}
-                  onChange={handleFileChange}
-                  accept="image/*"
-                />
-
-                <input
-                  type="text"
-                  value={fileName}
-                  readOnly
-                  className="form-control"
-                />
-              </div>
-
-              <button onClick={handleSubmit} className="btn btn-primary">
-                Envoyer
-              </button>
-            </div>}
-             {visibleSeConnecterDiv  && (<div>{success && (
-              <button
-                type="button"
-                onClick={handleVaildeAbn}
-                className="btn btn-primary"
-              >
-                se connecter maintenant
-              </button>
-            )}  <img src={seconnecter} alt="Upload" width="500" height="500" /></div>)}
-            
-          </div>
-        </div>
-         
-      )}
-        
-      {VisibleValideAbounemet && isTabletOrMobile && (
-        <div className={`${classes.fullvalidecontainer_phone}  `}>
-          <div
-            className={`${classes.valideabncontainer_phone} card text-center`}
-          >
-            <div className="card-header">
-              <h5>Abounemet validation</h5>
-            </div>
-            <div className="card-body">
-              <h5 className="card-title">Methode de paiement</h5>
-              <div className={`${classes.paymentdiv_phone} `}>
-                <ul style={{ color: "#3457D5" }}>
-                  <h6> Paiment avec Baridi</h6>
-                  <li className="list-group-item" style={{ color: "#000000" }}>
-                    <h6>RIP : 00799999001630355448</h6>
-                  </li>
-                  <h6> Paiment avec CCP</h6>
-                  <li className="list-group-item" style={{ color: "#000000" }}>
-                    <h6>CCP : 16303554 clé 90 Bakiri walid</h6>
-                  </li>
-                </ul>
-              </div>
-             {visibleSendRecueDiv && <div
+            {visibleSendRecueDiv && (
+              <div
                 className="card text-center p-3"
                 style={{ maxWidth: "400px", margin: "auto" }}
               >
@@ -353,26 +277,119 @@ function AbounementLogin(props) {
                 <button onClick={handleSubmit} className="btn btn-primary">
                   Envoyer
                 </button>
-              </div>}
-               
-               {visibleSeConnecterDiv  && (<div>{success && (
-              <button
-                type="button"
-                onClick={handleVaildeAbn}
-                className="btn btn-primary"
-               
-              >
-                se connecter maintenant
-              </button>
-            )}  <img src={seconnecter} alt="Upload" width="250" height="300" /></div>)}
-             
-              
+              </div>
+            )}
+            {visibleSeConnecterDiv && (
+              <div>
+                {success && (
+                  <button
+                    type="button"
+                    onClick={handleVaildeAbn}
+                    className="btn btn-primary"
+                  >
+                    se connecter maintenant
+                  </button>
+                )}{" "}
+                <img src={seconnecter} alt="Upload" width="500" height="500" />
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {VisibleValideAbounemet && isTabletOrMobile && (
+        <div className={`${classes.fullvalidecontainer_phone}  `}>
+          <div
+            className={`${classes.valideabncontainer_phone} card text-center`}
+          >
+            <div className="card-header">
+              <h5>Abounemet validation</h5>
+            </div>
+            <div className="card-body">
+              <h5 className="card-title">Methode de paiement</h5>
+              <div className={`${classes.paymentdiv_phone} `}>
+                <ul style={{ color: "#3457D5" }}>
+                  <h6> Paiment avec Baridi</h6>
+                  <li className="list-group-item" style={{ color: "#000000" }}>
+                    <h6>RIP : 00799999001630355448</h6>
+                  </li>
+                  <h6> Paiment avec CCP</h6>
+                  <li className="list-group-item" style={{ color: "#000000" }}>
+                    <h6>CCP : 16303554 clé 90 Bakiri walid</h6>
+                  </li>
+                </ul>
+              </div>
+              {visibleSendRecueDiv && (
+                <div
+                  className="card text-center p-3"
+                  style={{ maxWidth: "400px", margin: "auto" }}
+                >
+                  <h5>Importer la preuve de paiement</h5>
+
+                  <input
+                    style={{ width: "300px", margin: "5px", height: "50px" }}
+                    type="email"
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Entrez votre email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  ></input>
+
+                  <div>
+                    <h6>Reçu de paiement</h6>
+                    <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
+                      <img src={received} alt="Upload" width="40" />
+                    </label>
+
+                    <input
+                      id="file-upload"
+                      type="file"
+                      style={{ display: "none" }}
+                      onChange={handleFileChange}
+                      accept="image/*"
+                    />
+
+                    <input
+                      type="text"
+                      value={fileName}
+                      readOnly
+                      className="form-control"
+                    />
+                  </div>
+
+                  <button onClick={handleSubmit} className="btn btn-primary">
+                    Envoyer
+                  </button>
+                </div>
+              )}
+
+              {visibleSeConnecterDiv && (
+                <div>
+                  {success && (
+                    <button
+                      type="button"
+                      onClick={handleVaildeAbn}
+                      className="btn btn-primary"
+                    >
+                      se connecter maintenant
+                    </button>
+                  )}{" "}
+                  <img
+                    src={seconnecter}
+                    alt="Upload"
+                    width="250"
+                    height="300"
+                  />
+                </div>
+              )}
             </div>
           </div>
         </div>
-       
       )}
-       
+
       <Toaster />
     </>
   );
