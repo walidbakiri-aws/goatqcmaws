@@ -10,12 +10,15 @@ import UserService from "../compenent/layout/service/UserService";
 import { useMediaQuery } from "react-responsive";
 import "react-toastify/dist/ReactToastify.css";
 import received from "../compenent/layout/img/received.png";
+ import seconnecter from "../compenent/layout/img/seconnecter.png";
 function AbounementLogin(props) {
   const navigateValid = useNavigate();
   const navigateLogin = useNavigate();
   const user = props.user;
   const [VisibleAbounemet, setVisibleAbounemet] = useState(true);
   const [VisibleValideAbounemet, setVisibleValideAbounemet] = useState(false);
+  const[visibleSendRecueDiv,setVisibleSendRecueDiv]= useState(true);
+  const[visibleSeConnecterDiv,setVisibleSeConnecterDiv]= useState(false);
   const abonnementName = useSignal("");
 
   const abounementInf = [
@@ -29,27 +32,27 @@ function AbounementLogin(props) {
     },
     {
       nameAbn: "1ér Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "2éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "3éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "4éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "5éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "6éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
   ];
   /***************************************** */
@@ -89,15 +92,13 @@ function AbounementLogin(props) {
     formData.append("photo", file);
 
     try {
-      await axios.post(
-        "https://goatqcm-instance.com/checkabounement",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
+      await axios.post("https://goatqcm-instance.com/checkabounement", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setSuccess(true);
-      alert("Données envoyées avec succès !");
+        toast.success("le recue envoyee avec succès !!");
+        setVisibleSendRecueDiv(false);
+        setVisibleSeConnecterDiv(true);
       setEmail("");
       setFile(null);
     } catch (err) {
@@ -115,7 +116,7 @@ function AbounementLogin(props) {
   //******************************************************************* */
   const handleVaildeAbn = async () => {
     UserService.logout();
-    navigateValid("/register");
+    navigateValid("/");
   };
   //********************************************************************** */
 
@@ -227,7 +228,8 @@ function AbounementLogin(props) {
                 </li>
               </ul>
             </div>
-            <div
+
+            {visibleSendRecueDiv &&<div
               className="card text-center p-3"
               style={{ maxWidth: "400px", margin: "auto" }}
             >
@@ -270,30 +272,22 @@ function AbounementLogin(props) {
               <button onClick={handleSubmit} className="btn btn-primary">
                 Envoyer
               </button>
-            </div>
-            <a
-              href="/home"
-              style={{ marginRight: 10 }}
-              className="btn btn-danger"
-              onClick={() => {
-                navigateValid("/");
-              }}
-              to="/"
-            >
-              Annuler
-            </a>
-            {success && (
+            </div>}
+             {visibleSeConnecterDiv  && (<div>{success && (
               <button
                 type="button"
                 onClick={handleVaildeAbn}
                 className="btn btn-primary"
               >
-                Suivant
+                se connecter maintenant
               </button>
-            )}
+            )}  <img src={seconnecter} alt="Upload" width="500" height="500" /></div>)}
+            
           </div>
         </div>
+         
       )}
+        
       {VisibleValideAbounemet && isTabletOrMobile && (
         <div className={`${classes.fullvalidecontainer_phone}  `}>
           <div
@@ -316,7 +310,7 @@ function AbounementLogin(props) {
                   </li>
                 </ul>
               </div>
-              <div
+             {visibleSendRecueDiv && <div
                 className="card text-center p-3"
                 style={{ maxWidth: "400px", margin: "auto" }}
               >
@@ -359,27 +353,26 @@ function AbounementLogin(props) {
                 <button onClick={handleSubmit} className="btn btn-primary">
                   Envoyer
                 </button>
-              </div>
-              <a
-                href="/home"
-                style={{ marginRight: 10 }}
-                className="btn btn-danger"
+              </div>}
+               
+               {visibleSeConnecterDiv  && (<div>{success && (
+              <button
+                type="button"
+                onClick={handleVaildeAbn}
+                className="btn btn-primary"
+               
               >
-                Annuler
-              </a>
-              {success && (
-                <button
-                  type="button"
-                  onClick={handleVaildeAbn}
-                  className="btn btn-primary"
-                >
-                  Suivant
-                </button>
-              )}
+                se connecter maintenant
+              </button>
+            )}  <img src={seconnecter} alt="Upload" width="250" height="300" /></div>)}
+             
+              
             </div>
           </div>
         </div>
+       
       )}
+       
       <Toaster />
     </>
   );

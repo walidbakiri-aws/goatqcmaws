@@ -242,7 +242,7 @@ function LoginPage() {
     console.log(password);
   };
   const achterBounemment = () => {
-    navigateBnmtLogin("/abounementlogin");
+    navigateBnmtLogin("/register");
   };
   return (
     <>

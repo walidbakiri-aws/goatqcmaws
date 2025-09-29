@@ -57,7 +57,7 @@ function RegistrationPage() {
 
       await UserService.register(formData);
       toast.success("Inscription réussie!");
-      navigate("/");
+      navigate("/abounementlogin");
       // Reset form only on success
       setFormData({
         name: "",
@@ -69,6 +69,7 @@ function RegistrationPage() {
     } catch (error) {
       console.error("Registration error:", error);
       toast.error(error.message || "Erreur lors de l'inscription");
+       navigate("/abounementlogin");
     }
   };
 

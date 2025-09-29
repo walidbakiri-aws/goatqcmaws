@@ -118,7 +118,7 @@ function App() {
         {isAdmin && isAuthenticated && (
           <Route
             exact
-            path="/admin/newabonnement"
+            path="/newabonnement"
             element={<NewAbonnement />}
           ></Route>
         )}
