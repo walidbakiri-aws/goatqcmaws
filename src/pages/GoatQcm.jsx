@@ -137,7 +137,7 @@ function GoatQcm() {
           await axios.post(
             `https://goatqcm-instance.com/codegmail/send-code/${result.data.ourUsers.username}`
           );
-          setCooldown(30);
+          setCooldown(60);
         } else {
           toast.info(
             `Veuillez attendre ${cooldown} secondes avant de renvoyer le code.`
@@ -154,7 +154,7 @@ function GoatQcm() {
         `https://goatqcm-instance.com/codegmail/send-code/${finalEmail.value}`
       );
       toast.success("Code renvoyé avec succès");
-      setCooldown(30);
+      setCooldown(60);
     } catch (err) {
       toast.error("Erreur lors de l'envoi du code");
     }
