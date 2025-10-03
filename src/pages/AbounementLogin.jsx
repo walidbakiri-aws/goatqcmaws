@@ -28,7 +28,7 @@ function AbounementLogin(props) {
     },
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "4900 DA",
+      priceAbn: "4700 DA",
     },
     {
       nameAbn: "1ér Année Médecine",

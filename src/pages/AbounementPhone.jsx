@@ -17,16 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 function AbounementPhone() {
   const navigateValid = useNavigate();
 
-  const abounementInf = [
-    {
-      nameAbn: "Résidanat 2025",
-      priceAbn: "2000 DA",
-    },
-    {
-      nameAbn: "Externat Blida",
-      priceAbn: "1500 DA",
-    },
-  ];
+   
 
   //***************************************************************** */
   useEffect(() => {});
