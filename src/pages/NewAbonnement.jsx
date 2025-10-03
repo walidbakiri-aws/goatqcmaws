@@ -6,62 +6,60 @@ import { useSignal } from "@preact/signals-react/runtime";
 import axios from "axios";
 import { useMediaQuery } from "react-responsive";
 import useLocalStorage from "use-local-storage";
-import { useNavigate } from "react-router-dom";
-import playsessionicon from "../compenent/layout/img/playsession.png";
-import detail from "../compenent/layout/img/detailicon.png";
 import UserService from "../compenent/layout/service/UserService";
-import ModalDetailSession from "./ModalDetailSession";
-import Backdrop from "./Backdrop";
+
 function NewAbonnement() {
-  //******SideBare Change************************************* */
-  function etatsidebare(etat) {
-    setShowSideBare(etat);
-  }
   const [ShowSideBare, setShowSideBare] = useState(false);
-
-  /*********adresse Ip***************************** */
-  let ipAdresse = useSignal("");
-  let getUserAdresseIp = useSignal("");
-  const token = localStorage.getItem("token");
-  const userIdToken = localStorage.getItem("userId");
-  //************************************************* */
-  const isAuthenticated = UserService.isAuthenticated();
-  const isAdmin = UserService.isAdmin();
-  const isOnlyAdmin = UserService.adminOnly();
-
+  const token = localStorage.getItem("tokengoat");
   const [abonnements, setAbonnements] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const [isDark] = useLocalStorage("isDark", false);
+  const isDesktopOrLaptop = useMediaQuery({ query: "(min-width: 1224px)" });
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   useEffect(() => {
-    const fetchAbonnements = async () => {
-      try {
-        const res = await axios.get(
-          "https://goatqcm-instance.com/checkabounement"
-        );
-        setAbonnements(res.data);
-      } catch (err) {
-        console.error("Erreur lors du chargement des abonnements", err);
-      }
-    };
     fetchAbonnements();
   }, []);
 
-  //******************************************************************* */
-  const [isDark, setIsDark] = useLocalStorage("isDark", false);
-  const isDesktopOrLaptop = useMediaQuery({
-    query: "(min-width: 1224px)",
-  });
-  const isBigScreen = useMediaQuery({ query: "(min-width: 1824px)" });
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
-  const isPortrait = useMediaQuery({ query: "(orientation: portrait)" });
-  const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
+  const fetchAbonnements = async () => {
+    try {
+      const res = await axios.get(
+        "https://goatqcm-instance.com/admin/checkabounement",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setAbonnements(res.data);
+    } catch (err) {
+      console.error(
+        "Erreur lors du chargement:",
+        err.response?.data || err.message
+      );
+    }
+  };
 
-  //************************************************************************ */
+  const handleDelete = async (id) => {
+    if (!window.confirm("Supprimer cet abonnement ?")) return;
+    try {
+      await axios.delete(
+        `https://goatqcm-instance.com/admin/checkabounement/${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setAbonnements((prev) => prev.filter((abn) => abn.id !== id));
+    } catch (err) {
+      console.error("Erreur suppression:", err.response?.data || err.message);
+    }
+  };
 
   return (
     <>
-      <NavigationBar changeetatsidebar={etatsidebare} />
+      <NavigationBar changeetatsidebar={setShowSideBare} />
       <div className={classes.addingdiv}>
         <div className={classes.sidebare}>{ShowSideBare && <Sidebar />}</div>
+
         {isDesktopOrLaptop && (
           <div
             className={classes.contanerspace}
@@ -75,6 +73,7 @@ function NewAbonnement() {
                     <th>Email</th>
                     <th>Abonnement</th>
                     <th>Photo</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -88,8 +87,22 @@ function NewAbonnement() {
                             src={`data:image/jpeg;base64,${abn.photo}`}
                             alt="preuve"
                             width="60"
+                            style={{ cursor: "pointer" }}
+                            onClick={() =>
+                              setSelectedImage(
+                                `data:image/jpeg;base64,${abn.photo}`
+                              )
+                            }
                           />
                         )}
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDelete(abn.id)}
+                        >
+                          Supprimer
+                        </button>
                       </td>
                     </tr>
                   ))}
@@ -101,6 +114,31 @@ function NewAbonnement() {
 
         {isTabletOrMobile && (
           <div className={classes.quizzContainer_phone}></div>
+        )}
+
+        {/* Image modal */}
+        {selectedImage && (
+          <div
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              backgroundColor: "rgba(0,0,0,0.7)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              zIndex: 9999,
+            }}
+            onClick={() => setSelectedImage(null)}
+          >
+            <img
+              src={selectedImage}
+              alt="preview"
+              style={{ maxWidth: "90%", maxHeight: "90%" }}
+            />
+          </div>
         )}
       </div>
     </>

@@ -99,6 +99,13 @@ function App() {
             element={<UserAbounement />}
           ></Route>
         )}
+        {isAdmin && isAuthenticated && (
+          <Route
+            exact
+            path="/admin/checkabounement"
+            element={<NewAbonnement />}
+          ></Route>
+        )}
         {isAuthenticated && (
           <Route exact path="/home" element={<Home />}></Route>
         )}
@@ -115,13 +122,7 @@ function App() {
             element={<ShowMyAbonnement />}
           ></Route>
         )}
-        {isAdmin && isAuthenticated && (
-          <Route
-            exact
-            path="/newabonnement"
-            element={<NewAbonnement />}
-          ></Route>
-        )}
+
         {(isAdmin || isParcitipate || isUser) && isAuthenticated && (
           <Route
             exact
