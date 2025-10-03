@@ -111,7 +111,57 @@ function NewAbonnement() {
             </div>
           </div>
         )}
-
+{isTabletOrMobile && (
+          <div
+            className={classes.contanerspace}
+            data-theme={isDark ? "dark" : "light"}
+          >
+            <div className={classes.quizzContainer}>
+              <h3>Liste des Abonnements</h3>
+              <table className="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Email</th>
+                    <th>Abonnement</th>
+                    <th>Photo</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {abonnements.map((abn) => (
+                    <tr key={abn.id}>
+                      <td>{abn.email}</td>
+                      <td>{abn.abonnement}</td>
+                      <td>
+                        {abn.photo && (
+                          <img
+                            src={`data:image/jpeg;base64,${abn.photo}`}
+                            alt="preuve"
+                            width="60"
+                            style={{ cursor: "pointer" }}
+                            onClick={() =>
+                              setSelectedImage(
+                                `data:image/jpeg;base64,${abn.photo}`
+                              )
+                            }
+                          />
+                        )}
+                      </td>
+                      <td>
+                        <button
+                          className="btn btn-danger btn-sm"
+                          onClick={() => handleDelete(abn.id)}
+                        >
+                          Supprimer
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
         {isTabletOrMobile && (
           <div className={classes.quizzContainer_phone}></div>
         )}
