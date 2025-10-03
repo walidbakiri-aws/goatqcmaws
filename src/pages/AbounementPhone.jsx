@@ -31,7 +31,7 @@ function AbounementPhone() {
             <li>Correction Fiable</li>
             <li>Avec Explication</li>
           </ul>
-          <a href="/abounementlogin" className="btn btn-primary">
+          <a href="/register" className="btn btn-primary">
             Register
           </a>
         </div>
@@ -45,7 +45,7 @@ function AbounementPhone() {
             <li>Correction Fiable</li>
             <li>Avec Explication</li>
           </ul>
-          <a href="/abounementlogin" className="btn btn-primary">
+          <a href="/register" className="btn btn-primary">
             Register
           </a>
         </div>
@@ -59,7 +59,7 @@ function AbounementPhone() {
             <li>Correction Fiable</li>
             <li>Avec Explication</li>
           </ul>
-          <a href="/abounementlogin" className="btn btn-primary">
+          <a href="/register" className="btn btn-primary">
             Register
           </a>
         </div>

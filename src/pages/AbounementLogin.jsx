@@ -93,7 +93,7 @@ function AbounementLogin(props) {
 
     try {
       await axios.post(
-        "https://goatqcm-instance.com/checkabounement",
+        "https://goatqcm-instance.com/checkabounementuser",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
