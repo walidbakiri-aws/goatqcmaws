@@ -11,6 +11,8 @@ import { useMediaQuery } from "react-responsive";
 import "react-toastify/dist/ReactToastify.css";
 import received from "../compenent/layout/img/received.png";
 import seconnecter from "../compenent/layout/img/seconnecter.png";
+import BackdropDoneQuiz from "./BackdropDoneQuiz";
+import BackdropDeleteCour from "./BackdropDeleteCour";
 function AbounementLogin(props) {
   const navigateValid = useNavigate();
   const navigateLogin = useNavigate();
@@ -20,7 +22,8 @@ function AbounementLogin(props) {
   const [visibleSendRecueDiv, setVisibleSendRecueDiv] = useState(true);
   const [visibleSeConnecterDiv, setVisibleSeConnecterDiv] = useState(false);
   const abonnementName = useSignal("");
-
+  const [showAlreadySentDiv, setShowAlreadySentDiv] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const abounementInf = [
     {
       nameAbn: "Résidanat 2025",
@@ -86,28 +89,60 @@ function AbounementLogin(props) {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("email", email);
-    formData.append("abonnement", abonnementName.value); // fixed value
-    formData.append("photo", file);
-
     try {
-      await axios.post(
-        "https://goatqcm-instance.com/checkabounementuser",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
+      setIsLoading(true); // show loader
+
+      let emailExists = false;
+
+      try {
+        const checkResponse = await axios.get(
+          `https://goatqcm-instance.com/checkabounementuser/byemail/${email}`
+        );
+        if (checkResponse.status === 200) {
+          emailExists = true;
         }
-      );
-      setSuccess(true);
-      toast.success("le recue envoyee avec succès !!");
+      } catch (error) {
+        // If backend returns 404, treat as not found → safe to post
+        if (error.response && error.response.status === 404) {
+          emailExists = false;
+        } else {
+          console.warn("Vérification email ignorée:", error.message);
+          // In case of 403 or network issue, assume it's not found to avoid blocking
+          emailExists = false;
+        }
+      }
+
+      // If email already exists → show popup and stop here
+      if (emailExists) {
+        setShowAlreadySentDiv(true);
+        setVisibleSendRecueDiv(false);
+        setVisibleSeConnecterDiv(false);
+        setIsLoading(false);
+        return;
+      }
+
+      // Proceed with POST if email not found
+      const formData = new FormData();
+      formData.append("email", email);
+      formData.append("abonnement", abonnementName.value);
+      formData.append("photo", file);
+
+      await axios.post("https://goatqcm-instance.com/checkabounementuser", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      toast.success("Le reçu a été envoyé avec succès !");
       setVisibleSendRecueDiv(false);
+      setSuccess(true);
       setVisibleSeConnecterDiv(true);
       setEmail("");
       setFile(null);
+      setShowAlreadySentDiv(false);
     } catch (err) {
-      console.error(err);
-      alert("Erreur lors de l’envoi");
+      console.error("Erreur lors de l’envoi du reçu :", err);
+      alert("Erreur lors de l’envoi du reçu");
+    } finally {
+      setIsLoading(false); // hide loader
     }
   };
 
@@ -123,7 +158,11 @@ function AbounementLogin(props) {
     navigateValid("/");
   };
   //********************************************************************** */
-
+  /*****done Quiz******************************************** */
+  function closeModalDoneQuizHandler() {
+    setShowAlreadySentDiv(false);
+  }
+  //**************************************************** */
   return (
     <>
       {isDesktopOrLaptop && (
@@ -287,10 +326,10 @@ function AbounementLogin(props) {
                     onClick={handleVaildeAbn}
                     className="btn btn-primary"
                   >
-                    se connecter maintenant
+                    Suivant
                   </button>
-                )}{" "}
-                <img src={seconnecter} alt="Upload" width="500" height="500" />
+                )}
+                <img src={seconnecter} alt="Upload" width="400" height="500" />
               </div>
             )}
           </div>
@@ -374,7 +413,7 @@ function AbounementLogin(props) {
                       onClick={handleVaildeAbn}
                       className="btn btn-primary"
                     >
-                      se connecter maintenant
+                      Suivant
                     </button>
                   )}{" "}
                   <img
@@ -389,7 +428,99 @@ function AbounementLogin(props) {
           </div>
         </div>
       )}
+      {showAlreadySentDiv && isDesktopOrLaptop && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "white",
+            padding: "30px",
+            borderRadius: "12px",
+            boxShadow: "0 0 20px rgba(0,0,0,0.2)",
+            textAlign: "center",
+            zIndex: 9999,
+            width: 700,
+            hight: 600,
+          }}
+        >
+          <h5>Votre reçu a été déjà envoyé</h5>
+          <p>Se connecter maintenant</p>
+          <button
+            onClick={handleVaildeAbn}
+            className="btn btn-primary"
+            style={{ marginTop: "10px" }}
+          >
+            Suivant
+          </button>
+          <img src={seconnecter} alt="Upload" width="250" height="300" />
+        </div>
+      )}
+      {isDesktopOrLaptop && showAlreadySentDiv && <BackdropDeleteCour />}
 
+      {showAlreadySentDiv && isTabletOrMobile && (
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            background: "white",
+            padding: "30px",
+            borderRadius: "12px",
+            boxShadow: "0 0 20px rgba(0,0,0,0.2)",
+            textAlign: "center",
+            zIndex: 9999,
+          }}
+        >
+          <h5>Votre reçu a été déjà envoyé</h5>
+          <p>Se connecter maintenant</p>
+          <button
+            onClick={handleVaildeAbn}
+            className="btn btn-primary"
+            style={{ marginTop: "10px", marginBottom: "5px" }}
+          >
+            Suivant
+          </button>
+          <img src={seconnecter} alt="Upload" width="250" height="300" />
+        </div>
+      )}
+      {isTabletOrMobile && showAlreadySentDiv && <BackdropDeleteCour />}
+
+      {isLoading && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.4)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 10000,
+          }}
+        >
+          <div
+            style={{
+              background: "white",
+              padding: "30px 50px",
+              borderRadius: "10px",
+              textAlign: "center",
+              boxShadow: "0 0 10px rgba(0,0,0,0.2)",
+            }}
+          >
+            <div
+              className="spinner-border text-primary"
+              role="status"
+              style={{ width: "3rem", height: "3rem" }}
+            ></div>
+            <h5 className="mt-3">Veuillez patienter, envoi en cours...</h5>
+          </div>
+        </div>
+      )}
       <Toaster />
     </>
   );
