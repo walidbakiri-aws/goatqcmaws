@@ -3547,7 +3547,7 @@ function QuizBoard(props) {
                                       }}
                                     />
                                   </div>
-                                  <div className={`${classes.chatgpt} `}>
+                                  {/*<div className={`${classes.chatgpt} `}>
                                     <img
                                       src={chatgpt}
                                       height="100%"
@@ -3566,7 +3566,7 @@ function QuizBoard(props) {
                                         handleDeepSeekBtn(qcm.id);
                                       }}
                                     />
-                                  </div>
+                                  </div>*/}
                                   <div className={`${classes.note} `}>
                                     <img
                                       src={noteimage}
@@ -4524,7 +4524,7 @@ function QuizBoard(props) {
                                           }}
                                         />
                                       </div>
-                                      <div
+                                      {/*<div
                                         className={`${classes.chatgpt_phone} `}
                                       >
                                         <img
@@ -4547,7 +4547,7 @@ function QuizBoard(props) {
                                             handleDeepSeekBtn(qcm.id);
                                           }}
                                         />
-                                      </div>
+                                      </div>*/}
                                       <div className={`${classes.note_phone} `}>
                                         <img
                                           src={noteimage}
