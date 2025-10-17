@@ -23,16 +23,16 @@
 .quizzContainer {
   margin-left: 200px;
   width: 1200px;
-  height: 850px;
+  height: auto;
   margin-top: 10px;
   margin-bottom: 10px;
   padding-top: 20px;
   border-radius: 10px;
 
-  box-shadow: 5px 10px;
   background-color: var(--background-color);
 }
 .fullquizzdiv {
+  position: relative;
   margin-top: 5px;
   width: 1100px;
   height: fit-content;
@@ -63,6 +63,167 @@
   white-space: nowrap;
   width: 100%;
 }
+.separation {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(161, 120, 201);
+  padding: 10px;
+  color: aliceblue;
+  margin-bottom: 10px;
+}
+
+/*****************************************************/
+.fullquizzdiv_playliste {
+  margin-left: 300px;
+  width: 1200px;
+  height: 650px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  border-radius: 10px;
+  overflow-y: scroll;
+  background-color: rgb(223, 220, 226);
+}
+.fullquizzdiv_header_playliste {
+  background-color: #9d00ff;
+  color: aliceblue;
+  height: 40px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.eachsession_playliste {
+  margin-left: 150px;
+  width: 600px;
+  height: 250px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: rgb(246, 248, 248);
+  display: flex;
+}
+.piestatique_playliste {
+  width: 180px;
+  height: 180px;
+}
+
+.full_module_iconplay_playliste {
+  left: 0px;
+  float: left;
+  width: 400px;
+  height: 100%;
+  padding-top: 5px;
+  padding-left: 30px;
+}
+.nameQcmSession_playliste {
+  padding-top: 5px;
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(138, 141, 141);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+}
+.modulename_playliste {
+  padding-top: 5px;
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 200px;
+  height: 30px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(43, 44, 44);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+.playicondiv_playliste {
+  border: 3px solid #9d00ff;
+  border-radius: 10px;
+  width: 300px;
+  height: 40px;
+  display: flex;
+
+  padding-left: 6px;
+  padding-top: 3px;
+  float: right;
+  bottom: 0;
+  right: 10;
+}
+.icondiv_playliste {
+  margin-right: 10px;
+}
+.yearquizz_playliste {
+  padding-top: 30px;
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 200px;
+  height: 50%;
+  border-radius: 10px;
+  color: rgb(43, 44, 44);
+}
+.threepoint_playliste {
+  float: right;
+  right: 0px;
+  margin-top: 20px;
+  margin-right: 5px;
+}
+.quizzdiv_container_playliste {
+  position: relative;
+  margin-top: 50px;
+}
+.detail_playliste {
+  width: 120px;
+  height: 70px;
+
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 1;
+
+  color: var(--primary-text-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.detail_playliste button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail_playliste button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+.hr_desk_playliste {
+  margin-left: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(159, 157, 202) 0%,
+    rgb(159, 157, 202) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+/*****************************************************************/
+
 .quizzdiv {
   display: inline-block;
   margin-right: 10px;
@@ -109,6 +270,19 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+.detail_playliste {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 120px;
+  height: 70px;
+
+  background-color: var(--background-color);
+  border: 2px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 2;
+  color: var(--primary-text-color);
 }
 .detail button {
   padding-left: 5px;
@@ -199,6 +373,7 @@
 .contanerspace_phone {
   position: absolute;
   display: inline-block;
+  margin-top: 20px;
   width: 100%;
   height: 100%;
   background-color: var(--background-color-full);
@@ -264,7 +439,7 @@
 }
 .quizzname_phone {
   height: 10px;
-  width: 70px;
+  width: 60px;
 }
 .threedotsbtn_phone {
   height: 20px;
@@ -272,6 +447,18 @@
 }
 .quizzdiv_container_phone {
   position: relative;
+}
+.separation_phone {
+  height: 25px;
+  width: 100%;
+  background-color: rgb(161, 120, 201);
+  padding: 5px;
+  font-size: 10px;
+  color: aliceblue;
+  margin-bottom: 10px;
+}
+.separation_phone h5 {
+  font-size: 10px;
 }
 .detail_phone {
   width: 70px;
@@ -315,7 +502,158 @@
   margin-top: 2px;
   margin-bottom: 2px;
 }
+/**************************************************************/
+.quizzContainer_phone {
+  margin-left: 5px;
+  width: 95%;
+  height: 700x;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  padding-top: 20px;
+  border-radius: 10px;
+  padding-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+}
+.eachsession_phone_playliste {
+  margin-left: 5px;
+  width: 320px;
+  height: 180px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background-color: rgb(235, 241, 241);
+  display: flex;
+  box-shadow: #535554;
+}
+.piestatique_phone_playliste {
+  width: 150px;
+  height: 150px;
+}
+.full_module_iconplay_phone_playliste {
+  left: 0px;
+  float: left;
+  width: 100x;
+  height: 100%;
+  padding-top: 5px;
+  padding-left: 5px;
+}
+.modulename_nameQcmSession_phone_playliste {
+  height: 70px;
 
+  display: grid;
+}
+.nameQcmSession_phone_playliste {
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 100px;
+
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(64, 68, 68);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+.modulename_phone_playliste {
+  padding-left: 10px;
+  left: 0px;
+  float: left;
+  width: 100px;
+
+  border-radius: 10px;
+  margin-bottom: 5px;
+  color: rgb(64, 68, 68);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+.playicondiv_phone_playliste {
+  width: 80px;
+  height: 70px;
+  display: flex;
+  margin-left: 40px;
+  padding-left: 6px;
+  padding-top: 3px;
+  padding-bottom: 10px;
+}
+.icondiv_phone_playliste {
+  margin-right: 10px;
+}
+.yearquizz_phone_playliste {
+  padding-top: 20px;
+  padding-left: 5px;
+
+  left: 0px;
+  float: left;
+  width: 50px;
+  height: 100%;
+  border-radius: 10px;
+  color: rgb(105, 114, 111);
+}
+.threepoint_phone_playliste {
+  float: right;
+  right: 0px;
+  margin-top: 30px;
+  margin-right: 5px;
+}
+.quizzdiv_container_phone_playliste {
+  position: relative;
+  margin-top: 50px;
+}
+.infosession_phone {
+  display: grid;
+}
+.yearquizz_threepoint_phone_playliste {
+  margin-top: -20px;
+  display: flex;
+}
+.detail_phone_playliste {
+  width: 120px;
+  height: 70px;
+
+  background-color: var(--background-color);
+  border: 3px solid rgb(80, 80, 76);
+  border-radius: 5px;
+  z-index: 1;
+
+  color: var(--primary-text-color);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.detail_phone_playliste button {
+  padding-left: 5px;
+  width: 100%;
+  height: 10px;
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--primary-text-color);
+}
+.detail_phone_playliste button:hover {
+  border-radius: 5px;
+  height: 50%;
+  background-color: #cad4d1;
+  color: black;
+}
+.hr_desk_phone_playliste {
+  margin-left: 3px;
+  height: 3px;
+  border: none;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    rgb(159, 157, 202) 0%,
+    rgb(159, 157, 202) 21%,
+    rgba(6, 84, 170, 1) 51%,
+    rgba(0, 255, 113, 1) 100%
+  );
+  width: 95%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+/**************************************************************/
 .quizzcontent_phone {
   width: 100%;
   height: 140px;

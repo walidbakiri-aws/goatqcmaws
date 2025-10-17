@@ -15,6 +15,8 @@ import A from "../compenent/layout/img/A.png";
 import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
+import addplayliste from "../compenent/layout/img/addplayliste.png";
+
 import axiosRetry from "axios-retry";
 import E from "../compenent/layout/img/E.png";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
@@ -80,12 +82,25 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import eysezoom from "../compenent/layout/img/eysezoom.png";
 function QuizBoardClinique(props) {
+  const [visibleSaveQuizzEnter, setVisibleSaveQuizzEnter] = useState(false);
+  const [visiblePlayListe, setVisiblePlayListe] = useState(true);
+  const [allPLayListes, setAllPLayListes] = useState([]);
+
+  const [playListeName, setPlayListeName] = useState("");
+  const userIdToken = localStorage.getItem("userId");
+  let [newPlayListe, setNewPlayListe] = useState({
+    playlisteName: "",
+
+    ourUsers: { id: userIdToken },
+  });
+  const [playListe, setPlayListe] = useState([]);
+
   const currentQcmIndex = useSignal(0);
   /**chat Box*************************************************************** */
   const getDuiscussionDivStatus = localStorage.getItem("showdiscussiondiv");
   const codechatlocation = localStorage.getItem("codechatlocation");
   //************************************************************************ */
-  const Date = new DateObject();
+
   const sourceSaveQuizzBtn = "savequizzsource";
   const sourceSaveSessionBtn = "savesessionsource";
   const sourceQuizzName = "quizzname";
@@ -311,6 +326,7 @@ function QuizBoardClinique(props) {
     saveIsClickedCounterClinique: "",
     savePieStatiqueClinique: "",
     saveEachLineStatiqueClinique: "",
+    playListe: {},
     ourUsers: {},
   });
   const [SaveCasCliniqueSession, setSaveCasCliniqueSession] = useState({
@@ -366,6 +382,7 @@ function QuizBoardClinique(props) {
     saveIsClickedCounterClinique: "",
     savePieStatiqueClinique: "",
     saveEachLineStatiqueClinique: "",
+    playListe: {},
     ourUsers: {},
   });
   const [SaveQcmCasCliniqueSession, setSaveQcmCasCliniqueSession] = useState({
@@ -545,7 +562,10 @@ function QuizBoardClinique(props) {
     const formData = new FormData();
     formData.append("desc", FullDescEdite.qcmDescription);
     await axios
-      .put(`https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`, formData)
+      .put(
+        `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
+        formData
+      )
       .then((res) => {
         console.log("success updating");
         toast.success("Succes Editing");
@@ -565,11 +585,15 @@ function QuizBoardClinique(props) {
     formData.append("image", file);
     formData.append("qcmStandard", JSON.stringify(result.data));
     axios
-      .post("https://goatqcm-instance.com/image/clinique/uploadimage", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
+      .post(
+        "https://goatqcm-instance.com/image/clinique/uploadimage",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
         setvisisbleDescInsert(false);
@@ -771,9 +795,12 @@ function QuizBoardClinique(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
-        method: "POST",
-      });
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
+        {
+          method: "POST",
+        }
+      );
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -888,7 +915,7 @@ function QuizBoardClinique(props) {
     const getYear = document.getElementById("year").value;
     console.log(getYear);
     const result = await axios.get(
-      `https://goatqcm-instance.com/casclinique/get_groupes_year/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
+      `http://localhost:8080/casclinique/get_groupes_year/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
     );
     document.getElementById("groupepermutation").options[0].selected = true;
     setGroupesPermut(result.data);
@@ -2247,9 +2274,12 @@ function QuizBoardClinique(props) {
 
     //****augmenter slect count******************************************** */
     await axios
-      .put(`https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .put(
+        `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {})
       .catch((err) => console.log(err));
     //************************************************************************* */
@@ -2687,12 +2717,25 @@ function QuizBoardClinique(props) {
     saveQuizzSession.saveEachLineStatiqueClinique = JSON.stringify(
       SaveEachLineStatiqueClinique
     );
+    if (sourceQuizzSessionName === "quizzname") {
+      saveQuizzSession.playListe = { id: playListe.id }; // only send ID
+    }
     //******************************************************************************** */
-    saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
+    const currentDate = new DateObject({
+      date: new Date(), // use system local time
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    });
+    saveQuizzSession.dateSaveQuizzSession = currentDate.format(
+      "YYYY-MM-DD HH:mm:ss"
+    );
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2835,14 +2878,28 @@ function QuizBoardClinique(props) {
     saveQuizzSession.saveEachLineStatiqueClinique = JSON.stringify(
       SaveEachLineStatiqueClinique
     );
+
+    if (sourceSaveBtn === "savequizzsource") {
+      saveQuizzSession.playListe = { id: playListe.id }; // only send ID
+    }
     //******************************************************************************** */
-    saveQuizzSession.dateSaveQuizzSession = Date.format("YYYY-MM-dd hh:mm:ss");
+    const currentDate = new DateObject({
+      date: new Date(), // use system local time
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    });
+    saveQuizzSession.dateSaveQuizzSession = currentDate.format(
+      "YYYY-MM-DD HH:mm:ss"
+    );
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3159,6 +3216,35 @@ function QuizBoardClinique(props) {
     }
     return new File([u8arr], filename, { type: mime });
   }
+  //***plasylites/************************************************** */ */
+  const handleCreatPlayListe = async () => {
+    getAllPLayListe();
+    console.log(userIdToken);
+    newPlayListe.ourUsers = { id: userIdToken };
+    newPlayListe.playlisteName = playListeName;
+    console.log(newPlayListe);
+    try {
+      await axios.post(`https://goatqcm-instance.com/playliste`, newPlayListe);
+
+      console.log("succes insert");
+    } catch (err) {
+      console.error("Failed to create PlayList:", err);
+    }
+  };
+
+  const getAllPLayListe = async () => {
+    let allPlayListe = await axios.get(
+      `https://goatqcm-instance.com/playliste`
+    );
+    console.log(allPlayListe);
+    setAllPLayListes(allPlayListe.data);
+  };
+  const handleOnchangePlayListe = async (playlisteId) => {
+    let playListe = await axios.get(`${BASE_URL}/playliste/${playlisteId}`);
+    setPlayListe(playListe.data);
+    console.log(playListe.data);
+  };
+  //***************************************************************** */
   return (
     <>
       {!OpenBoardQcm && (
@@ -3225,6 +3311,9 @@ function QuizBoardClinique(props) {
                           className="btn btn-primary"
                           onClick={() => {
                             setModalSaveQuizzIsOpen(true);
+                            setVisibleSaveQuizzEnter(false);
+                            setVisiblePlayListe(true);
+                            getAllPLayListe();
                           }}
                         >
                           Sauvegarder CasClinique
@@ -3247,6 +3336,9 @@ function QuizBoardClinique(props) {
                           className="btn btn-primary"
                           onClick={() => {
                             setModalSaveQuizzIsOpen(true);
+                            setVisibleSaveQuizzEnter(false);
+                            setVisiblePlayListe(true);
+                            getAllPLayListe();
                           }}
                         >
                           Sauvegarder Quizz
@@ -4294,6 +4386,8 @@ function QuizBoardClinique(props) {
                               <TfiClose
                                 onClick={(e) => {
                                   setShowModelActionsPhone(true);
+                                  setVisibleSaveQuizzEnter(false);
+                                  setVisiblePlayListe(true);
                                 }}
                               />
                             </li>
@@ -5109,32 +5203,105 @@ function QuizBoardClinique(props) {
           {isDesktopOrLaptop && ModalDoneQuizIsOpen && (
             <BackdropDoneQuiz onCancel={closeModalDoneQuizHandler} />
           )}
+
           {isDesktopOrLaptop && ModalSaveQuizzIsOpen && (
             <>
               <div className={classes.save_quizz}>
-                <div className={classes.save_quizz_conetent}>
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="nome de quizz"
-                    onChange={(e) => setCasCliniqueQuizzName(e.target.value)}
-                  />
-                  <button
-                    type="button"
-                    className="btn btn-info"
-                    onClick={() => {
-                      handleSaveCasCliniqueQuizzBtn(
-                        sourceQuizzName,
-                        sourceSaveQuizzBtn
-                      );
-                    }}
-                  >
-                    Save Qcm Quizz
-                  </button>
-                </div>
+                {visiblePlayListe && (
+                  <div className={classes.playliste}>
+                    <div className={classes.playliste_input}>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="nome de PlayListe"
+                        onChange={(e) => setPlayListeName(e.target.value)}
+                      />
+                      <img
+                        src={addplayliste}
+                        height="70%"
+                        width="25"
+                        onClick={() => {
+                          handleCreatPlayListe();
+                        }}
+                      />
+                    </div>
+                    <div className={classes.playlistesdiv}>
+                      <div className={"form-check"}>
+                        {allPLayListes.map((playliste, index) => (
+                          <div key={index} className={classes.playlisteitem}>
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id={playliste.playlisteName}
+                              value={playliste.id}
+                              onChange={() => {
+                                handleOnchangePlayListe(playliste.id);
+                              }}
+                            ></input>
+                            <h6
+                              className={`${classes.playlisteh6} form-check-label `}
+                            >
+                              {playliste.playlisteName}
+                            </h6>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className={classes.suivant_btn}>
+                      <button
+                        type="button"
+                        style={{ marginTop: 10 }}
+                        className="btn btn-info"
+                        onClick={() => {
+                          setVisiblePlayListe(false);
+                          setVisibleSaveQuizzEnter(true);
+                        }}
+                      >
+                        suivant
+                      </button>{" "}
+                    </div>
+                  </div>
+                )}
+
+                {visibleSaveQuizzEnter && (
+                  <div className={classes.save_quizz_conetent}>
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="nome de quizz"
+                      onChange={(e) => setCasCliniqueQuizzName(e.target.value)}
+                    />
+                    <div className={classes.save_quizz_conetent_btns}>
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => {
+                          setVisiblePlayListe(true);
+                          setVisibleSaveQuizzEnter(false);
+                        }}
+                      >
+                        précenent
+                      </button>
+                      <button
+                        type="button"
+                        className="btn btn-info"
+                        onClick={() => {
+                          handleSaveCasCliniqueQuizzBtn(
+                            sourceQuizzName,
+                            sourceSaveQuizzBtn
+                          );
+                        }}
+                      >
+                        Save Quizz
+                      </button>{" "}
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           )}
+
           {isDesktopOrLaptop && ModalSaveQuizzIsOpen && (
             <BackdropDoneQuiz onCancel={closeModalSaveQcmQuizHandler} />
           )}
@@ -5173,33 +5340,100 @@ function QuizBoardClinique(props) {
           {isTabletOrMobile && ModalSaveQuizzIsOpen && (
             <>
               <div className={classes.save_quizz_phone}>
-                <div className={classes.save_quizz_conetent_phone}>
-                  <input
-                    className="form-control"
-                    type="text"
-                    placeholder="nome de quizz"
-                    onChange={(e) => setCasCliniqueQuizzName(e.target.value)}
-                  />
-                  <button
-                    type="button"
-                    className="btn btn-info"
-                    onClick={() => {
-                      handleSaveCasCliniqueQuizzBtn(
-                        sourceQuizzName,
-                        sourceSaveQuizzBtn
-                      );
-                    }}
-                  >
-                    Save Qcm Quizz
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-warning"
-                    onClick={closeModalSaveQcmQuizHandler}
-                  >
-                    cancel
-                  </button>
-                </div>
+                {visiblePlayListe && (
+                  <div className={classes.playliste_phone}>
+                    <div className={classes.playliste_input_phone}>
+                      <input
+                        className="form-control"
+                        type="text"
+                        placeholder="nome de PlayListe"
+                        onChange={(e) => setPlayListeName(e.target.value)}
+                      />
+                      <img
+                        src={addplayliste}
+                        height="70%"
+                        width="25"
+                        onClick={() => {
+                          handleCreatPlayListe();
+                        }}
+                      />
+                    </div>
+                    <div className={classes.playlistesdiv_phone}>
+                      <div className={"form-check"}>
+                        {allPLayListes.map((playliste, index) => (
+                          <div
+                            key={index}
+                            className={classes.playlisteitem_phone}
+                          >
+                            <input
+                              className="form-check-input"
+                              type="radio"
+                              name="flexRadioDefault"
+                              id={playliste.playlisteName}
+                              value={playliste.id}
+                              onChange={() => {
+                                handleOnchangePlayListe(playliste.id);
+                              }}
+                            ></input>
+                            <h6
+                              className={`${classes.playlisteh6_phone} form-check-label `}
+                            >
+                              {playliste.playlisteName}
+                            </h6>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className={classes.suivant_btn_phone}>
+                      <button
+                        type="button"
+                        style={{ marginTop: 10 }}
+                        className="btn btn-info"
+                        onClick={() => {
+                          setVisiblePlayListe(false);
+                          setVisibleSaveQuizzEnter(true);
+                        }}
+                      >
+                        suivant
+                      </button>{" "}
+                    </div>
+                  </div>
+                )}
+
+                {visibleSaveQuizzEnter && (
+                  <div className={classes.save_quizz_conetent_phone}>
+                    <input
+                      className="form-control"
+                      type="text"
+                      placeholder="nome de quizz"
+                      onChange={(e) => setCasCliniqueQuizzName(e.target.value)}
+                    />
+                    <div className={classes.save_quizz_conetent_btns_phone}>
+                      <button
+                        type="button"
+                        className="btn btn-info"
+                        onClick={() => {
+                          handleSaveCasCliniqueQuizzBtn(
+                            sourceQuizzName,
+                            sourceSaveQuizzBtn
+                          );
+                        }}
+                      >
+                        Save Quizz
+                      </button>{" "}
+                      <button
+                        type="button"
+                        className="btn btn-danger"
+                        onClick={() => {
+                          setVisiblePlayListe(true);
+                          setVisibleSaveQuizzEnter(false);
+                        }}
+                      >
+                        précenent
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             </>
           )}
@@ -5729,8 +5963,12 @@ function QuizBoardClinique(props) {
               style={{ marginBottom: 8, width: 200 }}
               className="btn btn-primary"
               onClick={() => {
+                console.log("heyy");
                 setModalSaveQuizzIsOpen(true);
                 setShowModelActionsPhone(false);
+
+                setVisibleSaveQuizzEnter(false);
+                setVisiblePlayListe(true);
               }}
             >
               Sauvegarder CasClinique
@@ -5756,6 +5994,9 @@ function QuizBoardClinique(props) {
               onClick={() => {
                 setModalSaveQuizzIsOpen(true);
                 setShowModelActionsPhone(false);
+
+                setVisibleSaveQuizzEnter(false);
+                setVisiblePlayListe(true);
               }}
             >
               Sauvegarder Quizz

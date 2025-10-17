@@ -327,6 +327,15 @@
   font-size: 20px; /* Adjust as needed */
   font-weight: 450; /* Regular weight */
 }
+.list-group-item {
+  transition: all 0.2s ease-in-out;
+}
+
+.list-group-item.active {
+  transform: scale(1.05); /* Slightly bigger */
+  font-weight: 600;
+  z-index: 1;
+}
 .percentage {
   width: 50px;
   font-size: 15px;
@@ -462,9 +471,11 @@
   width: 400px;
   margin-top: 10px;
 }
+/**************************************************************************/
+
 .save_quizz {
   width: 550px;
-  height: 150px;
+  height: 350px;
   padding: 10px;
   margin-bottom: 7px;
   margin-left: 550px;
@@ -476,9 +487,91 @@
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   white-space: pre-line;
 }
-.save_quizz_conetent button {
+.playliste {
   margin-top: 20px;
-  margin-left: 160px;
+  margin-left: 60px;
+  width: 350px;
+
+  font-size: 16px;
+}
+.playliste_input {
+  margin-top: 20px;
+  height: 40px;
+  width: 95%;
+  font-size: 16px;
+  display: flex;
+}
+.suivant_btn {
+  float: right;
+  right: 0px;
+  bottom: 0px;
+
+  margin-left: 100px;
+}
+
+.playliste_input input {
+  width: 450px;
+  height: 30px;
+  font-size: 16px;
+}
+
+.playlistesdiv {
+  padding-left: 10px;
+  width: 45%;
+  margin-right: 30px;
+  margin-left: 10px;
+  height: 200px;
+  width: 250px;
+  background-color: #f4f6f7;
+  display: inline-block;
+  vertical-align: middle;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 5px;
+  border: #888484 1px;
+}
+.playlisteitem input {
+  border: 1px solid rgb(194, 191, 191);
+  margin-right: 3px;
+}
+
+.playlisteitem label {
+  font-style: unset;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+}
+.playlisteh6 {
+  margin-left: 3px;
+  color: var(--primary-text-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  font-size: 18px;
+}
+
+.save_quizz_conetent {
+  margin-top: 20px;
+
+  width: 200px;
+  font-size: 16px;
+}
+.save_quizz_conetent input {
+  margin-top: 20px;
+  margin-left: 100px;
+  width: 300px;
+}
+.save_quizz_conetent_btns {
+  margin-top: 20px;
+  display: flex;
+  width: 350px;
+  font-size: 16px;
+
+  margin-left: 60px;
+}
+/**************************************************************************/
+
+.save_quizz_conetent button {
+  margin-top: 30px;
+  margin-left: 20px;
   width: 200px;
   font-size: 16px;
 }
@@ -1376,10 +1469,10 @@ modulediv_phone .homebtn {
 /****************************************************************/
 .save_quizz_phone {
   width: 240px;
-  height: 200px;
+  height: 300px;
   padding: 10px;
   margin-bottom: 7px;
-  margin-left: 50px;
+  margin-left: 10px;
   margin-top: 100px;
   border-radius: 8px;
   z-index: 6;
@@ -1388,9 +1481,93 @@ modulediv_phone .homebtn {
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   white-space: pre-line;
 }
+.playliste_phone {
+  margin-top: 20px;
+  margin-left: -20px;
+  width: 100%;
+
+  font-size: 14px;
+}
+.playliste_input_phone {
+  margin-top: -10px;
+  height: 30px;
+  width: 100%;
+  font-size: 16px;
+  display: flex;
+}
+.suivant_btn_phone {
+  float: right;
+  right: 0px;
+  bottom: 0px;
+
+  margin-left: 100px;
+}
+
+.playliste_input_phone input {
+  margin-right: 5px;
+  width: 90%;
+  height: 30px;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.playlistesdiv_phone {
+  padding: 10px;
+  padding-left: 10px;
+  width: 45%;
+  margin-right: 30px;
+  margin-left: 15px;
+  height: 200px;
+  width: 100%;
+  background-color: #f4f6f7;
+  display: inline-block;
+  vertical-align: middle;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 5px;
+  border: #888484 1px;
+}
+.playlisteitem_phone input {
+  border: 1px solid rgb(194, 191, 191);
+  margin-right: 3px;
+}
+
+.playlisteitem_phone label {
+  font-style: unset;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: normal;
+}
+.playlisteh6_phone {
+  margin-left: 3px;
+  color: var(--primary-text-color);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+  font-size: 18px;
+}
+
+.save_quizz_conetent_phone {
+  margin-top: 20px;
+
+  width: 200px;
+  font-size: 16px;
+}
+.save_quizz_conetent_phone input {
+  margin-top: 20px;
+
+  width: 90%;
+}
+.save_quizz_conetent_btns_phone {
+  margin-top: 20px;
+
+  width: 80%;
+  font-size: 16px;
+
+  margin-left: 60px;
+}
+/**************************************************************************/
 .save_quizz_conetent_phone button {
   margin-top: 20px;
-  margin-left: 55px;
+
   width: 120px;
   font-size: 13px;
 }

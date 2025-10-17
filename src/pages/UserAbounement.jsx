@@ -26,12 +26,12 @@ function UserAbounement() {
     { nameAbn: "Résidanat 2024", dateExp: "2024-10-28" },
     { nameAbn: "Résidanat 2025", dateExp: "2025-10-28" },
     { nameAbn: "Résidanat 2026", dateExp: "2026-10-28" },
-    { nameAbn: "1ér Année Médecine", dateExp: "2025-07-29" },
-    { nameAbn: "2éme Année Médecine", dateExp: "2025-07-29" },
-    { nameAbn: "3éme Année Médecine", dateExp: "2025-07-29" },
-    { nameAbn: "4éme Année Médecine", dateExp: "2025-07-29" },
-    { nameAbn: "5éme Année Médecine", dateExp: "2025-07-29" },
-    { nameAbn: "6éme Année Médecine", dateExp: "2025-07-29" },
+    { nameAbn: "1ér Année Médecine", dateExp: "2026-10-20" },
+    { nameAbn: "2éme Année Médecine", dateExp: "2026-10-20" },
+    { nameAbn: "3éme Année Médecine", dateExp: "2026-10-20" },
+    { nameAbn: "4éme Année Médecine", dateExp: "2026-10-20" },
+    { nameAbn: "5éme Année Médecine", dateExp: "2026-10-20" },
+    { nameAbn: "6éme Année Médecine", dateExp: "2026-10-20" },
   ];
 
   function etatsidebare(etat) {
