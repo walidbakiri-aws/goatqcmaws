@@ -3371,13 +3371,13 @@ function QuizBoard(props) {
                 className={classes.contanerspace}
                 data-theme={isDark ? "dark" : "light"}
               >
-                <button
+              {/*  <button
                   onClick={() => {
                     handleTestBtn();
                   }}
                 >
                   test
-                </button>
+                </button>*/}
                 {VisibleParSujet && isDesktopOrLaptop && (
                   <div
                     className={`${classes.parsujetscontainer} `}

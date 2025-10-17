@@ -609,6 +609,14 @@ function SaveQuizz() {
     await axios.delete(`https://goatqcm-instance.com/playliste/${playListeId}`);
     getAllPLayListe();
   };
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    setShowPlayListe(true);
+    setShowQuizzesPlayListe(false);
+    setShowMyQuizz(true);
+  };
   //******************************************************************************* */
 
   return (
@@ -714,7 +722,7 @@ function SaveQuizz() {
                         className={classes.playicondiv_playliste}
                         onClick={() => {
                           if (quizz.qcmType === "Qcm")
-                            handleQuizQcmPlayListe(quizz.id, index);
+                            handleQuizQcm(quizz.id, index);
                           else if (quizz.qcmType === "Cas Clinique")
                             handleQuizCasCliniquePlayListe(quizz.id, index);
                           else
@@ -777,6 +785,13 @@ function SaveQuizz() {
                     </div>
                   </div>
                 ))}
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={handleClick}
+                >
+                  précédent
+                </button>
               </div>
             )}
 
@@ -1161,7 +1176,7 @@ function SaveQuizz() {
                             type="button"
                             onClick={() => {
                               if (quizz.qcmType === "Qcm")
-                                handleDeteQizzBtn(quizz.id);
+                                handleQuizQcmPlayListe(quizz.id);
                               else if (quizz.qcmType === "Cas Clinique")
                                 handleDeteQizzCliniqueBtn(quizz.id);
                               else handleDeteQizzQcmQcasCliniqeBtn(quizz.id);
@@ -1187,6 +1202,13 @@ function SaveQuizz() {
                     </div>
                   </div>
                 ))}
+                <button
+                  type="button"
+                  className="btn btn-danger"
+                  onClick={handleClick}
+                >
+                  précédent
+                </button>
               </div>
             )}
 
