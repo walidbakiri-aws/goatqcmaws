@@ -416,7 +416,7 @@ function Sidebar() {
                 }}
               >
                 <img src={myquizz} height="100%" width="25" />
-                <span className="fs-6 p-2">Mes Quizz </span>
+                <span className="fs-6 p-2">PlayListe </span>
               </Link>
             </li>
             <li
@@ -567,7 +567,7 @@ function Sidebar() {
               >
                 <img src={myquizz} height="100%" width="25" />
                 <span className="fs-7 " style={{}}>
-                  Mes Quizz
+                  PlayListe
                 </span>
               </Link>
             </li>
