@@ -526,7 +526,7 @@ function SaveQuizz() {
   //**mes playlistes**************************************************************** */
   const getAllPLayListe = async () => {
     let allPlayListe = await axios.get(
-      `https://goatqcm-instance.com/playliste`
+      `http://localhost:8080/playliste/specifiqueuser/${userIdToken}`
     );
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);
