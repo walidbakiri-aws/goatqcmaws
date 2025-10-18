@@ -271,6 +271,10 @@ function GoatQcm() {
                     <img src={GoatLogo} height="100" width="200" />
                   </div>
                 </div>
+                <div style={{ marginLeft: 700, marginTop: 20 }}>
+                  <h6>déplacer vorte quiz vers votre nouvelle playList</h6>
+                  <img src={pubgoat} height="450" width="400" />
+                </div>
                 <div className={classes.publicationfull}>
                   <div className={classes.inputeaddcomment}>
                     <input
@@ -563,11 +567,12 @@ function GoatQcm() {
                   <img src={GoatLogo} height="70" width="100" />
                 </div>
               </div>
-              {/*  <div>
-                 
-                <img src={pubgoat} height="400" width="350" />
-              </div>*/}
+
               <div className={classes.container_phone}>
+                <div style={{ marginTop: 3 }}>
+                  <h6>déplacer vorte quiz vers votre nouvelle playList</h6>
+                  <img src={pubgoat} height="230" width="80%" />
+                </div>
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>
                     <input
