@@ -31,7 +31,7 @@ function AbounementLogin(props) {
     },
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "4700 DA",
+      priceAbn: "4500 DA",
     },
     {
       nameAbn: "1ér Année Médecine",
@@ -127,9 +127,13 @@ function AbounementLogin(props) {
       formData.append("abonnement", abonnementName.value);
       formData.append("photo", file);
 
-      await axios.post("https://goatqcm-instance.com/checkabounementuser", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        "https://goatqcm-instance.com/checkabounementuser",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       toast.success("Le reçu a été envoyé avec succès !");
       setVisibleSendRecueDiv(false);

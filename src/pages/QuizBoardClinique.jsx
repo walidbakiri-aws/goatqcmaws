@@ -3341,7 +3341,7 @@ function QuizBoardClinique(props) {
                             getAllPLayListe();
                           }}
                         >
-                          Sauvegarder Quizz
+                          Ajoute a la playList
                         </button>
                       )}
                       {showUpdateQcmCasCliniqueBtn && (
@@ -5971,7 +5971,7 @@ function QuizBoardClinique(props) {
                 setVisiblePlayListe(true);
               }}
             >
-              Sauvegarder CasClinique
+              Ajoute a la playList
             </button>
           )}
           {showUpdateCasCliniqueBtn && (
@@ -5999,7 +5999,7 @@ function QuizBoardClinique(props) {
                 setVisiblePlayListe(true);
               }}
             >
-              Sauvegarder Quizz
+              Ajoute a la playList
             </button>
           )}
           {showUpdateQcmCasCliniqueBtn && (

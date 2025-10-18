@@ -14,8 +14,17 @@ import { CiPlay1 } from "react-icons/ci";
 import ModalDetail from "./ModalDetail";
 import playsessionicon from "../compenent/layout/img/playsession.png";
 import detail from "../compenent/layout/img/detailicon.png";
+import playlistebackground from "../compenent/layout/img/playlistebackground.png";
 import Backdrop from "./Backdrop";
+import addplayliste from "../compenent/layout/img/addplayliste.png";
 function SaveQuizz() {
+  const [getQcmType, setGetQcmType] = useState("");
+  const userIdToken = localStorage.getItem("userId");
+  const [quizzId, setQuizzId] = useState("");
+  const [playListe, setPlayListe] = useState([]);
+  const [playListeName, setPlayListeName] = useState("");
+  const [showDeplacementPlayListe, setShowDeplacementPlayListe] =
+    useState(false);
   const [allPlayListe, setAllPLayListes] = useState([]);
   const [showPlayListe, setShowPlayListe] = useState(true);
   const [showMyQuizz, setShowMyQuizz] = useState(true);
@@ -24,7 +33,10 @@ function SaveQuizz() {
   const [modalDetalIsOpen, setModalDetalIsOpen] = useState(false);
   const [showDivDeleteDetail, setShowDivDeleteDetail] = useState(false);
   const token = localStorage.getItem("tokengoat");
-  const userIdToken = localStorage.getItem("userId");
+  let [newPlayListe, setNewPlayListe] = useState({
+    playlisteName: "",
+    ourUsers: { id: userIdToken },
+  });
   //******SideBare Change************************************* */
   function etatsidebare(etat) {
     setShowSideBare(etat);
@@ -71,8 +83,10 @@ function SaveQuizz() {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-
-    setQcmsQuizz(result.data);
+    const onlyWithPlaylist = result.data.filter(
+      (item) => item.playListe === null
+    );
+    setQcmsQuizz(onlyWithPlaylist);
   };
   ///**************************************************************************** */
   //****get qcms saves******************************************************** */
@@ -83,8 +97,10 @@ function SaveQuizz() {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-
-    setCasCliniqueQuizz(result.data);
+    const onlyWithPlaylist = result.data.filter(
+      (item) => item.playListe === null
+    );
+    setCasCliniqueQuizz(onlyWithPlaylist);
   };
   ///**************************************************************************** */
   //****get qcms saves******************************************************** */
@@ -95,8 +111,11 @@ function SaveQuizz() {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
+    const onlyWithPlaylist = result.data.filter(
+      (item) => item.playListe === null
+    );
 
-    setQcmCasCliniqueQuizz(result.data);
+    setQcmCasCliniqueQuizz(onlyWithPlaylist);
   };
   ///**************************************************************************** */
   //******handle quiz div click************************************************* */
@@ -469,6 +488,9 @@ function SaveQuizz() {
   function closeModalHandler() {
     setModalDetalIsOpen(false);
   }
+  function closeShowDeplacementDiv() {
+    setShowDeplacementPlayListe(false);
+  }
   //**handle delete quizz ********************************************************* */
   const handleDeteQizzBtn = async (quizzId) => {
     await axios.delete(`https://goatqcm-instance.com/qcmquizz/${quizzId}`, {
@@ -526,7 +548,7 @@ function SaveQuizz() {
   //**mes playlistes**************************************************************** */
   const getAllPLayListe = async () => {
     let allPlayListe = await axios.get(
-      `http://localhost:8080/playliste/specifiqueuser/${userIdToken}`
+      `https://goatqcm-instance.com/playliste/specifiqueuser/${userIdToken}`
     );
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);
@@ -617,6 +639,77 @@ function SaveQuizz() {
     setShowQuizzesPlayListe(false);
     setShowMyQuizz(true);
   };
+
+  const handleCreatPlayListe = async () => {
+    console.log(userIdToken);
+    newPlayListe.ourUsers = { id: userIdToken };
+    newPlayListe.playlisteName = playListeName;
+    console.log(newPlayListe);
+    try {
+      await axios.post(`https://goatqcm-instance.com/playliste`, newPlayListe);
+
+      console.log("succes insert");
+      getAllPLayListe();
+    } catch (err) {
+      console.error("Failed to create PlayList:", err);
+    }
+  };
+  const handleOnchangePlayListe = async (playlisteId) => {
+    let playListe = await axios.get(
+      `https://goatqcm-instance.com/playliste/${playlisteId}`
+    );
+    setPlayListe(playListe.data);
+    console.log(playListe.data);
+  };
+
+  const handleDeplacerBtn = async (quizzId, qcmType) => {
+    setQuizzId(quizzId);
+    setGetQcmType(qcmType);
+    console.log("walidd");
+    getAllPLayListe();
+    setShowDeplacementPlayListe(true);
+  };
+  // Update PlayListe for a selected quiz
+  const handleDeplacerFinalBtn = async () => {
+    try {
+      // The quiz ID (you can get it from localStorage or a selected quiz)
+
+      const playListeId = playListe.id; // retrieved from handleOnchangePlayListe()
+      console.log(quizzId);
+      console.log(playListeId);
+      if (!quizzId || !playListeId) {
+        alert("❌ Sélectionnez un quiz et une playlist avant de déplacer !");
+        return;
+      }
+      let response = [];
+      if (getQcmType === "Qcm") {
+        response = await axios.put(
+          `https://goatqcm-instance.com/qcmquizz/${quizzId}/playliste/${playListeId}`
+        );
+        getAllQcmsSaves();
+      } else if (getQcmType === "Cas Clinique") {
+        response = await axios.put(
+          `https://goatqcm-instance.com/cliniquequizz/${quizzId}/playliste/${playListeId}`
+        );
+        getAllCasCliniqueSaves();
+      } else if (getQcmType === "Tous (Qcm,Cas Clinique)") {
+        response = await axios.put(
+          `https://goatqcm-instance.com/qcmcliniquequizz/${quizzId}/playliste/${playListeId}`
+        );
+        getAllQcmCasCliniqueSaves();
+      }
+
+      console.log("✅ Playlist updated:", response.data);
+      alert("Le quiz a été déplacé avec succès !");
+      // Optionally refresh lists:
+
+      getAllPLayListe();
+      setShowDeplacementPlayListe(false);
+    } catch (error) {
+      console.error("Erreur de déplacement:", error);
+      alert("❌ Erreur lors du déplacement du quiz !");
+    }
+  };
   //******************************************************************************* */
 
   return (
@@ -663,7 +756,7 @@ function SaveQuizz() {
                           </div>
                         </div>
                         <div className={classes.quizzcontent}>
-                          <img src={backsave} />
+                          <img src={playlistebackground} />
                         </div>
                         <div className={classes.quizzdivfooter}></div>
                         <div
@@ -859,6 +952,17 @@ function SaveQuizz() {
                               >
                                 Détail
                               </button>
+                              <hr className={`${classes.hr_desk} `} />
+                              <button
+                                onClick={() => {
+                                  handleDeplacerBtn(
+                                    qcmQuizz.id,
+                                    qcmQuizz.qcmType
+                                  );
+                                }}
+                              >
+                                Déplacer
+                              </button>
                             </div>
                           )}
                         </div>
@@ -913,7 +1017,7 @@ function SaveQuizz() {
                           key={quizzCasClinique.id}
                         >
                           {quizzCasClinique.id === quizzIndex && (
-                            <div className={classes.detail_clinique}>
+                            <div className={classes.detail}>
                               <button
                                 type="button"
                                 onClick={() => {
@@ -935,6 +1039,17 @@ function SaveQuizz() {
                                 }}
                               >
                                 Détail
+                              </button>
+                              <hr className={`${classes.hr_desk} `} />
+                              <button
+                                onClick={() => {
+                                  handleDeplacerBtn(
+                                    quizzCasClinique.id,
+                                    quizzCasClinique.qcmType
+                                  );
+                                }}
+                              >
+                                Déplacer
                               </button>
                             </div>
                           )}
@@ -1011,6 +1126,17 @@ function SaveQuizz() {
                               >
                                 Détail
                               </button>
+                              <hr className={`${classes.hr_desk} `} />
+                              <button
+                                onClick={() => {
+                                  handleDeplacerBtn(
+                                    QcmCasClinique.id,
+                                    QcmCasClinique.qcmType
+                                  );
+                                }}
+                              >
+                                Déplacer
+                              </button>
                             </div>
                           )}
                         </div>
@@ -1065,7 +1191,7 @@ function SaveQuizz() {
                           </div>
                         </div>
                         <div className={classes.quizzcontent_phone}>
-                          <img src={backsave} />
+                          <img src={playlistebackground} />
                         </div>
                         <div className={classes.quizzdivfooter_phone}></div>
                         <div
@@ -1289,6 +1415,17 @@ function SaveQuizz() {
                                 >
                                   Détail
                                 </button>
+                                <hr className={`${classes.hr_desk_phone} `} />
+                                <button
+                                  onClick={() => {
+                                    handleDeplacerBtn(
+                                      qcmQuizz.id,
+                                      qcmQuizz.qcmType
+                                    );
+                                  }}
+                                >
+                                  Déplacer
+                                </button>
                               </div>
                             )}
                           </div>
@@ -1362,7 +1499,7 @@ function SaveQuizz() {
                               key={quizzCasClinique.id}
                             >
                               {quizzCasClinique.id === quizzIndex && (
-                                <div className={classes.detail_clinique_phone}>
+                                <div className={classes.detail_phone}>
                                   <button
                                     type="button"
                                     onClick={() => {
@@ -1384,6 +1521,17 @@ function SaveQuizz() {
                                     }}
                                   >
                                     Détail
+                                  </button>
+                                  <hr className={`${classes.hr_desk_phone} `} />
+                                  <button
+                                    onClick={() => {
+                                      handleDeplacerBtn(
+                                        quizzCasClinique.id,
+                                        quizzCasClinique.qcmType
+                                      );
+                                    }}
+                                  >
+                                    Déplacer
                                   </button>
                                 </div>
                               )}
@@ -1477,6 +1625,17 @@ function SaveQuizz() {
                                 >
                                   Détail
                                 </button>
+                                <hr className={`${classes.hr_desk_phone} `} />
+                                <button
+                                  onClick={() => {
+                                    handleDeplacerBtn(
+                                      QcmCasClinique.id,
+                                      QcmCasClinique.qcmType
+                                    );
+                                  }}
+                                >
+                                  Déplacer
+                                </button>
                               </div>
                             )}
                           </div>
@@ -1490,6 +1649,131 @@ function SaveQuizz() {
           </div>
         )}
       </div>
+      {isDesktopOrLaptop && showDeplacementPlayListe && (
+        <>
+          <div className={classes.save_quizz}>
+            <div className={classes.playliste}>
+              <div className={classes.playliste_input}>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="nome de PlayListe"
+                  onChange={(e) => setPlayListeName(e.target.value)}
+                />
+                <img
+                  src={addplayliste}
+                  height="70%"
+                  width="25"
+                  onClick={() => {
+                    handleCreatPlayListe();
+                  }}
+                />
+              </div>
+              <div className={classes.playlistesdiv}>
+                <div className={"form-check"}>
+                  {allPlayListe.map((playliste, index) => (
+                    <div key={index} className={classes.playlisteitem}>
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id={playliste.playlisteName}
+                        value={playliste.id}
+                        onChange={() => {
+                          handleOnchangePlayListe(playliste.id);
+                        }}
+                      ></input>
+                      <h6
+                        className={`${classes.playlisteh6} form-check-label `}
+                      >
+                        {playliste.playlisteName}
+                      </h6>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={classes.suivant_btn}>
+                <button
+                  type="button"
+                  style={{ marginTop: 10 }}
+                  className="btn btn-info"
+                  onClick={() => {
+                    handleDeplacerFinalBtn();
+                  }}
+                >
+                  déplacer
+                </button>{" "}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+
+      {showDeplacementPlayListe && isDesktopOrLaptop && (
+        <Backdrop onCancel={closeShowDeplacementDiv} />
+      )}
+      {isTabletOrMobile && showDeplacementPlayListe && (
+        <>
+          <div className={classes.save_quizz_phone}>
+            <div className={classes.playliste_phone}>
+              <div className={classes.playliste_input_phone}>
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="nome de PlayListe"
+                  onChange={(e) => setPlayListeName(e.target.value)}
+                />
+                <img
+                  src={addplayliste}
+                  height="70%"
+                  width="25"
+                  onClick={() => {
+                    handleCreatPlayListe();
+                  }}
+                />
+              </div>
+              <div className={classes.playlistesdiv_phone}>
+                <div className={"form-check"}>
+                  {allPlayListe.map((playliste, index) => (
+                    <div key={index} className={classes.playlisteitem_phone}>
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="flexRadioDefault"
+                        id={playliste.playlisteName}
+                        value={playliste.id}
+                        onChange={() => {
+                          handleOnchangePlayListe(playliste.id);
+                        }}
+                      ></input>
+                      <h6
+                        className={`${classes.playlisteh6_phone} form-check-label `}
+                      >
+                        {playliste.playlisteName}
+                      </h6>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={classes.suivant_btn_phone}>
+                <button
+                  type="button"
+                  style={{ marginTop: 10 }}
+                  className="btn btn-info"
+                  onClick={() => {
+                    handleDeplacerFinalBtn();
+                  }}
+                >
+                  déplacer
+                </button>{" "}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+      {showDeplacementPlayListe && isTabletOrMobile && (
+        <Backdrop onCancel={closeShowDeplacementDiv} />
+      )}
       {modalDetalIsOpen && (
         <ModalDetail onCancel={closeModalHandler} detailQuizz={detailQuizz} />
       )}

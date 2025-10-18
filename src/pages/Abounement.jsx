@@ -23,7 +23,7 @@ function Abounement(props) {
     },
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "4700 DA",
+      priceAbn: "4500 DA",
     },
 
     {
@@ -197,28 +197,22 @@ function Abounement(props) {
             <h5>Abounemet validation</h5>
           </div>
           <div className="card-body">
-            
-            
-             
             <button
               type="button"
               onClick={() => handleVaildeAbn()}
               className="btn btn-primary"
             >
-               Click ici pour Confirmer
+              Click ici pour Confirmer
             </button>
           </div>
         </div>
       )}
-       {VisibleValideAbounemet && isTabletOrMobile && (
+      {VisibleValideAbounemet && isTabletOrMobile && (
         <div className={`${classes.valideabncontainer_phone} card text-center`}>
           <div className="card-header">
             <h5>Abounemet validation</h5>
           </div>
           <div className="card-body">
-            
-             
-           
             <button
               type="button"
               onClick={() => handleVaildeAbn()}
