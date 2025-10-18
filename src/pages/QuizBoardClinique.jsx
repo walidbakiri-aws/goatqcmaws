@@ -3234,7 +3234,7 @@ function QuizBoardClinique(props) {
 
   const getAllPLayListe = async () => {
     let allPlayListe = await axios.get(
-      `https://goatqcm-instance.com/playliste`
+      `https://goatqcm-instance.com/playliste/specifiqueuser/${userIdToken}`
     );
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);

@@ -816,9 +816,12 @@ function QuizBoard(props) {
   const clearChat = async () => {
     try {
       setMessages([]);
-      await fetch(`https://goatqcm-instance.com/chat/clear/${shareScreenCode}`, {
-        method: "POST",
-      });
+      await fetch(
+        `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
+        {
+          method: "POST",
+        }
+      );
     } catch (Exception) {}
   };
   /***************************************************************************************/
@@ -2128,12 +2131,16 @@ function QuizBoard(props) {
         formData.append("file", selectedFile);
       }
 
-      await axios.post("https://goatqcm-instance.com/commentary/upload", formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "https://goatqcm-instance.com/commentary/upload",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       // Refresh commentary list
       getCommentaryQcm(Commentary.qcmStandard.id);
@@ -2782,9 +2789,13 @@ function QuizBoard(props) {
 
     //************************************************************* */
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQcmQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQcmQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -2956,9 +2967,13 @@ function QuizBoard(props) {
     }
 
     await axios
-      .post(`https://goatqcm-instance.com/${sourceCommingFrom}`, saveQuizzSession, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(
+        `https://goatqcm-instance.com/${sourceCommingFrom}`,
+        saveQuizzSession,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
           "fullSessionsListeLength"
@@ -3189,7 +3204,10 @@ function QuizBoard(props) {
     newPost.content = newPost.content + inputValue;
     console.log(newPost);
     try {
-      await axios.post(`https://goatqcm-instance.com/publiction/posts`, newPost);
+      await axios.post(
+        `https://goatqcm-instance.com/publiction/posts`,
+        newPost
+      );
       setNewPost({
         content: "",
         anonyme: false,
@@ -3340,7 +3358,9 @@ function QuizBoard(props) {
   };
 
   const getAllPLayListe = async () => {
-    let allPlayListe = await axios.get(`${BASE_URL}/playliste`);
+    let allPlayListe = await axios.get(
+      `${BASE_URL}/playliste/specifiqueuser/${userIdToken}`
+    );
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);
   };
@@ -3371,7 +3391,7 @@ function QuizBoard(props) {
                 className={classes.contanerspace}
                 data-theme={isDark ? "dark" : "light"}
               >
-              {/*  <button
+                {/*  <button
                   onClick={() => {
                     handleTestBtn();
                   }}
