@@ -513,7 +513,7 @@ function Quiz() {
 
               setMaxYearMultipleCoursClinique((maxYear) => [
                 ...maxYear,
-                "2025",
+                "2026",
               ]);
             } else if (SelectedSourceExmn.value === "Externat Blida") {
               setMinYearMultipleCoursClinique((minYear) => [
@@ -523,7 +523,7 @@ function Quiz() {
 
               setMaxYearMultipleCoursClinique((maxYear) => [
                 ...maxYear,
-                "2025",
+                "2026",
               ]);
             }
             isFind = true;
