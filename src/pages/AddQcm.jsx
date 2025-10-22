@@ -68,7 +68,7 @@ function AddQcm(props) {
     "2022",
     "2023",
     "2024",
-    "2025",
+    "2025","2026",
   ];
   const category = ["Externat Blida", "Résidanat Blida"];
   const [VisibleGroupe, setVisibleGroupe] = useState(false);

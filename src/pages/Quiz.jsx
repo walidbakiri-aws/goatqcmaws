@@ -46,6 +46,7 @@ function Quiz() {
     "2023",
     "2024",
     "2025",
+    "2026",
   ];
   const [selectAllCours, setSelectAllCours] = useState("");
   const QcmTypeSelected = useSignal("");
@@ -455,27 +456,27 @@ function Quiz() {
       if (SelectedSourceExmn.value === "Résidanat Blida") {
         setMinYearMultipleCours((minYear) => [
           ...minYear,
-          ...Array.from({ length: 2025 - 2015 + 1 }, (_, i) =>
+          ...Array.from({ length: 2026 - 2015 + 1 }, (_, i) =>
             (2015 + i).toString()
           ),
         ]);
 
         setMaxYearMultipleCours((minYear) => [
           ...minYear,
-          ...Array.from({ length: 2025 - 2017 + 1 }, (_, i) =>
+          ...Array.from({ length: 2026 - 2017 + 1 }, (_, i) =>
             (2017 + i).toString()
           ),
         ]);
       } else if (SelectedSourceExmn.value === "Externat Blida") {
         setMinYearMultipleCours((minYear) => [
           ...minYear,
-          ...Array.from({ length: 2025 - 2017 + 1 }, (_, i) =>
+          ...Array.from({ length: 2026 - 2017 + 1 }, (_, i) =>
             (2017 + i).toString()
           ),
         ]);
         setMaxYearMultipleCours((minYear) => [
           ...minYear,
-          ...Array.from({ length: 2025 - 2017 + 1 }, (_, i) =>
+          ...Array.from({ length: 2026 - 2017 + 1 }, (_, i) =>
             (2017 + i).toString()
           ),
         ]);
@@ -496,11 +497,11 @@ function Quiz() {
           if (SelectedSourceExmn.value === "Résidanat Blida") {
             setMinYearMultipleCoursClinique((minYear) => [...minYear, "2015"]);
 
-            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2026"]);
           } else if (SelectedSourceExmn.value === "Externat Blida") {
             setMinYearMultipleCoursClinique((minYear) => [...minYear, "2017"]);
 
-            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2025"]);
+            setMaxYearMultipleCoursClinique((maxYear) => [...maxYear, "2026"]);
           }
           if (resultClinique.data.length > 0) {
             setVisibleMinMaxYear(true);
@@ -1250,7 +1251,7 @@ function Quiz() {
                 >
                   test
                 </button>*/}
-            
+
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div

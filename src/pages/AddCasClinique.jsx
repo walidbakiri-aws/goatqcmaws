@@ -49,6 +49,7 @@ function AddCasClinique(props) {
     "2023",
     "2024",
     "2025",
+    "2026",
   ];
 
   const [CasClinique, SetCasClinique] = useState({
