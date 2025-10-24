@@ -152,7 +152,8 @@ function QuizBoard(props) {
     "2022",
     "2023",
     "2024",
-    "2025","2026",
+    "2025",
+    "2026",
   ];
   const [shoYearBackFromCliniqueParSujet, setshoYearBackFromCliniqueParSujet] =
     useState(false);
@@ -3638,7 +3639,7 @@ function QuizBoard(props) {
                                       }}
                                     />
                                   </div>
-                                  {/* <div className={`${classes.chatgpt} `}>
+                                  <div className={`${classes.chatgpt} `}>
                                     <img
                                       src={chatgpt}
                                       height="100%"
@@ -3648,7 +3649,7 @@ function QuizBoard(props) {
                                       }}
                                     />
                                   </div>
-                                  <div className={`${classes.deepseek} `}>
+                                  {/*  <div className={`${classes.deepseek} `}>
                                     <img
                                       src={deepseek}
                                       height="100%"
@@ -4617,7 +4618,7 @@ function QuizBoard(props) {
                                           }}
                                         />
                                       </div>
-                                      {/* <div
+                                      <div
                                         className={`${classes.chatgpt_phone} `}
                                       >
                                         <img
@@ -4629,7 +4630,7 @@ function QuizBoard(props) {
                                           }}
                                         />
                                       </div>
-                                      <div
+                                      {/*    <div
                                         className={`${classes.deepseek_phone} `}
                                       >
                                         <img
