@@ -26,7 +26,7 @@ import {
 
 function ChatGptfinal(props) {
   // ------------------ API KEYS ------------------
-  const API_KEY_1 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_1;
+  /*const API_KEY_1 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_1;
   const API_KEY_2 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_2;
   const API_KEY_3 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_3;
   const API_KEY_4 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_4;
@@ -36,7 +36,19 @@ function ChatGptfinal(props) {
   const API_KEY_8 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_8;
   const API_KEY_9 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_9;
   const API_KEY_10 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_10;
+*/
 
+  const API_KEY_1 =
+    "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";
+  const API_KEY_2 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_2;
+  const API_KEY_3 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_3;
+  const API_KEY_4 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_4;
+  const API_KEY_5 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_5;
+  const API_KEY_6 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_6;
+  const API_KEY_7 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_7;
+  const API_KEY_8 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_8;
+  const API_KEY_9 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_9;
+  const API_KEY_10 = import.meta.env.VITE_OPENAI_API_KEY_CHAT_10;
   const systemMessage = { role: "system", content: "" };
 
   // ------------------ SIDEBAR ------------------
