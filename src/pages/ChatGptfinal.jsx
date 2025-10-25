@@ -39,10 +39,10 @@ function ChatGptfinal(props) {
 */
 
   const API_KEY_1 =
-    "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";
+    "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";
   const API_KEY_2 =
-    "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";
-  const API_KEY_3 =
+    "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";
+  /*const API_KEY_3 =
     "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";
   const API_KEY_4 =
     "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";
@@ -57,7 +57,7 @@ function ChatGptfinal(props) {
   const API_KEY_9 =
     "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";
   const API_KEY_10 =
-    "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";
+    "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";*/
 
   const systemMessage = { role: "system", content: "" };
 
