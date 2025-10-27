@@ -147,7 +147,7 @@ function ChatGptfinal(props) {
     });
 
     const apiRequestBody = {
-      model: "gpt-3.5-turbo-0613",
+      model: "gpt-4", // Change this from "gpt-3.5-turbo-0613" to "gpt-4"
       messages: [systemMessage, ...apiMessages],
     };
 
