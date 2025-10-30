@@ -19,35 +19,6 @@ function Abounement() {
         <div className={classes.fullabaounement}>
           <div className={classes.card}>
             <div className={`${classes.card_title}`}>
-              <h2>Résidanat 2025</h2>
-              <p>
-                <i className="fa fa-rupee"></i>
-                <span>800 promo ! </span>DA<br></br>
-              </p>
-            </div>
-            <div className={`${classes.card_content}`}>
-              <div className={`${classes.card_content}`}>
-                <ul>
-                  <li>
-                    <i className="fa fa-check-circle"></i>Tous les Modules 1ér
-                    jusqu'a 6éme Année
-                  </li>
-
-                  <li>
-                    <i className="fa fa-check-circle"></i>Correction Fiable
-                  </li>
-                  <li>
-                    <i className="fa fa-check-circle"></i>Avec Explication
-                  </li>
-                </ul>
-                <button>
-                  <a href="/register">Registrer</a>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className={classes.card}>
-            <div className={`${classes.card_title}`}>
               <h2>Résidanat 2026</h2>
               <p>
                 <i className="fa fa-rupee"></i>

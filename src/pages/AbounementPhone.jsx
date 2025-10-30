@@ -25,15 +25,13 @@ function AbounementPhone() {
       <div className={`${classes.cardfinal_phone} card`}>
         <div className={`${classes.card_title_phone}`}>Pack Résidanat 2025</div>
         <div className="card-body">
-          <h5 className="card-title">800 DA promo!</h5>
+          <h5 className="card-title">Modules gratuit</h5>
           <ul className={`${classes.feature_list_phone}`}>
-            <li>Tous les Modules </li>
-            <li>Correction Fiable</li>
-            <li>Avec Explication</li>
+            <li>Traumatologie </li>
+            <li>Pneumo</li>
+            <li>Email:goatqcm@gmail.com</li>
+            <li>Mot de pass:goatqcm123</li>
           </ul>
-          <a href="/register" className="btn btn-primary">
-            Register
-          </a>
         </div>
       </div>
       <div className={`${classes.cardfinal_phone} card`}>

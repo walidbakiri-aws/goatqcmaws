@@ -18,10 +18,6 @@ function Abounement(props) {
   const [VisibleValideAbounemet, setVisibleValideAbounemet] = useState(false);
   const abounementInf = [
     {
-      nameAbn: "Résidanat 2025",
-      priceAbn: "800 DA ",
-    },
-    {
       nameAbn: "Résidanat 2026",
       priceAbn: "4500 DA",
     },
