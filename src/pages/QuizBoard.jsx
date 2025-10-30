@@ -1841,7 +1841,10 @@ function QuizBoard(props) {
   function handleNextClick({ event, value } = {}) {
     setShowChatGpt(false);
     setShowDeepSeek(false);
-    updateIndex(currentIndex.value);
+    if (localStorage.getItem("username") === "goatqcm@gmail.com") {
+    } else {
+      updateIndex(currentIndex.value);
+    }
     clearChat();
     console.log(value);
     console.log(currentIndex.value);

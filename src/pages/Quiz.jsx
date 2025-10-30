@@ -958,6 +958,9 @@ function Quiz() {
       }
       if (nameModule.value === "Résidanat 2025") {
         loadAllModules();
+      }
+      if (localStorage.getItem("username") === "goatqcm@gmail.com") {
+        loadFreeModules();
       } else {
         loadSpefecModulesYear(nameModule.value);
       }
@@ -968,6 +971,29 @@ function Quiz() {
 
   //************************************************************** */
   //load les modules de selction options*************************************
+
+  const loadFreeModules = async () => {
+    setAllModules([]);
+    SetAllcours([]);
+    const result = await axios.get(
+      "https://goatqcm-instance.com/medmodule/getall/module",
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
+    // Filter the modules with id 23 and 28
+    const filteredModules = result.data.filter(
+      (module) => module.id === 23 || module.id === 28
+    );
+
+    console.log(filteredModules); // Log the filtered results
+
+    // Set the filtered modules to the state
+    setAllModules(filteredModules);
+  };
+  //*********************************************************************** */
+  //load les modules de selction options*************************************
+
   const loadSpefecModulesYear = async () => {
     const result = await axios.get(
       `https://goatqcm-instance.com/medmodule/year/${nameModule.value}`
@@ -1244,14 +1270,7 @@ function Quiz() {
             className={classes.contanerspace}
             data-theme={isDark ? "dark" : "light"}
           >
-            {/*  <button
-                  onClick={() => {
-                    handleShowCours;
-                  }}
-                >
-                  test
-                </button>*/}
-
+            <button onClick={handleShowCours}>test</button>
             <div className={classes.allcards}>
               <div className={`${classes.qcmmodele} table-hover shadow`}>
                 <div

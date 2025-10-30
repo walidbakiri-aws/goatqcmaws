@@ -16,7 +16,6 @@ import user from "../compenent/layout/img/user.png";
 import sendmessage from "../compenent/layout/img/sendmessage.png";
 import ios from "../compenent/layout/img/ios.png";
 import android from "../compenent/layout/img/android.png";
-import motivation from "../compenent/layout/img/motivation.jpg";
 import pubgoat from "../compenent/layout/img/pubgoat.jpg";
 function GoatQcm() {
   const [ShowSideBare, setShowSideBare] = useState(false);
@@ -50,6 +49,7 @@ function GoatQcm() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    console.log(localStorage.getItem("username"));
     console.log(localStorage.getItem("verificatioeCode"));
     if (localStorage.getItem("verificatioeCode") == "true") {
       console.log("already check code");
@@ -102,7 +102,7 @@ function GoatQcm() {
     deferredPrompt = e;
     showInstallButton();
   });
-  const showInstallButton = () => {
+  function showInstallButton() {
     const btn = document.getElementById("installBtn");
     btn.style.display = "block";
 
@@ -115,7 +115,7 @@ function GoatQcm() {
       deferredPrompt = null;
       btn.style.display = "none";
     });
-  };
+  }
   const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
@@ -126,7 +126,10 @@ function GoatQcm() {
       getUserAdresseIp.value = result.data.adresseIp;
       console.log(getUserAdresseIp.value);
       console.log(deviceId);
-      if (getUserAdresseIp.value === deviceId) {
+      if (
+        getUserAdresseIp.value === deviceId ||
+        localStorage.getItem("username") === "goatqcm@gmail.com"
+      ) {
         console.log("are the same");
       } else {
         toast.error(
@@ -137,7 +140,7 @@ function GoatQcm() {
           await axios.post(
             `https://goatqcm-instance.com/codegmail/send-code/${result.data.ourUsers.username}`
           );
-          setCooldown(60);
+          setCooldown(30);
         } else {
           toast.info(
             `Veuillez attendre ${cooldown} secondes avant de renvoyer le code.`
@@ -271,10 +274,7 @@ function GoatQcm() {
                     <img src={GoatLogo} height="100" width="200" />
                   </div>
                 </div>
-                {/* <div style={{ marginLeft: 700, marginTop: 20 }}>
-                  <h6>déplacer vorte quiz vers votre nouvelle playList</h6>
-                  <img src={pubgoat} height="450" width="400" />
-                </div>*/}
+
                 <div className={classes.publicationfull}>
                   <div className={classes.inputeaddcomment}>
                     <input
@@ -367,7 +367,15 @@ function GoatQcm() {
                                 {post.anonyme ? "Anonyme" : post.ourUsers.name}
                               </p>
                             </div>
-                            <p className={classes.postcontent} style={{}}>
+                            <p
+                              className={classes.postcontent}
+                              style={{
+                                userSelect: "none", // Prevent text selection
+                                WebkitUserSelect: "none", // Safari/Chrome
+                                MozUserSelect: "none", // Firefox
+                                msUserSelect: "none", // IE/Edge
+                              }}
+                            >
                               {post.content}
                             </p>
                             <p className={classes.createdAt}>
@@ -545,13 +553,7 @@ function GoatQcm() {
               data-theme={isDark ? "dark" : "light"}
             >
               <div className={classes.androidios_phone}>
-                <img
-                  src={android}
-                  height="35%"
-                  width="30"
-                  id="installBtn"
-                  onClick={showInstallButton}
-                />
+                <img src={android} height="35%" width="30" id="installBtn" />
                 <img
                   src={ios}
                   height="35%"
@@ -563,9 +565,6 @@ function GoatQcm() {
                 <div className={classes.bienvuenwlcm_phone}>
                   Bienvenue au GoatQcm!
                 </div>
-                {/*<div className={classes.logogoat_phone}>
-                  <img src={GoatLogo} height="70" width="100" />
-                </div>*/}
               </div>
 
               <div className={classes.container_phone}>
@@ -666,7 +665,15 @@ function GoatQcm() {
                               </p>
                             </div>
 
-                            <p className={classes.postcontent_phone}>
+                            <p
+                              className={classes.postcontent_phone}
+                              style={{
+                                userSelect: "none", // Prevent text selection
+                                WebkitUserSelect: "none", // Safari/Chrome
+                                MozUserSelect: "none", // Firefox
+                                msUserSelect: "none", // IE/Edge
+                              }}
+                            >
                               {post.content}
                             </p>
                             <p className={classes.createdAt_phone}>
