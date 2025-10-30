@@ -213,7 +213,10 @@ function LoginPage() {
       const response = await fetch("https://api.ipify.org");
       const data = await response.text();
       ipAdresse.value = data;
-      updateAdresseIp(ipAdresse.value, userId);
+      if (username === "goatqcm@gmail.com") {
+      } else {
+        updateAdresseIp(ipAdresse.value, userId);
+      }
     } catch (error) {
       console.error("failed to fetch IP:", error);
     }
