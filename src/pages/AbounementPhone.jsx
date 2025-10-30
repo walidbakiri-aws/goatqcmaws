@@ -29,8 +29,12 @@ function AbounementPhone() {
           <ul className={`${classes.feature_list_phone}`}>
             <li>Traumatologie </li>
             <li>Pneumo</li>
-            <li>Email:goatqcm@gmail.com</li>
-            <li>Mot de pass:goatqcm123</li>
+            <li>
+              Email: <h6>goatqcm@gmail.com</h6>
+            </li>
+            <li>
+              Mot de pass: <h6>goatqcm123</h6>
+            </li>
           </ul>
         </div>
       </div>
