@@ -860,6 +860,7 @@ body,
   width: 100%;
   min-height: calc(100vh - 80px);
   background-color: var(--background-color-full);
+  overflow-y: auto;
 }
 
 .headerquizz_phone {
@@ -971,7 +972,7 @@ body,
 }
 .qcmpropocontainer_phone {
   overflow-x: hidden;
-  overflow-y: auto;
+
   background-color: var(--background-color-full);
   height: 100%;
   padding-bottom: 30px;
@@ -1446,9 +1447,9 @@ modulediv_phone .homebtn {
   height: 180px;
   padding: 10px;
   margin-bottom: 7px;
-  margin-left: 40px;
-  margin-top: 150px;
-  z-index: 5;
+  margin-left: 50px;
+  margin-top: -400px;
+  z-index: 40;
   position: fixed;
   background-color: rgb(238, 234, 234);
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
