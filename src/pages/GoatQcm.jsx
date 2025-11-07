@@ -568,10 +568,10 @@ function GoatQcm() {
               </div>
 
               <div className={classes.container_phone}>
-                <div style={{ marginTop: 3 }}>
+                {/*<div style={{ marginTop: 3 }}>
                   <h6>déplacer vorte quiz vers votre nouvelle playList</h6>
                   <img src={pubgoat} height="230" width="80%" />
-                </div>
+                </div>*/}
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>
                     <input

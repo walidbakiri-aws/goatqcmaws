@@ -1658,13 +1658,13 @@ modulediv_phone .homebtn {
   width: 280px;
   height: auto;
   background-color: rgb(239, 240, 241);
-  z-index: 7;
+  z-index: 40;
   position: fixed;
   margin-top: 5px;
   margin-left: 23px;
-  margin-right: 5px;
+  margin-right: 10px;
   margin-bottom: 5px;
-  margin-top: -400px;
+  margin-top: -500px;
   border-radius: 7px;
   overflow: auto;
 }
