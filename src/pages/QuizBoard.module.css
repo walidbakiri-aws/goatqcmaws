@@ -1017,11 +1017,11 @@ modulediv_phone .homebtn {
 
   margin-top: 5px;
   margin-left: 15px;
-
+  font-weight: 450; /* Regular weight for body text */
   font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
     "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
     Arial, sans-serif;
-  font-size: 18px; /* Adjust as needed */
+  font-size: 16px; /* Adjust as needed */
   color: var(--primary-text-color);
   border-radius: 6px;
 }
@@ -1034,7 +1034,7 @@ modulediv_phone .homebtn {
   font-weight: 450;
   background-color: #2287b6;
   font-family: "Roboto", sans-serif;
-  font-weight: 400; /* Regular weight for body text */
+
   line-height: 1.6; /* Adds some space for readability */
   color: var(--primary-text-color);
   border-radius: 6px;
@@ -1046,7 +1046,7 @@ modulediv_phone .homebtn {
   border-radius: 6px;
   margin-left: 5px;
   font-family: "Roboto", sans-serif;
-  font-weight: 400; /* Regular weight for body text */
+
   line-height: 1.6; /* Adds some space for readability */
   background-color: #2287b6;
   padding: 3px;
@@ -1062,7 +1062,7 @@ modulediv_phone .homebtn {
   margin-left: 15px;
   margin-bottom: 5px;
   font-family: "Roboto", sans-serif;
-  font-weight: 400; /* Regular weight for body text */
+
   line-height: 1.6; /* Adds some space for readability */
   color: var(--primary-text-color);
   border-radius: 6px;
