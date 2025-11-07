@@ -100,6 +100,7 @@ import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 function QuizBoard(props) {
   //************************************************************************ */
+  const [showChatGptPremieum, setShowChatGptPremieum] = useState(false);
   const [visibleSaveQuizzEnter, setVisibleSaveQuizzEnter] = useState(false);
   const [visiblePlayListe, setVisiblePlayListe] = useState(true);
   const [allPLayListes, setAllPLayListes] = useState([]);
@@ -541,7 +542,6 @@ function QuizBoard(props) {
     anonyme: false,
     ourUsers: { id: userIdToken },
   });
-
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
@@ -1845,6 +1845,7 @@ function QuizBoard(props) {
     } else {
       updateIndex(currentIndex.value);
     }
+
     clearChat();
     console.log(value);
     console.log(currentIndex.value);
@@ -3192,6 +3193,7 @@ function QuizBoard(props) {
     setShowDiscsussionDiv(true);
   };
   const handleChatGptBtn = async (qcmId) => {
+    //setShowChatGptPremieum(true);
     setShowChatGpt(true);
     setShowDeepSeek(false);
     qcmIdChatGptDeepSeek.value = qcmId;
@@ -3360,6 +3362,11 @@ function QuizBoard(props) {
       console.error("Failed to create PlayList:", err);
     }
   };
+  const handleOnchangePlayListe = async (playlisteId) => {
+    let playListe = await axios.get(`${BASE_URL}/playliste/${playlisteId}`);
+    setPlayListe(playListe.data);
+    console.log(playListe.data);
+  };
 
   const getAllPLayListe = async () => {
     let allPlayListe = await axios.get(
@@ -3368,12 +3375,14 @@ function QuizBoard(props) {
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);
   };
-  const handleOnchangePlayListe = async (playlisteId) => {
-    let playListe = await axios.get(`${BASE_URL}/playliste/${playlisteId}`);
-    setPlayListe(playListe.data);
-    console.log(playListe.data);
-  };
+
   //***************************************************************** */
+  document.querySelectorAll(".ulpropo_phone li").forEach((item) => {
+    item.addEventListener("click", function () {
+      // Toggle the 'active' class on the clicked item
+      item.classList.toggle("active");
+    });
+  });
   return (
     <>
       {!OpenBoardClinique && (
@@ -3395,13 +3404,6 @@ function QuizBoard(props) {
                 className={classes.contanerspace}
                 data-theme={isDark ? "dark" : "light"}
               >
-                {/*  <button
-                  onClick={() => {
-                    handleTestBtn();
-                  }}
-                >
-                  test
-                </button>*/}
                 {VisibleParSujet && isDesktopOrLaptop && (
                   <div
                     className={`${classes.parsujetscontainer} `}
@@ -3487,7 +3489,7 @@ function QuizBoard(props) {
                             setVisiblePlayListe(true);
                           }}
                         >
-                          Ajoute a la playList
+                          Sauvegarder Qcm
                         </button>
                       )}
                       {showUpdateQcmBtn && (
@@ -3652,7 +3654,7 @@ function QuizBoard(props) {
                                       }}
                                     />
                                   </div>
-                                  {/*  <div className={`${classes.deepseek} `}>
+                                  {/* <div className={`${classes.deepseek} `}>
                                     <img
                                       src={deepseek}
                                       height="100%"
@@ -4323,7 +4325,10 @@ function QuizBoard(props) {
                 )}
                 {showChatGpt && (
                   <div className={`${classes.chatgptdiv}`}>
-                    <ChatGptfinal qcmId={qcmIdChatGptDeepSeek.value} />
+                    <ChatGptfinal
+                      qcmId={qcmIdChatGptDeepSeek.value}
+                      cameFrom="quizQcm"
+                    />
                   </div>
                 )}
                 {showDeepSeek && (
@@ -4411,9 +4416,12 @@ function QuizBoard(props) {
             )}
 
             {VisibleQmcContainer && isTabletOrMobile && (
-              <div className={classes.modal_phone}>
+              <div
+                className={classes.modal_phone}
+                data-theme={isDark ? "dark" : "light"}
+              >
                 <div className={classes.contanerspace_phone}>
-                  <div className={classes.fullqcmcontainer_commentary}>
+                  <div className={classes.fullqcmcontainer_commentary_phone}>
                     <div
                       className={`${classes.quizcontainer_phone} card text-white py-1`}
                       data-theme={isDark ? "dark" : "light"}
@@ -4545,57 +4553,52 @@ function QuizBoard(props) {
                       )}
 
                       <div
-                        className={`${classes.qcmpropocontainer_phone} card-body text-black`}
+                        className={`${classes.qcmpropocontainer_phone}  text-black`}
                         data-theme={isDark ? "dark" : "light"}
                       >
                         {ShowQcm.map((qcm, index) => {
                           if (index === currentIndex.value) {
                             return (
                               <div key={index}>
-                                <div className={`${classes.modulediv_phone} `}>
-                                  <div className={`${classes.child_phone} `}>
-                                    <li
-                                      className={`${classes.modulename} list-group-item`}
-                                    >
-                                      {props.moduleName}
-                                    </li>
-                                  </div>
-                                </div>
-                                <hr className={`${classes.hr_phone} `} />
-                                <div
-                                  className={`${classes.qcmInfoHeader_phone} `}
-                                >
+                                <div className={`${classes.infoquizz_phone} `}>
                                   <div
-                                    className={`${classes.qcmInfocatgrp_phone} `}
+                                    className={`${classes.qcmInfoHeader_phone} `}
                                   >
-                                    <li className="list-group-item">
-                                      {qcm.category}-
-                                    </li>
+                                    <div
+                                      className={`${classes.modulediv_phone} `}
+                                    >
+                                      <li
+                                        className={`${classes.modulename} list-group-item`}
+                                      >
+                                        {props.moduleName}
+                                      </li>
+                                    </div>
 
-                                    <li className="list-group-item">
-                                      ({qcm.qcmGroupe}) {qcm.qcmYear}
-                                    </li>
+                                    <div
+                                      className={`${classes.qcmInfocatgrp_phone} `}
+                                    >
+                                      <li className="list-group-item">
+                                        {qcm.category}-
+                                      </li>
+
+                                      <li className="list-group-item">
+                                        ({qcm.qcmGroupe}) {qcm.qcmYear}
+                                      </li>
+                                    </div>
                                   </div>
-                                </div>
-                                <hr className={`${classes.hr_phone} `} />
-                                <div
-                                  className={`${classes.qcmcourqcmnbr_phone} `}
-                                >
                                   <div
                                     className={`${classes.qcmcourimgname_phone} `}
                                   >
-                                    <img
-                                      src={courlogo}
-                                      height="30%"
-                                      width="20"
-                                    />
                                     <li
                                       className={`${classes.courname_phone} list-group-item`}
                                     >
                                       {qcm.coursMed.coursName}
                                     </li>
                                   </div>
-                                  <hr className={`${classes.hr_phone} `} />
+                                </div>
+                                <div
+                                  className={`${classes.qcmcourqcmnbr_phone} `}
+                                >
                                   <div
                                     className={`${classes.qcmnbr_commentary_div_phone} `}
                                   >
@@ -4633,7 +4636,7 @@ function QuizBoard(props) {
                                           }}
                                         />
                                       </div>
-                                      {/*    <div
+                                      {/*  <div
                                         className={`${classes.deepseek_phone} `}
                                       >
                                         <img
@@ -4815,7 +4818,7 @@ function QuizBoard(props) {
                             );
                           }
                         })}
-                        <div className={`${classes.propofeild_phone} card `}>
+                        <div className={`${classes.propofeild_phone}  `}>
                           {ShowPropositions.map(
                             (Proposition, QcmPropoIndex) => {
                               if (QcmPropoIndex === currentIndex.value) {
@@ -5034,7 +5037,10 @@ function QuizBoard(props) {
                   )}
                   {showChatGpt && (
                     <div className={`${classes.chatgptdiv_phone}`}>
-                      <ChatGptfinal qcmId={qcmIdChatGptDeepSeek.value} />
+                      <ChatGptfinal
+                        qcmId={qcmIdChatGptDeepSeek.value}
+                        cameFrom="quizQcm"
+                      />
                     </div>
                   )}
                   {showDeepSeek && (
@@ -5917,7 +5923,7 @@ function QuizBoard(props) {
                 getAllPLayListe();
               }}
             >
-              Ajoute a la playList
+              Sauvegarder Qcm
             </button>
           )}
           {showUpdateQcmBtn && (
@@ -5949,7 +5955,29 @@ function QuizBoard(props) {
           </button>
         </div>
       )}
+
       <Toaster />
+      {isDesktopOrLaptop && showChatGptPremieum && (
+        <>
+          <div className={classes.chatgptpremieum}>
+            <div className="card text-center">
+              <div className="card-header">ChatGPT (GoatQcm Premieum)</div>
+              <div className="card-body">
+                <h5 className="card-title">🎯 Version professionnelle</h5>
+                <p className="card-text">
+                  Nous avons une excellente nouvelle ! 🔹 GoatQcm intègre
+                  maintenant ChatGPT, l’intelligence artificielle la plus
+                  avancée. Obtenez des explications claires, des rappels précis
+                  et des conseils personnalisés pour chaque QCM 🧠
+                </p>
+                <a href="#" className="btn btn-primary">
+                  commencer
+                </a>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </>
   );
 }

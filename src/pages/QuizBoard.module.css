@@ -1,10 +1,16 @@
+html,
+body,
+#root {
+  height: 100%;
+}
 .addingdiv {
   width: 100%;
-  height: auto;
+
   overflow: hidden;
   border: 1px solid (240, 240, 240);
   background: var(--background-color);
   display: flex;
+  height: 100%;
 }
 
 .sidebare {
@@ -436,14 +442,6 @@
   margin-left: 250px;
 }
 /**************************************************/
-.contanerspace_phone {
-  position: absolute;
-  display: inline-block;
-  width: 100%;
-  height: auto;
-  background: var(--background-color);
-  scroll-behavior: auto;
-}
 
 .card_done_quiz {
   width: 550px;
@@ -845,18 +843,31 @@
   margin-top: 20px;
   width: 90%;
 }
+.chatgptpremieum {
+  z-index: 100;
+  width: 800px;
+  height: 600px;
+  margin-left: 600px;
+  margin-top: 100px;
+}
 /***end list qcms******************************************************/
 /***********phone designe***************************************************/
 .modal_phone {
-  margin-top: 20px;
-  background: var(--background-color);
+  margin-top: 19px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background-color: var(--background-color-full);
 }
 
 .headerquizz_phone {
   width: 100%;
-  height: 35px;
+  height: 45px;
   background-color: var(--background-color_headerquizz);
   display: flex;
+  padding: 5px;
 }
 .full_save_qcm_phone {
   background-color: #e6dddd;
@@ -954,38 +965,125 @@
   height: auto;
   width: 100%;
 }
-
+.modal_phone {
+  height: auto;
+  width: 100%;
+}
+.qcmpropocontainer_phone {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: var(--background-color-full);
+  height: 100%;
+  margin-bottom: -5px;
+}
+.fullqcmcontainer_commentary_phone {
+  width: 100%;
+  background-color: var(--background-color-full);
+  display: flex;
+}
+.contanerspace_phone {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  height: auto;
+  background-color: var(--background-color-full);
+  scroll-behavior: auto;
+}
 .quizcontainer_phone {
   display: flex;
   height: 100px;
   width: 100%;
-  background: var(--background-color);
-}
-.modulediv_phone {
-  font-style: initial;
-  width: fit-content; /* size depends on text */
-  background-color: #17a9ec;
-  border-radius: 3px;
-  height: fit-content;
-  display: flex;
-  margin-top: -15px;
-  font-size: 13px;
+  background-color: var(--background-color-full);
 }
 
-.child_phone {
-  float: left;
-  background-color: var(--background-modulename-color);
-  background-color: rgb(37, 176, 233, 0.9);
-  padding: 3px;
-  border-radius: 4px;
-}
 modulediv_phone .homebtn {
   margin-left: 20px;
 }
+.infoquizz_phone {
+  background-color: var(--background-color);
+  height: fit-content;
+  width: 95%;
+  margin: 5px;
+  padding: 5px;
+  z-index: 10px;
+  border-radius: 6px;
+}
 .qcmInfoHeader_phone {
   display: flex;
-  width: 100%;
-  font-size: 13px;
+  width: fit-content;
+
+  margin-top: 5px;
+  margin-left: 15px;
+
+  font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
+    "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
+    Arial, sans-serif;
+  font-size: 18px; /* Adjust as needed */
+  color: var(--primary-text-color);
+  border-radius: 6px;
+}
+.modulediv_phone {
+  width: fit-content; /* size depends on text */
+  height: fit-content;
+
+  display: flex;
+  padding: 3px;
+  font-weight: 450;
+  background-color: #2287b6;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; /* Regular weight for body text */
+  line-height: 1.6; /* Adds some space for readability */
+  color: var(--primary-text-color);
+  border-radius: 6px;
+}
+.qcmInfocatgrp_phone {
+  display: flex;
+  width: fit-content; /* size depends on text */
+  height: fit-content;
+  border-radius: 6px;
+  margin-left: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; /* Regular weight for body text */
+  line-height: 1.6; /* Adds some space for readability */
+  background-color: #2287b6;
+  padding: 3px;
+}
+.qcmcourimgname_phone {
+  display: flex;
+
+  width: fit-content; /* size depends on text */
+  background-color: #2287b6;
+  border-radius: 6px;
+  padding: 3px; /* add some breathing space */
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; /* Regular weight for body text */
+  line-height: 1.6; /* Adds some space for readability */
+  color: var(--primary-text-color);
+  border-radius: 6px;
+}
+.nmbrqcm_phone {
+  background-color: transparent;
+  width: 156px;
+  left: 0;
+  margin-right: 40px;
+}
+.nmbrqcm_phone li {
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; /* Regular weight for body text */
+  line-height: 1.6; /* Adds some space for readability */
+}
+.full_note_commentary_phone {
+  display: flex;
+  width: 165px;
+  height: 30px;
+
+  float: right;
+  right: 0;
 }
 
 .hr_phone {
@@ -1003,92 +1101,89 @@ modulediv_phone .homebtn {
   margin-top: 2px;
   margin-bottom: 2px;
 }
-.nmbrqcm_phone {
-  font-size: 12px;
+.qcmcourqcmnbr_phone {
+  margin-top: 5px;
+  margin-left: 15px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400; /* Regular weight for body text */
+  line-height: 1.6; /* Adds some space for readability */
+  color: var(--primary-text-color);
+  border-radius: 6px;
 }
+
 .qcmfeild_phone {
   color: var(--primary-text-color);
   width: 100%;
   height: auto;
-  padding: 5px;
+
   margin-bottom: 7px;
-  z-index: 1;
-  padding: 3px;
+
   white-space: pre-line;
+  padding: 5px;
   background-color: var(--background-color);
+  height: fit-content;
+  width: 95%;
+  margin: 5px;
+  padding: 5px;
+  z-index: 10px;
+  border-radius: 6px;
+  position: relative;
+  transform: translateZ(200px);
 }
 .qcmfeild_phone p {
-  font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
-    "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
-    Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px; /* Suitable for mobile screens */
+  padding: 5px;
 
-  font-size: 18px; /* Adjust as needed */
-  font-weight: 410; /* Regular weight */
+  font-weight: 600; /* Regular weight */
   color: var(--primary-text-color);
 }
 .propofeild_phone {
-  width: 100%;
   height: auto;
+  background-color: var(--background-color);
+  height: fit-content;
+  width: 95%;
+  margin: 5px;
+  padding: 5px;
+  z-index: 10px;
+  margin-bottom: 10px;
 }
 .ulpropo_phone {
   padding-bottom: 10px;
 }
-.ulpropo_phone li {
-  height: auto;
 
+.ulpropo_phone li {
   padding: 3px;
-  font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
-    "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
-    Arial, sans-serif;
-  font-size: 18px; /* Adjust as needed */
-  font-weight: 410; /* Regular weight */
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 410;
   color: var(--primary-text-color);
   background-color: var(--background-color);
   overflow: hidden;
-  border: 0.3px solid rgb(112, 112, 114);
+  cursor: pointer; /* Optional: changes cursor to pointer for clickability */
 }
+.ulpropo_phone li:active {
+  transform: scale(1.03);
+  font-size: 1.05rem; /* slightly bigger text */
+  font-weight: 600;
+  font-size: 20px; /* Suitable for mobile screens */
+  /* optional: raise z-index so it appears above neighbours */
+  z-index: 1;
+}
+
 .ulpropo_phone img {
   height: 25px;
   width: 25px;
 }
 /************************************************/
-.qcmpropocontainer_phone {
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: var(--background-color-full);
-}
 
-.qcmcourimgname_phone {
-  display: flex;
-
-  width: fit-content; /* size depends on text */
-  background-color: #17a9ec;
-  border-radius: 3px;
-  padding: 3px 8px; /* add some breathing space */
-}
-.courname_phone {
-  font-size: 13px;
-}
-.qcmInfocatgrp_phone {
-  float: left;
-  display: flex;
-}
-.qcmInfocatgrp_phone li {
-  font-size: 13px;
-  background-color: #17a9ec;
-  border-radius: 3px;
-  padding: 3px;
-}
 .goatlogo_phone {
   margin-left: 50px;
 }
 .ulcatogorycourname_phone {
   display: flex;
 }
-.nmbrqcm_phone {
-  background-color: #4b91f7;
-  width: 70px;
-}
+
 /***********footer phone divs******************/
 
 .btnfooter_phone {
@@ -1172,11 +1267,7 @@ modulediv_phone .homebtn {
 }
 
 /******commentary section*********************************************************/
-.fullqcmcontainer_commentary_phone {
-  width: 100%;
 
-  display: flex;
-}
 .commentarydiv_phone {
   float: right;
 
@@ -1288,20 +1379,7 @@ modulediv_phone .homebtn {
   display: flex;
   height: 27px;
 }
-.nmbrqcm_phone {
-  width: 160px;
-  background-color: transparent;
-  float: left;
-  left: 0;
-}
-.full_note_commentary_phone {
-  display: flex;
-  width: 165px;
-  height: 30px;
 
-  float: right;
-  right: 0;
-}
 .commentary_phone {
   margin-left: 5px;
   height: 100%;
