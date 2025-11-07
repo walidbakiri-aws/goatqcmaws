@@ -966,17 +966,15 @@ body,
   height: auto;
   width: 100%;
 }
-.modal_phone {
-  height: auto;
-  width: 100%;
-}
+
 .qcmpropocontainer_phone {
   overflow-x: hidden;
 
   background-color: var(--background-color-full);
   height: 100%;
   padding-bottom: 30px;
-  margin-bottom: -5px;
+  margin-bottom: 70px;
+
   overflow-y: auto;
 }
 .fullqcmcontainer_commentary_phone {
