@@ -1161,6 +1161,8 @@ modulediv_phone .homebtn {
   background-color: var(--background-color);
   overflow: hidden;
   cursor: pointer; /* Optional: changes cursor to pointer for clickability */
+  border-bottom: 2px solid #ecdfdf;
+  margin-bottom: 3px;
 }
 .ulpropo_phone li:active {
   transform: scale(1.03);
