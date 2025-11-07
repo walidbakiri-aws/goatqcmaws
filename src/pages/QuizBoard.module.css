@@ -975,6 +975,7 @@ body,
   background-color: var(--background-color-full);
   height: 100%;
   margin-bottom: 10px;
+  padding-bottom: 20px;
   overflow-y: auto;
 }
 .fullqcmcontainer_commentary_phone {
