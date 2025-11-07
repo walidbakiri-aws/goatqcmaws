@@ -1662,9 +1662,9 @@ modulediv_phone .homebtn {
   position: fixed;
   margin-top: 5px;
   margin-left: 23px;
-  margin-right: 10px;
+  margin-right: 20px;
   margin-bottom: 5px;
-  margin-top: -500px;
+  margin-top: -550px;
   border-radius: 7px;
   overflow: auto;
 }
