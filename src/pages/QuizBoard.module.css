@@ -974,7 +974,8 @@ body,
   overflow-y: auto;
   background-color: var(--background-color-full);
   height: 100%;
-  margin-bottom: -5px;
+  margin-bottom: 10px;
+  overflow-y: auto;
 }
 .fullqcmcontainer_commentary_phone {
   width: 100%;
@@ -1149,7 +1150,7 @@ modulediv_phone .homebtn {
   margin-bottom: 10px;
 }
 .ulpropo_phone {
-  padding-bottom: 10px;
+  margin-bottom: 30px;
 }
 
 .ulpropo_phone li {
@@ -1189,11 +1190,11 @@ modulediv_phone .homebtn {
 /***********footer phone divs******************/
 
 .btnfooter_phone {
-  height: 70px;
+  height: 90px;
   width: 100%;
   background-color: rgb(224, 226, 226);
   display: flex;
-
+  margin-top: 10px;
   height: 25px;
   position: fixed;
   bottom: 5px; /* Distance from the bottom */
