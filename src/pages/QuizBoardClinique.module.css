@@ -479,6 +479,10 @@
 }
 
 /***liste qcms******************************************************/
+.chatgptdiv {
+  margin-left: 1300px;
+  margin-top: 10px;
+}
 .qcmsliste {
   width: 200px;
   height: 600px;
@@ -721,23 +725,34 @@
   width: 100%;
   margin-top: 20px;
 }
+.modal_phone {
+  margin-top: 19px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+  background-color: var(--background-color-full);
+  overflow-y: auto;
+}
 .headerquizz_phone {
   width: 100%;
   height: 35px;
   background-color: var(--background-color_headerquizz);
   display: flex;
+  margin-top: -20px;
 }
 
 .fullchronotime_phone {
-  margin-top: 3px;
-  width: 160px;
+  margin-left: 3px;
   border-radius: 8px;
+  width: 130px;
   display: flex;
   border: 1px solid #61e03a;
   height: 30px;
+  margin-top: 3px;
   background-color: var(--background-color);
   overflow: hidden;
-  margin-left: 3px;
 }
 .timediv_phone {
   width: 60%;
@@ -806,32 +821,45 @@
 }
 .cliniqueqcmcontainer_phone {
   overflow-x: hidden;
-  overflow-y: auto;
+
   background-color: var(--background-color-full);
+  height: 100%;
+  padding-bottom: 30px;
+  margin-bottom: 70px;
+
+  overflow-y: auto;
 }
 
 .modulediv_phone {
+  width: fit-content; /* size depends on text */
+  height: fit-content;
+  margin-right: 5px;
+  margin-bottom: 5px;
   display: flex;
-  width: 100%;
-
-  margin-top: -15px;
-  font-size: 13px;
-}
-.child_phone {
-  float: left;
-  left: 0;
-  background-color: var(--background-modulename-color);
-  background-color: rgb(37, 176, 233, 0.9);
   padding: 3px;
-  border-radius: 4px;
+  font-weight: 450;
+  background-color: #2287b6;
+  font-family: "Roboto", sans-serif;
+
+  line-height: 1.6; /* Adds some space for readability */
+  color: var(--primary-text-color);
+  border-radius: 6px;
 }
-.modulename {
-  font-style: initial;
+
+.infoquizz_phone {
+  background-color: var(--background-color);
+  height: fit-content;
+  width: 100%;
+  margin: 5px;
+  padding: 5px;
+  z-index: 10px;
+  border-radius: 6px;
 }
+
 .full_note_commentary_clinique_phone {
   width: 30px;
 
-  margin-left: 160px;
+  margin-left: 120px;
   float: right;
   right: 0;
 }
@@ -840,8 +868,17 @@
 }
 .qcmInfoHeader_phone {
   display: flex;
-  width: 100%;
-  font-size: 13px;
+  width: fit-content;
+
+  margin-top: 5px;
+  margin-left: 15px;
+  font-weight: 450; /* Regular weight for body text */
+  font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
+    "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
+    Arial, sans-serif;
+  font-size: 16px; /* Adjust as needed */
+  color: var(--primary-text-color);
+  border-radius: 6px;
 }
 
 .hr_phone {
@@ -860,7 +897,12 @@
   margin-bottom: 2px;
 }
 .nmbrqcm {
-  font-size: 12px;
+  display: flex;
+  width: 165px;
+  height: 30px;
+
+  float: right;
+  right: 0;
 }
 .qcmfeild_phone {
   white-space: pre-line;
@@ -878,11 +920,15 @@
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .qcmInfocatgrp_phone {
-  float: left;
   display: flex;
   width: fit-content; /* size depends on text */
-  background-color: #17a9ec;
-  border-radius: 5px;
+  height: fit-content;
+  border-radius: 6px;
+  margin-left: 5px;
+  font-family: "Roboto", sans-serif;
+
+  line-height: 1.6; /* Adds some space for readability */
+  background-color: #2287b6;
   padding: 3px;
 }
 .courname_phone {
@@ -890,10 +936,25 @@
 }
 .qcmcourimgname_phone {
   display: flex;
+
   width: fit-content; /* size depends on text */
-  background-color: #17a9ec;
-  border-radius: 5px;
+  background-color: #2287b6;
+  border-radius: 6px;
+  padding: 3px; /* add some breathing space */
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-bottom: 5px;
+  font-family: "Roboto", sans-serif;
+
+  line-height: 1.6; /* Adds some space for readability */
+  color: var(--primary-text-color);
+  border-radius: 6px;
+}
+.fullqcmnumbernote {
+  width: 100%;
+  height: fit-content;
   padding: 3px;
+  display: flex;
 }
 .propofeild_phone {
   width: 100%;
@@ -910,15 +971,24 @@
   border-radius: 5px;
 }
 .ulpropo_phone li {
-  height: auto;
-  border: 1px solid rgb(192, 186, 186);
   padding: 3px;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 18px; /* Adjust as needed */
-  font-weight: 410; /* Regular weight */
-  background-color: var(--background-color);
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 410;
   color: var(--primary-text-color);
+  background-color: var(--background-color);
   overflow: hidden;
+  cursor: pointer; /* Optional: changes cursor to pointer for clickability */
+  border-bottom: 2px solid #ecdfdf;
+  margin-bottom: 3px;
+}
+.ulpropo_phone li:active {
+  transform: scale(1.03);
+  font-size: 1.05rem; /* slightly bigger text */
+  font-weight: 600;
+  font-size: 20px; /* Suitable for mobile screens */
+  /* optional: raise z-index so it appears above neighbours */
+  z-index: 1;
 }
 /****percentage*******************************************/
 .percentage_phone {
@@ -950,16 +1020,23 @@
   padding: 3px;
   margin-bottom: 7px;
   z-index: 1;
-
+  padding: 5px;
   border-radius: 5px;
   color: var(--primary-text-color);
   background-color: var(--background-color);
   white-space: pre-line;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+  transform: translateZ(200px);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .cascliniquecontent_phone p {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 18px; /* Adjust as needed */
+  padding: 5px;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
   font-weight: 410; /* Regular weight */
   color: var(--primary-text-color);
 }
@@ -1072,8 +1149,8 @@
   height: 180px;
   padding: 10px;
   margin-bottom: 7px;
-  margin-left: 40px;
-  margin-top: 150px;
+  margin-left: 50px;
+  margin-top: -400px;
   z-index: 5;
   position: fixed;
   background-color: rgb(238, 234, 234);
@@ -1313,15 +1390,15 @@
 /**statique*****************************************************************/
 .fullstatique_phone {
   width: 280px;
-  height: auto;
+  height: 90%;
   background-color: rgb(239, 240, 241);
   z-index: 7;
   position: fixed;
   margin-top: 5px;
   margin-left: 23px;
   margin-right: 5px;
-  margin-bottom: 5px;
-  margin-top: -10px;
+
+  margin-top: -520px;
   border-radius: 7px;
   overflow: auto;
 }

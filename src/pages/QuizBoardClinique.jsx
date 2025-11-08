@@ -15,6 +15,7 @@ import A from "../compenent/layout/img/A.png";
 import B from "../compenent/layout/img/B.png";
 import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
+import chatgpt from "../compenent/layout/img/chatgpt.png";
 import addplayliste from "../compenent/layout/img/addplayliste.png";
 
 import axiosRetry from "axios-retry";
@@ -81,6 +82,7 @@ import SockJS from "sockjs-client";
 import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
 import eysezoom from "../compenent/layout/img/eysezoom.png";
+import ChatGptfinal from "./ChatGptfinal";
 function QuizBoardClinique(props) {
   const [visibleSaveQuizzEnter, setVisibleSaveQuizzEnter] = useState(false);
   const [visiblePlayListe, setVisiblePlayListe] = useState(true);
@@ -510,10 +512,12 @@ function QuizBoardClinique(props) {
   let saveCountAllQcmsClinique = useSignal(0);
   let dounateDataQcms = [];
   let saveAllNumberCasClinique = useSignal(0);
+
   //******************************************************************* */
   const [visibleNoteQcm, setVisibleNoteQcm] = useState(false);
   const [QcmIdNote, setQcmIdNote] = useState("");
-
+  let qcmIdChatGptDeepSeek = useSignal("");
+  const [showChatGpt, setShowChatGpt] = useState(false);
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
@@ -915,7 +919,7 @@ function QuizBoardClinique(props) {
     const getYear = document.getElementById("year").value;
     console.log(getYear);
     const result = await axios.get(
-      `http://localhost:8080/casclinique/get_groupes_year/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
+      `https://goatqcm-instance.com/casclinique/get_groupes_year/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
     );
     document.getElementById("groupepermutation").options[0].selected = true;
     setGroupesPermut(result.data);
@@ -1702,7 +1706,7 @@ function QuizBoardClinique(props) {
     }
 
     setVisibleNoteQcm(false);
-
+    setShowChatGpt(false);
     setSelectcasCliniqueIndex(currentIndex.value);
     setVisibiliteCasCliniqueIndex(currentIndex.value);
     //setVisibilitePorpoIndex(currentIndex.value);
@@ -1806,6 +1810,7 @@ function QuizBoardClinique(props) {
   //************************************************************************* */
   function handleNextClick({ event, value } = {}) {
     setVisibleNoteQcm(false);
+    setShowChatGpt(false);
     //saveIncrValueOfeachClinique.value[VisibiliteCasCliniqueIndex] = 0;
 
     /*if (
@@ -2015,6 +2020,7 @@ function QuizBoardClinique(props) {
     setQcmIndex(currentQcmIndex.value);
     setShowDescQcm(false);
     setVisibleNoteQcm(false);
+    setShowChatGpt(false);
   }
   //******************************************************************** */
   //delete function cas cliqnieu*//////////////////////////////////////////////////////////
@@ -3234,7 +3240,7 @@ function QuizBoardClinique(props) {
 
   const getAllPLayListe = async () => {
     let allPlayListe = await axios.get(
-      `https://goatqcm-instance.com/playliste/specifiqueuser/${userIdToken}`
+      `${BASE_URL}/playliste/specifiqueuser/${userIdToken}`
     );
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);
@@ -3245,6 +3251,12 @@ function QuizBoardClinique(props) {
     console.log(playListe.data);
   };
   //***************************************************************** */
+  const handleChatGptBtn = async (qcmId) => {
+    //setShowChatGptPremieum(true);
+    setShowChatGpt(true);
+    console.log(qcmId);
+    qcmIdChatGptDeepSeek.value = qcmId;
+  };
   return (
     <>
       {!OpenBoardQcm && (
@@ -3341,7 +3353,7 @@ function QuizBoardClinique(props) {
                             getAllPLayListe();
                           }}
                         >
-                          Ajoute a la playList
+                          Sauvegarder Quizz
                         </button>
                       )}
                       {showUpdateQcmCasCliniqueBtn && (
@@ -3637,6 +3649,16 @@ function QuizBoardClinique(props) {
                         })}
                       </div>
                       <div className={`${classes.full_note_commentary} `}>
+                        <div className={`${classes.chatgpt} `}>
+                          <img
+                            src={chatgpt}
+                            height="100%"
+                            width="30"
+                            onClick={(e) => {
+                              handleChatGptBtn(QcmIdNote);
+                            }}
+                          />
+                        </div>
                         <div className={`${classes.note} `}>
                           <img
                             src={noteimage}
@@ -4305,7 +4327,10 @@ function QuizBoardClinique(props) {
               </div>
             )}
             {VisibleQmcContainer && isTabletOrMobile && (
-              <div className={classes.modal}>
+              <div
+                className={classes.modal_phone}
+                data-theme={isDark ? "dark" : "light"}
+              >
                 <div className={classes.contanerspace_phone}>
                   <div
                     className={`${classes.quizcontainer_phone} card text-white  py-1`}
@@ -4404,12 +4429,65 @@ function QuizBoardClinique(props) {
                         if (indexCasClinique === VisibiliteCasCliniqueIndex)
                           return (
                             <div key={indexCasClinique}>
-                              <div className={`${classes.modulediv_phone} `}>
-                                <div className={`${classes.child_phone} `}>
-                                  <li
-                                    className={`${classes.modulename} list-group-item`}
+                              <div className={`${classes.infoquizz_phone} `}>
+                                <div
+                                  className={`${classes.qcmInfoHeader_phone} `}
+                                >
+                                  <div
+                                    className={`${classes.modulediv_phone} `}
                                   >
-                                    {props.moduleName}
+                                    <li
+                                      className={`${classes.modulename} list-group-item`}
+                                    >
+                                      {props.moduleName}
+                                    </li>
+                                  </div>
+
+                                  <div
+                                    className={`${classes.qcmInfocatgrp_phone} `}
+                                  >
+                                    <li className="list-group-item">
+                                      {CasClinique.category}-
+                                    </li>
+                                    <li className="list-group-item">
+                                      {ShowGroupePermExternat && (
+                                        <>({CasClinique.casCliniqueGroupe})- </>
+                                      )}
+                                      {CasClinique.casCliniqueYear}
+                                    </li>
+                                  </div>
+                                </div>
+                                <div
+                                  className={`${classes.qcmcourimgname_phone} `}
+                                >
+                                  <li
+                                    className={`${classes.courname_phone} list-group-item`}
+                                  >
+                                    {CasClinique.coursMed.coursName}
+                                  </li>
+                                </div>
+                              </div>
+                              <div className={`${classes.fullqcmnumbernote} `}>
+                                <div
+                                  className={`${classes.qcmcourqcmnbr_phone} `}
+                                >
+                                  {isParticipateAdmin && (
+                                    <button
+                                      type="button"
+                                      className="btn btn-danger"
+                                      onClick={(e) =>
+                                        DeleteCasClinique(CasClinique.id)
+                                      }
+                                    >
+                                      Delete CasClinique
+                                    </button>
+                                  )}
+                                  <li
+                                    className={`${classes.nmbrqcm} list-group-item`}
+                                    style={{ color: "#007FFF" }}
+                                  >
+                                    CasClinique {indexCasClinique + 1} sur{" "}
+                                    {ShowCasClinique.length}
                                   </li>
                                 </div>
                                 <div
@@ -4427,61 +4505,6 @@ function QuizBoardClinique(props) {
                                   </div>
                                 </div>
                               </div>
-                              <hr className={`${classes.hr_phone} `} />
-
-                              <div
-                                className={`${classes.qcmInfoHeader_phone} `}
-                              >
-                                <div
-                                  className={`${classes.qcmInfocatgrp_phone} `}
-                                >
-                                  <li className="list-group-item">
-                                    {CasClinique.category}-
-                                  </li>
-                                  <li className="list-group-item">
-                                    {ShowGroupePermExternat && (
-                                      <>({CasClinique.casCliniqueGroupe})- </>
-                                    )}
-                                    {CasClinique.casCliniqueYear}
-                                  </li>
-                                </div>
-                              </div>
-                              <hr className={`${classes.hr_phone} `} />
-
-                              <div
-                                className={`${classes.qcmcourqcmnbr_phone} `}
-                              >
-                                <div
-                                  className={`${classes.qcmcourimgname_phone} `}
-                                >
-                                  <img src={courlogo} height="30%" width="20" />
-                                  <li
-                                    className={`${classes.courname_phone} list-group-item`}
-                                  >
-                                    {CasClinique.coursMed.coursName}
-                                  </li>
-                                </div>
-                                <hr className={`${classes.hr_phone} `} />
-                                {isParticipateAdmin && (
-                                  <button
-                                    type="button"
-                                    className="btn btn-danger"
-                                    onClick={(e) =>
-                                      DeleteCasClinique(CasClinique.id)
-                                    }
-                                  >
-                                    Delete CasClinique
-                                  </button>
-                                )}
-                                <li
-                                  className={`${classes.nmbrqcm} list-group-item`}
-                                  style={{ color: "#007FFF" }}
-                                >
-                                  CasClinique {indexCasClinique + 1} sur{" "}
-                                  {ShowCasClinique.length}
-                                </li>
-                              </div>
-
                               <div
                                 className={`${classes.cascliniquecontent_phone}  `}
                                 onCopy={disableCopyPaste}
@@ -5847,6 +5870,19 @@ function QuizBoardClinique(props) {
           {isTabletOrMobile && ShowModalStatique && (
             <BackdropSaveQuizPhone onCancel={closeModalDoneQuizHandler} />
           )}
+          {isDesktopOrLaptop && showChatGpt && (
+            <div className={`${classes.chatgptdiv}`}>
+              <ChatGptfinal qcmId={QcmIdNote} cameFrom="quizClinique" />
+            </div>
+          )}
+          {isTabletOrMobile && showChatGpt && (
+            <div className={`${classes.chatgptdiv_phone}`}>
+              <ChatGptfinal
+                qcmId={qcmIdChatGptDeepSeek.value}
+                cameFrom="quizClinique"
+              />
+            </div>
+          )}
           {isDesktopOrLaptop &&
             ShowModalStatique &&
             ShowModalStatiqueParSujet && (
@@ -5971,7 +6007,7 @@ function QuizBoardClinique(props) {
                 setVisiblePlayListe(true);
               }}
             >
-              Ajoute a la playList
+              Sauvegarder CasClinique
             </button>
           )}
           {showUpdateCasCliniqueBtn && (
@@ -5999,7 +6035,7 @@ function QuizBoardClinique(props) {
                 setVisiblePlayListe(true);
               }}
             >
-              Ajoute a la playList
+              Sauvegarder Quizz
             </button>
           )}
           {showUpdateQcmCasCliniqueBtn && (
