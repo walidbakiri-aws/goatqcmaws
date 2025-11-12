@@ -6007,7 +6007,7 @@ function QuizBoardClinique(props) {
                 setVisiblePlayListe(true);
               }}
             >
-              Sauvegarder CasClinique
+               Ajouter a la playList
             </button>
           )}
           {showUpdateCasCliniqueBtn && (
