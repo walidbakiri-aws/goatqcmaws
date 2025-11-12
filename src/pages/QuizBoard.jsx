@@ -3489,7 +3489,7 @@ function QuizBoard(props) {
                             setVisiblePlayListe(true);
                           }}
                         >
-                          Sauvegarder Qcm
+                           Ajouter a la playList
                         </button>
                       )}
                       {showUpdateQcmBtn && (
@@ -5923,7 +5923,7 @@ function QuizBoard(props) {
                 getAllPLayListe();
               }}
             >
-              Sauvegarder Qcm
+               Ajouter a la playList
             </button>
           )}
           {showUpdateQcmBtn && (
