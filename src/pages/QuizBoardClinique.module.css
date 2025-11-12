@@ -1395,10 +1395,10 @@
   z-index: 7;
   position: fixed;
   margin-top: 5px;
-  margin-left: 23px;
+  margin-left: 40px;
   margin-right: 5px;
 
-  margin-top: -520px;
+  margin-top: -600px;
   border-radius: 7px;
   overflow: auto;
 }

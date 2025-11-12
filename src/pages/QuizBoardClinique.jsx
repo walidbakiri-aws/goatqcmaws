@@ -3328,7 +3328,7 @@ function QuizBoardClinique(props) {
                             getAllPLayListe();
                           }}
                         >
-                          Sauvegarder CasClinique
+                          Ajouter a la playList
                         </button>
                       )}
                       {showUpdateCasCliniqueBtn && (
