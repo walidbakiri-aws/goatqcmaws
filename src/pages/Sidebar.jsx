@@ -70,11 +70,18 @@ function Sidebar() {
       navigatLogin("/");
     }
   };
-
+  const [VisiteurOnly, setVisiteurOnly] = useState(false);
   //********************************************************************** */
   //**************************************************************** */
   const handleCreatQquez = () => {};
   /***************************************************************** */
+  const testVisiteurUser = () => {
+    if (localStorage.getItem("username") === "goatqcm@gmail.com") {
+      setVisiteurOnly(true);
+    } else {
+      setVisiteurOnly(false);
+    }
+  };
 
   useEffect(() => {
     const deviceId = getOrCreateDeviceId();
@@ -445,12 +452,14 @@ function Sidebar() {
               </ul>
             )}
 
-            <li className="nav-item p-1">
-              <Link to={"/driverscours"} className="nav-link fs-6">
-                <img src={mycours} height="100%" width="25" />
-                <span className="fs-6 p-2">GOAT Cours</span>
-              </Link>
-            </li>
+            {!VisiteurOnly && (
+              <li className="nav-item p-1">
+                <Link to={"/driverscours"} className="nav-link fs-6">
+                  <img src={mycours} height="100%" width="25" />
+                  <span className="fs-6 p-2">GOAT Cours</span>
+                </Link>
+              </li>
+            )}
             <li className="nav-item p-1">
               <Link to={"/residantsujet"} className="nav-link fs-6">
                 <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />
@@ -584,14 +593,16 @@ function Sidebar() {
               </span>
             </li>
 
-            <li className="nav-item p-1" style={{}}>
-              <Link to={"/driverscours"}>
-                <img src={mycours} height="100%" width="20" />
-                <span className="fs-7 " style={{}}>
-                  GOAT Cours
-                </span>
-              </Link>
-            </li>
+            {!VisiteurOnly && (
+              <li className="nav-item p-1" style={{}}>
+                <Link to={"/driverscours"}>
+                  <img src={mycours} height="100%" width="20" />
+                  <span className="fs-7 " style={{}}>
+                    GOAT Cours
+                  </span>
+                </Link>
+              </li>
+            )}
             <li className="nav-item p-1" style={{}}>
               <Link to={"/residantsujet"}>
                 <FontAwesomeIcon icon={faListCheck} color="#c5c5c5" />

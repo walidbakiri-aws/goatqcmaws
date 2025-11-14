@@ -19,7 +19,7 @@ import { useLocation } from "react-router-dom";
 function DriversYearsLinks() {
   const [modalDetalIsOpen, setModalDetalIsOpen] = useState(false);
   const [showDivDeleteDetail, setShowDivDeleteDetail] = useState(false);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("tokengoat");
   const userIdToken = localStorage.getItem("userId");
   const { state } = useLocation();
   const { yearMed } = state;
@@ -33,7 +33,6 @@ function DriversYearsLinks() {
 
   useEffect(() => {
     console.log(yearMed);
-    console.log(yearMed);
   }, []);
   //******************************************************************* */
   const yearsName = {
@@ -45,12 +44,27 @@ function DriversYearsLinks() {
     sixYear: "6éme Année Médecine",
     samediYear: "Samedi Pédagogique",
   };
-
+  const yearsLinks26 = {
+    firstYear:
+      "https://drive.google.com/drive/folders/1Twm2L3fMHpj26cUaTBtQKhVbqD129bBa",
+    secondeYear:
+      "https://drive.google.com/drive/folders/1mNbDj7B936Tm2O87ycOCqqXvCvOUI5EL",
+    thirdYear:
+      "https://drive.google.com/drive/folders/1JYDVaU42brJ3TQPRGbrO90L5a_FSK6Q4",
+    fourthYear:
+      "https://drive.google.com/drive/folders/1Bka0eECqgf1A0Iyu9VSsfPgBAzDcPa_w",
+    fifthYear:
+      "https://drive.google.com/drive/folders/1P_qrApYN84T6jlu1qwxPzHvlWVOnGqVd?fbclid=IwdGRjcANHQyJjbGNrA0dDG2V4dG4DYWVtAjExAAEelO2M2BmJeucknhnNPzn4_CUWhNvmAUSAYRCMkBkwW0ML0oF2xeCSwPX1AOw_aem_u8xjCWIGXIFZ8lz96u-L-Q",
+    sixYear:
+      "https://drive.google.com/drive/folders/190n5URoP843vsLEbx0uyLt1ZsR3O6ONc",
+    samediYear:
+      "https://drive.google.com/drive/folders/190n5URoP843vsLEbx0uyLt1ZsR3O6ONc",
+  };
   const yearsLinks25 = {
     firstYear:
       "https://drive.google.com/drive/folders/1--VcYpjK_XKyj54o53HENuWAUFzC0gFB?usp=drive_link",
     secondeYear:
-      "https://drive.google.com/drive/mobile/folders/1UjaxyXp8pU56jlz-F7K-MGECj2pheF21?fbclid=IwY2xjawINfE1leHRuA2FlbQIxMQABHW12P39nFNaEzObj34D5ufPI6qciapERBbqUtnYS2EFC8EMFUdwp7quUxw_aem_3qaquHIHqhskYJTjmEBQ9A&sfnsn=wa",
+      "https://drive.google.com/drive/folders/16RRAsDI7WAunMWWFZEV1Mvj2nlh1jvFU?usp=drive_link",
     thirdYear:
       "https://drive.google.com/drive/folders/1-hP22KANfPYq5M9l0w3-aHn7xI_kmjAH?usp=drive_link",
     fourthYear:
@@ -60,7 +74,7 @@ function DriversYearsLinks() {
     sixYear:
       "https://drive.google.com/drive/folders/190n5URoP843vsLEbx0uyLt1ZsR3O6ONc",
     samediYear:
-      "https://drive.google.com/drive/folders/19ZoH9nsh_qoK_gwC6haPeyLY64GVIU1I?usp=drive_link",
+      "https://drive.google.com/drive/folders/1MsRFY98XABNIs-4lsN-prWGzYJVE1aDs?usp=drive_link",
   };
   const yearsLinks24 = {
     firstYear:
@@ -89,6 +103,23 @@ function DriversYearsLinks() {
   const isRetina = useMediaQuery({ query: "(min-resolution: 2dppx)" });
 
   //************************************************************************ */
+  const handleOpenDrivelLink2026 = (getYearMed) => {
+    if (getYearMed === yearsName.firstYear) {
+      window.open(yearsLinks26.firstYear, "_blank", "noopener,noreferrer");
+    } else if (getYearMed === yearsName.secondeYear) {
+      window.open(yearsLinks26.secondeYear, "_blank", "noopener,noreferrer");
+    } else if (getYearMed === yearsName.thirdYear) {
+      window.open(yearsLinks26.thirdYear, "_blank", "noopener,noreferrer");
+    } else if (getYearMed === yearsName.fourthYear) {
+      window.open(yearsLinks26.fourthYear, "_blank", "noopener,noreferrer");
+    } else if (getYearMed === yearsName.fifthYear) {
+      window.open(yearsLinks26.fifthYear, "_blank", "noopener,noreferrer");
+    } else if (getYearMed === yearsName.sixYear) {
+      window.open(yearsLinks26.sixYear, "_blank", "noopener,noreferrer");
+    } else if (getYearMed === yearsName.samediYear) {
+      window.location.href = yearsLinks26.samediYear;
+    }
+  };
 
   const handleOpenDrivelLink2025 = (getYearMed) => {
     if (getYearMed === yearsName.firstYear) {
@@ -140,11 +171,25 @@ function DriversYearsLinks() {
               >
                 <div
                   onClick={() => {
+                    handleOpenDrivelLink2026(yearMed);
+                  }}
+                  className={`${classes.cardyearbodyfirst} card-body text-white bg-primary  `}
+                >
+                  <h5 className={classes.cartitle}>2025/2026</h5> <br />
+                  <h2>(Externat Blida)</h2>
+                </div>
+              </div>
+              <div
+                className={`${classes.cardyear} card bg-c-blue order-card  `}
+              >
+                <div
+                  onClick={() => {
                     handleOpenDrivelLink2025(yearMed);
                   }}
                   className={`${classes.cardyearbodyfirst} card-body text-white bg-primary  `}
                 >
-                  <h5 className={classes.cartitle}>2024/2025</h5>
+                  <h5 className={classes.cartitle}>2024/2025</h5> <br />
+                  <h2>(Externat Blida)</h2>
                 </div>
               </div>
               <div
@@ -156,7 +201,8 @@ function DriversYearsLinks() {
                   }}
                   className={`${classes.cardyearbodyseconde} card-body text-white bg-primary  `}
                 >
-                  <h5 className={classes.cartitle}>2023/2024</h5>
+                  <h5 className={classes.cartitle}>2023/2024</h5> <br />
+                  <h2>(Externat Blida)</h2>
                 </div>
               </div>
             </div>
@@ -173,11 +219,25 @@ function DriversYearsLinks() {
               >
                 <div
                   onClick={() => {
+                    handleOpenDrivelLink2026(yearMed);
+                  }}
+                  className={`${classes.cardyearbodyfirst_phone} card-body text-white bg-primary  `}
+                >
+                  <h5 className={classes.cartitle_phone}>2025/2026</h5> <br />
+                  <h2>(Externat Blida)</h2>
+                </div>
+              </div>
+              <div
+                className={`${classes.cardyear_phone} card bg-c-blue order-card  `}
+              >
+                <div
+                  onClick={() => {
                     handleOpenDrivelLink2025(yearMed);
                   }}
                   className={`${classes.cardyearbodyfirst_phone} card-body text-white bg-primary  `}
                 >
-                  <h5 className={classes.cartitle_phone}>2024/2025</h5>
+                  <h5 className={classes.cartitle_phone}>2024/2025</h5> <br />
+                  <h2>(Externat Blida)</h2>
                 </div>
               </div>
               <div
@@ -189,7 +249,8 @@ function DriversYearsLinks() {
                   }}
                   className={`${classes.cardyearbodyseconde_phone} card-body text-white bg-primary  `}
                 >
-                  <h5 className={classes.cartitle_phone}>2023/2024</h5>
+                  <h5 className={classes.cartitle_phone}>2023/2024</h5> <br />
+                  <h2>(Externat Blida)</h2>
                 </div>
               </div>
             </div>
