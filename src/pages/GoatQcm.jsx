@@ -568,7 +568,7 @@ function GoatQcm() {
               </div>
 
               <div className={classes.container_phone}>
-                <div>
+                {/*<div>
                   <img src={android} height="60%" width="50" />
                   <a
                     href="https://drive.google.com/file/d/1xbGGA4nkYH2dCItj5HTL8DbHGaeDn13U/view?usp=drive_link"
@@ -576,7 +576,7 @@ function GoatQcm() {
                   >
                     Télecahrger Application
                   </a>
-                </div>
+                </div>*/}
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>
                     <input
