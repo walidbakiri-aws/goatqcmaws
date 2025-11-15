@@ -553,11 +553,17 @@ function GoatQcm() {
               data-theme={isDark ? "dark" : "light"}
             >
               <div className={classes.androidios_phone}>
-                <img src={android} height="35%" width="30" id="installBtn" />
+                <img
+                  style={{ margin: 5 }}
+                  src={android}
+                  height="50%"
+                  width="50"
+                  id="installBtn"
+                />
                 <img
                   src={ios}
-                  height="35%"
-                  width="30"
+                  height="50%"
+                  width="50"
                   onClick={handleInstallClick}
                 />
               </div>
