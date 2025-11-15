@@ -568,10 +568,15 @@ function GoatQcm() {
               </div>
 
               <div className={classes.container_phone}>
-                {/*<div style={{ marginTop: 3 }}>
-                  <h6>déplacer vorte quiz vers votre nouvelle playList</h6>
-                  <img src={pubgoat} height="230" width="80%" />
-                </div>*/}
+                <div>
+                  <img src={android} height="60%" width="50" />
+                  <a
+                    href="https://drive.google.com/file/d/1xbGGA4nkYH2dCItj5HTL8DbHGaeDn13U/view?usp=drive_link"
+                    target="_blank"
+                  >
+                    Télecahrger Application
+                  </a>
+                </div>
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>
                     <input
