@@ -3489,7 +3489,7 @@ function QuizBoard(props) {
                             setVisiblePlayListe(true);
                           }}
                         >
-                           Ajouter a la playList
+                          Ajouter a la playList
                         </button>
                       )}
                       {showUpdateQcmBtn && (
@@ -4073,6 +4073,9 @@ function QuizBoard(props) {
                                           currentIndex.value;
                                         console.log(
                                           saveQcmIndex.value[currentIndex.value]
+                                        );
+                                        handeldescription(
+                                          Proposition[0].qcmStandard.id
                                         );
                                       }}
                                     >
@@ -4970,6 +4973,9 @@ function QuizBoard(props) {
                                               saveQcmIndex.value[
                                                 currentIndex.value
                                               ]
+                                            );
+                                            handeldescription(
+                                              Proposition[0].qcmStandard.id
                                             );
                                           }}
                                         />
@@ -5923,7 +5929,7 @@ function QuizBoard(props) {
                 getAllPLayListe();
               }}
             >
-               Ajouter a la playList
+              Ajouter a la playList
             </button>
           )}
           {showUpdateQcmBtn && (

@@ -3353,7 +3353,7 @@ function QuizBoardClinique(props) {
                             getAllPLayListe();
                           }}
                         >
-                           Ajouter a la playList
+                          Ajouter a la playList
                         </button>
                       )}
                       {showUpdateQcmCasCliniqueBtn && (
@@ -4141,6 +4141,9 @@ function QuizBoardClinique(props) {
                                         console.log(saveQcmIndex.value);
                                         console.log(
                                           saveCaseCliniqueIndex.value
+                                        );
+                                        handeldescription(
+                                          currentQcmIdOfPropo.value
                                         );
                                       }}
                                     >
@@ -4941,6 +4944,9 @@ function QuizBoardClinique(props) {
                                           console.log(saveQcmIndex.value);
                                           console.log(
                                             saveCaseCliniqueIndex.value
+                                          );
+                                          handeldescription(
+                                            currentQcmIdOfPropo.value
                                           );
                                         }}
                                       />
@@ -6007,7 +6013,7 @@ function QuizBoardClinique(props) {
                 setVisiblePlayListe(true);
               }}
             >
-               Ajouter a la playList
+              Ajouter a la playList
             </button>
           )}
           {showUpdateCasCliniqueBtn && (
@@ -6035,7 +6041,7 @@ function QuizBoardClinique(props) {
                 setVisiblePlayListe(true);
               }}
             >
-               Ajouter a la playList
+              Ajouter a la playList
             </button>
           )}
           {showUpdateQcmCasCliniqueBtn && (

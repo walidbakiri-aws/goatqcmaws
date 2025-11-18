@@ -983,7 +983,7 @@ function Quiz() {
     );
     // Filter the modules with id 23 and 28
     const filteredModules = result.data.filter(
-      (module) => module.id === 23 || module.id === 28
+      (module) => module.id === 20 || module.id === 28
     );
 
     console.log(filteredModules); // Log the filtered results
