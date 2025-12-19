@@ -27,7 +27,7 @@ function AbounementLogin(props) {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "3000 DA",
+      priceAbn: "2500 DA",
     },
     {
       nameAbn: "1ér Année Médecine",
