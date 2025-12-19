@@ -110,7 +110,7 @@ function Abounement(props) {
                 <table className="table border shadow">
                   <thead>
                     <tr>
-                      <th scope="col">Abounement</th>
+                      <th scope="col">Abonnement</th>
                       <th scope="col">Prix</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -132,7 +132,7 @@ function Abounement(props) {
                             className="btn btn-primary"
                             onClick={(e) => handleAbounerBtn(index)}
                           >
-                            Abouner
+                            Abonner
                           </button>
                         </td>
                       </tr>
@@ -152,7 +152,7 @@ function Abounement(props) {
                 <table className="table border shadow">
                   <thead>
                     <tr>
-                      <th scope="col">Abounement</th>
+                      <th scope="col">Abonnement</th>
                       <th scope="col">Prix</th>
                       <th scope="col">Action</th>
                     </tr>
@@ -174,7 +174,7 @@ function Abounement(props) {
                             className="btn btn-primary"
                             onClick={(e) => handleAbounerBtn(index)}
                           >
-                            Abouner
+                            Abonner
                           </button>
                         </td>
                       </tr>
