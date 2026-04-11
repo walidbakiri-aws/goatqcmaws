@@ -31,11 +31,11 @@ function AbounementLogin(props) {
     },
     {
       nameAbn: "1ér Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "2éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "3éme Année Médecine",
@@ -92,7 +92,7 @@ function AbounementLogin(props) {
 
       try {
         const checkResponse = await axios.get(
-          `https://goatqcm-instance.com/checkabounementuser/byemail/${email}`
+          `https://goatqcm-instance.com/checkabounementuser/byemail/${email}`,
         );
         if (checkResponse.status === 200) {
           emailExists = true;
@@ -128,7 +128,7 @@ function AbounementLogin(props) {
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
-        }
+        },
       );
 
       toast.success("Le reçu a été envoyé avec succès !");
