@@ -175,13 +175,13 @@ function Quiz() {
     await axios
       .put(
         `https://goatqcm-instance.com/auth/updateAdresseip/${userIdToken}`,
-        UpdtAbnAdressIp
+        UpdtAbnAdressIp,
       )
       .then((res) => {
         console.log(UpdtAbnAdressIp);
       })
       .catch((err) =>
-        console.log("user not have abnt yet to update adress ip")
+        console.log("user not have abnt yet to update adress ip"),
       );
   };
   //********************************************************************** */
@@ -199,7 +199,7 @@ function Quiz() {
 
     console.log(
       JSON.parse(localStorage.getItem("IsCkickShowAllReponsesClinique")) ===
-        true
+        true,
     );
 
     QcmSujetTypeSelected.value = e.target.value;
@@ -325,7 +325,7 @@ function Quiz() {
           `https://goatqcm-instance.com/qcms/get_minmax_year/${value}/${QcmTypeSelectedRsdntExetrnt}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
 
         setMinYearMultipleCours((minYear) => [...minYear, result.data[0]]);
@@ -342,7 +342,7 @@ function Quiz() {
           `https://goatqcm-instance.com/casclinique/get_minmax_year/${value}/${QcmTypeSelectedRsdntExetrnt}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
 
         setMinYearMultipleCoursClinique((minYear) => [
@@ -364,7 +364,7 @@ function Quiz() {
 
       try {
         setSelectMultipleCours(
-          selectMultipleCours.filter((cour) => cour !== value)
+          selectMultipleCours.filter((cour) => cour !== value),
         );
         console.log("im here ani na7it");
         console.log(SelectedSourceExmn.value);
@@ -373,7 +373,7 @@ function Quiz() {
           `https://goatqcm-instance.com/qcms/get_minmax_year/${value}/${QcmTypeSelectedRsdntExetrnt}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         console.log(result.data[0]);
         console.log(result.data[1]);
@@ -398,7 +398,7 @@ function Quiz() {
       //************delete year of casClinique*********************************************************** */
       try {
         setSelectMultipleCoursClinique(
-          selectMultipleCoursClinique.filter((cour) => cour !== value)
+          selectMultipleCoursClinique.filter((cour) => cour !== value),
         );
         console.log(SelectedSourceExmn.value);
         //**************get min max multiople cours */
@@ -406,7 +406,7 @@ function Quiz() {
           `https://goatqcm-instance.com/casclinique/get_minmax_year/${value}/${QcmTypeSelectedRsdntExetrnt}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         console.log(resultClinique.data[0]);
         console.log(resultClinique.data[1]);
@@ -457,27 +457,27 @@ function Quiz() {
         setMinYearMultipleCours((minYear) => [
           ...minYear,
           ...Array.from({ length: 2026 - 2015 + 1 }, (_, i) =>
-            (2015 + i).toString()
+            (2015 + i).toString(),
           ),
         ]);
 
         setMaxYearMultipleCours((minYear) => [
           ...minYear,
           ...Array.from({ length: 2026 - 2017 + 1 }, (_, i) =>
-            (2017 + i).toString()
+            (2017 + i).toString(),
           ),
         ]);
       } else if (SelectedSourceExmn.value === "Externat Blida") {
         setMinYearMultipleCours((minYear) => [
           ...minYear,
           ...Array.from({ length: 2026 - 2017 + 1 }, (_, i) =>
-            (2017 + i).toString()
+            (2017 + i).toString(),
           ),
         ]);
         setMaxYearMultipleCours((minYear) => [
           ...minYear,
           ...Array.from({ length: 2026 - 2017 + 1 }, (_, i) =>
-            (2017 + i).toString()
+            (2017 + i).toString(),
           ),
         ]);
       }
@@ -491,7 +491,7 @@ function Quiz() {
             `https://goatqcm-instance.com/casclinique/get_minmax_year/${AllCours[indexCour].id}/${QcmTypeSelectedRsdntExetrnt}`,
             {
               headers: { Authorization: `Bearer ${token}` },
-            }
+            },
           );
 
           if (SelectedSourceExmn.value === "Résidanat Blida") {
@@ -595,10 +595,10 @@ function Quiz() {
 
           let MinMaxMultipleFinalClinique = [];
           MinMaxMultipleFinalClinique[0] = Math.min(
-            ...minYearMultipleCoursClinique
+            ...minYearMultipleCoursClinique,
           ).toString();
           MinMaxMultipleFinalClinique[1] = Math.max(
-            ...maxYearMultipleCoursClinique
+            ...maxYearMultipleCoursClinique,
           ).toString();
 
           minMaxYear = MinMaxMultipleFinalClinique;
@@ -626,7 +626,7 @@ function Quiz() {
                 `https://goatqcm-instance.com/cours/${selectMultipleCours[inc]}/qcms/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
-                }
+                },
               );
               if (result.data.length > 0) {
                 console.log(selectMultipleCours[inc]);
@@ -688,7 +688,7 @@ function Quiz() {
                 `https://goatqcm-instance.com/cours/${selectMultipleCours[inc]}/qcmsclinique/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
-                }
+                },
               );
 
               if (result.data.length > 0) {
@@ -736,7 +736,7 @@ function Quiz() {
             `https://goatqcm-instance.com/qcms/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
             {
               headers: { Authorization: `Bearer ${token}` },
-            }
+            },
           );
           minMaxYear = result.data;
           setVisibleCommenceBtn(true);
@@ -750,7 +750,7 @@ function Quiz() {
             `https://goatqcm-instance.com/casclinique/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
             {
               headers: { Authorization: `Bearer ${token}` },
-            }
+            },
           );
           minMaxYear = result.data;
           setVisibleCommenceBtn(true);
@@ -769,7 +769,7 @@ function Quiz() {
               `https://goatqcm-instance.com/qcms/get_minmax_year/specefique/${SelectedCours[0]}/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
               {
                 headers: { Authorization: `Bearer ${token}` },
-              }
+              },
             );
             console.log(result.data);
             if (QcmSujetTypeSelected.value === "Par Cour") {
@@ -792,7 +792,7 @@ function Quiz() {
             `https://goatqcm-instance.com/qcms/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
             {
               headers: { Authorization: `Bearer ${token}` },
-            }
+            },
           );
           minQcmYear = result.data;
           console.log(result.data);
@@ -803,7 +803,7 @@ function Quiz() {
               `https://goatqcm-instance.com/casclinique/get_minmax_year/specefique/${SelectedCours[0]}/${getMinYearValue.value}/${getMaxYearValue.value}/${QcmTypeSelectedRsdntExetrnt}`,
               {
                 headers: { Authorization: `Bearer ${token}` },
-              }
+              },
             );
             if (result.data.length > 0) {
               checkSpecifiqueYearExiste.value = result.data;
@@ -817,7 +817,7 @@ function Quiz() {
             `https://goatqcm-instance.com/casclinique/get_minmax_year/${SelectedCours[0]}/${QcmTypeSelectedRsdntExetrnt}`,
             {
               headers: { Authorization: `Bearer ${token}` },
-            }
+            },
           );
 
           minCliniqueYear = result.data;
@@ -930,7 +930,7 @@ function Quiz() {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
       console.log(resultUserFinal);
 
@@ -950,7 +950,7 @@ function Quiz() {
     console.log(getresultUserFinal.id);
     try {
       const result = await axios.get(
-        `https://goatqcm-instance.com/abounement/${getresultUserFinal.id}`
+        `https://goatqcm-instance.com/abounement/${getresultUserFinal.id}`,
       );
       nameModule.value = result.data.nameAbn;
       if (nameModule.value === "Résidanat 2026") {
@@ -979,13 +979,13 @@ function Quiz() {
       "https://goatqcm-instance.com/medmodule/getall/module",
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
     // Filter the modules with id 23 and 28
-    const filteredModules = result.data.filter(
+    /*const filteredModules = result.data.filter(
       (module) => module.id === 20 || module.id === 28
-    );
-
+    );*/
+    const filteredModules = result.data.filter((module) => module.id === 20);
     console.log(filteredModules); // Log the filtered results
 
     // Set the filtered modules to the state
@@ -996,7 +996,7 @@ function Quiz() {
 
   const loadSpefecModulesYear = async () => {
     const result = await axios.get(
-      `https://goatqcm-instance.com/medmodule/year/${nameModule.value}`
+      `https://goatqcm-instance.com/medmodule/year/${nameModule.value}`,
     );
     setAllModules(result.data);
   };
@@ -1010,7 +1010,7 @@ function Quiz() {
       "https://goatqcm-instance.com/medmodule/getall/module",
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
     setAllModules(result.data);
   };
@@ -1023,7 +1023,7 @@ function Quiz() {
         `https://goatqcm-instance.com/module/${SelectedModule}/cours`,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
       SetAllcours(result.data);
       console.log("externat abn");
@@ -1032,7 +1032,7 @@ function Quiz() {
         `https://goatqcm-instance.com/module/${SelectedModule}/cours/Résidanat Blida`,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
       SetAllcours(result.data);
       console.log("rsdnt abn");
@@ -1048,7 +1048,7 @@ function Quiz() {
       `https://goatqcm-instance.com/module/${moduleId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
     moduleName.value = result.data.moduleName;
   };
@@ -1077,7 +1077,7 @@ function Quiz() {
           `https://goatqcm-instance.com/qcms/get_minmax_year/parsujet/${SelectedModule.value}/${SelectedSourceExmn.value}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         minMaxYearParSujets.value = result.data;
         console.log(minMaxYearParSujets.value);
@@ -1090,7 +1090,7 @@ function Quiz() {
           `https://goatqcm-instance.com/casclinique/get_minmax_year/parsujet/${SelectedModule.value}/${SelectedSourceExmn.value}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         minMaxYearParSujets.value = result.data;
         console.log(minMaxYearParSujets.value);
@@ -1104,7 +1104,7 @@ function Quiz() {
           `https://goatqcm-instance.com/qcms/get_minmax_year/parsujet/${SelectedModule.value}/${SelectedSourceExmn.value}`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          }
+          },
         );
         minMaxYearParSujets.value = result.data;
         console.log(minMaxYearParSujets.value);
@@ -1219,8 +1219,8 @@ function Quiz() {
               SelectedSourceExmn.value === "Externat Blida")
               ? "Tous (Qcm,Cas Clinique)"
               : ExisteCasClinique
-              ? QcmTypeSelected.value
-              : "Qcm",
+                ? QcmTypeSelected.value
+                : "Qcm",
           QcmSujetTypeSelected: QcmTypeParSjtParCours,
           SelectedSourceExmn: QcmTypeSelectedRsdntExetrnt,
           minYearQcm: MinYearValue,
