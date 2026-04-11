@@ -26,7 +26,7 @@ function AbounementPhone() {
         <div className={`${classes.card_title_phone}`}>Modules gratuit</div>
         <div className="card-body">
           <ul className={`${classes.feature_list_phone}`}>
-            <li>Hémato</li>
+            <li>Gastro</li>
             <li>
               Email: <h6>goatqcm@gmail.com</h6>
             </li>
