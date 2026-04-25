@@ -77,7 +77,7 @@ function Abounement() {
               <h2>2éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -103,7 +103,7 @@ function Abounement() {
               <h2>3éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -131,7 +131,7 @@ function Abounement() {
               <h2>4éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -158,7 +158,7 @@ function Abounement() {
               <h2>5éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>
@@ -184,7 +184,7 @@ function Abounement() {
               <h2>6éme Année</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>1500</span>DA
+                <span>500</span>DA
               </p>
             </div>
             <div className={`${classes.card_content}`}>

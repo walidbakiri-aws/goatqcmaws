@@ -39,19 +39,19 @@ function AbounementLogin(props) {
     },
     {
       nameAbn: "3éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "4éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "5éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
     {
       nameAbn: "6éme Année Médecine",
-      priceAbn: "1500 DA",
+      priceAbn: "500 DA",
     },
   ];
   /***************************************** */
