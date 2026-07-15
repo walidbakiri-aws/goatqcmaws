@@ -7,84 +7,22 @@ import { useMediaQuery } from "react-responsive";
 import { Document, Page } from "react-pdf";
 import useLocalStorage from "use-local-storage";
 import { useLocation, useNavigate } from "react-router-dom";
-import sjtresidanat_2010 from "../compenent/layout/pdf/2010.pdf";
-import sjtresidanat_2011 from "../compenent/layout/pdf/2011.pdf";
-import sjtresidanat_2013 from "../compenent/layout/pdf/2013.pdf";
-import sjtresidanat_2015 from "../compenent/layout/pdf/2015.pdf";
-import sjtresidanat_2016 from "../compenent/layout/pdf/2016.pdf";
-import sjtresidanat_2017 from "../compenent/layout/pdf/2017.pdf";
-import sjtresidanat_2018 from "../compenent/layout/pdf/2018.pdf";
-import sjtresidanat_2019 from "../compenent/layout/pdf/2019.pdf";
-import sjtresidanat_2020 from "../compenent/layout/pdf/2020.pdf";
-import sjtresidanat_2021 from "../compenent/layout/pdf/2021.pdf";
-import sjtresidanat_2022 from "../compenent/layout/pdf/2022.pdf";
-import sjtresidanat_2023 from "../compenent/layout/pdf/2023.pdf";
-import sjtresidanat_2024 from "../compenent/layout/pdf/2024.pdf";
-import fondamentaux from "../compenent/layout/pdf/fondamentaux.pdf";
-import clinique from "../compenent/layout/pdf/clinique.pdf";
-import epide from "../compenent/layout/pdf/epide.pdf";
-import gygy2025 from "../compenent/layout/pdf/gygy2025.pdf";
-import infect2025 from "../compenent/layout/pdf/infect2025.pdf";
-import hemato2025 from "../compenent/layout/pdf/hemato2025.pdf";
-import cardio2025 from "../compenent/layout/pdf/cardio2025.pdf";
-import uronephro2025 from "../compenent/layout/pdf/uronephro2025.pdf";
-import psychiatrie2025 from "../compenent/layout/pdf/psychiatrie2025.pdf";
-import pediatrie2025 from "../compenent/layout/pdf/pediatrie2025.pdf";
+import Sujet_Résidanat_Clinique from "../compenent/layout/pdf/Sujet_Résidanat_Clinique.pdf";
+import Sujet_Résidanat_Fondamentaux from "../compenent/layout/pdf/Sujet_Résidanat_Fondamentaux.pdf";
+import Sujet_Externat_Partie_01 from "../compenent/layout/pdf/Sujet_Externat_Partie_01.pdf";
+import Sujet_Externat_Partie_02 from "../compenent/layout/pdf/Sujet_Externat_Partie_02.pdf";
+import Sujet_Résidanat_2010_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2010_2024.pdf";
+import Sujet_Résidanat_2015_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2015_2024.pdf";
+import Sujet_Rattrapage from "../compenent/layout/pdf/Sujet_Rattrapage.pdf";
 
-import microbio from "../compenent/layout/pdf/microbio.pdf";
-import immuno2025 from "../compenent/layout/pdf/immuno2025.pdf";
-
-import u12025 from "../compenent/layout/pdf/u12025.pdf";
-import u22025 from "../compenent/layout/pdf/u22025.pdf";
-import u42025 from "../compenent/layout/pdf/u42025.pdf";
-import u12eme2025 from "../compenent/layout/pdf/u12eme2025.pdf";
-import u22eme2025 from "../compenent/layout/pdf/u22eme2025.pdf";
-import u32eme2025 from "../compenent/layout/pdf/u32eme2025.pdf";
-import u42eme2025 from "../compenent/layout/pdf/u42eme2025.pdf";
-import u52eme2025 from "../compenent/layout/pdf/u52eme2025.pdf";
-
-import geriatrie2025 from "../compenent/layout/pdf/geriatrie2025.pdf";
-import orl from "../compenent/layout/pdf/orl.pdf";
-import maladiesysteme from "../compenent/layout/pdf/maladiesysteme.pdf";
 const pdfMap = {
-  2010: sjtresidanat_2010,
-  2011: sjtresidanat_2011,
-  2013: sjtresidanat_2013,
-  2015: sjtresidanat_2015,
-  2016: sjtresidanat_2016,
-  2017: sjtresidanat_2017,
-  2018: sjtresidanat_2018,
-  2019: sjtresidanat_2019,
-  2020: sjtresidanat_2020,
-  2021: sjtresidanat_2021,
-  2022: sjtresidanat_2022,
-  2023: sjtresidanat_2023,
-  2024: sjtresidanat_2024,
-  fondamentaux: fondamentaux,
-  clinique: clinique,
-  epidemio: epide,
-  Rattrapage_gynéco: gygy2025,
-  Rattrapage_infect: infect2025,
-  Rattrapage_hemato: hemato2025,
-  Rattrapage_cardio: cardio2025,
-  Rattrapage_uronephro: uronephro2025,
-  Rattrapage_psyciatrie: psychiatrie2025,
-
-  Rattrapage_pediatrie: pediatrie2025,
-  Rattrapage_microbio: microbio,
-  Rattrapage_immuno: immuno2025,
-  Rattrapage_unite_01_3émeAnnée: u12025,
-  Rattrapage_unite_02_3émeAnnée: u22025,
-  Rattrapage_unite_04_3émeAnnée: u42025,
-  Rattrapage_unite_01_2émeAnnée: u12eme2025,
-  Rattrapage_unite_02_2émeAnnée: u22eme2025,
-  Rattrapage_unite_03_2émeAnnée: u32eme2025,
-  Rattrapage_unite_04_2émeAnnée: u42eme2025,
-  Rattrapage_unite_05_2émeAnnée: u52eme2025,
-
-  Rattrapage_geriatrie: geriatrie2025,
-  Rattrapage_orl: orl,
-  Rattrapage_maladie_systéme: maladiesysteme,
+  Sujet_Résidanat_Clinique: Sujet_Résidanat_Clinique,
+  Sujet_Résidanat_Fondamentaux: Sujet_Résidanat_Fondamentaux,
+  Sujet_Externat_Partie_01: Sujet_Externat_Partie_01,
+  Sujet_Externat_Partie_02: Sujet_Externat_Partie_02,
+  Sujet_Résidanat_2010_2024: Sujet_Résidanat_2010_2024,
+  Sujet_Résidanat_2015_2024: Sujet_Résidanat_2015_2024,
+  Sujet_Rattrapage: Sujet_Rattrapage,
 };
 
 function ShowPdfResidanat() {
@@ -366,6 +304,7 @@ function ShowPdfResidanat() {
                         className={classes.pdfPage_startrattra}
                         pageNumber={pageNumber}
                         width={isDesktopOrLaptop ? 800 * zoom : 300 * zoom}
+                        height={isDesktopOrLaptop ? 500 * zoom : 300 * zoom}
                         renderTextLayer={false}
                         renderAnnotationLayer={false}
                       />

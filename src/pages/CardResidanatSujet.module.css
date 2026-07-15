@@ -22,31 +22,81 @@
 }
 
 .quizzContainer {
-  margin-left: 200px;
-  width: 1400px;
-  height: 800px;
-  margin-top: 10px;
+  margin-left: 220px; /* leave space for sidebar */
+  margin-top: 20px;
   margin-bottom: 30px;
-  padding-top: 10px;
-  padding-left: 10px;
+
+  max-width: 1390px;
+  width: calc(100% - 240px);
+
+  padding: 20px;
   border-radius: 10px;
+
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+
   background-color: rgb(242, 239, 245);
 }
+
+/* From Uiverse.io by eslam-hany */
 .cardyear {
-  border-radius: 5px;
-  margin-right: 30px;
-  height: 200px;
-  width: 250px;
-  background: linear-gradient(45deg, #4099ff, #73b4ff);
+  width: 100%;
+  min-height: 200px;
+  background: mediumturquoise;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
 }
+.cardyear::before,
+.cardyear::after {
+  position: absolute;
+  content: "";
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: lightblue;
+  transition: all 0.5s;
+}
+
+.cardyear::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 15px 0 100%;
+}
+
+.cardyear::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 15px;
+}
+
+.cardyear:hover::before,
+.cardyear:hover:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  transition: all 0.5s;
+}
+
+.cardyear:hover:after {
+  content: "Commencer";
+}
+
 .cartitle {
   margin-top: 60px;
   margin-left: 30px;
   font-size: 30px;
-  color: aliceblue;
+  color: rgb(9, 10, 10);
 }
 
 /*****phone****************************************************/
@@ -70,17 +120,63 @@
   gap: 1.5rem;
   background-color: rgb(242, 239, 245);
 }
+
 .cardyear_phone {
-  border-radius: 10px;
-  margin-right: 30px;
-  height: 100px;
   width: 100%;
-  background-color: #8f71ff;
+  min-height: 150px;
+  background: mediumturquoise;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
 }
+.cardyear_phone::before,
+.cardyear_phone::after {
+  position: absolute;
+  content: "";
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: lightblue;
+  transition: all 0.5s;
+}
+
+.cardyear_phone::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 15px 0 100%;
+}
+
+.cardyear_phone::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100% 0 15px;
+}
+
+.cardyear_phone:hover::before,
+.cardyear_phone:hover:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  transition: all 0.5s;
+}
+
+.cardyear_phone:hover:after {
+  content: "Commencer";
+}
+
 .cartitle_phone {
   margin-top: 20px;
-  margin-left: 30px;
+  margin-left: 10px;
   font-size: 20px;
 
-  color: aliceblue;
+  color: rgb(8, 9, 10);
 }
