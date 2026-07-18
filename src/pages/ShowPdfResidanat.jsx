@@ -13,7 +13,11 @@ import Sujet_Externat_Partie_01 from "../compenent/layout/pdf/Sujet_Externat_Par
 import Sujet_Externat_Partie_02 from "../compenent/layout/pdf/Sujet_Externat_Partie_02.pdf";
 import Sujet_Résidanat_2010_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2010_2024.pdf";
 import Sujet_Résidanat_2015_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2015_2024.pdf";
-import Sujet_Rattrapage from "../compenent/layout/pdf/Sujet_Rattrapage.pdf";
+import rattrapage_u2_2eme from "../compenent/layout/pdf/rattrapage_u2_2eme.pdf";
+import rattrapage_u4_2eme from "../compenent/layout/pdf/rattrapage_u4_2eme.pdf";
+import rattrapage_u5_2eme from "../compenent/layout/pdf/rattrapage_u5_2eme.pdf";
+import rattrapage_immuno_2eme from "../compenent/layout/pdf/rattrapage_immuno_2eme.pdf";
+import rattrapage_genetique_2eme from "../compenent/layout/pdf/rattrapage_genetique_2eme.pdf";
 
 const pdfMap = {
   Sujet_Résidanat_Clinique: Sujet_Résidanat_Clinique,
@@ -22,7 +26,11 @@ const pdfMap = {
   Sujet_Externat_Partie_02: Sujet_Externat_Partie_02,
   Sujet_Résidanat_2010_2024: Sujet_Résidanat_2010_2024,
   Sujet_Résidanat_2015_2024: Sujet_Résidanat_2015_2024,
-  Sujet_Rattrapage: Sujet_Rattrapage,
+  Rattrapage_u2_2éme: rattrapage_u2_2eme,
+  Rattrapage_u4_2éme: rattrapage_u4_2eme,
+  Rattrapage_u5_2éme: rattrapage_u5_2eme,
+  Rattrapage_immuno_2éme: rattrapage_immuno_2eme,
+  Rattrapage_genetique_2éme: rattrapage_genetique_2eme,
 };
 
 function ShowPdfResidanat() {
@@ -304,7 +312,6 @@ function ShowPdfResidanat() {
                         className={classes.pdfPage_startrattra}
                         pageNumber={pageNumber}
                         width={isDesktopOrLaptop ? 800 * zoom : 300 * zoom}
-                        height={isDesktopOrLaptop ? 500 * zoom : 300 * zoom}
                         renderTextLayer={false}
                         renderAnnotationLayer={false}
                       />
