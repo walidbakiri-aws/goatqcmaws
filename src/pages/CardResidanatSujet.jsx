@@ -48,7 +48,11 @@ function CardResidanatSujet() {
     "Sujet_Résidanat_Clinique",
     "Sujet_Externat_Partie_01",
     "Sujet_Externat_Partie_02",
-    "Sujet_Rattrapage",
+    "Rattrapage_u2_2éme",
+    "Rattrapage_u4_2éme",
+    "Rattrapage_u5_2éme",
+    "Rattrapage_immuno_2éme",
+    "Rattrapage_genetique_2éme",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "Sujet_Résidanat_2010_2024") {
@@ -91,6 +95,36 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Sujet_Rattrapage",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_u2_2éme") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_u2_2éme",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_u4_2éme") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_u4_2éme",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_u5_2éme") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_u5_2éme",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_immuno_2éme") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_immuno_2éme",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_genetique_2éme") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_genetique_2éme",
         },
       });
     }
