@@ -53,6 +53,7 @@ function CardResidanatSujet() {
     "Rattrapage_u5_2éme",
     "Rattrapage_immuno_2éme",
     "Rattrapage_genetique_2éme",
+    "Rattrapage_gastro",
   ];
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "Sujet_Résidanat_2010_2024") {
@@ -125,6 +126,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_genetique_2éme",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_gastro") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_gastro",
         },
       });
     }

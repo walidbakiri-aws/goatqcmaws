@@ -18,7 +18,7 @@ import rattrapage_u4_2eme from "../compenent/layout/pdf/rattrapage_u4_2eme.pdf";
 import rattrapage_u5_2eme from "../compenent/layout/pdf/rattrapage_u5_2eme.pdf";
 import rattrapage_immuno_2eme from "../compenent/layout/pdf/rattrapage_immuno_2eme.pdf";
 import rattrapage_genetique_2eme from "../compenent/layout/pdf/rattrapage_genetique_2eme.pdf";
-
+import rattrapage_gastro from "../compenent/layout/pdf/rattrapage_gastro.pdf";
 const pdfMap = {
   Sujet_Résidanat_Clinique: Sujet_Résidanat_Clinique,
   Sujet_Résidanat_Fondamentaux: Sujet_Résidanat_Fondamentaux,
@@ -31,6 +31,7 @@ const pdfMap = {
   Rattrapage_u5_2éme: rattrapage_u5_2eme,
   Rattrapage_immuno_2éme: rattrapage_immuno_2eme,
   Rattrapage_genetique_2éme: rattrapage_genetique_2eme,
+  Rattrapage_gastro_2éme: rattrapage_gastro,
 };
 
 function ShowPdfResidanat() {
