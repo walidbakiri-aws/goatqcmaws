@@ -23,15 +23,12 @@ function AbounementPhone() {
   return (
     <>
       <div className={`${classes.cardfinal_phone} card`}>
-        <div className={`${classes.card_title_phone}`}>Modules gratuit</div>
+        <div className={`${classes.card_title_phone}`}>Goat Qcm</div>
         <div className="card-body">
           <ul className={`${classes.feature_list_phone}`}>
-            <li>Traumato</li>
             <li>
-              Email: <h6>goatqcm@gmail.com</h6>
-            </li>
-            <li>
-              Mot de pass: <h6>goatqcm123</h6>
+              GoatQCM contient{" "}
+              <b>le même contenu que la série papier CopyWal pav-18.</b>
             </li>
           </ul>
         </div>
