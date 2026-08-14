@@ -21,7 +21,10 @@ function Abounement(props) {
       nameAbn: "Résidanat 2026",
       priceAbn: "1000 DA",
     },
-
+    {
+      nameAbn: "Résidanat 2027",
+      priceAbn: "4800 DA",
+    },
     {
       nameAbn: "1ér Année Médecine",
       priceAbn: "1500 DA",
@@ -90,7 +93,7 @@ function Abounement(props) {
       .post("https://goatqcm-instance.com/abounement", Abounement)
       .then((res) => {
         toast.success(
-          "votre abounemet a éte confirmer , visite la page pour continue"
+          "votre abounemet a éte confirmer , visite la page pour continue",
         );
         console.log("eyy");
         UserService.logout();

@@ -91,7 +91,7 @@ ChartJS.register(
   Legend,
   CategoryScale,
   LinearScale,
-  BarElement
+  BarElement,
 );
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
@@ -304,14 +304,14 @@ function QuizBoard(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
-      (saveUserQcm.id = resultUserFinal.id),
+      ((saveUserQcm.id = resultUserFinal.id),
         (saveUserQcm.name = resultUserFinal.name),
         (saveUserQcm.lastname = resultUserFinal.lastname),
         (saveUserQcm.password = resultUserFinal.password),
         (saveUserQcm.role = resultUserFinal.role),
-        (save.ourUsers = userFinal);
+        (save.ourUsers = userFinal));
     } catch (Exception) {
       console.log("user not found");
     }
@@ -545,14 +545,14 @@ function QuizBoard(props) {
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
-      `${BASE_URL}/fulldesc/descqcm/${qcmId}`
+      `${BASE_URL}/fulldesc/descqcm/${qcmId}`,
     );
 
     console.log(fullDescResult.data);
     if (fullDescResult.data !== null) {
       setFullDescEdite(fullDescResult.data);
       setFileDisplayEdite(
-        `${BASE_URL}/image/${qcmId}/${fullDescResult.data.imageName}`
+        `${BASE_URL}/image/${qcmId}/${fullDescResult.data.imageName}`,
       );
 
       setLoadImage(fullDescResult.data);
@@ -576,7 +576,7 @@ function QuizBoard(props) {
 
     try {
       const fullDescResultiniial = await axios.get(
-        `https://goatqcm-instance.com/noteqcm/${qcmId}/${userId}`
+        `https://goatqcm-instance.com/noteqcm/${qcmId}/${userId}`,
       );
       console.log(fullDescResultiniial.data);
       setExisteNote(true);
@@ -821,7 +821,7 @@ function QuizBoard(props) {
         `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
         {
           method: "POST",
-        }
+        },
       );
     } catch (Exception) {}
   };
@@ -866,7 +866,7 @@ function QuizBoard(props) {
                 indexPropo,
                 qcmId,
                 courName,
-                cameFrome[1]
+                cameFrome[1],
               );
             }
           } catch (e) {
@@ -901,10 +901,10 @@ function QuizBoard(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
 
-      (saveUser.name = resultUserFinal.name), console.log(saveUser);
+      ((saveUser.name = resultUserFinal.name), console.log(saveUser));
       console.log(resultUserFinal.name);
       setNickname(resultUserFinal.name);
     } catch (Exception) {
@@ -1009,7 +1009,7 @@ function QuizBoard(props) {
               `${BASE_URL}/cours/${props.selectMultipleCours[incCours]}/qcms/${props.minYearQcm}/${props.maxYearQcm}/${props.SelectedSourceExmn}`,
               {
                 headers: { Authorization: `Bearer ${token}` },
-              }
+              },
             );
 
             getQcms.value = result.data;
@@ -1086,7 +1086,7 @@ function QuizBoard(props) {
         const getCurrentYear = document.getElementById("year").value;
         try {
           const result = await axios.get(
-            `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
+            `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`,
           );
           if (result.data.length > 0) {
             //save nombre qcms ////////***************************************************** */
@@ -1149,7 +1149,7 @@ function QuizBoard(props) {
                 `${BASE_URL}/cours/${props.selectMultipleCours[incCours]}/qcms/${props.minYearQcm}/${props.maxYearQcm}/${props.SelectedSourceExmn}`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
-                }
+                },
               );
               getQcms.value = result.data;
               saveAllQcms.value = result.data;
@@ -1212,7 +1212,7 @@ function QuizBoard(props) {
           if (props.ExisteCasClinique === true) {
             finalgetCasCliniqueLength.value = 1;
             setgetlengthCasCliniqueParSjr(
-              finalgetCasCliniqueLength.value.length
+              finalgetCasCliniqueLength.value.length,
             );
           } else {
             if (getQcms.value.length === 1) {
@@ -1256,7 +1256,7 @@ function QuizBoard(props) {
                 `${BASE_URL}/cours/${props.selectMultipleCours[incCours]}/qcms/${props.minYearQcm}/${props.maxYearQcm}/${props.SelectedSourceExmn}`,
                 {
                   headers: { Authorization: `Bearer ${token}` },
-                }
+                },
               );
               if (result.data.length > 0) {
                 //save nombre qcms ////////***************************************************** */
@@ -1320,7 +1320,7 @@ function QuizBoard(props) {
             console.log("we ffff");
             finalgetCasCliniqueLength.value = 1;
             setgetlengthCasCliniqueParSjr(
-              finalgetCasCliniqueLength.value.length
+              finalgetCasCliniqueLength.value.length,
             );
           } else {
             if (getQcms.value.length === 1) {
@@ -1351,7 +1351,7 @@ function QuizBoard(props) {
               console.log(props.getGroupePerm);
               //****get clinique length***************************************** */
               const getresultCasClinqiue = await axios.get(
-                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`
+                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`,
               );
               getCasCliniqueLength = getresultCasClinqiue.data.length;
               finalgetCasCliniqueLength.value = getCasCliniqueLength;
@@ -1359,7 +1359,7 @@ function QuizBoard(props) {
               console.log(finalgetCasCliniqueLength.value);
               try {
                 const result = await axios.get(
-                  `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`
+                  `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`,
                 );
                 if (result.data.length > 0) {
                   //save nombre qcms ////////***************************************************** */
@@ -1402,7 +1402,7 @@ function QuizBoard(props) {
               getCurrentYear = document.getElementById("year").value;
 
               const getresultCasClinqiue = await axios.get(
-                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getGroupePerm.value}/${props.SelectedSourceExmn}`
+                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getGroupePerm.value}/${props.SelectedSourceExmn}`,
               );
               getCasCliniqueLength = getresultCasClinqiue.data.length;
               finalgetCasCliniqueLength.value = getCasCliniqueLength;
@@ -1410,7 +1410,7 @@ function QuizBoard(props) {
               console.log(finalgetCasCliniqueLength.value);
               try {
                 const result = await axios.get(
-                  `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getGroupePerm.value}/${props.SelectedSourceExmn}`
+                  `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getCurrentYear}/${getGroupePerm.value}/${props.SelectedSourceExmn}`,
                 );
                 //save nombre qcms ////////***************************************************** */
                 setSaveQcmsNbrStatique((QcmsNbrStatique) => [
@@ -1457,7 +1457,7 @@ function QuizBoard(props) {
                 getCurrentYear = props.getYear;
                 getCurrentGroupePerm = props.getGroupePerm;
                 const getresultCasClinqiue = await axios.get(
-                  `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
+                  `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`,
                 );
                 getCasCliniqueLength = getresultCasClinqiue.data.length;
                 finalgetCasCliniqueLength.value = getCasCliniqueLength;
@@ -1473,7 +1473,7 @@ function QuizBoard(props) {
                 getCurrentYear = document.getElementById("year").value;
 
                 const getresultCasClinqiue = await axios.get(
-                  `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
+                  `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`,
                 );
                 getCasCliniqueLength = getresultCasClinqiue.data.length;
                 finalgetCasCliniqueLength.value = getCasCliniqueLength;
@@ -1486,7 +1486,7 @@ function QuizBoard(props) {
 
             try {
               const result = await axios.get(
-                `${BASE_URL}/qcms/getqcqms/biologie/${props.moduleId}/${getCurrentYear}/Biologie`
+                `${BASE_URL}/qcms/getqcqms/biologie/${props.moduleId}/${getCurrentYear}/Biologie`,
               );
               if (result.data.length > 0) {
                 //save nombre qcms ////////***************************************************** */
@@ -1532,7 +1532,7 @@ function QuizBoard(props) {
             try {
               getYear.value = document.getElementById("year").value;
               const getresultCasClinqiue = await axios.get(
-                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
+                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`,
               );
               //getCasCliniqueLength = getresultCasClinqiue.data.length;
               setgetlengthCasCliniqueParSjr(getresultCasClinqiue.data.length);
@@ -1542,7 +1542,7 @@ function QuizBoard(props) {
             }
             //*************************************************************************************************** */
             const result = await axios.get(
-              `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
+              `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`,
             );
             if (result.data.length > 0) {
               //save nombre qcms ////////***************************************************** */
@@ -1582,7 +1582,7 @@ function QuizBoard(props) {
             //***********get length cas clinique*************************************** */
             try {
               const getresultCasClinqiue = await axios.get(
-                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`
+                `${BASE_URL}/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`,
               );
               getCasCliniqueLength = getresultCasClinqiue.data.length;
             } catch (Exception) {
@@ -1591,7 +1591,7 @@ function QuizBoard(props) {
             }
             //*********************************************************************** */
             const result = await axios.get(
-              `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`
+              `${BASE_URL}/qcms/getqcqms/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`,
             );
             if (result.data.length > 0) {
               //save nombre qcms ////////***************************************************** */
@@ -1656,7 +1656,7 @@ function QuizBoard(props) {
           //******************************************************************************* */
         }
         const result = await axios.get(
-          `${BASE_URL}/qcms/${getQcms.value[increment].id}/reponses`
+          `${BASE_URL}/qcms/${getQcms.value[increment].id}/reponses`,
         );
         if (increment === getQcms.value.length - 1) {
           //if (props.qcmType === "Qcm") {
@@ -1712,7 +1712,7 @@ function QuizBoard(props) {
           setSaveIsClickedCounter((ClickedCounter) => [...ClickedCounter, 0]);
         }
         const result = await axios.get(
-          `${BASE_URL}/qcms/${getQcms.value[i].id}/reponses`
+          `${BASE_URL}/qcms/${getQcms.value[i].id}/reponses`,
         );
         console.log(result.data);
         resultGetLoadPropo.value[i] = result.data;
@@ -1805,7 +1805,7 @@ function QuizBoard(props) {
   const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
-        `https://goatqcm-instance.com/abounement/${userIdToken}`
+        `https://goatqcm-instance.com/abounement/${userIdToken}`,
       );
       getUserAdresseIp.value = result.data.adresseIp;
       console.log(getUserAdresseIp.value);
@@ -1813,7 +1813,7 @@ function QuizBoard(props) {
         console.log("are the same");
       } else {
         toast.error(
-          "Un autre appareil a été connecté en même temps, veuillez vous déconnecter. "
+          "Un autre appareil a été connecté en même temps, veuillez vous déconnecter. ",
         );
         setTimeout(() => {
           UserService.logout();
@@ -1986,7 +1986,7 @@ function QuizBoard(props) {
         `${BASE_URL}/qcms/get_groupes_year/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       );
       document.getElementById("groupepermutation").options[0].selected = true;
       setGroupesPermut(result.data);
@@ -2047,7 +2047,7 @@ function QuizBoard(props) {
 
     for (let i = 0; i < qcmsIds.length; i++) {
       const result = await axios.get(
-        `${BASE_URL}/commentary/qcm/${qcmsIds[i]}`
+        `${BASE_URL}/commentary/qcm/${qcmsIds[i]}`,
       );
       numbreCommentaryFinal.value[incCmntr.value] = result.data.length;
       incCmntr.value = incCmntr.value + 1;
@@ -2077,7 +2077,7 @@ function QuizBoard(props) {
 
     try {
       const result = await axios.get(
-        `https://goatqcm-instance.com/commentary/qcm/${qcmId}`
+        `https://goatqcm-instance.com/commentary/qcm/${qcmId}`,
       );
 
       const comments = result.data;
@@ -2090,7 +2090,7 @@ function QuizBoard(props) {
             {
               responseType: "blob",
               headers: { Authorization: `Bearer ${token}` },
-            }
+            },
           );
           comment.imageUrl = URL.createObjectURL(imgRes.data);
         }
@@ -2123,7 +2123,7 @@ function QuizBoard(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
 
       const formData = new FormData();
@@ -2144,7 +2144,7 @@ function QuizBoard(props) {
             Authorization: `Bearer ${token}`,
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
 
       // Refresh commentary list
@@ -2276,7 +2276,7 @@ function QuizBoard(props) {
     indexPropo,
     qcmId,
     courName,
-    comingFrom
+    comingFrom,
   ) => {
     if (e?.preventDefault) e.preventDefault();
     console.log(comingFrom);
@@ -2363,7 +2363,7 @@ function QuizBoard(props) {
     console.log(saveCurrentAmount);
     const sum = saveCurrentAmount.reduce(
       (accumulator, currentValue) => accumulator + currentValue,
-      0
+      0,
     );
     //*************************************************************************** */
     //********update perentage array******************************************** */
@@ -2728,14 +2728,14 @@ function QuizBoard(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
-      (saveUserQcm.id = resultUserFinal.id),
+      ((saveUserQcm.id = resultUserFinal.id),
         (saveUserQcm.name = resultUserFinal.name),
         (saveUserQcm.lastname = resultUserFinal.lastname),
         (saveUserQcm.username = resultUserFinal.username),
         (saveUserQcm.password = resultUserFinal.password),
-        (saveUserQcm.role = resultUserFinal.role);
+        (saveUserQcm.role = resultUserFinal.role));
     } catch (Exception) {
       console.log("user not found");
     }
@@ -2758,14 +2758,14 @@ function QuizBoard(props) {
     saveQcmQuizzSession.moduleId = props.moduleId;
     saveQcmQuizzSession.moduleName = props.moduleName;
     saveQcmQuizzSession.selectMultipleCours = JSON.stringify(
-      props.selectMultipleCours
+      props.selectMultipleCours,
     );
     saveQcmQuizzSession.qcmType = "Qcm";
     saveQcmQuizzSession.minYearQcm = props.minYearQcm;
     saveQcmQuizzSession.maxYearQcm = props.maxYearQcm;
     saveQcmQuizzSession.savePropositions = JSON.stringify(savePropositions);
     saveQcmQuizzSession.saveClickSelectVerfieAll = JSON.stringify(
-      SaveClickSelectVerfieAll
+      SaveClickSelectVerfieAll,
     );
     saveQcmQuizzSession.saveVerfieReponses = JSON.stringify(SaveVerfieReponses);
     saveQcmQuizzSession.saveQcmIsAnswer = JSON.stringify(SaveQcmIsAnswer);
@@ -2785,7 +2785,7 @@ function QuizBoard(props) {
     });
 
     saveQcmQuizzSession.dateSaveQuizzSession = currentDate.format(
-      "YYYY-MM-DD HH:mm:ss"
+      "YYYY-MM-DD HH:mm:ss",
     );
     /**add play liste***************************************** */
     if (getSourceBtnSaveQuizzSession === "saveQuizz") {
@@ -2799,11 +2799,11 @@ function QuizBoard(props) {
         saveQcmQuizzSession,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
-          "fullSessionsListeLength"
+          "fullSessionsListeLength",
         );
 
         if (fullSessionsListeLength >= 10) {
@@ -2846,14 +2846,14 @@ function QuizBoard(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
-      (saveUserQcm.id = resultUserFinal.id),
+      ((saveUserQcm.id = resultUserFinal.id),
         (saveUserQcm.name = resultUserFinal.name),
         (saveUserQcm.lastname = resultUserFinal.lastname),
         (saveUserQcm.username = resultUserFinal.username),
         (saveUserQcm.password = resultUserFinal.password),
-        (saveUserQcm.role = resultUserFinal.role);
+        (saveUserQcm.role = resultUserFinal.role));
     } catch (Exception) {
       console.log("user not found");
     }
@@ -2877,7 +2877,7 @@ function QuizBoard(props) {
     saveQuizzSession.moduleId = props.moduleId;
     saveQuizzSession.moduleName = props.moduleName;
     saveQuizzSession.selectMultipleCours = JSON.stringify(
-      props.selectMultipleCours
+      props.selectMultipleCours,
     );
     saveQuizzSession.qcmType = props.qcmType;
     saveQuizzSession.minYearQcm = props.minYearQcm;
@@ -2885,32 +2885,32 @@ function QuizBoard(props) {
 
     //***proposition cas clinique*********************************************** */
     saveQuizzSession.savePropositionsClinique = JSON.stringify(
-      props.savePropositionsClinique
+      props.savePropositionsClinique,
     );
     saveQuizzSession.saveClickSelectVerfieAllClinique = JSON.stringify(
-      props.SaveClickSelectVerfieAllClinique
+      props.SaveClickSelectVerfieAllClinique,
     );
     saveQuizzSession.saveVerfieReponsesClinique = JSON.stringify(
-      props.SaveVerfieReponsesClinique
+      props.SaveVerfieReponsesClinique,
     );
     saveQuizzSession.saveQcmIsAnswerClinique = JSON.stringify(
-      props.SaveQcmIsAnswerClinique
+      props.SaveQcmIsAnswerClinique,
     );
     saveQuizzSession.savePercentageCliniqueAmount = JSON.stringify(
-      props.SavePercentageCliniqueAmount
+      props.SavePercentageCliniqueAmount,
     );
     //************************************************************************** */
 
     //*****proposition Qcm CasClinique****************************************** */
     saveQuizzSession.savePropositions = JSON.stringify(savePropositions);
     saveQuizzSession.saveClickSelectVerfieAll = JSON.stringify(
-      SaveClickSelectVerfieAll
+      SaveClickSelectVerfieAll,
     );
     saveQuizzSession.saveVerfieReponses = JSON.stringify(SaveVerfieReponses);
     console.log(props.veriferAllreponseClicked);
     if (props.veriferAllreponseClicked === true) {
       saveQuizzSession.saveQcmIsAnswer = JSON.stringify(
-        SaveClickSelectVerfieAll
+        SaveClickSelectVerfieAll,
       );
     } else if (
       props.veriferAllreponseClicked === false ||
@@ -2934,16 +2934,16 @@ function QuizBoard(props) {
     //****************************************************************************** */
     /**statique Arrays*************************************************************** */
     saveQuizzSession.saveCorrectAnswerClinique = JSON.stringify(
-      props.SaveCorrectAnswerClinique
+      props.SaveCorrectAnswerClinique,
     );
     saveQuizzSession.saveIsClickedCounterClinique = JSON.stringify(
-      props.SaveIsClickedCounterClinique
+      props.SaveIsClickedCounterClinique,
     );
     saveQuizzSession.savePieStatiqueClinique = JSON.stringify(
-      props.savePieStatiqueClinique
+      props.savePieStatiqueClinique,
     );
     saveQuizzSession.saveEachLineStatiqueClinique = JSON.stringify(
-      props.SaveEachLineStatiqueClinique
+      props.SaveEachLineStatiqueClinique,
     );
     /**add play liste***************************************** */
     if (sourceSaveBtn === "saveQuizz") {
@@ -2958,7 +2958,7 @@ function QuizBoard(props) {
     });
 
     saveQuizzSession.dateSaveQuizzSession = currentDate.format(
-      "YYYY-MM-DD HH:mm:ss"
+      "YYYY-MM-DD HH:mm:ss",
     );
 
     saveQuizzSession.existeCasClinique = true;
@@ -2977,11 +2977,11 @@ function QuizBoard(props) {
         saveQuizzSession,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
-          "fullSessionsListeLength"
+          "fullSessionsListeLength",
         );
 
         /*  if (fullSessionsListeLength >= 10) {
@@ -3027,14 +3027,14 @@ function QuizBoard(props) {
     updateQcmCasCliniqueQuizz.savePropositions =
       JSON.stringify(savePropositions);
     updateQcmCasCliniqueQuizz.saveClickSelectVerfieAll = JSON.stringify(
-      SaveClickSelectVerfieAll
+      SaveClickSelectVerfieAll,
     );
     updateQcmCasCliniqueQuizz.saveVerfieReponses =
       JSON.stringify(SaveVerfieReponses);
     console.log(props.veriferAllreponseClicked);
     if (props.veriferAllreponseClicked === true) {
       updateQcmCasCliniqueQuizz.saveQcmIsAnswer = JSON.stringify(
-        SaveClickSelectVerfieAll
+        SaveClickSelectVerfieAll,
       );
     } else if (
       props.veriferAllreponseClicked === false ||
@@ -3051,19 +3051,19 @@ function QuizBoard(props) {
     console.log(props.doneGetAllClinique);
 
     updateQcmCasCliniqueQuizz.savePropositionsClinique = JSON.stringify(
-      props.savePropositionsClinique
+      props.savePropositionsClinique,
     );
     updateQcmCasCliniqueQuizz.saveClickSelectVerfieAllClinique = JSON.stringify(
-      props.SaveClickSelectVerfieAllClinique
+      props.SaveClickSelectVerfieAllClinique,
     );
     updateQcmCasCliniqueQuizz.saveVerfieReponsesClinique = JSON.stringify(
-      props.SaveVerfieReponsesClinique
+      props.SaveVerfieReponsesClinique,
     );
     updateQcmCasCliniqueQuizz.saveQcmIsAnswerClinique = JSON.stringify(
-      props.SaveQcmIsAnswerClinique
+      props.SaveQcmIsAnswerClinique,
     );
     updateQcmCasCliniqueQuizz.savePercentageCliniqueAmount = JSON.stringify(
-      props.SavePercentageCliniqueAmount
+      props.SavePercentageCliniqueAmount,
     );
 
     //**statique ***************************************************************** */
@@ -3079,16 +3079,16 @@ function QuizBoard(props) {
     //**statique ***************************************************************** */
 
     updateQcmCasCliniqueQuizz.saveCorrectAnswerClinique = JSON.stringify(
-      props.SaveCorrectAnswerClinique
+      props.SaveCorrectAnswerClinique,
     );
     updateQcmCasCliniqueQuizz.saveIsClickedCounterClinique = JSON.stringify(
-      props.SaveIsClickedCounterClinique
+      props.SaveIsClickedCounterClinique,
     );
     updateQcmCasCliniqueQuizz.savePieStatiqueClinique = JSON.stringify(
-      props.savePieStatiqueClinique
+      props.savePieStatiqueClinique,
     );
     updateQcmCasCliniqueQuizz.saveEachLineStatiqueClinique = JSON.stringify(
-      props.SaveEachLineStatiqueClinique
+      props.SaveEachLineStatiqueClinique,
     );
 
     //****************************************************************************** */
@@ -3099,7 +3099,7 @@ function QuizBoard(props) {
         updateQcmCasCliniqueQuizz,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         toast.success("succes modification!");
@@ -3128,7 +3128,7 @@ function QuizBoard(props) {
     console.log(qcmQuizzId);
     updateQcmQuizz.savePropositions = JSON.stringify(savePropositions);
     updateQcmQuizz.saveClickSelectVerfieAll = JSON.stringify(
-      SaveClickSelectVerfieAll
+      SaveClickSelectVerfieAll,
     );
     updateQcmQuizz.saveVerfieReponses = JSON.stringify(SaveVerfieReponses);
     updateQcmQuizz.saveQcmIsAnswer = JSON.stringify(SaveQcmIsAnswer);
@@ -3147,7 +3147,7 @@ function QuizBoard(props) {
         updateQcmQuizz,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         toast.success("succes modification!");
@@ -3184,7 +3184,7 @@ function QuizBoard(props) {
       `https://goatqcm-instance.com/${sourceSessio}/${lastSessionId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
   };
   const handleChatBtn = () => {
@@ -3212,7 +3212,7 @@ function QuizBoard(props) {
     try {
       await axios.post(
         `https://goatqcm-instance.com/publiction/posts`,
-        newPost
+        newPost,
       );
       setNewPost({
         content: "",
@@ -3238,7 +3238,7 @@ function QuizBoard(props) {
     let contentqcm = result.data.qcmContent;
 
     let response = await axios.get(
-      `https://goatqcm-instance.com/qcms/${qcmId}/reponses`
+      `https://goatqcm-instance.com/qcms/${qcmId}/reponses`,
     );
     console.log(response.data);
     let allPropositions = response.data.propositionQcm || [];
@@ -3322,7 +3322,7 @@ function QuizBoard(props) {
       0,
       0,
       completedCrop.width,
-      completedCrop.height
+      completedCrop.height,
     );
 
     const croppedDataUrl = canvas.toDataURL("image/png");
@@ -3370,7 +3370,7 @@ function QuizBoard(props) {
 
   const getAllPLayListe = async () => {
     let allPlayListe = await axios.get(
-      `${BASE_URL}/playliste/specifiqueuser/${userIdToken}`
+      `${BASE_URL}/playliste/specifiqueuser/${userIdToken}`,
     );
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);
@@ -3644,7 +3644,7 @@ function QuizBoard(props) {
                                       }}
                                     />
                                   </div>
-                                  <div className={`${classes.chatgpt} `}>
+                                  {/* <div className={`${classes.chatgpt} `}>
                                     <img
                                       src={chatgpt}
                                       height="100%"
@@ -3654,7 +3654,7 @@ function QuizBoard(props) {
                                       }}
                                     />
                                   </div>
-                                  {/* <div className={`${classes.deepseek} `}>
+                                   <div className={`${classes.deepseek} `}>
                                     <img
                                       src={deepseek}
                                       height="100%"
@@ -3976,27 +3976,28 @@ function QuizBoard(props) {
                                             ? propo.reponseBool === true
                                               ? COLORS[1]
                                               : savePropositions[
-                                                  currentIndex.value
-                                                ][indexPropo] === propo.id &&
-                                                propo.reponseBool === false
-                                              ? COLORS[0]
-                                              : ""
+                                                    currentIndex.value
+                                                  ][indexPropo] === propo.id &&
+                                                  propo.reponseBool === false
+                                                ? COLORS[0]
+                                                : ""
                                             : (SaveClickSelectVerfieAll[
-                                                currentIndex.value
-                                              ] === currentIndex.value &&
-                                                TrueFullInsertClr === true) ||
-                                              SaveQcmIsAnswer[
-                                                currentIndex.value
-                                              ] === currentIndex.value
-                                            ? propo.reponseBool === true
-                                              ? COLORS[1]
-                                              : savePropositions[
                                                   currentIndex.value
-                                                ][indexPropo] === propo.id &&
-                                                propo.reponseBool === false
-                                              ? COLORS[0]
-                                              : ""
-                                            : "",
+                                                ] === currentIndex.value &&
+                                                  TrueFullInsertClr === true) ||
+                                                SaveQcmIsAnswer[
+                                                  currentIndex.value
+                                                ] === currentIndex.value
+                                              ? propo.reponseBool === true
+                                                ? COLORS[1]
+                                                : savePropositions[
+                                                      currentIndex.value
+                                                    ][indexPropo] ===
+                                                      propo.id &&
+                                                    propo.reponseBool === false
+                                                  ? COLORS[0]
+                                                  : ""
+                                              : "",
                                       }}
                                       className={
                                         savePropositions[currentIndex.value][
@@ -4013,7 +4014,7 @@ function QuizBoard(props) {
                                           indexPropo,
                                           propo.qcmStandard.id,
                                           propo.qcmStandard.coursMed.coursName,
-                                          cameFrome[0]
+                                          cameFrome[0],
                                         );
                                       }}
                                     >
@@ -4064,7 +4065,7 @@ function QuizBoard(props) {
                                       className={`${classes.BntVerifierrpnse} btn btn-warning`}
                                       onClick={(e) => {
                                         handleClickiVerifieReponse(
-                                          currentIndex.value
+                                          currentIndex.value,
                                         );
 
                                         setTrueInsertClr(currentIndex.value);
@@ -4072,10 +4073,12 @@ function QuizBoard(props) {
                                         saveQcmIndex.value[currentIndex.value] =
                                           currentIndex.value;
                                         console.log(
-                                          saveQcmIndex.value[currentIndex.value]
+                                          saveQcmIndex.value[
+                                            currentIndex.value
+                                          ],
                                         );
                                         handeldescription(
-                                          Proposition[0].qcmStandard.id
+                                          Proposition[0].qcmStandard.id,
                                         );
                                       }}
                                     >
@@ -4092,7 +4095,7 @@ function QuizBoard(props) {
                                       className={`${classes.BntVerifierrpnse} btn btn-warning`}
                                       onClick={(e) => {
                                         handeldescription(
-                                          Proposition[0].qcmStandard.id
+                                          Proposition[0].qcmStandard.id,
                                         );
                                       }}
                                     >
@@ -4213,7 +4216,7 @@ function QuizBoard(props) {
                                     handlejadorebtn(
                                       commentary.id,
                                       commentary.likes,
-                                      commentary.qcmStandard.id
+                                      commentary.qcmStandard.id,
                                     );
                                   }
                                 }}
@@ -4314,7 +4317,7 @@ function QuizBoard(props) {
                           style={{ width: "100%" }}
                           onEmojiClick={(emojiObject) => {
                             setInputStr(
-                              (prevMsg) => prevMsg + emojiObject.emoji
+                              (prevMsg) => prevMsg + emojiObject.emoji,
                             );
                             setShowPicker(false);
                           }}
@@ -4627,7 +4630,7 @@ function QuizBoard(props) {
                                           }}
                                         />
                                       </div>
-                                      <div
+                                      {/* <div
                                         className={`${classes.chatgpt_phone} `}
                                       >
                                         <img
@@ -4639,7 +4642,7 @@ function QuizBoard(props) {
                                           }}
                                         />
                                       </div>
-                                      {/*  <div
+                                        <div
                                         className={`${classes.deepseek_phone} `}
                                       >
                                         <img
@@ -4851,30 +4854,32 @@ function QuizBoard(props) {
                                                 ? propo.reponseBool === true
                                                   ? COLORS[1]
                                                   : savePropositions[
-                                                      currentIndex.value
-                                                    ][indexPropo] ===
-                                                      propo.id &&
-                                                    propo.reponseBool === false
-                                                  ? COLORS[0]
-                                                  : ""
+                                                        currentIndex.value
+                                                      ][indexPropo] ===
+                                                        propo.id &&
+                                                      propo.reponseBool ===
+                                                        false
+                                                    ? COLORS[0]
+                                                    : ""
                                                 : (SaveClickSelectVerfieAll[
-                                                    currentIndex.value
-                                                  ] === currentIndex.value &&
-                                                    TrueFullInsertClr ===
-                                                      true) ||
-                                                  SaveQcmIsAnswer[
-                                                    currentIndex.value
-                                                  ] === currentIndex.value
-                                                ? propo.reponseBool === true
-                                                  ? COLORS[1]
-                                                  : savePropositions[
                                                       currentIndex.value
-                                                    ][indexPropo] ===
-                                                      propo.id &&
-                                                    propo.reponseBool === false
-                                                  ? COLORS[0]
-                                                  : ""
-                                                : "",
+                                                    ] === currentIndex.value &&
+                                                      TrueFullInsertClr ===
+                                                        true) ||
+                                                    SaveQcmIsAnswer[
+                                                      currentIndex.value
+                                                    ] === currentIndex.value
+                                                  ? propo.reponseBool === true
+                                                    ? COLORS[1]
+                                                    : savePropositions[
+                                                          currentIndex.value
+                                                        ][indexPropo] ===
+                                                          propo.id &&
+                                                        propo.reponseBool ===
+                                                          false
+                                                      ? COLORS[0]
+                                                      : ""
+                                                  : "",
                                           }}
                                           className={
                                             savePropositions[
@@ -4892,7 +4897,7 @@ function QuizBoard(props) {
                                               propo.qcmStandard.id,
                                               propo.qcmStandard.coursMed
                                                 .coursName,
-                                              cameFrome[0]
+                                              cameFrome[0],
                                             );
                                           }}
                                         >
@@ -4959,11 +4964,11 @@ function QuizBoard(props) {
                                           className={`${classes.BntVerifierrpnse_phone} `}
                                           onClick={(e) => {
                                             handleClickiVerifieReponse(
-                                              currentIndex.value
+                                              currentIndex.value,
                                             );
 
                                             setTrueInsertClr(
-                                              currentIndex.value
+                                              currentIndex.value,
                                             );
 
                                             saveQcmIndex.value[
@@ -4972,10 +4977,10 @@ function QuizBoard(props) {
                                             console.log(
                                               saveQcmIndex.value[
                                                 currentIndex.value
-                                              ]
+                                              ],
                                             );
                                             handeldescription(
-                                              Proposition[0].qcmStandard.id
+                                              Proposition[0].qcmStandard.id,
                                             );
                                           }}
                                         />
@@ -4990,7 +4995,7 @@ function QuizBoard(props) {
                                           className={`${classes.button_10} `}
                                           onClick={(e) => {
                                             handeldescription(
-                                              Proposition[0].qcmStandard.id
+                                              Proposition[0].qcmStandard.id,
                                             );
                                           }}
                                         >
@@ -5031,7 +5036,7 @@ function QuizBoard(props) {
                                   </>
                                 );
                               }
-                            }
+                            },
                           )}
                         </div>
                       </div>
@@ -5164,7 +5169,7 @@ function QuizBoard(props) {
                                     handlejadorebtn(
                                       commentary.id,
                                       commentary.likes,
-                                      commentary.qcmStandard.id
+                                      commentary.qcmStandard.id,
                                     );
                                   }
                                 }}

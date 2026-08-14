@@ -75,7 +75,7 @@ ChartJS.register(
   Legend,
   CategoryScale,
   LinearScale,
-  BarElement
+  BarElement,
 );
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client";
@@ -247,7 +247,7 @@ function QuizBoardClinique(props) {
   let saveCurrentCorretAnswer = [];
   let saveIsClickedCounter = [];
   const [SaveVerfieReponsesClinique, setSaveVerfieReponsesClinique] = useState(
-    []
+    [],
   );
   let saveCurrentQcmIsAnswr = useSignal([]);
   let saveCurrentVerRep = useSignal([]);
@@ -269,10 +269,10 @@ function QuizBoardClinique(props) {
   const [SelectcasCliniqueIndex, setSelectcasCliniqueIndex] = useState("");
   let [CasCliniqueClicked, setCasCliniqueClicked] = useState("");
   let [saveDoneLoadQcmsCasClinique, setSaveDoneLoadQcmsCasClinique] = useState(
-    []
+    [],
   );
   const [SaveCorrectAnswerClinique, setSaveCorrectAnswerClinique] = useState(
-    []
+    [],
   );
   const [SaveIsClickedCounterClinique, setSaveIsClickedCounterClinique] =
     useState([]);
@@ -521,14 +521,14 @@ function QuizBoardClinique(props) {
   //****test if desc existe******************** */
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
-      `https://goatqcm-instance.com/fulldesc/clinique/descqcm/${qcmId}`
+      `https://goatqcm-instance.com/fulldesc/clinique/descqcm/${qcmId}`,
     );
 
     console.log(fullDescResult.data);
     if (fullDescResult.data !== null) {
       setFullDescEdite(fullDescResult.data);
       setFileDisplayEdite(
-        `https://goatqcm-instance.com/image/clinique/${qcmId}/${fullDescResult.data.imageName}`
+        `https://goatqcm-instance.com/image/clinique/${qcmId}/${fullDescResult.data.imageName}`,
       );
 
       setLoadImage(fullDescResult.data);
@@ -551,7 +551,7 @@ function QuizBoardClinique(props) {
     await axios
       .put(
         `https://goatqcm-instance.com/image/clinique/updateimage/${qcmId}`,
-        formData
+        formData,
       )
       .then((res) => {
         toast.success("Succes Editing");
@@ -568,7 +568,7 @@ function QuizBoardClinique(props) {
     await axios
       .put(
         `https://goatqcm-instance.com/image/clinique/updatedesc/${qcmId}`,
-        formData
+        formData,
       )
       .then((res) => {
         console.log("success updating");
@@ -596,7 +596,7 @@ function QuizBoardClinique(props) {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       )
       .then((res) => {
         toast.success("Image Commentaire inseré avec succes");
@@ -609,7 +609,7 @@ function QuizBoardClinique(props) {
   const AjouterDesc = async (qcmId) => {
     testDescExsite(qcmId);
     const result = await axios.get(
-      `https://goatqcm-instance.com/qcmsclinique/${qcmId}`
+      `https://goatqcm-instance.com/qcmsclinique/${qcmId}`,
     );
     console.log(result.data);
     const formData = new FormData();
@@ -803,7 +803,7 @@ function QuizBoardClinique(props) {
         `https://goatqcm-instance.com/chat/clear/${shareScreenCode}`,
         {
           method: "POST",
-        }
+        },
       );
     } catch (Exception) {}
   };
@@ -832,7 +832,7 @@ function QuizBoardClinique(props) {
           handlePrevClick({ value: indexClinique });
         } else if (latest.content.startsWith("CliniqueClickIndex")) {
           const indexClinique = latest.content.slice(
-            "CliniqueClickIndex".length
+            "CliniqueClickIndex".length,
           );
           console.log(indexClinique);
           handleItemClick({ casCliniqueIndex: indexClinique });
@@ -862,7 +862,7 @@ function QuizBoardClinique(props) {
                 propoId,
                 qcmId,
                 courName,
-                cameFrome[1]
+                cameFrome[1],
               );
             }
           } catch (e) {
@@ -897,10 +897,10 @@ function QuizBoardClinique(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
 
-      (saveUser.name = resultUserFinal.name), console.log(saveUser);
+      ((saveUser.name = resultUserFinal.name), console.log(saveUser));
       console.log(resultUserFinal.name);
       setNickname(resultUserFinal.name);
     } catch (Exception) {
@@ -919,7 +919,7 @@ function QuizBoardClinique(props) {
     const getYear = document.getElementById("year").value;
     console.log(getYear);
     const result = await axios.get(
-      `https://goatqcm-instance.com/casclinique/get_groupes_year/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`
+      `https://goatqcm-instance.com/casclinique/get_groupes_year/${props.moduleId}/${getYear}/${props.SelectedSourceExmn}`,
     );
     document.getElementById("groupepermutation").options[0].selected = true;
     setGroupesPermut(result.data);
@@ -977,7 +977,7 @@ function QuizBoardClinique(props) {
               }`,
               {
                 headers: { Authorization: `Bearer ${token}` },
-              }
+              },
             );
             saveAllCasClinique.value = result.data;
 
@@ -1079,7 +1079,7 @@ function QuizBoardClinique(props) {
               }`,
               {
                 headers: { Authorization: `Bearer ${token}` },
-              }
+              },
             );
             saveAllCasClinique.value = result.data;
           } catch {
@@ -1148,7 +1148,7 @@ function QuizBoardClinique(props) {
         const getCurrentYear = document.getElementById("year").value;
         try {
           const result = await axios.get(
-            `https://goatqcm-instance.com/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`
+            `https://goatqcm-instance.com/casclinique/getcasclinique/${props.moduleId}/${getCurrentYear}/${getCurrentGroupePerm}/${props.SelectedSourceExmn}`,
           );
 
           setShowCasClinique([]);
@@ -1179,7 +1179,7 @@ function QuizBoardClinique(props) {
           if (props.checkParSjtBiologieClinique === "CliniqueParSujet") {
             try {
               const result = await axios.get(
-                `https://goatqcm-instance.com/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`
+                `https://goatqcm-instance.com/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.getGroupePerm}/${props.SelectedSourceExmn}`,
               );
 
               console.log(props.getYear);
@@ -1210,7 +1210,7 @@ function QuizBoardClinique(props) {
           } else if (props.checkParSjtBiologieClinique === "BiologieParSujet") {
             try {
               const result = await axios.get(
-                `https://goatqcm-instance.com/casclinique/getcasclinique/biologie/${props.moduleId}/${props.getYear}/Biologie`
+                `https://goatqcm-instance.com/casclinique/getcasclinique/biologie/${props.moduleId}/${props.getYear}/Biologie`,
               );
 
               setShowCasClinique([]);
@@ -1240,7 +1240,7 @@ function QuizBoardClinique(props) {
         } else if (props.SelectedSourceExmn === "Résidanat Blida") {
           try {
             const result = await axios.get(
-              `https://goatqcm-instance.com/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`
+              `https://goatqcm-instance.com/casclinique/getcasclinique/${props.moduleId}/${props.getYear}/${props.SelectedSourceExmn}`,
             );
             console.log(props.getYear);
             console.log(props.getGroupePerm);
@@ -1290,7 +1290,7 @@ function QuizBoardClinique(props) {
       setTrueFullInsertClrClinique(props.TrueFullInsertClrClinique);
       setSavePercentageCliniqueAmount(props.SavePercentageCliniqueAmount);
       setSaveClickSelectVerfieAllClinique(
-        props.SaveClickSelectVerfieAllClinique
+        props.SaveClickSelectVerfieAllClinique,
       );
       //clinique State*****************************************************
       setSaveCorrectAnswerClinique(props.SaveCorrectAnswerClinique);
@@ -1318,7 +1318,7 @@ function QuizBoardClinique(props) {
       setSaveQcmIsAnswerClinique(props.SaveQcmIsAnswerClinique);
       setSavePercentageCliniqueAmount(props.SavePercentageCliniqueAmount);
       setSaveClickSelectVerfieAllClinique(
-        props.SaveClickSelectVerfieAllClinique
+        props.SaveClickSelectVerfieAllClinique,
       );
 
       //clinique State*****************************************************
@@ -1347,7 +1347,7 @@ function QuizBoardClinique(props) {
       setSaveQcmIsAnswerClinique(props.SaveQcmIsAnswerClinique);
       setSavePercentageCliniqueAmount(props.SavePercentageCliniqueAmount);
       setSaveClickSelectVerfieAllClinique(
-        props.SaveClickSelectVerfieAllClinique
+        props.SaveClickSelectVerfieAllClinique,
       );
 
       //clinique State******en miniscul psk te3 savequizz***********************
@@ -1377,7 +1377,7 @@ function QuizBoardClinique(props) {
         saveIsClickedCounter = [];
         //********************************************************* */
         const result = await axios.get(
-          `https://goatqcm-instance.com/casclinique/${getCasClinique.value[clnqIdex].id}/qcms`
+          `https://goatqcm-instance.com/casclinique/${getCasClinique.value[clnqIdex].id}/qcms`,
         );
         /***save kaml les qcms d'un seule cour***hada yetenesializa chq iteration de cour a 0************** */
         AllNbrQcmsOfCourEachCasCliniqe.value =
@@ -1460,7 +1460,7 @@ function QuizBoardClinique(props) {
         saveCurrentPecentage = [];
         //********************************************************* */
         const result = await axios.get(
-          `https://goatqcm-instance.com/casclinique/${getCasClinique.value[clnqIdex].id}/qcms`
+          `https://goatqcm-instance.com/casclinique/${getCasClinique.value[clnqIdex].id}/qcms`,
         );
         /***save kaml les qcms d'un seule cour***hada yetenesializa chq iteration de cour a 0************** */
         AllNbrQcmsOfCourEachCasCliniqe.value =
@@ -1534,7 +1534,7 @@ function QuizBoardClinique(props) {
         ) {
           await axios
             .get(
-              `https://goatqcm-instance.com/qcmsclinique/${getQcms.value[clncIdex][qcmIndex].id}/reponsesqcmClinique`
+              `https://goatqcm-instance.com/qcmsclinique/${getQcms.value[clncIdex][qcmIndex].id}/reponsesqcmClinique`,
             )
             .then((result) => {
               //getQcms.value[clncIdex][qcmIndex][qcmIndex] = result.data;
@@ -1650,7 +1650,7 @@ function QuizBoardClinique(props) {
         ) {
           await axios
             .get(
-              `https://goatqcm-instance.com/qcmsclinique/${getQcms.value[clncIdex][qcmIndex].id}/reponsesqcmClinique`
+              `https://goatqcm-instance.com/qcmsclinique/${getQcms.value[clncIdex][qcmIndex].id}/reponsesqcmClinique`,
             )
             .then((result) => {
               //getQcms.value[clncIdex][qcmIndex][qcmIndex] = result.data;
@@ -1889,8 +1889,8 @@ function QuizBoardClinique(props) {
     try {
       setCasCliniqueClicked(
         CasCliniqueClicked.filter(
-          (clinique) => clinique !== saveLastCliniqueOpenIndex.value
-        )
+          (clinique) => clinique !== saveLastCliniqueOpenIndex.value,
+        ),
       );
     } catch (Exception) {
       console.log("not click yet");
@@ -1899,7 +1899,9 @@ function QuizBoardClinique(props) {
       setCasCliniqueClicked(currentIndex.value);
     } else if (CasCliniqueClicked === currentIndex.value) {
       setCasCliniqueClicked(
-        CasCliniqueClicked.filter((clinique) => clinique !== currentIndex.value)
+        CasCliniqueClicked.filter(
+          (clinique) => clinique !== currentIndex.value,
+        ),
       );
     }
 
@@ -1975,8 +1977,8 @@ function QuizBoardClinique(props) {
     try {
       setCasCliniqueClicked(
         CasCliniqueClicked.filter(
-          (clinique) => clinique !== saveLastCliniqueOpenIndex.value
-        )
+          (clinique) => clinique !== saveLastCliniqueOpenIndex.value,
+        ),
       );
     } catch (Exception) {
       console.log("not click yet");
@@ -1985,7 +1987,9 @@ function QuizBoardClinique(props) {
       setCasCliniqueClicked(currentIndex.value);
     } else if (CasCliniqueClicked === currentIndex.value) {
       setCasCliniqueClicked(
-        CasCliniqueClicked.filter((clinique) => clinique !== currentIndex.value)
+        CasCliniqueClicked.filter(
+          (clinique) => clinique !== currentIndex.value,
+        ),
       );
     }
 
@@ -2187,7 +2191,7 @@ function QuizBoardClinique(props) {
     propoId,
     qcmId,
     courName,
-    comingFrom
+    comingFrom,
   ) => {
     if (e?.preventDefault) e.preventDefault();
     console.log(courName);
@@ -2220,7 +2224,7 @@ function QuizBoardClinique(props) {
     }
     //save proposition selected &&ClickedCounter*********************************************************
     const updatedArraySavePropositionsClinique = savePropositionsClinique.map(
-      (innerArray) => [...innerArray]
+      (innerArray) => [...innerArray],
     );
     const updatedSaveIsClickedCounterClinique = [
       ...SaveIsClickedCounterClinique,
@@ -2284,7 +2288,7 @@ function QuizBoardClinique(props) {
         `https://goatqcm-instance.com/reponses/countselectclinique/${propoId}`,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {})
       .catch((err) => console.log(err));
@@ -2292,7 +2296,7 @@ function QuizBoardClinique(props) {
 
     //******get all selected click********************************************** */
     const result = await axios.get(
-      `${BASE_URL}/qcmsclinique/${qcmId}/reponsesqcmClinique`
+      `${BASE_URL}/qcmsclinique/${qcmId}/reponsesqcmClinique`,
     );
     saveAllCouentSelect.value = result.data;
     saveCurrentAmount = [];
@@ -2302,7 +2306,7 @@ function QuizBoardClinique(props) {
     console.log(saveCurrentAmount);
     const sum = saveCurrentAmount.reduce(
       (accumulator, currentValue) => accumulator + currentValue,
-      0
+      0,
     );
     //*************************************************************************** */
     //********update perentage array******************************************** */
@@ -2545,18 +2549,18 @@ function QuizBoardClinique(props) {
     ) {
       setModalDoneQuizIsOpen(true);
       setShowNoSelectPropoMessage(
-        "Il y a des questions à laquelle vous n'avez pas répondu dans cette quizz (Qcms,et CasClinique)"
+        "Il y a des questions à laquelle vous n'avez pas répondu dans cette quizz (Qcms,et CasClinique)",
       );
     } else if (IsRepondeAllSignal.value === false) {
       setShowNoSelectPropoMessage(
-        "Il y a une question à laquelle vous n'avez pas répondu dans ces cas Clinique"
+        "Il y a une question à laquelle vous n'avez pas répondu dans ces cas Clinique",
       );
 
       setModalDoneQuizIsOpen(true);
     } else if (IsRepondeAllSignalQcm.value === false) {
       console.log("immm  heree");
       setShowNoSelectPropoMessage(
-        "Il y a des questions à laquelle vous n'avez pas répondu dans cette quizz"
+        "Il y a des questions à laquelle vous n'avez pas répondu dans cette quizz",
       );
       setModalDoneQuizIsOpen(true);
     }
@@ -2607,7 +2611,7 @@ function QuizBoardClinique(props) {
     }
     //**end all statique********************************************************************************************** */
     setSaveQcmIsAnswerClinique(
-      JSON.parse(JSON.stringify(SaveClickSelectVerfieAllClinique))
+      JSON.parse(JSON.stringify(SaveClickSelectVerfieAllClinique)),
     );
 
     //*****set if verier all reponse true**************************** */
@@ -2633,7 +2637,7 @@ function QuizBoardClinique(props) {
   //******************************************************** */
   const handleSaveCasCliniqueQuizzBtn = (
     sourceQuizzSessionName,
-    sourceSaveBtn
+    sourceSaveBtn,
   ) => {
     if (props.qcmType === "Cas Clinique") {
       handleSaveCasCliniqueQuizz(sourceQuizzSessionName, sourceSaveBtn);
@@ -2643,7 +2647,7 @@ function QuizBoardClinique(props) {
   };
   const handleSaveCasCliniqueQuizz = async (
     sourceQuizzSessionName,
-    sourceSaveBtn
+    sourceSaveBtn,
   ) => {
     savePieStatiqueClinique[2] =
       saveCountAllQcmsClinique.value -
@@ -2666,14 +2670,14 @@ function QuizBoardClinique(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
-      (saveUserCasClinique.id = resultUserFinal.id),
+      ((saveUserCasClinique.id = resultUserFinal.id),
         (saveUserCasClinique.name = resultUserFinal.name),
         (saveUserCasClinique.lastname = resultUserFinal.lastname),
         (saveUserCasClinique.username = resultUserFinal.username),
         (saveUserCasClinique.password = resultUserFinal.password),
-        (saveUserCasClinique.role = resultUserFinal.role);
+        (saveUserCasClinique.role = resultUserFinal.role));
     } catch (Exception) {
       console.log("user not found");
     }
@@ -2690,38 +2694,38 @@ function QuizBoardClinique(props) {
     saveQuizzSession.moduleId = props.moduleId;
     saveQuizzSession.moduleName = props.moduleName;
     saveQuizzSession.selectMultipleCours = JSON.stringify(
-      props.selectMultipleCours
+      props.selectMultipleCours,
     );
     saveQuizzSession.qcmType = props.qcmType;
     saveQuizzSession.minYearQcm = props.minYearQcm;
     saveQuizzSession.maxYearQcm = props.maxYearQcm;
     saveQuizzSession.savePropositionsClinique = JSON.stringify(
-      savePropositionsClinique
+      savePropositionsClinique,
     );
     saveQuizzSession.saveClickSelectVerfieAllClinique = JSON.stringify(
-      SaveClickSelectVerfieAllClinique
+      SaveClickSelectVerfieAllClinique,
     );
     saveQuizzSession.saveVerfieReponsesClinique = JSON.stringify(
-      SaveVerfieReponsesClinique
+      SaveVerfieReponsesClinique,
     );
     saveQuizzSession.saveQcmIsAnswerClinique = JSON.stringify(
-      SaveQcmIsAnswerClinique
+      SaveQcmIsAnswerClinique,
     );
     saveQuizzSession.savePercentageCliniqueAmount = JSON.stringify(
-      SavePercentageCliniqueAmount
+      SavePercentageCliniqueAmount,
     );
     /**statique Arrays*************************************************************** */
     saveQuizzSession.saveCorrectAnswerClinique = JSON.stringify(
-      SaveCorrectAnswerClinique
+      SaveCorrectAnswerClinique,
     );
     saveQuizzSession.saveIsClickedCounterClinique = JSON.stringify(
-      SaveIsClickedCounterClinique
+      SaveIsClickedCounterClinique,
     );
     saveQuizzSession.savePieStatiqueClinique = JSON.stringify(
-      savePieStatiqueClinique
+      savePieStatiqueClinique,
     );
     saveQuizzSession.saveEachLineStatiqueClinique = JSON.stringify(
-      SaveEachLineStatiqueClinique
+      SaveEachLineStatiqueClinique,
     );
     if (sourceQuizzSessionName === "quizzname") {
       saveQuizzSession.playListe = { id: playListe.id }; // only send ID
@@ -2732,7 +2736,7 @@ function QuizBoardClinique(props) {
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
     saveQuizzSession.dateSaveQuizzSession = currentDate.format(
-      "YYYY-MM-DD HH:mm:ss"
+      "YYYY-MM-DD HH:mm:ss",
     );
     await axios
       .post(
@@ -2740,11 +2744,11 @@ function QuizBoardClinique(props) {
         saveQuizzSession,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
-          "fullSessionsListeLength"
+          "fullSessionsListeLength",
         );
 
         /* if (fullSessionsListeLength >= 10) {
@@ -2765,7 +2769,7 @@ function QuizBoardClinique(props) {
   //********************************************************************* */
   const handleSaveQcmCasCliniqueQuizz = async (
     sourceQuizzSessionName,
-    sourceSaveBtn
+    sourceSaveBtn,
   ) => {
     savePieStatiqueClinique[2] =
       saveCountAllQcmsClinique.value -
@@ -2786,14 +2790,14 @@ function QuizBoardClinique(props) {
     try {
       const resultUserFinal = await UserService.getUserByuserName(
         username,
-        token
+        token,
       );
-      (saveUserCasClinique.id = resultUserFinal.id),
+      ((saveUserCasClinique.id = resultUserFinal.id),
         (saveUserCasClinique.name = resultUserFinal.name),
         (saveUserCasClinique.lastname = resultUserFinal.lastname),
         (saveUserCasClinique.username = resultUserFinal.username),
         (saveUserCasClinique.password = resultUserFinal.password),
-        (saveUserCasClinique.role = resultUserFinal.role);
+        (saveUserCasClinique.role = resultUserFinal.role));
     } catch (Exception) {
       console.log("user not found");
     }
@@ -2817,72 +2821,72 @@ function QuizBoardClinique(props) {
     saveQuizzSession.moduleId = props.moduleId;
     saveQuizzSession.moduleName = props.moduleName;
     saveQuizzSession.selectMultipleCours = JSON.stringify(
-      props.selectMultipleCours
+      props.selectMultipleCours,
     );
     saveQuizzSession.qcmType = props.qcmType;
     saveQuizzSession.minYearQcm = props.minYearQcm;
     saveQuizzSession.maxYearQcm = props.maxYearQcm;
     //***proposition cas clinique*********************************************** */
     saveQuizzSession.savePropositionsClinique = JSON.stringify(
-      savePropositionsClinique
+      savePropositionsClinique,
     );
     saveQuizzSession.saveClickSelectVerfieAllClinique = JSON.stringify(
-      SaveClickSelectVerfieAllClinique
+      SaveClickSelectVerfieAllClinique,
     );
     saveQuizzSession.saveVerfieReponsesClinique = JSON.stringify(
-      SaveVerfieReponsesClinique
+      SaveVerfieReponsesClinique,
     );
     saveQuizzSession.saveQcmIsAnswerClinique = JSON.stringify(
-      SaveQcmIsAnswerClinique
+      SaveQcmIsAnswerClinique,
     );
     saveQuizzSession.savePercentageCliniqueAmount = JSON.stringify(
-      SavePercentageCliniqueAmount
+      SavePercentageCliniqueAmount,
     );
     //************************************************************************** */
     //*****proposition Qcm CasClinique****************************************** */
     saveQuizzSession.savePropositions = JSON.stringify(props.savePropositions);
     saveQuizzSession.saveClickSelectVerfieAll = JSON.stringify(
-      props.SaveClickSelectVerfieAll
+      props.SaveClickSelectVerfieAll,
     );
     saveQuizzSession.saveVerfieReponses = JSON.stringify(
-      props.SaveVerfieReponses
+      props.SaveVerfieReponses,
     );
     if (veriferAllreponseClicked === true) {
       saveQuizzSession.saveQcmIsAnswer = JSON.stringify(
-        props.SaveClickSelectVerfieAll
+        props.SaveClickSelectVerfieAll,
       );
     } else if (veriferAllreponseClicked === false) {
       saveQuizzSession.saveQcmIsAnswer = JSON.stringify(props.SaveQcmIsAnswer);
     }
 
     saveQuizzSession.savePercentageAmount = JSON.stringify(
-      props.SavePercentageAmount
+      props.SavePercentageAmount,
     );
     //*************************************************************************** */
     //**statique ***************************************************************** */
     saveQuizzSession.saveCorrectAnswer = JSON.stringify(
-      props.SaveCorrectAnswer
+      props.SaveCorrectAnswer,
     );
     saveQuizzSession.saveIsClickedCounter = JSON.stringify(
-      props.SaveIsClickedCounter
+      props.SaveIsClickedCounter,
     );
     saveQuizzSession.savePieStatique = JSON.stringify(props.savePieStatique);
     saveQuizzSession.saveEachLineStatique = JSON.stringify(
-      props.SaveEachLineStatique
+      props.SaveEachLineStatique,
     );
     //****************************************************************************** */
     /**statique Arrays*************************************************************** */
     saveQuizzSession.saveCorrectAnswerClinique = JSON.stringify(
-      SaveCorrectAnswerClinique
+      SaveCorrectAnswerClinique,
     );
     saveQuizzSession.saveIsClickedCounterClinique = JSON.stringify(
-      SaveIsClickedCounterClinique
+      SaveIsClickedCounterClinique,
     );
     saveQuizzSession.savePieStatiqueClinique = JSON.stringify(
-      savePieStatiqueClinique
+      savePieStatiqueClinique,
     );
     saveQuizzSession.saveEachLineStatiqueClinique = JSON.stringify(
-      SaveEachLineStatiqueClinique
+      SaveEachLineStatiqueClinique,
     );
 
     if (sourceSaveBtn === "savequizzsource") {
@@ -2894,7 +2898,7 @@ function QuizBoardClinique(props) {
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
     saveQuizzSession.dateSaveQuizzSession = currentDate.format(
-      "YYYY-MM-DD HH:mm:ss"
+      "YYYY-MM-DD HH:mm:ss",
     );
     saveQuizzSession.existeCasClinique = true;
     saveQuizzSession.doneGetAllClinique = true;
@@ -2904,11 +2908,11 @@ function QuizBoardClinique(props) {
         saveQuizzSession,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         let fullSessionsListeLength = +localStorage.getItem(
-          "fullSessionsListeLength"
+          "fullSessionsListeLength",
         );
 
         if (fullSessionsListeLength >= 10) {
@@ -2945,32 +2949,32 @@ function QuizBoardClinique(props) {
 
     //****update cas clinique*********************************** */
     updateCasCliniqueQuizz.savePropositionsClinique = JSON.stringify(
-      savePropositionsClinique
+      savePropositionsClinique,
     );
     updateCasCliniqueQuizz.saveClickSelectVerfieAllClinique = JSON.stringify(
-      SaveClickSelectVerfieAllClinique
+      SaveClickSelectVerfieAllClinique,
     );
     updateCasCliniqueQuizz.saveVerfieReponsesClinique = JSON.stringify(
-      SaveVerfieReponsesClinique
+      SaveVerfieReponsesClinique,
     );
     updateCasCliniqueQuizz.saveQcmIsAnswerClinique = JSON.stringify(
-      SaveQcmIsAnswerClinique
+      SaveQcmIsAnswerClinique,
     );
     updateCasCliniqueQuizz.savePercentageCliniqueAmount = JSON.stringify(
-      SavePercentageCliniqueAmount
+      SavePercentageCliniqueAmount,
     );
     //**statique ***************************************************************** */
     updateCasCliniqueQuizz.saveCorrectAnswerClinique = JSON.stringify(
-      SaveCorrectAnswerClinique
+      SaveCorrectAnswerClinique,
     );
     updateCasCliniqueQuizz.saveIsClickedCounterClinique = JSON.stringify(
-      SaveIsClickedCounterClinique
+      SaveIsClickedCounterClinique,
     );
     updateCasCliniqueQuizz.savePieStatiqueClinique = JSON.stringify(
-      savePieStatiqueClinique
+      savePieStatiqueClinique,
     );
     updateCasCliniqueQuizz.saveEachLineStatiqueClinique = JSON.stringify(
-      SaveEachLineStatiqueClinique
+      SaveEachLineStatiqueClinique,
     );
     //****************************************************************************** */
 
@@ -2980,7 +2984,7 @@ function QuizBoardClinique(props) {
         updateCasCliniqueQuizz,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         toast.success("succes modification!");
@@ -3016,70 +3020,70 @@ function QuizBoardClinique(props) {
 
     //*****update qcm ************************************************************** */
     updateQcmCasCliniqueQuizz.savePropositions = JSON.stringify(
-      props.savePropositions
+      props.savePropositions,
     );
     updateQcmCasCliniqueQuizz.saveClickSelectVerfieAll = JSON.stringify(
-      props.SaveClickSelectVerfieAll
+      props.SaveClickSelectVerfieAll,
     );
     updateQcmCasCliniqueQuizz.saveVerfieReponses = JSON.stringify(
-      props.SaveVerfieReponses
+      props.SaveVerfieReponses,
     );
     if (veriferAllreponseClicked === true) {
       updateQcmCasCliniqueQuizz.saveQcmIsAnswer = JSON.stringify(
-        props.SaveClickSelectVerfieAll
+        props.SaveClickSelectVerfieAll,
       );
     } else if (veriferAllreponseClicked === false) {
       updateQcmCasCliniqueQuizz.saveQcmIsAnswer = JSON.stringify(
-        props.SaveQcmIsAnswer
+        props.SaveQcmIsAnswer,
       );
     }
     updateQcmCasCliniqueQuizz.savePercentageAmount = JSON.stringify(
-      props.SavePercentageAmount
+      props.SavePercentageAmount,
     );
     //*********************************************************************************** */
     //****update cas clinque******************************************************* */
     updateQcmCasCliniqueQuizz.savePropositionsClinique = JSON.stringify(
-      savePropositionsClinique
+      savePropositionsClinique,
     );
     updateQcmCasCliniqueQuizz.saveClickSelectVerfieAllClinique = JSON.stringify(
-      SaveClickSelectVerfieAllClinique
+      SaveClickSelectVerfieAllClinique,
     );
     updateQcmCasCliniqueQuizz.saveVerfieReponsesClinique = JSON.stringify(
-      SaveVerfieReponsesClinique
+      SaveVerfieReponsesClinique,
     );
     updateQcmCasCliniqueQuizz.saveQcmIsAnswerClinique = JSON.stringify(
-      SaveQcmIsAnswerClinique
+      SaveQcmIsAnswerClinique,
     );
     updateQcmCasCliniqueQuizz.savePercentageCliniqueAmount = JSON.stringify(
-      SavePercentageCliniqueAmount
+      SavePercentageCliniqueAmount,
     );
     //****************************************************************************** */
     //**statique ***************************************************************** */
     updateQcmCasCliniqueQuizz.saveCorrectAnswer = JSON.stringify(
-      props.SaveCorrectAnswer
+      props.SaveCorrectAnswer,
     );
     updateQcmCasCliniqueQuizz.saveIsClickedCounter = JSON.stringify(
-      props.SaveIsClickedCounter
+      props.SaveIsClickedCounter,
     );
     updateQcmCasCliniqueQuizz.savePieStatique = JSON.stringify(
-      props.savePieStatique
+      props.savePieStatique,
     );
     updateQcmCasCliniqueQuizz.saveEachLineStatique = JSON.stringify(
-      props.SaveEachLineStatique
+      props.SaveEachLineStatique,
     );
     //****************************************************************************** */
     //**statique ***************************************************************** */
     updateQcmCasCliniqueQuizz.saveCorrectAnswerClinique = JSON.stringify(
-      SaveCorrectAnswerClinique
+      SaveCorrectAnswerClinique,
     );
     updateQcmCasCliniqueQuizz.saveIsClickedCounterClinique = JSON.stringify(
-      SaveIsClickedCounterClinique
+      SaveIsClickedCounterClinique,
     );
     updateQcmCasCliniqueQuizz.savePieStatiqueClinique = JSON.stringify(
-      savePieStatiqueClinique
+      savePieStatiqueClinique,
     );
     updateQcmCasCliniqueQuizz.saveEachLineStatiqueClinique = JSON.stringify(
-      SaveEachLineStatiqueClinique
+      SaveEachLineStatiqueClinique,
     );
     //****************************************************************************** */
     await axios
@@ -3088,7 +3092,7 @@ function QuizBoardClinique(props) {
         updateQcmCasCliniqueQuizz,
         {
           headers: { Authorization: `Bearer ${token}` },
-        }
+        },
       )
       .then((res) => {
         toast.success("succes modification!");
@@ -3120,7 +3124,7 @@ function QuizBoardClinique(props) {
       `https://goatqcm-instance.com/${sourceSessio}/${lastSessionId}`,
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
   };
   //************************************************************* */
@@ -3200,7 +3204,7 @@ function QuizBoardClinique(props) {
       0,
       0,
       completedCrop.width,
-      completedCrop.height
+      completedCrop.height,
     );
 
     const croppedDataUrl = canvas.toDataURL("image/png");
@@ -3240,7 +3244,7 @@ function QuizBoardClinique(props) {
 
   const getAllPLayListe = async () => {
     let allPlayListe = await axios.get(
-      `${BASE_URL}/playliste/specifiqueuser/${userIdToken}`
+      `${BASE_URL}/playliste/specifiqueuser/${userIdToken}`,
     );
     console.log(allPlayListe);
     setAllPLayListes(allPlayListe.data);
@@ -3375,7 +3379,7 @@ function QuizBoardClinique(props) {
                           onClick={() => {
                             handleSaveCasCliniqueQuizz(
                               sourceSessionName,
-                              sourceSaveSessionBtn
+                              sourceSaveSessionBtn,
                             );
                           }}
                         >
@@ -3401,7 +3405,7 @@ function QuizBoardClinique(props) {
                           onClick={() => {
                             handleSaveQcmCasCliniqueQuizz(
                               sourceSessionName,
-                              sourceSaveSessionBtn
+                              sourceSaveSessionBtn,
                             );
                           }}
                         >
@@ -3613,13 +3617,13 @@ function QuizBoardClinique(props) {
                                           ) {
                                             console.log(indexqcmClnq);
                                             console.log(
-                                              VisibiliteCasCliniqueIndex
+                                              VisibiliteCasCliniqueIndex,
                                             );
 
                                             setShowDescRpnsBtn(true);
                                             setShowVerifierRpnsBtn(false);
                                             setSlectCliniquePropo(
-                                              VisibiliteCasCliniqueIndex
+                                              VisibiliteCasCliniqueIndex,
                                             );
                                             setTrueInsertClrClick(true);
                                             setTrueInsertClr(indexqcmClnq);
@@ -3629,7 +3633,7 @@ function QuizBoardClinique(props) {
                                           }
                                         } catch (Exception) {
                                           console.log(
-                                            "no check in this clinique"
+                                            "no check in this clinique",
                                           );
                                         }
                                         setShowDescQcm(false);
@@ -3696,7 +3700,7 @@ function QuizBoardClinique(props) {
                                                   qcmSource:
                                                     props.SelectedSourceExmn,
                                                 },
-                                              }
+                                              },
                                             )
                                           }
                                         >
@@ -4022,37 +4026,39 @@ function QuizBoardClinique(props) {
                                                             true
                                                             ? COLORS[1]
                                                             : savePropositionsClinique[
-                                                                VisibiliteCasCliniqueIndex
-                                                              ][QcmIndex][
-                                                                indexPropofinal
-                                                              ] === propo.id &&
-                                                              propo.reponseBoolClinique ===
-                                                                false
-                                                            ? COLORS[0]
-                                                            : ""
+                                                                  VisibiliteCasCliniqueIndex
+                                                                ][QcmIndex][
+                                                                  indexPropofinal
+                                                                ] ===
+                                                                  propo.id &&
+                                                                propo.reponseBoolClinique ===
+                                                                  false
+                                                              ? COLORS[0]
+                                                              : ""
                                                           : (TrueFullInsertClrClinique ===
-                                                              true &&
-                                                              SaveClickSelectVerfieAllClinique[
+                                                                true &&
+                                                                SaveClickSelectVerfieAllClinique[
+                                                                  VisibiliteCasCliniqueIndex
+                                                                ][QcmIndex] ===
+                                                                  QcmIndex) ||
+                                                              SaveQcmIsAnswerClinique[
                                                                 VisibiliteCasCliniqueIndex
                                                               ][QcmIndex] ===
-                                                                QcmIndex) ||
-                                                            SaveQcmIsAnswerClinique[
-                                                              VisibiliteCasCliniqueIndex
-                                                            ][QcmIndex] ===
-                                                              QcmIndex
-                                                          ? propo.reponseBoolClinique ===
-                                                            true
-                                                            ? COLORS[1]
-                                                            : savePropositionsClinique[
-                                                                VisibiliteCasCliniqueIndex
-                                                              ][QcmIndex][
-                                                                indexPropofinal
-                                                              ] === propo.id &&
-                                                              propo.reponseBoolClinique ===
-                                                                false
-                                                            ? COLORS[0]
-                                                            : ""
-                                                          : "",
+                                                                QcmIndex
+                                                            ? propo.reponseBoolClinique ===
+                                                              true
+                                                              ? COLORS[1]
+                                                              : savePropositionsClinique[
+                                                                    VisibiliteCasCliniqueIndex
+                                                                  ][QcmIndex][
+                                                                    indexPropofinal
+                                                                  ] ===
+                                                                    propo.id &&
+                                                                  propo.reponseBoolClinique ===
+                                                                    false
+                                                                ? COLORS[0]
+                                                                : ""
+                                                            : "",
                                                     }}
                                                     className={
                                                       savePropositionsClinique[
@@ -4074,7 +4080,7 @@ function QuizBoardClinique(props) {
                                                         propo.qcmClinique
                                                           .casClinique.coursMed
                                                           .coursName,
-                                                        cameFrome[0]
+                                                        cameFrome[0],
                                                       );
                                                     }}
                                                   >
@@ -4111,13 +4117,13 @@ function QuizBoardClinique(props) {
                                                     )}
                                                   </li>
                                                 );
-                                              }
+                                              },
                                             )}
                                           </ul>
                                         </div>
                                       );
                                     }
-                                  }
+                                  },
                                 )}
 
                                 <div className={classes.btnfooter}>
@@ -4130,7 +4136,7 @@ function QuizBoardClinique(props) {
                                       onClick={(e) => {
                                         handleClickiVerifieReponse(
                                           VisibiliteCasCliniqueIndex,
-                                          QcmIndex
+                                          QcmIndex,
                                         );
 
                                         //*******descreption**************************** */
@@ -4140,10 +4146,10 @@ function QuizBoardClinique(props) {
                                         ] = saveQcmIndex.value;
                                         console.log(saveQcmIndex.value);
                                         console.log(
-                                          saveCaseCliniqueIndex.value
+                                          saveCaseCliniqueIndex.value,
                                         );
                                         handeldescription(
-                                          currentQcmIdOfPropo.value
+                                          currentQcmIdOfPropo.value,
                                         );
                                       }}
                                     >
@@ -4161,7 +4167,7 @@ function QuizBoardClinique(props) {
                                       className={`${classes.BntVerifierrpnse} btn btn-warning`}
                                       onClick={(e) => {
                                         handeldescription(
-                                          currentQcmIdOfPropo.value
+                                          currentQcmIdOfPropo.value,
                                         );
                                       }}
                                     >
@@ -4222,7 +4228,7 @@ function QuizBoardClinique(props) {
                               </div>
                             );
                           }
-                        }
+                        },
                       )}
                     </div>
                   </div>
@@ -4564,13 +4570,13 @@ function QuizBoardClinique(props) {
                                           ) {
                                             console.log(indexqcmClnq);
                                             console.log(
-                                              VisibiliteCasCliniqueIndex
+                                              VisibiliteCasCliniqueIndex,
                                             );
 
                                             setShowDescRpnsBtn(true);
                                             setShowVerifierRpnsBtn(false);
                                             setSlectCliniquePropo(
-                                              VisibiliteCasCliniqueIndex
+                                              VisibiliteCasCliniqueIndex,
                                             );
                                             setTrueInsertClrClick(true);
                                             setTrueInsertClr(indexqcmClnq);
@@ -4580,7 +4586,7 @@ function QuizBoardClinique(props) {
                                           }
                                         } catch (Exception) {
                                           console.log(
-                                            "no check in this clinique"
+                                            "no check in this clinique",
                                           );
                                         }
                                         setShowDescQcm(false);
@@ -4625,7 +4631,7 @@ function QuizBoardClinique(props) {
                                                     qcmSource:
                                                       props.SelectedSourceExmn,
                                                   },
-                                                }
+                                                },
                                               )
                                             }
                                           >
@@ -4822,39 +4828,41 @@ function QuizBoardClinique(props) {
                                                               true
                                                               ? COLORS[1]
                                                               : savePropositionsClinique[
-                                                                  VisibiliteCasCliniqueIndex
-                                                                ][QcmIndex][
-                                                                  indexPropofinal
-                                                                ] ===
-                                                                  propo.id &&
-                                                                propo.reponseBoolClinique ===
-                                                                  false
-                                                              ? COLORS[0]
-                                                              : ""
+                                                                    VisibiliteCasCliniqueIndex
+                                                                  ][QcmIndex][
+                                                                    indexPropofinal
+                                                                  ] ===
+                                                                    propo.id &&
+                                                                  propo.reponseBoolClinique ===
+                                                                    false
+                                                                ? COLORS[0]
+                                                                : ""
                                                             : (TrueFullInsertClrClinique ===
-                                                                true &&
-                                                                SaveClickSelectVerfieAllClinique[
+                                                                  true &&
+                                                                  SaveClickSelectVerfieAllClinique[
+                                                                    VisibiliteCasCliniqueIndex
+                                                                  ][
+                                                                    QcmIndex
+                                                                  ] ===
+                                                                    QcmIndex) ||
+                                                                SaveQcmIsAnswerClinique[
                                                                   VisibiliteCasCliniqueIndex
                                                                 ][QcmIndex] ===
-                                                                  QcmIndex) ||
-                                                              SaveQcmIsAnswerClinique[
-                                                                VisibiliteCasCliniqueIndex
-                                                              ][QcmIndex] ===
-                                                                QcmIndex
-                                                            ? propo.reponseBoolClinique ===
-                                                              true
-                                                              ? COLORS[1]
-                                                              : savePropositionsClinique[
-                                                                  VisibiliteCasCliniqueIndex
-                                                                ][QcmIndex][
-                                                                  indexPropofinal
-                                                                ] ===
-                                                                  propo.id &&
-                                                                propo.reponseBoolClinique ===
-                                                                  false
-                                                              ? COLORS[0]
-                                                              : ""
-                                                            : "",
+                                                                  QcmIndex
+                                                              ? propo.reponseBoolClinique ===
+                                                                true
+                                                                ? COLORS[1]
+                                                                : savePropositionsClinique[
+                                                                      VisibiliteCasCliniqueIndex
+                                                                    ][QcmIndex][
+                                                                      indexPropofinal
+                                                                    ] ===
+                                                                      propo.id &&
+                                                                    propo.reponseBoolClinique ===
+                                                                      false
+                                                                  ? COLORS[0]
+                                                                  : ""
+                                                              : "",
                                                       }}
                                                       className={
                                                         savePropositionsClinique[
@@ -4876,7 +4884,7 @@ function QuizBoardClinique(props) {
                                                           propo.qcmClinique
                                                             .casClinique
                                                             .coursMed.coursName,
-                                                          cameFrome[0]
+                                                          cameFrome[0],
                                                         );
                                                       }}
                                                     >
@@ -4914,13 +4922,13 @@ function QuizBoardClinique(props) {
                                                     </li>
                                                     //end retunr proposition
                                                   );
-                                                }
+                                                },
                                               )}
                                             </ul>
                                           </div>
                                         );
                                       }
-                                    }
+                                    },
                                   )}
 
                                   <div className={classes.btnfooter_phone}>
@@ -4932,7 +4940,7 @@ function QuizBoardClinique(props) {
                                         onClick={(e) => {
                                           handleClickiVerifieReponse(
                                             VisibiliteCasCliniqueIndex,
-                                            QcmIndex
+                                            QcmIndex,
                                           );
 
                                           //*******descreption**************************** */
@@ -4943,10 +4951,10 @@ function QuizBoardClinique(props) {
                                           ] = saveQcmIndex.value;
                                           console.log(saveQcmIndex.value);
                                           console.log(
-                                            saveCaseCliniqueIndex.value
+                                            saveCaseCliniqueIndex.value,
                                           );
                                           handeldescription(
-                                            currentQcmIdOfPropo.value
+                                            currentQcmIdOfPropo.value,
                                           );
                                         }}
                                       />
@@ -4962,7 +4970,7 @@ function QuizBoardClinique(props) {
                                         className={`${classes.button_10} `}
                                         onClick={(e) => {
                                           handeldescription(
-                                            currentQcmIdOfPropo.value
+                                            currentQcmIdOfPropo.value,
                                           );
                                         }}
                                       >
@@ -5041,7 +5049,7 @@ function QuizBoardClinique(props) {
                                 </div>
                               );
                             }
-                          }
+                          },
                         )}
                       </div>
                     </div>
@@ -5144,7 +5152,7 @@ function QuizBoardClinique(props) {
                                                         ></div>
                                                       )}
                                                     </div>
-                                                  )
+                                                  ),
                                                 )}
                                               </ul>
                                             );
@@ -5156,7 +5164,7 @@ function QuizBoardClinique(props) {
                                 </li>
                               </div>
                             </>
-                          )
+                          ),
                         )}
                       </ul>
                     </div>
@@ -5318,7 +5326,7 @@ function QuizBoardClinique(props) {
                         onClick={() => {
                           handleSaveCasCliniqueQuizzBtn(
                             sourceQuizzName,
-                            sourceSaveQuizzBtn
+                            sourceSaveQuizzBtn,
                           );
                         }}
                       >
@@ -5444,7 +5452,7 @@ function QuizBoardClinique(props) {
                         onClick={() => {
                           handleSaveCasCliniqueQuizzBtn(
                             sourceQuizzName,
-                            sourceSaveQuizzBtn
+                            sourceSaveQuizzBtn,
                           );
                         }}
                       >
@@ -5539,7 +5547,7 @@ function QuizBoardClinique(props) {
                                 />
                               </div>
                             </div>
-                          )
+                          ),
                         )}
                       </div>
                     </div>
@@ -5625,7 +5633,7 @@ function QuizBoardClinique(props) {
                                   />
                                 </div>
                               </div>
-                            )
+                            ),
                           )}
                         </div>
                         <div className={classes.fulleachcours_eachqcmClinique}>
@@ -5653,7 +5661,7 @@ function QuizBoardClinique(props) {
                                   />
                                 </div>
                               </div>
-                            )
+                            ),
                           )}
                         </div>
                       </div>
@@ -5747,7 +5755,7 @@ function QuizBoardClinique(props) {
                                   />
                                 </div>
                               </div>
-                            )
+                            ),
                           )}
                         </div>
                         <div
@@ -5781,7 +5789,7 @@ function QuizBoardClinique(props) {
                                   />
                                 </div>
                               </div>
-                            )
+                            ),
                           )}
                         </div>
                       </div>
@@ -5865,7 +5873,7 @@ function QuizBoardClinique(props) {
                                 />
                               </div>
                             </div>
-                          )
+                          ),
                         )}
                       </div>
                     </div>
@@ -5948,7 +5956,7 @@ function QuizBoardClinique(props) {
           qcmType={qcmType}
           TrueFullInsertClr={
             JSON.parse(
-              localStorage.getItem("IsCkickShowAllReponsesClinique")
+              localStorage.getItem("IsCkickShowAllReponsesClinique"),
             ) === true
           }
           QcmSujetTypeSelected={props.QcmSujetTypeSelected}
@@ -6065,7 +6073,7 @@ function QuizBoardClinique(props) {
               onClick={() => {
                 handleSaveCasCliniqueQuizz(
                   sourceSessionName,
-                  sourceSaveSessionBtn
+                  sourceSaveSessionBtn,
                 );
               }}
             >
@@ -6093,7 +6101,7 @@ function QuizBoardClinique(props) {
               onClick={() => {
                 handleSaveQcmCasCliniqueQuizz(
                   sourceSessionName,
-                  sourceSaveSessionBtn
+                  sourceSaveSessionBtn,
                 );
               }}
             >
