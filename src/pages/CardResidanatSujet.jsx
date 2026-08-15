@@ -52,6 +52,7 @@ function CardResidanatSujet() {
     "Rattrapage_u4_2éme",
     "Rattrapage_u5_2éme",
     "Rattrapage_immuno_2éme",
+    "Rattrapage_immuno_3éme",
     "Rattrapage_genetique_2éme",
     "Rattrapage_gastro",
   ];
@@ -132,6 +133,12 @@ function CardResidanatSujet() {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Rattrapage_gastro",
+        },
+      });
+    } else if (getYearMed === "Rattrapage_immuno_3éme") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Rattrapage_immuno_3éme",
         },
       });
     }
