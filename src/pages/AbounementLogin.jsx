@@ -13,17 +13,24 @@ import received from "../compenent/layout/img/received.png";
 import seconnecter from "../compenent/layout/img/seconnecter.png";
 import BackdropDoneQuiz from "./BackdropDoneQuiz";
 import BackdropDeleteCour from "./BackdropDeleteCour";
+
 function AbounementLogin(props) {
   const navigateValid = useNavigate();
   const navigateLogin = useNavigate();
+
   const user = props.user;
+
   const [VisibleAbounemet, setVisibleAbounemet] = useState(true);
   const [VisibleValideAbounemet, setVisibleValideAbounemet] = useState(false);
   const [visibleSendRecueDiv, setVisibleSendRecueDiv] = useState(true);
   const [visibleSeConnecterDiv, setVisibleSeConnecterDiv] = useState(false);
-  const abonnementName = useSignal("");
+
+  // CHANGED: useState instead of useSignal
+  const [abonnementName, setAbonnementName] = useState("");
+
   const [showAlreadySentDiv, setShowAlreadySentDiv] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
   const abounementInf = [
     {
       nameAbn: "Résidanat 2026",
@@ -58,28 +65,35 @@ function AbounementLogin(props) {
       priceAbn: "500 DA",
     },
   ];
+
   /***************************************** */
+
   const UpdtAbnDeconnect = {
     stateActiveLogin: false,
   };
+
   //************************************************* */
 
-  //***************************************************************** */
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  });
 
-  //***************************************************************** */
-
-  const isDesktopOrLaptop = useMediaQuery({ query: "(min-width: 1224px)" });
-  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const isTabletOrMobile = useMediaQuery({
+    query: "(max-width: 1224px)",
+  });
 
   useEffect(() => {});
+
   const [email, setEmail] = useState("");
   const [file, setFile] = useState(null);
-  const [success, setSuccess] = useState(false); // controls Suivant visibility
+  const [success, setSuccess] = useState(false);
   const [fileName, setFileName] = useState("Aucun fichier choisi");
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
+
     setFile(selectedFile);
+
     setFileName(selectedFile ? selectedFile.name : "Aucun fichier choisi");
   };
 
@@ -90,7 +104,7 @@ function AbounementLogin(props) {
     }
 
     try {
-      setIsLoading(true); // show loader
+      setIsLoading(true);
 
       let emailExists = false;
 
@@ -98,81 +112,107 @@ function AbounementLogin(props) {
         const checkResponse = await axios.get(
           `https://goatqcm-instance.com/checkabounementuser/byemail/${email}`,
         );
+
         if (checkResponse.status === 200) {
           emailExists = true;
         }
       } catch (error) {
-        // If backend returns 404, treat as not found → safe to post
+        // If backend returns 404, treat as not found
         if (error.response && error.response.status === 404) {
           emailExists = false;
         } else {
           console.warn("Vérification email ignorée:", error.message);
-          // In case of 403 or network issue, assume it's not found to avoid blocking
+
           emailExists = false;
         }
       }
 
-      // If email already exists → show popup and stop here
+      // If email already exists
       if (emailExists) {
         setShowAlreadySentDiv(true);
         setVisibleSendRecueDiv(false);
         setVisibleSeConnecterDiv(false);
         setIsLoading(false);
+
         return;
       }
 
-      // Proceed with POST if email not found
+      // Proceed with POST
       const formData = new FormData();
+
       formData.append("email", email);
-      formData.append("abonnement", abonnementName.value);
+
+      // CHANGED: abonnementName instead of abonnementName.value
+      formData.append("abonnement", abonnementName);
+
       formData.append("photo", file);
 
       await axios.post(
         "https://goatqcm-instance.com/checkabounementuser",
         formData,
         {
-          headers: { "Content-Type": "multipart/form-data" },
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         },
       );
 
       toast.success("Le reçu a été envoyé avec succès !");
+
       setVisibleSendRecueDiv(false);
       setSuccess(true);
       setVisibleSeConnecterDiv(true);
+
       setEmail("");
       setFile(null);
       setShowAlreadySentDiv(false);
     } catch (err) {
       console.error("Erreur lors de l’envoi du reçu :", err);
+
       alert("Erreur lors de l’envoi du reçu");
     } finally {
-      setIsLoading(false); // hide loader
+      setIsLoading(false);
     }
   };
 
   //*************************************************************** */
-  const handleAbounerBtn = async (abnName) => {
-    abonnementName.value = abnName;
-    if (abonnementName.value === "Résidanat 2026") {
+
+  const handleAbounerBtn = (abnName) => {
+    // CHANGED
+    setAbonnementName(abnName);
+
+    // CHANGED: directly check abnName
+    if (abnName === "Résidanat 2026") {
       navigateValid("/");
     } else {
       setVisibleAbounemet(false);
       setVisibleValideAbounemet(true);
     }
   };
+
   //******************************************************************* */
+
   const handleVaildeAbn = async () => {
     UserService.logout();
     navigateValid("/");
   };
+
   //********************************************************************** */
+
   /*****done Quiz******************************************** */
+
   function closeModalDoneQuizHandler() {
     setShowAlreadySentDiv(false);
   }
+
   //**************************************************** */
+
   return (
     <>
+      {/* =======================================================
+          DESKTOP
+      ======================================================= */}
+
       {isDesktopOrLaptop && (
         <>
           {VisibleAbounemet && (
@@ -186,24 +226,29 @@ function AbounementLogin(props) {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {abounementInf.map((abounement, index) => (
                       <tr key={index}>
                         <td>
                           <h5>{abounement.nameAbn}</h5>
                         </td>
+
                         <td>
-                          <h5 style={{ color: "#318CE7" }}>
+                          <h5
+                            style={{
+                              color: "#318CE7",
+                            }}
+                          >
                             {abounement.priceAbn}
                           </h5>
                         </td>
+
                         <td>
                           <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={(e) =>
-                              handleAbounerBtn(abounement.nameAbn)
-                            }
+                            onClick={() => handleAbounerBtn(abounement.nameAbn)}
                           >
                             Abouner
                           </button>
@@ -217,6 +262,11 @@ function AbounementLogin(props) {
           )}
         </>
       )}
+
+      {/* =======================================================
+          MOBILE / TABLET
+      ======================================================= */}
+
       {isTabletOrMobile && (
         <>
           {VisibleAbounemet && (
@@ -230,22 +280,32 @@ function AbounementLogin(props) {
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
+
                   <tbody>
                     {abounementInf.map((abounement, index) => (
                       <tr key={index}>
                         <td>
                           <h5>{abounement.nameAbn}</h5>
                         </td>
+
                         <td>
-                          <h5 style={{ color: "#318CE7" }}>
+                          <h5
+                            style={{
+                              color: "#318CE7",
+                            }}
+                          >
                             {abounement.priceAbn}
                           </h5>
                         </td>
+
                         <td>
                           <button
                             type="button"
                             className="btn btn-primary"
-                            onClick={(e) => handleAbounerBtn(index)}
+                            // CHANGED:
+                            // Previously you were passing index.
+                            // Now we pass the abonnement name.
+                            onClick={() => handleAbounerBtn(abounement.nameAbn)}
                           >
                             Abouner
                           </button>
@@ -260,35 +320,53 @@ function AbounementLogin(props) {
         </>
       )}
 
+      {/* =======================================================
+          VALIDATION - DESKTOP
+      ======================================================= */}
+
       {VisibleValideAbounemet && isDesktopOrLaptop && (
         <div className={`${classes.valideabncontainer} card text-center`}>
           <div className="card-header">
             <h5>Abounemet validation</h5>
           </div>
+
           <div className="card-body">
             <h5 className="card-title">Methode de paiement</h5>
-            <div className={`${classes.paymentdiv} `}>
+
+            <div className={`${classes.paymentdiv}`}>
               <ul style={{ color: "#3457D5" }}>
-                <h6> Paiment avec Baridi</h6>
+                <h6>Paiment avec Baridi</h6>
+
                 <li className="list-group-item" style={{ color: "#000000" }}>
                   <h6>RIP : 00799999001630355448</h6>
                 </li>
-                <h6> Paiment avec CCP</h6>
+
+                <h6>Paiment avec CCP</h6>
+
                 <li className="list-group-item" style={{ color: "#000000" }}>
                   <h6>CCP : 16303554 clé 90 Bakiri walid</h6>
                 </li>
               </ul>
             </div>
 
+            {/* PAYMENT RECEIPT */}
+
             {visibleSendRecueDiv && (
               <div
                 className="card text-center p-3"
-                style={{ maxWidth: "400px", margin: "auto" }}
+                style={{
+                  maxWidth: "400px",
+                  margin: "auto",
+                }}
               >
                 <h5>Importer la preuve de paiement</h5>
 
                 <input
-                  style={{ width: "300px", margin: "5px", height: "50px" }}
+                  style={{
+                    width: "300px",
+                    margin: "5px",
+                    height: "50px",
+                  }}
                   type="email"
                   className="form-control"
                   id="exampleInputEmail1"
@@ -297,10 +375,11 @@ function AbounementLogin(props) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                ></input>
+                />
 
                 <div>
                   <h6>Reçu de paiement</h6>
+
                   <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
                     <img src={received} alt="Upload" width="40" />
                   </label>
@@ -326,6 +405,9 @@ function AbounementLogin(props) {
                 </button>
               </div>
             )}
+
+            {/* LOGIN / NEXT */}
+
             {visibleSeConnecterDiv && (
               <div>
                 {success && (
@@ -337,6 +419,7 @@ function AbounementLogin(props) {
                     Suivant
                   </button>
                 )}
+
                 <img src={seconnecter} alt="Upload" width="400" height="500" />
               </div>
             )}
@@ -344,37 +427,56 @@ function AbounementLogin(props) {
         </div>
       )}
 
+      {/* =======================================================
+          VALIDATION - MOBILE
+      ======================================================= */}
+
       {VisibleValideAbounemet && isTabletOrMobile && (
-        <div className={`${classes.fullvalidecontainer_phone}  `}>
+        <div className={`${classes.fullvalidecontainer_phone}`}>
           <div
             className={`${classes.valideabncontainer_phone} card text-center`}
           >
             <div className="card-header">
               <h5>Abounemet validation</h5>
             </div>
+
             <div className="card-body">
               <h5 className="card-title">Methode de paiement</h5>
-              <div className={`${classes.paymentdiv_phone} `}>
+
+              <div className={`${classes.paymentdiv_phone}`}>
                 <ul style={{ color: "#3457D5" }}>
-                  <h6> Paiment avec Baridi</h6>
+                  <h6>Paiment avec Baridi</h6>
+
                   <li className="list-group-item" style={{ color: "#000000" }}>
                     <h6>RIP : 00799999001630355448</h6>
                   </li>
-                  <h6> Paiment avec CCP</h6>
+
+                  <h6>Paiment avec CCP</h6>
+
                   <li className="list-group-item" style={{ color: "#000000" }}>
                     <h6>CCP : 16303554 clé 90 Bakiri walid</h6>
                   </li>
                 </ul>
               </div>
+
+              {/* PAYMENT RECEIPT */}
+
               {visibleSendRecueDiv && (
                 <div
                   className="card text-center p-3"
-                  style={{ maxWidth: "400px", margin: "auto" }}
+                  style={{
+                    maxWidth: "400px",
+                    margin: "auto",
+                  }}
                 >
                   <h5>Importer la preuve de paiement</h5>
 
                   <input
-                    style={{ width: "300px", margin: "5px", height: "50px" }}
+                    style={{
+                      width: "300px",
+                      margin: "5px",
+                      height: "50px",
+                    }}
                     type="email"
                     className="form-control"
                     id="exampleInputEmail1"
@@ -383,10 +485,11 @@ function AbounementLogin(props) {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                  ></input>
+                  />
 
                   <div>
                     <h6>Reçu de paiement</h6>
+
                     <label htmlFor="file-upload" style={{ cursor: "pointer" }}>
                       <img src={received} alt="Upload" width="40" />
                     </label>
@@ -413,6 +516,8 @@ function AbounementLogin(props) {
                 </div>
               )}
 
+              {/* LOGIN / NEXT */}
+
               {visibleSeConnecterDiv && (
                 <div>
                   {success && (
@@ -423,7 +528,8 @@ function AbounementLogin(props) {
                     >
                       Suivant
                     </button>
-                  )}{" "}
+                  )}
+
                   <img
                     src={seconnecter}
                     alt="Upload"
@@ -436,6 +542,11 @@ function AbounementLogin(props) {
           </div>
         </div>
       )}
+
+      {/* =======================================================
+          ALREADY SENT - DESKTOP
+      ======================================================= */}
+
       {showAlreadySentDiv && isDesktopOrLaptop && (
         <div
           style={{
@@ -450,11 +561,13 @@ function AbounementLogin(props) {
             textAlign: "center",
             zIndex: 9999,
             width: 700,
-            hight: 600,
+            height: 600,
           }}
         >
           <h5>Votre reçu a été déjà envoyé</h5>
+
           <p>Se connecter maintenant</p>
+
           <button
             onClick={handleVaildeAbn}
             className="btn btn-primary"
@@ -462,10 +575,16 @@ function AbounementLogin(props) {
           >
             Suivant
           </button>
+
           <img src={seconnecter} alt="Upload" width="250" height="300" />
         </div>
       )}
+
       {isDesktopOrLaptop && showAlreadySentDiv && <BackdropDeleteCour />}
+
+      {/* =======================================================
+          ALREADY SENT - MOBILE
+      ======================================================= */}
 
       {showAlreadySentDiv && isTabletOrMobile && (
         <div
@@ -483,18 +602,29 @@ function AbounementLogin(props) {
           }}
         >
           <h5>Votre reçu a été déjà envoyé</h5>
+
           <p>Se connecter maintenant</p>
+
           <button
             onClick={handleVaildeAbn}
             className="btn btn-primary"
-            style={{ marginTop: "10px", marginBottom: "5px" }}
+            style={{
+              marginTop: "10px",
+              marginBottom: "5px",
+            }}
           >
             Suivant
           </button>
+
           <img src={seconnecter} alt="Upload" width="250" height="300" />
         </div>
       )}
+
       {isTabletOrMobile && showAlreadySentDiv && <BackdropDeleteCour />}
+
+      {/* =======================================================
+          LOADING
+      ======================================================= */}
 
       {isLoading && (
         <div
@@ -523,14 +653,20 @@ function AbounementLogin(props) {
             <div
               className="spinner-border text-primary"
               role="status"
-              style={{ width: "3rem", height: "3rem" }}
+              style={{
+                width: "3rem",
+                height: "3rem",
+              }}
             ></div>
+
             <h5 className="mt-3">Veuillez patienter, envoi en cours...</h5>
           </div>
         </div>
       )}
+
       <Toaster />
     </>
   );
 }
+
 export default AbounementLogin;
