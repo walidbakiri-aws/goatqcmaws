@@ -27,7 +27,7 @@ function AbounementLogin(props) {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "Gratuite",
+      priceAbn: "Gratuit",
     },
     {
       nameAbn: "Résidanat 2027",
@@ -153,7 +153,7 @@ function AbounementLogin(props) {
   //*************************************************************** */
   const handleAbounerBtn = async (abnName) => {
     abonnementName.value = abnName;
-    if (abonnementName.value == "Résidanat 2026") {
+    if (abonnementName.value === "Résidanat 2026") {
       navigateValid("/");
     } else {
       setVisibleAbounemet(false);
