@@ -27,7 +27,7 @@ function AbounementLogin(props) {
   const abounementInf = [
     {
       nameAbn: "Résidanat 2026",
-      priceAbn: "1000 DA",
+      priceAbn: "Gratuite",
     },
     {
       nameAbn: "Résidanat 2027",
@@ -152,9 +152,13 @@ function AbounementLogin(props) {
 
   //*************************************************************** */
   const handleAbounerBtn = async (abnName) => {
-    setVisibleAbounemet(false);
-    setVisibleValideAbounemet(true);
     abonnementName.value = abnName;
+    if (abonnementName.value == "Résidanat 2026") {
+      navigateValid("/");
+    } else {
+      setVisibleAbounemet(false);
+      setVisibleValideAbounemet(true);
+    }
   };
   //******************************************************************* */
   const handleVaildeAbn = async () => {
