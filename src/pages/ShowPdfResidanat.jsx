@@ -7,12 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { Document, Page } from "react-pdf";
 import useLocalStorage from "use-local-storage";
 import { useLocation, useNavigate } from "react-router-dom";
-import Sujet_Résidanat_Clinique from "../compenent/layout/pdf/Sujet_Résidanat_Clinique.pdf";
-import Sujet_Résidanat_Fondamentaux from "../compenent/layout/pdf/Sujet_Résidanat_Fondamentaux.pdf";
-import Sujet_Externat_Partie_01 from "../compenent/layout/pdf/Sujet_Externat_Partie_01.pdf";
-import Sujet_Externat_Partie_02 from "../compenent/layout/pdf/Sujet_Externat_Partie_02.pdf";
-import Sujet_Résidanat_2010_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2010_2024.pdf";
-import Sujet_Résidanat_2015_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2015_2024.pdf";
+
 import rattrapage_u2_2eme from "../compenent/layout/pdf/rattrapage_u2_2eme.pdf";
 import rattrapage_u4_2eme from "../compenent/layout/pdf/rattrapage_u4_2eme.pdf";
 import rattrapage_u5_2eme from "../compenent/layout/pdf/rattrapage_u5_2eme.pdf";
@@ -22,12 +17,7 @@ import rattrapage_immuno_3eme from "../compenent/layout/pdf/rattrapage_immuno_3e
 import rattrapage_genetique_2eme from "../compenent/layout/pdf/rattrapage_genetique_2eme.pdf";
 import rattrapage_gastro from "../compenent/layout/pdf/rattrapage_gastro.pdf";
 const pdfMap = {
-  Sujet_Résidanat_Clinique: Sujet_Résidanat_Clinique,
-  Sujet_Résidanat_Fondamentaux: Sujet_Résidanat_Fondamentaux,
-  Sujet_Externat_Partie_01: Sujet_Externat_Partie_01,
-  Sujet_Externat_Partie_02: Sujet_Externat_Partie_02,
-  Sujet_Résidanat_2010_2024: Sujet_Résidanat_2010_2024,
-  Sujet_Résidanat_2015_2024: Sujet_Résidanat_2015_2024,
+  
   Rattrapage_u2_2éme: rattrapage_u2_2eme,
   Rattrapage_u4_2éme: rattrapage_u4_2eme,
   Rattrapage_u5_2éme: rattrapage_u5_2eme,
