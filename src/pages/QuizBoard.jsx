@@ -543,7 +543,6 @@ function QuizBoard(props) {
     ourUsers: { id: userIdToken },
   });
   //****test if desc existe******************** */
-  const [showSaveQuizNote, setShowSaveQuizNote] = useState(false);
   const testDescExsite = async (qcmId) => {
     const fullDescResult = await axios.get(
       `${BASE_URL}/fulldesc/descqcm/${qcmId}`,
@@ -698,12 +697,7 @@ function QuizBoard(props) {
   let qcmIdChatGptDeepSeek = useSignal("");
   let deviceId = localStorage.getItem("deviceId");
   /**share screen variable********************************************************* */
-  /* NEW */
-  const [showSaveQuizNote, setShowSaveQuizNote] = useState(false);
 
-  const doneFirstUplaodSaveQcm = useSignal(false);
-
-  const [ShowModelActionsPhone, setShowModelActionsPhone] = useState(false);
   useEffect(() => {
     /**share screen **************************************************************************** */
     console.log(isToggled);
@@ -806,18 +800,6 @@ function QuizBoard(props) {
 
     client.activate();
     setStompClient(client);
-    if (!ShowCancelQuizzPhone) {
-      setShowSaveQuizNote(false);
-      return;
-    }
-
-    // Show the message when the close/save icon becomes visible
-    setShowSaveQuizNote(true);
-
-    // Hide it after 3 seconds
-    const timer = setTimeout(() => {
-      setShowSaveQuizNote(false);
-    }, 3000);
 
     return () => {
       client.deactivate();
@@ -825,7 +807,7 @@ function QuizBoard(props) {
       setMessages([]);
     };
     /***************************************************************************************************/
-  }, [ShowCancelQuizzPhone]);
+  }, []);
 
   /**share screen effect******************************************************* */
   const [lastMessage, setLastMessage] = useState(null);
@@ -4459,27 +4441,26 @@ function QuizBoard(props) {
                                 : hours}
                               :
                             </span>
-
                             <span>
                               {props.qcmAndCliniqueTimer === true
                                 ? props.watchValues[1].minutes
                                 : minutes}
                               :
                             </span>
-
                             <span>
                               {props.qcmAndCliniqueTimer === true
                                 ? props.watchValues[2].seconds
                                 : seconds}
                             </span>
                           </div>
-
                           <div className={classes.timetbns_phone}>
                             {ShowPlayBtn && (
                               <a>
                                 <IoPlayCircleOutline
                                   onClick={(e) => {
-                                    start();
+                                    {
+                                      start();
+                                    }
                                     setShowPauseBtn(true);
                                     setShowPlayBtn(false);
                                   }}
@@ -4494,51 +4475,43 @@ function QuizBoard(props) {
                                   onClick={(e) => {
                                     setShowPlayBtn(true);
                                     setShowPauseBtn(false);
-                                    pause();
+                                    {
+                                      pause();
+                                    }
                                   }}
                                   style={{ width: 20, height: 20 }}
                                 />
                               </a>
                             )}
-
                             <a>
                               <MdOutlineReplay
                                 onClick={() => {
-                                  reset();
+                                  {
+                                    reset();
+                                  }
                                 }}
                                 style={{ width: 20, height: 20 }}
                               />
                             </a>
                           </div>
                         </div>
-
-                        {/* =====================================================
-      SAVE QUIZ / CLOSE ICON + 3 SECOND MESSAGE
-      ===================================================== */}
-
                         <div className={classes.full_save_close_quizz}>
                           {ShowCancelQuizzPhone && (
-                            <div className={classes.closequizz_phone}>
-                              {showSaveQuizNote && (
-                                <div className={classes.saveQuizNote}>
-                                  Cliquez ici pour sauvegarder votre quiz
-                                </div>
-                              )}
-
-                              <li
-                                className={`${classes.homebtn} list-group-item`}
-                              >
-                                <TfiClose
-                                  className={classes.saveQuizCloseIcon}
-                                  onClick={(e) => {
-                                    setShowModelActionsPhone(true);
-                                    setVisibleSaveQuizzEnter(false);
-                                    setVisiblePlayListe(true);
-                                    setShowSaveQuizNote(false);
-                                  }}
-                                />
-                              </li>
-                            </div>
+                            <>
+                              <div className={`${classes.closequizz_phone} `}>
+                                <li
+                                  className={`${classes.homebtn} list-group-item`}
+                                >
+                                  <TfiClose
+                                    onClick={(e) => {
+                                      setShowModelActionsPhone(true);
+                                      setVisibleSaveQuizzEnter(false);
+                                      setVisiblePlayListe(true);
+                                    }}
+                                  />
+                                </li>
+                              </div>
+                            </>
                           )}
                         </div>
                       </div>
