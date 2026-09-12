@@ -162,7 +162,7 @@ function Sidebar() {
   // ******************************************************************
 
   useEffect(() => {
-    localStorage.setItem("extraAccess", "false");
+    //localStorage.setItem("extraAccess", "false");
     const deviceId = getOrCreateDeviceId();
 
     updateAdresseIp(deviceId);
