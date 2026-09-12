@@ -698,7 +698,12 @@ function QuizBoard(props) {
   let qcmIdChatGptDeepSeek = useSignal("");
   let deviceId = localStorage.getItem("deviceId");
   /**share screen variable********************************************************* */
+  /* NEW */
+  const [showSaveQuizNote, setShowSaveQuizNote] = useState(false);
 
+  const doneFirstUplaodSaveQcm = useSignal(false);
+
+  const [ShowModelActionsPhone, setShowModelActionsPhone] = useState(false);
   useEffect(() => {
     /**share screen **************************************************************************** */
     console.log(isToggled);
@@ -801,6 +806,18 @@ function QuizBoard(props) {
 
     client.activate();
     setStompClient(client);
+    if (!ShowCancelQuizzPhone) {
+      setShowSaveQuizNote(false);
+      return;
+    }
+
+    // Show the message when the close/save icon becomes visible
+    setShowSaveQuizNote(true);
+
+    // Hide it after 3 seconds
+    const timer = setTimeout(() => {
+      setShowSaveQuizNote(false);
+    }, 3000);
 
     return () => {
       client.deactivate();
@@ -808,7 +825,7 @@ function QuizBoard(props) {
       setMessages([]);
     };
     /***************************************************************************************************/
-  }, []);
+  }, [ShowCancelQuizzPhone]);
 
   /**share screen effect******************************************************* */
   const [lastMessage, setLastMessage] = useState(null);
