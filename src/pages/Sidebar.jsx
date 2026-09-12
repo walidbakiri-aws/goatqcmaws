@@ -162,6 +162,7 @@ function Sidebar() {
   // ******************************************************************
 
   useEffect(() => {
+    localStorage.setItem("extraAccess", "false");
     const deviceId = getOrCreateDeviceId();
 
     updateAdresseIp(deviceId);
@@ -1035,7 +1036,96 @@ function Sidebar() {
           EXTRA POPUP
       ============================================================ */}
 
-      {showExtraPopup && (
+      {showExtraPopup && isTabletOrMobile && (
+        <div
+          className={classes.extraOverlay_phone}
+          onClick={handleCloseExtraPopup}
+        >
+          <div
+            className={classes.extraPopup}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* CLOSE BUTTON */}
+            <button
+              type="button"
+              className={classes.extraCloseButton}
+              onClick={handleCloseExtraPopup}
+              aria-label="Fermer"
+            >
+              ×
+            </button>
+
+            {/* ICON */}
+            <div className={classes.extraIcon}>
+              <FontAwesomeIcon icon={faListCheck} />
+            </div>
+
+            {/* TITLE */}
+            <h3 className={classes.extraTitle}>Accès Extra</h3>
+
+            {/* MESSAGE */}
+            <p className={classes.extraMessage}>
+              Le bouton <strong>Extra</strong> contient les PDF et fichiers
+              suivants :
+              <br />
+              <br />• Sujets de résidanat de <strong>2010 à 2024</strong> <br />
+              • Sujets de rattrapage <br />• Tous les sujets d’externat{" "}
+              <strong>2026</strong> <br />• Sujets de résidanat classés par
+              module <strong>2015/2024</strong> <br /> <br />
+              <strong>💰 Tout cela coûte 500 DA.</strong> <br /> <br />
+              Après avoir effectué le paiement, veuillez nous informer par
+              message sur la page Facebook <strong>GOATQCM</strong> : <br />{" "}
+              <br />
+              <a
+                href="https://www.facebook.com/share/1EqDuXvudH/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={classes.facebookLink}
+              >
+                ``` 👉 Contacter GOATQCM sur Facebook ```
+              </a>
+              <br />
+              <br />
+              <strong>CCP :</strong> <br />
+              16303554 — Clé 90 <br />
+              Bakiri Walid
+              <br />
+              <br />
+              <strong>RIP/BARIDIMOB :</strong> <br />
+              00799999001630355448
+            </p>
+
+            {/* TEXTAREA */}
+            <textarea
+              className={classes.extraTextarea}
+              value={extraCode}
+              onChange={(e) => {
+                setExtraCode(e.target.value);
+                setExtraCodeError("");
+              }}
+              onKeyDown={handleExtraCodeKeyDown}
+              placeholder="Entrez le code..."
+              rows={3}
+              autoFocus
+            />
+
+            {/* ERROR */}
+            {extraCodeError && (
+              <div className={classes.extraError}>{extraCodeError}</div>
+            )}
+
+            {/* VALIDATE BUTTON */}
+            <button
+              type="button"
+              className={classes.extraSubmitButton}
+              onClick={handleExtraCodeSubmit}
+            >
+              Valider
+            </button>
+          </div>
+        </div>
+      )}
+      {showExtraPopup && isDesktopOrLaptop && (
         <div className={classes.extraOverlay} onClick={handleCloseExtraPopup}>
           <div
             className={classes.extraPopup}
