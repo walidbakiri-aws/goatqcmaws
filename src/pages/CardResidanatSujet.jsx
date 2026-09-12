@@ -42,7 +42,13 @@ function CardResidanatSujet() {
 
   //************************************************************************ */
   const yearsName = [
-    
+    "fondamentaux",
+    "clinique",
+    "Sujet_Rattrapage",
+    "Sujet_Résidanat_2010_2024",
+    "Sujet_Externat_Partie_01",
+    "Sujet_Externat_Partie_02",
+
     "Rattrapage_u2_2éme",
     "Rattrapage_u4_2éme",
     "Rattrapage_u5_2éme",
@@ -52,7 +58,43 @@ function CardResidanatSujet() {
     "Rattrapage_gastro",
   ];
   const hanleOnclickYear = (getYearMed) => {
-     if (getYearMed === "Sujet_Rattrapage") {
+    if (getYearMed === "Sujet_Résidanat_2010_2024") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Sujet_Résidanat_2010_2024",
+        },
+      });
+    } else if (getYearMed === "Sujet_Externat_Partie_01") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Sujet_Externat_Partie_01",
+        },
+      });
+    } else if (getYearMed === "Sujet_Externat_Partie_02") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Sujet_Externat_Partie_02",
+        },
+      });
+    } else if (getYearMed === "Sujet_Externat_Partie_02") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "Sujet_Externat_Partie_02",
+        },
+      });
+    } else if (getYearMed === "fondamentaux") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "fondamentaux",
+        },
+      });
+    } else if (getYearMed === "clinique") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "clinique",
+        },
+      });
+    } else if (getYearMed === "Sujet_Rattrapage") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "Sujet_Rattrapage",

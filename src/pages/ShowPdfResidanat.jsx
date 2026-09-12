@@ -16,8 +16,23 @@ import rattrapage_immuno_3eme from "../compenent/layout/pdf/rattrapage_immuno_3e
 
 import rattrapage_genetique_2eme from "../compenent/layout/pdf/rattrapage_genetique_2eme.pdf";
 import rattrapage_gastro from "../compenent/layout/pdf/rattrapage_gastro.pdf";
+
+import sujet_residanat_2010_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2010_2024.pdf";
+
+import sujet_externat_partie_01 from "../compenent/layout/pdf/Sujet_Externat_Partie_01.pdf";
+import sujet_externat_partie_02 from "../compenent/layout/pdf/Sujet_Externat_Partie_02.pdf";
+
+import fondamentaux from "../compenent/layout/pdf/Sujet_Résidanat_Fondamentaux.pdf";
+import clinique from "../compenent/layout/pdf/Sujet_Résidanat_Clinique.pdf";
+import sujet_rattrapage from "../compenent/layout/pdf/Sujet_Rattrapage.pdf";
+
 const pdfMap = {
-  
+  fondamentaux: fondamentaux,
+  clinique: clinique,
+  Sujet_Rattrapage: sujet_rattrapage,
+  Sujet_Résidanat_2010_2024: sujet_residanat_2010_2024,
+  Sujet_Externat_Partie_01: sujet_externat_partie_01,
+  Sujet_Externat_Partie_02: sujet_externat_partie_02,
   Rattrapage_u2_2éme: rattrapage_u2_2eme,
   Rattrapage_u4_2éme: rattrapage_u4_2eme,
   Rattrapage_u5_2éme: rattrapage_u5_2eme,
