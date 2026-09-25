@@ -59,6 +59,7 @@ function CardResidanatSujet() {
 
     "rattrapage_gastro",
   ];
+
   const hanleOnclickYear = (getYearMed) => {
     if (getYearMed === "sujet_residanat_2010_2024") {
       navigateBoardQuiz(`/shopdfresidant`, {
@@ -90,13 +91,13 @@ function CardResidanatSujet() {
           sjetResidant: "clinique",
         },
       });
-    } else if (getYearMed === "sujet_rattrapage") {
+    } /*else if (getYearMed === "sujet_rattrapage") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "sujet_rattrapage",
         },
       });
-    } else if (getYearMed === "rattrapage_u2_2eme") {
+    }*/ else if (getYearMed === "rattrapage_u2_2eme") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "rattrapage_u2_2eme",
