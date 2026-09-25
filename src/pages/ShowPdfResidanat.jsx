@@ -36,9 +36,9 @@ const pdfMap = {
   rattrapage_u2_2eme: rattrapage_u2_2eme,
   rattrapage_u4_2eme: rattrapage_u4_2eme,
   rattrapage_u5_2eme: rattrapage_u5_2eme,
-  rattrapage_immuno_2eme: rattrapage_immuno_2eme,
   rattrapage_genetique_2eme: rattrapage_genetique_2eme,
   rattrapage_gastro: rattrapage_gastro,
+  rattrapage_immuno_2eme: rattrapage_immuno_2eme,
   rattrapage_immuno_3eme: rattrapage_immuno_3eme,
 };
 
