@@ -23,7 +23,7 @@ function Abounement(props) {
     },
     {
       nameAbn: "Résidanat 2027",
-      priceAbn: "4800 DA",
+      priceAbn: "4500 DA",
     },
     {
       nameAbn: "1ér Année Médecine",
