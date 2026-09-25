@@ -8,23 +8,21 @@ import { Document, Page } from "react-pdf";
 import useLocalStorage from "use-local-storage";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import rattrapage_u2_2eme from "../compenent/layout/pdf/rattrapage_u2_2eme.pdf";
-import rattrapage_u4_2eme from "../compenent/layout/pdf/rattrapage_u4_2eme.pdf";
-import rattrapage_u5_2eme from "../compenent/layout/pdf/rattrapage_u5_2eme.pdf";
-import rattrapage_immuno_2eme from "../compenent/layout/pdf/rattrapage_immuno_2eme.pdf";
-import rattrapage_immuno_3eme from "../compenent/layout/pdf/rattrapage_immuno_3eme.pdf";
-
-import rattrapage_genetique_2eme from "../compenent/layout/pdf/rattrapage_genetique_2eme.pdf";
-import rattrapage_gastro from "../compenent/layout/pdf/rattrapage_gastro.pdf";
-
-import sujet_residanat_2010_2024 from "../compenent/layout/pdf/sujet_residanat_2010_2024.pdf";
-
-import sujet_externat_partie_01 from "../compenent/layout/pdf/sujet_externat_partie_01.pdf";
-import sujet_externat_partie_02 from "../compenent/layout/pdf/sujet_externat_partie_02.pdf";
-
 import fondamentaux from "../compenent/layout/pdf/sujet_residanat_fondamentaux.pdf";
 import clinique from "../compenent/layout/pdf/sujet_residanat_clinique.pdf";
 import sujet_rattrapage from "../compenent/layout/pdf/sujet_rattrapage.pdf";
+import sujet_residanat_2010_2024 from "../compenent/layout/pdf/sujet_residanat_2010_2024.pdf";
+import sujet_externat_partie_01 from "../compenent/layout/pdf/sujet_externat_partie_01.pdf";
+import sujet_externat_partie_02 from "../compenent/layout/pdf/sujet_externat_partie_02.pdf";
+import rattrapage_u2_2eme from "../compenent/layout/pdf/rattrapage_u2_2eme.pdf";
+import rattrapage_u4_2eme from "../compenent/layout/pdf/rattrapage_u4_2eme.pdf";
+import rattrapage_u5_2eme from "../compenent/layout/pdf/rattrapage_u5_2eme.pdf";
+import rattrapage_genetique_2eme from "../compenent/layout/pdf/rattrapage_genetique_2eme.pdf";
+import rattrapage_immuno_2eme from "../compenent/layout/pdf/rattrapage_immuno_2eme.pdf";
+
+import rattrapage_immuno_3eme from "../compenent/layout/pdf/rattrapage_immuno_3eme.pdf";
+
+import rattrapage_gastro from "../compenent/layout/pdf/rattrapage_gastro.pdf";
 
 const pdfMap = {
   fondamentaux: fondamentaux,
@@ -37,9 +35,9 @@ const pdfMap = {
   rattrapage_u4_2eme: rattrapage_u4_2eme,
   rattrapage_u5_2eme: rattrapage_u5_2eme,
   rattrapage_genetique_2eme: rattrapage_genetique_2eme,
-  rattrapage_gastro: rattrapage_gastro,
   rattrapage_immuno_2eme: rattrapage_immuno_2eme,
   rattrapage_immuno_3eme: rattrapage_immuno_3eme,
+  rattrapage_gastro: rattrapage_gastro,
 };
 
 function ShowPdfResidanat() {

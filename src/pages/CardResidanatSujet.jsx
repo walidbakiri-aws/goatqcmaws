@@ -52,9 +52,11 @@ function CardResidanatSujet() {
     "rattrapage_u2_2eme",
     "rattrapage_u4_2eme",
     "rattrapage_u5_2eme",
-    "rattrapage_immuno_2eme",
-    "rattrapage_immuno_3eme",
     "rattrapage_genetique_2eme",
+    "rattrapage_immuno_2eme",
+
+    "rattrapage_immuno_3eme",
+
     "rattrapage_gastro",
   ];
   const hanleOnclickYear = (getYearMed) => {
@@ -64,7 +66,7 @@ function CardResidanatSujet() {
           sjetResidant: "sujet_residanat_2010_2024",
         },
       });
-    } else if (getYearMed === "sujet_externat_Partie_01") {
+    } else if (getYearMed === "sujet_externat_partie_01") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
           sjetResidant: "sujet_externat_partie_01",
