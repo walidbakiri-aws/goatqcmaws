@@ -76,12 +76,6 @@ function CardResidanatSujet() {
           sjetResidant: "sujet_externat_partie_02",
         },
       });
-    } else if (getYearMed === "sujet_externat_partie_02") {
-      navigateBoardQuiz(`/shopdfresidant`, {
-        state: {
-          sjetResidant: "sujet_externat_partie_02",
-        },
-      });
     } else if (getYearMed === "fondamentaux") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
