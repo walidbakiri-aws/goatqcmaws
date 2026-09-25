@@ -17,29 +17,29 @@ import rattrapage_immuno_3eme from "../compenent/layout/pdf/rattrapage_immuno_3e
 import rattrapage_genetique_2eme from "../compenent/layout/pdf/rattrapage_genetique_2eme.pdf";
 import rattrapage_gastro from "../compenent/layout/pdf/rattrapage_gastro.pdf";
 
-import sujet_residanat_2010_2024 from "../compenent/layout/pdf/Sujet_Résidanat_2010_2024.pdf";
+import sujet_residanat_2010_2024 from "../compenent/layout/pdf/sujet_residanat_2010_2024.pdf";
 
-import sujet_externat_partie_01 from "../compenent/layout/pdf/Sujet_Externat_Partie_01.pdf";
-import sujet_externat_partie_02 from "../compenent/layout/pdf/Sujet_Externat_Partie_02.pdf";
+import sujet_externat_partie_01 from "../compenent/layout/pdf/sujet_externat_partie_01.pdf";
+import sujet_externat_partie_02 from "../compenent/layout/pdf/sujet_externat_partie_02.pdf";
 
-import fondamentaux from "../compenent/layout/pdf/Sujet_Résidanat_Fondamentaux.pdf";
-import clinique from "../compenent/layout/pdf/Sujet_Résidanat_Clinique.pdf";
-import sujet_rattrapage from "../compenent/layout/pdf/Sujet_Rattrapage.pdf";
+import fondamentaux from "../compenent/layout/pdf/sujet_residanat_fondamentaux.pdf";
+import clinique from "../compenent/layout/pdf/sujet_residanat_clinique.pdf";
+import sujet_rattrapage from "../compenent/layout/pdf/sujet_rattrapage.pdf";
 
 const pdfMap = {
   fondamentaux: fondamentaux,
   clinique: clinique,
-  Sujet_Rattrapage: sujet_rattrapage,
-  Sujet_Résidanat_2010_2024: sujet_residanat_2010_2024,
-  Sujet_Externat_Partie_01: sujet_externat_partie_01,
-  Sujet_Externat_Partie_02: sujet_externat_partie_02,
-  Rattrapage_u2_2éme: rattrapage_u2_2eme,
-  Rattrapage_u4_2éme: rattrapage_u4_2eme,
-  Rattrapage_u5_2éme: rattrapage_u5_2eme,
-  Rattrapage_immuno_2éme: rattrapage_immuno_2eme,
-  Rattrapage_genetique_2éme: rattrapage_genetique_2eme,
-  Rattrapage_gastro: rattrapage_gastro,
-  Rattrapage_immuno_3éme: rattrapage_immuno_3eme,
+  sujet_rattrapage: sujet_rattrapage,
+  sujet_residanat_2010_2024: sujet_residanat_2010_2024,
+  sujet_externat_partie_01: sujet_externat_partie_01,
+  sujet_externat_partie_02: sujet_externat_partie_02,
+  rattrapage_u2_2eme: rattrapage_u2_2eme,
+  rattrapage_u4_2eme: rattrapage_u4_2eme,
+  rattrapage_u5_2eme: rattrapage_u5_2eme,
+  rattrapage_immuno_2eme: rattrapage_immuno_2eme,
+  rattrapage_genetique_2eme: rattrapage_genetique_2eme,
+  rattrapage_gastro: rattrapage_gastro,
+  rattrapage_immuno_3eme: rattrapage_immuno_3eme,
 };
 
 function ShowPdfResidanat() {
@@ -73,7 +73,7 @@ function ShowPdfResidanat() {
 
     const pdfPath = pdfMap[state.sjetResidant];
 
-    if (state.sjetResidant?.startsWith("Rattrapage")) {
+    if (state.sjetResidant?.startsWith("rattrapage")) {
       setStartWithRattrapage(true);
     } else {
       setStartWithRattrapage(false);
