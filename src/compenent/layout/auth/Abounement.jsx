@@ -22,7 +22,7 @@ function Abounement() {
               <h2>Résidanat 2026</h2>
               <p>
                 <i className="fa fa-rupee"></i>
-                <span>Gratuit </span>
+                <span>500 DA </span>
                 <br></br>
               </p>
             </div>

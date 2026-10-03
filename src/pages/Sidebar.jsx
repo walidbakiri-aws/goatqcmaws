@@ -707,25 +707,20 @@ function Sidebar() {
                 handleShowSessionBtn();
               }}
               className="nav-item p-1"
-              style={{
-                marginLeft: "16px",
-                cursor: "pointer",
-              }}
+              style={{ marginLeft: "16px" }}
             >
-              <img src={mysession} height="60%" width="25" alt="Sessions" />
-
+              <img src={mysession} height="60%" width="25" />
               <span className="fs-6 p-2">Mes Sessions</span>
             </li>
-
             {ShowSessionsList && (
               <ul className={`${classes.session_ul} nav-item p-1`}>
                 {fullSessionsListe.map((session, index) => (
                   <li
                     className="nav-item p-1"
-                    key={session.id || index}
-                    onClick={() =>
-                      handleCheckSession(session.qcmType, session.id, index)
-                    }
+                    key={index}
+                    onClick={() => {
+                      handleCheckSession(session.qcmType, session.id, index);
+                    }}
                   >
                     session {index + 1}
                   </li>
@@ -912,27 +907,13 @@ function Sidebar() {
                 handleShowSessionBtn();
               }}
               className="nav-item p-1"
+              style={{}}
             >
-              <img src={mysession} height="100%" width="25" alt="Sessions" />
-
-              <span className="fs-7">Mes Session</span>
+              <img src={mysession} height="100%" width="25" />
+              <span className="fs-7 " style={{}}>
+                Mes Session
+              </span>
             </li>
-
-            {ShowSessionsList && (
-              <ul className={`${classes.session_ul} nav-item p-1`}>
-                {fullSessionsListe.map((session, index) => (
-                  <li
-                    className="nav-item p-1"
-                    key={session.id || index}
-                    onClick={() =>
-                      handleCheckSession(session.qcmType, session.id, index)
-                    }
-                  >
-                    session {index + 1}
-                  </li>
-                ))}
-              </ul>
-            )}
 
             {/* GOAT COURS */}
             {!VisiteurOnly && (
