@@ -252,7 +252,8 @@ function Sidebar() {
   // ******************************************************************
 
   const handleShowSessionBtn = () => {
-    setShowSessionsList((prev) => !prev);
+   navigasavesession("/savesession");
+      setShowSessionsList(!ShowSessionsList);
   };
 
   // ******************************************************************
@@ -702,7 +703,9 @@ function Sidebar() {
 
             {/* SESSIONS */}
             <li
-              onClick={handleShowSessionBtn}
+              onClick={() => {
+                             handleShowSessionBtn();
+                           }}
               className="nav-item p-1"
               style={{
                 marginLeft: "16px",
@@ -904,7 +907,9 @@ function Sidebar() {
             </li>
 
             {/* SESSIONS */}
-            <li onClick={handleShowSessionBtn} className="nav-item p-1">
+            <li  onClick={() => {
+                            handleShowSessionBtn();
+                          }} className="nav-item p-1">
               <img src={mysession} height="100%" width="25" alt="Sessions" />
 
               <span className="fs-7">Mes Session</span>
