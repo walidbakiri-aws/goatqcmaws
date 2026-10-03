@@ -252,8 +252,8 @@ function Sidebar() {
   // ******************************************************************
 
   const handleShowSessionBtn = () => {
-   navigasavesession("/savesession");
-      setShowSessionsList(!ShowSessionsList);
+    navigasavesession("/savesession");
+    setShowSessionsList(!ShowSessionsList);
   };
 
   // ******************************************************************
@@ -429,7 +429,7 @@ function Sidebar() {
     });
   }
 
-  // ******************************************************************
+  // *************sss*****************************************************
   // HANDLE CAS CLINIQUE
   // ******************************************************************
 
@@ -704,8 +704,8 @@ function Sidebar() {
             {/* SESSIONS */}
             <li
               onClick={() => {
-                             handleShowSessionBtn();
-                           }}
+                handleShowSessionBtn();
+              }}
               className="nav-item p-1"
               style={{
                 marginLeft: "16px",
@@ -907,9 +907,12 @@ function Sidebar() {
             </li>
 
             {/* SESSIONS */}
-            <li  onClick={() => {
-                            handleShowSessionBtn();
-                          }} className="nav-item p-1">
+            <li
+              onClick={() => {
+                handleShowSessionBtn();
+              }}
+              className="nav-item p-1"
+            >
               <img src={mysession} height="100%" width="25" alt="Sessions" />
 
               <span className="fs-7">Mes Session</span>
