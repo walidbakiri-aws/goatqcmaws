@@ -11,7 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import fondamentaux from "../compenent/layout/pdf/sujet_residanat_fondamentaux.pdf";
 import clinique from "../compenent/layout/pdf/sujet_residanat_clinique.pdf";
 import sujet_rattrapage from "../compenent/layout/pdf/sujet_rattrapage.pdf";
-import sujet_residanat_2010_2024 from "../compenent/layout/pdf/sujet_residanat_2010_2024.pdf";
+import sujet_residanat_2015_2024_cmplt from "../compenent/layout/pdf/sujet_residanat_2015_2024_cmplt.pdf";
 import sujet_externat_partie_01 from "../compenent/layout/pdf/sujet_externat_partie_01.pdf";
 import sujet_externat_partie_02 from "../compenent/layout/pdf/sujet_externat_partie_02.pdf";
 import rattrapage_u2_2eme from "../compenent/layout/pdf/rattrapage_u2_2eme.pdf";
@@ -28,7 +28,7 @@ const pdfMap = {
   fondamentaux: fondamentaux,
   clinique: clinique,
   sujet_rattrapage: sujet_rattrapage,
-  sujet_residanat_2010_2024: sujet_residanat_2010_2024,
+  sujet_residanat_2015_2024_cmplt: sujet_residanat_2015_2024_cmplt,
   sujet_externat_partie_01: sujet_externat_partie_01,
   sujet_externat_partie_02: sujet_externat_partie_02,
   rattrapage_u2_2eme: rattrapage_u2_2eme,
