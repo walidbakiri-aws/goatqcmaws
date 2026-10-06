@@ -45,7 +45,8 @@ function CardResidanatSujet() {
     "fondamentaux",
     "clinique",
     "sujet_rattrapage",
-    "sujet_residanat_2015_2024_cmplt",
+    "sujet_residanat_2015_2019_cmplt",
+    "sujet_residanat_2020_2024_cmplt",
     "sujet_externat_partie_01",
     "sujet_externat_partie_02",
 
@@ -61,10 +62,16 @@ function CardResidanatSujet() {
   ];
 
   const hanleOnclickYear = (getYearMed) => {
-    if (getYearMed === "sujet_residanat_2015_2024_cmplt") {
+    if (getYearMed === "sujet_residanat_2015_2019_cmplt") {
       navigateBoardQuiz(`/shopdfresidant`, {
         state: {
-          sjetResidant: "sujet_residanat_2015_2024_cmplt",
+          sjetResidant: "sujet_residanat_2015_2019_cmplt",
+        },
+      });
+    } else if (getYearMed === "sujet_residanat_2020_2024_cmplt") {
+      navigateBoardQuiz(`/shopdfresidant`, {
+        state: {
+          sjetResidant: "sujet_residanat_2020_2024_cmplt",
         },
       });
     } else if (getYearMed === "sujet_externat_partie_01") {
