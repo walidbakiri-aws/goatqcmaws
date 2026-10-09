@@ -1915,7 +1915,7 @@ modulediv_phone .homebtn {
 }
 
 .playlistNotification {
-  position: absolute;
+  position: flex;
 
   left: 50%;
   transform: translateX(-50%);
