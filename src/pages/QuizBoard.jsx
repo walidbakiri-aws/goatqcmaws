@@ -342,8 +342,8 @@ function QuizBoard(props) {
   let [SavePercentageAmount, setSavePercentageAmount] = useState([]);
   let saveCurrentAmount = [];
   //********************************************************* */
-const [showPlaylistNotification, setShowPlaylistNotification] =
-  useState(false);
+  const [showPlaylistNotification, setShowPlaylistNotification] =
+    useState(false);
   const [SaveQcmQuizz, setSaveQcmQuizz] = useState({
     nameQcmQuizz: "",
     qcmSujetTypeSelected: "",
@@ -700,15 +700,15 @@ const [showPlaylistNotification, setShowPlaylistNotification] =
   /**share screen variable********************************************************* */
 
   useEffect(() => {
-     if (ShowCancelQuizzPhone) {
-    setShowPlaylistNotification(true);
+    if (ShowCancelQuizzPhone) {
+      setShowPlaylistNotification(true);
 
-    const timer = setTimeout(() => {
-      setShowPlaylistNotification(false);
-    }, 2000);
+      const timer = setTimeout(() => {
+        setShowPlaylistNotification(false);
+      }, 3000);
 
-    return () => clearTimeout(timer);
-  }
+      return () => clearTimeout(timer);
+    }
     /**share screen **************************************************************************** */
     console.log(isToggled);
     console.log(shareScreenCode);
@@ -817,7 +817,6 @@ const [showPlaylistNotification, setShowPlaylistNotification] =
       setMessages([]);
     };
     /***************************************************************************************************/
-    
   }, [ShowCancelQuizzPhone]);
 
   /**share screen effect******************************************************* */
@@ -4507,26 +4506,29 @@ const [showPlaylistNotification, setShowPlaylistNotification] =
                           </div>
                         </div>
                         <div className={classes.full_save_close_quizz}>
-  {ShowCancelQuizzPhone && (
-    <div className={classes.closequizz_phone}>
-      <li className={`${classes.homebtn} list-group-item`}>
-        <TfiClose
-          onClick={() => {
-            setShowModelActionsPhone(true);
-            setVisibleSaveQuizzEnter(false);
-            setVisiblePlayListe(true);
-          }}
-        />
+                          {ShowCancelQuizzPhone && (
+                            <div className={classes.closequizz_phone}>
+                              <li
+                                className={`${classes.homebtn} list-group-item`}
+                              >
+                                <TfiClose
+                                  onClick={() => {
+                                    setShowModelActionsPhone(true);
+                                    setVisibleSaveQuizzEnter(false);
+                                    setVisiblePlayListe(true);
+                                  }}
+                                />
 
-        {showPlaylistNotification && (
-          <div className={classes.playlistNotification}>
-            Clique là pour sauvegarder dans une playlist !
-          </div>
-        )}
-      </li>
-    </div>
-  )}
-</div>
+                                {showPlaylistNotification && (
+                                  <div className={classes.playlistNotification}>
+                                    Clique là pour sauvegarder dans une playlist
+                                    !
+                                  </div>
+                                )}
+                              </li>
+                            </div>
+                          )}
+                        </div>
                       </div>
 
                       {VisibleParSujet && (
