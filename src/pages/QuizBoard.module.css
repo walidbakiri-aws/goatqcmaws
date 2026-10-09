@@ -1910,3 +1910,23 @@ modulediv_phone .homebtn {
   font-weight: 200; /* Regular weight */
   color: var(--primary-text-color);
 }
+.homebtn {
+  position: relative;
+}
+
+.playlistNotification {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 240px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: #198754;
+  color: white;
+  font-size: 13px;
+  text-align: center;
+  z-index: 9999;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
