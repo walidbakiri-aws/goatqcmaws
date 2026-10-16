@@ -50,6 +50,7 @@ function AddCasClinique(props) {
     "2024",
     "2025",
     "2026",
+    "2027",
   ];
 
   const [CasClinique, SetCasClinique] = useState({
@@ -69,7 +70,7 @@ function AddCasClinique(props) {
   //********get Cour me id ************************************************* */
   const getCour = async () => {
     const result = await axios.get(
-      `https://goatqcm-instance.com/cours/${cours_id}`
+      `https://goatqcm-instance.com/cours/${cours_id}`,
     );
     console.log(result);
     CasClinique.coursMed = result.data;

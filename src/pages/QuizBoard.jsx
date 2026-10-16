@@ -154,7 +154,7 @@ function QuizBoard(props) {
     "2023",
     "2024",
     "2025",
-    "2026",
+    "2026","2027",
   ];
   const [shoYearBackFromCliniqueParSujet, setshoYearBackFromCliniqueParSujet] =
     useState(false);

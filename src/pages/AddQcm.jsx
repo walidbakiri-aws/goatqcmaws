@@ -68,7 +68,9 @@ function AddQcm(props) {
     "2022",
     "2023",
     "2024",
-    "2025","2026",
+    "2025",
+    "2026",
+    "2027",
   ];
   const category = ["Externat Blida", "Résidanat Blida"];
   const [VisibleGroupe, setVisibleGroupe] = useState(false);
@@ -117,7 +119,7 @@ function AddQcm(props) {
       `https://goatqcm-instance.com/cours/${cours_id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
     Qcm.coursMed = result.data;
   };
@@ -354,7 +356,7 @@ function AddQcm(props) {
       `https://goatqcm-instance.com/qcms/get_last_id/${cours_id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
-      }
+      },
     );
     console.log(resultLasQcm.data);
 

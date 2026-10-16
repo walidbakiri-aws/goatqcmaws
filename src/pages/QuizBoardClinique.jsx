@@ -419,7 +419,7 @@ function QuizBoardClinique(props) {
     savePieStatiqueClinique: "",
     saveEachLineStatiqueClinique: "",
     ourUsers: {},
-  });
+  });2026
 
   const doneFirstUplaodSaveQcm = useSignal(false);
   const [ModalSaveQuizzIsOpen, setModalSaveQuizzIsOpen] = useState(false);
