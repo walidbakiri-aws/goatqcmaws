@@ -11,7 +11,7 @@
   position: relative;
   color: var(--primary-text-color);
   margin-bottom: 20px;
-  margin-top: 15px;
+  margin-top: 18px;
 }
 
 /* =========================================
@@ -534,7 +534,7 @@
    MOBILE EXAM TYPE
 ========================================= */
 .typesujetphone {
-  color: #252139;
+  color: var(--primary-text-color);
   display: flex;
   align-items: center;
   gap: 12px;
