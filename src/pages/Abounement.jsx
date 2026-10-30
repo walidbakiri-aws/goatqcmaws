@@ -18,10 +18,6 @@ function Abounement(props) {
   const [VisibleValideAbounemet, setVisibleValideAbounemet] = useState(false);
   const abounementInf = [
     {
-      nameAbn: "Résidanat 2026",
-      priceAbn: "500 DA",
-    },
-    {
       nameAbn: "Résidanat 2027",
       priceAbn: "4500 DA",
     },
@@ -135,7 +131,7 @@ function Abounement(props) {
                             className="btn btn-primary"
                             onClick={(e) => handleAbounerBtn(index)}
                           >
-                            Abonner
+                            S'abonner
                           </button>
                         </td>
                       </tr>
@@ -177,7 +173,7 @@ function Abounement(props) {
                             className="btn btn-primary"
                             onClick={(e) => handleAbounerBtn(index)}
                           >
-                            Abonner
+                            S'abonner
                           </button>
                         </td>
                       </tr>

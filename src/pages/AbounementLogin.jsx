@@ -33,10 +33,6 @@ function AbounementLogin(props) {
 
   const abounementInf = [
     {
-      nameAbn: "Résidanat 2026",
-      priceAbn: "500 DA",
-    },
-    {
       nameAbn: "Résidanat 2027",
       priceAbn: "4500 DA",
     },
@@ -250,7 +246,7 @@ function AbounementLogin(props) {
                             className="btn btn-primary"
                             onClick={() => handleAbounerBtn(abounement.nameAbn)}
                           >
-                            Abouner
+                            S'abonner
                           </button>
                         </td>
                       </tr>
@@ -307,7 +303,7 @@ function AbounementLogin(props) {
                             // Now we pass the abonnement name.
                             onClick={() => handleAbounerBtn(abounement.nameAbn)}
                           >
-                            Abouner
+                            S'abonner
                           </button>
                         </td>
                       </tr>
