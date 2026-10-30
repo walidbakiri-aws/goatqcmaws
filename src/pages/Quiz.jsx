@@ -1590,7 +1590,7 @@ function Quiz() {
                 >
                   <div className={classes.childtypesujetsourcesexamnphone}>
                     {TypeSujets.map((typeSujet, index) => (
-                      <div key={index} className={classes.typesujet}>
+                      <div key={index} className={classes.typesujetphone}>
                         <input
                           key={index}
                           className="form-check-input fs-6 "
@@ -1606,9 +1606,21 @@ function Quiz() {
                       </div>
                     ))}
                   </div>
+                </div>
+              </div>
+              <div
+                className={`${classes.qcmmodelephone} card text-white bg-light mb-3`}
+                style={{ border: "1px solid #A0A0A0" }}
+              >
+                <div className="card-header" style={{ background: "#9370db " }}>
+                  Type d'examens
+                </div>
+                <div
+                  className={`${classes.typesujetsourcesexamnphone} card-body`}
+                >
                   <div className={classes.childtypesujetsourcesexamnphone}>
                     {sourceExamn.map((sourceExamen, index) => (
-                      <div key={index} className={classes.typesujet}>
+                      <div key={index} className={classes.typesujetphone}>
                         <input
                           key={index}
                           className="form-check-input fs-6 "
