@@ -559,7 +559,20 @@
   padding: 12px 10px;
   border: none;
 }
+.typesujeth6phone {
+  margin: 0;
+  color: var(--primary-text-color);
+  font-family: "Segoe UI", sans-serif;
+  font-size: 15px;
+  font-weight: 550;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
 
+.typesujet:hover .typesujeth6 {
+  color: #8061d5;
+  color: var(--primary-text-color);
+}
 /* =========================================
    MOBILE MODULES AND COURSES
 ========================================= */
@@ -575,11 +588,11 @@
 
 .childmodulecoursdivphone {
   width: 100%;
-  height: 190px;
+  height: 360px;
   display: block;
   overflow-x: hidden;
   overflow-y: auto;
-  padding: 8px;
+  padding: 6px;
   border: 1px solid rgba(147, 112, 219, 0.2);
   border-radius: 10px;
   background: var(--background-color-full);
@@ -605,6 +618,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.2s ease;
+  color: var(--primary-text-color);
 }
 
 .moduleitem_phone:hover,
