@@ -4084,17 +4084,9 @@ function QuizBoardClinique(props) {
                                                       );
                                                     }}
                                                   >
-                                                    <img
-                                                      src={
-                                                        AlphabetChoice[
-                                                          (IndexAlphabetChoice =
-                                                            IndexAlphabetChoice +
-                                                            1)
-                                                        ]
-                                                      }
-                                                      height="60%"
-                                                      width="40"
-                                                    />
+                                                  <span className={classes.choiceLetter}>
+  {String.fromCharCode(65 + indexPropo)}
+</span>
                                                     {
                                                       propo.propositionQcmClinique
                                                     }
@@ -4888,17 +4880,9 @@ function QuizBoardClinique(props) {
                                                         );
                                                       }}
                                                     >
-                                                      <img
-                                                        src={
-                                                          AlphabetChoice[
-                                                            (IndexAlphabetChoice =
-                                                              IndexAlphabetChoice +
-                                                              1)
-                                                          ]
-                                                        }
-                                                        height="60%"
-                                                        width="40"
-                                                      />
+                                                     <span className={classes.choiceLetter}>
+  {String.fromCharCode(65 + indexPropo)}
+</span>
                                                       {
                                                         propo.propositionQcmClinique
                                                       }

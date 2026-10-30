@@ -165,7 +165,8 @@
 .timediv span {
   padding-top: 3px;
   font-size: 18px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .timetbns {
@@ -219,7 +220,9 @@
   margin-bottom: 5px;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
   border-radius: 8px;
-  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-family:
+    1.2rem "Fira Sans",
+    sans-serif;
   font-size: 18px;
   font-style: normal;
 }
@@ -327,7 +330,9 @@
   background-color: var(--background-color);
   color: var(--primary-text-color-propo);
   overflow: hidden;
-  font-family: 1.2rem "Fira Sans", sans-serif;
+  font-family:
+    1.2rem "Fira Sans",
+    sans-serif;
   font-size: 18px;
   font-weight: 450;
   font-style: normal;
@@ -769,7 +774,8 @@
   background-color: var(--background-color);
   padding-top: 3px;
   font-size: 15px;
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  font-family:
+    "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 .timetbns_phone {
@@ -873,9 +879,18 @@
   margin-top: 5px;
   margin-left: 15px;
   font-weight: 450; /* Regular weight for body text */
-  font-family: "Segoe UI", "Segoe UI Variable", -apple-system, "San Francisco",
-    "Helvetica Neue", Roboto, "Noto Sans", "Segoe UI Emoji", "Segoe UI Symbol",
-    Arial, sans-serif;
+  font-family:
+    "Segoe UI",
+    "Segoe UI Variable",
+    -apple-system,
+    "San Francisco",
+    "Helvetica Neue",
+    Roboto,
+    "Noto Sans",
+    "Segoe UI Emoji",
+    "Segoe UI Symbol",
+    Arial,
+    sans-serif;
   font-size: 16px; /* Adjust as needed */
   color: var(--primary-text-color);
   border-radius: 6px;
@@ -915,9 +930,12 @@
   border-radius: 5px;
   color: var(--primary-text-color);
   background-color: var(--background-color);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 .qcmInfocatgrp_phone {
   display: flex;
@@ -1028,9 +1046,12 @@
   font-size: 16px;
   font-family: "Roboto", sans-serif;
   transform: translateZ(200px);
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
-    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
-    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  box-shadow:
+    rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px,
+    rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px,
+    rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
 .cascliniquecontent_phone p {
@@ -1130,7 +1151,8 @@
   color: #fcfbfb;
   background: linear-gradient(180deg, #4b91f7 0%, #367af6 100%);
   background-origin: border-box;
-  box-shadow: 0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
+  box-shadow:
+    0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
     inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2);
   user-select: none;
   -webkit-user-select: none;
@@ -1138,7 +1160,8 @@
 }
 
 .button-10:focus {
-  box-shadow: inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
+  box-shadow:
+    inset 0px 0.8px 0px -0.25px rgba(255, 255, 255, 0.2),
     0px 0.5px 1.5px rgba(54, 122, 246, 0.25),
     0px 0px 0px 3.5px rgba(58, 108, 217, 0.5);
   outline: 0;
@@ -1538,6 +1561,47 @@
   padding-left: 5;
   font-size: 15px;
   color: rgb(83, 81, 81);
+}
+.choiceLetter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  width: 34px;
+  height: 34px;
+
+  margin-right: 13px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #eef4ff, #dce8ff);
+  color: #2864d8;
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+
+  border: 1px solid #c9d9ff;
+
+  box-shadow: 0 2px 5px rgba(40, 100, 216, 0.12);
+
+  flex-shrink: 0;
+
+  transition: all 0.2s ease;
+}
+
+/* When the answer is selected */
+.choiceLetter:hover {
+  transform: scale(1.08);
+}
+
+/* Selected answer */
+:global(.list-group-item.active) .choiceLetter {
+  background: linear-gradient(135deg, #2864d8, #1746a2);
+  color: white;
+  border-color: #2864d8;
+  box-shadow: 0 3px 8px rgba(40, 100, 216, 0.25);
 }
 
 /***end list qcms******************************************************/

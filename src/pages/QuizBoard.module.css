@@ -1930,3 +1930,45 @@ modulediv_phone .homebtn {
   z-index: 12000;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
+
+.choiceLetter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 34px;
+  width: 34px;
+  height: 34px;
+
+  margin-right: 13px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(135deg, #eef4ff, #dce8ff);
+  color: #2864d8;
+
+  font-size: 16px;
+  font-weight: 600;
+  font-family: Arial, sans-serif;
+
+  border: 1px solid #c9d9ff;
+
+  box-shadow: 0 2px 5px rgba(40, 100, 216, 0.12);
+
+  flex-shrink: 0;
+
+  transition: all 0.2s ease;
+}
+
+/* When the answer is selected */
+.choiceLetter:hover {
+  transform: scale(1.08);
+}
+
+/* Selected answer */
+:global(.list-group-item.active) .choiceLetter {
+  background: linear-gradient(135deg, #2864d8, #1746a2);
+  color: white;
+  border-color: #2864d8;
+  box-shadow: 0 3px 8px rgba(40, 100, 216, 0.25);
+}

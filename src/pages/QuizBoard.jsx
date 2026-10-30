@@ -154,7 +154,8 @@ function QuizBoard(props) {
     "2023",
     "2024",
     "2025",
-    "2026","2027",
+    "2026",
+    "2027",
   ];
   const [shoYearBackFromCliniqueParSujet, setshoYearBackFromCliniqueParSujet] =
     useState(false);
@@ -4028,16 +4029,9 @@ function QuizBoard(props) {
                                         );
                                       }}
                                     >
-                                      <img
-                                        src={
-                                          AlphabetChoice[
-                                            (IndexAlphabetChoice =
-                                              IndexAlphabetChoice + 1)
-                                          ]
-                                        }
-                                        height="30"
-                                        width="30"
-                                      />
+                                      <span className={classes.choiceLetter}>
+                                        {String.fromCharCode(65 + indexPropo)}
+                                      </span>
                                       {propo.propositionQcm}
                                       {SaveQcmIsAnswer[currentIndex.value] ===
                                         currentIndex.value && (
@@ -4916,16 +4910,13 @@ function QuizBoard(props) {
                                             );
                                           }}
                                         >
-                                          <img
-                                            src={
-                                              AlphabetChoice[
-                                                (IndexAlphabetChoice =
-                                                  IndexAlphabetChoice + 1)
-                                              ]
-                                            }
-                                            height="30"
-                                            width="30"
-                                          />
+                                          <span
+                                            className={classes.choiceLetter}
+                                          >
+                                            {String.fromCharCode(
+                                              65 + indexPropo,
+                                            )}
+                                          </span>
                                           {propo.propositionQcm}
                                           {SaveQcmIsAnswer[
                                             currentIndex.value
