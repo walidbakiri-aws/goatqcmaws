@@ -419,7 +419,8 @@ function QuizBoardClinique(props) {
     savePieStatiqueClinique: "",
     saveEachLineStatiqueClinique: "",
     ourUsers: {},
-  });2026
+  });
+  2026;
 
   const doneFirstUplaodSaveQcm = useSignal(false);
   const [ModalSaveQuizzIsOpen, setModalSaveQuizzIsOpen] = useState(false);
@@ -4084,9 +4085,15 @@ function QuizBoardClinique(props) {
                                                       );
                                                     }}
                                                   >
-                                                  <span className={classes.choiceLetter}>
-  {String.fromCharCode(65 + indexPropo)}
-</span>
+                                                    <span
+                                                      className={
+                                                        classes.choiceLetter
+                                                      }
+                                                    >
+                                                      {String.fromCharCode(
+                                                        65 + indexPropofinal,
+                                                      )}
+                                                    </span>
                                                     {
                                                       propo.propositionQcmClinique
                                                     }
@@ -4880,9 +4887,15 @@ function QuizBoardClinique(props) {
                                                         );
                                                       }}
                                                     >
-                                                     <span className={classes.choiceLetter}>
-  {String.fromCharCode(65 + indexPropo)}
-</span>
+                                                      <span
+                                                        className={
+                                                          classes.choiceLetter
+                                                        }
+                                                      >
+                                                        {String.fromCharCode(
+                                                          65 + indexPropofinal,
+                                                        )}
+                                                      </span>
                                                       {
                                                         propo.propositionQcmClinique
                                                       }
