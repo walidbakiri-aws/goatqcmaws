@@ -25,7 +25,7 @@ import next from "../compenent/layout/img/next.png";
 import prev from "../compenent/layout/img/prev.png";
 import closecommentary from "../compenent/layout/img/closecommentary.png";
 import upimagecommentary from "../compenent/layout/img/upimagecommentary.png";
-
+import { BookOpen, GraduationCap, Layers3 } from "lucide-react";
 import pub from "../compenent/layout/img/pub.png";
 import chatgpt from "../compenent/layout/img/chatgpt.png";
 import deepseek from "../compenent/layout/img/deepseek.png";
@@ -3594,32 +3594,41 @@ function QuizBoard(props) {
                             <div key={currentIndex.value}>
                               <div className={`${classes.qcmInfoHeader} `}>
                                 <div className={`${classes.qcmInfo} `}>
-                                  <ul
-                                    className={`${classes.ulcatogorycourname} "list-group"`}
-                                  >
-                                    <img
-                                      src={courlogo}
-                                      height="30%"
-                                      width="20"
-                                    />
-                                    <li className="list-group-item">
-                                      {qcm.coursMed.coursName}
+                                  <ul className={classes.ulcatogorycourname}>
+                                    <li
+                                      className={`${classes.infoItem} ${classes.courseInfo}`}
+                                    >
+                                      <span className={classes.infoIcon}>
+                                        <BookOpen size={23} strokeWidth={2.2} />
+                                      </span>
+                                      <span className={classes.infoText}>
+                                        {qcm.coursMed.coursName}
+                                      </span>
                                     </li>
-                                    <img
-                                      src={externatlogo}
-                                      height="50%"
-                                      width="20"
-                                    />
-                                    <li className="list-group-item">
-                                      {qcm.category}
+
+                                    <li
+                                      className={`${classes.infoItem} ${classes.categoryInfo}`}
+                                    >
+                                      <span className={classes.infoIcon}>
+                                        <GraduationCap
+                                          size={24}
+                                          strokeWidth={2.2}
+                                        />
+                                      </span>
+                                      <span className={classes.infoText}>
+                                        {qcm.category}
+                                      </span>
                                     </li>
-                                    <img
-                                      src={groupelogo}
-                                      height="50%"
-                                      width="20"
-                                    />
-                                    <li className="list-group-item">
-                                      ({qcm.qcmGroupe}) {qcm.qcmYear}
+
+                                    <li
+                                      className={`${classes.infoItem} ${classes.groupInfo}`}
+                                    >
+                                      <span className={classes.infoIcon}>
+                                        <Layers3 size={23} strokeWidth={2.2} />
+                                      </span>
+                                      <span className={classes.infoText}>
+                                        ({qcm.qcmGroupe}) {qcm.qcmYear}
+                                      </span>
                                     </li>
                                   </ul>
                                 </div>

@@ -17,7 +17,7 @@ import C from "../compenent/layout/img/C.png";
 import D from "../compenent/layout/img/D.png";
 import chatgpt from "../compenent/layout/img/chatgpt.png";
 import addplayliste from "../compenent/layout/img/addplayliste.png";
-
+import { BookOpen, GraduationCap, Layers3 } from "lucide-react";
 import axiosRetry from "axios-retry";
 import E from "../compenent/layout/img/E.png";
 import GoatLogo from "../compenent/layout/GoatLogo.png";
@@ -3504,41 +3504,43 @@ function QuizBoardClinique(props) {
                           <div key={indexCasClinique}>
                             <div className={`${classes.qcmInfoHeader}`}>
                               <div className={`${classes.qcmInfo} `}>
-                                <ul
-                                  className={`${classes.ulcatogorycourname} "list-group"`}
-                                >
-                                  <img src={courlogo} height="30%" width="20" />
-                                  <li className="list-group-item">
-                                    {CasClinique.coursMed.coursName}
+                                <ul className={classes.ulcatogorycourname}>
+                                  <li
+                                    className={`${classes.infoItem} ${classes.courseInfo}`}
+                                  >
+                                    <span className={classes.infoIcon}>
+                                      <BookOpen size={23} strokeWidth={2.2} />
+                                    </span>
+                                    <span className={classes.infoText}>
+                                      {CasClinique.coursMed.coursName}
+                                    </span>
                                   </li>
-                                  <img
-                                    src={externatlogo}
-                                    height="50%"
-                                    width="20"
-                                  />
-                                  <li className="list-group-item">
-                                    {CasClinique.category}
+
+                                  <li
+                                    className={`${classes.infoItem} ${classes.categoryInfo}`}
+                                  >
+                                    <span className={classes.infoIcon}>
+                                      <GraduationCap
+                                        size={24}
+                                        strokeWidth={2.2}
+                                      />
+                                    </span>
+                                    <span className={classes.infoText}>
+                                      {CasClinique.category}
+                                    </span>
                                   </li>
-                                  <img
-                                    src={groupelogo}
-                                    height="50%"
-                                    width="20"
-                                  />
-                                  {ShowGroupePermExternat && (
-                                    <li className="list-group-item">
-                                      ({CasClinique.casCliniqueGroupe})
-                                    </li>
-                                  )}
-                                  <li className="list-group-item">
-                                    {CasClinique.casCliniqueYear}
+
+                                  <li
+                                    className={`${classes.infoItem} ${classes.groupInfo}`}
+                                  >
+                                    <span className={classes.infoIcon}>
+                                      <Layers3 size={23} strokeWidth={2.2} />
+                                    </span>
+                                    <span className={classes.infoText}>
+                                      ({CasClinique.casCliniqueGroupe}){" "}
+                                      {CasClinique.casCliniqueYear}
+                                    </span>
                                   </li>
-                                  <div className={`${classes.goatlogo} `}>
-                                    <img
-                                      src={GoatLogo}
-                                      height="40"
-                                      width="70"
-                                    />
-                                  </div>
                                 </ul>
                               </div>
                             </div>

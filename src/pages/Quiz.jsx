@@ -1334,7 +1334,7 @@ function Quiz() {
                 style={{
                   border: "1px solid #A0A0A0",
                   width: "90%",
-                  height: "300px",
+                  height: "400px",
                 }}
               >
                 <div
@@ -1346,7 +1346,7 @@ function Quiz() {
                 <div
                   className={`${classes.modulecours_full}  card-body`}
                   style={{
-                    height: "300px",
+                    height: "400px",
                   }}
                 >
                   <div className={classes.childmodulecoursdiv}>
@@ -1486,7 +1486,7 @@ function Quiz() {
                           <div
                             style={{
                               color: "gray",
-                              fontSize: "14px",
+                              fontSize: "16px",
                               marginTop: "4px",
                             }}
                           >
@@ -1514,7 +1514,7 @@ function Quiz() {
                           <div
                             style={{
                               color: "gray",
-                              fontSize: "14px",
+                              fontSize: "16px",
                               marginTop: "4px",
                             }}
                           >
