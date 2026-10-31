@@ -17,7 +17,9 @@ import sendmessage from "../compenent/layout/img/sendmessage.png";
 import ios from "../compenent/layout/img/ios.png";
 import android from "../compenent/layout/img/android.png";
 import pubgoat from "../compenent/layout/img/pubgoat.jpg";
+import { useNavigate } from "react-router-dom";
 function GoatQcm() {
+  const navigatcreequizz = useNavigate();
   const [ShowSideBare, setShowSideBare] = useState(false);
   function etatsidebare(etat) {
     setShowSideBare(etat);
@@ -58,13 +60,13 @@ function GoatQcm() {
     }
 
     const isIOS = /iphone|ipad|ipod/.test(
-      window.navigator.userAgent.toLowerCase()
+      window.navigator.userAgent.toLowerCase(),
     );
     const isInStandalone =
       "standalone" in window.navigator && window.navigator.standalone;
     const dismissed = localStorage.getItem("ios-install-dismissed") === "true";
     const isSafari = /^((?!chrome|android).)*safari/i.test(
-      window.navigator.userAgent
+      window.navigator.userAgent,
     );
 
     if (isIOS && !isInStandalone && !dismissed && isSafari) {
@@ -81,7 +83,7 @@ function GoatQcm() {
 
   const handleInstallClick = () => {
     alert(
-      'On iOS: Tap the Share button in Safari, then choose "Add to Home Screen".'
+      'On iOS: Tap the Share button in Safari, then choose "Add to Home Screen".',
     );
     localStorage.setItem("ios-install-dismissed", "true");
     setVisible(false);
@@ -119,7 +121,7 @@ function GoatQcm() {
   const getUserAdressIp = async () => {
     try {
       const result = await axios.get(
-        `https://goatqcm-instance.com/abounement/${userIdToken}`
+        `https://goatqcm-instance.com/abounement/${userIdToken}`,
       );
       console.log(result.data);
       finalEmail.value = result.data.ourUsers.username;
@@ -133,17 +135,17 @@ function GoatQcm() {
         console.log("are the same");
       } else {
         toast.error(
-          "Un autre appareil a été connecté en même temps, veuillez vous déconnecter. "
+          "Un autre appareil a été connecté en même temps, veuillez vous déconnecter. ",
         );
         setShowEnterGmailCode(true);
         if (cooldown === 0) {
           await axios.post(
-            `https://goatqcm-instance.com/codegmail/send-code/${result.data.ourUsers.username}`
+            `https://goatqcm-instance.com/codegmail/send-code/${result.data.ourUsers.username}`,
           );
           setCooldown(30);
         } else {
           toast.info(
-            `Veuillez attendre ${cooldown} secondes avant de renvoyer le code.`
+            `Veuillez attendre ${cooldown} secondes avant de renvoyer le code.`,
           );
         }
       }
@@ -154,7 +156,7 @@ function GoatQcm() {
   const handleResend = async () => {
     try {
       await axios.post(
-        `https://goatqcm-instance.com/codegmail/send-code/${finalEmail.value}`
+        `https://goatqcm-instance.com/codegmail/send-code/${finalEmail.value}`,
       );
       toast.success("Code renvoyé avec succès");
       setCooldown(60);
@@ -169,7 +171,7 @@ function GoatQcm() {
         {
           email: finalEmail.value,
           code: verificationCode,
-        }
+        },
       );
       if (response.data === true) {
         localStorage.setItem("verificatioeCode", true);
@@ -202,7 +204,7 @@ function GoatQcm() {
   const fetchPosts = async () => {
     try {
       const res = await axios.get(
-        `https://goatqcm-instance.com/publiction/posts`
+        `https://goatqcm-instance.com/publiction/posts`,
       );
       setPosts(res.data);
     } catch (err) {
@@ -215,7 +217,7 @@ function GoatQcm() {
     try {
       await axios.post(
         `https://goatqcm-instance.com/publiction/posts`,
-        newPost
+        newPost,
       );
       setNewPost({
         content: "",
@@ -244,7 +246,7 @@ function GoatQcm() {
         {
           content: commentInputs[postId],
           anonyme: isAnonymouse,
-        }
+        },
       );
       setCommentInputs({ ...commentInputs, [postId]: "" });
       fetchPosts();
@@ -252,6 +254,10 @@ function GoatQcm() {
     } catch (err) {
       console.error("Failed to add comment:", err);
     }
+  };
+
+  const handlecreatquizzBtn = () => {
+    navigatcreequizz("/quiz");
   };
 
   return (
@@ -272,6 +278,41 @@ function GoatQcm() {
                   </div>
                   <div className={classes.logogoat}>
                     <img src={GoatLogo} height="100" width="200" />
+                  </div>
+                </div>
+                <div className={classes.createQuizContainer}>
+                  <div className={classes.createQuizContent}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="120"
+                      height="120"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#9ca3af"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M14 2H6a2 2 0 0 0-2 2v4" />
+                      <path d="M14 2v6h6" />
+                      <path d="M14 2l6 6v12a2 2 0 0 1-2 2H6" />
+                      <path d="M4 16h6" />
+                      <path d="M7 13v6" />
+                    </svg>
+
+                    <div className={classes.createQuizText}>
+                      Commencez par créer un nouveau quiz
+                    </div>
+
+                    <button
+                      className={classes.createQuizButton}
+                      onClick={() => {
+                        handlecreatquizzBtn();
+                      }}
+                    >
+                      <span className={classes.plusIcon}>+</span>
+                      Créer un Quiz
+                    </button>
                   </div>
                 </div>
 
@@ -355,7 +396,7 @@ function GoatQcm() {
                   )}
                   {[...posts]
                     .sort(
-                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
                     )
                     .map((post) => {
                       return (
@@ -572,17 +613,42 @@ function GoatQcm() {
                   Bienvenue au GoatQcm!
                 </div>
               </div>
-
-              <div className={classes.container_phone}>
-                {/*<div>
-                  <img src={android} height="60%" width="50" />
-                  <a
-                    href="https://drive.google.com/file/d/1xbGGA4nkYH2dCItj5HTL8DbHGaeDn13U/view?usp=drive_link"
-                    target="_blank"
+              <div className={classes.createQuizContainer}>
+                <div className={classes.createQuizContent}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="80"
+                    height="80"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#9ca3af"
+                    strokeWidth="1.8"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    Télecahrger Application
-                  </a>
-                </div>*/}
+                    <path d="M14 2H6a2 2 0 0 0-2 2v4" />
+                    <path d="M14 2v6h6" />
+                    <path d="M14 2l6 6v12a2 2 0 0 1-2 2H6" />
+                    <path d="M4 16h6" />
+                    <path d="M7 13v6" />
+                  </svg>
+
+                  <div className={classes.createQuizTextphone}>
+                    Commencez par créer un nouveau quiz
+                  </div>
+
+                  <button
+                    className={classes.createQuizButtonphone}
+                    onClick={() => {
+                      handlecreatquizzBtn();
+                    }}
+                  >
+                    <span className={classes.plusIconphone}>+</span>
+                    Créer un Quiz
+                  </button>
+                </div>
+              </div>
+              <div className={classes.container_phone}>
                 <div className={classes.publicationfull_phone}>
                   <div className={classes.inputeaddcomment_phone}>
                     <input
@@ -663,7 +729,7 @@ function GoatQcm() {
                   )}
                   {[...posts]
                     .sort(
-                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+                      (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
                     )
                     .map((post) => {
                       return (
