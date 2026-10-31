@@ -23,7 +23,7 @@ function AbounementPhone() {
   return (
     <>
       <div className={`${classes.cardfinal_phone} card`}>
-        <div className={`${classes.card_title_phone}`}>Goat Qcm</div>
+        <div className={`${classes.card_title_phone}`}>GoatQcm</div>
         <div className="card-body">
           <ul className={`${classes.feature_list_phone}`}>
             <li>
@@ -31,6 +31,28 @@ function AbounementPhone() {
               <b>le même contenu que la série papier CopyWal pav-18.</b>
             </li>
           </ul>
+        </div>
+      </div>
+
+      <div className={`${classes.cardfinal_phone} card`}>
+        <div className={classes.card_title_phone}>🎁 Module Gratuit</div>
+
+        <div className="card-body">
+          <p className={classes.free_description}>
+            Connectez-vous avec le compte gratuit GoatQCM
+          </p>
+
+          <div className={classes.login_info}>
+            <div className={classes.login_item}>
+              <span>📧 Email</span>
+              <b>goatqcm@gmail.com</b>
+            </div>
+
+            <div className={classes.login_item}>
+              <span>🔑 Mot de passe</span>
+              <b>goatqcm123</b>
+            </div>
+          </div>
         </div>
       </div>
 
