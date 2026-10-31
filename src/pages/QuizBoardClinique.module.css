@@ -16,7 +16,7 @@
   position: absolute;
   display: inline-block;
   width: 100%;
-  height: 100%;
+  height: auto;
   margin-top: 0;
   background-color: var(--background-color);
 }
@@ -198,8 +198,8 @@
 }
 .quizcontainer {
   margin-top: 5px;
-  width: 1000px;
-  height: 700px;
+  width: 70%;
+  height: auto;
   margin-left: 280px;
   background: linear-gradient(to right, lch(50% 250 250), lch(50% 250 250));
 }
