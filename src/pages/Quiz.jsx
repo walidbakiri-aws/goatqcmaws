@@ -990,7 +990,7 @@ function Quiz() {
     /*const filteredModules = result.data.filter(
       (module) => module.id === 20 || module.id === 28
     );*/
-    const filteredModules = result.data.filter((module) => module.id === 23);
+    const filteredModules = result.data.filter((module) => module.id === 21);
     console.log(filteredModules); // Log the filtered results
 
     // Set the filtered modules to the state
